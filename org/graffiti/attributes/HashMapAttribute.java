@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: HashMapAttribute.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: HashMapAttribute.java,v 1.2 2007/08/16 11:01:12 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -27,7 +27,7 @@ import org.ErrorMsg;
  * 'Color'-CollectionAttribute. The subattributes 'red', 'green' and 'blue'
  * are not mapped in this Attribute!
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see CollectionAttribute
  * @see CompositeAttribute
@@ -159,7 +159,7 @@ public class HashMapAttribute
             setCollection(attrs);
         } catch(ClassCastException cce) {
             throw new IllegalArgumentException("Wrong argument type " +
-                "(Collection's value: HashMap - expected).");
+                "(Collection's value: HashMap - expected): "+cce.getMessage());
         }
     }
 }
