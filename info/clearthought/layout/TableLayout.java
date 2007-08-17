@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -2363,5 +2364,14 @@ public void invalidateLayout (Container target)
 		}
 		result.validate();
 		return result;
+	}
+
+
+
+	public static JComponent getLeftDivider(JComponent gui, double layout, Color color, int width) {
+		JLabel divider = new JLabel("");
+		divider.setBackground(color);
+		divider.setOpaque(true);
+		return TableLayout.getSplit(divider, gui, width, layout);
 	}
 }
