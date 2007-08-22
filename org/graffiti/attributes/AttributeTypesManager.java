@@ -5,12 +5,13 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeTypesManager.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: AttributeTypesManager.java,v 1.2 2007/08/22 20:21:52 klukas Exp $
 
 package org.graffiti.attributes;
 
 import java.lang.reflect.Constructor;
 
+import java.security.AccessControlException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -29,7 +30,7 @@ import org.graffiti.plugin.GenericPlugin;
  * can be added and then used in an arbitrary <code>Attribute</code> hierarchy
  * associated with this <code>AttributeTypesManager</code>.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class AttributeTypesManager
     implements PluginManagerListener
@@ -53,7 +54,11 @@ public class AttributeTypesManager
      */
     public AttributeTypesManager()
     {
-        logger.setLevel(Level.OFF);
+    	try {
+    		logger.setLevel(Level.OFF);
+    	} catch(AccessControlException ace) {
+    		// empty
+    	}
         attributeTypes = new HashMap();
     }
 

@@ -22,6 +22,19 @@ public class ReleaseInfo {
 	}
 	
 	public static boolean getIsAllowedFeature(FeatureSet fs) {
+		
+		try {
+			String s = getAppFolder();
+		} catch(Exception e) {
+			if (fs==FeatureSet.GravistoJavaHelp)
+				return false;
+			if (fs==FeatureSet.KEGG_ACCESS)
+				return false;
+			if (fs==FeatureSet.KEGG_ACCESS_ENH)
+				return false;
+			return true;
+		}
+		
 		switch (fs) {
 			case KEGG_ACCESS :
           if ((new File(getAppFolderWithFinalSep()+"license_kegg_accepted")).exists())
@@ -141,5 +154,15 @@ public class ReleaseInfo {
 
 	public static String getHelpIntroductionText() {
 		return helpIntro;
+	}
+
+	public static boolean isRunningAsApplet() {
+		try {
+			@SuppressWarnings("unused")
+			String s = System.getProperty("user.home");
+			return false;
+		} catch(Exception e) {
+			return true;
+		}
 	}
 }

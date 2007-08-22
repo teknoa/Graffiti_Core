@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.1 2007/05/31 12:55:57 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.2 2007/08/22 20:21:51 klukas Exp $
  */
 
 import java.awt.Color;
@@ -20,6 +20,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -59,7 +60,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class AttributeHelper {
 
@@ -146,7 +147,11 @@ public class AttributeHelper {
 	}
 	
 	public static boolean macOSrunning() {
-	    return System.getProperty("mrj.version") != null;
+		try {
+			return System.getProperty("mrj.version") != null;
+		} catch(AccessControlException ace) {
+			return false;
+		}
 	}
 	
 	public static void setMacOSsettings(String applicationName) {

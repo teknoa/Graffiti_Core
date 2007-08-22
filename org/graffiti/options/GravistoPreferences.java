@@ -71,7 +71,11 @@ public class GravistoPreferences {
      * @return
      */
     public static GravistoPreferences userNodeForPackage(Class classValue) {
-        return new GravistoPreferences(classValue.getPackage().getName()+"/"+classValue.getName());
+    	try {
+    		return new GravistoPreferences(classValue.getPackage().getName()+"/"+classValue.getName());
+    	} catch(NullPointerException npe) {
+    		return new GravistoPreferences("/"+classValue.getName());
+    	}
     }
 
     /**

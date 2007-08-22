@@ -5,11 +5,12 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.1 2007/05/31 12:56:06 klukas Exp $
+// $Id: DefaultIOManager.java,v 1.2 2007/08/22 20:21:48 klukas Exp $
 
 package org.graffiti.managers;
 
 import java.io.File;
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -33,7 +34,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -114,7 +115,11 @@ public class DefaultIOManager implements IOManager {
 		inputSerializer = new ArrayList();
 		outputSerializer = new ArrayList();
 		this.listeners = new LinkedList();
-		fc = new JFileChooser();
+		try  {
+			fc = new JFileChooser();
+		} catch(AccessControlException ace) {
+			ErrorMsg.addErrorMessage(ace);
+		}
 	}
 
 	//~ Methods ================================================================

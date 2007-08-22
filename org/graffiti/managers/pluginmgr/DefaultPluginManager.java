@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.2 2007/08/22 20:21:52 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -33,7 +33,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -453,6 +453,9 @@ public class DefaultPluginManager
 		        {
 		            messages.add(pme.getMessage());
 		        }
+		        catch(NullPointerException npe) {
+		        	messages.add(npe.getMessage());
+		        }
 		        finally {
 		            loadLater.remove(i);    // URL
 		            loadLater.remove(i);  // PD
@@ -790,12 +793,17 @@ public class DefaultPluginManager
 
         try
         { // to instanciate the plugin's main class
+        	System.out.println("Instanciate: "+description.getMain());
             pluginInstance = (GenericPlugin) InstanceLoader.createInstance(description.getMain());
         }
         catch(InstanceCreationException ice)
         {
             throw new PluginManagerException(ice.getMessage()+" (cause: "+ice.getCause().getMessage()+") ",
                 description.toString());
+        }
+        catch(NoClassDefFoundError nce) {
+        	throw new PluginManagerException(nce.getMessage()+" (cause: "+nce.getCause().getMessage()+") ",
+                    description.toString());
         }
 
         // update status (if available).
