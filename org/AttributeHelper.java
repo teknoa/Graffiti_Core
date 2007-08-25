@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.2 2007/08/22 20:21:51 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.3 2007/08/25 12:18:34 klukas Exp $
  */
 
 import java.awt.Color;
@@ -60,7 +60,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class AttributeHelper {
 
@@ -355,6 +355,7 @@ public class AttributeHelper {
 		idToNiceId.put("grid_color", chartAll+": Grid Color");
 		idToNiceId.put("axis_color", chartAll+": Axis Color");
 		idToNiceId.put("node_gridWidth", chartAll+": Grid Line-Width");
+		idToNiceId.put("node_axisWidth", chartAll+": Axis Line-Width");
 		idToNiceId.put("node_plotAxisFontSize", chartAll+": Axis Font Size");
 
 		idToNiceId.put("grouppart", "KEGG: Part of Group");

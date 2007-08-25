@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphicAttributeConstants.java,v 1.1 2007/05/31 12:55:57 klukas Exp $
+// $Id: GraphicAttributeConstants.java,v 1.2 2007/08/25 12:18:34 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -146,8 +146,7 @@ public interface GraphicAttributeConstants
     public static final String LABEL_ATTRIBUTE_PATH = "";
 
     /** Path to coordinate attribute */
-    public static final String COORD_PATH = GRAPHICS + Attribute.SEPARATOR +
-        COORDINATE;
+    public static final String COORD_PATH = GRAPHICS + Attribute.SEPARATOR + COORDINATE;
 
     /** Path to x-coordinate attribute */
     public static final String COORDX_PATH = COORD_PATH + Attribute.SEPARATOR +
@@ -158,8 +157,7 @@ public interface GraphicAttributeConstants
         Y;
 
     /** Path to dimension attribute */
-    public static final String DIM_PATH = GRAPHICS + Attribute.SEPARATOR +
-        DIMENSION;
+    public static final String DIM_PATH = GRAPHICS + Attribute.SEPARATOR + DIMENSION;
 
     /** Path to width attribute */
     public static final String DIMW_PATH = DIM_PATH + Attribute.SEPARATOR +
