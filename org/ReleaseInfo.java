@@ -103,10 +103,14 @@ public class ReleaseInfo {
 				break;
 				
 			case TAB_PATTERNSEARCH :
-				// return false;
-				if (currentRelease==Release.DEBUG)
+				if (currentRelease==Release.KGML_EDITOR)
+					return false;
+				else
 					return true;
-				break;
+				// return false;
+				// if (currentRelease==Release.DEBUG)
+				//	return true;
+				// break;
 			case DATAMAPPING :
 				if (currentRelease!=Release.RELEASE_CLUSTERVIS && currentRelease!=Release.KGML_EDITOR)
 					return true;
