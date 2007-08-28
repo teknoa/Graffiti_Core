@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: XMLHelper.java,v 1.2 2007/08/28 09:24:11 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -527,7 +527,7 @@ public class XMLHelper {
 								Node stdDevAvgData = samplePath2avgNode_stdDevData.get(samplePath);
 								Node actualDataWithoutStdDev = samplePath2avgNode_actualDataWithoutStdDev.get(samplePath);
 								// avg value --> std dev value
-								String avgValue = stdDevAvgData.getFirstChild().getTextContent();
+								String avgValue = stdDevAvgData.getFirstChild().getNodeValue();
 								actualDataWithoutStdDev.getAttributes().getNamedItem("stddev").setNodeValue(avgValue);
 								transformed++;
 								transformedForThisSubstance++;
