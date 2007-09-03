@@ -330,28 +330,25 @@ public class ErrorMsg {
 	public static String removeHTMLtags(String textWithHtmlTags) {
 		if (textWithHtmlTags==null)
 			return null;
-		int ps = textWithHtmlTags.indexOf("<");
-		while (ps>=0) {
-			int es = textWithHtmlTags.indexOf(">", ps)+1;
-			if (es>0) {
-				textWithHtmlTags = textWithHtmlTags.substring(0, ps) + textWithHtmlTags.substring(es);
-				ps = textWithHtmlTags.indexOf("<");
-			} else
-				es = -1;
-		}
-		return textWithHtmlTags; 
+		return removeTags(textWithHtmlTags, "<", ">");
 	}
 	
 	public static String removeTags(String textWithHtmlTags, String tagA, String tagB) {
-		int ps = textWithHtmlTags.indexOf(tagA);
-		while (ps>=0) {
-			int es = textWithHtmlTags.indexOf(tagB, ps)+tagB.length();
-			if (es>0) {
-				textWithHtmlTags = textWithHtmlTags.substring(0, ps) + textWithHtmlTags.substring(es);
-				ps = textWithHtmlTags.indexOf(tagA);
-			} else
-				es = -1;
+		if (textWithHtmlTags==null) 
+			return null;
+		int tagApos = textWithHtmlTags.indexOf(tagA);
+		while (tagApos>=0) {
+			int tagBpos = textWithHtmlTags.indexOf(tagB, tagApos+tagB.length())+tagB.length();
+			if (tagBpos>0) {
+				textWithHtmlTags = textWithHtmlTags.substring(0, tagApos) + textWithHtmlTags.substring(tagBpos);
+				tagApos = textWithHtmlTags.indexOf(tagA);
+			} else {
+				textWithHtmlTags = textWithHtmlTags.substring(0, tagApos);
+				tagApos = textWithHtmlTags.indexOf(tagA);
+			}
 		}
+		if (textWithHtmlTags.indexOf(tagB)>=0)
+			textWithHtmlTags = textWithHtmlTags.substring(textWithHtmlTags.indexOf(tagB)+tagB.length());
 		return textWithHtmlTags; 
 	}
 }
