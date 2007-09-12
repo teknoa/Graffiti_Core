@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Node.java,v 1.1 2007/05/31 12:55:55 klukas Exp $
+// $Id: Node.java,v 1.2 2007/09/12 11:38:29 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -19,7 +19,7 @@ import java.util.Iterator;
  * Undirected edges are regarded separately since a <code>Graph</code> can
  * have <b>both</b> directed and indirected edges.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see Edge
  * @see GraphElement
@@ -229,6 +229,8 @@ public interface Node
      *         <code>Edge</code>.
      */
     public Collection<Node> getUndirectedNeighbors();
+    
+    public Iterator<Node> getUndirectedNeighborsIterator();
 
 	/**
 	 * @param graph

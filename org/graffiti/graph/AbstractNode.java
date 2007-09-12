@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractNode.java,v 1.3 2007/09/12 07:54:25 klukas Exp $
+// $Id: AbstractNode.java,v 1.4 2007/09/12 11:38:29 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -24,7 +24,7 @@ import org.graffiti.util.MultipleIterator;
  * Abstract class <code>AbstractNode</code> common functionality for
  * <code>Node</code> implementations.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *
  * @see AdjListNode
  */
@@ -217,6 +217,11 @@ public abstract class AbstractNode
     public Iterator<Node> getInNeighborsIterator()
     {
         return new MultipleIterator(getInNeighbors().iterator());
+    }
+    
+    public Iterator<Node> getUndirectedNeighborsIterator()
+    {
+        return new MultipleIterator(getUndirectedNeighbors().iterator());
     }
 
     /**
