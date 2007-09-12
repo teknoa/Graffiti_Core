@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListNode.java,v 1.1 2007/05/31 12:55:55 klukas Exp $
+// $Id: AdjListNode.java,v 1.2 2007/09/12 07:54:25 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -23,7 +23,7 @@ import org.graffiti.util.MultipleIterator;
 /**
  * Implements a graph node with adjacency list representation.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see AdjListGraph
  * @see AdjListEdge
@@ -68,9 +68,9 @@ public class AdjListNode
     {
         super(graph);
         // logger.fine("Creating new instance of AdjListNode");
-        directedInEdges = new HashSet<Edge>();
-        undirectedEdges = new HashSet<Edge>();
-        directedOutEdges = new HashSet<Edge>();
+        directedInEdges = new LinkedHashSet<Edge>(); // new HashSet<Edge>();
+        undirectedEdges = new LinkedHashSet<Edge>(); // new HashSet<Edge>();
+        directedOutEdges = new LinkedHashSet<Edge>(); // new HashSet<Edge>();
     }
 
 	/**
@@ -84,9 +84,9 @@ public class AdjListNode
     {
         super(graph, coll);
         // logger.fine("Creating new instance of AdjListNode");
-        directedInEdges = new HashSet<Edge>();
-        undirectedEdges = new HashSet<Edge>();
-        directedOutEdges = new HashSet<Edge>();
+        directedInEdges = new LinkedHashSet<Edge>(); // new HashSet<Edge>();
+        undirectedEdges = new LinkedHashSet<Edge>(); // new HashSet<Edge>();
+        directedOutEdges = new LinkedHashSet<Edge>(); // new HashSet<Edge>();
     }
 
     //~ Methods ================================================================

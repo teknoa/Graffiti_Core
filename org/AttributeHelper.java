@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.3 2007/08/25 12:18:34 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.4 2007/09/12 07:54:25 klukas Exp $
  */
 
 import java.awt.Color;
@@ -26,6 +26,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -60,7 +62,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class AttributeHelper {
 
@@ -931,6 +933,25 @@ public class AttributeHelper {
 		} catch (Exception ex) {
 		}
 	}
+	
+	public static void setHeight(Node myNode, double height) {
+		try {
+			DoubleAttribute da = (DoubleAttribute) myNode
+						.getAttribute(GraphicAttributeConstants.DIMH_PATH);
+			da.setDouble(height);
+		} catch (Exception ex) {
+		}
+	}
+	
+	public static void setWidth(Node myNode, double width) {
+		try {
+			DoubleAttribute da = (DoubleAttribute) myNode
+						.getAttribute(GraphicAttributeConstants.DIMW_PATH);
+
+			da.setDouble(width);
+		} catch (Exception ex) {
+		}
+	}
 
 	/**
 	 * Sets the size of the Node.
@@ -1373,6 +1394,20 @@ public class AttributeHelper {
 			ErrorMsg.addErrorMessage("Get-FrameThickness-Failure: "
 						+ ex.getLocalizedMessage());
 			return 0;
+		}
+	}
+	
+	public static void setFrameThickNess(GraphElement ge, double frameThinkness) {
+		try {
+			DoubleAttribute dblAtt = null;
+			dblAtt = (DoubleAttribute) ge
+						.getAttribute(GraphicAttributeConstants.GRAPHICS
+									+ Attribute.SEPARATOR
+									+ GraphicAttributeConstants.FRAMETHICKNESS);
+
+			dblAtt.setDouble(frameThinkness);
+		} catch (Exception ex) {
+
 		}
 	}
 
@@ -2475,6 +2510,105 @@ public class AttributeHelper {
 
 	public static void setPositionZ(Node a, double z) {
 		setAttribute(a, "graphics", "z_", z);
+	}
+
+	public static boolean isHiddenGraphElement(GraphElement ge) {
+		if (ge==null)
+			return true;
+		
+		if (ge instanceof Node)
+			return getWidth((Node)ge)<0;
+		
+		if (ge instanceof Edge)
+			return getFrameThickNess(ge)<0;
+		
+		return false;
+	}
+
+	public static void switchVisibilityOfChildElements(Collection<Node> nodes) {
+		if (nodes==null || nodes.size()<=0)
+			return;
+		
+		Node firstNode = nodes.iterator().next();
+		try {
+			firstNode.getGraph().getListenerManager().transactionStarted(nodes); 
+		
+			LinkedHashSet<GraphElement> childElements = new LinkedHashSet<GraphElement>();
+			for (Node node : nodes)
+				getChildElements(node, childElements);
+			boolean modeSet = false;
+			boolean doHide = false;
+			childElements.remove(firstNode);
+			for (GraphElement ge : childElements) {
+				if (!modeSet) {
+					doHide = !isHiddenGraphElement(ge);
+					modeSet = true;
+				}
+				if (modeSet) {
+					setHidden(doHide, ge);
+				}
+			}
+		} finally {
+			firstNode.getGraph().getListenerManager().transactionFinished(nodes);
+		}
+	}
+
+	/**
+	 * Return nodes and edges, traceable from the given node. Does not include the given node
+	 * in the result set. Directionality of edge directions is taken into account if the edges
+	 * are directed.
+	 * @param node start node
+	 * @param result nodes and edges, traceable from the given node
+	 */
+	private static void getChildElements(Node node, Set<GraphElement> result) {
+		if (node!=null && result!=null) {
+			result.addAll(node.getUndirectedEdges());
+			result.addAll(node.getDirectedOutEdges());
+			for (Node n : node.getUndirectedNeighbors()) {
+				if (result.contains(n))
+					continue;
+				result.add(n);
+				getChildElements(n, result);
+			}
+			for (Node n : node.getOutNeighbors()) {
+				if (result.contains(n))
+					continue;
+				result.add(n);
+				getChildElements(n, result);
+			}
+		}
+	}
+
+	public static void setHidden(boolean doHide, GraphElement ge) {
+		if (ge==null)
+			return;
+		
+		if (ge instanceof Node) {
+			if (doHide)
+				setWidth((Node)ge, -Math.abs(getWidth((Node)ge)));
+			else
+				setWidth((Node)ge, Math.abs(getWidth((Node)ge)));
+			return;
+		}
+		if (ge instanceof Edge) {
+			if (doHide)
+				setFrameThickNess(ge, -Math.abs(getFrameThickNess(ge)));
+			else
+				setFrameThickNess(ge, Math.abs(getFrameThickNess(ge)));
+		}
+	}
+
+	public static void setHidden(boolean doHide, Node n, boolean processOutEdges, boolean processInEdges, boolean processUndirEdges) {
+		setHidden(doHide, n);
+		if (processOutEdges)
+			for (Edge e : n.getAllOutEdges())
+				setHidden(doHide, e);
+		if (processInEdges)
+			for (Edge e : n.getAllInEdges())
+				setHidden(doHide, e);
+		if (processUndirEdges)
+			for (Edge e : n.getUndirectedEdges())
+				setHidden(doHide, e);
 	}
 
 }

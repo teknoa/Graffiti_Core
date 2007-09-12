@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractNode.java,v 1.2 2007/08/25 14:05:23 klukas Exp $
+// $Id: AbstractNode.java,v 1.3 2007/09/12 07:54:25 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -24,7 +24,7 @@ import org.graffiti.util.MultipleIterator;
  * Abstract class <code>AbstractNode</code> common functionality for
  * <code>Node</code> implementations.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see AdjListNode
  */
@@ -199,7 +199,7 @@ public abstract class AbstractNode
      */
     public Collection<Node> getInNeighbors()
     {
-        Set<Node> s = new HashSet<Node>(getUndirectedNeighbors());
+        Set<Node> s = new LinkedHashSet<Node>(getUndirectedNeighbors());
 
         for(Iterator<Edge> it = getDirectedInEdgesIterator(); it.hasNext();)
         {
@@ -230,7 +230,7 @@ public abstract class AbstractNode
      */
     public Collection<Node> getNeighbors()
     {
-        Set<Node> s = new HashSet<Node>();
+        Set<Node> s = new LinkedHashSet<Node>();
         for(Edge e : getEdges())
         {
             if(this == e.getSource())
@@ -268,7 +268,7 @@ public abstract class AbstractNode
     }
 
     /**
-     * Returns a collection conataining all the neighbors of the current
+     * Returns a collection containing all the neighbors of the current
      * <code>Node</code> which are connected by an outgoing <code>Edge</code>.
      * The number of Elements returned by this function might be less than the
      * number returned by <code>getOutDegree()</code>, due to the fact that
@@ -280,7 +280,7 @@ public abstract class AbstractNode
      */
     public Collection<Node> getOutNeighbors()
     {
-        Set<Node> s = new HashSet<Node>(getUndirectedNeighbors());
+        Set<Node> s = new LinkedHashSet<Node>(getUndirectedNeighbors());
 
         for(Iterator it = getDirectedOutEdgesIterator(); it.hasNext();)
         {
@@ -291,7 +291,7 @@ public abstract class AbstractNode
     }
 
     /**
-     * Returns an iterator conataining all the neighbors of the current
+     * Returns an iterator containing all the neighbors of the current
      * <code>Node</code> which are connected by an outgoing <code>Edge</code>.
      *
      * @return a Iterator containing all the neighbor nodes of the current
@@ -331,7 +331,7 @@ public abstract class AbstractNode
      */
     public Collection<Node> getUndirectedNeighbors()
     {
-        Set<Node> s = new HashSet<Node>();
+        Set<Node> s = new LinkedHashSet<Node>();
         Edge e;
 
         for(Iterator it = getUndirectedEdgesIterator(); it.hasNext();)
