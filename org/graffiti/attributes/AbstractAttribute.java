@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttribute.java,v 1.1 2007/05/31 12:55:54 klukas Exp $
+// $Id: AbstractAttribute.java,v 1.2 2007/09/20 11:11:15 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -35,10 +35,10 @@ import org.graffiti.plugin.XMLHelper;
  * <code>parent</code> and <code>attributable</code> of the
  * <code>Attribute</code>.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class AbstractAttribute
-    implements Attribute, DeepCopy
+    implements Attribute
 {
 	 protected static HashMap<String,Class> typedAttributesID2TypeForNodes = getDefaultNodeTypedAttributes();
 	 protected static HashMap<String,Class> typedAttributesID2TypeForEdges = getDefaultEdgeTypedAttributes();
