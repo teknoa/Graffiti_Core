@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.4 2007/09/12 07:54:25 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.5 2007/10/09 10:27:38 klukas Exp $
  */
 
 import java.awt.Color;
@@ -62,7 +62,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class AttributeHelper {
 
@@ -2538,7 +2538,6 @@ public class AttributeHelper {
 				getChildElements(node, childElements);
 			boolean modeSet = false;
 			boolean doHide = false;
-			childElements.remove(firstNode);
 			for (GraphElement ge : childElements) {
 				if (!modeSet) {
 					doHide = !isHiddenGraphElement(ge);
@@ -2550,6 +2549,15 @@ public class AttributeHelper {
 			}
 		} finally {
 			firstNode.getGraph().getListenerManager().transactionFinished(nodes);
+		}
+	}
+	
+	public static void setVisibilityOfChildElements(Collection<Node> nodes, boolean doHide) {
+		LinkedHashSet<GraphElement> childElements = new LinkedHashSet<GraphElement>();
+		for (Node node : nodes)
+			getChildElements(node, childElements);
+		for (GraphElement ge : childElements) {
+			setHidden(doHide, ge);
 		}
 	}
 
@@ -2609,6 +2617,11 @@ public class AttributeHelper {
 		if (processUndirEdges)
 			for (Edge e : n.getUndirectedEdges())
 				setHidden(doHide, e);
+	}
+
+	public static void setHidden(Collection<GraphElement> graphElements, boolean doHide) {
+		for (GraphElement ge : graphElements)
+			setHidden(doHide, ge);
 	}
 
 }
