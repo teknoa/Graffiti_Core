@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.5 2007/10/09 10:27:38 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.6 2007/10/15 09:48:16 klukas Exp $
  */
 
 import java.awt.Color;
@@ -62,7 +62,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class AttributeHelper {
 
@@ -2622,6 +2622,20 @@ public class AttributeHelper {
 	public static void setHidden(Collection<GraphElement> graphElements, boolean doHide) {
 		for (GraphElement ge : graphElements)
 			setHidden(doHide, ge);
+	}
+
+	public static String getStringList(String[] elements, String div) {
+		if (elements==null || elements.length<=0)
+			return "";
+		else {
+			StringBuilder sb = new StringBuilder();
+			for (int i=0; i<elements.length; i++) {
+				sb.append(elements[i]);
+				if (i<elements.length-1)
+					sb.append(div);
+			}
+			return sb.toString();
+		}
 	}
 
 }
