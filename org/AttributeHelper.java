@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.6 2007/10/15 09:48:16 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.7 2007/10/17 13:27:51 klukas Exp $
  */
 
 import java.awt.Color;
@@ -62,7 +62,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class AttributeHelper {
 
@@ -344,6 +344,8 @@ public class AttributeHelper {
 		idToNiceId.put("useCustomRangeSteps", chartSelN+":<html>&nbsp;Range Axis: <!--A-->Custom Step Size");
 		idToNiceId.put("rangeStepSize", chartSelN+":<html>&nbsp;Range Axis:  <!--A-->Step Size");
 		
+		idToNiceId.put("max_charts_in_column", chartSelN+": Number of Charts in a Row");
+
 		idToNiceId.put("minRange", chartSelN+": Range Axis: Minimum");
 		idToNiceId.put("maxRange", chartSelN+": Range Axis: Maximum");
 		idToNiceId.put("connectPriorItems", chartAllLine+": No gaps for missing data");
