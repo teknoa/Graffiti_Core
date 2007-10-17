@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.7 2007/10/17 13:27:51 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.8 2007/10/17 14:27:10 klukas Exp $
  */
 
 import java.awt.Color;
@@ -62,7 +62,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class AttributeHelper {
 
@@ -408,7 +408,8 @@ public class AttributeHelper {
 		idToNiceId.put("kegg_link", "KEGG: Reference");
 		idToNiceId.put("kegg_link_os", "KEGG (Organism-Specific): Reference");
 		idToNiceId.put("present", "KEGG: Presence in spec. Pathway");
-		idToNiceId.put("url", "Reference Information");
+		idToNiceId.put("url", "Link: Reference URL");
+		idToNiceId.put("pathway_ref_url", "Link: Pathway File");
 		idToNiceId.put("xml_url", "KEGG: XML Source");
 		idToNiceId.put("xml_url_os", "KEGG (Organism-Specific): XML Source");
 		idToNiceId.put("kegg_link_reaction", "KEGG: Reaction Reference");

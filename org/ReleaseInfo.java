@@ -122,6 +122,11 @@ public class ReleaseInfo {
 					return false;
 				else
 					return true;
+			case PATHWAY_FILE_REFERENCE : 
+			if (currentRelease==Release.KGML_EDITOR)
+				return false;
+			else
+				return true;
 			default :
 				return true;
 		}
