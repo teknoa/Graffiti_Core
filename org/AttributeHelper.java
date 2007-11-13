@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.8 2007/10/17 14:27:10 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.9 2007/11/13 12:16:44 klukas Exp $
  */
 
 import java.awt.Color;
@@ -62,7 +62,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class AttributeHelper {
 
@@ -2639,6 +2639,14 @@ public class AttributeHelper {
 			}
 			return sb.toString();
 		}
+	}
+
+	public static void setReferenceURL(Attributable ge, String url) {
+		AttributeHelper.setAttribute(ge, "", "url", url);
+	}
+
+	public static String getReferenceURL(Attributable ge) {
+		return (String) AttributeHelper.getAttributeValue(ge, "", "url", null, "");
 	}
 
 }
