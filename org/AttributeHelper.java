@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.9 2007/11/13 12:16:44 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.10 2007/11/14 08:25:54 klukas Exp $
  */
 
 import java.awt.Color;
@@ -30,6 +30,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import org.graffiti.attributes.Attributable;
@@ -62,7 +63,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class AttributeHelper {
 
@@ -2436,6 +2437,7 @@ public class AttributeHelper {
 	    	"org.graffiti.plugins.views.defaults.SmoothLineEdgeShape",
 	    	"org.graffiti.plugins.views.defaults.QuadCurveEdgeShape"
     	};
+	public static String preFilePath = "filepath|";
     
     public static void setEdgeBendStyle(Edge edge, String shape) {
 		try {
@@ -2649,4 +2651,14 @@ public class AttributeHelper {
 		return (String) AttributeHelper.getAttributeValue(ge, "", "url", null, "");
 	}
 
+	public static void setPathwayReference(GraphElement ge, String url) {
+		setAttribute(ge, "", "pathway_ref_url", preFilePath+url);
+	}
+
+	public static String getPathwayReference(GraphElement ge) {
+		String ref = (String)getAttributeValue(ge, "", "pathway_ref_url", null, "");
+		if (ref!=null && ref.startsWith(preFilePath))
+			return ref.substring(preFilePath.length());
+		return ref;
+	}
 }
