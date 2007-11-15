@@ -4,7 +4,7 @@
  * 
  *******************************************************************************/
 /* Copyright (c) 2003 IPK Gatersleben
- * $Id: Colors.java,v 1.1 2007/05/31 12:55:56 klukas Exp $
+ * $Id: Colors.java,v 1.2 2007/11/15 13:17:11 klukas Exp $
  */
 
 /*
@@ -73,22 +73,34 @@ public class Colors
     {
     	ArrayList<Color> colors = new ArrayList<Color>();
     	
-    	if (numberOfColors==1) {
-    		colors.add(Color.DARK_GRAY);
-    		return colors;
+    	final Color c1 = Color.LIGHT_GRAY;
+    	final Color c2 = Color.BLACK;
+    	
+    	for (int i = 0; i<numberOfColors; i++) {
+			float f;
+			if (numberOfColors>1)
+				f = ((float)(numberOfColors-i-1))/(numberOfColors-1);
+			else
+				f = 0.5f;
+			Color cc = getColor(f, 1, c1, c2);
+			colors.add(cc);
     	}
-
-        //define how much the Hue will change between steps
-        float incr = 1f / numberOfColors;
-        
-        for (int i = 0; i < numberOfColors; i++) {
-            float b = incr * i;
-            //create a new color using the HSB parameters
-            colors.add(new Color(1f-b,1f-b,1f-b));
-        }
-
+    	
         return colors;
     }
+    
+    public static Color getColor(float maxOrMinR, double gamma, 
+			Color col__1, Color col_1) {
+		Color col1 = col__1;
+		Color col2 = col_1;
+		maxOrMinR = Math.abs(maxOrMinR);
+		maxOrMinR = (float)Math.pow(maxOrMinR, gamma);
+		float red = (col2.getRed()-col1.getRed())*maxOrMinR+col1.getRed();
+		float green = (col2.getGreen()-col1.getGreen())*maxOrMinR+col1.getGreen();
+		float blue = (col2.getBlue()-col1.getBlue())*maxOrMinR+col1.getBlue();
+		float alpha = (col2.getAlpha()-col1.getAlpha())*maxOrMinR+col1.getAlpha();
+		return new Color(red/255f, green/255f, blue/255f, alpha/255f);
+	}
     
     public static ArrayList<Color> getGrayColorsInverse(int numberOfColors)
     {
