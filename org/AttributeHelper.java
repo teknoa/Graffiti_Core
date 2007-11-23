@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.10 2007/11/14 08:25:54 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.11 2007/11/23 12:22:08 klukas Exp $
  */
 
 import java.awt.Color;
@@ -63,7 +63,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public class AttributeHelper {
 
@@ -2408,8 +2408,8 @@ public class AttributeHelper {
 		}
 	}
 	
-	public static Collection<Vector2d> getEdgeBends(Edge edge) {
-		Collection<Vector2d> result = new ArrayList<Vector2d>();
+	public static ArrayList<Vector2d> getEdgeBends(Edge edge) {
+		ArrayList<Vector2d> result = new ArrayList<Vector2d>();
 		try {
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute("graphics");
 			for (Attribute a : ega.getBends().getCollection().values()) {
