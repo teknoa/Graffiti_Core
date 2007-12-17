@@ -4,7 +4,7 @@
  * 
  *******************************************************************************/
 /* Copyright (c) 2003 IPK Gatersleben
- * $Id: Colors.java,v 1.2 2007/11/15 13:17:11 klukas Exp $
+ * $Id: Colors.java,v 1.3 2007/12/17 10:25:04 klukas Exp $
  */
 
 /*
@@ -155,12 +155,13 @@ public class Colors
      * @author klukas
      */
     public static Color getOppositeColor(Color color) {
-        float[] hsb = new float[3];
-        Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
-        hsb[2] = hsb[2] > 0.5 ? 0f : 1f;
-        hsb[0] = hsb[0] > 0.5 ? hsb[0]-0.5f : hsb[0]+0.5f;
-        hsb[1] = hsb[1] > 0.5 ? hsb[1]-0.5f : hsb[1]+0.5f;
-        Color r = Color.getHSBColor(hsb[0], hsb[1], hsb[2]); 
-        return r;
+//        float[] hsb = new float[3];
+//        Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
+//        hsb[2] = hsb[2] > 0.5 ? 0f : 1f;
+//        hsb[0] = hsb[0] > 0.5 ? hsb[0]-0.5f : hsb[0]+0.5f;
+//        hsb[1] = hsb[1] > 0.5 ? hsb[1]-0.5f : hsb[1]+0.5f;
+//        Color r = Color.getHSBColor(hsb[0], hsb[1], hsb[2]); 
+//        return r;
+    	return new Color(color.getRGB()^0x00ffffff);
     }
 }

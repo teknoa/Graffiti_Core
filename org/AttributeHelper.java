@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.11 2007/11/23 12:22:08 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.12 2007/12/17 10:25:04 klukas Exp $
  */
 
 import java.awt.Color;
@@ -63,7 +63,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class AttributeHelper {
 
@@ -2068,9 +2068,12 @@ public class AttributeHelper {
 			int r0 = testColor.getRed();
 			int g0 = testColor.getGreen();
 			int b0 = testColor.getBlue();
-			Color.RGBtoHSB(r0,g0,b0,hsbValsTest);
-			float tDiff = Math.abs(hsbVals[0]-hsbValsTest[0]);
-			tDiff = Math.abs(r-r0)+Math.abs(g-g0)+Math.abs(b-b0);
+			float dr, dg, db;
+			dr = r-r0;
+			dg = g-g0;
+			db = b-b0;
+			// float tDiff = (float)Math.sqrt ( 0.3*( dr * dr ) + 0.59*( dg * dg ) + 0.11*( db * db ) );
+			float tDiff = (float)Math.sqrt ( ( dr * dr ) + ( dg * dg ) + ( db * db ) );
 			if (tDiff<diff) {
 				nearest = i;
 				diff = tDiff;
@@ -2087,7 +2090,8 @@ public class AttributeHelper {
 			if (hsbVals[2]>0.7)
 				return "light gray";
 			return "gray";
-		} else if (nearest>=0) {
+		} else 
+		if (nearest>=0) {
 			return knownColorNames[nearest];
 		} else
 			return "";

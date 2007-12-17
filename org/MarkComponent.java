@@ -27,7 +27,10 @@ public class MarkComponent extends JComponent {
 	
 	JLabel b1 = new JLabel();
 	JLabel b2 = new JLabel();
+	JLabel bb1 = new JLabel();
+	JLabel bb2 = new JLabel();
 	Color selCol = new Color(180, 180, 255);
+	Color selColBB = null;
 	JComponent comp;
 	private boolean marked;
 
@@ -40,9 +43,9 @@ public class MarkComponent extends JComponent {
 		
 		setLayout(TableLayout.getLayout(new double[] {5, 1, width, 1, 5}, TableLayout.PREFERRED));
 		add(b1, "0,0");
-		add(new JLabel(), "1,0");
+		add(bb1, "1,0");
 		add(comp, "2,0");
-		add(new JLabel(), "3,0");
+		add(bb2, "3,0");
 		add(b2, "4,0");
 		this.marked = marked;
 		updateMarked();
@@ -51,13 +54,29 @@ public class MarkComponent extends JComponent {
 	private void updateMarked() {
 		b1.setOpaque(marked);
 		b2.setOpaque(marked);
+		bb1.setOpaque(marked);
+		bb2.setOpaque(marked);
 		if (marked) {
 			b1.setBackground(selCol);
 			b2.setBackground(selCol);
+			bb1.setBackground(selColBB);
+			bb2.setBackground(selColBB);
 		} else {
 			b1.setBackground(null);
 			b2.setBackground(null);
+			bb1.setBackground(null);
+			bb2.setBackground(null);
 		}
+	}
+	
+	public void setMarkColor(Color c, Color gapColor) {
+		this.selCol = c;
+		this.selColBB = gapColor;
+		updateMarked();
+		b1.repaint();
+		b2.repaint();
+		bb1.repaint();
+		bb2.repaint();
 	}
 	
 	public void setMark(final boolean markedReq) {
