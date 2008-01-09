@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Selection.java,v 1.1 2007/05/31 12:56:06 klukas Exp $
+// $Id: Selection.java,v 1.2 2008/01/09 10:13:10 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -51,7 +51,7 @@ import org.graffiti.graph.Node;
  * selectionChanged()</code>
  * </p>
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class Selection
 {
@@ -401,6 +401,14 @@ public class Selection
         this.newMarked = new HashMap<GraphElement,GraphElement>();
         this.newUnmarked = new HashMap<GraphElement,GraphElement>();
     }
+
+	public boolean contains(GraphElement ge) {
+		if (ge instanceof Node)
+			return this.nodes.contains(ge);
+		if (ge instanceof Edge)
+			return this.edges.contains(ge);
+		return false;
+	}
 }
 
 //------------------------------------------------------------------------------
