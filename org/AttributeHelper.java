@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.12 2007/12/17 10:25:04 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.13 2008/01/16 10:38:47 klukas Exp $
  */
 
 import java.awt.Color;
@@ -63,7 +63,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public class AttributeHelper {
 
@@ -338,17 +338,17 @@ public class AttributeHelper {
 		idToNiceId.put("rounding", "Rounded Corners");
 		idToNiceId.put("shape", "Shape");
 		idToNiceId.put("fill", "Fill-Color");
-		idToNiceId.put("Node:gradient", "Gradient Fill (0..1)");
-		idToNiceId.put("Edge:gradient", "Gradient Fill (0=off)");
+		idToNiceId.put("Node:gradient", "<html>Gradient Fill<br>(0..1)");
+		idToNiceId.put("Edge:gradient", "<html>Gradient Fill<br>(0=off)");
 		
-		idToNiceId.put("useCustomRange", chartSelN+": Range Axis: Custom Min/Max");
-		idToNiceId.put("useCustomRangeSteps", chartSelN+":<html>&nbsp;Range Axis: <!--A-->Custom Step Size");
-		idToNiceId.put("rangeStepSize", chartSelN+":<html>&nbsp;Range Axis:  <!--A-->Step Size");
+		idToNiceId.put("useCustomRange", chartSelN+":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;Custom Min/Max");
+		idToNiceId.put("useCustomRangeSteps", chartSelN+":<html>&nbsp;Range Axis: <br>&nbsp;&nbsp;&nbsp;<!--A-->Custom Step Size");
+		idToNiceId.put("rangeStepSize", chartSelN+":<html>&nbsp;Range Axis:  <br>&nbsp;&nbsp;&nbsp;<!--A-->Step Size");
 		
 		idToNiceId.put("max_charts_in_column", chartSelN+": Number of Charts in a Row");
 
-		idToNiceId.put("minRange", chartSelN+": Range Axis: Minimum");
-		idToNiceId.put("maxRange", chartSelN+": Range Axis: Maximum");
+		idToNiceId.put("minRange", chartSelN+":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;Minimum");
+		idToNiceId.put("maxRange", chartSelN+":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;Maximum");
 		idToNiceId.put("connectPriorItems", chartAllLine+": No gaps for missing data");
 		idToNiceId.put("outline", "Frame-Color");
 		idToNiceId.put("Edge:outline", "Color");
@@ -385,7 +385,7 @@ public class AttributeHelper {
 		idToNiceId.put("node_showRangeAxis", chartAll+": Show Range Labels");
 		idToNiceId.put("node_useStdErr", chartAll+": Show SE instead of SD");
 		idToNiceId.put("node_plotOrientationHor", chartAll+": Horizontal/Vertical");
-		idToNiceId.put("node_outlineBorderWidth", chartAll+": Bar-Outline/Line Thickness");
+		idToNiceId.put("node_outlineBorderWidth", chartAll+":<html>&nbsp;Bar-Outline/<br>&nbsp;Line Thickness");
 		idToNiceId.put("node_halfErrorBar", chartAllBars+": Hide bottom of Error-Bar");
 		idToNiceId.put("scatter_showRangeAxis", "Scatter-Plot: Show Y-axis");
 		idToNiceId.put("scatter_showLegend", "Scatter-Plot: Show Legend");

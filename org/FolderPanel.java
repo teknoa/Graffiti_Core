@@ -26,7 +26,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -995,5 +994,9 @@ public class FolderPanel extends JComponent {
 					return jc;
 			}
 		});
+	}
+
+	public String getTitle() {
+		return title;
 	}
 }
