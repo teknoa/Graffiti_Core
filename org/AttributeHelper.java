@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.13 2008/01/16 10:38:47 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.14 2008/01/21 11:32:49 klukas Exp $
  */
 
 import java.awt.Color;
@@ -63,7 +63,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public class AttributeHelper {
 
@@ -1658,6 +1658,10 @@ public class AttributeHelper {
 
 	public static void setSBMLid(GraphElement ge, String id) {
 		AttributeHelper.setAttribute(ge, "sbml", "sbmlID", id);
+	}
+	
+	public static String getSBMLid(GraphElement ge) {
+		return (String)AttributeHelper.getAttributeValue(ge, "sbml", "sbmlID", "", null);
 	}
 
 	public static void setSBMLmodelID(GraphElement ge, String modelID) {
