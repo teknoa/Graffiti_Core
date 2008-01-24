@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Selection.java,v 1.2 2008/01/09 10:13:10 klukas Exp $
+// $Id: Selection.java,v 1.3 2008/01/24 10:16:34 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -51,7 +51,7 @@ import org.graffiti.graph.Node;
  * selectionChanged()</code>
  * </p>
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class Selection
 {
@@ -408,6 +408,10 @@ public class Selection
 		if (ge instanceof Edge)
 			return this.edges.contains(ge);
 		return false;
+	}
+
+	public int getNumberOfNodes() {
+		return nodes.size();
 	}
 }
 
