@@ -37,17 +37,17 @@ public class ReleaseInfo {
 		
 		switch (fs) {
 			case KEGG_ACCESS :
-          if ((new File(getAppFolderWithFinalSep()+"license_kegg_accepted")).exists())
-				return true;
-          else
-         	 return false;
+		          if ((new File(getAppFolderWithFinalSep()+"license_kegg_accepted")).exists())
+						return true;
+		          else
+		         	 return false;
 			case KEGG_ACCESS_ENH :
 				if (!(currentRelease==Release.RELEASE_PUBLIC || currentRelease==Release.KGML_EDITOR || currentRelease==Release.DEBUG))
 					return false;
-	          if ((new File(getAppFolderWithFinalSep()+"license_kegg_accepted")).exists())
-					return true;
-	          else
-	         	 return false;
+		          if ((new File(getAppFolderWithFinalSep()+"license_kegg_accepted")).exists())
+						return true;
+		          else
+		         	 return false;
 			case AUTO_NEWS_DOWNLOAD :
 	          if ((new File(getAppFolderWithFinalSep()+"setting_news_download_enabled")).exists())
 					return true;
@@ -69,6 +69,15 @@ public class ReleaseInfo {
 				if (currentRelease==Release.DEBUG || currentRelease==Release.RELEASE_IPK)
 					return true;
 				break;
+			case MetaCrop_ACCESS :
+				if (currentRelease==Release.DEBUG || currentRelease==Release.RELEASE_IPK)
+					return true;
+				break;	
+			case DATA_CARD_ACCESS :
+					return false;
+				// if (currentRelease==Release.DEBUG || currentRelease==Release.RELEASE_IPK)
+				// 	return true;
+				// break;					
 			case METHOUSE_ACCESS :
 				if (currentRelease==Release.DEBUG || currentRelease==Release.RELEASE_IPK)
 					return true;
