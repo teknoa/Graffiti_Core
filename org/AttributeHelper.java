@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.14 2008/01/21 11:32:49 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.15 2008/01/25 14:13:32 klukas Exp $
  */
 
 import java.awt.Color;
@@ -63,7 +63,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 public class AttributeHelper {
 
@@ -2288,6 +2288,11 @@ public class AttributeHelper {
 
 	public static void setShape(Node node, String knownShapeClassName) {
 		NodeGraphicAttribute nga = (NodeGraphicAttribute) node.getAttribute(NodeGraphicAttribute.GRAPHICS);
+		nga.setShape(knownShapeClassName);
+	}
+	
+	public static void setShape(Edge edge, String knownShapeClassName) {
+		EdgeGraphicAttribute nga = (EdgeGraphicAttribute) edge.getAttribute(NodeGraphicAttribute.GRAPHICS);
 		nga.setShape(knownShapeClassName);
 	}
 	
