@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: AbstractCollectionAttribute.java,v 1.2 2008/01/25 14:38:17 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -21,7 +21,7 @@ import org.graffiti.plugin.XMLHelper;
  * instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			implements CollectionAttribute {
@@ -197,8 +197,17 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			try {
 				attributes.get(attrId).setValue(a.getValue());
 			} catch(Exception e) {
-				 throw new AttributeExistsException("Attribute with ID " + attrId
+				try {
+					attributes.remove(attrId);
+					AttributeEvent attrEvent = new AttributeEvent(a);
+					callPreAttributeAdded(attrEvent);
+					a.setParent(this);
+					attributes.put(attrId, a);
+					callPostAttributeAdded(attrEvent); 
+				} catch(Exception e2) {
+					throw new AttributeExistsException("Attribute with ID " + attrId
 							+ " already exists in " + "this HashMapAttribute!");
+				}
 			}
 		} else {
 			AttributeEvent attrEvent = new AttributeEvent(a);
