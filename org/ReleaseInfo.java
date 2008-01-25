@@ -124,6 +124,10 @@ public class ReleaseInfo {
 				if (currentRelease!=Release.RELEASE_CLUSTERVIS && currentRelease!=Release.KGML_EDITOR)
 					return true;
 				break;
+			case AGLET_NETWORK :
+				if (currentRelease!=Release.RELEASE_CLUSTERVIS && currentRelease!=Release.KGML_EDITOR)
+					return true;
+				break;
 			case FUNCAT_ACCESS :
 				return true;
 			case URL_NODE_ANNOTATION :
