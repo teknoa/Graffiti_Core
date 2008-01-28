@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.15 2008/01/25 14:13:32 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.16 2008/01/28 12:52:22 klukas Exp $
  */
 
 import java.awt.Color;
@@ -63,7 +63,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public class AttributeHelper {
 
@@ -1395,9 +1395,7 @@ public class AttributeHelper {
 
 			return dblAtt.getDouble();
 		} catch (Exception ex) {
-			ErrorMsg.addErrorMessage("Get-FrameThickness-Failure: "
-						+ ex.getLocalizedMessage());
-			return 0;
+			return 1;
 		}
 	}
 	
