@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.16 2008/01/28 12:52:22 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.17 2008/01/29 11:23:09 klukas Exp $
  */
 
 import java.awt.Color;
@@ -63,7 +63,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 public class AttributeHelper {
 
@@ -424,6 +424,8 @@ public class AttributeHelper {
 		idToNiceId.put("kegg_reaction_substrate", "KEGG: Reaction Substrate");
 		idToNiceId.put("relVert", "Label:"+disabled+"Vertical Offset");
 		idToNiceId.put("relHor", "Label:"+disabled+"Horizontal Offset");
+		
+		idToNiceId.put("tooltip", "Tooltip");
 
 		idToNiceId.put("absHor", "Label:"+disabled+"Horizontal Offset");
 		idToNiceId.put("absVert", "Label:"+disabled+"Vertical Offset");

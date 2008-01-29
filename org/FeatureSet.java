@@ -1,6 +1,6 @@
 /*******************************************************************************
  * 
- *    Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
+ *    Copyright (c) 2003-2008 Network Analysis Group, IPK Gatersleben
  * 
  *******************************************************************************/
 /*
@@ -29,5 +29,6 @@ public enum FeatureSet {
 	PATHWAY_FILE_REFERENCE,
 	MetaCrop_ACCESS,
 	DATA_CARD_ACCESS, 
-	AGLET_NETWORK
+	AGLET_NETWORK, 
+	TOOLTIPS
 }

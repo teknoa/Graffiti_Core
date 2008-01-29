@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 /**
  * @author C. Klukas
  *
- * Adds recursivly a tool tip text to a JComponent or to JPanels Sub-Components.
+ * Adds recursively a tool tip text to a JComponent or to JPanels Sub-Components.
  * If a JCheckbox is found with no Text, the given toolTipText is used as the new
  * descriptive text. 
  * The first character of the toolTipText is changed to upper case.
