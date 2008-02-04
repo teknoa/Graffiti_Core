@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Selection.java,v 1.3 2008/01/24 10:16:34 klukas Exp $
+// $Id: Selection.java,v 1.4 2008/02/04 13:08:55 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -51,7 +51,7 @@ import org.graffiti.graph.Node;
  * selectionChanged()</code>
  * </p>
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class Selection
 {
@@ -297,6 +297,13 @@ public class Selection
     {
         for(Object ge : newElements)
             add((GraphElement) ge);
+    }
+    
+    public void removeAll(Collection elements)
+    {
+        for(Object ge : elements) {
+            remove((GraphElement) ge);
+        }
     }
     
 //    /**
