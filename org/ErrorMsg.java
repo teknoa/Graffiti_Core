@@ -16,7 +16,8 @@ import java.util.Locale;
 
 public class ErrorMsg {
     private static LinkedList<String> errorMessages=new LinkedList<String>();
-	 private static String statusMsg = null;
+    private static LinkedList<String> errorMessagesShort=new LinkedList<String>();
+    private static String statusMsg = null;
 
 	 
 	 public static DecimalFormat getDecimalFormat(String pattern) {
@@ -36,6 +37,7 @@ public class ErrorMsg {
     	synchronized(errorMessages) {
     		StackTraceElement[] stack = Java_1_5_compatibility.getStackFrame();
     		String res;
+    		String firstMethod = "";
     		if (stack==null) {
     		    res="<br><font color=\"gray\"><code>No Stack Information (Running on Java 1.4 or lower)</code></font><hr>";
     		} else {
@@ -48,6 +50,9 @@ public class ErrorMsg {
 	    				if (methodName==null || methodName.length()<=0)
 	    					methodName=stack[i].getClass().getName(); // if methodname is empty, the constructor caused the problem
 	    				res=res+"     Line: "+stack[i].getLineNumber()+" Method: "+stack[i].getClassName()+"/"+methodName+"<br>";
+	    				if (firstMethod.length()<=0 && methodName!=null && !methodName.endsWith("addErrorMessage")) {
+	    					firstMethod = ", Line "+stack[i].getLineNumber()+" Method "+stack[i].getClassName()+"/"+methodName;
+	    				}
 	    			}
 	    			if (stack[i].getMethodName().equalsIgnoreCase("addErrorMessage")) thisMethodFound=true;
 	    		}
@@ -56,6 +61,12 @@ public class ErrorMsg {
     		String err="<code>Error: "+errorMsg+"</code>"+res;
     		if (!errorMessages.contains(err))
     		    errorMessages.add(err);
+    		synchronized (errorMessagesShort) {
+    			if (firstMethod.length()>0)
+    				firstMethod = ", "+firstMethod;
+        		if (!errorMessagesShort.contains(errorMsg+firstMethod));
+        		    errorMessagesShort.add(errorMsg+firstMethod);
+			}
     	}
     }
 	 
@@ -73,6 +84,9 @@ public class ErrorMsg {
     		errorMessages.clear();
 			statusMsg = null;
     	}
+    	synchronized (errorMessagesShort) {
+    		errorMessagesShort.clear();
+		}
     }
 
 	/**
@@ -92,6 +106,17 @@ public class ErrorMsg {
 			int i=0;
 			for (Iterator it=errorMessages.iterator(); it.hasNext(); ) {
 				result[statusAvail+(i++)]=(String) it.next();
+			}
+			return result;
+		}
+	}
+	
+	public synchronized static String[] getErrorMessagesShort() {
+		synchronized(errorMessagesShort) {
+			String[] result = new String[errorMessagesShort.size()];
+			int i=0;
+			for (Iterator it=errorMessagesShort.iterator(); it.hasNext(); ) {
+				result[(i++)]=(String) it.next();
 			}
 			return result;
 		}
