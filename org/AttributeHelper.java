@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.17 2008/01/29 11:23:09 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.18 2008/02/04 12:38:33 klukas Exp $
  */
 
 import java.awt.Color;
@@ -63,7 +63,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public class AttributeHelper {
 
@@ -724,6 +724,15 @@ public class AttributeHelper {
 			Attribute attr = n.getAttribute(attributeName);
 			return attr != null;
 		} catch (AttributeNotFoundException err) {
+			return false;
+		} catch(Exception err2) {
+			if (n==null)
+				System.err.println("hasAttribute Function called with Null argument for attributeable!");
+			if (attributeName==null)
+				System.err.println("hasAttribute Function called with Null argument for attributeName!");
+			if (n!=null && attributeName!=null)
+				System.err.println("hasAttribute Function received exception while retreiving attribute! ("+
+						err2.getMessage()+")");
 			return false;
 		}
 	}
