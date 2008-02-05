@@ -104,8 +104,8 @@ public class ErrorMsg {
 			if (statusMsg!=null && errorMessages.size()>0)
 				result[0] = "Last Status: "+statusMsg;
 			int i=0;
-			for (Iterator it=errorMessages.iterator(); it.hasNext(); ) {
-				result[statusAvail+(i++)]=(String) it.next();
+			for (Iterator<String> it=errorMessages.iterator(); it.hasNext(); ) {
+				result[statusAvail+(i++)]= it.next();
 			}
 			return result;
 		}
@@ -115,8 +115,18 @@ public class ErrorMsg {
 		synchronized(errorMessagesShort) {
 			String[] result = new String[errorMessagesShort.size()];
 			int i=0;
-			for (Iterator it=errorMessagesShort.iterator(); it.hasNext(); ) {
-				result[(i++)]=(String) it.next();
+			for (Iterator<String> it=errorMessagesShort.iterator(); it.hasNext(); ) {
+				String s = it.next();
+				if (s!=null && s.length()>0) {
+					s = ErrorMsg.stringReplace(s, "\"", "");
+					s = ErrorMsg.stringReplace(s, ">", "");
+					s = ErrorMsg.stringReplace(s, "<", "");
+					s = ErrorMsg.stringReplace(s, "#", "");
+					s = ErrorMsg.stringReplace(s, "?", "");
+					s = ErrorMsg.stringReplace(s, "&", "");
+				} else
+					s = "";
+				result[(i++)] = s;
 			}
 			return result;
 		}
