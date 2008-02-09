@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.18 2008/02/04 12:38:33 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.19 2008/02/09 13:27:36 klukas Exp $
  */
 
 import java.awt.Color;
@@ -44,6 +44,7 @@ import org.graffiti.attributes.LinkedHashMapAttribute;
 import org.graffiti.attributes.ObjectAttribute;
 import org.graffiti.attributes.StringAttribute;
 import org.graffiti.graph.Edge;
+import org.graffiti.graph.Graph;
 import org.graffiti.graph.GraphElement;
 import org.graffiti.graph.Node;
 import org.graffiti.graphics.ColorAttribute;
@@ -63,7 +64,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  */
 public class AttributeHelper {
 
@@ -79,6 +80,7 @@ public class AttributeHelper {
 	private static String chartAllLine = "<html><!--a-->Charting <small><font color=\"gray\">(line-charts)</font></small>";
 	private static String chartSelN = "<html><!--a-->Charting <small><font color=\"gray\">(selected elements)</font></small>";
 	private static String chartDiagram = "<html><!--a-->Charting <small><font color=\"gray\">(Coloring of data-area to mark developmental stages)</font></small>";
+	private static String chartHeatMap = "<html><!--a-->Charting <small><font color=\"gray\">(Heatmap Settings)</font></small>";
 
 	private static String getEncodedUrl(String input) {
 		String url = input;
@@ -374,6 +376,14 @@ public class AttributeHelper {
 		idToNiceId.put("node_categoryBackgroundColorIndexC", chartDiagram+":<html>&nbsp;Time B<br>&nbsp;<small><font color=\"gray\">(-1 = disabled, 0...x enabled)");
 		
 		
+		idToNiceId.put("hm_lower_col", chartHeatMap+": Lower Color");
+		idToNiceId.put("hm_upper_col", chartHeatMap+": Upper Color");
+		idToNiceId.put("hm_middle_col", chartHeatMap+": Middle Color");
+		idToNiceId.put("hm_lower_bound", chartHeatMap+": Lower Bound");
+		idToNiceId.put("hm_middle_bound", chartHeatMap+": Middle Bound");
+		idToNiceId.put("hm_upper_bound", chartHeatMap+": Upper Bound");
+		idToNiceId.put("hm_gamma", chartHeatMap+": Gamma");
+		
 		idToNiceId.put("node_useLogScaleForRangeAxis", chartAll+": Use Log Scale for Range Axis");
 		idToNiceId.put("node_usePieScale", chartAll+": Scale Pie-Chart");
 		idToNiceId.put("node_chartShapeSize", chartAllLine+": Shape-Size");
@@ -467,7 +477,8 @@ public class AttributeHelper {
 			idToNiceId.put("clusterbackground_grid", cc+"Grid (>~20)");
 			
 			idToNiceId.put("arrowtail", "Arrow Tail: Shape");
-			idToNiceId.put("thickness", "Arrow-Size");
+			idToNiceId.put("arrowhead", "Arrow Head");
+			idToNiceId.put("thickness", "Arrow Size");
 			idToNiceId.put("Edge:fill", "Arrow Tail: Color");
 		}
 		
@@ -2682,5 +2693,31 @@ public class AttributeHelper {
 		if (ref!=null && ref.startsWith(preFilePath))
 			return ref.substring(preFilePath.length());
 		return ref;
+	}
+
+	
+
+	public static double getHeatMapLowerBound(Graph graph) {
+		return ((Double) getAttributeValue(
+				graph, "", "hm_lower_bound", new Double(0.5d),
+				new Double(0.5))).doubleValue();
+	}
+
+	public static double getHeatMapMiddleBound(Graph graph) {
+		return ((Double) getAttributeValue(
+				graph, "", "hm_middle_bound", new Double(1d),
+				new Double(1))).doubleValue();
+	}
+
+	public static double getHeatMapUpperBound(Graph graph) {
+		return ((Double) getAttributeValue(
+				graph, "", "hm_upper_bound", new Double(2d),
+				new Double(2))).doubleValue();
+	}
+
+	public static double getHeatMapGamma(Graph graph) {
+		return ((Double) getAttributeValue(
+				graph, "", "hm_gamma", new Double(1d),
+				new Double(1))).doubleValue();
 	}
 }

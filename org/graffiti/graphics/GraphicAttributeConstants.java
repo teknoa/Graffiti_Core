@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphicAttributeConstants.java,v 1.2 2007/08/25 12:18:34 klukas Exp $
+// $Id: GraphicAttributeConstants.java,v 1.3 2008/02/09 13:27:36 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -71,6 +71,11 @@ public interface GraphicAttributeConstants
     public static final String GRIDCOLOR = "grid_color";
     public static final String AXISCOLOR = "axis_color";
     public static final String COLOR = "color";
+    
+    public static final String HEATMAP_LOWER_COL = "hm_lower_col";
+    public static final String HEATMAP_MIDDLE_COL = "hm_middle_col";
+    public static final String HEATMAP_UPPER_COL = "hm_upper_col";
+    
     // for NodeLabelPosition:
     public static final String RELVERT = "relVert";
     public static final String RELHOR = "relHor";
