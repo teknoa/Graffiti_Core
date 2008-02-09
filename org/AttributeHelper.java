@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.19 2008/02/09 13:27:36 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.20 2008/02/09 19:04:22 klukas Exp $
  */
 
 import java.awt.Color;
@@ -64,7 +64,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  */
 public class AttributeHelper {
 
@@ -2348,6 +2348,13 @@ public class AttributeHelper {
 			ega.setArrowhead("org.graffiti.plugins.views.defaults.StandardArrowShape");
 		else
 			ega.setArrowhead("");
+	}
+
+	public static void setArrowhead(Edge edge, String knownShapeClassName) {
+      EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
+      if (ega==null)
+      	edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK, Color.BLACK, edge.isDirected()), GraphicAttributeConstants.GRAPHICS);
+		ega.setArrowhead(knownShapeClassName);
 	}
 
 	/**
