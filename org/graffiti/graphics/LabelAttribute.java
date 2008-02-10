@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LabelAttribute.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: LabelAttribute.java,v 1.2 2008/02/10 22:05:02 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -15,6 +15,7 @@ import java.awt.FontMetrics;
 import java.text.BreakIterator;
 
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import org.AttributeHelper;
@@ -32,7 +33,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class LabelAttribute
     extends HashMapAttribute
@@ -64,7 +65,7 @@ public abstract class LabelAttribute
 	private JLabel lastLabel = null;
 	
 	private static final int defaultSize = new JLabel().getFont().getSize();
-	private static final String defaultFont = new JLabel().getFont().getFamily();
+	private static final String defaultFont = new JLabel().getFont().getFontName();
 	
 	public void setLastLabel(JLabel lastLabel) {
 		this.lastLabel = lastLabel;
@@ -74,7 +75,7 @@ public abstract class LabelAttribute
     //~ Constructors ===========================================================
 	 public LabelAttribute() {
        this(LABELGRAPHICS);
-       System.out.println("INTERNAL ERROR, Label Attribute Created, with no ID.");
+       ErrorMsg.addErrorMessage("INTERNAL ERROR, Label Attribute Created, with no ID!");
     }
     /**
      * Constructor for Label.
@@ -252,12 +253,9 @@ public abstract class LabelAttribute
 	
 	private String getLabel(boolean stripHTML) {
 		String result = getLabel();
-		result = ErrorMsg.stringReplace(result, "<html>", "");
-		result = ErrorMsg.stringReplace(result, "<HTML>", "");
-		result = ErrorMsg.stringReplace(result, "</html>", "");
-		result = ErrorMsg.stringReplace(result, "</HTML>", "");
-		result = ErrorMsg.stringReplace(result, "<br>", "");
-		result = ErrorMsg.stringReplace(result, "<BR>", "");
+		if (stripHTML) {
+			result = ErrorMsg.removeHTMLtags(result);
+		}
 		return result;
 	}
 	

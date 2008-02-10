@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.20 2008/02/09 19:04:22 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.21 2008/02/10 22:05:03 klukas Exp $
  */
 
 import java.awt.Color;
@@ -64,7 +64,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  */
 public class AttributeHelper {
 
@@ -2461,6 +2461,20 @@ public class AttributeHelper {
 		}
 		return result;
 	}
+
+	public static ArrayList<CoordinateAttribute> getEdgeBendCoordinateAttributes(Edge edge) {
+		ArrayList<CoordinateAttribute> result = new ArrayList<CoordinateAttribute>();
+		try {
+			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute("graphics");
+			for (Attribute a : ega.getBends().getCollection().values()) {
+				CoordinateAttribute ca = (CoordinateAttribute) a;
+				result.add(ca);
+			}
+		} catch(Exception e) {
+			// ingore here
+		}
+		return result;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public static void removeEdgeBends(Edge edge) {
@@ -2726,5 +2740,22 @@ public class AttributeHelper {
 		return ((Double) getAttributeValue(
 				graph, "", "hm_gamma", new Double(1d),
 				new Double(1))).doubleValue();
+	}
+
+	public static void moveGraph(Graph graph, int x, int y) {
+		if (graph==null || graph.getNumberOfNodes()<=0)
+			return;
+		for (Node n : graph.getNodes()) {
+			Vector2d pos = getPositionVec2d(n);
+			pos.x+=x;
+			pos.y+=y;
+			setPosition(n, pos);
+		}
+		for (Edge e : graph.getEdges()) {
+			for (CoordinateAttribute ca : getEdgeBendCoordinateAttributes(e)) {
+				ca.setX(ca.getX()+x);
+				ca.setY(ca.getY()+y);
+			}
+		}
 	}
 }
