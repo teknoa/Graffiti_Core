@@ -15,7 +15,9 @@ import java.util.LinkedList;
 import java.util.Locale;
 
 public class ErrorMsg {
-    private static LinkedList<String> errorMessages=new LinkedList<String>();
+    public static final String Unicode = "UTF-8";
+    
+	private static LinkedList<String> errorMessages=new LinkedList<String>();
     private static LinkedList<String> errorMessagesShort=new LinkedList<String>();
     private static String statusMsg = null;
 
