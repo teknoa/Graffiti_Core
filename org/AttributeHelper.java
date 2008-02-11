@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.21 2008/02/10 22:05:03 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.22 2008/02/11 10:13:07 klukas Exp $
  */
 
 import java.awt.Color;
@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
@@ -64,7 +65,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.21 $
+ * @version $Revision: 1.22 $
  */
 public class AttributeHelper {
 
@@ -2757,5 +2758,17 @@ public class AttributeHelper {
 				ca.setY(ca.getY()+y);
 			}
 		}
+	}
+
+	public static boolean linuxRunning() {
+		Properties p = System.getProperties();
+		String os = (String)p.get("os.name");
+		if (os!=null && os.toUpperCase().contains("LINUX")) {
+			return true;
+		} else
+			if (os!=null && os.toUpperCase().contains("UNIX")) {
+				return true;
+			} else
+				return false;
 	}
 }

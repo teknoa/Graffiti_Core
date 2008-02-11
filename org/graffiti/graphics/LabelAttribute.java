@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LabelAttribute.java,v 1.2 2008/02/10 22:05:02 klukas Exp $
+// $Id: LabelAttribute.java,v 1.3 2008/02/11 10:13:07 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -33,7 +33,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class LabelAttribute
     extends HashMapAttribute
@@ -65,14 +65,18 @@ public abstract class LabelAttribute
 	private JLabel lastLabel = null;
 	
 	private static final int defaultSize = new JLabel().getFont().getSize();
-	private static final String defaultFont = new JLabel().getFont().getFontName();
+	private static final String defaultFont = getDefaultFont();
 	
 	public void setLastLabel(JLabel lastLabel) {
 		this.lastLabel = lastLabel;
 	}
 
 
-    //~ Constructors ===========================================================
+    private static String getDefaultFont() {
+    	String name = new JLabel().getFont().getFamily();
+		return name;
+	}
+	//~ Constructors ===========================================================
 	 public LabelAttribute() {
        this(LABELGRAPHICS);
        ErrorMsg.addErrorMessage("INTERNAL ERROR, Label Attribute Created, with no ID!");

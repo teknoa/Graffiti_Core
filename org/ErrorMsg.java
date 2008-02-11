@@ -337,11 +337,10 @@ public class ErrorMsg {
 	
 	public static boolean isMac() {
 		return AttributeHelper.macOSrunning();
-//		String vers = System.getProperty("os.name").toLowerCase();
-//	    if (vers.indexOf("mac") >= 0)
-//	    	return true;
-//	    else
-//	    	return false;
+	}
+
+	public static boolean isLinux() {
+		return AttributeHelper.linuxRunning();
 	}
 
 	public static int getAccelModifier() {
