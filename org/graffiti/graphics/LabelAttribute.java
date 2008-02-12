@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LabelAttribute.java,v 1.3 2008/02/11 10:13:07 klukas Exp $
+// $Id: LabelAttribute.java,v 1.4 2008/02/12 15:11:17 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -33,7 +33,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public abstract class LabelAttribute
     extends HashMapAttribute
@@ -184,7 +184,11 @@ public abstract class LabelAttribute
      * @return the 'label'-value of the encapsulated label.
      */
     public String getLabel() {
-   	 return ((StringAttribute)attributes.get(LABEL)).getString();
+    	try {
+    		return ((StringAttribute)attributes.get(LABEL)).getString();
+   	 	} catch(Exception e) {
+   	 		return null;
+   	 	}
     }
 
     /**

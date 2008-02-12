@@ -7,7 +7,7 @@
 package org;
 
 /* Copyright (c) 2003-207 IPK Gatersleben
- * $Id: AttributeHelper.java,v 1.22 2008/02/11 10:13:07 klukas Exp $
+ * $Id: AttributeHelper.java,v 1.23 2008/02/12 15:11:17 klukas Exp $
  */
 
 import java.awt.Color;
@@ -65,7 +65,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  */
 public class AttributeHelper {
 
@@ -377,9 +377,9 @@ public class AttributeHelper {
 		idToNiceId.put("node_categoryBackgroundColorIndexC", chartDiagram+":<html>&nbsp;Time B<br>&nbsp;<small><font color=\"gray\">(-1 = disabled, 0...x enabled)");
 		
 		
-		idToNiceId.put("hm_lower_col", chartHeatMap+": Lower Color");
-		idToNiceId.put("hm_upper_col", chartHeatMap+": Upper Color");
-		idToNiceId.put("hm_middle_col", chartHeatMap+": Middle Color");
+		idToNiceId.put(GraphicAttributeConstants.HEATMAP_LOWER_COL, chartHeatMap+": Lower Color");
+		idToNiceId.put(GraphicAttributeConstants.HEATMAP_UPPER_COL, chartHeatMap+": Upper Color");
+		idToNiceId.put(GraphicAttributeConstants.HEATMAP_MIDDLE_COL, chartHeatMap+": Middle Color");
 		idToNiceId.put("hm_lower_bound", chartHeatMap+": Lower Bound");
 		idToNiceId.put("hm_middle_bound", chartHeatMap+": Middle Bound");
 		idToNiceId.put("hm_upper_bound", chartHeatMap+": Upper Bound");
