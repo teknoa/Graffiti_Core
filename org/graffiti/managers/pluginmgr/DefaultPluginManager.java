@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.2 2007/08/22 20:21:52 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.3 2008/02/15 14:26:45 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
+import org.ErrorMsg;
 import org.graffiti.core.StringBundle;
 import org.graffiti.options.GravistoPreferences;
 import org.graffiti.plugin.GenericPlugin;
@@ -33,7 +34,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -270,9 +271,14 @@ public class DefaultPluginManager
         // load plugins with dependencies if they are satisfied
         int loaded = 1;
         int tryCnt = 0;
-        while(loadLater.size() > 0) { //  && tryCnt<1000
+        while(loadLater.size() > 0 && tryCnt<1000) {
             loadDelayedPlugins(progressViewer, messages, loadLater);
             tryCnt++;
+        }
+        
+        if (tryCnt>=1000) {
+        	System.err.println("Internal error in loading delayed plugins.");
+        	ErrorMsg.addErrorMessage("Internal error in loading delayed plugins.");
         }
 
         // check if all plugins could be loaded
