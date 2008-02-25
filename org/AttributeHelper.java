@@ -66,7 +66,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  */
 public class AttributeHelper {
 
@@ -1419,6 +1419,19 @@ public class AttributeHelper {
 		} catch (Exception e) {
 			ErrorMsg.addErrorMessage(e);
 		}
+	}
+
+	
+	public static Set<Object> getAttributeValueSet(Collection<Attributable> attributables,
+			String path, String attributeName, Object defaultValue,
+			Object resultType, boolean setDefaultIfMissing) {
+		HashSet<Object> values = new HashSet<Object>();
+		for (Attributable a : attributables) {
+			Object o = getAttributeValue(a, path, attributeName,
+				defaultValue, resultType, setDefaultIfMissing);
+			values.add(o);
+		}
+		return values;
 	}
 
 	public static Object getAttributeValue(Attributable attributable,
