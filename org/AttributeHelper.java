@@ -66,7 +66,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.24 $
+ * @version $Revision: 1.25 $
  */
 public class AttributeHelper {
 
@@ -81,7 +81,7 @@ public class AttributeHelper {
 	private static String chartAllBars = "<html><!--a-->Charting <small><font color=\"gray\">(bar-charts)</font></small>";
 	private static String chartAllLine = "<html><!--a-->Charting <small><font color=\"gray\">(line-charts)</font></small>";
 	private static String chartSelN = "<html><!--a-->Charting <small><font color=\"gray\">(selected elements)</font></small>";
-	private static String chartDiagram = "<html><!--a-->Charting <small><font color=\"gray\">(Coloring of data-area to mark developmental stages)</font></small>";
+	private static String chartDiagram = "<html><!--a-->Charting <small><font color=\"gray\">(Coloring of developmental stages)</font></small>";
 	private static String chartHeatMap = "<html><!--a-->Charting <small><font color=\"gray\">(Heatmap Settings)</font></small>";
 
 	private static String getEncodedUrl(String input) {
@@ -475,6 +475,11 @@ public class AttributeHelper {
 				+ ": Show Error as vert. Line");
 		idToNiceId.put("node_lineChartShowStdDevRangeLine", chartAllLine
 				+ ": Show Error as Fill-Range");
+		
+		idToNiceId.put("node_lineChartFillTimeGaps", chartAllLine
+				+ ": Fill Time-Gaps (linear X-Axis)");
+		
+		
 		idToNiceId.put("node_chartStdDevLineWidth", chartAllLine
 				+ ": Error-Bar Line-Thickness");
 		idToNiceId.put("node_chartStdDevTopWidth", chartAll
