@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttributable.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: AbstractAttributable.java,v 1.2 2008/02/27 15:07:17 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -15,7 +15,7 @@ import org.graffiti.event.AttributeEvent;
  * Provides common functionality for <code>Attributable</code> classes. This
  * class also contains additional functionality for dealing with attributes.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see Attributable
  */
@@ -92,8 +92,8 @@ public abstract class AbstractAttributable implements Attributable {
         assert path != null;
         
         /* if the path contains "." as first character then remove it.*/
-        if (!path.equals("") && path.substring(0,1).equals(Attribute.SEPARATOR)) {
-		return attributes.getAttribute(path.substring(1));
+        if (path.startsWith(Attribute.SEPARATOR)) {
+        	return attributes.getAttribute(path.substring(1));
         }
 
         return attributes.getAttribute(path);
