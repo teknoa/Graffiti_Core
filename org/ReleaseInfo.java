@@ -152,10 +152,20 @@ public class ReleaseInfo {
 	}
 
 	public static String getAppFolder() {
+		String home = System.getProperty("user.home");
+		try {
+			if (!new File(home).isDirectory()) {
+				String home2 = System.getenv("USERPROFILE");
+				if (!new File(ReleaseInfo.getAppFolder()).isDirectory())
+					home = home2;
+			}
+		} catch(Exception e) {
+			// empty
+		}
 		if (getRunningReleaseStatus()==Release.KGML_EDITOR)
-			return System.getProperty("user.home")+getPathSeparator()+".kgml_editor";
-		else
-			return System.getProperty("user.home")+getPathSeparator()+".vanted";
+			return home+getPathSeparator()+".kgml_editor";
+		else 
+			return home+getPathSeparator()+".vanted";
 	}
 
 	public static String getPathSeparator() {
