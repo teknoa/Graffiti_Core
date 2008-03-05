@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.3 2008/02/27 15:07:17 klukas Exp $
+// $Id: AbstractCollectionAttribute.java,v 1.4 2008/03/05 11:39:42 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -21,7 +21,7 @@ import org.graffiti.plugin.XMLHelper;
  * instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			implements CollectionAttribute {
@@ -117,7 +117,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	 */
 	public Attribute getAttribute(String path) throws AttributeNotFoundException {
 		assert path != null;
-		if (path.isEmpty()) {
+		if (path==null || path.length()<=0) {
 			return this;
 		} else {
 			String[] splitPath = path.split("\\"
