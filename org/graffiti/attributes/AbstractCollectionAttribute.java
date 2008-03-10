@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.4 2008/03/05 11:39:42 klukas Exp $
+// $Id: AbstractCollectionAttribute.java,v 1.5 2008/03/10 15:01:19 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -21,7 +21,7 @@ import org.graffiti.plugin.XMLHelper;
  * instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			implements CollectionAttribute {
@@ -242,6 +242,8 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			//            logger.warning("Adding Attribute with id " + id + " without " +
 			//                "informing the ListenerManager.");
 
+			if (a==null)
+				System.err.println("internal error: try to add null attribute...");	
 			String attrId = a.getId();
 //			if (attributes.containsKey(attrId)) {
 //				attributes.remove(attrId);

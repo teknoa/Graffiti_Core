@@ -366,7 +366,10 @@ public class ErrorMsg {
 	public static String removeHTMLtags(String textWithHtmlTags) {
 		if (textWithHtmlTags==null)
 			return null;
-		return removeTags(textWithHtmlTags, "<", ">");
+		String res = removeTags(textWithHtmlTags, "<", ">");
+		res = stringReplace(res, "&nbsp;", " ");
+		res = stringReplace(res, "%20", " ");
+		return res;
 	}
 	
 	public static String removeTags(String textWithHtmlTags, String tagA, String tagB) {

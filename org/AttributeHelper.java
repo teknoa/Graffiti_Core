@@ -28,8 +28,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -66,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.27 $
  */
 public class AttributeHelper {
 
@@ -519,8 +521,9 @@ public class AttributeHelper {
 		idToNiceId.put("kegg_link", "KEGG: Reference");
 		idToNiceId.put("kegg_link_os", "KEGG (Organism-Specific): Reference");
 		idToNiceId.put("present", "KEGG: Presence in spec. Pathway");
-		idToNiceId.put("url", "Link: Reference URL");
-		idToNiceId.put("pathway_ref_url", "Link: Pathway File");
+		idToNiceId.put("url", "Links: Reference URL");
+		idToNiceId.put("pathway_ref_url", "Links: Pathway");
+		idToNiceId.put("pathway_link_visualization", "Links: Link Visualization");
 		idToNiceId.put("xml_url", "KEGG: XML Source");
 		idToNiceId.put("xml_url_os", "KEGG (Organism-Specific): XML Source");
 		idToNiceId.put("kegg_link_reaction", "KEGG: Reaction Reference");
@@ -3034,12 +3037,40 @@ public class AttributeHelper {
 		setAttribute(ge, "", "pathway_ref_url", preFilePath + url);
 	}
 
-	public static String getPathwayReference(GraphElement ge) {
-		String ref = (String) getAttributeValue(ge, "", "pathway_ref_url",
+	public static void setPathwayReference(Attributable a, int idx, String url) {
+		setAttribute(a, "", "pathway_ref_url"+idx, preFilePath + url);
+	}
+
+	public static void removePathwayReferences(Attributable a, boolean includeNonIndexed) {
+		String nonIndexedURL = null;
+		if (!includeNonIndexed)
+			nonIndexedURL = (String) getAttributeValue(a, "", "pathway_ref_url", null, "", false);
+		deleteAttribute(a, "", "pathway_ref_url*");
+		if (!includeNonIndexed && nonIndexedURL!=null)
+			setAttribute(a, "", "pathway_ref_url", nonIndexedURL); 
+	}
+
+	public static String getPathwayReference(Attributable a) {
+		String ref = (String) getAttributeValue(a, "", "pathway_ref_url",
 				null, "");
 		if (ref != null && ref.startsWith(preFilePath))
 			return ref.substring(preFilePath.length());
 		return ref;
+	}
+	
+	public static ArrayList<String> getPathwayReferences(Attributable a, boolean includeOnlyIndexed) {
+		ArrayList<String> result = new ArrayList<String>();
+		Map<String,Attribute> rr = a.getAttributes().getCollection();
+		for (Entry<String, Attribute> e : rr.entrySet()) {
+			if (!e.getKey().startsWith("pathway_ref_url"))
+				continue;
+			if (
+				   (!includeOnlyIndexed)
+				|| (includeOnlyIndexed && e.getKey().length()>"pathway_ref_url".length())) {
+				result.add((String)e.getValue().getValue());
+			}
+		}
+		return result;
 	}
 
 	public static double getHeatMapLowerBound(Graph graph) {
