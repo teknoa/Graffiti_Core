@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractGraphElement.java,v 1.1 2007/05/31 12:55:55 klukas Exp $
+// $Id: AbstractGraphElement.java,v 1.2 2008/03/26 15:11:48 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -128,7 +128,7 @@ public abstract class AbstractGraphElement
    	 return viewID;
     }
     
- 	public int compareTo(Object o) {
+ 	public int compareTo(AbstractGraphElement o) {
  		if (getViewID()>((GraphElement)o).getViewID())
 			return -1;
 		if (getViewID()<((GraphElement)o).getViewID())
