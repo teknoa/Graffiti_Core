@@ -68,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.27 $
+ * @version $Revision: 1.28 $
  */
 public class AttributeHelper {
 
@@ -175,17 +175,17 @@ public class AttributeHelper {
 		if (!macOSrunning())
 			return;
 		System.setProperty("apple.laf.useScreenMenuBar", "true");
-		System.setProperty("apple.awt.showGrowBox", "false");
 		// apple.awt.showGrowBox=false
-		// System.setProperty("com.apple.mrj.application.live-resize", "true");
 		// System.setProperty("om.apple.macos.smallTabs", "true");
-		// System.setProperty("apple.awt.brushMetalLook", "true");
 
 		// System.setProperty("apple.awt.window.position.forceSafeCreation",
 		// "true");
-		// System.setProperty("apple.awt.rendering", "VALUE_RENDER_SPEED");
-		// System.setProperty("com.apple.mrj.application.apple.menu.about.name",
-		// applicationName);
+		
+		System.setProperty("apple.awt.showGrowBox", "true");
+		System.setProperty("com.apple.mrj.application.apple.menu.about.name", applicationName);
+		System.setProperty("apple.awt.rendering", "VALUE_RENDER_SPEED");
+		System.setProperty("apple.awt.brushMetalLook", "true");
+		System.setProperty("com.apple.mrj.application.live-resize", "true");
 	}
 
 	public static String getDefaultAttributeDescriptionFor(String id,
