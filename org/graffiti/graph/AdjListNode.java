@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListNode.java,v 1.3 2008/03/26 15:11:48 klukas Exp $
+// $Id: AdjListNode.java,v 1.4 2008/03/28 09:37:24 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -23,7 +23,7 @@ import org.graffiti.util.MultipleIterator;
 /**
  * Implements a graph node with adjacency list representation.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *
  * @see AdjListGraph
  * @see AdjListEdge
@@ -402,7 +402,6 @@ public class AdjListNode
 		return getEdges().size();
 	}
 	
-	@Override
 	public int compareTo(GraphElement arg0) {
 		return new Integer(getViewID()).compareTo(arg0.getViewID());
 	}

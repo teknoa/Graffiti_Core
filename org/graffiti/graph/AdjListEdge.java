@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListEdge.java,v 1.2 2008/03/26 15:11:48 klukas Exp $
+// $Id: AdjListEdge.java,v 1.3 2008/03/28 09:37:24 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -17,7 +17,7 @@ import org.graffiti.attributes.CollectionAttribute;
  * Implementation of the <code>Edge</code> interface for a <code>Graph</code>
  * with adjacency list representation.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see AdjListGraph
  * @see AdjListNode
@@ -259,7 +259,6 @@ public class AdjListEdge
 		return "Edge ID="+getID();
 	}
 
-	@Override
 	public int compareTo(GraphElement arg0) {
 		return new Integer(getViewID()).compareTo(arg0.getViewID());
 	}
