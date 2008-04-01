@@ -174,8 +174,14 @@ public class FolderPanel extends JComponent {
 	}
 
 	public void addFirstGuiComponentRow(JComponent leftComponent,
-			JComponent rightComponent, boolean updateLayout) {
-		guiComponentRows.add(0, new GuiRow(leftComponent, rightComponent));
+			JComponent rightComponent, boolean updateLayout, int spaceAroundComponents) {
+		int sp = spaceAroundComponents;
+		if (spaceAroundComponents==0)
+			guiComponentRows.add(0, new GuiRow(leftComponent, rightComponent));
+		else
+			guiComponentRows.add(0, new GuiRow(
+					getBorderedComponent(leftComponent, sp, sp, sp, sp), 
+					getBorderedComponent(rightComponent, sp, sp, sp, sp)));
 		if (updateLayout)
 			layoutRows();
 	}
