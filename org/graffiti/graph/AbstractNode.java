@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractNode.java,v 1.4 2007/09/12 11:38:29 klukas Exp $
+// $Id: AbstractNode.java,v 1.5 2008/04/04 09:36:54 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -24,7 +24,7 @@ import org.graffiti.util.MultipleIterator;
  * Abstract class <code>AbstractNode</code> common functionality for
  * <code>Node</code> implementations.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *
  * @see AdjListNode
  */
@@ -49,7 +49,7 @@ public abstract class AbstractNode
     public AbstractNode(Graph graph)
     {
         super(graph);
-        setViewID(-1); // nodes default = -1, edges default = 0 => nodes are painted bedges
+        setViewID(-1); // nodes default = -1, edges default = 0 => nodes are painted before edges
     }
 
     /**

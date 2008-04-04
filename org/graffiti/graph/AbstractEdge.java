@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractEdge.java,v 1.1 2007/05/31 12:55:55 klukas Exp $
+// $Id: AbstractEdge.java,v 1.2 2008/04/04 09:36:54 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -19,7 +19,7 @@ import org.graffiti.event.ListenerManager;
 /**
  * Provides default implementations of methods on edges.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class AbstractEdge
     extends AbstractGraphElement
@@ -41,7 +41,7 @@ public abstract class AbstractEdge
     public AbstractEdge(Graph graph)
     {
         super(graph);
-        setViewID(0); // nodes default = 1, edges default = 0 => nodes are painted after edges
+        setViewID(0); // nodes default = -1, edges default = 0 => nodes are painted before edges 
     }
 
     /**
@@ -56,7 +56,7 @@ public abstract class AbstractEdge
     public AbstractEdge(Graph graph, CollectionAttribute coll)
     {
         super(graph, coll);
-        setViewID(0); // nodes default = 1, edges default = 0 => nodes are painted after edges
+        setViewID(0); // nodes default = -1, edges default = 0 => nodes are painted before edges
     }
 
     //~ Methods ================================================================
