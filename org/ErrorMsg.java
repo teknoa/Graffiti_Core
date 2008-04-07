@@ -188,6 +188,21 @@ public class ErrorMsg {
         return result.toString();
 	}
 	
+	public synchronized static String UnicodeToURLsyntax(String unicodeText) {
+	    StringBuffer result = new StringBuffer();
+	    char[] characters = unicodeText.toCharArray();
+        for (int i=0; i<characters.length; i++) {
+            char curChar = characters[i];
+            if (curChar<128 && Character.isLetterOrDigit(curChar)) {
+                result.append(curChar);
+            } else {
+                String html="%"+new Integer(curChar).toString();
+                result.append(html);
+            }
+        }
+        return result.toString();
+	}
+	
 	/**
      * 
      * Replace occurrences of a substring.
