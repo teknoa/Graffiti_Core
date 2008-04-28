@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphElementsDeletionEdit.java,v 1.1 2007/05/31 12:56:09 klukas Exp $
+// $Id: GraphElementsDeletionEdit.java,v 1.2 2008/04/28 10:55:17 klukas Exp $
 
 package org.graffiti.undo;
 
@@ -28,7 +28,7 @@ import org.graffiti.graph.Node;
  * undoable.
  *
  * @author $Author $
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class GraphElementsDeletionEdit
     extends GraphElementsEdit
@@ -130,7 +130,11 @@ public class GraphElementsDeletionEdit
 
             if(ge instanceof Node)
             {
-                graph.deleteNode((Node) ge);
+            	try {
+            		graph.deleteNode((Node) ge);
+            	} catch(Exception e) {
+            		ErrorMsg.addErrorMessage(e);
+            	}
             }
         }
 
