@@ -168,6 +168,14 @@ public class FolderPanel extends JComponent {
 		setBorder(BorderFactory.createLineBorder(frameColor, frameWidth));
 		layoutRows();
 	}
+	
+	public void setFrameColor(Color frameColor, Color headingColor) {
+		this.frameColor = frameColor;
+		this.headingColor = headingColor;
+		titleLabel.setBackground(frameColor);
+		setBorder(BorderFactory.createLineBorder(frameColor, frameWidth));
+		layoutRows();
+	}
 
 	public void setBackground(Color backgroundColor) {
 		this.backgroundColor = backgroundColor;
@@ -545,8 +553,7 @@ public class FolderPanel extends JComponent {
 				showCondensed.put(title, new Boolean(condensedState));
 				layoutRows();
 				for (ActionListener al : collapse_listeners) {
-					al.actionPerformed(new ActionEvent(this, condensedState ? 1
-							: 0, "collapseevent"));
+					al.actionPerformed(new ActionEvent(this, condensedState ? 1 : 0, "collapseevent"));
 				}
 			}
 		});

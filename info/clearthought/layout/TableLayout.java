@@ -2187,10 +2187,10 @@ public void invalidateLayout (Container target)
   }
 
 
-	public static Component getDoubleRow(JComponent label, JComponent row2, Color color) {
-      JPanel result = new JPanel();
+	public static JComponent getDoubleRow(JComponent label, JComponent row2, Color color) {
+		JPanel result = new JPanel();
 		result.setOpaque(false);
-      double border = 0;
+		double border = 0;
 		double[][] size =
 			{
 				{border, TableLayoutConstants.FILL, border}, // Columns
