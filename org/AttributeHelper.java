@@ -68,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.28 $
+ * @version $Revision: 1.29 $
  */
 public class AttributeHelper {
 
@@ -382,7 +382,7 @@ public class AttributeHelper {
 		idToNiceId.put("height", "<html><!--B-->Height");
 		idToNiceId.put("x", "X");
 		idToNiceId.put("y", "Y");
-		idToNiceId.put("z", "Z");
+		idToNiceId.put("z_", "Z");
 		idToNiceId.put("mol", "Molecule Structure:3D MOL View");
 		idToNiceId.put("rounding", "Rounded Corners");
 		idToNiceId.put("shape", "Shape");
@@ -2879,10 +2879,28 @@ public class AttributeHelper {
 		}
 		return new Vector3d(Double.NaN, Double.NaN, Double.NaN);
 	}
+	
+	public static Vector3d getPositionVec3d(Node a, double zReturnIfNotAvailable, boolean setDefaultZ) {
+		try {
+			CoordinateAttribute coA = (CoordinateAttribute) a
+					.getAttribute(GraphicAttributeConstants.COORD_PATH);
+			Point2D r = coA.getCoordinate();
+			double z = getPositionZ(a, zReturnIfNotAvailable, setDefaultZ);
+			return new Vector3d(r.getX(), r.getY(), z);
+		} catch (Exception ex) {
+		}
+		return new Vector3d(Double.NaN, Double.NaN, Double.NaN);
+	}
 
 	public static double getPositionZ(Node a, boolean setDefault) {
 		double z = (Double) getAttributeValue(a, "graphics", "z_",
 				new Double(0), new Double(0), setDefault);
+		return z;
+	}
+
+	public static double getPositionZ(Node a, double defaultReturn, boolean setDefault) {
+		double z = (Double) getAttributeValue(a, "graphics", "z_",
+				defaultReturn, new Double(0), setDefault);
 		return z;
 	}
 
