@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.3 2008/02/15 14:26:45 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.4 2008/05/30 10:52:48 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -34,7 +34,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -122,7 +122,7 @@ public class DefaultPluginManager
      */
     public void setLoadOnStartup(String name, Boolean loadOnStartup)
     {
-        ((Entry) pluginEntries.get(name)).setLoadOnStartup(loadOnStartup);
+        ((PluginEntry) pluginEntries.get(name)).setLoadOnStartup(loadOnStartup);
     }
 
     /**
@@ -144,7 +144,7 @@ public class DefaultPluginManager
      */
     public GenericPlugin getPluginInstance(String name)
     {
-        return ((Entry) pluginEntries.get(name)).getPlugin();
+        return ((PluginEntry) pluginEntries.get(name)).getPlugin();
     }
 
     /**
@@ -218,7 +218,7 @@ public class DefaultPluginManager
         Boolean loadOnStartup)
         throws PluginManagerException
     {
-        loadPlugins(new Entry[]
+        loadPlugins(new PluginEntry[]
             {
                 new DefaultPluginEntry(pluginLocation.toString(), description)
             });
@@ -232,13 +232,13 @@ public class DefaultPluginManager
      * @exception PluginManagerException if an error occurs while loading or
      *            instantiating the plugin.
      */
-    public void loadPlugins(Entry[] plugins)
+    public void loadPlugins(PluginEntry[] plugins)
         throws PluginManagerException
     {
         loadPlugins(plugins, null);
     }
     
-    public void loadPlugins(Entry[] plugins, ProgressViewer progressViewer) throws PluginManagerException {
+    public void loadPlugins(PluginEntry[] plugins, ProgressViewer progressViewer) throws PluginManagerException {
     	loadPlugins(plugins, progressViewer, false);
     }
 
@@ -252,7 +252,7 @@ public class DefaultPluginManager
      * @exception PluginManagerException if an error occurs while loading or
      *            instantiating the plugin.
      */
-    public void loadPlugins(Entry[] plugins, ProgressViewer progressViewer, boolean doAutomatic)
+    public void loadPlugins(PluginEntry[] plugins, ProgressViewer progressViewer, boolean doAutomatic)
         throws PluginManagerException
     {
     	
@@ -351,7 +351,7 @@ public class DefaultPluginManager
 		                for(Iterator enit = entries.iterator();
 		                    enit.hasNext();)
 		                {
-		                    Entry entry = (Entry) enit.next();
+		                    PluginEntry entry = (PluginEntry) enit.next();
 
 		                    if(entry.getDescription().getName().equals(dep.getName()))
 		                    {
@@ -359,7 +359,7 @@ public class DefaultPluginManager
 		                        try
 		                        {
 		                            //                                        doAutomatic = true;
-		                            loadPlugins(new Entry[] { entry });
+		                            loadPlugins(new PluginEntry[] { entry });
 
 		                            //                                        doAutomatic = false;
 		                            couldLoad1 = true;
@@ -479,7 +479,7 @@ public class DefaultPluginManager
 	 * @param loadLater
 	 * @param i
 	 */
-	private void loadPlugin(Entry[] plugins, ProgressViewer progressViewer, List<String> messages, ArrayList<Object> loadLater, int i) {
+	private void loadPlugin(PluginEntry[] plugins, ProgressViewer progressViewer, List<String> messages, ArrayList<Object> loadLater, int i) {
 		String pluginLocation = plugins[i].getFileName();
 		// System.out.println("Loading Plugin from: "+pluginLocation);
 		try
@@ -579,7 +579,7 @@ public class DefaultPluginManager
 
         List messages = new LinkedList();
 
-        Entry[] pluginEntries = new Entry[numberOfPlugins];
+        PluginEntry[] pluginEntries = new PluginEntry[numberOfPlugins];
 
         int cnt = 0;
 
@@ -665,7 +665,7 @@ public class DefaultPluginManager
 
             for(Iterator i = pluginEntries.values().iterator(); i.hasNext();)
             {
-                Entry e = (Entry) i.next();
+                PluginEntry e = (PluginEntry) i.next();
 
                 if(e.getLoadOnStartup().equals(Boolean.TRUE))
                 {
@@ -799,15 +799,17 @@ public class DefaultPluginManager
 
         try
         { // to instanciate the plugin's main class
-        	System.out.println("Instanciate: "+description.getMain());
+        	System.out.print(".");
             pluginInstance = (GenericPlugin) InstanceLoader.createInstance(description.getMain());
         }
         catch(InstanceCreationException ice)
         {
+        	System.out.println("Instance Creation Exception: "+description.getMain());
             throw new PluginManagerException(ice.getMessage()+" (cause: "+ice.getCause().getMessage()+") ",
                 description.toString());
         }
         catch(NoClassDefFoundError nce) {
+        	System.out.println("No Class Definition Found: "+description.getMain());
         	throw new PluginManagerException(nce.getMessage()+" (cause: "+nce.getCause().getMessage()+") ",
                     description.toString());
         }

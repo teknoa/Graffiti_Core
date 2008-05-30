@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginManagerDialog.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: PluginManagerDialog.java,v 1.2 2008/05/30 10:52:48 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -56,7 +56,7 @@ import org.graffiti.util.PluginHelper;
 /**
  * DOCUMENT ME!
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PluginManagerDialog
     extends JDialog
@@ -397,7 +397,7 @@ public class PluginManagerDialog
      *
      * @param plugins DOCUMENT ME!
      */
-    private void addPlugins(Entry[] plugins)
+    private void addPlugins(PluginEntry[] plugins)
     {
         if(plugins != null)
         {
@@ -575,7 +575,7 @@ public class PluginManagerDialog
     /**
      * The list model of the dialog's jlist component.
      *
-     * @version $Revision: 1.1 $
+     * @version $Revision: 1.2 $
      */
     protected class PluginsTableModel
         extends AbstractTableModel
@@ -662,7 +662,7 @@ public class PluginManagerDialog
          */
         public PluginDescription getPluginDescription(int index)
         {
-            return ((Entry) pluginEntries.get(index)).getDescription();
+            return ((PluginEntry) pluginEntries.get(index)).getDescription();
         }
 
         /**
@@ -698,7 +698,7 @@ public class PluginManagerDialog
          */
         public Object getValueAt(int rowIndex, int columnIndex)
         {
-            Entry entry = (Entry) pluginEntries.get(rowIndex);
+            PluginEntry entry = (PluginEntry) pluginEntries.get(rowIndex);
 
             if(columnIndex == 0)
             {
@@ -756,7 +756,7 @@ public class PluginManagerDialog
      * DOCUMENT ME!
      *
      * @author $Author: klukas $
-     * @version $Revision: 1.1 $ $Date: 2007/05/31 12:55:59 $
+     * @version $Revision: 1.2 $ $Date: 2008/05/30 10:52:48 $
      */
     class EntryComparator
         implements Comparator
@@ -766,7 +766,7 @@ public class PluginManagerDialog
          */
         public int compare(Object o1, Object o2)
         {
-            return ((Entry) o1).getDescription().getName().compareTo(((Entry) o2).getDescription()
+            return ((PluginEntry) o1).getDescription().getName().compareTo(((PluginEntry) o2).getDescription()
                                                                       .getName());
         }
     }

@@ -1,11 +1,9 @@
-//==============================================================================
-//
-//   AlgorithmWithContextMenu.java
-//
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
-//
-//==============================================================================
-// $Id: ProvidesGeneralContextMenu.java,v 1.1 2007/05/31 12:55:54 klukas Exp $
+/*******************************************************************************
+ * 
+ *    Copyright (c) 2003-2008 Network Analysis Group, IPK Gatersleben
+ * 
+ *******************************************************************************/
+// $Id: ProvidesGeneralContextMenu.java,v 1.2 2008/05/30 10:52:49 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -15,7 +13,7 @@ import javax.swing.JMenuItem;
  * DOCUMENT ME!
  *
  * @author $Author: klukas $
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public interface ProvidesGeneralContextMenu
 {

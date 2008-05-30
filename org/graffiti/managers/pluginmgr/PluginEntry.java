@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Entry.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: PluginEntry.java,v 1.1 2008/05/30 10:52:48 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -18,7 +18,7 @@ import org.graffiti.plugin.GenericPlugin;
  *
  * @see PluginManager
  */
-public interface Entry
+public interface PluginEntry
 {
     //~ Methods ================================================================
 

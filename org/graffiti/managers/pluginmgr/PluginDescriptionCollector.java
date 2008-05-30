@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDescriptionCollector.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: PluginDescriptionCollector.java,v 1.2 2008/05/30 10:52:48 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -14,10 +14,10 @@ import java.util.List;
 /**
  * Collects plugin description URLs, which can be used by the PluginSelector.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see PluginSelector
- * @see org.graffiti.managers.pluginmgr.Entry
+ * @see org.graffiti.managers.pluginmgr.PluginEntry
  */
 public interface PluginDescriptionCollector
 {
@@ -25,7 +25,7 @@ public interface PluginDescriptionCollector
 
     /**
      * Returns an enumeration of {@link
-     * org.graffiti.managers.pluginmgr.Entry}s.
+     * org.graffiti.managers.pluginmgr.PluginEntry}s.
      *
      * @return DOCUMENT ME!
      */

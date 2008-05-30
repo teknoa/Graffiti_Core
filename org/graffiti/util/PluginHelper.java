@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginHelper.java,v 1.1 2007/05/31 12:56:03 klukas Exp $
+// $Id: PluginHelper.java,v 1.2 2008/05/30 10:52:49 klukas Exp $
 
 package org.graffiti.util;
 
@@ -28,7 +28,7 @@ import java.util.zip.ZipEntry;
 import org.graffiti.core.StringBundle;
 import org.graffiti.managers.pluginmgr.DefaultPluginEntry;
 import org.graffiti.managers.pluginmgr.DefaultPluginManager;
-import org.graffiti.managers.pluginmgr.Entry;
+import org.graffiti.managers.pluginmgr.PluginEntry;
 import org.graffiti.managers.pluginmgr.PluginDescription;
 import org.graffiti.managers.pluginmgr.PluginManager;
 import org.graffiti.managers.pluginmgr.PluginManagerException;
@@ -167,7 +167,7 @@ public class PluginHelper
         List<Class> result = new ArrayList<Class>();
         Collection plugins = DefaultPluginManager.lastInstance.getPluginEntries();
         for (Iterator it = plugins.iterator(); it.hasNext();) {
-            Entry e = (Entry) it.next();
+            PluginEntry e = (PluginEntry) it.next();
             Class[] at = e.getPlugin().getAttributes();
             if (at!=null && at.length>0) {
                 for (int i=0; i<at.length; i++)

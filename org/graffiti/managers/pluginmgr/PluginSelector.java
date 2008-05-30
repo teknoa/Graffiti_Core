@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginSelector.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: PluginSelector.java,v 1.2 2008/05/30 10:52:48 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -46,7 +46,7 @@ import org.graffiti.core.StringBundle;
  * Represents a plugin selector. A simple dialog to pick the name of a plugin.
  * The dialog filters already loaded plugins from the list of plugins.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PluginSelector
     extends JDialog
@@ -120,7 +120,7 @@ public class PluginSelector
 
         for(Iterator i = plugins.iterator(); i.hasNext();)
         {
-            Entry e = (Entry) i.next();
+            PluginEntry e = (PluginEntry) i.next();
 
             String name = e.getDescription().getName();
 
@@ -171,9 +171,9 @@ public class PluginSelector
     /**
      * Returns the selected plugin entries.
      *
-     * @see Entry
+     * @see PluginEntry
      */
-    public Entry[] getSelectedItems()
+    public PluginEntry[] getSelectedItems()
     {
         if((selectedItems == null) || (selectedItems.length == 0))
         {
@@ -181,11 +181,11 @@ public class PluginSelector
         }
 
         // FIXME is there a better way of implementing this?
-        Entry[] e = new Entry[selectedItems.length];
+        PluginEntry[] e = new PluginEntry[selectedItems.length];
 
         for(int i = 0; i < selectedItems.length; i++)
         {
-            e[i] = (Entry) selectedItems[i];
+            e[i] = (PluginEntry) selectedItems[i];
         }
 
         return e;
@@ -350,7 +350,7 @@ public class PluginSelector
     /**
      * Generates and returns the plugin description list.
      *
-     * @see Entry
+     * @see PluginEntry
      */
     private List createPluginDescriptionList(
         PluginDescriptionCollector collector)
@@ -440,7 +440,7 @@ public class PluginSelector
             Component c = super.getListCellRendererComponent(list, value,
                     modelIndex, isSelected, cellHasFocus);
 
-            Entry e = (Entry) value;
+            PluginEntry e = (PluginEntry) value;
 
             // TODO setIcon() (perhaps, but creating an instance of the plugin
             // to get the plugin's icon is somehow a bad idea)
@@ -471,7 +471,7 @@ public class PluginSelector
          *
          * @return DOCUMENT ME!
          */
-        public static String displayToolTip(Entry e)
+        public static String displayToolTip(PluginEntry e)
         {
             PluginDescription d = e.getDescription();
 
@@ -487,7 +487,7 @@ public class PluginSelector
      * DOCUMENT ME!
      *
      * @author $Author: klukas $
-     * @version $Revision: 1.1 $ $Date: 2007/05/31 12:55:59 $
+     * @version $Revision: 1.2 $ $Date: 2008/05/30 10:52:48 $
      */
     class EntryComparator
         implements Comparator
@@ -501,8 +501,8 @@ public class PluginSelector
          */
         public int compare(Object o1, Object o2)
         {
-            String s1 = ((Entry) o1).getDescription().getName();
-            String s2 = ((Entry) o2).getDescription().getName();
+            String s1 = ((PluginEntry) o1).getDescription().getName();
+            String s2 = ((PluginEntry) o2).getDescription().getName();
 
             if(s1.startsWith("_"))
             {

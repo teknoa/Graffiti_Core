@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginManager.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: PluginManager.java,v 1.2 2008/05/30 10:52:48 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -102,7 +102,7 @@ public interface PluginManager
      *
      * @throws PluginManagerException
      */
-    public void loadPlugins(Entry[] plugins)
+    public void loadPlugins(PluginEntry[] plugins)
         throws PluginManagerException;
 
     /**

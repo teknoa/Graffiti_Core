@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginEntry.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: DefaultPluginEntry.java,v 1.2 2008/05/30 10:52:48 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -17,7 +17,7 @@ import org.graffiti.plugin.GenericPlugin;
  * Represents a plugin entry in the plugin manager.
  */
 public class DefaultPluginEntry
-    implements Entry
+    implements PluginEntry
 {
     //~ Instance fields ========================================================
 
