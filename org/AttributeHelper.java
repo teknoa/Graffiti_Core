@@ -68,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.29 $
+ * @version $Revision: 1.30 $
  */
 public class AttributeHelper {
 
@@ -2821,6 +2821,15 @@ public class AttributeHelper {
 				ega.setShape(shape);
 		} catch (Exception e) {
 			ErrorMsg.addErrorMessage(e);
+		}
+	}
+	
+	public static String getEdgeBendStyle(Edge edge) {
+		try {
+			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute("graphics");
+			return ega.getShape();
+		} catch (Exception e) {
+			return "org.graffiti.plugins.views.defaults.PolyLineEdgeShape";
 		}
 	}
 
