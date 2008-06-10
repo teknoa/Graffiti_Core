@@ -68,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.30 $
+ * @version $Revision: 1.31 $
  */
 public class AttributeHelper {
 
@@ -2278,6 +2278,34 @@ public class AttributeHelper {
 			new Color(0xFFFFFF00), // yellow
 			new Color(0xFF9ACD32), // yellowgreen
 	};
+	
+	public static Color getColorFromName(String name, Color ifUnkown) {
+		int i = 0;
+		for (String cname : knownColorNames) {
+			if (cname.equalsIgnoreCase(name))
+				return knownColors[i];
+			i++;
+		}
+		name = ErrorMsg.stringReplace(name, "0", "");
+		name = ErrorMsg.stringReplace(name, "1", "");
+		name = ErrorMsg.stringReplace(name, "2", "");
+		name = ErrorMsg.stringReplace(name, "3", "");
+		name = ErrorMsg.stringReplace(name, "4", "");
+		name = ErrorMsg.stringReplace(name, "5", "");
+		name = ErrorMsg.stringReplace(name, "6", "");
+		name = ErrorMsg.stringReplace(name, "7", "");
+		name = ErrorMsg.stringReplace(name, "8", "");
+		name = ErrorMsg.stringReplace(name, "9", "");
+		name = ErrorMsg.stringReplace(name, " ", "");
+		i = 0;
+		for (String cname : knownColorNames) {
+			cname = ErrorMsg.stringReplace(cname, " ", "");
+			if (cname.equalsIgnoreCase(name))
+				return knownColors[i];
+			i++;
+		}
+		return ifUnkown;
+	}
 
 	public static String getColorName(Color attrColor) {
 		if (attrColor == null)
