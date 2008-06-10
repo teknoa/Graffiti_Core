@@ -68,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.31 $
+ * @version $Revision: 1.32 $
  */
 public class AttributeHelper {
 
@@ -2278,6 +2278,24 @@ public class AttributeHelper {
 			new Color(0xFFFFFF00), // yellow
 			new Color(0xFF9ACD32), // yellowgreen
 	};
+	
+	public static Color getColorFrom3floatValues0to1(String color, Color ifUnkown) {
+		String[] col = color.split(" ");
+		if (col.length!=3)
+			return ifUnkown;
+		String r = col[0];
+		String g = col[1];
+		String b = col[2];
+		try {
+			float rd = Float.parseFloat(r);
+			float gd = Float.parseFloat(g);
+			float bd = Float.parseFloat(b);
+			return new Color(rd, gd, bd);
+		} catch(NumberFormatException nfe) {
+			ErrorMsg.addErrorMessage(nfe);
+			return ifUnkown;
+		}
+	}
 	
 	public static Color getColorFromName(String name, Color ifUnkown) {
 		int i = 0;
