@@ -68,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.32 $
+ * @version $Revision: 1.33 $
  */
 public class AttributeHelper {
 
@@ -1654,10 +1654,15 @@ public class AttributeHelper {
 				new Dimension((int) java.lang.Math.round(width),
 						(int) java.lang.Math.round(height)));
 		// setting the framecolor
-		graphics.getFramecolor().setColor(frameColor_0_0_0_255);
+		if (frameColor_0_0_0_255==null)
+			graphics.getFramecolor().setColor(new Color(0,0,0,255));
+		else
+			graphics.getFramecolor().setColor(frameColor_0_0_0_255);
 		// setting the fillcolor
-		graphics.getFillcolor().setColor(fillColor_0_100_250_100);
-
+		if (fillColor_0_100_250_100==null)
+			graphics.getFillcolor().setColor(new Color(0,100,250,100));
+		else
+			graphics.getFillcolor().setColor(fillColor_0_100_250_100);
 		// setting the shape
 		graphics
 				.setShape("org.graffiti.plugins.views.defaults.RectangleNodeShape");
