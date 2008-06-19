@@ -68,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.34 $
+ * @version $Revision: 1.35 $
  */
 public class AttributeHelper {
 
@@ -967,16 +967,14 @@ public class AttributeHelper {
 	}
 
 	/**
-	 * For geting the x position of a node through attribute access,
+	 * For getting the x position of a node through attribute access,
 	 * 
-	 * @param a
-	 *            Node to be analysed.
+	 * @param a  Node to be analyzed.
 	 * 
 	 * @return X position of node.
 	 */
 	public static double getPositionX(Node a) {
-		CoordinateAttribute coA = (CoordinateAttribute) a
-				.getAttribute(GraphicAttributeConstants.COORD_PATH);
+		CoordinateAttribute coA = (CoordinateAttribute) a.getAttribute(GraphicAttributeConstants.COORD_PATH);
 
 		return coA.getX();
 	}
@@ -984,20 +982,16 @@ public class AttributeHelper {
 	/**
 	 * Returns the position of a node
 	 * 
-	 * @param a
-	 *            The node to be analyzed.
+	 * @param a  The node to be analyzed.
 	 * 
 	 * @return The position of the Node (a<code>Point2D</code> structure)
 	 */
 	public static Point2D getPosition(Node a) {
 		try {
-			CoordinateAttribute coA = (CoordinateAttribute) a
-					.getAttribute(GraphicAttributeConstants.COORD_PATH);
-
+			CoordinateAttribute coA = (CoordinateAttribute) a.getAttribute(GraphicAttributeConstants.COORD_PATH);
 			return coA.getCoordinate();
 		} catch (Exception ex) {
-			ErrorMsg.addErrorMessage("Get Position-Failure: "
-					+ ex.getLocalizedMessage());
+			ErrorMsg.addErrorMessage(ex);
 		}
 		return null;
 	}
