@@ -68,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.33 $
+ * @version $Revision: 1.34 $
  */
 public class AttributeHelper {
 
@@ -2817,6 +2817,8 @@ public class AttributeHelper {
 				CoordinateAttribute ca = (CoordinateAttribute) a;
 				result.add(new Vector2d(ca.getX(), ca.getY()));
 			}
+		} catch (AttributeNotFoundException e) {
+			// no bends
 		} catch (Exception e) {
 			ErrorMsg.addErrorMessage(e);
 		}

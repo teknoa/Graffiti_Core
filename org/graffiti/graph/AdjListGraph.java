@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListGraph.java,v 1.1 2007/05/31 12:55:55 klukas Exp $
+// $Id: AdjListGraph.java,v 1.2 2008/06/19 07:25:35 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Logger;
 
 import org.ErrorMsg;
@@ -33,7 +32,7 @@ import org.graffiti.event.ListenerManager;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see Graph
  * @see AbstractGraph
@@ -64,8 +63,8 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	// ~ Instance fields ========================================================
 
 	/** The list containing the nodes of the graph. */
-	private CopyOnWriteArrayList<Node> nodes = new CopyOnWriteArrayList<Node>();
-	private CopyOnWriteArrayList<Edge> edges = new CopyOnWriteArrayList<Edge>();
+	private ArrayList<Node> nodes = new ArrayList<Node>();
+	private ArrayList<Edge> edges = new ArrayList<Edge>();
 
 	/**
 	 * set to True if graph has been modified.
@@ -85,8 +84,8 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 			graphCount++;
 			id = graphCount;
 		}
-		this.nodes = new CopyOnWriteArrayList<Node>();
-		this.edges = new CopyOnWriteArrayList<Edge>();
+		this.nodes = new ArrayList<Node>();
+		this.edges = new ArrayList<Edge>();
 	}
 
 	/*
@@ -118,8 +117,8 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 */
 	public AdjListGraph(CollectionAttribute coll) {
 		super(coll);
-		this.nodes = new CopyOnWriteArrayList<Node>();
-		this.edges = new CopyOnWriteArrayList<Edge>();
+		this.nodes = new ArrayList<Node>();
+		this.edges = new ArrayList<Edge>();
 	}
 
 	/**
@@ -308,8 +307,8 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 */
 	protected void doClear() {
 		setModified(true);
-		this.nodes = new CopyOnWriteArrayList<Node>();
-		this.edges = new CopyOnWriteArrayList<Edge>();
+		this.nodes = new ArrayList<Node>();
+		this.edges = new ArrayList<Edge>();
 	}
 
 	/**
