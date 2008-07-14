@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.2 2007/08/28 09:24:11 klukas Exp $
+// $Id: XMLHelper.java,v 1.3 2008/07/14 10:56:56 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -45,6 +45,8 @@ import org.xml.sax.SAXException;
 
 import com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl;
 import com.sun.org.apache.xpath.internal.XPathAPI;
+import com.sun.org.apache.xpath.internal.objects.XBoolean;
+import com.sun.org.apache.xpath.internal.objects.XBooleanStatic;
 
 /**
  * Contains some (static) auxiliary methods for writing XML.
@@ -580,15 +582,15 @@ public class XMLHelper {
 
 	public static boolean isReplicateDataMissing(Document mydoc) {
 		// 
-		String xpath = "//substance/line/sample/average[@replicates > 1]";
-		NodeList result;
+		String xpath = "count(//substance/line/sample/average[@replicates > 1])<=0";
+		Object result;
 		try {
-			result = XPathAPI.selectNodeList(mydoc, xpath);
+			result = XPathAPI.eval(mydoc, xpath);
 		} catch (TransformerException e) {
 			ErrorMsg.addErrorMessage(e);
 			return false;
 		}
-		return result.getLength()<=0;
+		return ((XBoolean)result).bool();
 	}
 }
 

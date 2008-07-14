@@ -5,13 +5,14 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericPlugin.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: GenericPlugin.java,v 1.2 2008/07/14 10:56:56 klukas Exp $
 
 package org.graffiti.plugin;
 
 import javax.swing.ImageIcon;
 
 import org.graffiti.options.GravistoPreferences;
+import org.graffiti.plugin.actions.URLattributeAction;
 import org.graffiti.plugin.algorithm.Algorithm;
 import org.graffiti.plugin.extension.Extension;
 import org.graffiti.plugin.io.InputSerializer;
@@ -149,6 +150,8 @@ public interface GenericPlugin
     public void stop();
 
 	public String getDefaultView();
+	
+	public URLattributeAction[] getURLattributeActions();
 }
 
 //------------------------------------------------------------------------------

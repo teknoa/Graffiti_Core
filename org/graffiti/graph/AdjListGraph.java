@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListGraph.java,v 1.2 2008/06/19 07:25:35 klukas Exp $
+// $Id: AdjListGraph.java,v 1.3 2008/07/14 10:56:55 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -14,10 +14,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.logging.Logger;
+// import java.util.logging.Logger;
 
 import org.ErrorMsg;
 import org.graffiti.attributes.CollectionAttribute;
@@ -32,7 +30,7 @@ import org.graffiti.event.ListenerManager;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see Graph
  * @see AbstractGraph
@@ -44,9 +42,9 @@ import org.graffiti.event.ListenerManager;
 public class AdjListGraph extends AbstractGraph implements Graph {
 	// ~ Static fields/initializers =============================================
 
-	/** The logger for the current class. */
-	private static final Logger logger = Logger.getLogger(AdjListGraph.class
-			.getName());
+//	/** The logger for the current class. */
+//	private static final Logger logger = Logger.getLogger(AdjListGraph.class
+//			.getName());
 
 	private int id;
 

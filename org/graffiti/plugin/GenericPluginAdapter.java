@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericPluginAdapter.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: GenericPluginAdapter.java,v 1.2 2008/07/14 10:56:56 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import org.graffiti.core.ImageBundle;
 import org.graffiti.core.StringBundle;
 import org.graffiti.options.GravistoPreferences;
+import org.graffiti.plugin.actions.URLattributeAction;
 import org.graffiti.plugin.algorithm.Algorithm;
 import org.graffiti.plugin.extension.Extension;
 import org.graffiti.plugin.io.GraphPostProcessor;
@@ -23,7 +24,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * An adapter class for the generic plugin interface.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class GenericPluginAdapter
     implements GenericPlugin
@@ -256,6 +257,12 @@ public abstract class GenericPluginAdapter
     public String getDefaultView() {
     	return null;
     }
+
+	public URLattributeAction[] getURLattributeActions() {
+		return null;
+	}
+    
+    
 }
 
 //------------------------------------------------------------------------------
