@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ShapeDescriptionAttribute.java,v 1.1 2007/05/31 12:55:57 klukas Exp $
+// $Id: ShapeDescriptionAttribute.java,v 1.2 2008/07/16 11:39:54 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -164,7 +164,7 @@ public class ShapeDescriptionAttribute
     {
         ShapeDescriptionAttribute copy = new ShapeDescriptionAttribute(this.getId());
 
-        //M.S.: w�re es hier nicht sinnvoller �ber attributes.values() zu
+        //M.S.: wäre es hier nicht sinnvoller über attributes.values() zu
         //      iterieren? getId() ist wahrscheinlich schneller als get(Id)
         //      bzw. hat eine kleinerer Konstante...
         //ph: done

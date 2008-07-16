@@ -68,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.35 $
+ * @version $Revision: 1.36 $
  */
 public class AttributeHelper {
 
@@ -361,8 +361,8 @@ public class AttributeHelper {
 				+ ": Global Series List");
 		idToNiceId.put("chartSizeX", chartSelN + ": Diagram Width");
 		idToNiceId.put("chartSizeY", chartSelN + ": Diagram Height");
-		idToNiceId.put("empty_border_width", chartSelN
-				+ ": Spacing around Chart");
+		idToNiceId.put("empty_border_width", chartSelN + ": Spacing (hor.)");
+		idToNiceId.put("empty_border_width_vert", chartSelN + ": Spacing (vert.)");
 		idToNiceId.put("rangeAxis", chartSelN + ": Range Axis Title");
 		idToNiceId.put("chartTitle", chartSelN + ": Diagram Title");
 		idToNiceId.put("domainAxis", chartSelN + ": Domain Axis Title");
@@ -3194,4 +3194,47 @@ public class AttributeHelper {
 		} else
 			return false;
 	}
+
+	public static String getShapeClassFromShapeName(String s) {
+		if (s.equals("oval"))
+			return "org.graffiti.plugins.views.defaults.EllipseNodeShape";
+		if (s.equals("circle"))
+			return "org.graffiti.plugins.views.defaults.CircleNodeShape";
+		if (s.equals("rectangle")) 
+		    return  "org.graffiti.plugins.views.defaults.RectangleNodeShape";
+		if (s.equals("tag"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.TagRightShape";
+		if (s.equals("tagl"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.TagLeftShape";
+		if (s.equals("tagu"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.TagUpShape";
+		if (s.equals("tagd"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.TagDownShape";
+		if (s.equals("observable"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.ObservableShape";
+		if (s.equals("pertubation"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.PertubationShape";
+		if (s.equals("complex"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.ComplexShape";
+		return s;
+	}
+
+	public static String[] getShapeDescritions() {
+		return new String[] { "Rectangle", "Circle", "Ellipse", "Tag (right)", "Tag (left)", "Tag (up)", "Tag (down)", "Observable", "Pertubation", "Complex" };
+	}
+
+	public static String[] getShapeClasses() {
+		return new String[]
+		            {
+		                "rectangle",
+		                "circle",
+		                "oval",
+		                "tag",
+		                "tagl",
+		                "tagu",
+		                "tagd",
+		                "observable",
+		                "pertubation",
+		                "complex"
+		            };	}
 }
