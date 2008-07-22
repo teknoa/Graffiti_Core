@@ -68,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.36 $
+ * @version $Revision: 1.37 $
  */
 public class AttributeHelper {
 
@@ -3202,6 +3202,8 @@ public class AttributeHelper {
 			return "org.graffiti.plugins.views.defaults.CircleNodeShape";
 		if (s.equals("rectangle")) 
 		    return  "org.graffiti.plugins.views.defaults.RectangleNodeShape";
+		if (s.equals("diamond"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.DiamondShape";
 		if (s.equals("tag"))
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.TagRightShape";
 		if (s.equals("tagl"))
@@ -3216,11 +3218,35 @@ public class AttributeHelper {
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.PertubationShape";
 		if (s.equals("complex"))
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.ComplexShape";
+		if (s.equals("skewrectr"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.RightSkewedRectShape";
+		if (s.equals("skewrectl"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.LeftSkewedRectShape";
+		if (s.equals("receptord"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.ReceptorDownShape";
+		if (s.equals("receptoru"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.ReceptorUpShape";
+		if (s.equals("receptorl"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.ReceptorLeftShape";
+		if (s.equals("receptorr"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.ReceptorRightShape";
+		if (s.equals("nucleic"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.NucleicAcidFeatureShape";
+		if (s.equals("truncprotein"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.TruncProteinShape";
+		if (s.equals("sourcesink"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.SourceSinkShape";
 		return s;
 	}
 
 	public static String[] getShapeDescritions() {
-		return new String[] { "Rectangle", "Circle", "Ellipse", "Tag (right)", "Tag (left)", "Tag (up)", "Tag (down)", "Observable", "Pertubation", "Complex" };
+		return new String[] { "Rectangle", "Circle", "Ellipse", "Rhombus", 
+				"Tag (right)", "Tag (left)", "Tag (up)", "Tag (down)", "Observable", "Pertubation", "Complex",
+				"Skewed Rect (right)", "Skewed Rect (left)", 
+				"Receptor (down)", "Receptor (up)", "Receptor (left)", "Receptor (right)",
+				"Nucleic Acid Feature",
+				"Truncated Protein",
+				"Source / Sink"};
 	}
 
 	public static String[] getShapeClasses() {
@@ -3229,12 +3255,23 @@ public class AttributeHelper {
 		                "rectangle",
 		                "circle",
 		                "oval",
+		                "diamond",
 		                "tag",
 		                "tagl",
 		                "tagu",
 		                "tagd",
 		                "observable",
 		                "pertubation",
-		                "complex"
-		            };	}
+		                "complex",
+		                "skewrectr",
+		                "skewrectl",
+		                "receptord",
+		                "receptoru",
+		                "receptorl",
+		                "receptorr",
+		                "nucleic",
+		                "truncprotein",
+		                "sourcesink"
+		            };	
+		}
 }
