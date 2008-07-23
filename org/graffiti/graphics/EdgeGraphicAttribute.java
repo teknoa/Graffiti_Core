@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: EdgeGraphicAttribute.java,v 1.1 2007/05/31 12:55:57 klukas Exp $
+// $Id: EdgeGraphicAttribute.java,v 1.2 2008/07/23 08:15:32 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -28,7 +28,7 @@ import org.graffiti.attributes.StringAttribute;
  * Defines all graphic attributes of an edge
  *
  * @author breu
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class EdgeGraphicAttribute
     extends GraphElementGraphicAttribute
@@ -154,8 +154,8 @@ public class EdgeGraphicAttribute
      */
     public void setArrowhead(String ah)
     {
-   	 StringAttribute arrowhead = (StringAttribute) attributes.get(ARROWHEAD);
-       arrowhead.setString(ah);
+    	StringAttribute arrowhead = (StringAttribute) attributes.get(ARROWHEAD);
+    	arrowhead.setString(ah);
     }
 
     /**
