@@ -68,7 +68,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.37 $
+ * @version $Revision: 1.38 $
  */
 public class AttributeHelper {
 
@@ -368,14 +368,14 @@ public class AttributeHelper {
 		idToNiceId.put("domainAxis", chartSelN + ": Domain Axis Title");
 		idToNiceId.put("rangeAxis", chartSelN + ": Range Axis Title");
 		idToNiceId.put("substancename", chartSelN + ": Name of Substance");
-		idToNiceId.put("frameThickness", "Border-Width");
+		idToNiceId.put("Node:frameThickness", "Shape: Border-Width");
 		idToNiceId.put("Edge:frameThickness", "Thickness");
 		idToNiceId
 				.put("Edge:relation_subtype", "KEGG - Relations: Sub-Type(s)");
 		idToNiceId.put("Edge:relation_type", "KEGG - Relations: Type");
 		idToNiceId.put("Edge:relation_src_tgt",
 				"KEGG - Relations: Source/Target");
-		idToNiceId.put("Node:linemode", "Border Drawing");
+		idToNiceId.put("Node:linemode", "Shape: Border Drawing");
 		idToNiceId.put("Edge:linemode", "Drawing");
 		idToNiceId.put("component", chartSelN + ": Diagram");
 		idToNiceId.put("width", "<html><!--A-->Width");
@@ -384,10 +384,12 @@ public class AttributeHelper {
 		idToNiceId.put("y", "Y");
 		idToNiceId.put("z_", "Z");
 		idToNiceId.put("mol", "Molecule Structure:3D MOL View");
-		idToNiceId.put("rounding", "Rounded Corners");
-		idToNiceId.put("shape", "Shape");
+		idToNiceId.put("rounding", "Shape: Rounded Corners");
+		idToNiceId.put("Edge:shape", "Shape");
+		idToNiceId.put("Node:shape", "Shape: Shape");
+		idToNiceId.put("Node:fill", "Shape: Fill-Color");
 		idToNiceId.put("fill", "Fill-Color");
-		idToNiceId.put("Node:gradient", "<html>Gradient Fill<br>(0..1)");
+		idToNiceId.put("Node:gradient", "Shape:<html>&nbsp;Gradient Fill<br>&nbsp;(-1..1)");
 		idToNiceId.put("Edge:gradient", "<html>Gradient Fill<br>(0=off)");
 
 		idToNiceId.put("useCustomRange", chartSelN
@@ -412,7 +414,7 @@ public class AttributeHelper {
 				+ ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;Maximum");
 		idToNiceId.put("connectPriorItems", chartAllLine
 				+ ": No gaps for missing data");
-		idToNiceId.put("outline", "Frame-Color");
+		idToNiceId.put("Node:outline", "Shape: Frame-Color");
 		idToNiceId.put("Edge:outline", "Color");
 		idToNiceId.put("show_legend", chartSelN + ": Show Legend");
 		idToNiceId
@@ -554,6 +556,9 @@ public class AttributeHelper {
 		idToNiceId.put(".mapping.chartposition.alignSegment", chartSelN
 				+ " (Chart-Position on Edge): Alignment Segment");
 
+		idToNiceId.put(".graphics.offX", "Shape: Multi-Offset (X)");
+		idToNiceId.put(".graphics.offY", "Shape: Multi-Offset (Y)");
+		
 		idToNiceId.put(".graphics.bends.bend", "Edge-Bend ");
 		idToNiceId.put(".graphics.bends.bend.x", "Edge-Bend 0: x");
 		idToNiceId.put(".graphics.bends.bend.y", "Edge-Bend 0: y");
@@ -3236,6 +3241,13 @@ public class AttributeHelper {
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.TruncProteinShape";
 		if (s.equals("sourcesink"))
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.SourceSinkShape";
+		if (s.equals("multinucleic"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.MultiNucleicAcidFeatureShape";
+		if (s.equals("multirectangle"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.MultiRectangleShape";
+		if (s.equals("mulitoval"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.MultiEllipseShape";
+		
 		return s;
 	}
 
@@ -3246,7 +3258,10 @@ public class AttributeHelper {
 				"Receptor (down)", "Receptor (up)", "Receptor (left)", "Receptor (right)",
 				"Nucleic Acid Feature",
 				"Truncated Protein",
-				"Source / Sink"};
+				"Source or Sink",
+				"Multi Nucleic Acid Feature",
+				"Multi Rectangle",
+				"Multi Oval"};
 	}
 
 	public static String[] getShapeClasses() {
@@ -3271,7 +3286,10 @@ public class AttributeHelper {
 		                "receptorr",
 		                "nucleic",
 		                "truncprotein",
-		                "sourcesink"
+		                "sourcesink",
+		                "multinucleic",
+		                "multirectangle",
+		                "mulitoval"
 		            };	
 		}
 }
