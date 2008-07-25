@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LabelAttribute.java,v 1.4 2008/02/12 15:11:17 klukas Exp $
+// $Id: LabelAttribute.java,v 1.5 2008/07/25 13:04:31 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -33,7 +33,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public abstract class LabelAttribute
     extends HashMapAttribute
@@ -270,6 +270,11 @@ public abstract class LabelAttribute
 	public boolean getUseDropShadow() {
 		String s = getFontStyle().toUpperCase();
 		return s.contains("SHADOW");
+	}
+	
+	public boolean getUseBoxedLabel() {
+		String s = getFontStyle().toUpperCase();
+		return s.contains("BOX");
 	}
 	
 	public int getShadowOffX() {

@@ -2287,6 +2287,34 @@ public void invalidateLayout (Container target)
 		return result;
 	}
 
+	public static JComponent get4SplitVertical(
+			JComponent top, JComponent middle1, JComponent middle2, JComponent bottom, 
+			double sizeTop, double sizeMiddle1, double sizeMiddle2, double sizeBottom, 
+			double spaceBetween, double border) {
+		JPanel result = new JPanel();
+		result.setOpaque(false);
+		double[][] size =
+			{
+				{border, TableLayoutConstants.FILL, border},
+				{border, 
+					sizeTop, 
+					spaceBetween, 
+					sizeMiddle1,
+					spaceBetween, 
+					sizeMiddle2,
+					spaceBetween, 
+					sizeBottom, 
+				 border}, // row
+				
+		}; // Rows
+		result.setLayout(new TableLayout(size));
+		if (top!=null) result.add(top, "1,1");
+		if (middle1!=null) result.add(middle1, "1,3");
+		if (middle2!=null) result.add(middle2, "1,5");
+		if (bottom!=null) result.add(bottom, "1,7");
+		result.validate();
+		return result;
+	}
 
 
 	public static LayoutManager getLayout(int width, int height) {
