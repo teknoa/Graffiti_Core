@@ -57,6 +57,7 @@ import org.graffiti.graphics.Dash;
 import org.graffiti.graphics.DockingAttribute;
 import org.graffiti.graphics.EdgeGraphicAttribute;
 import org.graffiti.graphics.EdgeLabelAttribute;
+import org.graffiti.graphics.EdgeLabelPositionAttribute;
 import org.graffiti.graphics.GraphicAttributeConstants;
 import org.graffiti.graphics.LabelAttribute;
 import org.graffiti.graphics.LineModeAttribute;
@@ -68,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.39 $
+ * @version $Revision: 1.40 $
  */
 public class AttributeHelper {
 
@@ -564,6 +565,27 @@ public class AttributeHelper {
 		idToNiceId.put(".graphics.bends.bend.y", "Edge-Bend 0: y");
 
 		idToNiceId.put("localAlign", "Label:" + disabled + "Local Alignment");
+
+		
+		idToNiceId.put(".srcLabel.fontName", "Label (Consumption): Font");
+		idToNiceId.put(".srcLabel.fontSize", "Label (Consumption): Font-Size");
+		idToNiceId.put(".srcLabel.fontStyle", "Label (Consumption): Font-Style");
+		idToNiceId.put(".srcLabel.shadowOffset", "Label (Consumption): Shadow-Offset");
+		idToNiceId.put(".srcLabel.shadowColor", "Label (Consumption): Shadow-Color");
+		idToNiceId.put(".srcLabel.text", "Label (Consumption): Text");
+		idToNiceId.put(".srcLabel.color", "Label (Consumption): Color");
+		idToNiceId.put(".srcLabel.anchor", "Label (Consumption): Position");
+		
+		idToNiceId.put(".tgtLabel.fontName", "Label (Production): Font");
+		idToNiceId.put(".tgtLabel.fontSize", "Label (Production): Font-Size");
+		idToNiceId.put(".tgtLabel.fontStyle", "Label (Production): Font-Style");
+		idToNiceId.put(".tgtLabel.shadowOffset", "Label (Production): Shadow-Offset");
+		idToNiceId.put(".tgtLabel.shadowColor", "Label (Production): Shadow-Color");
+		idToNiceId.put(".tgtLabel.text", "Label (Production): Text");
+		idToNiceId.put(".tgtLabel.color", "Label (Production): Color");
+		idToNiceId.put(".tgtLabel.anchor", "Label (Production): Position");
+
+		
 		idToNiceId.put("fontName", "Label: Font");
 		idToNiceId.put("fontSize", "Label: Font-Size");
 		idToNiceId.put("fontStyle", "Label: Font-Style");
@@ -572,6 +594,18 @@ public class AttributeHelper {
 		idToNiceId.put("text", "Label: Text");
 		idToNiceId.put("color", "Label: Color");
 		idToNiceId.put("anchor", "Label: Position");
+
+		
+		idToNiceId.put("fontName", "Label: Font");
+		idToNiceId.put("fontSize", "Label: Font-Size");
+		idToNiceId.put("fontStyle", "Label: Font-Style");
+		idToNiceId.put("shadowOffset", "Label: Shadow-Offset");
+		idToNiceId.put("shadowColor", "Label: Shadow-Color");
+		idToNiceId.put("text", "Label: Text");
+		idToNiceId.put("color", "Label: Color");
+		idToNiceId.put("anchor", "Label: Position");
+		
+		
 		idToNiceId.put("image_url", "Image:<html>&nbsp;URL<br><br>&nbsp;View");
 		idToNiceId.put("image_position", "Image: Position");
 		if (ReleaseInfo.getRunningReleaseStatus() == Release.KGML_EDITOR) {
@@ -856,7 +890,10 @@ public class AttributeHelper {
 			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS)) {
 				labelAttr = (LabelAttribute) node
 						.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
-				return labelAttr.getLabel();
+				if (labelAttr.getLabel()==null)
+					return defaultReturn;
+				else
+					return labelAttr.getLabel();
 			} else {
 				return defaultReturn;
 			}
@@ -3296,4 +3333,85 @@ public class AttributeHelper {
 		                "doubleoval"
 		            };	
 		}
+
+	public static String getLabelConsumption(Edge e, String returnIfNull) {
+		try {
+			Attribute a = e.getAttribute("srcLabel");
+			if (a instanceof EdgeLabelAttribute) {
+				return ((EdgeLabelAttribute)a).getLabel();	
+			} else
+				return returnIfNull;
+		} catch(Exception err) {
+			return returnIfNull;
+		}
+	}
+	
+	public static String getLabelProduction(Edge e, String returnIfNull) {
+		try {
+			Attribute a = e.getAttribute("tgtLabel");
+			if (a instanceof EdgeLabelAttribute) {
+				return ((EdgeLabelAttribute)a).getLabel();	
+			} else
+				return returnIfNull;
+		} catch(Exception err) {
+			return returnIfNull;
+		}
+	}
+	
+	public static void setLabelConsumption(Edge e, String srcLabel) {
+		Attribute a = null;
+		try {
+			a = e.getAttribute("srcLabel");
+		} catch(Exception err) {
+			// empty
+		}
+		if (a!=null && srcLabel==null) {
+			e.removeAttribute("srcLabel");
+			return;
+		}
+		if (srcLabel!=null) {
+			EdgeLabelAttribute ls = null;
+			if (a==null || !(a instanceof EdgeLabelAttribute)) {
+				if (a!=null)
+					e.removeAttribute("srcLabel");
+				a = new EdgeLabelAttribute("srcLabel");
+				ls = (EdgeLabelAttribute) a;
+				ls.setFontStyle("box");
+				EdgeLabelPositionAttribute posS = new EdgeLabelPositionAttribute("position", 0.2, 0, 0, -7);
+				ls.add(posS);
+				e.addAttribute(a, "");
+			} else
+				ls = (EdgeLabelAttribute)a;
+			if (srcLabel!=null)
+				ls.setLabel(srcLabel);
+		}
+	}
+	
+	public static void setLabelProduction(Edge e, String tgtLabel) {
+		Attribute a = null;
+		try {
+			a = e.getAttribute("tgtLabel");
+		} catch(Exception err) {
+			// empty
+		}
+		if (a!=null && tgtLabel==null) {
+			e.removeAttribute("tgtLabel");
+			return;
+		}
+		if (tgtLabel!=null) {
+			EdgeLabelAttribute ls = null;
+			if (a==null || !(a instanceof EdgeLabelAttribute)) {
+				if (a!=null)
+					e.removeAttribute("tgtLabel");
+				a = new EdgeLabelAttribute("tgtLabel");
+				ls = (EdgeLabelAttribute) a;
+				ls.setFontStyle("box");
+				EdgeLabelPositionAttribute posS = new EdgeLabelPositionAttribute("position", 0.8, 0, 0, -7);
+				ls.add(posS);
+				e.addAttribute(a, "");
+			} else
+				ls = (EdgeLabelAttribute)a;
+			ls.setLabel(tgtLabel);
+		}
+	}
 }

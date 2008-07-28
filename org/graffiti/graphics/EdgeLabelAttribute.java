@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: EdgeLabelAttribute.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: EdgeLabelAttribute.java,v 1.2 2008/07/28 14:48:15 klukas Exp $
 package org.graffiti.graphics;
 
 import java.util.Iterator;
@@ -20,7 +20,7 @@ import org.graffiti.attributes.StringAttribute;
  * DOCUMENT ME!
  *
  * @author holleis
- * @version $Revision: 1.1 $ Extends LabelAttribute by a PositionAttribute specific for edges.
+ * @version $Revision: 1.2 $ Extends LabelAttribute by a PositionAttribute specific for edges.
  */
 public class EdgeLabelAttribute extends LabelAttribute
 {
@@ -132,7 +132,7 @@ public class EdgeLabelAttribute extends LabelAttribute
                 else if (attrId.equals(POSITION))
                 {
                 	if (!(attrs.get(POSITION) instanceof EdgeLabelPositionAttribute)) {
-    					setPosition(new EdgeLabelPositionAttribute(attrs.get(POSITION) .getId(), 0, 0, 0, 0));
+    					setPosition(new EdgeLabelPositionAttribute(attrs.get(POSITION).getId(), 0, 0, 0, 0));
                 	} else {
 	            		EdgeLabelPositionAttribute elpa = (EdgeLabelPositionAttribute) attrs.get(POSITION); 
 	            		setPosition(elpa);

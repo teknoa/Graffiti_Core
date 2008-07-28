@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttribute.java,v 1.2 2007/09/20 11:11:15 klukas Exp $
+// $Id: AbstractAttribute.java,v 1.3 2008/07/28 14:48:14 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -35,7 +35,7 @@ import org.graffiti.plugin.XMLHelper;
  * <code>parent</code> and <code>attributable</code> of the
  * <code>Attribute</code>.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class AbstractAttribute
     implements Attribute
@@ -72,6 +72,8 @@ public abstract class AbstractAttribute
     	HashMap<String,Class> result = new HashMap<String,Class>();
     	// result.put("color", ColorAttribute.class);
     	result.put("labelgraphics", EdgeLabelAttribute.class);
+    	result.put("srcLabel", EdgeLabelAttribute.class);
+    	result.put("tgtLabel", EdgeLabelAttribute.class);
  		return result;
   	}
  	public static boolean isTypedAttributeFromID(String id, boolean isNodeTrue_isEdgeFalse) {
