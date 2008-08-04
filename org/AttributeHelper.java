@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.40 $
+ * @version $Revision: 1.41 $
  */
 public class AttributeHelper {
 
@@ -3338,7 +3338,11 @@ public class AttributeHelper {
 		try {
 			Attribute a = e.getAttribute("srcLabel");
 			if (a instanceof EdgeLabelAttribute) {
-				return ((EdgeLabelAttribute)a).getLabel();	
+				String lbl = ((EdgeLabelAttribute)a).getLabel();
+				if (lbl==null)
+					return returnIfNull;
+				else
+					return lbl;	
 			} else
 				return returnIfNull;
 		} catch(Exception err) {
@@ -3350,7 +3354,11 @@ public class AttributeHelper {
 		try {
 			Attribute a = e.getAttribute("tgtLabel");
 			if (a instanceof EdgeLabelAttribute) {
-				return ((EdgeLabelAttribute)a).getLabel();	
+				String lbl = ((EdgeLabelAttribute)a).getLabel();
+				if (lbl==null)
+					return returnIfNull;
+				else
+					return lbl;
 			} else
 				return returnIfNull;
 		} catch(Exception err) {
@@ -3377,7 +3385,7 @@ public class AttributeHelper {
 				a = new EdgeLabelAttribute("srcLabel");
 				ls = (EdgeLabelAttribute) a;
 				ls.setFontStyle("box");
-				EdgeLabelPositionAttribute posS = new EdgeLabelPositionAttribute("position", 0.2, 0, 0, -7);
+				EdgeLabelPositionAttribute posS = new EdgeLabelPositionAttribute("position", 0.333, 0, 0, -7);
 				ls.add(posS);
 				e.addAttribute(a, "");
 			} else
@@ -3406,7 +3414,7 @@ public class AttributeHelper {
 				a = new EdgeLabelAttribute("tgtLabel");
 				ls = (EdgeLabelAttribute) a;
 				ls.setFontStyle("box");
-				EdgeLabelPositionAttribute posS = new EdgeLabelPositionAttribute("position", 0.8, 0, 0, -7);
+				EdgeLabelPositionAttribute posS = new EdgeLabelPositionAttribute("position", 0.666, 0, 0, -7);
 				ls.add(posS);
 				e.addAttribute(a, "");
 			} else

@@ -399,7 +399,7 @@ public class FolderPanel extends JComponent {
 		if (lastSearchText.length() > 0 && currentSearchInputField != null) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					currentSearchInputField.requestFocus();
+					currentSearchInputField.requestFocusInWindow();
 				}
 			});
 		}

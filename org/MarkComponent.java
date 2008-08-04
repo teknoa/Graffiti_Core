@@ -88,7 +88,7 @@ public class MarkComponent extends JComponent {
 				updateMarked();
 				repaint();
 				if (marked && requestFocus)
-					comp.requestFocus();
+					comp.requestFocusInWindow();
 			}});
 	}
 
