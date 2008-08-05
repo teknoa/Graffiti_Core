@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphicAttributeConstants.java,v 1.3 2008/02/09 13:27:36 klukas Exp $
+// $Id: GraphicAttributeConstants.java,v 1.4 2008/08/05 15:23:59 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -138,6 +138,24 @@ public interface GraphicAttributeConstants
     /** Constant used to specify the position of a label according to a node. */
     public static final String NEARTARGET = "neartarget";
 
+    public static final String BORDER_TOP_LEFT = "btl";
+    public static final String BORDER_TOP_CENTER = "btc";
+    public static final String BORDER_TOP_RIGHT = "btr";
+
+    public static final String BORDER_BOTTOM_LEFT = "bbl";
+    public static final String BORDER_BOTTOM_CENTER = "bbc";
+    public static final String BORDER_BOTTOM_RIGHT = "bbr";
+    
+    public static final String BORDER_LEFT_TOP = "blt";
+    public static final String BORDER_LEFT_CENTER = "blc";
+    public static final String BORDER_LEFT_BOTTOM = "blb";
+
+    public static final String BORDER_RIGHT_TOP = "brt";
+    public static final String BORDER_RIGHT_CENTER = "brc";
+    public static final String BORDER_RIGHT_BOTTOM = "brb";
+
+
+    
     /**
      * Distance between a label and the surrounding rectangle of the  according
      * node.

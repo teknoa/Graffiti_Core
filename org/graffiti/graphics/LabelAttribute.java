@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LabelAttribute.java,v 1.5 2008/07/25 13:04:31 klukas Exp $
+// $Id: LabelAttribute.java,v 1.6 2008/08/05 15:23:59 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -33,7 +33,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public abstract class LabelAttribute
     extends HashMapAttribute
@@ -275,6 +275,11 @@ public abstract class LabelAttribute
 	public boolean getUseBoxedLabel() {
 		String s = getFontStyle().toUpperCase();
 		return s.contains("BOX");
+	}
+	
+	public boolean getUseOvalLabel() {
+		String s = getFontStyle().toUpperCase();
+		return s.contains("OVAL");
 	}
 	
 	public int getShadowOffX() {

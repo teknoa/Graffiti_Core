@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttribute.java,v 1.4 2008/08/04 09:42:51 klukas Exp $
+// $Id: AbstractAttribute.java,v 1.5 2008/08/05 15:23:59 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -29,7 +29,7 @@ import org.graffiti.plugin.XMLHelper;
  * <code>parent</code> and <code>attributable</code> of the
  * <code>Attribute</code>.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public abstract class AbstractAttribute
     implements Attribute
@@ -60,12 +60,8 @@ public abstract class AbstractAttribute
 	   	HashMap<String,Class> result = new HashMap<String,Class>();
 	   	// result.put("color", ColorAttribute.class);
 	   	result.put("labelgraphics", NodeLabelAttribute.class);
-   		result.put("auxInfoLabel", NodeLabelAttribute.class);
-   		result.put("auxStateLabel", NodeLabelAttribute.class);
-	   	// TODO: check if this is needed:
-   		for (int i = 0; i<9; i++) {
-	   		result.put("auxInfoLabel"+i, NodeLabelAttribute.class);
-	   		result.put("auxStateLabel"+i, NodeLabelAttribute.class);
+   		for (int i = 0; i<=99; i++) {
+	   		result.put("labelgraphics"+i, NodeLabelAttribute.class);
 	   	}
 		return result;
  	}

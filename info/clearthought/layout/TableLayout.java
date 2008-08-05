@@ -2370,7 +2370,8 @@ public void invalidateLayout (Container target)
 		result.setLayout(getLayout(width, TableLayout.PREFERRED));
 		int idx = 0;
 		for (JComponent jc : guiElements) {
-			result.add(jc, idx+",0");
+			if (jc!=null)
+				result.add(jc, idx+",0");
 			idx++;
 		}
 		result.validate();
@@ -2394,6 +2395,7 @@ public void invalidateLayout (Container target)
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static JComponent getMultiSplitVertical(
 			Collection jComponentList) {
 		JPanel result = new JPanel();

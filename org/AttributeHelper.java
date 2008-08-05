@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.41 $
+ * @version $Revision: 1.42 $
  */
 public class AttributeHelper {
 
@@ -839,6 +839,38 @@ public class AttributeHelper {
 			ErrorMsg.addErrorMessage(ex);
 		}
 	}
+	
+	public static void setLabel(int index, Node node, String label, String fontName, String alignment) {
+		if (label == null) {
+			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS+index)) {
+				NodeLabelAttribute labelAttr;
+				labelAttr = (NodeLabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS+index);
+				labelAttr.getParent().remove(labelAttr);
+			}
+			return;
+		}
+		try {
+			if (label.contains("\""))
+				label = label.replace("\"", "");
+			LabelAttribute labelAttr;
+			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS+index)) {
+				labelAttr = (LabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS+index);
+			} else {
+				// no label - associate one
+				labelAttr = new NodeLabelAttribute(GraphicAttributeConstants.LABELGRAPHICS+index, label);
+				node.addAttribute(labelAttr, GraphicAttributeConstants.LABEL_ATTRIBUTE_PATH);
+			}
+
+			if (fontName != null)
+				setFont(labelAttr, fontName);
+
+			labelAttr.setLabel(label);
+			if (alignment != null)
+				labelAttr.setAlignment(alignment);
+		} catch (Exception ex) {
+			ErrorMsg.addErrorMessage(ex);
+		}
+	}
 
 	public static void setLabelAlignment(Node node, AlignmentSetting align) {
 		try {
@@ -888,8 +920,26 @@ public class AttributeHelper {
 			LabelAttribute labelAttr;
 
 			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS)) {
-				labelAttr = (LabelAttribute) node
-						.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
+				labelAttr = (LabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
+				if (labelAttr.getLabel()==null)
+					return defaultReturn;
+				else
+					return labelAttr.getLabel();
+			} else {
+				return defaultReturn;
+			}
+		} catch (Exception ex) {
+			ErrorMsg.addErrorMessage(ex);
+			return defaultReturn;
+		}
+	}
+	
+	public static String getLabel(int index, Attributable node, String defaultReturn) {
+		try {
+			LabelAttribute labelAttr;
+
+			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS+index)) {
+				labelAttr = (LabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS+index);
 				if (labelAttr.getLabel()==null)
 					return defaultReturn;
 				else
@@ -3385,7 +3435,7 @@ public class AttributeHelper {
 				a = new EdgeLabelAttribute("srcLabel");
 				ls = (EdgeLabelAttribute) a;
 				ls.setFontStyle("box");
-				EdgeLabelPositionAttribute posS = new EdgeLabelPositionAttribute("position", 0.333, 0, 0, -7);
+				EdgeLabelPositionAttribute posS = new EdgeLabelPositionAttribute("position", 0.333, 0, 0, -8);
 				ls.add(posS);
 				e.addAttribute(a, "");
 			} else
@@ -3414,7 +3464,7 @@ public class AttributeHelper {
 				a = new EdgeLabelAttribute("tgtLabel");
 				ls = (EdgeLabelAttribute) a;
 				ls.setFontStyle("box");
-				EdgeLabelPositionAttribute posS = new EdgeLabelPositionAttribute("position", 0.666, 0, 0, -7);
+				EdgeLabelPositionAttribute posS = new EdgeLabelPositionAttribute("position", 0.666, 0, 0, -8);
 				ls.add(posS);
 				e.addAttribute(a, "");
 			} else
