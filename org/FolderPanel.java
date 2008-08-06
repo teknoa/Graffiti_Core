@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -359,7 +360,7 @@ public class FolderPanel extends JComponent {
 				JComponent helpButton = getHelpButton();
 				button2 = helpButton;
 			}
-			JComponent labelPanel = null;
+			JComponent labelPanel = titleComp;
 			if (button1 != null && button2 == null) {
 				if (condenseStyle == CondenseButtonLayout.RIGHT)
 					labelPanel = TableLayout.getSplit(titleComp, button1,
@@ -503,6 +504,10 @@ public class FolderPanel extends JComponent {
 		return result;
 	}
 
+	public void setCondensedState(boolean condensed) {
+		this.condensedState = condensed;
+	}
+	
 	private void checkCondensedState() {
 		if (condensedState) {
 			guiComponentInvisibleRows.addAll(guiComponentRows);
@@ -1011,5 +1016,50 @@ public class FolderPanel extends JComponent {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public void mergeRowsWithSameLeftLabel() {
+		HashMap<String, ArrayList<GuiRow>> descAndGuiRows = new HashMap<String, ArrayList<GuiRow>>();
+		for (GuiRow gr :guiComponentRows) {
+			if (gr.left!=null && gr.left instanceof JLabel) {
+				String lbl = ((JLabel)gr.left).getText();
+				if (lbl!=null && lbl.length()>0) {
+					if (!descAndGuiRows.containsKey(lbl))
+						descAndGuiRows.put(lbl, new ArrayList<GuiRow>());
+					descAndGuiRows.get(lbl).add(gr);
+				}
+			}
+		}
+		ArrayList<GuiRow> toBeDeleted = new ArrayList<GuiRow>();
+		ArrayList<GuiRow> toBeAdded   = new ArrayList<GuiRow>();
+		for (ArrayList<GuiRow> grl : descAndGuiRows.values()) {
+			if (grl.size()>1) {
+				toBeDeleted.addAll(grl);
+				ArrayList<JComponent> grlRight = new ArrayList<JComponent>();
+				for (GuiRow gr : grl)
+					grlRight.add(gr.right);
+//				Collections.sort(grlRight, new Comparator<JComponent>() {
+//					@Override
+//					public int compare(JComponent o1, JComponent o2) {
+//						String a = o1.getToolTipText();
+//						String b = o2.getToolTipText();
+//						if (a==null) a = "";
+//						if (b==null) b = "";
+//						if (a.contains("Width") && b.contains("Height"))
+//							return -1;
+//						if (a.contains("Height") && b.contains("Width"))
+//							return 1;
+//						String numA = ErrorMsg.getNummericChars(a);
+//						String numB = ErrorMsg.getNummericChars(a);
+//						
+//						return a.compareTo(b);
+//					}});
+				toBeAdded.add(new GuiRow(grl.iterator().next().left, TableLayout.getMultiSplit(grlRight)));
+			}
+		}
+		guiComponentRows.removeAll(toBeDeleted);
+		guiComponentInvisibleRows.removeAll(toBeDeleted);
+		for (GuiRow gr : toBeAdded)
+			addGuiComponentRow(gr, false);
 	}
 }

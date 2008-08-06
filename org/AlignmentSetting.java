@@ -20,6 +20,39 @@ public enum AlignmentSetting {
 	
 	public String toString() {
 		switch(this) {
+			case AUTO_OUTSIDE: return "outside (automatic)";
+			case BELOW : return "below";
+			case ABOVE : return "above";
+			case RIGHT : return "right";
+			case LEFT : return "left";
+			case INSIDEBOTTOM : return "inside, bottom";
+			case INSIDETOP : return "inside, top";
+			case CENTERED : return "centered";
+			case BELOWRIGHT : return "below, right";
+			case BELOWLEFT : return "below, left";
+			case ABOVELEFT : return "above, left";
+			case ABOVERIGHT : return "above, right";
+			case NEARSOURCE : return "nearsource (not impl.)";
+			case NEARTARGET : return "neartarget (not impl.)";
+			case BORDER_TOP_LEFT  : return "border, top-left";
+			case BORDER_TOP_CENTER: return "border, top-center";
+			case BORDER_TOP_RIGHT : return "border, top-right";
+			case BORDER_RIGHT_TOP : return "border, right-top";
+			case BORDER_RIGHT_CENTER: return "border, right-center";
+			case BORDER_RIGHT_BOTTOM: return "border, right-bottom";
+			case BORDER_BOTTOM_LEFT: return "border, bottom-left";
+			case BORDER_BOTTOM_CENTER: return "border, bottom-center";
+			case BORDER_BOTTOM_RIGHT: return "border, bottom-right";
+			case BORDER_LEFT_TOP  : return "border, left-top";
+			case BORDER_LEFT_CENTER: return "border, left-center";
+			case BORDER_LEFT_BOTTOM: return "border, left-bottom";
+		}
+		return null;
+
+	}
+	
+	public String toGMLstring() {
+		switch(this) {
 			case AUTO_OUTSIDE: return "auto_outside";
 			case BELOW : return GraphicAttributeConstants.BELOW;
 			case ABOVE : return GraphicAttributeConstants.ABOVE;

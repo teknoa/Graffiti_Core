@@ -5,12 +5,13 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericPlugin.java,v 1.2 2008/07/14 10:56:56 klukas Exp $
+// $Id: GenericPlugin.java,v 1.3 2008/08/06 15:12:14 klukas Exp $
 
 package org.graffiti.plugin;
 
 import javax.swing.ImageIcon;
 
+import org.graffiti.attributes.AttributeDescription;
 import org.graffiti.options.GravistoPreferences;
 import org.graffiti.plugin.actions.URLattributeAction;
 import org.graffiti.plugin.algorithm.Algorithm;
@@ -52,6 +53,8 @@ public interface GenericPlugin
      * @return the attribute types provided by this plugin.
      */
     public Class[] getAttributes();
+    
+    public AttributeDescription[] getAttributeDescriptions();
 
     /**
      * Returns the array containing the names of the plugin classes the current

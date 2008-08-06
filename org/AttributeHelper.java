@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.42 $
+ * @version $Revision: 1.43 $
  */
 public class AttributeHelper {
 
@@ -347,8 +347,10 @@ public class AttributeHelper {
 	 *            The group and "nice name" of the attribute
 	 */
 	public static void setNiceId(String attributeID, String description) {
-		if (idToNiceId.containsKey(attributeID))
+		if (idToNiceId.containsKey(attributeID)) {
+			System.out.println("Information: overwriting previous attribute user description for id "+attributeID+"");
 			idToNiceId.remove(attributeID);
+		}
 		idToNiceId.put(attributeID, description);
 	}
 
@@ -360,10 +362,10 @@ public class AttributeHelper {
 		idToNiceId.put("chart_colors", chartAll + ": Series Colors");
 		idToNiceId.put("chart_color_line_names", chartAll
 				+ ": Global Series List");
-		idToNiceId.put("chartSizeX", chartSelN + ": Diagram Width");
-		idToNiceId.put("chartSizeY", chartSelN + ": Diagram Height");
-		idToNiceId.put("empty_border_width", chartSelN + ": Spacing (hor.)");
-		idToNiceId.put("empty_border_width_vert", chartSelN + ": Spacing (vert.)");
+		idToNiceId.put("chartSizeX", chartSelN + ": Diagram Width/Height");
+		idToNiceId.put("chartSizeY", chartSelN + ": Diagram Width/Height");
+		idToNiceId.put("empty_border_width", chartSelN + ": Spacing (hor./vert.)");
+		idToNiceId.put("empty_border_width_vert", chartSelN + ": Spacing (hor./vert.)");
 		idToNiceId.put("rangeAxis", chartSelN + ": Range Axis Title");
 		idToNiceId.put("chartTitle", chartSelN + ": Diagram Title");
 		idToNiceId.put("domainAxis", chartSelN + ": Domain Axis Title");
@@ -379,10 +381,10 @@ public class AttributeHelper {
 		idToNiceId.put("Node:linemode", "Shape: Border Drawing");
 		idToNiceId.put("Edge:linemode", "Drawing");
 		idToNiceId.put("component", chartSelN + ": Diagram");
-		idToNiceId.put("width", "<html><!--A-->Width");
-		idToNiceId.put("height", "<html><!--B-->Height");
-		idToNiceId.put("x", "X");
-		idToNiceId.put("y", "Y");
+		idToNiceId.put("width", "<html><!--A-->Size");
+		idToNiceId.put("height", "<html><!--A-->Size");
+		idToNiceId.put("x", "Position");
+		idToNiceId.put("y", "Position");
 		idToNiceId.put("z_", "Z");
 		idToNiceId.put("mol", "Molecule Structure:3D MOL View");
 		idToNiceId.put("rounding", "Shape: Rounded Corners");
@@ -586,24 +588,24 @@ public class AttributeHelper {
 		idToNiceId.put(".tgtLabel.anchor", "Label (Production): Position");
 
 		
-		idToNiceId.put("fontName", "Label: Font");
-		idToNiceId.put("fontSize", "Label: Font-Size");
-		idToNiceId.put("fontStyle", "Label: Font-Style");
-		idToNiceId.put("shadowOffset", "Label: Shadow-Offset");
-		idToNiceId.put("shadowColor", "Label: Shadow-Color");
-		idToNiceId.put("text", "Label: Text");
-		idToNiceId.put("color", "Label: Color");
-		idToNiceId.put("anchor", "Label: Position");
+		idToNiceId.put(".labelgraphics.fontName", "Label: Font");
+		idToNiceId.put(".labelgraphics.fontSize", "Label: Font-Size");
+		idToNiceId.put(".labelgraphics.fontStyle", "Label: Font-Style");
+		idToNiceId.put(".labelgraphics.shadowOffset", "Label: Shadow-Offset");
+		idToNiceId.put(".labelgraphics.shadowColor", "Label: Shadow-Color");
+		idToNiceId.put(".labelgraphics.text", "Label: Text");
+		idToNiceId.put(".labelgraphics.color", "Label: Color");
+		idToNiceId.put(".labelgraphics.anchor", "Label: Position");
 
 		
-		idToNiceId.put("fontName", "Label: Font");
-		idToNiceId.put("fontSize", "Label: Font-Size");
-		idToNiceId.put("fontStyle", "Label: Font-Style");
-		idToNiceId.put("shadowOffset", "Label: Shadow-Offset");
-		idToNiceId.put("shadowColor", "Label: Shadow-Color");
-		idToNiceId.put("text", "Label: Text");
-		idToNiceId.put("color", "Label: Color");
-		idToNiceId.put("anchor", "Label: Position");
+		idToNiceId.put("fontName", "Label (Annotation): Font");
+		idToNiceId.put("fontSize", "Label (Annotation): Font-Size");
+		idToNiceId.put("fontStyle", "Label (Annotation): Font-Style");
+		idToNiceId.put("shadowOffset", "Label (Annotation): Shadow-Offset");
+		idToNiceId.put("shadowColor", "Label (Annotation): Shadow-Color");
+		idToNiceId.put("text", "Label (Annotation): Text");
+		idToNiceId.put("color", "Label (Annotation): Color");
+		idToNiceId.put("anchor", "Label (Annotation): Position");
 		
 		
 		idToNiceId.put("image_url", "Image:<html>&nbsp;URL<br><br>&nbsp;View");
@@ -616,7 +618,6 @@ public class AttributeHelper {
 		} else {
 			String cc = "Cluster-Coloring: ";
 			idToNiceId.put("cluster_colors", cc + "Colors");
-			idToNiceId.put("background_coloring", cc + "Background-Coloring");
 			idToNiceId.put("clusterbackground_fill_outer_region", cc
 					+ "Fill View Completely");
 			idToNiceId.put("clusterbackground_space_fill", cc
@@ -840,7 +841,10 @@ public class AttributeHelper {
 		}
 	}
 	
-	public static void setLabel(int index, Node node, String label, String fontName, String alignment) {
+	public static void setLabel(int idx, Node node, String label, String fontName, String alignment) {
+		String index = ""+idx;
+		if (idx<0)
+			index = "";
 		if (label == null) {
 			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS+index)) {
 				NodeLabelAttribute labelAttr;
@@ -872,23 +876,43 @@ public class AttributeHelper {
 		}
 	}
 
-	public static void setLabelAlignment(Node node, AlignmentSetting align) {
+	public static void setLabelAlignment(int index, Node node, AlignmentSetting align) {
 		try {
+			String idx = ""+index;
+			if (index<0)
+				idx = "";
 			LabelAttribute labelAttr;
-			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS)) {
-				labelAttr = (LabelAttribute) node
-						.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
+			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS+idx)) {
+				labelAttr = (LabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS+idx);
 			} else {
 				// no label - associate one
-				labelAttr = new NodeLabelAttribute(
-						GraphicAttributeConstants.LABELGRAPHICS, "");
-				node.addAttribute(labelAttr,
-						GraphicAttributeConstants.LABEL_ATTRIBUTE_PATH);
+				labelAttr = new NodeLabelAttribute(GraphicAttributeConstants.LABELGRAPHICS+idx, "");
+				node.addAttribute(labelAttr, GraphicAttributeConstants.LABEL_ATTRIBUTE_PATH);
 			}
-			labelAttr.setAlignment(align.toString());
+			labelAttr.setAlignment(align.toGMLstring());
 		} catch (Exception ex) {
 			ErrorMsg.addErrorMessage(ex);
 		}
+	}
+	
+	public static AlignmentSetting getLabelAlignment(int index, Node node) {
+		try {
+			String idx = ""+index;
+			if (index<0)
+				idx = "";
+			LabelAttribute labelAttr;
+			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS+idx)) {
+				labelAttr = (LabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS+idx);
+				String align = labelAttr.getAlignment();
+				for (AlignmentSetting a : AlignmentSetting.values()) {
+					if (a.toGMLstring().equalsIgnoreCase(align))
+						return a;
+				}
+			}
+		} catch (Exception ex) {
+			// empty
+		}
+		return AlignmentSetting.CENTERED;
 	}
 
 	/**
@@ -2647,21 +2671,76 @@ public class AttributeHelper {
 		return null;
 	}
 
-	public static NodeLabelAttribute getLabel(Node node) {
+	/**
+	 * Get NodeLabelAttribute (if available)
+	 * @param index Use -1 to get main label, use 0..99 to get annotation labels
+	 * @param node Node to be processed
+	 * @return NodeLabelAttribute, if present, otherwise null.
+	 */
+	public static NodeLabelAttribute getLabel(int index, Node node) {
 		try {
-			NodeLabelAttribute labelAttr;
-			// if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS))
-			// {
-			labelAttr = (NodeLabelAttribute) node
-					.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
+			String idx = ""+index;
+			if (index<0)
+				idx = "";
+			NodeLabelAttribute labelAttr = (NodeLabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS+idx);
 			return labelAttr;
-			/*
-			 * } else { return null; }
-			 */
 		} catch (Exception ex) {
 			return null;
 		}
 	}
+	
+	public static void setLabelStyleBox(int index, Node n, boolean showBox) {
+		LabelAttribute la = getLabel(index, n);
+		if (la!=null) {
+			String currentStyle = la.getFontStyle();
+			if (currentStyle==null)
+				currentStyle = "";
+			if (showBox && currentStyle.contains("box"))
+				return;
+			if (!showBox) {
+				if (currentStyle.contains("box,")) {
+					currentStyle = ErrorMsg.stringReplace(currentStyle, "box,", "");
+				} else
+					if (currentStyle.contains("box")) {
+						currentStyle = ErrorMsg.stringReplace(currentStyle, "box", "");
+					}
+			} else {
+				if (currentStyle.length()>0)
+					currentStyle = currentStyle+",box";
+				else
+					currentStyle = "box";
+			}
+			currentStyle = ErrorMsg.stringReplace(currentStyle, " ", "");
+			la.setFontStyle(currentStyle);
+		}
+	}
+	
+	public static void setLabelStyleOval(int index, Node n, boolean showOval) {
+		LabelAttribute la = getLabel(index, n);
+		if (la!=null) {
+			String currentStyle = la.getFontStyle();
+			if (currentStyle==null)
+				currentStyle = "";
+			if (showOval && currentStyle.contains("oval"))
+				return;
+			if (!showOval) {
+				if (currentStyle.contains("oval,")) {
+					currentStyle = ErrorMsg.stringReplace(currentStyle, "oval,", "");
+				} else
+					if (currentStyle.contains("oval")) {
+						currentStyle = ErrorMsg.stringReplace(currentStyle, "oval", "");
+					}
+			} else {
+				if (currentStyle.length()>0)
+					currentStyle = currentStyle+",oval";
+				else
+					currentStyle = "oval";
+			}
+			currentStyle = ErrorMsg.stringReplace(currentStyle, " ", "");
+			la.setFontStyle(currentStyle);
+		}
+	}
+
 
 	public static String formatNumber(double d, String pattern) {
 		return ErrorMsg.getDecimalFormat(pattern).format(d);

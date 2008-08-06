@@ -5,12 +5,13 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericPluginAdapter.java,v 1.2 2008/07/14 10:56:56 klukas Exp $
+// $Id: GenericPluginAdapter.java,v 1.3 2008/08/06 15:12:14 klukas Exp $
 
 package org.graffiti.plugin;
 
 import javax.swing.ImageIcon;
 
+import org.graffiti.attributes.AttributeDescription;
 import org.graffiti.core.ImageBundle;
 import org.graffiti.core.StringBundle;
 import org.graffiti.options.GravistoPreferences;
@@ -24,7 +25,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * An adapter class for the generic plugin interface.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class GenericPluginAdapter
     implements GenericPlugin
@@ -50,6 +51,9 @@ public abstract class GenericPluginAdapter
 
     /** The algorithms the plugin provides. */
     protected Algorithm[] algorithms;
+    
+    /** The algorithms plugin descriptions the plugin provides. */
+    protected AttributeDescription[] attributeDescriptions;
     
     /** The extensions the plugin provides. */
     protected Extension[] extensions;
@@ -100,6 +104,11 @@ public abstract class GenericPluginAdapter
     public Algorithm[] getAlgorithms()
     {
         return this.algorithms;
+    }
+    
+    public AttributeDescription[] getAttributeDescriptions()
+    {
+    	return this.attributeDescriptions;
     }
 
     /**

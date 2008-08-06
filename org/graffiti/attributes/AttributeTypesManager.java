@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeTypesManager.java,v 1.2 2007/08/22 20:21:52 klukas Exp $
+// $Id: AttributeTypesManager.java,v 1.3 2008/08/06 15:12:11 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.AttributeHelper;
 import org.graffiti.managers.pluginmgr.PluginDescription;
 import org.graffiti.managers.pluginmgr.PluginManagerListener;
 
@@ -30,7 +31,7 @@ import org.graffiti.plugin.GenericPlugin;
  * can be added and then used in an arbitrary <code>Attribute</code> hierarchy
  * associated with this <code>AttributeTypesManager</code>.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class AttributeTypesManager
     implements PluginManagerListener
@@ -216,6 +217,21 @@ public class AttributeTypesManager
         for(int i = 0; i < newTypes.length; i++)
         {
             addAttributeType(newTypes[i]);
+        }
+        
+        if (plugin.getAttributeDescriptions()!=null)
+        for (AttributeDescription ad : plugin.getAttributeDescriptions()) {
+        	String id = ad.getId();
+        	String help = ad.getUser_description();
+        	if (id!=null && help!=null && id.length()>0 && help.length()>0) {
+        		AttributeHelper.setNiceId(id, help);
+        	}
+        	if (id!=null && id.length()>0 && ad.getAttributeClass()!=null) {
+        		if (ad.isNodeAttributeDescription())
+        			AbstractAttribute.addNodeAttributeType(id, ad.getAttributeClass());
+        		if (ad.isNodeAttributeDescription())
+        			AbstractAttribute.addEdgeAttributeType(id, ad.getAttributeClass());
+        	}
         }
     }
 }

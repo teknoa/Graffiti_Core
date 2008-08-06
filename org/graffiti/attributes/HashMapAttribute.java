@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: HashMapAttribute.java,v 1.3 2008/03/10 15:01:19 klukas Exp $
+// $Id: HashMapAttribute.java,v 1.4 2008/08/06 15:12:11 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.ErrorMsg;
 
@@ -27,14 +28,14 @@ import org.ErrorMsg;
  * 'Color'-CollectionAttribute. The subattributes 'red', 'green' and 'blue'
  * are not mapped in this Attribute!
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *
  * @see CollectionAttribute
  * @see CompositeAttribute
  */
 public class HashMapAttribute
     extends AbstractCollectionAttribute
-    implements CollectionAttribute {
+    implements CollectionAttribute, Comparable {
     //~ Constructors ===========================================================
 
     /**
@@ -45,12 +46,12 @@ public class HashMapAttribute
      */
     public HashMapAttribute(String id) {
         super(id);
-        this.attributes = new LinkedHashMap<String,Attribute>();
+        this.attributes = new TreeMap<String,Attribute>();
     }
     
     public HashMapAttribute() {
    	 super("undefined id");
-       this.attributes = new LinkedHashMap<String,Attribute>();
+       this.attributes = new TreeMap<String,Attribute>();
    }
 
     //~ Methods ================================================================
@@ -65,7 +66,7 @@ public class HashMapAttribute
      */
     public void setCollection(Map<String, Attribute> attrs) {
         assert attrs != null;
-        attributes = new LinkedHashMap<String,Attribute>();
+        attributes = new TreeMap<String,Attribute>();
 
         Iterator it = attrs.values().iterator();
 
@@ -96,7 +97,7 @@ public class HashMapAttribute
      */
     @SuppressWarnings("unchecked")
 	public Map<String,Attribute> getCollection() {
-        return (Map<String, Attribute>) ((HashMap)attributes); // CK 2006 .clone();
+        return (Map<String, Attribute>)attributes;
     }
 
     /**
@@ -106,7 +107,7 @@ public class HashMapAttribute
      */
     public void setDefaultValue() {
    	 if (attributes==null)
-   		 this.attributes = new LinkedHashMap<String,Attribute>();
+   		 this.attributes = new TreeMap<String,Attribute>();
     }
 
     /**
@@ -156,16 +157,24 @@ public class HashMapAttribute
         throws IllegalArgumentException {
         assert o != null;
 
-        HashMap<String,Attribute> attrs;
+        Map<String,Attribute> attrs;
 
         try {
-            attrs = (HashMap<String,Attribute>) o;
+            attrs = (Map<String,Attribute>) o;
             setCollection(attrs);
         } catch(ClassCastException cce) {
             throw new IllegalArgumentException("Wrong argument type " +
                 "(Collection's value: HashMap - expected): "+cce.getMessage());
         }
     }
+
+	@Override
+	public int compareTo(Object o) {
+		if (o instanceof Attribute) {
+			return id.compareTo(((Attribute)o).getId());
+		}
+		return 0;
+	}
 }
 
 //------------------------------------------------------------------------------

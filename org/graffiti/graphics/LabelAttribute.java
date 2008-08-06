@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LabelAttribute.java,v 1.6 2008/08/05 15:23:59 klukas Exp $
+// $Id: LabelAttribute.java,v 1.7 2008/08/06 15:12:14 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -15,14 +15,12 @@ import java.awt.FontMetrics;
 import java.text.BreakIterator;
 
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import org.AttributeHelper;
 import org.ErrorMsg;
 import org.graffiti.attributes.Attribute;
 import org.graffiti.attributes.AttributeExistsException;
-import org.graffiti.attributes.AttributeNotFoundException;
 import org.graffiti.attributes.ColorSetAndGetSupport;
 import org.graffiti.attributes.FieldAlreadySetException;
 import org.graffiti.attributes.HashMapAttribute;
@@ -33,7 +31,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  *
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public abstract class LabelAttribute
     extends HashMapAttribute
@@ -64,7 +62,7 @@ public abstract class LabelAttribute
 	
 	private JLabel lastLabel = null;
 	
-	private static final int defaultSize = new JLabel().getFont().getSize();
+	private static final int defaultSize = 12; // new JLabel().getFont().getSize();
 	private static final String defaultFont = getDefaultFont();
 	
 	public void setLastLabel(JLabel lastLabel) {
@@ -73,7 +71,7 @@ public abstract class LabelAttribute
 
 
     private static String getDefaultFont() {
-    	String name = new JLabel().getFont().getFamily();
+    	String name = "Arial"; // new JLabel().getFont().getFamily();
 		return name;
 	}
 	//~ Constructors ===========================================================
@@ -143,14 +141,22 @@ public abstract class LabelAttribute
        ((StringAttribute)attributes.get(FONTNAME)).setString(f);
     }
     public String getFontName() {
-        return ((StringAttribute)attributes.get(FONTNAME)).getString();
+    	try {
+    		return ((StringAttribute)attributes.get(FONTNAME)).getString();
+    	} catch(NullPointerException npe) {
+    		return defaultFont;
+    	}
     }
     
     public void setFontStyle(String fs) {
        ((StringAttribute)attributes.get(FONTSTYLE)).setString(fs);
     }
     public String getFontStyle() {
-        return ((StringAttribute)attributes.get(FONTSTYLE)).getString();
+    	try {
+    		return ((StringAttribute)attributes.get(FONTSTYLE)).getString();
+    	} catch(NullPointerException npe) {
+    		return "plain";
+    	}
     }
     public int getFontStyleJava() {
  		 int fontStyleInt = 0;
@@ -163,7 +169,11 @@ public abstract class LabelAttribute
        ((IntegerAttribute)attributes.get(FONTSIZE)).setInteger(fs);
     }
     public int getFontSize() {
-        return ((IntegerAttribute)attributes.get(FONTSIZE)).getInteger();
+    	try {
+    		return ((IntegerAttribute)attributes.get(FONTSIZE)).getInteger();
+    	} catch(NullPointerException npe) {
+    		return defaultSize;
+    	}
     }
 
     /**

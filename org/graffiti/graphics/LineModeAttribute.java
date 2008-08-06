@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LineModeAttribute.java,v 1.1 2007/05/31 12:55:57 klukas Exp $
+// $Id: LineModeAttribute.java,v 1.2 2008/08/06 15:12:14 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -21,7 +21,7 @@ import org.graffiti.attributes.HashMapAttribute;
  * to specify stroke properties.
  *
  * @author schoeffl
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class LineModeAttribute
     extends CompositeAttribute {
@@ -93,10 +93,13 @@ public class LineModeAttribute
    	 boolean allZero = true;
    	 if (da==null)
    		 dash.setDashArray(da);
-		 else {
-	   	 for (float t : da)
-	   		 if (Math.abs(t)>0.000001)
+   	 else {
+	   	 for (float t : da) {
+	   		 if (Math.abs(t)>0.000001) {
 	   			 allZero = false;
+	   			 break;
+	   		 }
+	   	 }
 	   	 if (!allZero)
 	   		 this.dash.setDashArray(da);
 	   	 else
