@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.43 $
+ * @version $Revision: 1.44 $
  */
 public class AttributeHelper {
 
@@ -2896,18 +2896,21 @@ public class AttributeHelper {
 		}
 	}
 
-	public static void setLabelColor(Node n, Color color) {
+	public static void setLabelColor(int index, Node n, Color color) {
+		String idx = ""+index;
+		if (index<0)
+			idx="";
 		try {
 			HashMapAttribute l = (HashMapAttribute) n
 					.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
-							+ NodeLabelAttribute.LABELGRAPHICS);
+							+ NodeLabelAttribute.LABELGRAPHICS+idx);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
 			o.setString(ErrorMsg.getHexFromColor(color));
 		} catch (AttributeNotFoundException e) {
 			setLabel(n, getLabel(n, ""));
 			HashMapAttribute l = (HashMapAttribute) n
 					.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
-							+ NodeLabelAttribute.LABELGRAPHICS);
+							+ NodeLabelAttribute.LABELGRAPHICS+idx);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
 			o.setString(ErrorMsg.getHexFromColor(color));
 		}
