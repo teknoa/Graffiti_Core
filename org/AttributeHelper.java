@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.44 $
+ * @version $Revision: 1.45 $
  */
 public class AttributeHelper {
 
@@ -2544,13 +2544,13 @@ public class AttributeHelper {
 		graphics.setFrameThickness(2);
 		// setting the dimension
 		graphics.getDimension().setDimension(new Dimension(25, 25));
+		graphics.setRoundedEdges(5);
 		// setting the framecolor
 		graphics.getFramecolor().setColor(Color.BLACK);
 		// setting the fillcolor
 		graphics.getFillcolor().setColor(Color.WHITE);
 		// setting the shape
-		graphics
-				.setShape("org.graffiti.plugins.views.defaults.RectangleNodeShape");
+		graphics.setShape("org.graffiti.plugins.views.defaults.RectangleNodeShape");
 		// setting the lineMode
 		graphics.getLineMode().setDashArray(null);
 		graphics.getLineMode().setDashPhase(0.0f);

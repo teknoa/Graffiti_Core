@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphicAttributeConstants.java,v 1.4 2008/08/05 15:23:59 klukas Exp $
+// $Id: GraphicAttributeConstants.java,v 1.5 2008/08/14 12:26:25 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -262,14 +262,14 @@ public interface GraphicAttributeConstants
      *
      * @see java.awt.BasicStroke
      */
-    public static int DEFAULT_CAP = BasicStroke.CAP_BUTT;
+    public static int DEFAULT_CAP = BasicStroke.CAP_ROUND;
 
     /**
      * The join used by default.
      *
      * @see java.awt.BasicStroke
      */
-    public static int DEFAULT_JOIN = BasicStroke.JOIN_MITER;
+    public static int DEFAULT_JOIN = BasicStroke.JOIN_ROUND;
 
     /**
      * The miter limit used by default.
