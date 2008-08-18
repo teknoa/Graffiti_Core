@@ -49,4 +49,8 @@ public class Vector2d {
 		return new Point2D.Double(x,y);
 	}
 
+	public double distance(Vector2d point) {
+		return Math.sqrt((point.x-x)*(point.x-x)+(point.y-y)*(point.y-y));
+	}
+
 }

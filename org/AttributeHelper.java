@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.46 $
+ * @version $Revision: 1.47 $
  */
 public class AttributeHelper {
 
@@ -2965,8 +2965,16 @@ public class AttributeHelper {
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
 					.getAttribute("graphics");
 			int cnt = ega.getBendCount() + 1;
-			ega.getBends().add(new CoordinateAttribute("bend" + cnt, x, y),
-					false);
+			boolean added = false;
+			while (!added) {
+				try {
+					Attribute a = ega.getBends().getAttribute("bend" + cnt);
+					cnt++;
+				} catch(AttributeNotFoundException nfe) {
+					ega.getBends().add(new CoordinateAttribute("bend" + cnt, x, y), false);
+					added = true;
+				}
+			}
 		} catch (Exception e) {
 			((LinkedHashMapAttribute) edge.getAttribute("graphics.bends"))
 					.setCollection(new HashMap());
@@ -2975,7 +2983,7 @@ public class AttributeHelper {
 			ega.getBends().add(new CoordinateAttribute("bend1", x, y), false);
 		}
 	}
-
+	
 	public static ArrayList<Vector2d> getEdgeBends(Edge edge) {
 		ArrayList<Vector2d> result = new ArrayList<Vector2d>();
 		try {
