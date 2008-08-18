@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.45 $
+ * @version $Revision: 1.46 $
  */
 public class AttributeHelper {
 
@@ -3258,6 +3258,12 @@ public class AttributeHelper {
 			setHidden(doHide, ge);
 	}
 
+	public static void setHidden(Set<GraphElement> graphElements,
+			boolean doHide) {
+		for (GraphElement ge : graphElements)
+			setHidden(doHide, ge);
+	}
+
 	public static String getStringList(String[] elements, String div) {
 		if (elements == null || elements.length <= 0)
 			return "";
@@ -3271,6 +3277,30 @@ public class AttributeHelper {
 			return sb.toString();
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static String getStringList(Collection elements, String div) {
+		ArrayList<Object> al = new ArrayList<Object>();
+		for (Object o : elements)
+			al.add(o);
+		return getStringList(al, div);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static String getStringList(ArrayList elements, String div) {
+		if (elements == null || elements.size() <= 0)
+			return "";
+		else {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < elements.size(); i++) {
+				sb.append(elements.get(i));
+				if (i < elements.size() - 1)
+					sb.append(div);
+			}
+			return sb.toString();
+		}
+	}
+
 
 	public static void setReferenceURL(Attributable ge, String url) {
 		AttributeHelper.setAttribute(ge, "", "url", url);
