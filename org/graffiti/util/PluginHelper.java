@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginHelper.java,v 1.2 2008/05/30 10:52:49 klukas Exp $
+// $Id: PluginHelper.java,v 1.3 2008/08/26 12:48:55 klukas Exp $
 
 package org.graffiti.util;
 
@@ -78,12 +78,12 @@ public class PluginHelper
                     uc = pluginLocation.openConnection();
                     // %5c
                     try { 
-                    	input = uc.getInputStream();
-                    } catch(IOException ioe) {
                     	fileName=fileName.replaceAll("%5c","/");
                     	fileName=fileName.replaceAll("file://", "file:///");
-                    	uc = new URL(fileName).openConnection();
-                        input = uc.getInputStream();
+                    	URLConnection uc2 = new URL(fileName).openConnection();
+                        input = uc2.getInputStream();
+                    } catch(IOException ioe) {
+                    	input = uc.getInputStream();
                     }
                 }
             }

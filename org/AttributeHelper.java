@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.47 $
+ * @version $Revision: 1.48 $
  */
 public class AttributeHelper {
 
@@ -353,6 +353,12 @@ public class AttributeHelper {
 		}
 		idToNiceId.put(attributeID, description);
 	}
+	
+	public static String getNiceIdFromAttributeId(String attributeId) {
+		if (!idInit)
+			initNiceIds();
+		return idToNiceId.get(attributeId);
+	}
 
 	private static void initNiceIds() {
 
@@ -364,8 +370,8 @@ public class AttributeHelper {
 				+ ": Global Series List");
 		idToNiceId.put("chartSizeX", chartSelN + ": Diagram Width/Height");
 		idToNiceId.put("chartSizeY", chartSelN + ": Diagram Width/Height");
-		idToNiceId.put("empty_border_width", chartSelN + ": Spacing (hor./vert.)");
-		idToNiceId.put("empty_border_width_vert", chartSelN + ": Spacing (hor./vert.)");
+		idToNiceId.put("empty_border_width", chartSelN + ": Space (hor./vert.)");
+		idToNiceId.put("empty_border_width_vert", chartSelN + ": Space (hor./vert.)");
 		idToNiceId.put("rangeAxis", chartSelN + ": Range Axis Title");
 		idToNiceId.put("chartTitle", chartSelN + ": Diagram Title");
 		idToNiceId.put("domainAxis", chartSelN + ": Domain Axis Title");
@@ -3361,17 +3367,17 @@ public class AttributeHelper {
 
 	public static double getHeatMapLowerBound(Graph graph) {
 		return ((Double) getAttributeValue(graph, "", "hm_lower_bound",
-				new Double(0.5d), new Double(0.5))).doubleValue();
+				new Double(-10), new Double(-10))).doubleValue();
 	}
 
 	public static double getHeatMapMiddleBound(Graph graph) {
 		return ((Double) getAttributeValue(graph, "", "hm_middle_bound",
-				new Double(1d), new Double(1))).doubleValue();
+				new Double(0d), new Double(0))).doubleValue();
 	}
 
 	public static double getHeatMapUpperBound(Graph graph) {
 		return ((Double) getAttributeValue(graph, "", "hm_upper_bound",
-				new Double(2d), new Double(2))).doubleValue();
+				new Double(10d), new Double(10))).doubleValue();
 	}
 
 	public static double getHeatMapGamma(Graph graph) {
