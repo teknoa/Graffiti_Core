@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttributable.java,v 1.2 2008/02/27 15:07:17 klukas Exp $
+// $Id: AbstractAttributable.java,v 1.3 2008/08/28 09:51:06 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -15,7 +15,7 @@ import org.graffiti.event.AttributeEvent;
  * Provides common functionality for <code>Attributable</code> classes. This
  * class also contains additional functionality for dealing with attributes.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see Attributable
  */
@@ -92,11 +92,10 @@ public abstract class AbstractAttributable implements Attributable {
         assert path != null;
         
         /* if the path contains "." as first character then remove it.*/
-        if (path.startsWith(Attribute.SEPARATOR)) {
+        if (path.startsWith(Attribute.SEPARATOR))
         	return attributes.getAttribute(path.substring(1));
-        }
-
-        return attributes.getAttribute(path);
+        else
+        	return attributes.getAttribute(path);
     }
 
     /**
@@ -1098,100 +1097,88 @@ public abstract class AbstractAttributable implements Attributable {
             }
         }
 
-        Attribute toSet = null;
-
         try {
-            toSet = parent.getAttribute(subPaths[subPaths.length - 1]);
+        	Attribute toSet = parent.getAttribute(subPaths[subPaths.length - 1]);
             toSet.setValue(o);
         } catch (AttributeNotFoundException anfe) {
-            Attribute a = null;
-
-            switch (attributeType) {
-                case BOOLEAN_ATTRIBUTE :
-                    a =
-                        new BooleanAttribute(
-                            subPaths[subPaths.length - 1],
-                            ((Boolean) o).booleanValue());
-
-                    break;
-
-                case DOUBLE_ATTRIBUTE :
-                    a =
-                        new DoubleAttribute(
-                            subPaths[subPaths.length - 1],
-                            ((Double) o).doubleValue());
-
-                    break;
-
-                case FLOAT_ATTRIBUTE :
-                    a =
-                        new FloatAttribute(
-                            subPaths[subPaths.length - 1],
-                            ((Float) o).floatValue());
-
-                    break;
-
-                case INTEGER_ATTRIBUTE :
-                    a =
-                        new IntegerAttribute(
-                            subPaths[subPaths.length - 1],
-                            ((Integer) o).intValue());
-
-                    break;
-
-                case STRING_ATTRIBUTE :
-                    a =
-                        StringAttribute.getTypedStringAttribute(
-                            subPaths[subPaths.length - 1],
-                            (String) o);
-
-                    break;
-
-                case LONG_ATTRIBUTE :
-                    a =
-                        new LongAttribute(
-                            subPaths[subPaths.length - 1],
-                            (Long) o);
-
-                    break;
-
-                case BYTE_ATTRIBUTE :
-                    a =
-                        new ByteAttribute(
-                            subPaths[subPaths.length - 1],
-                            (Byte) o);
-
-                    break;
-
-                case SHORT_ATTRIBUTE :
-                    a =
-                        new ShortAttribute(
-                            subPaths[subPaths.length - 1],
-                            (Short) o);
-
-                    break;
-
-                default :
-                    assert false : "Encountered an unknown attribute type ...";
-            }
-
-            assert a != null : "Could not create a basic attribute ...";
+            Attribute a = getDefaultAttribute(o, attributeType, subPaths);
             parent.add(a, furtherInformLM);
-        } catch (IllegalArgumentException iae) {
-        	throw iae;
-        	// changed by C. Klukas, IPK. It is not clear why
-        	// a new exception should be thrown, that is different
-        	// to the real cause of the problem (at least in my test)
-        	// A new and missleading error message appears if a new
-        	// exception is thrown here.
-            /*throw new AttributeExistsException(
-                "Attribute with path "
-                    + path
-                    + " already exists but not an "
-                    + o.getClass().getName()
-                    + "Attribute.");*/
         }
     }
+
+	private Attribute getDefaultAttribute(Object o, int attributeType,
+			String[] subPaths) {
+		Attribute a = null;
+		switch (attributeType) {
+		    case BOOLEAN_ATTRIBUTE :
+		        a =
+		            new BooleanAttribute(
+		                subPaths[subPaths.length - 1],
+		                ((Boolean) o).booleanValue());
+
+		        break;
+
+		    case DOUBLE_ATTRIBUTE :
+		        a =
+		            new DoubleAttribute(
+		                subPaths[subPaths.length - 1],
+		                ((Double) o).doubleValue());
+
+		        break;
+
+		    case FLOAT_ATTRIBUTE :
+		        a =
+		            new FloatAttribute(
+		                subPaths[subPaths.length - 1],
+		                ((Float) o).floatValue());
+
+		        break;
+
+		    case INTEGER_ATTRIBUTE :
+		        a =
+		            new IntegerAttribute(
+		                subPaths[subPaths.length - 1],
+		                ((Integer) o).intValue());
+
+		        break;
+
+		    case STRING_ATTRIBUTE :
+		        a =
+		            StringAttribute.getTypedStringAttribute(
+		                subPaths[subPaths.length - 1],
+		                (String) o);
+
+		        break;
+
+		    case LONG_ATTRIBUTE :
+		        a =
+		            new LongAttribute(
+		                subPaths[subPaths.length - 1],
+		                (Long) o);
+
+		        break;
+
+		    case BYTE_ATTRIBUTE :
+		        a =
+		            new ByteAttribute(
+		                subPaths[subPaths.length - 1],
+		                (Byte) o);
+
+		        break;
+
+		    case SHORT_ATTRIBUTE :
+		        a =
+		            new ShortAttribute(
+		                subPaths[subPaths.length - 1],
+		                (Short) o);
+
+		        break;
+
+		    default :
+		        assert false : "Encountered an unknown attribute type ...";
+		}
+		return a;
+	}
 }
 
 //------------------------------------------------------------------------------

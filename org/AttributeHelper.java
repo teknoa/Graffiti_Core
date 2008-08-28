@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.48 $
+ * @version $Revision: 1.49 $
  */
 public class AttributeHelper {
 
@@ -1568,14 +1568,11 @@ public class AttributeHelper {
 			Object resultType, boolean setDefaultIfMissing) {
 
 		try {
-			HashMapAttribute a = (HashMapAttribute) getAttribute(attributable,
-					path);
+			HashMapAttribute a = (HashMapAttribute) getAttribute(attributable, path);
 			Object res = a.getAttribute(attributeName).getValue();
-			if (resultType != null
-					&& !res.getClass().equals(resultType.getClass())) {
+			if (resultType != null && !res.getClass().equals(resultType.getClass())) {
 				if (res instanceof String && !(resultType instanceof Boolean)) {
-					res = ObjectAttributeService
-							.createAndInitObjectFromString((String) res);
+					res = ObjectAttributeService.createAndInitObjectFromString((String) res);
 					if (res == null
 							|| !res.getClass().equals(resultType.getClass())) {
 						if ((res != null) && (res instanceof String)
@@ -1617,8 +1614,7 @@ public class AttributeHelper {
 							&& resultType instanceof Color) {
 						LinkedHashMap lhm = (LinkedHashMap) res;
 						IntegerAttribute r = (IntegerAttribute) lhm.get("red");
-						IntegerAttribute g = (IntegerAttribute) lhm
-								.get("green");
+						IntegerAttribute g = (IntegerAttribute) lhm.get("green");
 						IntegerAttribute b = (IntegerAttribute) lhm.get("blue");
 						return new Color(r.getInteger(), g.getInteger(), b
 								.getInteger());
@@ -1631,8 +1627,7 @@ public class AttributeHelper {
 						setAttribute(attributable, path, attributeName, rr);
 						return rr;
 					} else {
-						ErrorMsg
-								.addErrorMessage("Attribute Type Invalid, is not the same as expected: "
+						ErrorMsg.addErrorMessage("Attribute Type Invalid, is not the same as expected: "
 										+ res.getClass().getSimpleName()
 										+ " *#* "
 										+ resultType.getClass().getSimpleName());
@@ -1645,7 +1640,6 @@ public class AttributeHelper {
 			}
 			return res;
 		} catch (Exception e) {
-			// ErrorMsg.addErrorMessage(e.getLocalizedMessage());
 			if (defaultValue != null && setDefaultIfMissing)
 				setAttribute(attributable, path, attributeName, defaultValue);
 			return defaultValue;
