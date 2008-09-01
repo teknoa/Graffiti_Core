@@ -197,15 +197,19 @@ public class FolderPanel extends JComponent {
 
 	public void addGuiComponentRow(JComponent leftComponent,
 			JComponent rightComponent, boolean updateLayout) {
-		guiComponentRows.add(new GuiRow(leftComponent, rightComponent));
-		if (updateLayout)
-			layoutRows();
+		synchronized (guiComponentRows) {
+			guiComponentRows.add(new GuiRow(leftComponent, rightComponent));
+			if (updateLayout)
+				layoutRows();
+		}
 	}
 
 	public void removeGuiComponentRow(GuiRow guiRow, boolean updateLayout) {
-		guiComponentRows.remove(guiRow);
-		if (updateLayout)
-			layoutRows();
+		synchronized (guiComponentRows) {
+			guiComponentRows.remove(guiRow);
+			if (updateLayout)
+				layoutRows();
+		}
 	}
 
 	/**
@@ -246,163 +250,165 @@ public class FolderPanel extends JComponent {
 	}
 
 	public void layoutRows() {
-		checkCondensedState();
-		removeAll();
-
-		rowPanel.removeAll();
-		ArrayList<GuiRow> guiComponentRowsForCurrentPage = new ArrayList<GuiRow>();
-		guiComponentRowsForCurrentPage
-				.addAll(getFilteredList(guiComponentRows));
-		if (guiComponentRowsForCurrentPage.size() > maxRowCount
-				&& maxRowCount > 0) {
-			ArrayList<GuiRow> remove = new ArrayList<GuiRow>();
-			for (int i = 0; i < guiComponentRowsForCurrentPage.size(); i++) {
-				if (!(i >= currentPage * maxRowCount && i < (currentPage + 1)
-						* maxRowCount))
-					remove.add(guiComponentRowsForCurrentPage.get(i));
-			}
-			if (remove.size() > 0) {
-				for (GuiRow gr : remove)
-					guiComponentRowsForCurrentPage.remove(gr);
-			}
-		}
-		int maxX = 2;
-		int maxY = guiComponentRowsForCurrentPage.size();
-		double[][] size = new double[2][];
-		size[0] = new double[maxX];
-		size[1] = new double[maxY];
-		size[0][0] = columnStyle1; // first column //
-									// TableLayoutConstants.PREFERRED
-		size[0][1] = columnStyle2; // TableLayoutConstants.FILL;
-
-		rowPanel.setBorder(BorderFactory.createEmptyBorder(
-				maxY > 0 ? emptyBorderWidth : 0, maxY > 0 ? emptyBorderWidth
-						: 0, maxY > 0 ? emptyBorderWidth : 0,
-				maxY > 0 ? emptyBorderWidth : 0));
-		titleLabel
-				.setForeground(maxY > 0 ? headingColor
-						: (headingColor != null ? headingColor.darker()
-								: headingColor));
-		boolean hasData = guiComponentRowsForCurrentPage.size() > 0
-				|| guiComponentInvisibleRows.size() > 0;
-		titleLabel.setText(hasData ? title : title); // + " (no data)");
-		titleLabel.validate();
-
-		boolean firstColumn = true;
-		int row = 0;
-		ArrayList<GuiRow> workSet;
-		if (sortedRows)
-			workSet = getSortedRows(guiComponentRowsForCurrentPage);
-		else
-			workSet = guiComponentRowsForCurrentPage;
-
-		for (int y = 0; y < maxY; y++) {
-			if (workSet.get(y)!=null && workSet.get(y).right!=null && 
-					(workSet.get(y).right instanceof JScrollPane)) {
-				size[1][y] = TableLayoutConstants.FILL;
-				// workSet.get(y).right.setBorder(BorderFactory.createLineBorder(Color.red));
-			} else
-				size[1][y] = TableLayoutConstants.PREFERRED;
-		}
-		
-		rowPanel.setLayout(new TableLayout(size));
-
-		
-		for (GuiRow gr : workSet) {
-			if (rowSpacing > 0 || colSpacing > 0) {
-				rowPanel.add(getBorderedComponent(gr.left, 0, 0, rowSpacing,
-						colSpacing), "0," + row + ", l"); // left orientation
-				rowPanel.add(
-						getBorderedComponent(gr.right, 0, 0, rowSpacing, 0),
-						"1," + row);
-			} else {
-				rowPanel.add(gr.left, "0," + row + ", l"); // left orientation
-				rowPanel.add(gr.right, "1," + row);
-			}
-			row++;
-			colorRow(firstColumn, gr.left, gr.right);
-			firstColumn = !firstColumn;
-		}
-		if (backgroundColor != null)
-			if (backgroundColor.getRGB() == Color.BLACK.getRGB())
-				rowPanel.setBackground(null);
-			else
-				rowPanel.setBackground(backgroundColor);
-		else {
-			rowPanel.setOpaque(false);
-		}
-		rowPanel.validate();
-
-		if (!ReleaseInfo.getIsAllowedFeature(FeatureSet.GravistoJavaHelp))
-			showHelpButton = false;
-
-		if (showCondenseButton || showHelpButton || maxRowCount > 0
-				|| searchEnabled) {
-			JComponent button1 = null, button2 = null;
-			JComponent titleComp = titleLabel;
-			if (searchEnabled) {
-				JComponent sfield = getSearchField();
-				titleComp = TableLayout.getSplit(titleLabel, sfield,
-						TableLayout.FILL, TableLayout.PREFERRED);
-			}
-			if (maxRowCount > 0) {
-				JComponent lrb = getLeftRightButton();
-				titleComp = TableLayout.getSplit(titleComp, lrb,
-						TableLayout.FILL, TableLayout.PREFERRED);
-			}
-			if (showCondenseButton) {
-				final JComponent condenseCmdPanel = getCondenseButton();
-				condenseCmdPanel.setEnabled(hasData);
-				button1 = condenseCmdPanel;
-				addTitleMouseClickHandler(condenseCmdPanel);
-			}
-			if (showHelpButton) {
-				JComponent helpButton = getHelpButton();
-				button2 = helpButton;
-			}
-			JComponent labelPanel = titleComp;
-			if (button1 != null && button2 == null) {
-				if (condenseStyle == CondenseButtonLayout.RIGHT)
-					labelPanel = TableLayout.getSplit(titleComp, button1,
-							TableLayout.FILL, TableLayout.PREFERRED);
-				else
-					labelPanel = TableLayout.getSplit(button1, titleComp,
-							TableLayout.PREFERRED, TableLayout.FILL);
-			}
-			if (button2 != null && button1 == null)
-				labelPanel = TableLayout.getSplit(titleComp, button2,
-						TableLayout.FILL, TableLayout.PREFERRED);
-			if (button1 != null && button2 != null) {
-				if (condenseStyle == CondenseButtonLayout.RIGHT)
-					labelPanel = TableLayout.getSplit(titleComp, TableLayout
-							.getSplit(button2, button1, TableLayout.PREFERRED,
-									TableLayout.PREFERRED), TableLayout.FILL,
-							TableLayout.PREFERRED);
-				else
-					labelPanel = TableLayout.getSplit(button1, TableLayout
-							.getSplit(titleComp, button2, TableLayout.FILL,
-									TableLayout.PREFERRED),
-							TableLayout.PREFERRED, TableLayout.FILL);
-			}
-			setLayout(getVSplitLayout(labelPanel, rowPanel,
-					TableLayout.PREFERRED, TableLayout.FILL));
-			add(labelPanel, "1,1");
-		} else {
-			setLayout(getVSplitLayout(titleLabel, rowPanel,
-					TableLayout.PREFERRED, TableLayout.FILL));
-			add(titleLabel, "1,1");
-		}
-		add(rowPanel, "1,2");
-
-		validate();
-		repaint();
-
-		if (lastSearchText.length() > 0 && currentSearchInputField != null) {
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					currentSearchInputField.requestFocusInWindow();
+		synchronized (guiComponentRows) {
+			checkCondensedState();
+			removeAll();
+	
+			rowPanel.removeAll();
+			ArrayList<GuiRow> guiComponentRowsForCurrentPage = new ArrayList<GuiRow>();
+			guiComponentRowsForCurrentPage
+					.addAll(getFilteredList(guiComponentRows));
+			if (guiComponentRowsForCurrentPage.size() > maxRowCount
+					&& maxRowCount > 0) {
+				ArrayList<GuiRow> remove = new ArrayList<GuiRow>();
+				for (int i = 0; i < guiComponentRowsForCurrentPage.size(); i++) {
+					if (!(i >= currentPage * maxRowCount && i < (currentPage + 1)
+							* maxRowCount))
+						remove.add(guiComponentRowsForCurrentPage.get(i));
 				}
-			});
+				if (remove.size() > 0) {
+					for (GuiRow gr : remove)
+						guiComponentRowsForCurrentPage.remove(gr);
+				}
+			}
+			int maxX = 2;
+			int maxY = guiComponentRowsForCurrentPage.size();
+			double[][] size = new double[2][];
+			size[0] = new double[maxX];
+			size[1] = new double[maxY];
+			size[0][0] = columnStyle1; // first column //
+										// TableLayoutConstants.PREFERRED
+			size[0][1] = columnStyle2; // TableLayoutConstants.FILL;
+	
+			rowPanel.setBorder(BorderFactory.createEmptyBorder(
+					maxY > 0 ? emptyBorderWidth : 0, maxY > 0 ? emptyBorderWidth
+							: 0, maxY > 0 ? emptyBorderWidth : 0,
+					maxY > 0 ? emptyBorderWidth : 0));
+			titleLabel
+					.setForeground(maxY > 0 ? headingColor
+							: (headingColor != null ? headingColor.darker()
+									: headingColor));
+			boolean hasData = guiComponentRowsForCurrentPage.size() > 0
+					|| guiComponentInvisibleRows.size() > 0;
+			titleLabel.setText(hasData ? title : title); // + " (no data)");
+			titleLabel.validate();
+	
+			boolean firstColumn = true;
+			int row = 0;
+			ArrayList<GuiRow> workSet;
+			if (sortedRows)
+				workSet = getSortedRows(guiComponentRowsForCurrentPage);
+			else
+				workSet = guiComponentRowsForCurrentPage;
+	
+			for (int y = 0; y < maxY; y++) {
+				if (workSet.get(y)!=null && workSet.get(y).right!=null && 
+						(workSet.get(y).right instanceof JScrollPane)) {
+					size[1][y] = TableLayoutConstants.FILL;
+					// workSet.get(y).right.setBorder(BorderFactory.createLineBorder(Color.red));
+				} else
+					size[1][y] = TableLayoutConstants.PREFERRED;
+			}
+			
+			rowPanel.setLayout(new TableLayout(size));
+	
+			
+			for (GuiRow gr : workSet) {
+				if (rowSpacing > 0 || colSpacing > 0) {
+					rowPanel.add(getBorderedComponent(gr.left, 0, 0, rowSpacing,
+							colSpacing), "0," + row + ", l"); // left orientation
+					rowPanel.add(
+							getBorderedComponent(gr.right, 0, 0, rowSpacing, 0),
+							"1," + row);
+				} else {
+					rowPanel.add(gr.left, "0," + row + ", l"); // left orientation
+					rowPanel.add(gr.right, "1," + row);
+				}
+				row++;
+				colorRow(firstColumn, gr.left, gr.right);
+				firstColumn = !firstColumn;
+			}
+			if (backgroundColor != null)
+				if (backgroundColor.getRGB() == Color.BLACK.getRGB())
+					rowPanel.setBackground(null);
+				else
+					rowPanel.setBackground(backgroundColor);
+			else {
+				rowPanel.setOpaque(false);
+			}
+			rowPanel.validate();
+	
+			if (!ReleaseInfo.getIsAllowedFeature(FeatureSet.GravistoJavaHelp))
+				showHelpButton = false;
+	
+			if (showCondenseButton || showHelpButton || maxRowCount > 0
+					|| searchEnabled) {
+				JComponent button1 = null, button2 = null;
+				JComponent titleComp = titleLabel;
+				if (searchEnabled) {
+					JComponent sfield = getSearchField();
+					titleComp = TableLayout.getSplit(titleLabel, sfield,
+							TableLayout.FILL, TableLayout.PREFERRED);
+				}
+				if (maxRowCount > 0) {
+					JComponent lrb = getLeftRightButton();
+					titleComp = TableLayout.getSplit(titleComp, lrb,
+							TableLayout.FILL, TableLayout.PREFERRED);
+				}
+				if (showCondenseButton) {
+					final JComponent condenseCmdPanel = getCondenseButton();
+					condenseCmdPanel.setEnabled(hasData);
+					button1 = condenseCmdPanel;
+					addTitleMouseClickHandler(condenseCmdPanel);
+				}
+				if (showHelpButton) {
+					JComponent helpButton = getHelpButton();
+					button2 = helpButton;
+				}
+				JComponent labelPanel = titleComp;
+				if (button1 != null && button2 == null) {
+					if (condenseStyle == CondenseButtonLayout.RIGHT)
+						labelPanel = TableLayout.getSplit(titleComp, button1,
+								TableLayout.FILL, TableLayout.PREFERRED);
+					else
+						labelPanel = TableLayout.getSplit(button1, titleComp,
+								TableLayout.PREFERRED, TableLayout.FILL);
+				}
+				if (button2 != null && button1 == null)
+					labelPanel = TableLayout.getSplit(titleComp, button2,
+							TableLayout.FILL, TableLayout.PREFERRED);
+				if (button1 != null && button2 != null) {
+					if (condenseStyle == CondenseButtonLayout.RIGHT)
+						labelPanel = TableLayout.getSplit(titleComp, TableLayout
+								.getSplit(button2, button1, TableLayout.PREFERRED,
+										TableLayout.PREFERRED), TableLayout.FILL,
+								TableLayout.PREFERRED);
+					else
+						labelPanel = TableLayout.getSplit(button1, TableLayout
+								.getSplit(titleComp, button2, TableLayout.FILL,
+										TableLayout.PREFERRED),
+								TableLayout.PREFERRED, TableLayout.FILL);
+				}
+				setLayout(getVSplitLayout(labelPanel, rowPanel,
+						TableLayout.PREFERRED, TableLayout.FILL));
+				add(labelPanel, "1,1");
+			} else {
+				setLayout(getVSplitLayout(titleLabel, rowPanel,
+						TableLayout.PREFERRED, TableLayout.FILL));
+				add(titleLabel, "1,1");
+			}
+			add(rowPanel, "1,2");
+	
+			validate();
+			repaint();
+	
+			if (lastSearchText.length() > 0 && currentSearchInputField != null) {
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						currentSearchInputField.requestFocusInWindow();
+					}
+				});
+			}
 		}
 	}
 
@@ -936,6 +942,16 @@ public class FolderPanel extends JComponent {
 			}
 		};
 		addCollapseListener(resizeListener);
+	}
+	
+	public void dialogSizeUpdate() {
+		final FolderPanel fp = this;
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				Component pc = fp.getParent();
+				performDialogResize(pc);
+			}
+		});
 	}
 
 	public static void performDialogResize(Component startComponent) {
