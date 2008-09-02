@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginManager.java,v 1.2 2008/05/30 10:52:48 klukas Exp $
+// $Id: PluginManager.java,v 1.3 2008/09/02 11:30:17 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -47,7 +47,7 @@ public interface PluginManager
      *
      * @return a <code>Collection</code> containing all the plugin entries.
      */
-    public Collection<DefaultPluginEntry> getPluginEntries();
+    public Collection<PluginEntry> getPluginEntries();
 
     /**
      * Returns the plugin instance of the given plugin name.
@@ -137,7 +137,7 @@ public interface PluginManager
     /**
      * Saves the plugin manager's prefs.
      *
-     * @exception PluginManagerException if an error occurrs while saving the
+     * @exception PluginManagerException if an error occurs while saving the
      *            preferences.
      */
     public void savePrefs()

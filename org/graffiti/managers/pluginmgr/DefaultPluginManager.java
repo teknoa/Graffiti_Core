@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.4 2008/05/30 10:52:48 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.5 2008/09/02 11:30:18 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -34,7 +34,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -55,29 +55,19 @@ public class DefaultPluginManager
      * Maps from a plugin name (<code>String</code>) to a plugin entry
      * (<code>Entry</code>).
      */
-    private Hashtable pluginEntries;
+    private Hashtable<String, PluginEntry> pluginEntries;
 
     /**
      * Holds the plugin entries of the last search. This avoids researching
      * everytime a dependent plugin is automatically searched.
      */
-    private List entries;
+    private List<PluginEntry> entries;
 
     /** The list of plugin manager listeners. */
-    private List pluginManagerListeners;
-
-    /** The xml parser for the <tt>plugin.xml</tt> files. */
-    private PluginXMLParser parser;
+    private List<PluginManagerListener> pluginManagerListeners;
 
     /** The preferences of the plugin manager. */
     private GravistoPreferences prefs;
-
-    /**
-     * Used do decide whether or not to ask the user if she wants an automatic
-     * dependency solving or not. Could have used a parameter to method
-     * <code>loadPlugins</code> ...
-     */
-    private boolean doAutomatic = false;
 
     //~ Constructors ===========================================================
 
@@ -90,9 +80,8 @@ public class DefaultPluginManager
     public DefaultPluginManager(GravistoPreferences prefs)
     {
         this.prefs = prefs;
-        this.pluginEntries = new Hashtable();
-        this.parser = new PluginXMLParser();
-        this.pluginManagerListeners = new LinkedList();
+        this.pluginEntries = new Hashtable<String, PluginEntry>();
+        this.pluginManagerListeners = new LinkedList<PluginManagerListener>();
         lastInstance=this;
     }
 
@@ -130,7 +119,7 @@ public class DefaultPluginManager
      *
      * @return a <code>Collection</code> containing all the plugin entries.
      */
-    public Collection getPluginEntries()
+    public Collection<PluginEntry> getPluginEntries()
     {
         return pluginEntries.values();
     }
@@ -255,9 +244,6 @@ public class DefaultPluginManager
     public void loadPlugins(PluginEntry[] plugins, ProgressViewer progressViewer, boolean doAutomatic)
         throws PluginManagerException
     {
-    	
-    	this.doAutomatic=doAutomatic;
-    	
         List messages = new LinkedList();
 
         ArrayList loadLater = new ArrayList();
@@ -299,8 +285,7 @@ public class DefaultPluginManager
                 msg += ((String) itr.next() + "\n");
             }
 
-            throw new PluginManagerException("Error during plugin loading: "+msg,
-                msg.trim());
+            throw new PluginManagerException("Error during plugin loading: "+msg, msg.trim());
         }
     }
 
@@ -322,10 +307,6 @@ public class DefaultPluginManager
 		            "Some dependencies are not satisfied. Should an " +
 		            "automatic search be performed?")))
 		    {
-		        //                        "Some dependencies for the plugin \"" + desc.getName()+ 
-		        //                        "\" are not satisfied. Should an automatic search be "+
-		        //                        "performed?")) {
-		        // avoid redundant lookup
 		        if(!doAutomatic)
 		        {
 		            PluginDescriptionCollector collector = new ClassPathPluginDescriptionCollector();
