@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.5 2008/09/02 11:30:18 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.6 2008/09/04 09:56:08 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -34,7 +34,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -720,8 +720,8 @@ public class DefaultPluginManager
 
         // inform all listeners about the new plugin.
        	firePluginAdded(plugin, description);
-
-        // construct the path for the plugin in the preferences        
+       	
+       	// construct the path for the plugin in the preferences        
         // e.g. org.graffiti.plugins.io.graphviz.DOTSerializerPlugin becomes
         //      org/graffiti/plugins/io/graphviz/DOTSerializerPlugin
         String[] strings = StringSplitter.split(description.getMain(), ".");
@@ -837,8 +837,7 @@ public class DefaultPluginManager
             	try {
             		listener.pluginAdded(plugin, desc);
             	} catch(Exception e) {
-            	    System.err.println("ERROR: Listener "+listener.toString()+" could not handle new plugin: "+e.getLocalizedMessage());
-            	    e.printStackTrace();
+            	    ErrorMsg.addErrorMessage(e);
             	}
             }
         }

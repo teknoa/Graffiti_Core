@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericPluginAdapter.java,v 1.3 2008/08/06 15:12:14 klukas Exp $
+// $Id: GenericPluginAdapter.java,v 1.4 2008/09/04 09:56:08 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -25,7 +25,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * An adapter class for the generic plugin interface.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public abstract class GenericPluginAdapter
     implements GenericPlugin
@@ -270,8 +270,6 @@ public abstract class GenericPluginAdapter
 	public URLattributeAction[] getURLattributeActions() {
 		return null;
 	}
-    
-    
 }
 
 //------------------------------------------------------------------------------

@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.49 $
+ * @version $Revision: 1.50 $
  */
 public class AttributeHelper {
 
@@ -2939,10 +2939,8 @@ public class AttributeHelper {
 					.getAttribute("graphics");
 			for (Vector2d point : points) {
 				int cnt = ega.getBendCount() + 1;
-				ega.getBends()
-						.add(
-								new CoordinateAttribute("bend" + cnt, point.x,
-										point.y), false);
+				ega.getBends().add(new CoordinateAttribute("bend" + cnt, point.x,
+										point.y), true);
 			}
 		} catch (Exception e) {
 			((LinkedHashMapAttribute) edge.getAttribute("graphics.bends"))
@@ -2951,10 +2949,8 @@ public class AttributeHelper {
 					.getAttribute("graphics");
 			for (Vector2d point : points) {
 				int cnt = ega.getBendCount() + 1;
-				ega.getBends()
-						.add(
-								new CoordinateAttribute("bend" + cnt, point.x,
-										point.y), false);
+				ega.getBends().add(new CoordinateAttribute("bend" + cnt, point.x,
+										point.y), true);
 			}
 		}
 	}
@@ -2971,7 +2967,7 @@ public class AttributeHelper {
 					Attribute a = ega.getBends().getAttribute("bend" + cnt);
 					cnt++;
 				} catch(AttributeNotFoundException nfe) {
-					ega.getBends().add(new CoordinateAttribute("bend" + cnt, x, y), false);
+					ega.getBends().add(new CoordinateAttribute("bend" + cnt, x, y), true);
 					added = true;
 				}
 			}
@@ -2980,7 +2976,7 @@ public class AttributeHelper {
 					.setCollection(new HashMap());
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
 					.getAttribute("graphics");
-			ega.getBends().add(new CoordinateAttribute("bend1", x, y), false);
+			ega.getBends().add(new CoordinateAttribute("bend1", x, y), true);
 		}
 	}
 	
@@ -3472,6 +3468,16 @@ public class AttributeHelper {
 				"Multi Rectangle",
 				"Multi Oval",
 				"Double Oval"};
+	}
+	
+	public static String getShapeClassFromDescription(String desc) {
+		int i = 0;
+		for (String s : getShapeDescritions()) {
+			if (s.equals(desc))
+				return getShapeClasses()[i];
+			i++;
+		}
+		return null;
 	}
 
 	public static String[] getShapeClasses() {

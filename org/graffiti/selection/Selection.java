@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Selection.java,v 1.4 2008/02/04 13:08:55 klukas Exp $
+// $Id: Selection.java,v 1.5 2008/09/04 09:56:08 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -22,6 +22,7 @@ import org.apache.commons.collections.set.ListOrderedSet;
 import org.graffiti.attributes.FieldAlreadySetException;
 
 import org.graffiti.graph.Edge;
+import org.graffiti.graph.Graph;
 import org.graffiti.graph.GraphElement;
 import org.graffiti.graph.Node;
 
@@ -51,7 +52,7 @@ import org.graffiti.graph.Node;
  * selectionChanged()</code>
  * </p>
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class Selection
 {
@@ -419,6 +420,19 @@ public class Selection
 
 	public int getNumberOfNodes() {
 		return nodes.size();
+	}
+
+	public Collection<Graph> getGraph() {
+		Collection<Graph> res = new ArrayList<Graph>();
+		if (nodes.size()>0) {
+			res.add(nodes.iterator().next().getGraph());
+			return res;
+		}
+		if (edges.size()>0) {
+			res.add(edges.iterator().next().getGraph());
+			return res;
+		}
+		return null;
 	}
 }
 
