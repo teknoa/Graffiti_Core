@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.3 2008/08/05 15:23:55 klukas Exp $
+// $Id: DefaultIOManager.java,v 1.4 2008/09/06 19:18:35 klukas Exp $
 
 package org.graffiti.managers;
 
@@ -34,7 +34,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -118,7 +118,7 @@ public class DefaultIOManager implements IOManager {
 		try  {
 			fc = new JFileChooser();
 		} catch(AccessControlException ace) {
-			ErrorMsg.addErrorMessage(ace);
+			// ErrorMsg.addErrorMessage(ace);
 		}
 	}
 
