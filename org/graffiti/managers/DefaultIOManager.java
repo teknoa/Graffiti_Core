@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.4 2008/09/06 19:18:35 klukas Exp $
+// $Id: DefaultIOManager.java,v 1.5 2008/09/11 13:39:05 klukas Exp $
 
 package org.graffiti.managers;
 
@@ -34,7 +34,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -55,6 +55,11 @@ public class DefaultIOManager implements IOManager {
 			if (file.getName().lastIndexOf(".") > 0) {
 				String fileExt = file.getName().substring(
 							file.getName().lastIndexOf("."));
+				if (fileExt.equalsIgnoreCase(".GZ")) {
+					String fileName = file.getName();
+					fileName = fileName.substring(0, fileName.length()-".gz".length());
+					fileExt = fileName.substring(fileName.lastIndexOf("."));
+				}
 				for (Iterator itr = inputSerializer.iterator(); itr.hasNext();) {
 					InputSerializer is = (InputSerializer) itr.next();
 					String[] ext = is.getExtensions();
@@ -63,18 +68,6 @@ public class DefaultIOManager implements IOManager {
 				}
 			}
 			return false;
-		}
-
-		private String getSupported(String pre, String div) {
-			String result = "";
-			for (Iterator itr = inputSerializer.iterator(); itr.hasNext();) {
-				InputSerializer is = (InputSerializer) itr.next();
-				String[] ext = is.getExtensions();
-				for (int i = 0; i < ext.length; i++)
-					result += pre + ext[i] + div;
-			}
-			result = result.substring(0, result.length() - div.length());
-			return result;
 		}
 
 		/* (non-Javadoc)

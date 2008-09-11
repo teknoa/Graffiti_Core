@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttribute.java,v 1.6 2008/08/06 15:12:11 klukas Exp $
+// $Id: AbstractAttribute.java,v 1.7 2008/09/11 13:39:05 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -29,7 +29,7 @@ import org.graffiti.plugin.XMLHelper;
  * <code>parent</code> and <code>attributable</code> of the
  * <code>Attribute</code>.
  *
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public abstract class AbstractAttribute
     implements Attribute
@@ -46,7 +46,7 @@ public abstract class AbstractAttribute
 	 @SuppressWarnings("unchecked")
 	public static void addNodeAttributeType(String id, Class type) {
 		 if (typedAttributesID2TypeForNodes.containsKey(id)) {
-			 System.out.println("Information: overwriting previous attribute class mapping for id "+id+"");
+			 // System.out.println("Information: overwriting previous attribute class mapping for id "+id+"");
 		 }
 		 typedAttributesID2TypeForNodes.put(id, type);
 	 }
@@ -54,7 +54,7 @@ public abstract class AbstractAttribute
 	 @SuppressWarnings("unchecked")
 	public static void addEdgeAttributeType(String id, Class type) {
 		 if (typedAttributesID2TypeForEdges.containsKey(id)) {
-			 System.out.println("Information: overwriting previous attribute class mapping for id "+id+"");
+			 // System.out.println("Information: overwriting previous attribute class mapping for id "+id+"");
 		 }
 		 typedAttributesID2TypeForEdges.put(id, type);
 	 }

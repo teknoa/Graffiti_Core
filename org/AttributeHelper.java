@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.50 $
+ * @version $Revision: 1.51 $
  */
 public class AttributeHelper {
 
@@ -348,7 +348,7 @@ public class AttributeHelper {
 	 */
 	public static void setNiceId(String attributeID, String description) {
 		if (idToNiceId.containsKey(attributeID)) {
-			System.out.println("Information: overwriting previous attribute user description for id "+attributeID+"");
+			// System.out.println("Information: overwriting previous attribute user description for id "+attributeID+"");
 			idToNiceId.remove(attributeID);
 		}
 		idToNiceId.put(attributeID, description);

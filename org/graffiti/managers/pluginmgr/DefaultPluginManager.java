@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.6 2008/09/04 09:56:08 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.7 2008/09/11 13:39:05 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -34,7 +34,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -250,7 +250,8 @@ public class DefaultPluginManager
 
         for(int i = 0; i < plugins.length; i++)
         {
-        	if (plugins[i]==null) continue;
+        	if (plugins[i]==null) 
+        		continue;
         	loadPlugin(plugins, progressViewer, messages, loadLater, i);
         }
 
@@ -470,7 +471,6 @@ public class DefaultPluginManager
 		    
 		    if (desc==null) return;
 
-		    //                    PluginHelper.readPluginDescription(pluginUrl);
 		    List deps = null;
 		    if (desc!=null) deps = desc.getDependencies();
 
@@ -685,8 +685,7 @@ public class DefaultPluginManager
      * @throws PluginManagerException DOCUMENT ME!
      */
     private void addPlugin(PluginDescription description, 
-    //        GenericPlugin plugin,
-    URL pluginLocation, Boolean loadOnStartup, ProgressViewer progressViewer) throws PluginManagerException
+    		URL pluginLocation, Boolean loadOnStartup, ProgressViewer progressViewer) throws PluginManagerException
     {
         //        assert plugin != null;
         assert description != null;
@@ -780,7 +779,7 @@ public class DefaultPluginManager
 
         try
         { // to instanciate the plugin's main class
-        	System.out.print(".");
+        	// System.out.print(".");
             pluginInstance = (GenericPlugin) InstanceLoader.createInstance(description.getMain());
         }
         catch(InstanceCreationException ice)

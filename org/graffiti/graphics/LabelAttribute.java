@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LabelAttribute.java,v 1.7 2008/08/06 15:12:14 klukas Exp $
+// $Id: LabelAttribute.java,v 1.8 2008/09/11 13:39:05 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -31,7 +31,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  *
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public abstract class LabelAttribute
     extends HashMapAttribute
@@ -220,7 +220,11 @@ public abstract class LabelAttribute
      * @return the 'textcolor'-value of the encapsulated label.
      */
     public Color getTextcolor() {
-       return ErrorMsg.getColorFromHex((((StringAttribute)attributes.get(TEXTCOLOR)).getString()));
+    	try { 
+    		return ErrorMsg.getColorFromHex((((StringAttribute)attributes.get(TEXTCOLOR)).getString()));
+    	} catch(Exception err) {
+    		return Color.black;
+    	}
     }
     
 	public void wordWrap() {
