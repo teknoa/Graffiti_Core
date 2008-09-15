@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.51 $
+ * @version $Revision: 1.52 $
  */
 public class AttributeHelper {
 
@@ -3549,11 +3549,11 @@ public class AttributeHelper {
 		} catch(Exception err) {
 			// empty
 		}
-		if (a!=null && srcLabel==null) {
+		if (a!=null && (srcLabel==null || srcLabel.length()<=0)) {
 			e.removeAttribute("srcLabel");
 			return;
 		}
-		if (srcLabel!=null) {
+		if (srcLabel!=null && srcLabel.length()>0) {
 			EdgeLabelAttribute ls = null;
 			if (a==null || !(a instanceof EdgeLabelAttribute)) {
 				if (a!=null)
@@ -3578,11 +3578,11 @@ public class AttributeHelper {
 		} catch(Exception err) {
 			// empty
 		}
-		if (a!=null && tgtLabel==null) {
+		if (a!=null && (tgtLabel==null || tgtLabel.length()<=0)) {
 			e.removeAttribute("tgtLabel");
 			return;
 		}
-		if (tgtLabel!=null) {
+		if (tgtLabel!=null && tgtLabel.length()>0) {
 			EdgeLabelAttribute ls = null;
 			if (a==null || !(a instanceof EdgeLabelAttribute)) {
 				if (a!=null)

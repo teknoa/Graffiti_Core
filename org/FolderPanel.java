@@ -972,6 +972,24 @@ public class FolderPanel extends JComponent {
 			jf.repaint();
 		}
 	}
+	
+	public static void closeParentDialog(Component startComponent) {
+		Component pc = startComponent;
+		while (!((pc instanceof JDialog) || (pc instanceof JFrame))
+				&& pc != null) {
+			pc = pc.getParent();
+		}
+		if (pc != null && pc instanceof JDialog) {
+			JDialog jf = (JDialog) pc;
+			jf.setVisible(false);
+			jf.dispose();
+		}
+		if (pc != null && pc instanceof JFrame) {
+			JFrame jf = (JFrame) pc;
+			jf.setVisible(false);
+			jf.dispose();
+		}
+	}
 
 	public void setMaximumRowCount(int maxRowCount) {
 		this.maxRowCount = maxRowCount;
