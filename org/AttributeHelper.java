@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.52 $
+ * @version $Revision: 1.53 $
  */
 public class AttributeHelper {
 
@@ -185,7 +185,7 @@ public class AttributeHelper {
 		System.setProperty("apple.awt.showGrowBox", "true");
 		System.setProperty("com.apple.mrj.application.apple.menu.about.name", applicationName);
 		System.setProperty("apple.awt.rendering", "VALUE_RENDER_SPEED");
-		System.setProperty("apple.awt.brushMetalLook", "true");
+		System.setProperty("apple.awt.brushMetalLook", "false");
 		System.setProperty("com.apple.mrj.application.live-resize", "true");
 	}
 
