@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.53 $
+ * @version $Revision: 1.54 $
  */
 public class AttributeHelper {
 
@@ -1403,7 +1403,7 @@ public class AttributeHelper {
 	 * 
 	 * @author Christian Klukas
 	 */
-	public static void setAttribute(Attributable attributable, String path,
+	public synchronized static void setAttribute(Attributable attributable, String path,
 			String attributeName, Object attributeValue) {
 		if (!hasAttribute(attributable, path)) {
 			addAttributeFolder(attributable, path);
