@@ -639,6 +639,7 @@ public class FolderPanel extends JComponent {
 		// }
 
 		cmdButtonS.setBackground(frameColor);
+		cmdButtonS.setOpaque(true);
 		cmdButtonS.setBorderPainted(false);
 		cmdButtonS.setRolloverEnabled(true);
 
@@ -684,7 +685,7 @@ public class FolderPanel extends JComponent {
 		tb.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		tb.setBorderPainted(false);
 		tb.setFloatable(false);
-		tb.setOpaque(false);
+		tb.setOpaque(true);
 		tb.setBackground(frameColor);
 		tb.setLayout(new TableLayout(new double[][] {
 				{ TableLayout.PREFERRED, TableLayout.PREFERRED,
