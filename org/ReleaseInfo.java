@@ -9,6 +9,9 @@
 package org;
 
 import java.io.File;
+import java.util.Properties;
+
+import javax.swing.JOptionPane;
 
 public class ReleaseInfo {
 	private static Release currentRelease = Release.DEBUG;
@@ -170,6 +173,65 @@ public class ReleaseInfo {
 	}
 
 	private static String getAppFolderName() {
+		String newStyle = getAppFolderNameNewStyle();
+
+		try {
+		
+		String oldStyle = getAppFolderNameOldStyle();
+		if (!oldStyle.equals(newStyle)) {
+			if (new File(oldStyle).isDirectory()) {
+
+			    File src = new File(oldStyle);
+			    File tgt = new File(newStyle);
+			    boolean success = src.renameTo(tgt);
+			    if (success) {
+			        System.out.println("Moved user preferences from "+oldStyle+" to "+newStyle+"!");
+				   	  JOptionPane.showMessageDialog(
+								null,
+								"<html>" +
+								"<h3>New Preferences Folder</h3>"+
+								"User preferences have been moved:<br>" +
+								"<ol><li>Old: "+oldStyle+"" +
+										"<li>New: "+newStyle+"</ol>",
+								"Information",
+								JOptionPane.INFORMATION_MESSAGE);
+
+			    }
+			}
+		}
+		
+		} catch(Exception e) {
+			ErrorMsg.addErrorMessage(e);
+		}
+		
+		return newStyle;
+	}
+		
+	private static String getAppFolderNameNewStyle() {
+		String home = System.getProperty("user.home");
+		boolean windows = false;
+		if (ErrorMsg.isMac())
+			home = home+getPathSeparator()+"Library"+getPathSeparator()+"Preferences";
+		else {
+			if (new File(home+getPathSeparator()+"AppData"+getPathSeparator()+"Roaming").isDirectory())
+				home = home+getPathSeparator()+"AppData"+getPathSeparator()+"Roaming";
+			windows = true;
+		}
+		
+		if (ErrorMsg.isMac() || windows) {
+			if (getRunningReleaseStatus()==Release.KGML_EDITOR)
+				return home+getPathSeparator()+"KGML_EDITOR";
+			else 
+				return home+getPathSeparator()+"VANTED";
+		} else {
+			if (getRunningReleaseStatus()==Release.KGML_EDITOR)
+				return home+getPathSeparator()+".kgml_editor";
+			else 
+				return home+getPathSeparator()+".vanted";
+		}
+	}
+
+	private static String getAppFolderNameOldStyle() {
 		String home = System.getProperty("user.home");
 		if (getRunningReleaseStatus()==Release.KGML_EDITOR)
 			return home+getPathSeparator()+".kgml_editor";
