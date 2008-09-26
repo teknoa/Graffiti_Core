@@ -191,8 +191,9 @@ public class ReleaseInfo {
 								"<html>" +
 								"<h3>New Preferences Folder</h3>"+
 								"User preferences have been moved:<br>" +
-								"<ol><li>Old: "+oldStyle+"" +
-										"<li>New: "+newStyle+"</ol>",
+								"<ul>" +
+								"<li>Old: "+oldStyle+"" +
+								"<li>New: "+newStyle+"</ul>",
 								"Information",
 								JOptionPane.INFORMATION_MESSAGE);
 
