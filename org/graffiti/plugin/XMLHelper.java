@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.3 2008/07/14 10:56:56 klukas Exp $
+// $Id: XMLHelper.java,v 1.4 2008/09/30 14:40:56 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -38,7 +38,6 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.traversal.NodeIterator;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -46,7 +45,6 @@ import org.xml.sax.SAXException;
 import com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl;
 import com.sun.org.apache.xpath.internal.XPathAPI;
 import com.sun.org.apache.xpath.internal.objects.XBoolean;
-import com.sun.org.apache.xpath.internal.objects.XBooleanStatic;
 
 /**
  * Contains some (static) auxiliary methods for writing XML.
@@ -146,7 +144,7 @@ public class XMLHelper {
 	public static Document getDocumentFromXMLstring(String res) {
 		// System.out.println("Try to parse:\n"+res);
 		// Set namespaceAware to true to get a DOM Level 2 tree with nodes
-		// containing namesapce information. This is necessary because the
+		// containing namespace information. This is necessary because the
 		// default value from JAXP 1.0 was defined to be false.
 		dbf.setNamespaceAware(false);
 		DocumentBuilder db;
@@ -159,20 +157,16 @@ public class XMLHelper {
 			// System.err.println("Type of XML Document Builder: " + db.getClass().getCanonicalName());
 			return doc;
 		} catch (NullPointerException e) {
-			ErrorMsg
-					.addErrorMessage("Null Pointer Exception, data could not be retrieved.<br>"
+			ErrorMsg.addErrorMessage("Null Pointer Exception, data could not be retrieved.<br>"
 							+ e.getLocalizedMessage());
 		} catch (SAXException e) {
-			ErrorMsg
-					.addErrorMessage("Format Parser (SAX) Exception while processing experimental data.<br>"
+			ErrorMsg.addErrorMessage("Format Parser (SAX) Exception while processing experimental data.<br>"
 							+ e.getLocalizedMessage());
 		} catch (IOException e) {
-			ErrorMsg
-					.addErrorMessage("IO Exception while processing experimental data.<br>"
+			ErrorMsg.addErrorMessage("IO Exception while processing experimental data.<br>"
 							+ e.getLocalizedMessage());
 		} catch (ParserConfigurationException e) {
-			ErrorMsg
-					.addErrorMessage("Format Parser Configuration Exception while processing experimental data.<br>"
+			ErrorMsg.addErrorMessage("Format Parser Configuration Exception while processing experimental data.<br>"
 							+ e.getLocalizedMessage());
 		}
 		return null;
