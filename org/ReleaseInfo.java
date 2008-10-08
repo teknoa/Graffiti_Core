@@ -73,7 +73,7 @@ public class ReleaseInfo {
 					return true;
 				break;
 			case MetaCrop_ACCESS :
-				if (currentRelease!=Release.KGML_EDITOR)
+				if (currentRelease!=Release.KGML_EDITOR && currentRelease==Release.RELEASE_IPK)
 					return true;
 				break;	
 			case DATA_CARD_ACCESS :

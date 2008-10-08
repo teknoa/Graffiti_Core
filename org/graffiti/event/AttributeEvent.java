@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeEvent.java,v 1.1 2007/05/31 12:56:04 klukas Exp $
+// $Id: AttributeEvent.java,v 1.2 2008/10/08 17:26:48 klukas Exp $
 
 package org.graffiti.event;
 
@@ -14,7 +14,7 @@ import org.graffiti.attributes.Attribute;
 /**
  * Contains an attribute event.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class AttributeEvent
     extends AbstractEvent
@@ -61,7 +61,7 @@ public class AttributeEvent
         return (Attribute) getSource();
     }
 
-    /**
+	/**
      * Returns the path to the attribute that has been changed by this event.
      *
      * @return the path to the attribute that has been changed by this event.

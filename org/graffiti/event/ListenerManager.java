@@ -5,19 +5,14 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ListenerManager.java,v 1.1 2007/05/31 12:56:04 klukas Exp $
+// $Id: ListenerManager.java,v 1.2 2008/10/08 17:26:48 klukas Exp $
 
 package org.graffiti.event;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Set;
-
-import javax.swing.Timer;
 
 import org.graffiti.util.MultipleIterator;
 
@@ -36,58 +31,28 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class ListenerManager {
 	//~ Instance fields ========================================================
 
 	/**
-	 * Holds the list of registered AttributeListeners that receive events even
-	 * if a transaction is active.
-	 */
-	private LinkedList<AttributeListener> nonstrictAttributeListenerList;
-
-	/**
-	 * Holds the list of registered EdgeListeners that receive events even if a
-	 * transaction is active.
-	 */
-	private LinkedList<EdgeListener> nonstrictEdgeListenerList;
-
-	/**
-	 * Holds the list of registered GraphListeners that receive events even if
-	 * a transaction is active.
-	 */
-	private LinkedList<GraphListener> nonstrictGraphListenerList;
-
-	/**
 	 * Holds the list of registered NodeListeners that receive events even if a
 	 * transaction is active.
 	 */
-	private LinkedList<NodeListener> nonstrictNodeListenerList;
+	private Set<AttributeListener> alltimeAttributeListenerList;
+	private Set<EdgeListener> alltimeEdgeListenerList;
+	private Set<GraphListener> alltimeGraphListenerList;
+	private Set<NodeListener> alltimeNodeListenerList;
 
 	/**
-	 * Holds the list of registered AttributeListeners that do not reveive any
+	 * Holds the list of registered AttributeListeners that do not receive any
 	 * events whenever a transaction is active.
 	 */
-	private LinkedList<AttributeListener> strictAttributeListenerList;
-
-	/**
-	 * Holds the list of registered EdgeListeners that do not reveive any
-	 * events whenever a transaction is active.
-	 */
-	private LinkedList<EdgeListener> strictEdgeListenerList;
-
-	/**
-	 * Holds the list of registered GraphListeners that do not reveive any
-	 * events whenever a transaction is active.
-	 */
-	private LinkedList<GraphListener> strictGraphListenerList;
-
-	/**
-	 * Holds the list of registered NodeListeners that do not reveive any
-	 * events whenever a transaction is active.
-	 */
-	private LinkedList<NodeListener> strictNodeListenerList;
+	private Set<AttributeListener> delayedAttributeListenerList;
+	private Set<EdgeListener> delayedEdgeListenerList;
+	private Set<GraphListener> delayedGraphListenerList;
+	private Set<NodeListener> delayedNodeListenerList;
 
 	/** Logs the objects that get changed during a transaction. */
 	private Set<Object> changedObjects;
@@ -106,14 +71,14 @@ public class ListenerManager {
 	 * Default contructor. Initializes all listener sets as empty hash sets.
 	 */
 	public ListenerManager() {
-		strictNodeListenerList = new LinkedList<NodeListener>();
-		strictEdgeListenerList = new LinkedList<EdgeListener>();
-		strictAttributeListenerList = new LinkedList<AttributeListener>();
-		strictGraphListenerList = new LinkedList<GraphListener>();
-		nonstrictNodeListenerList = new LinkedList<NodeListener>();
-		nonstrictEdgeListenerList = new LinkedList<EdgeListener>();
-		nonstrictAttributeListenerList = new LinkedList<AttributeListener>();
-		nonstrictGraphListenerList = new LinkedList<GraphListener>();
+		delayedNodeListenerList = new HashSet<NodeListener>();
+		delayedEdgeListenerList = new HashSet<EdgeListener>();
+		delayedAttributeListenerList = new HashSet<AttributeListener>();
+		delayedGraphListenerList = new HashSet<GraphListener>();
+		alltimeNodeListenerList = new HashSet<NodeListener>();
+		alltimeEdgeListenerList = new HashSet<EdgeListener>();
+		alltimeAttributeListenerList = new HashSet<AttributeListener>();
+		alltimeGraphListenerList = new HashSet<GraphListener>();
 
 		changedObjects = new HashSet<Object>();
 	}
@@ -129,14 +94,14 @@ public class ListenerManager {
 	 * @throws ListenerRegistrationException DOCUMENT ME!
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
-	public void addNonstrictAttributeListener(AttributeListener l)
+	public void addAllTimeAttributeListener(AttributeListener l)
 			throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
-		if (!strictAttributeListenerList.contains(l)) {
-			if (!nonstrictAttributeListenerList.contains(l)) {
-				nonstrictAttributeListenerList.add(l);
+		if (!delayedAttributeListenerList.contains(l)) {
+			if (!alltimeAttributeListenerList.contains(l)) {
+				alltimeAttributeListenerList.add(l);
 			}
 		} else
 			throw new ListenerRegistrationException(
@@ -152,14 +117,14 @@ public class ListenerManager {
 	 * @throws ListenerRegistrationException DOCUMENT ME!
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
-	public void addNonstrictEdgeListener(EdgeListener l)
+	public void addAllTimeEdgeListener(EdgeListener l)
 			throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
-		if (!strictEdgeListenerList.contains(l)) {
-			if (!nonstrictEdgeListenerList.contains(l)) {
-				nonstrictEdgeListenerList.add(l);
+		if (!delayedEdgeListenerList.contains(l)) {
+			if (!alltimeEdgeListenerList.contains(l)) {
+				alltimeEdgeListenerList.add(l);
 			}
 		} else
 			throw new ListenerRegistrationException(
@@ -174,14 +139,14 @@ public class ListenerManager {
 	 * @throws ListenerRegistrationException DOCUMENT ME!
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
-	public void addNonstrictGraphListener(GraphListener l)
+	public void addAllTimeGraphListener(GraphListener l)
 			throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
-		if (!strictGraphListenerList.contains(l)) {
-			if (!nonstrictGraphListenerList.contains(l)) {
-				nonstrictGraphListenerList.add(l);
+		if (!delayedGraphListenerList.contains(l)) {
+			if (!alltimeGraphListenerList.contains(l)) {
+				alltimeGraphListenerList.add(l);
 			}
 		} else
 			throw new ListenerRegistrationException(
@@ -197,14 +162,14 @@ public class ListenerManager {
 	 * @throws ListenerRegistrationException DOCUMENT ME!
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
-	public void addNonstrictNodeListener(NodeListener l)
+	public void addAllTimeNodeListener(NodeListener l)
 			throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
-		if (!strictNodeListenerList.contains(l)) {
-			if (!nonstrictNodeListenerList.contains(l)) {
-				nonstrictNodeListenerList.add(l);
+		if (!delayedNodeListenerList.contains(l)) {
+			if (!alltimeNodeListenerList.contains(l)) {
+				alltimeNodeListenerList.add(l);
 			}
 		} else
 			throw new ListenerRegistrationException(
@@ -220,14 +185,14 @@ public class ListenerManager {
 	 * @throws ListenerRegistrationException DOCUMENT ME!
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
-	public void addStrictAttributeListener(AttributeListener l)
+	public void addDelayedAttributeListener(AttributeListener l)
 			throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
-		if (!nonstrictAttributeListenerList.contains(l)) {
-			if (!strictAttributeListenerList.contains(l)) {
-				strictAttributeListenerList.add(l);
+		if (!alltimeAttributeListenerList.contains(l)) {
+			if (!delayedAttributeListenerList.contains(l)) {
+				delayedAttributeListenerList.add(l);
 			}
 		} else
 			throw new ListenerRegistrationException(
@@ -243,14 +208,14 @@ public class ListenerManager {
 	 * @throws ListenerRegistrationException DOCUMENT ME!
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
-	public void addStrictEdgeListener(EdgeListener l)
+	public void addDelayedEdgeListener(EdgeListener l)
 			throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
-		if (!nonstrictEdgeListenerList.contains(l)) {
-			if (!strictEdgeListenerList.contains(l)) {
-				strictEdgeListenerList.add(l);
+		if (!alltimeEdgeListenerList.contains(l)) {
+			if (!delayedEdgeListenerList.contains(l)) {
+				delayedEdgeListenerList.add(l);
 			}
 		} else
 			throw new ListenerRegistrationException(
@@ -266,14 +231,14 @@ public class ListenerManager {
 	 * @throws ListenerRegistrationException DOCUMENT ME!
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
-	public void addStrictGraphListener(GraphListener l)
+	public void addDelayedGraphListener(GraphListener l)
 			throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
-		if (!nonstrictGraphListenerList.contains(l)) {
-			if (!strictGraphListenerList.contains(l)) {
-				strictGraphListenerList.add(l);
+		if (!alltimeGraphListenerList.contains(l)) {
+			if (!delayedGraphListenerList.contains(l)) {
+				delayedGraphListenerList.add(l);
 			}
 		} else
 			throw new ListenerRegistrationException(
@@ -289,14 +254,14 @@ public class ListenerManager {
 	 * @throws ListenerRegistrationException DOCUMENT ME!
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
-	public void addStrictNodeListener(NodeListener l)
+	public void addDelayedNodeListener(NodeListener l)
 			throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
-		if (!nonstrictNodeListenerList.contains(l)) {
-			if (!strictNodeListenerList.contains(l)) {
-				strictNodeListenerList.add(l);
+		if (!alltimeNodeListenerList.contains(l)) {
+			if (!delayedNodeListenerList.contains(l)) {
+				delayedNodeListenerList.add(l);
 			}
 		} else
 			throw new ListenerRegistrationException(
@@ -317,29 +282,14 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictAttributeListenerList.iterator();
-
-			while (it.hasNext()) {
-				((AttributeListener) it.next()).postAttributeAdded(event);
-			}
-
-			it = nonstrictAttributeListenerList.iterator();
-
-			while (it.hasNext()) {
-				((AttributeListener) it.next()).postAttributeAdded(event);
+			for (AttributeListener al : delayedAttributeListenerList) {
+				al.postAttributeAdded(event);
 			}
 		} else {
-			// log objects that are (probably) affected
-			changedObjects.add(event.getSource());
-
-			if (event.getPath() != null)
-				changedObjects.add(event.getPath());
-
-			Iterator it = nonstrictAttributeListenerList.iterator();
-
-			while (it.hasNext()) {
-				((AttributeListener) it.next()).postAttributeAdded(event);
-			}
+			changedObjects.add(event);
+		}
+		for (AttributeListener al : alltimeAttributeListenerList) {
+			al.postAttributeAdded(event);
 		}
 	}
 
@@ -357,29 +307,14 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictAttributeListenerList.iterator();
-
-			while (it.hasNext()) {
-				((AttributeListener) it.next()).postAttributeChanged(event);
-			}
-
-			it = nonstrictAttributeListenerList.iterator();
-
-			while (it.hasNext()) {
-				((AttributeListener) it.next()).postAttributeChanged(event);
+			for (AttributeListener al : delayedAttributeListenerList) {
+				al.postAttributeChanged(event);
 			}
 		} else {
-			// log objects that are (probably) affected
-			changedObjects.add(event.getSource());
-
-			if (event.getPath() != null)
-				changedObjects.add(event.getPath());
-
-			Iterator it = nonstrictAttributeListenerList.iterator();
-
-			while (it.hasNext()) {
-				((AttributeListener) it.next()).postAttributeChanged(event);
-			}
+			changedObjects.add(event);
+		}
+		for (AttributeListener al : alltimeAttributeListenerList) {
+			al.postAttributeChanged(event);
 		}
 	}
 
@@ -397,29 +332,14 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictAttributeListenerList.iterator();
-
-			while (it.hasNext()) {
-				((AttributeListener) it.next()).postAttributeRemoved(event);
-			}
-
-			it = nonstrictAttributeListenerList.iterator();
-
-			while (it.hasNext()) {
-				((AttributeListener) it.next()).postAttributeRemoved(event);
+			for (AttributeListener al : delayedAttributeListenerList) {
+				al.postAttributeRemoved(event);
 			}
 		} else {
-			// log objects that are (probably) affected
-			changedObjects.add(event.getSource());
-
-			if (event.getPath() != null)
-				changedObjects.add(event.getPath());
-
-			Iterator it = nonstrictAttributeListenerList.iterator();
-
-			while (it.hasNext()) {
-				((AttributeListener) it.next()).postAttributeRemoved(event);
-			}
+			changedObjects.add(event);
+		}
+		for (AttributeListener al : alltimeAttributeListenerList) {
+			al.postAttributeRemoved(event);
 		}
 	}
 
@@ -437,13 +357,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictEdgeListenerList.iterator();
+			Iterator it = delayedEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postDirectedChanged(event);
 			}
 
-			it = nonstrictEdgeListenerList.iterator();
+			it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postDirectedChanged(event);
@@ -452,7 +372,7 @@ public class ListenerManager {
 			// log objects that are (probably) affected
 			changedObjects.add(event.getSource());
 
-			Iterator it = nonstrictEdgeListenerList.iterator();
+			Iterator it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postDirectedChanged(event);
@@ -474,13 +394,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictGraphListenerList.iterator();
+			Iterator it = delayedGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postEdgeAdded(event);
 			}
 
-			it = nonstrictGraphListenerList.iterator();
+			it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postEdgeAdded(event);
@@ -498,7 +418,7 @@ public class ListenerManager {
 			if (event.getSecondNode() != null)
 				changedObjects.add(event.getSecondNode());
 
-			Iterator it = nonstrictGraphListenerList.iterator();
+			Iterator it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postEdgeAdded(event);
@@ -520,13 +440,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictGraphListenerList.iterator();
+			Iterator it = delayedGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postEdgeRemoved(event);
 			}
 
-			it = nonstrictGraphListenerList.iterator();
+			it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postEdgeRemoved(event);
@@ -544,7 +464,7 @@ public class ListenerManager {
 			if (event.getSecondNode() != null)
 				changedObjects.add(event.getSecondNode());
 
-			Iterator it = nonstrictGraphListenerList.iterator();
+			Iterator it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preEdgeRemoved(event);
@@ -565,13 +485,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictEdgeListenerList.iterator();
+			Iterator it = delayedEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postEdgeReversed(event);
 			}
 
-			it = nonstrictEdgeListenerList.iterator();
+			it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postEdgeReversed(event);
@@ -580,7 +500,7 @@ public class ListenerManager {
 			// log objects that are (probably) affected
 			changedObjects.add(event.getSource());
 
-			Iterator it = nonstrictEdgeListenerList.iterator();
+			Iterator it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postEdgeReversed(event);
@@ -602,13 +522,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictGraphListenerList.iterator();
+			Iterator it = delayedGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postGraphCleared(event);
 			}
 
-			it = nonstrictGraphListenerList.iterator();
+			it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postGraphCleared(event);
@@ -626,7 +546,7 @@ public class ListenerManager {
 			if (event.getSecondNode() != null)
 				changedObjects.add(event.getSecondNode());
 
-			Iterator it = nonstrictGraphListenerList.iterator();
+			Iterator it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postGraphCleared(event);
@@ -648,13 +568,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postInEdgeAdded(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postInEdgeAdded(event);
@@ -666,7 +586,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postInEdgeAdded(event);
@@ -688,13 +608,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postInEdgeRemoved(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postInEdgeRemoved(event);
@@ -706,7 +626,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postInEdgeRemoved(event);
@@ -728,13 +648,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictGraphListenerList.iterator();
+			Iterator it = delayedGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postNodeAdded(event);
 			}
 
-			it = nonstrictGraphListenerList.iterator();
+			it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postNodeAdded(event);
@@ -752,7 +672,7 @@ public class ListenerManager {
 			if (event.getSecondNode() != null)
 				changedObjects.add(event.getSecondNode());
 
-			Iterator it = nonstrictGraphListenerList.iterator();
+			Iterator it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postNodeAdded(event);
@@ -774,13 +694,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictGraphListenerList.iterator();
+			Iterator it = delayedGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postNodeRemoved(event);
 			}
 
-			it = nonstrictGraphListenerList.iterator();
+			it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postNodeRemoved(event);
@@ -798,7 +718,7 @@ public class ListenerManager {
 			if (event.getSecondNode() != null)
 				changedObjects.add(event.getSecondNode());
 
-			Iterator it = nonstrictGraphListenerList.iterator();
+			Iterator it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).postNodeRemoved(event);
@@ -820,13 +740,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postOutEdgeAdded(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postOutEdgeAdded(event);
@@ -838,7 +758,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postOutEdgeAdded(event);
@@ -860,13 +780,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postOutEdgeRemoved(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postOutEdgeRemoved(event);
@@ -878,7 +798,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postOutEdgeRemoved(event);
@@ -900,13 +820,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictEdgeListenerList.iterator();
+			Iterator it = delayedEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postSourceNodeChanged(event);
 			}
 
-			it = nonstrictEdgeListenerList.iterator();
+			it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postSourceNodeChanged(event);
@@ -915,7 +835,7 @@ public class ListenerManager {
 			// log objects that are (probably) affected
 			changedObjects.add(event.getSource());
 
-			Iterator it = nonstrictEdgeListenerList.iterator();
+			Iterator it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postSourceNodeChanged(event);
@@ -937,13 +857,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictEdgeListenerList.iterator();
+			Iterator it = delayedEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postTargetNodeChanged(event);
 			}
 
-			it = nonstrictEdgeListenerList.iterator();
+			it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postTargetNodeChanged(event);
@@ -952,7 +872,7 @@ public class ListenerManager {
 			// log objects that are (probably) affected
 			changedObjects.add(event.getSource());
 
-			Iterator it = nonstrictEdgeListenerList.iterator();
+			Iterator it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postTargetNodeChanged(event);
@@ -974,13 +894,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postUndirectedEdgeAdded(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postUndirectedEdgeAdded(event);
@@ -992,7 +912,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postUndirectedEdgeAdded(event);
@@ -1014,13 +934,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postUndirectedEdgeRemoved(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postUndirectedEdgeRemoved(event);
@@ -1032,7 +952,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).postUndirectedEdgeRemoved(event);
@@ -1054,25 +974,22 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictAttributeListenerList.iterator();
+			Iterator it = delayedAttributeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((AttributeListener) it.next()).preAttributeAdded(event);
 			}
 
-			it = nonstrictAttributeListenerList.iterator();
+			it = alltimeAttributeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((AttributeListener) it.next()).preAttributeAdded(event);
 			}
 		} else {
 			// log objects that are (probably) affected
-			changedObjects.add(event.getSource());
+			changedObjects.add(event.getAttribute());
 
-			if (event.getPath() != null)
-				changedObjects.add(event.getPath());
-
-			Iterator it = nonstrictAttributeListenerList.iterator();
+			Iterator it = alltimeAttributeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((AttributeListener) it.next()).preAttributeAdded(event);
@@ -1094,25 +1011,22 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictAttributeListenerList.iterator();
+			Iterator it = delayedAttributeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((AttributeListener) it.next()).preAttributeChanged(event);
 			}
 
-			it = nonstrictAttributeListenerList.iterator();
+			it = alltimeAttributeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((AttributeListener) it.next()).preAttributeChanged(event);
 			}
 		} else {
 			// log objects that are (probably) affected
-			changedObjects.add(event.getSource());
+			changedObjects.add(event);
 
-			if (event.getPath() != null)
-				changedObjects.add(event.getPath());
-
-			Iterator it = nonstrictAttributeListenerList.iterator();
+			Iterator it = alltimeAttributeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((AttributeListener) it.next()).preAttributeChanged(event);
@@ -1134,25 +1048,22 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictAttributeListenerList.iterator();
+			Iterator it = delayedAttributeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((AttributeListener) it.next()).preAttributeRemoved(event);
 			}
 
-			it = nonstrictAttributeListenerList.iterator();
+			it = alltimeAttributeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((AttributeListener) it.next()).preAttributeRemoved(event);
 			}
 		} else {
 			// log objects that are (probably) affected
-			changedObjects.add(event.getSource());
+			changedObjects.add(event.getAttribute());
 
-			if (event.getPath() != null)
-				changedObjects.add(event.getPath());
-
-			Iterator it = nonstrictAttributeListenerList.iterator();
+			Iterator it = alltimeAttributeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((AttributeListener) it.next()).preAttributeRemoved(event);
@@ -1174,13 +1085,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictEdgeListenerList.iterator();
+			Iterator it = delayedEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).preDirectedChanged(event);
 			}
 
-			it = nonstrictEdgeListenerList.iterator();
+			it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).preDirectedChanged(event);
@@ -1189,7 +1100,7 @@ public class ListenerManager {
 			// log objects that are (probably) affected
 			changedObjects.add(event.getSource());
 
-			Iterator it = nonstrictEdgeListenerList.iterator();
+			Iterator it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).preDirectedChanged(event);
@@ -1211,13 +1122,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictGraphListenerList.iterator();
+			Iterator it = delayedGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preEdgeAdded(event);
 			}
 
-			it = nonstrictGraphListenerList.iterator();
+			it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preEdgeAdded(event);
@@ -1235,7 +1146,7 @@ public class ListenerManager {
 			if (event.getSecondNode() != null)
 				changedObjects.add(event.getSecondNode());
 
-			Iterator it = nonstrictGraphListenerList.iterator();
+			Iterator it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preEdgeAdded(event);
@@ -1257,13 +1168,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictGraphListenerList.iterator();
+			Iterator it = delayedGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preEdgeRemoved(event);
 			}
 
-			it = nonstrictGraphListenerList.iterator();
+			it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preEdgeRemoved(event);
@@ -1281,7 +1192,7 @@ public class ListenerManager {
 			if (event.getSecondNode() != null)
 				changedObjects.add(event.getSecondNode());
 
-			Iterator it = nonstrictGraphListenerList.iterator();
+			Iterator it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preEdgeRemoved(event);
@@ -1303,13 +1214,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictEdgeListenerList.iterator();
+			Iterator it = delayedEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).preEdgeReversed(event);
 			}
 
-			it = nonstrictEdgeListenerList.iterator();
+			it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).preEdgeReversed(event);
@@ -1318,7 +1229,7 @@ public class ListenerManager {
 			// log objects that are (probably) affected
 			changedObjects.add(event.getSource());
 
-			Iterator it = nonstrictEdgeListenerList.iterator();
+			Iterator it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postEdgeReversed(event);
@@ -1340,13 +1251,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictGraphListenerList.iterator();
+			Iterator it = delayedGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preGraphCleared(event);
 			}
 
-			it = nonstrictGraphListenerList.iterator();
+			it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preGraphCleared(event);
@@ -1364,7 +1275,7 @@ public class ListenerManager {
 			if (event.getSecondNode() != null)
 				changedObjects.add(event.getSecondNode());
 
-			Iterator it = nonstrictGraphListenerList.iterator();
+			Iterator it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preGraphCleared(event);
@@ -1386,13 +1297,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preInEdgeAdded(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preInEdgeAdded(event);
@@ -1404,7 +1315,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preInEdgeAdded(event);
@@ -1426,13 +1337,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preInEdgeRemoved(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preInEdgeRemoved(event);
@@ -1444,7 +1355,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preInEdgeRemoved(event);
@@ -1466,13 +1377,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictGraphListenerList.iterator();
+			Iterator it = delayedGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preNodeAdded(event);
 			}
 
-			it = nonstrictGraphListenerList.iterator();
+			it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preNodeAdded(event);
@@ -1490,7 +1401,7 @@ public class ListenerManager {
 			if (event.getSecondNode() != null)
 				changedObjects.add(event.getSecondNode());
 
-			Iterator it = nonstrictGraphListenerList.iterator();
+			Iterator it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preNodeAdded(event);
@@ -1512,13 +1423,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictGraphListenerList.iterator();
+			Iterator it = delayedGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preNodeRemoved(event);
 			}
 
-			it = nonstrictGraphListenerList.iterator();
+			it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preNodeRemoved(event);
@@ -1536,7 +1447,7 @@ public class ListenerManager {
 			if (event.getSecondNode() != null)
 				changedObjects.add(event.getSecondNode());
 
-			Iterator it = nonstrictGraphListenerList.iterator();
+			Iterator it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
 				((GraphListener) it.next()).preNodeRemoved(event);
@@ -1558,13 +1469,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preOutEdgeAdded(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preOutEdgeAdded(event);
@@ -1576,7 +1487,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preOutEdgeAdded(event);
@@ -1598,13 +1509,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preOutEdgeRemoved(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preOutEdgeRemoved(event);
@@ -1616,7 +1527,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preOutEdgeRemoved(event);
@@ -1638,13 +1549,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictEdgeListenerList.iterator();
+			Iterator it = delayedEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).preSourceNodeChanged(event);
 			}
 
-			it = nonstrictEdgeListenerList.iterator();
+			it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).preSourceNodeChanged(event);
@@ -1653,7 +1564,7 @@ public class ListenerManager {
 			// log objects that are (probably) affected
 			changedObjects.add(event.getSource());
 
-			Iterator it = nonstrictEdgeListenerList.iterator();
+			Iterator it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).preSourceNodeChanged(event);
@@ -1675,13 +1586,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictEdgeListenerList.iterator();
+			Iterator it = delayedEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).preTargetNodeChanged(event);
 			}
 
-			it = nonstrictEdgeListenerList.iterator();
+			it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).preTargetNodeChanged(event);
@@ -1690,7 +1601,7 @@ public class ListenerManager {
 			// log objects that are (probably) affected
 			changedObjects.add(event.getSource());
 
-			Iterator it = nonstrictEdgeListenerList.iterator();
+			Iterator it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).preTargetNodeChanged(event);
@@ -1712,13 +1623,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preUndirectedEdgeAdded(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preUndirectedEdgeAdded(event);
@@ -1730,7 +1641,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preUndirectedEdgeAdded(event);
@@ -1752,13 +1663,13 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = strictNodeListenerList.iterator();
+			Iterator it = delayedNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preUndirectedEdgeRemoved(event);
 			}
 
-			it = nonstrictNodeListenerList.iterator();
+			it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preUndirectedEdgeRemoved(event);
@@ -1770,7 +1681,7 @@ public class ListenerManager {
 			if (event.getEdge() != null)
 				changedObjects.add(event.getEdge());
 
-			Iterator it = nonstrictNodeListenerList.iterator();
+			Iterator it = alltimeNodeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((NodeListener) it.next()).preUndirectedEdgeRemoved(event);
@@ -1789,8 +1700,8 @@ public class ListenerManager {
 	 */
 	public void removeAttributeListener(AttributeListener l)
 			throws ListenerNotFoundException {
-		if (!strictAttributeListenerList.remove(l)
-				&& !nonstrictAttributeListenerList.remove(l)) {
+		if (!delayedAttributeListenerList.remove(l)
+				&& !alltimeAttributeListenerList.remove(l)) {
 			throw new ListenerNotFoundException("The attr. listener you want "
 					+ "to remove cannot be found.");
 		}
@@ -1807,8 +1718,8 @@ public class ListenerManager {
 	 */
 	public void removeEdgeListener(EdgeListener l)
 			throws ListenerNotFoundException {
-		if (!strictEdgeListenerList.remove(l)
-				&& !nonstrictEdgeListenerList.remove(l)) {
+		if (!delayedEdgeListenerList.remove(l)
+				&& !alltimeEdgeListenerList.remove(l)) {
 			throw new ListenerNotFoundException("The edge listener you want "
 					+ "to remove cannot be found.");
 		}
@@ -1825,8 +1736,8 @@ public class ListenerManager {
 	 */
 	public void removeGraphListener(GraphListener l)
 			throws ListenerNotFoundException {
-		if (!strictGraphListenerList.remove(l)
-				&& !nonstrictGraphListenerList.remove(l)) {
+		if (!delayedGraphListenerList.remove(l)
+				&& !alltimeGraphListenerList.remove(l)) {
 			throw new ListenerNotFoundException("The graph listener you want "
 					+ "to remove cannot be found.");
 		}
@@ -1843,54 +1754,23 @@ public class ListenerManager {
 	 */
 	public void removeNodeListener(NodeListener l)
 			throws ListenerNotFoundException {
-		if (!strictNodeListenerList.remove(l)
-				&& !nonstrictNodeListenerList.remove(l)) {
+		if (!delayedNodeListenerList.remove(l)
+				&& !alltimeNodeListenerList.remove(l)) {
 			throw new ListenerNotFoundException("The node listener you want "
 					+ "to remove cannot be found.");
 		}
 	}
 
-	private static Timer transactionDebugTimer;
 	private static ArrayList<Object> runningTransactions = new ArrayList<Object>();
-	private static ArrayList<Long> runningTransactionsStartTimes = new ArrayList<Long>();
-	private static ArrayList<String> knownErrorMessages = new ArrayList<String>();
 	private static void postDebugTransactionStarted(Object source) {
 		synchronized(runningTransactions) {
 			runningTransactions.add(source);
-			runningTransactionsStartTimes.add(new Long(System.currentTimeMillis()));
-			if (transactionDebugTimer==null) {
-				transactionDebugTimer = new Timer(100, new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						synchronized(runningTransactions) {
-							if (runningTransactions.size()>0) {
-								long currentTime = System.currentTimeMillis();
-								int pos = 0;
-								for (Long startTime : runningTransactionsStartTimes) {
-									if (currentTime-startTime.longValue()>3000) {
-										String errorMsg = runningTransactions.get(pos).toString();
-										if (!knownErrorMessages.contains(errorMsg)) {
-											System.err.println("============================================");
-											System.err.println("Transaction, initiated by "+errorMsg+" not finished after 3 seconds!");
-											System.err.println("============================================");
-											knownErrorMessages.add(errorMsg);
-										}
-									}
-									pos++;
-								}
-							}
-						}
-					}});
-				transactionDebugTimer.setRepeats(true);
-				transactionDebugTimer.start();
-			}
 		}
 	}
 	
 	private static void postDebugTransactionFinished(Object source) {
 		synchronized(runningTransactions) {
-			int pos = runningTransactions.indexOf(source);
 			runningTransactions.remove(source);
-			runningTransactionsStartTimes.remove(pos);
 		}
 	}
 	
@@ -1919,14 +1799,14 @@ public class ListenerManager {
 		TransactionEvent event = new TransactionEvent(source, changedObjects);
 
 		Iterator mIter = new MultipleIterator(new Iterator[] {
-				strictNodeListenerList.iterator(),
-				strictEdgeListenerList.iterator(),
-				strictAttributeListenerList.iterator(),
-				strictGraphListenerList.iterator(),
-				nonstrictNodeListenerList.iterator(),
-				nonstrictEdgeListenerList.iterator(),
-				nonstrictAttributeListenerList.iterator(),
-				nonstrictGraphListenerList.iterator() });
+				delayedNodeListenerList.iterator(),
+				delayedEdgeListenerList.iterator(),
+				delayedAttributeListenerList.iterator(),
+				delayedGraphListenerList.iterator(),
+				alltimeNodeListenerList.iterator(),
+				alltimeEdgeListenerList.iterator(),
+				alltimeAttributeListenerList.iterator(),
+				alltimeGraphListenerList.iterator() });
 
 		while (mIter.hasNext()) {
 			((TransactionListener) mIter.next()).transactionFinished(event);
@@ -1948,14 +1828,14 @@ public class ListenerManager {
 		this.transactionsActive++;
 
 		Iterator mIter = new MultipleIterator(new Iterator[] {
-				strictNodeListenerList.iterator(),
-				strictEdgeListenerList.iterator(),
-				strictAttributeListenerList.iterator(),
-				strictGraphListenerList.iterator(),
-				nonstrictNodeListenerList.iterator(),
-				nonstrictEdgeListenerList.iterator(),
-				nonstrictAttributeListenerList.iterator(),
-				nonstrictGraphListenerList.iterator() });
+				delayedNodeListenerList.iterator(),
+				delayedEdgeListenerList.iterator(),
+				delayedAttributeListenerList.iterator(),
+				delayedGraphListenerList.iterator(),
+				alltimeNodeListenerList.iterator(),
+				alltimeEdgeListenerList.iterator(),
+				alltimeAttributeListenerList.iterator(),
+				alltimeGraphListenerList.iterator() });
 
 		while (mIter.hasNext()) {
 			((TransactionListener) mIter.next()).transactionStarted(event);

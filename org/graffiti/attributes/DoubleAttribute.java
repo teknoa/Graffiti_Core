@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DoubleAttribute.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: DoubleAttribute.java,v 1.2 2008/10/08 17:26:47 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -14,14 +14,14 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a double
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class DoubleAttribute
     extends AbstractAttribute {
     //~ Instance fields ========================================================
 
     /** The value of this attribute */
-    private double value;
+    public double value;
 
     //~ Constructors ===========================================================
 

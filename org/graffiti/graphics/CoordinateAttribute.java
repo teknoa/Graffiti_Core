@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: CoordinateAttribute.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: CoordinateAttribute.java,v 1.2 2008/10/08 17:26:48 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -16,12 +16,15 @@ import java.util.Map;
 import org.graffiti.attributes.Attribute;
 import org.graffiti.attributes.DoubleAttribute;
 import org.graffiti.attributes.HashMapAttribute;
+import org.graffiti.event.AttributeEvent;
+
+import sun.security.action.GetLongAction;
 
 /**
  * Contains the coordinate graphic attribute.
  *
  * @author breu
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class CoordinateAttribute
     extends HashMapAttribute
@@ -106,8 +109,11 @@ public class CoordinateAttribute
      * @param p <code>Point2D</code> to which this coordinate should be set.
      */
     public void setCoordinate(Point2D p) {
-        this.x.setDouble(p.getX());
-        this.y.setDouble(p.getY());
+        AttributeEvent ae = new AttributeEvent(this);
+        callPreAttributeChanged(ae);
+    	this.x.value = p.getX();
+        this.y.value = p.getY();
+        callPostAttributeChanged(ae);
     }
 
     /**
