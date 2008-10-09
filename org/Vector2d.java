@@ -53,4 +53,9 @@ public class Vector2d {
 		return Math.sqrt((point.x-x)*(point.x-x)+(point.y-y)*(point.y-y));
 	}
 
+	public void applyGrid(int xg, int yg) {
+		x = x - (x % xg);
+		y = y - (y % yg);
+	}
+
 }
