@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.5 2008/03/10 15:01:19 klukas Exp $
+// $Id: AbstractCollectionAttribute.java,v 1.6 2008/10/10 22:26:46 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -21,7 +21,7 @@ import org.graffiti.plugin.XMLHelper;
  * instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			implements CollectionAttribute {
@@ -104,6 +104,8 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			return parent.getAttributable();
 		}
 	}
+	
+	private static int sepLen = Attribute.SEPARATOR.length();
 
 	/**
 	 * Returns the attribute located at <code>path</code>.
@@ -120,29 +122,26 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 		if (path==null || path.length()<=0) {
 			return this;
 		} else {
-			String[] splitPath = path.split("\\"
-						+ Attribute.SEPARATOR, 2);
-			String fstPath = splitPath[0];
-
-			Attribute attr = attributes.get(fstPath);
-//			if (attr == null)
-//				attr = attributes.get(ErrorMsg.stringReplace(fstPath, "\\", ""));
-			if (attr == null) {
-				// System.err.println("Attribute not found: "+path);
-				throw new AttributeNotFoundException(
-							"Did not find sub attribute with ID " + fstPath);
+			int sepPos = path.indexOf(Attribute.SEPARATOR);
+			if (sepPos<0) {
+				Attribute attr = attributes.get(path);
+				if (attr == null)
+					throw new AttributeNotFoundException("Did not find sub attribute with ID " + path);
+				return attr;
 			} else {
-				if (splitPath.length == 1) {
-					return attr;
+				String s0 = path.substring(0, sepPos);
+				String s1 = path.substring(sepPos+sepLen);
+				Attribute attr = attributes.get(s0);
+				if (attr == null) {
+					throw new AttributeNotFoundException("Did not find sub attribute with ID " + path);
 				} else {
 					try {
-						return ((CollectionAttribute) attr)
-									.getAttribute(splitPath[1]);
+						return ((CollectionAttribute) attr).getAttribute(s1);
 					} catch (ClassCastException cce) {
 						throw new AttributeNotFoundException("Attribute with ID "
-									+ fstPath + " is no "
+									+ s0 + " is no "
 									+ "CollectionAttribute and therefore can't "
-									+ "contain subattribute with ID " + splitPath[1]);
+									+ "contain subattribute with ID " + s1);
 					}
 				}
 			}

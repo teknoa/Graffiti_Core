@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ColorAttribute.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: ColorAttribute.java,v 1.2 2008/10/10 22:26:46 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -25,7 +25,7 @@ import org.graffiti.attributes.IntegerAttribute;
  * when applied to the outline of a node since that would lead to problems
  * with overlapping filling and outline.)
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class ColorAttribute
     extends HashMapAttribute
@@ -178,7 +178,7 @@ public class ColorAttribute
      */
     public Color getColor()
     {
-        return new Color(this.getRed(), this.getGreen(), this.getBlue(),
+    	return new Color(this.getRed(), this.getGreen(), this.getBlue(),
             this.getOpacity());
     }
 

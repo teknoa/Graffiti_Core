@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: CoordinateAttribute.java,v 1.2 2008/10/08 17:26:48 klukas Exp $
+// $Id: CoordinateAttribute.java,v 1.3 2008/10/10 22:26:46 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -24,7 +24,7 @@ import sun.security.action.GetLongAction;
  * Contains the coordinate graphic attribute.
  *
  * @author breu
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class CoordinateAttribute
     extends HashMapAttribute
@@ -113,6 +113,14 @@ public class CoordinateAttribute
         callPreAttributeChanged(ae);
     	this.x.value = p.getX();
         this.y.value = p.getY();
+        callPostAttributeChanged(ae);
+    }
+    
+    public void setCoordinate(double x, double y) {
+        AttributeEvent ae = new AttributeEvent(this);
+        callPreAttributeChanged(ae);
+    	this.x.value = x;
+        this.y.value = y;
         callPostAttributeChanged(ae);
     }
 

@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.54 $
+ * @version $Revision: 1.55 $
  */
 public class AttributeHelper {
 
@@ -3386,8 +3386,7 @@ public class AttributeHelper {
 		}
 		for (Edge e : graph.getEdges()) {
 			for (CoordinateAttribute ca : getEdgeBendCoordinateAttributes(e)) {
-				ca.setX(ca.getX() + x);
-				ca.setY(ca.getY() + y);
+				ca.setCoordinate(ca.getX() + x, ca.getY() + y);
 			}
 		}
 	}
