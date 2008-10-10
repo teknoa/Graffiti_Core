@@ -221,6 +221,7 @@ public class ReleaseInfo {
 				String hhh = System.getenv("APPDATA");
 				if (new File(hhh).isDirectory())
 					home = hhh;
+				windows = true;
 			}
 		}
 		
