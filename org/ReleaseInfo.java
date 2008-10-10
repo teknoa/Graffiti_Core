@@ -214,9 +214,14 @@ public class ReleaseInfo {
 		if (ErrorMsg.isMac())
 			home = home+getPathSeparator()+"Library"+getPathSeparator()+"Preferences";
 		else {
-			if (new File(home+getPathSeparator()+"AppData"+getPathSeparator()+"Roaming").isDirectory())
+			if (new File(home+getPathSeparator()+"AppData"+getPathSeparator()+"Roaming").isDirectory()) {
 				home = home+getPathSeparator()+"AppData"+getPathSeparator()+"Roaming";
-			windows = true;
+				windows = true;
+			} else {
+				String hhh = System.getenv("APPDATA");
+				if (new File(hhh).isDirectory())
+					home = hhh;
+			}
 		}
 		
 		if (ErrorMsg.isMac() || windows) {
