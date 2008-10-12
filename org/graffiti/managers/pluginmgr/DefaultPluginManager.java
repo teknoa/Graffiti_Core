@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.7 2008/09/11 13:39:05 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.8 2008/10/12 22:13:51 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -13,10 +13,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
@@ -34,7 +38,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -121,7 +125,9 @@ public class DefaultPluginManager
      */
     public Collection<PluginEntry> getPluginEntries()
     {
-        return pluginEntries.values();
+    	synchronized (pluginEntries) {
+            return new ArrayList<PluginEntry>(pluginEntries.values());
+		}
     }
 
     /**
@@ -133,7 +139,9 @@ public class DefaultPluginManager
      */
     public GenericPlugin getPluginInstance(String name)
     {
-        return ((PluginEntry) pluginEntries.get(name)).getPlugin();
+    	synchronized (pluginEntries) {
+    		return ((PluginEntry) pluginEntries.get(name)).getPlugin();
+    	}
     }
 
     /**
@@ -143,7 +151,9 @@ public class DefaultPluginManager
      */
     public void addPluginManagerListener(PluginManagerListener listener)
     {
-        pluginManagerListeners.add(listener);
+    	synchronized (pluginManagerListeners) {
+            pluginManagerListeners.add(listener);
+		}
     }
 
     /**
@@ -241,53 +251,61 @@ public class DefaultPluginManager
      * @exception PluginManagerException if an error occurs while loading or
      *            instantiating the plugin.
      */
-    public void loadPlugins(PluginEntry[] plugins, ProgressViewer progressViewer, boolean doAutomatic)
+    public void loadPlugins(
+    		final PluginEntry[] plugins, 
+    		final ProgressViewer progressViewer, 
+    		final boolean doAutomatic)
         throws PluginManagerException
     {
-        List messages = new LinkedList();
+        final Collection<Object> loadLater = new ArrayList();
 
-        ArrayList loadLater = new ArrayList();
-
+        ExecutorService run = Executors.newFixedThreadPool(plugins.length); // Runtime.getRuntime().availableProcessors());
+        
         for(int i = 0; i < plugins.length; i++)
         {
         	if (plugins[i]==null) 
         		continue;
-        	loadPlugin(plugins, progressViewer, messages, loadLater, i);
+        	final String pluginLocation = plugins[i].getFileName();
+			final URL pluginUrl;
+			try {
+				pluginUrl = new URL(pluginLocation);
+			} catch (MalformedURLException e1) {
+				ErrorMsg.addErrorMessage(e1);
+				continue;
+			}
+			final PluginDescription desc = plugins[i].getDescription();
+        	run.submit(new Runnable() {
+				public void run() {
+					try {
+						System.out.println("try load: "+desc.getName());
+			        	while (!loadPlugin(pluginUrl, desc, progressViewer)) {
+			        		try {
+			        			System.out.println("wait for: "+desc.getName());
+			        			progressViewer.setText(desc.getName()+" waits for satisfied dependencies");
+								Thread.sleep(50);
+							} catch (InterruptedException e) {
+								ErrorMsg.addErrorMessage(e);
+							}
+			        	}
+					} catch (PluginManagerException e) {
+						ErrorMsg.addErrorMessage(e);
+					}
+				}});
         }
-
-        // load plugins with dependencies if they are satisfied
-        int loaded = 1;
-        int tryCnt = 0;
-        while(loadLater.size() > 0 && tryCnt<1000) {
-            loadDelayedPlugins(progressViewer, messages, loadLater);
-            tryCnt++;
-        }
-        
-        if (tryCnt>=1000) {
-        	System.err.println("Internal error in loading delayed plugins.");
-        	ErrorMsg.addErrorMessage("Internal error in loading delayed plugins.");
+        run.shutdown();
+        try {
+        	run.awaitTermination(30, TimeUnit.SECONDS);
+        } catch(InterruptedException e) {
+        	ErrorMsg.addErrorMessage(e);
         }
 
         // check if all plugins could be loaded
         if(loadLater.size() > 0)
         {
-            checkDependencies(doAutomatic, messages, loadLater);
+            checkDependencies(doAutomatic, loadLater);
         }
 
         savePrefs();
-
-        // build error string and throw exception
-        if(!messages.isEmpty())
-        {
-            String msg = "";
-
-            for(Iterator itr = messages.iterator(); itr.hasNext();)
-            {
-                msg += ((String) itr.next() + "\n");
-            }
-
-            throw new PluginManagerException("Error during plugin loading: "+msg, msg.trim());
-        }
     }
 
     /**
@@ -295,11 +313,11 @@ public class DefaultPluginManager
 	 * @param messages
 	 * @param loadLater
 	 */
-	private void checkDependencies(boolean doAutomatic, List messages, ArrayList loadLater) {
+	private void checkDependencies(boolean doAutomatic, Collection loadLaterC) {
+		ArrayList loadLater = new ArrayList(loadLaterC);
 		for(int i = 0; i <= (loadLater.size() / 2); i += 2)
 		{
-		    PluginDescription desc = (PluginDescription) loadLater.get(i +
-		            1);
+		    PluginDescription desc = (PluginDescription) loadLater.get(i + 1);
 		    List deps = desc.getDependencies();
 
 		    if(doAutomatic ||
@@ -355,8 +373,7 @@ public class DefaultPluginManager
 		                        catch(Exception e)
 		                        {
 		                            couldLoadDep = false;
-		                            messages.add("Error during automatic" +
-		                                "dependency solving: " + e);
+		                            ErrorMsg.addErrorMessage("Error during automatic dependency solving: " + e);
 		                        }
 		                    }
 		                }
@@ -380,15 +397,14 @@ public class DefaultPluginManager
 		            }
 		            catch(Exception e)
 		            {
-		                messages.add("Error during automatic" +
-		                    "dependency resolving: " + e);
+		            	ErrorMsg.addErrorMessage("Error during automatic dependency resolving: " + e);
 		            }
 
 		            continue;
 		        }
 		    }
 
-		    messages.add("Plugin " + desc.getName() + " could not be " +
+		    ErrorMsg.addErrorMessage("Plugin " + desc.getName() + " could not be " +
 		        "loaded since one or more dependencies are not " +
 		        "satisfied:");
 
@@ -398,59 +414,10 @@ public class DefaultPluginManager
 
 		        if(!pluginEntries.containsKey(dep.getName()))
 		        {
-		            messages.add("     " + dep.getName() + " (" +
+		        	ErrorMsg.addErrorMessage("     " + dep.getName() + " (" +
 		                dep.getMain() + ")");
 		        }
 		    }
-		}
-	}
-
-	/**
-	 * @param progressViewer
-	 * @param messages
-	 * @param loadLater
-	 */
-	private void loadDelayedPlugins(ProgressViewer progressViewer, List messages, ArrayList loadLater) {
-	    int i=0;
-		while(loadLater.size() > 0 && i<loadLater.size())
-		{
-		    PluginDescription desc = (PluginDescription) loadLater.get(i+1);
-		    List deps = desc.getDependencies();
-		    boolean satisfied = true;
-
-		    for(Iterator it = deps.iterator(); it.hasNext();)
-		    {
-		        PluginDependency dep = (PluginDependency) it.next();
-
-		        if(!pluginEntries.containsKey(dep.getName()))
-		        {
-		            satisfied = false;
-
-		            break;
-		        }
-		    }
-
-		    if(satisfied)
-		    {
-		        try
-		        {
-		            addPlugin(desc, (URL) loadLater.get(i), Boolean.TRUE,
-		                progressViewer);
-		        }
-		        catch(PluginManagerException pme)
-		        {
-		            messages.add(pme.getMessage());
-		        }
-		        catch(NullPointerException npe) {
-		        	messages.add(npe.getMessage());
-		        }
-		        finally {
-		            loadLater.remove(i);    // URL
-		            loadLater.remove(i);  // PD
-		            i=-2;
-		        }
-		    } 
-		    i=i+2;
 		}
 	}
 
@@ -460,23 +427,20 @@ public class DefaultPluginManager
 	 * @param messages
 	 * @param loadLater
 	 * @param i
+	 * @throws PluginManagerException 
 	 */
-	private void loadPlugin(PluginEntry[] plugins, ProgressViewer progressViewer, List<String> messages, ArrayList<Object> loadLater, int i) {
-		String pluginLocation = plugins[i].getFileName();
-		// System.out.println("Loading Plugin from: "+pluginLocation);
-		try
-		{
-		    URL pluginUrl = new URL(pluginLocation);
-		    PluginDescription desc = plugins[i].getDescription();
-		    
-		    if (desc==null) return;
+	private boolean loadPlugin(URL pluginUrl, PluginDescription desc,
+			ProgressViewer progressViewer) throws PluginManagerException {
+
+		    if (desc==null) return true;
 
 		    List deps = null;
-		    if (desc!=null) deps = desc.getDependencies();
+		    if (desc!=null) 
+		    	deps = desc.getDependencies();
 
 		    if((deps == null) || deps.isEmpty())
 		    {
-		        addPlugin(desc, pluginUrl, Boolean.TRUE, progressViewer);
+		        return addPlugin(desc, pluginUrl, Boolean.TRUE, progressViewer);
 		    }
 		    else
 		    {
@@ -498,32 +462,12 @@ public class DefaultPluginManager
 
 		        if(satisfied)
 		        {
-		            try
-		            {
-		                addPlugin(desc, pluginUrl, Boolean.TRUE,
-		                    progressViewer);
-		            }
-		            catch(PluginManagerException pme)
-		            {
-		                messages.add(pme.toString());
-		            }
+	                return addPlugin(desc, pluginUrl, Boolean.TRUE, progressViewer);
 		        }
 		        else
 		        {
-		            loadLater.add(pluginUrl);
-		            loadLater.add(desc);
+		        	return false;
 		        }
-		    }
-		}
-		catch(PluginManagerException pme)
-		{
-		    messages.add(pme.toString());
-		}
-		catch(MalformedURLException mue) {
-			messages.add(mue.toString());
-		} catch(Exception e)
-		{
-		    messages.add(e.toString());
 		}
 	}
 
@@ -616,13 +560,15 @@ public class DefaultPluginManager
      */
     public void removePluginManagerListener(PluginManagerListener listener)
     {
-        boolean success = pluginManagerListeners.remove(listener);
+    	synchronized (pluginManagerListeners) {
+            boolean success = pluginManagerListeners.remove(listener);
 
-        if(!success)
-        {
-            logger.warning("trying to remove a non existing" +
-                " plugin manager listener");
-        }
+            if(!success)
+            {
+                logger.warning("trying to remove a non existing" +
+                    " plugin manager listener");
+            }
+		}
     }
 
     /**
@@ -684,7 +630,7 @@ public class DefaultPluginManager
      *
      * @throws PluginManagerException DOCUMENT ME!
      */
-    private void addPlugin(PluginDescription description, 
+    private boolean addPlugin(PluginDescription description, 
     		URL pluginLocation, Boolean loadOnStartup, ProgressViewer progressViewer) throws PluginManagerException
     {
         //        assert plugin != null;
@@ -693,10 +639,6 @@ public class DefaultPluginManager
         // create an instance of the plugin's main class
         GenericPlugin plugin = createInstance(description, progressViewer);
 
-        //        // add the plugin to the list of instanciated plugins.
-        //        addPlugin(description, pluginInstance, pluginLocation, loadOnStartup);
-        
-        
         if (plugin==null) {
         	System.err.println("ERROR: COULD NOT CREATE PLUGIN");
         	if (description!=null) System.err.println("Description/Name: "+description.getName());
@@ -713,12 +655,13 @@ public class DefaultPluginManager
         	throw new PluginManagerException("Plugin Loading Failed", errMsg);
         }
         
-        pluginEntries.put(description.getName(),
-            new DefaultPluginEntry(description, plugin, loadOnStartup,
-                pluginLocation));
-
-        // inform all listeners about the new plugin.
-       	firePluginAdded(plugin, description);
+    	synchronized (pluginEntries) {
+	        pluginEntries.put(description.getName(),
+	            new DefaultPluginEntry(description, plugin, loadOnStartup,
+	                pluginLocation));
+	        // inform all listeners about the new plugin.
+	       	firePluginAdded(plugin, description);
+    	}
        	
        	// construct the path for the plugin in the preferences        
         // e.g. org.graffiti.plugins.io.graphviz.DOTSerializerPlugin becomes
@@ -744,6 +687,7 @@ public class DefaultPluginManager
 	        if (plugin!=null)
 	        	plugin.configure(pluginPrefs);
         }
+        return true;
     }
 
     /**
@@ -768,7 +712,7 @@ public class DefaultPluginManager
     	}
         if(isInstalled(description.getName()))
         {
-      	  throw new PluginManagerException("Cause: plugin name already defined/plugin already loaded!");
+      	  throw new PluginManagerException("Plugin name already defined/plugin already loaded!");
         }
 
         // If available show statustext to the user
@@ -820,26 +764,21 @@ public class DefaultPluginManager
             addPluginManagerListener((PluginManagerListener) plugin);
         }
 
-        // Copy this list to prevent concurrent modification exceptions
-        List listeners = new LinkedList();
+        synchronized (pluginManagerListeners) {
+            for(Iterator i = pluginManagerListeners.iterator(); i.hasNext();)
+            {
+                PluginManagerListener listener = (PluginManagerListener) i.next();
 
-        for(Iterator i = pluginManagerListeners.iterator(); i.hasNext();)
-        {
-            listeners.add(i.next());
-        }
-
-        for(Iterator i = listeners.iterator(); i.hasNext();)
-        {
-            PluginManagerListener listener = (PluginManagerListener) i.next();
-
-            if(plugin != null) {
-            	try {
-            		listener.pluginAdded(plugin, desc);
-            	} catch(Exception e) {
-            	    ErrorMsg.addErrorMessage(e);
-            	}
+                if(plugin != null) {
+                	try {
+                		listener.pluginAdded(plugin, desc);
+                	} catch(Exception e) {
+                	    ErrorMsg.addErrorMessage(e);
+                	}
+                }
             }
-        }
+		}
+
     }
 }
 
