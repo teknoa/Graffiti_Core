@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.10 2008/10/13 08:18:54 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.11 2008/10/13 08:45:08 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -39,7 +40,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -290,9 +291,15 @@ public class DefaultPluginManager
 		
 		ExecutorService run = Executors.newFixedThreadPool(plugins.length); // Runtime.getRuntime().availableProcessors());
         
+//		ArrayList<PluginEntry> pluginsR = new ArrayList<PluginEntry>();
+//        for (PluginEntry plugin : plugins)
+//        	pluginsR.add(plugin);
+//		Collections.reverse(pluginsR);
+		
+		final HashSet<String> loading = new HashSet<String>();
+		
         for (PluginEntry plugin : plugins)
         {
-        	final String pluginLocation = plugin.getFileName();
 			final URL pluginUrl;
 			try {
 				pluginUrl = plugin.getPluginUrl();
@@ -307,10 +314,19 @@ public class DefaultPluginManager
 			        	if (desc.getDependencies().size()>0)
 			        		return;
 			        	
+			        	synchronized(loading) {
+			        		loading.add(desc.getName());
+			        	}
+			        	
 						if (!loadPlugin(pluginUrl, desc, progressViewer)) {
 							ErrorMsg.addErrorMessage("ERROR: could not load plugin: "+desc.getName());
-			        	} else
+			        	} else {
+				        	synchronized(loading) {
+				        		loading.remove(desc.getName());
+				        	}
 			        		loadChilds(desc);
+			        	}
+
 					} catch (Exception e) {
 						ErrorMsg.addErrorMessage(e);
 					}
@@ -321,10 +337,17 @@ public class DefaultPluginManager
 						URL url;
 						try {
 							url = pe.getPluginUrl();
+				        	synchronized(loading) {
+				        		loading.add(pe.getDescription().getName());
+				        	}
 							if (!loadPlugin(url, pe.getDescription(), progressViewer))
 								ErrorMsg.addErrorMessage("ERROR: could not load plugin: "+desc.getName());
-							else
+							else {
+					        	synchronized(loading) {
+					        		loading.remove(pe.getDescription().getName());
+					        	}
 								loadChilds(pe.getDescription());
+							}
 						} catch(Exception err) {
 							ErrorMsg.addErrorMessage(err);
 							continue;
@@ -338,6 +361,10 @@ public class DefaultPluginManager
         	run.awaitTermination(30, TimeUnit.SECONDS);
         } catch(InterruptedException e) {
         	ErrorMsg.addErrorMessage(e);
+        }
+        synchronized(loading) {
+        	for (String s : loading)
+        		System.err.println("Loading of plugin "+s+" not finished (time-out).");
         }
         savePrefs();
     }
@@ -645,7 +672,6 @@ public class DefaultPluginManager
 
         try
         { // to instanciate the plugin's main class
-        	// System.out.print(".");
             pluginInstance = (GenericPlugin) InstanceLoader.createInstance(description.getMain());
         }
         catch(InstanceCreationException ice)
