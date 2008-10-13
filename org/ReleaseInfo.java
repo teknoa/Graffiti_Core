@@ -219,9 +219,12 @@ public class ReleaseInfo {
 				windows = true;
 			} else {
 				String hhh = System.getenv("APPDATA");
-				if (new File(hhh).isDirectory())
-					home = hhh;
-				windows = true;
+				if (hhh!=null) {
+					if (new File(hhh).isDirectory()) {
+						home = hhh;
+						windows = true;
+					}
+				}
 			}
 		}
 		
