@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.9 2008/10/13 07:59:12 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.10 2008/10/13 08:18:54 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -39,7 +39,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -262,14 +262,25 @@ public class DefaultPluginManager
         
         HashMap<String, PluginEntry> name2plugin = new HashMap<String, PluginEntry>();
         for (PluginEntry plugin : plugins) {
+        	if (name2plugin.containsKey(plugin.getDescription().getName()))
+        		System.err.println("Non-unique plugin name: "+plugin.getDescription().getName()+" // "+plugin.getFileName());
         	name2plugin.put(plugin.getDescription().getName(), plugin);
         }
         for (PluginEntry plugin : plugins) {
         	List<PluginDependency> deps = plugin.getDescription().getDependencies();
         	if (deps!=null && deps.size()>0) {
+        		if (deps.size()>1)
+        			System.err.println("Problematic: plugin "+plugin.getFileName()+" requires more than one other plugin.");
         		for (PluginDependency dep : deps) {
         			PluginEntry pe = name2plugin.get(dep.getName());
-        			pe.getDescription().addChild(plugin);
+        			if (pe==null)
+        				System.err.println("Plugin "+dep.getName()+" is unknown! (required by "+plugin.getFileName()+")");
+        			else {
+	        			if (pe.getDescription()==null)
+	        				System.err.println("Plugin definition "+pe.getFileName()+" provides no description!");
+	        			else
+	        				pe.getDescription().addChild(plugin);
+        			}
         		}
         	}
         }
