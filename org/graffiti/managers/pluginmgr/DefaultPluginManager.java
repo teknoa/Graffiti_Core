@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.11 2008/10/13 08:45:08 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.12 2008/10/13 08:53:54 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -40,7 +40,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -289,7 +289,7 @@ public class DefaultPluginManager
         	
         progressViewer.setText("Load plugins...");
 		
-		ExecutorService run = Executors.newFixedThreadPool(plugins.length); // Runtime.getRuntime().availableProcessors());
+		ExecutorService run = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()); // plugins.length); // 
         
 //		ArrayList<PluginEntry> pluginsR = new ArrayList<PluginEntry>();
 //        for (PluginEntry plugin : plugins)
@@ -357,8 +357,20 @@ public class DefaultPluginManager
 				}});
         }
         run.shutdown();
+        int maxTime = 60;
         try {
-        	run.awaitTermination(30, TimeUnit.SECONDS);
+        	if (run.awaitTermination(maxTime, TimeUnit.SECONDS))
+        		progressViewer.setText("All plugins loaded!");
+        	else {
+                synchronized(loading) {
+                	System.err.println("Loading of plugin "+loading.size()+" not finished (time-out).");
+                	System.err.println("Possible error causes (intialization time over "+maxTime+" seconds):");
+                	System.err.println("* Plugin implementation errors");
+                	System.err.println("* A very slow computer, or starting the application under high system load");
+                	progressViewer.setText("Time-out: "+loading.size()+" plugins not initialized!");
+                }
+                Thread.sleep(5000);
+        	}
         } catch(InterruptedException e) {
         	ErrorMsg.addErrorMessage(e);
         }
