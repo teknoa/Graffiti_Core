@@ -5,10 +5,12 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDescription.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: PluginDescription.java,v 1.2 2008/10/13 07:59:12 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.logging.Logger;
 /**
  * Contains a meta data of a plugin.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PluginDescription
 {
@@ -29,7 +31,7 @@ public class PluginDescription
     //~ Instance fields ========================================================
 
     /** The list of <code>Dependency</code> objects of this plugin. */
-    private List dependencies;
+    private List<PluginDependency> dependencies;
 
     /** The author of the plugin. */
     private String author;
@@ -64,7 +66,7 @@ public class PluginDescription
      */
     public PluginDescription()
     {
-        dependencies = new LinkedList();
+        dependencies = new LinkedList<PluginDependency>();
     }
 
     //~ Methods ================================================================
@@ -115,7 +117,7 @@ public class PluginDescription
      *
      * @param dependencies The dependencies to set
      */
-    public void setDependencies(List dependencies)
+    public void setDependencies(List<PluginDependency> dependencies)
     {
         this.dependencies = dependencies;
     }
@@ -125,7 +127,7 @@ public class PluginDescription
      *
      * @return List
      */
-    public List getDependencies()
+    public List<PluginDependency> getDependencies()
     {
         return dependencies;
     }
@@ -255,6 +257,20 @@ public class PluginDescription
         " main = " + main + ", number of dependencies = " +
         dependencies.size() + "]";
     }
+    
+    private Collection<PluginEntry> childPlugins = new ArrayList<PluginEntry>();
+
+	public void addChild(PluginEntry plugin) {
+		synchronized(childPlugins) {
+			childPlugins.add(plugin);
+		}
+	}
+	
+	public Collection<PluginEntry> getChildPlugins() {
+		synchronized(childPlugins) {
+			return childPlugins;
+		}
+	}
 }
 
 //------------------------------------------------------------------------------

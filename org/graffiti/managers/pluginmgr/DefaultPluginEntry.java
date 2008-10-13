@@ -5,10 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginEntry.java,v 1.2 2008/05/30 10:52:48 klukas Exp $
+// $Id: DefaultPluginEntry.java,v 1.3 2008/10/13 07:59:12 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.graffiti.plugin.GenericPlugin;
@@ -166,6 +167,10 @@ public class DefaultPluginEntry
     {
         return pluginLocation;
     }
+
+	public URL getPluginUrl() throws MalformedURLException {
+		return new URL(getFileName());
+	}
 }
 
 //------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.8 2008/10/12 22:13:51 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.9 2008/10/13 07:59:12 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -38,7 +39,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -257,39 +258,68 @@ public class DefaultPluginManager
     		final boolean doAutomatic)
         throws PluginManagerException
     {
-        final Collection<Object> loadLater = new ArrayList();
-
-        ExecutorService run = Executors.newFixedThreadPool(plugins.length); // Runtime.getRuntime().availableProcessors());
+        progressViewer.setText("Analyze plugin dependencies...");
         
-        for(int i = 0; i < plugins.length; i++)
+        HashMap<String, PluginEntry> name2plugin = new HashMap<String, PluginEntry>();
+        for (PluginEntry plugin : plugins) {
+        	name2plugin.put(plugin.getDescription().getName(), plugin);
+        }
+        for (PluginEntry plugin : plugins) {
+        	List<PluginDependency> deps = plugin.getDescription().getDependencies();
+        	if (deps!=null && deps.size()>0) {
+        		for (PluginDependency dep : deps) {
+        			PluginEntry pe = name2plugin.get(dep.getName());
+        			pe.getDescription().addChild(plugin);
+        		}
+        	}
+        }
+
+        	
+        progressViewer.setText("Load plugins...");
+		
+		ExecutorService run = Executors.newFixedThreadPool(plugins.length); // Runtime.getRuntime().availableProcessors());
+        
+        for (PluginEntry plugin : plugins)
         {
-        	if (plugins[i]==null) 
-        		continue;
-        	final String pluginLocation = plugins[i].getFileName();
+        	final String pluginLocation = plugin.getFileName();
 			final URL pluginUrl;
 			try {
-				pluginUrl = new URL(pluginLocation);
+				pluginUrl = plugin.getPluginUrl();
 			} catch (MalformedURLException e1) {
 				ErrorMsg.addErrorMessage(e1);
 				continue;
 			}
-			final PluginDescription desc = plugins[i].getDescription();
-        	run.submit(new Runnable() {
+			final PluginDescription desc = plugin.getDescription();
+			run.submit(new Runnable() {
 				public void run() {
 					try {
-						System.out.println("try load: "+desc.getName());
-			        	while (!loadPlugin(pluginUrl, desc, progressViewer)) {
-			        		try {
-			        			System.out.println("wait for: "+desc.getName());
-			        			progressViewer.setText(desc.getName()+" waits for satisfied dependencies");
-								Thread.sleep(50);
-							} catch (InterruptedException e) {
-								ErrorMsg.addErrorMessage(e);
-							}
-			        	}
-					} catch (PluginManagerException e) {
+			        	if (desc.getDependencies().size()>0)
+			        		return;
+			        	
+						if (!loadPlugin(pluginUrl, desc, progressViewer)) {
+							ErrorMsg.addErrorMessage("ERROR: could not load plugin: "+desc.getName());
+			        	} else
+			        		loadChilds(desc);
+					} catch (Exception e) {
 						ErrorMsg.addErrorMessage(e);
 					}
+				}
+
+				private void loadChilds(PluginDescription desc) {
+					for (PluginEntry pe : desc.getChildPlugins()) {
+						URL url;
+						try {
+							url = pe.getPluginUrl();
+							if (!loadPlugin(url, pe.getDescription(), progressViewer))
+								ErrorMsg.addErrorMessage("ERROR: could not load plugin: "+desc.getName());
+							else
+								loadChilds(pe.getDescription());
+						} catch(Exception err) {
+							ErrorMsg.addErrorMessage(err);
+							continue;
+						}
+					}
+
 				}});
         }
         run.shutdown();
@@ -298,128 +328,9 @@ public class DefaultPluginManager
         } catch(InterruptedException e) {
         	ErrorMsg.addErrorMessage(e);
         }
-
-        // check if all plugins could be loaded
-        if(loadLater.size() > 0)
-        {
-            checkDependencies(doAutomatic, loadLater);
-        }
-
         savePrefs();
     }
 
-    /**
-	 * @param doAutomatic
-	 * @param messages
-	 * @param loadLater
-	 */
-	private void checkDependencies(boolean doAutomatic, Collection loadLaterC) {
-		ArrayList loadLater = new ArrayList(loadLaterC);
-		for(int i = 0; i <= (loadLater.size() / 2); i += 2)
-		{
-		    PluginDescription desc = (PluginDescription) loadLater.get(i + 1);
-		    List deps = desc.getDependencies();
-
-		    if(doAutomatic ||
-		        (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(
-		            null,
-		            "Some dependencies are not satisfied. Should an " +
-		            "automatic search be performed?")))
-		    {
-		        if(!doAutomatic)
-		        {
-		            PluginDescriptionCollector collector = new ClassPathPluginDescriptionCollector();
-
-		            entries = collector.collectPluginDescriptions();
-		        }
-
-		        doAutomatic = true;
-
-		        boolean couldLoadDep = false;
-		        boolean alreadyLoaded = true;
-
-		        for(Iterator it = deps.iterator(); it.hasNext();)
-		        {
-		            PluginDependency dep = (PluginDependency) it.next();
-
-		            if(!pluginEntries.containsKey(dep.getName()))
-		            {
-		                boolean couldLoad1 = false;
-		                alreadyLoaded = false;
-
-		                if (entries!=null)
-		                for(Iterator enit = entries.iterator();
-		                    enit.hasNext();)
-		                {
-		                    PluginEntry entry = (PluginEntry) enit.next();
-
-		                    if(entry.getDescription().getName().equals(dep.getName()))
-		                    {
-		                        // successfully found a missing dep plugin
-		                        try
-		                        {
-		                            //                                        doAutomatic = true;
-		                            loadPlugins(new PluginEntry[] { entry });
-
-		                            //                                        doAutomatic = false;
-		                            couldLoad1 = true;
-		                            couldLoadDep = true;
-
-		                            //////                                  JOptionPane.showMessageDialog(null, 
-		                            //////                                      "Succesfully loaded plugin: " +
-		                            //////                                      entry.getDescription().getName());
-		                            break;
-		                        }
-		                        catch(Exception e)
-		                        {
-		                            couldLoadDep = false;
-		                            ErrorMsg.addErrorMessage("Error during automatic dependency solving: " + e);
-		                        }
-		                    }
-		                }
-
-		                if(!couldLoad1)
-		                    couldLoadDep = false;
-		            }
-		        }
-
-		        if(alreadyLoaded)
-		        {
-		            continue;
-		        }
-
-		        if(couldLoadDep)
-		        {
-		            try
-		            {
-		                URL pluginUrl = (URL) loadLater.get(i);
-		                loadPlugin(desc, pluginUrl, Boolean.TRUE);
-		            }
-		            catch(Exception e)
-		            {
-		            	ErrorMsg.addErrorMessage("Error during automatic dependency resolving: " + e);
-		            }
-
-		            continue;
-		        }
-		    }
-
-		    ErrorMsg.addErrorMessage("Plugin " + desc.getName() + " could not be " +
-		        "loaded since one or more dependencies are not " +
-		        "satisfied:");
-
-		    for(Iterator it = deps.iterator(); it.hasNext();)
-		    {
-		        PluginDependency dep = (PluginDependency) it.next();
-
-		        if(!pluginEntries.containsKey(dep.getName()))
-		        {
-		        	ErrorMsg.addErrorMessage("     " + dep.getName() + " (" +
-		                dep.getMain() + ")");
-		        }
-		    }
-		}
-	}
 
 	/**
 	 * @param plugins
