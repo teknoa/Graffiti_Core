@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
 
 
@@ -50,6 +51,36 @@ public class OpenFileDialogService {
 				return description;
 			}});
 		int option = openDialog.showOpenDialog(null);
+		if (option == JFileChooser.APPROVE_OPTION) {
+			return openDialog.getSelectedFile();
+		} else 
+			return null;
+	}
+	
+	public static File getFile(final String[] valid_extensions, final String description, String selectButtonText ) {
+		if (openDialog==null) {
+			openDialog = new JFileChooser();
+		}
+		openDialog.setMultiSelectionEnabled(false);
+		openDialog.resetChoosableFileFilters();
+		openDialog.setFileFilter(new FileFilter() {
+			public boolean accept(File f) {
+				return (f.isDirectory()) || 
+				((f.canRead() && extensionOK(f.getName(), valid_extensions)));
+			}
+
+			private boolean extensionOK(String fileName, String[] valid_extensions) {
+				for (String ext : valid_extensions) {
+					if (fileName.toUpperCase().endsWith(ext.toUpperCase()))
+						return true;
+				}
+				return false;
+			}
+
+			public String getDescription() {
+				return description;
+			}});
+		int option = openDialog.showDialog(null, selectButtonText);
 		if (option == JFileChooser.APPROVE_OPTION) {
 			return openDialog.getSelectedFile();
 		} else 
