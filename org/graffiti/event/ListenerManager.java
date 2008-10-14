@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ListenerManager.java,v 1.2 2008/10/08 17:26:48 klukas Exp $
+// $Id: ListenerManager.java,v 1.3 2008/10/14 14:39:05 belau Exp $
 
 package org.graffiti.event;
 
@@ -31,7 +31,7 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class ListenerManager {
 	//~ Instance fields ========================================================
@@ -1789,13 +1789,19 @@ public class ListenerManager {
 	 * @param source the object, which initiated the end of the transaction.
 	 */
 	public void transactionFinished(Object source) {
+		transactionFinished(source, false);
+	}
+	
+	public void transactionFinished(Object source, boolean forgetChanges) {
 		postDebugTransactionFinished(source);
 		this.transactionsActive--;
 		assert this.transactionsActive >= 0;
 
+		if (forgetChanges)
+			this.changedObjects = new HashSet<Object>();
+
 		if (transactionsActive > 0)
 			return;
-
 		TransactionEvent event = new TransactionEvent(source, changedObjects);
 
 		Iterator mIter = new MultipleIterator(new Iterator[] {
