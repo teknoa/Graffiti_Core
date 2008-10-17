@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphElementsDeletionEdit.java,v 1.2 2008/04/28 10:55:17 klukas Exp $
+// $Id: GraphElementsDeletionEdit.java,v 1.3 2008/10/17 13:11:46 klukas Exp $
 
 package org.graffiti.undo;
 
@@ -28,7 +28,7 @@ import org.graffiti.graph.Node;
  * undoable.
  *
  * @author $Author $
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class GraphElementsDeletionEdit
     extends GraphElementsEdit
@@ -167,6 +167,7 @@ public class GraphElementsDeletionEdit
             return;
         }
 
+        graph.getListenerManager().transactionStarted(this);
         for(Iterator iter = graphElements.iterator(); iter.hasNext();)
         {
             GraphElement ge = (GraphElement) iter.next();
@@ -199,6 +200,7 @@ public class GraphElementsDeletionEdit
         graphElements.clear();
         graphElements.addAll(tempGraphElements);
         tempGraphElements.clear();
+        graph.getListenerManager().transactionFinished(this);
     }
 
     /**
@@ -214,7 +216,7 @@ public class GraphElementsDeletionEdit
             ErrorMsg.addErrorMessage("The execute method hasn't been invocated");
             return;
         }
-
+        graph.getListenerManager().transactionStarted(this);
         for(Iterator iter = graphElements.iterator(); iter.hasNext();)
         {
             GraphElement ge = (GraphElement) iter.next();
@@ -243,6 +245,7 @@ public class GraphElementsDeletionEdit
                 geMap.put(oldEdge, newEdge);
             }
         }
+        graph.getListenerManager().transactionFinished(this);
     }
 }
 
