@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLSerializer.java,v 1.1 2007/05/31 12:56:00 klukas Exp $
+// $Id: XMLSerializer.java,v 1.2 2008/10/19 08:42:36 klukas Exp $
 
 package org.graffiti.plugin.io;
 
@@ -30,7 +30,7 @@ import org.graffiti.graph.Node;
 /**
  * Reads and Writes a graph in XML.  TODO: specify the XML format.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class XMLSerializer
     extends AbstractIOSerializer
@@ -302,6 +302,11 @@ public class XMLSerializer
 	public void read(Reader reader, Graph newGraph) throws IOException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public boolean validFor(InputStream reader) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
 

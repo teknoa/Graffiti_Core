@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: InputSerializer.java,v 1.1 2007/05/31 12:56:00 klukas Exp $
+// $Id: InputSerializer.java,v 1.2 2008/10/19 08:42:36 klukas Exp $
 
 package org.graffiti.plugin.io;
 
@@ -20,7 +20,7 @@ import org.graffiti.graph.Graph;
  * Interfaces a serializer, which is able to reconstruct a graph from a given
  * input.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public interface InputSerializer
     extends Serializer
@@ -37,6 +37,8 @@ public interface InputSerializer
      */
     public void read(String filename, Graph g)
         throws IOException;
+    
+	public boolean validFor(InputStream reader);
 
     /**
      * Reads in the graph from the given url.

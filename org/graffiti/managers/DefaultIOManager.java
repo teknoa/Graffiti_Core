@@ -5,13 +5,16 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.5 2008/09/11 13:39:05 klukas Exp $
+// $Id: DefaultIOManager.java,v 1.6 2008/10/19 08:42:34 klukas Exp $
 
 package org.graffiti.managers;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.AccessControlException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,7 +37,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -88,7 +91,7 @@ public class DefaultIOManager implements IOManager {
 	//~ Instance fields ========================================================
 
 	/** The set of input serializers. */
-	private List inputSerializer;
+	private List<InputSerializer> inputSerializer;
 
 	/** The set of output serializers. */
 	private List outputSerializer;
@@ -105,7 +108,7 @@ public class DefaultIOManager implements IOManager {
 	 * Constructs a new io manager.
 	 */
 	public DefaultIOManager() {
-		inputSerializer = new ArrayList();
+		inputSerializer = new ArrayList<InputSerializer>();
 		outputSerializer = new ArrayList();
 		this.listeners = new LinkedList();
 		try  {
@@ -151,15 +154,27 @@ public class DefaultIOManager implements IOManager {
 	/*
 	 * @see org.graffiti.managers.IOManager#createInputSerializer(java.lang.String)
 	 */
-	public InputSerializer createInputSerializer(String extSearch) {
-		for (Iterator itr = inputSerializer.iterator(); itr.hasNext();) {
-			InputSerializer is = (InputSerializer) itr.next();
+	public InputSerializer createInputSerializer(MyInputStreamCreator in, String extSearch) {
+		ArrayList<InputSerializer> ins = new ArrayList<InputSerializer>();
+		for (InputSerializer is : inputSerializer) {
 			String[] ext = is.getExtensions();
-			for (int i = 0; i < ext.length; i++)
+			extsearch: for (int i = 0; i < ext.length; i++)
 				if (ext[i].equalsIgnoreCase(extSearch)) {
-					System.out.println("Input serializer for file extension "+extSearch+" is "+is.getClass().getCanonicalName());
+					System.out.println("Possible reader: "+is.getClass().getCanonicalName());
+					ins.add(is);
+					break extsearch;
+				}
+		}
+		for (InputSerializer is : ins) {
+			try {
+				if (is.validFor(in.getNewInputStream())) {
+					System.out.println(ins.size()+" input serializers for file extension "+extSearch+". Selected "+is.getClass().getCanonicalName());
 					return is;
 				}
+			} catch (IOException e) {
+				ErrorMsg.addErrorMessage(e);
+			}
+
 		}
 		return null;
 	}
@@ -180,9 +195,9 @@ public class DefaultIOManager implements IOManager {
 				continue;
 			}
 			for (int i = 0; i < ext.length; i++) {
-				if (knownExt.contains(ext[i]))
-							ErrorMsg.addErrorMessage("Internal Error: Duplicate Input File Type Extension - "
-													+ ext[i] + " Class: " + is.toString());
+//				if (knownExt.contains(ext[i]))
+//							ErrorMsg.addErrorMessage("Internal Error: Duplicate Input File Type Extension - "
+//													+ ext[i] + " Class: " + is.toString());
 				knownExt.add(ext[i]);
 				// System.out.println("Output: " + ext[i] + " Class: " + is.toString());
 				GravistoFileFilter gff = new GravistoFileFilter(ext[i], desc[i]);

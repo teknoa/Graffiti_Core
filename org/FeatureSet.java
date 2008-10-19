@@ -30,5 +30,6 @@ public enum FeatureSet {
 	MetaCrop_ACCESS,
 	DATA_CARD_ACCESS, 
 	AGLET_NETWORK, 
-	TOOLTIPS
+	TOOLTIPS, 
+	SBGN
 }

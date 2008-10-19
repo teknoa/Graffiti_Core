@@ -5,9 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: IOManager.java,v 1.1 2007/05/31 12:56:06 klukas Exp $
+// $Id: IOManager.java,v 1.2 2008/10/19 08:42:34 klukas Exp $
 
 package org.graffiti.managers;
+
+import java.io.InputStream;
 
 import javax.swing.JFileChooser;
 
@@ -19,7 +21,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public interface IOManager
     extends PluginManagerListener
@@ -53,7 +55,7 @@ public interface IOManager
      *
      * @return DOCUMENT ME!
      */
-    InputSerializer createInputSerializer(String ext)
+    InputSerializer createInputSerializer(MyInputStreamCreator is, String ext)
         throws IllegalAccessException, InstantiationException;
 
     /**
@@ -113,7 +115,7 @@ public interface IOManager
     /**
      * Interfaces an io manager listener.
      *
-     * @version $Revision: 1.1 $
+     * @version $Revision: 1.2 $
      */
     public interface IOManagerListener
     {

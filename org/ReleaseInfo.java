@@ -133,6 +133,10 @@ public class ReleaseInfo {
 				break;
 			case FUNCAT_ACCESS :
 				return true;
+			case SBGN :
+				if (currentRelease!=Release.KGML_EDITOR)
+					return true;
+				break;
 			case URL_NODE_ANNOTATION :
 				if (currentRelease==Release.KGML_EDITOR)
 					return false;

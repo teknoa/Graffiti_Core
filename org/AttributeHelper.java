@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.55 $
+ * @version $Revision: 1.56 $
  */
 public class AttributeHelper {
 
@@ -2822,10 +2822,35 @@ public class AttributeHelper {
 					.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		if (show)
-			ega
-					.setArrowhead("org.graffiti.plugins.views.defaults.StandardArrowShape");
+			ega.setArrowhead("org.graffiti.plugins.views.defaults.StandardArrowShape");
 		else
 			ega.setArrowhead("");
+	}
+	
+	public static String getArrowhead(Edge edge) {
+		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
+				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		if (ega == null) {
+			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK,
+					Color.BLACK, edge.isDirected()),
+					GraphicAttributeConstants.GRAPHICS);
+			ega = (EdgeGraphicAttribute) edge
+					.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		}
+		return ega.getArrowhead();
+	}
+
+	public static String getArrowtail(Edge edge) {
+		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
+				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		if (ega == null) {
+			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK,
+					Color.BLACK, edge.isDirected()),
+					GraphicAttributeConstants.GRAPHICS);
+			ega = (EdgeGraphicAttribute) edge
+					.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		}
+		return ega.getArrowtail();
 	}
 
 	public static void setArrowhead(Edge edge, String knownShapeClassName) {
