@@ -14,6 +14,7 @@ package org;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -34,7 +35,6 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import org.graffiti.attributes.Attributable;
@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.56 $
+ * @version $Revision: 1.57 $
  */
 public class AttributeHelper {
 
@@ -3621,5 +3621,15 @@ public class AttributeHelper {
 				ls = (EdgeLabelAttribute)a;
 			ls.setLabel(tgtLabel);
 		}
+	}
+
+	public static Rectangle2D.Double getNodeRectangle(Node node) {
+		Rectangle2D.Double result = new Rectangle2D.Double();
+		Vector2d left = AttributeHelper.getPositionVec2d(node);
+		Vector2d size = AttributeHelper.getSize(node);
+		left.x-=size.x/2d;
+		left.y-=size.y/2d;
+		result.setFrame(left.x, left.y, size.x, size.y);
+		return result;
 	}
 }
