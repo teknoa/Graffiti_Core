@@ -63,4 +63,17 @@ public class Vector2d {
 		y = y - (y % yg);
 	}
 
+	public double minXY() {
+		if (x<y)
+			return x;
+		else
+			return y;
+	}
+
+	public double maxXY() {
+		if (x>y)
+			return x;
+		else
+			return y;
+	}
 }
