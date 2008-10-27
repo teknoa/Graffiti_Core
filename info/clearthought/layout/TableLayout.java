@@ -15,7 +15,6 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 import javax.swing.BorderFactory;
-import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
