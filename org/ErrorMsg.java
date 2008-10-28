@@ -370,11 +370,20 @@ public class ErrorMsg {
 	    	return ActionEvent.CTRL_MASK;*/
 	}
 
+	@SuppressWarnings("unchecked")
 	public static Object findParentComponent(Component c, Class searchClass) {
 		if (c==null)
 			return null;
+		// System.out.println(c.getClass().getCanonicalName());
 		if (c.getClass()==searchClass)
 			return c;
+		try {
+			Object o = c.getClass().asSubclass(searchClass);
+			if (o!=null)
+				return c;
+		} catch(Exception err) {
+			// Component c is not of desired type
+		}
 		return findParentComponent(c.getParent(), searchClass);
 	}
 	
