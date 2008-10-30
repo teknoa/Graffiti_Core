@@ -287,4 +287,14 @@ public class ReleaseInfo {
 			return true;
 		}
 	}
+	
+	private static boolean firstRun = false;
+
+	public static void setIsFirstRun(boolean b) {
+		firstRun = b;
+	}
+
+	public static boolean isFirstRun() {
+		return firstRun;
+	}
 }
