@@ -60,7 +60,7 @@ public class ErrorMsg {
 	    		}
 	    		res=res+"</code></small></small></font><hr>";
     		}
-    		String err="<code>Error: "+errorMsg+"</code>"+res;
+    		String err="<b>Error: "+errorMsg+"</b>"+res;
     		if (!errorMessages.contains(err))
     		    errorMessages.add(err);
     		synchronized (errorMessagesShort) {
@@ -300,8 +300,7 @@ public class ErrorMsg {
 
 	public static void addErrorMessage(Exception e) {
 		addErrorMessage(e.toString()+"<p><p>"+e.getLocalizedMessage());
-		// if (ReleaseInfo.getRunningReleaseStatus()==Release.DEBUG)
-			e.printStackTrace();
+		e.printStackTrace();
 	}
 
 	public static int getErrorMsgCount() {
