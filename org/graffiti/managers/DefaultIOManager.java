@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.7 2008/10/24 18:54:06 klukas Exp $
+// $Id: DefaultIOManager.java,v 1.8 2008/10/30 09:54:35 klukas Exp $
 
 package org.graffiti.managers;
 
@@ -37,7 +37,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -124,11 +124,11 @@ public class DefaultIOManager implements IOManager {
 	 * @see org.graffiti.managers.IOManager#addInputSerializer(org.graffiti.plugin.io.InputSerializer)
 	 */
 	public void addInputSerializer(InputSerializer is) {
-		String[] inExtensions = is.getExtensions();
+//		String[] inExtensions = is.getExtensions();
 
-		for (int j = 0; j < inExtensions.length; j++) {
+//		for (int j = 0; j < inExtensions.length; j++) {
 			inputSerializer.add(is);
-		}
+//		}
 		fireInputSerializerAdded(is);
 	}
 
