@@ -69,7 +69,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.57 $
+ * @version $Revision: 1.58 $
  */
 public class AttributeHelper {
 
@@ -2981,7 +2981,8 @@ public class AttributeHelper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void addEdgeBend(Edge edge, double x, double y) {
+	public static CoordinateAttribute addEdgeBend(Edge edge, double x, double y) {
+		CoordinateAttribute result = null;
 		try {
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
 					.getAttribute("graphics");
@@ -2990,9 +2991,13 @@ public class AttributeHelper {
 			while (!added) {
 				try {
 					Attribute a = ega.getBends().getAttribute("bend" + cnt);
+					if (a!=null) {
+						// empty (avoid unused warning)
+					}
 					cnt++;
 				} catch(AttributeNotFoundException nfe) {
-					ega.getBends().add(new CoordinateAttribute("bend" + cnt, x, y), true);
+					result = new CoordinateAttribute("bend" + cnt, x, y);
+					ega.getBends().add(result, true);
 					added = true;
 				}
 			}
@@ -3001,8 +3006,21 @@ public class AttributeHelper {
 					.setCollection(new HashMap());
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
 					.getAttribute("graphics");
-			ega.getBends().add(new CoordinateAttribute("bend1", x, y), true);
+			result = new CoordinateAttribute("bend1", x, y);
+			ega.getBends().add(result, true);
 		}
+		return result;
+	}
+	
+	public static CoordinateAttribute addEdgeBend(Edge edge, double x, double y, boolean safeAdd) {
+		if (safeAdd) {
+			for (Vector2d bend : getEdgeBends(edge)) {
+				if (bend.distance(x, y)<20)
+					return null;
+			}
+			return addEdgeBend(edge, x, y);
+		} else
+			return addEdgeBend(edge, x, y);
 	}
 	
 	public static ArrayList<Vector2d> getEdgeBends(Edge edge) {

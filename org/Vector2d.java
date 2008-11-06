@@ -76,4 +76,8 @@ public class Vector2d {
 		else
 			return y;
 	}
+
+	public double distance(double px, double py) {
+		return Math.sqrt((px-x)*(px-x)+(py-y)*(py-y));
+	}
 }
