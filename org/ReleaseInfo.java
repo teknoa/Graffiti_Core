@@ -216,10 +216,10 @@ public class ReleaseInfo {
 		String home = System.getProperty("user.home");
 		boolean windows = false;
 		if (ErrorMsg.isMac())
-			home = home+getPathSeparator()+"Library"+getPathSeparator()+"Preferences";
+			home = home+getFileSeparator()+"Library"+getFileSeparator()+"Preferences";
 		else {
-			if (new File(home+getPathSeparator()+"AppData"+getPathSeparator()+"Roaming").isDirectory()) {
-				home = home+getPathSeparator()+"AppData"+getPathSeparator()+"Roaming";
+			if (new File(home+getFileSeparator()+"AppData"+getFileSeparator()+"Roaming").isDirectory()) {
+				home = home+getFileSeparator()+"AppData"+getFileSeparator()+"Roaming";
 				windows = true;
 			} else {
 				String hhh = System.getenv("APPDATA");
@@ -234,31 +234,31 @@ public class ReleaseInfo {
 		
 		if (ErrorMsg.isMac() || windows) {
 			if (getRunningReleaseStatus()==Release.KGML_EDITOR)
-				return home+getPathSeparator()+"KGML_EDITOR";
+				return home+getFileSeparator()+"KGML_EDITOR";
 			else 
-				return home+getPathSeparator()+"VANTED";
+				return home+getFileSeparator()+"VANTED";
 		} else {
 			if (getRunningReleaseStatus()==Release.KGML_EDITOR)
-				return home+getPathSeparator()+".kgml_editor";
+				return home+getFileSeparator()+".kgml_editor";
 			else 
-				return home+getPathSeparator()+".vanted";
+				return home+getFileSeparator()+".vanted";
 		}
 	}
 
 	private static String getAppFolderNameOldStyle() {
 		String home = System.getProperty("user.home");
 		if (getRunningReleaseStatus()==Release.KGML_EDITOR)
-			return home+getPathSeparator()+".kgml_editor";
+			return home+getFileSeparator()+".kgml_editor";
 		else 
-			return home+getPathSeparator()+".vanted";
+			return home+getFileSeparator()+".vanted";
 	}
 
-	public static String getPathSeparator() {
+	public static String getFileSeparator() {
 		return System.getProperty("file.separator");
 	}
 
 	public static String getAppFolderWithFinalSep() {
-		return getAppFolder()+getPathSeparator();
+		return getAppFolder()+getFileSeparator();
 	}
 
 	public static String getAppWebURL() {
@@ -296,5 +296,17 @@ public class ReleaseInfo {
 
 	public static boolean isFirstRun() {
 		return firstRun;
+	}
+
+	public static String getAppSubdirFolder(String folderName) {
+		String folder = getAppFolderWithFinalSep()+folderName;
+		File dir = new File(folder);
+		if(!dir.exists()) 
+			dir.mkdir();
+		return folder;
+	}
+	
+	public static String getAppSubdirFolderWithFinalSep(String folderName) {
+		return getAppSubdirFolder(folderName)+getFileSeparator();
 	}
 }

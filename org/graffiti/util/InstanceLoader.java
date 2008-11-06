@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: InstanceLoader.java,v 1.1 2007/05/31 12:56:03 klukas Exp $
+// $Id: InstanceLoader.java,v 1.2 2008/11/06 16:08:51 morla Exp $
 
 package org.graffiti.util;
 
@@ -15,13 +15,23 @@ import java.lang.reflect.InvocationTargetException;
  * Represents an instance loader, which can be used to instanciate a class with
  * the given name.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class InstanceLoader
 {
     //~ Methods ================================================================
 
-    /**
+    private static ClassLoader storedLoader = InstanceLoader.class.getClassLoader();
+    
+    public static synchronized void overrideLoader(ClassLoader loader) {
+    	storedLoader = loader;
+    }
+
+    public static synchronized ClassLoader getCurrentLoader() {
+    	return storedLoader;
+    }
+
+	/**
      * Returns a new instance of the specified class.
      *
      * @param theClass the class to instanciate.
@@ -56,12 +66,12 @@ public class InstanceLoader
      *
      * @throws InstanceCreationException DOCUMENT ME!
      */
-    public static Object createInstance(String name)
+    public static synchronized Object createInstance(String name)
         throws InstanceCreationException
     {
         try
         {
-            Class c = InstanceLoader.class.getClassLoader().loadClass(name);
+            Class c = storedLoader.loadClass(name);
 
             return c.newInstance();
         }
@@ -88,6 +98,8 @@ public class InstanceLoader
         }
     }
 
+
+    
     /**
      * Returns a new instance of the specified class. Uses a constructor taking
      * one argument.
