@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.12 2008/10/13 08:53:54 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.13 2008/11/07 16:05:25 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -40,7 +40,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -259,7 +259,8 @@ public class DefaultPluginManager
     		final boolean doAutomatic)
         throws PluginManagerException
     {
-        progressViewer.setText("Analyze plugin dependencies...");
+        if (progressViewer!=null)
+        	progressViewer.setText("Analyze plugin dependencies...");
         
         HashMap<String, PluginEntry> name2plugin = new HashMap<String, PluginEntry>();
         for (PluginEntry plugin : plugins) {
@@ -286,8 +287,8 @@ public class DefaultPluginManager
         	}
         }
 
-        	
-        progressViewer.setText("Load plugins...");
+        if (progressViewer!=null)
+        	progressViewer.setText("Load plugins...");
 		
 		ExecutorService run = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()); // plugins.length); // 
         
@@ -359,15 +360,17 @@ public class DefaultPluginManager
         run.shutdown();
         int maxTime = 60;
         try {
-        	if (run.awaitTermination(maxTime, TimeUnit.SECONDS))
-        		progressViewer.setText("All plugins loaded!");
-        	else {
+        	if (run.awaitTermination(maxTime, TimeUnit.SECONDS)) {
+        		if (progressViewer!=null)
+        			progressViewer.setText("All plugins loaded!");
+        	} else {
                 synchronized(loading) {
                 	System.err.println("Loading of plugin "+loading.size()+" not finished (time-out).");
                 	System.err.println("Possible error causes (intialization time over "+maxTime+" seconds):");
                 	System.err.println("* Plugin implementation errors");
                 	System.err.println("* A very slow computer, or starting the application under high system load");
-                	progressViewer.setText("Time-out: "+loading.size()+" plugins not initialized!");
+                	if (progressViewer!=null)
+                		progressViewer.setText("Time-out: "+loading.size()+" plugins not initialized!");
                 }
                 Thread.sleep(5000);
         	}
