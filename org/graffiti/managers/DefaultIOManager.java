@@ -5,16 +5,14 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.8 2008/10/30 09:54:35 klukas Exp $
+// $Id: DefaultIOManager.java,v 1.9 2008/11/14 14:40:49 morla Exp $
 
 package org.graffiti.managers;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.security.AccessControlException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,7 +23,6 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 import org.ErrorMsg;
-import org.OpenFileDialogService;
 import org.Release;
 import org.ReleaseInfo;
 import org.graffiti.core.GenericFileFilter;
@@ -37,7 +34,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class DefaultIOManager implements IOManager {
 

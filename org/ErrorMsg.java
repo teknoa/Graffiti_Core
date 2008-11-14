@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
@@ -412,5 +413,40 @@ public class ErrorMsg {
 		if (textWithHtmlTags.indexOf(tagB)>=0)
 			textWithHtmlTags = textWithHtmlTags.substring(textWithHtmlTags.indexOf(tagB)+tagB.length());
 		return textWithHtmlTags; 
+	}
+	
+	/**
+	 * Removes the tags from a html-text and gives back the striped text.
+	 * 
+	 * @param textWithHtmlTags the text with html tags
+	 * @param tagA The left tag (e.g. <a>)
+	 * @param tagB The right tag (e.g. </a>)
+	 * 
+	 * @return The array list< string>, where get(0) is the striped text and all other are the striped texts
+	 */
+	public static ArrayList<String> removeTagsGetTextAndRemovedTexts(String textWithHtmlTags, String tagA, String tagB) {
+		ArrayList<String> tu = new ArrayList<String>();
+		if (textWithHtmlTags==null) 
+			return null;
+
+		tu.add(textWithHtmlTags);
+		int tagApos = tu.get(0).indexOf(tagA);
+		while (tagApos>=0) {
+			int tagBpos = tu.get(0).indexOf(tagB, tagApos+tagB.length())+tagB.length();
+			if (tagBpos>0) {
+				tu.add(tu.get(0).substring(tagApos+tagA.length(),tagBpos-tagB.length()));
+				tu.set(0,tu.get(0).substring(0, tagApos) + tu.get(0).substring(tagBpos));
+				tagApos = tu.get(0).indexOf(tagA);
+			} else {
+				tu.add(tu.get(0).substring(tagApos+1));
+				tu.set(0,tu.get(0).substring(0, tagApos));
+				tagApos = tu.get(0).indexOf(tagA);
+			}
+		}
+		if (tu.get(0).indexOf(tagB)>=0)
+			tu.set(0,tu.get(0).substring(tu.get(0).indexOf(tagB)+tagB.length()));
+		
+		
+		return tu; 
 	}
 }

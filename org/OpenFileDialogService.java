@@ -169,4 +169,28 @@ public class OpenFileDialogService {
 		if (openDialog!=null)
 			fc.setCurrentDirectory(openDialog.getCurrentDirectory());
 	}
+
+	public static File getDirectoryFromUser(String okButtonText) {
+		if (openDialog==null) {
+			openDialog = new JFileChooser();
+		}
+		openDialog.setMultiSelectionEnabled(false);
+		openDialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+//		openDialog.resetChoosableFileFilters();
+//		openDialog.setFileFilter(new FileFilter() {
+//			public boolean accept(File f) {
+//				return f.isDirectory();
+//			}
+//
+//			public String getDescription() {
+//				return "Directory";
+//			}
+//		});
+		int option = openDialog.showDialog(null, okButtonText);
+		if (option == JFileChooser.APPROVE_OPTION) {
+			return openDialog.getSelectedFile();
+		} else 
+			return null;
+	}
 }

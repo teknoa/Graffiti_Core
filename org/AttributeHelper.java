@@ -16,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -69,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.58 $
+ * @version $Revision: 1.59 $
  */
 public class AttributeHelper {
 
@@ -116,6 +117,9 @@ public class AttributeHelper {
 	}
 
 	public static void showInBrowser(String url) {
+		if (url==null)
+			return;
+		if(url.indexOf('@')>0&&url.indexOf(':')==-1) url="mailto:"+url;
 		url = getEncodedUrl(url);
 		Runtime r = Runtime.getRuntime();
 		// this is not save, in case "&amp;" was included before & was exchanged
@@ -3318,6 +3322,20 @@ public class AttributeHelper {
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < elements.length; i++) {
 				sb.append(elements[i]);
+				if (i < elements.length - 1)
+					sb.append(div);
+			}
+			return sb.toString();
+		}
+	}
+	
+	public static String getStringList(File[] elements, String div) {
+		if (elements == null || elements.length <= 0)
+			return "";
+		else {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < elements.length; i++) {
+				sb.append(elements[i].getName());
 				if (i < elements.length - 1)
 					sb.append(div);
 			}

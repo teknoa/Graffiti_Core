@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.13 2008/11/07 16:05:25 morla Exp $
+// $Id: DefaultPluginManager.java,v 1.14 2008/11/14 14:40:49 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -40,7 +40,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -104,7 +104,10 @@ public class DefaultPluginManager
      */
     public boolean isInstalled(String name)
     {
-        return pluginEntries.containsKey(name);
+    	if (name==null)
+    		return true;
+    	else
+    		return pluginEntries.containsKey(name);
     }
 
     /**
@@ -674,9 +677,10 @@ public class DefaultPluginManager
     	if (description==null) {
     		return null;
     	}
-        if(isInstalled(description.getName()))
+    	String name = description.getName();
+        if(isInstalled(name))
         {
-      	  throw new PluginManagerException("Plugin name already defined/plugin already loaded!");
+        	throw new PluginManagerException("Plugin name "+name+" already defined/plugin already loaded!");
         }
 
         // If available show statustext to the user
