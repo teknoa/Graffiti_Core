@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.15 2008/11/26 12:36:47 morla Exp $
+// $Id: DefaultPluginManager.java,v 1.16 2008/11/26 14:33:07 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -40,7 +40,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -274,8 +274,6 @@ public class DefaultPluginManager
         for (PluginEntry plugin : plugins) {
         	List<PluginDependency> deps = plugin.getDescription().getDependencies();
         	if (deps!=null && deps.size()>0) {
-        		if (deps.size()>1)
-        			System.err.println("Problematic: plugin "+plugin.getFileName()+" requires more than one other plugin.");
         		for (PluginDependency dep : deps) {
         			PluginEntry pe = name2plugin.get(dep.getName());
         			if (pe==null)
@@ -294,11 +292,6 @@ public class DefaultPluginManager
         	progressViewer.setText("Load plugins...");
 		
 		ExecutorService run = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()); // plugins.length); // 
-        
-//		ArrayList<PluginEntry> pluginsR = new ArrayList<PluginEntry>();
-//        for (PluginEntry plugin : plugins)
-//        	pluginsR.add(plugin);
-//		Collections.reverse(pluginsR);
 		
 		final HashSet<String> loading = new HashSet<String>();
 		

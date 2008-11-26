@@ -5,10 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDescription.java,v 1.2 2008/10/13 07:59:12 klukas Exp $
+// $Id: PluginDescription.java,v 1.3 2008/11/26 14:33:07 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
 /**
  * Contains a meta data of a plugin.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class PluginDescription
 {
@@ -259,6 +260,16 @@ public class PluginDescription
     }
     
     private Collection<PluginEntry> childPlugins = new ArrayList<PluginEntry>();
+
+	private boolean isAddon;
+
+	public boolean isAddon() {
+		return isAddon;
+	}
+
+	public void setAddon(boolean isAddon) {
+		this.isAddon = isAddon;
+	}
 
 	public void addChild(PluginEntry plugin) {
 		synchronized(childPlugins) {

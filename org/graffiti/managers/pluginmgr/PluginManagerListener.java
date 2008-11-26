@@ -5,17 +5,17 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginManagerListener.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: PluginManagerListener.java,v 1.2 2008/11/26 14:33:07 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
 import org.graffiti.plugin.GenericPlugin;
 
 /**
- * Represents a listener, which is called, iff a plugin has been added to the
+ * Represents a listener, which is called, if a plugin has been added to the
  * plugin manager.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public interface PluginManagerListener
 {
