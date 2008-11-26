@@ -5,17 +5,20 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: InstanceLoader.java,v 1.2 2008/11/06 16:08:51 morla Exp $
+// $Id: InstanceLoader.java,v 1.3 2008/11/26 12:36:47 morla Exp $
 
 package org.graffiti.util;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.HashSet;
 
 /**
  * Represents an instance loader, which can be used to instanciate a class with
  * the given name.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class InstanceLoader
 {
@@ -24,7 +27,26 @@ public class InstanceLoader
     private static ClassLoader storedLoader = InstanceLoader.class.getClassLoader();
     
     public static synchronized void overrideLoader(ClassLoader loader) {
-    	storedLoader = loader;
+    	if (loader==null)
+    		return;
+    	
+    	if (storedLoader!=null && (storedLoader instanceof URLClassLoader) && (loader instanceof URLClassLoader)) {
+    		// update stored loader with new URLs
+    		URLClassLoader ucl = (URLClassLoader) storedLoader;
+    		URLClassLoader newUCL= (URLClassLoader) loader;
+    		HashSet<URL> knownURLs = new HashSet<URL>();
+			for (URL knownURL : ucl.getURLs())
+				knownURLs.add(knownURL);
+			
+			for (URL newURL : newUCL.getURLs()) {
+				if (!knownURLs.contains(newURL)) {
+    				storedLoader = loader;
+    				return;
+				}
+			}
+    	} else {
+    		storedLoader = loader;
+    	}
     }
 
     public static synchronized ClassLoader getCurrentLoader() {
