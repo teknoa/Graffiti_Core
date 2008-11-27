@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDescription.java,v 1.4 2008/11/27 16:33:02 klukas Exp $
+// $Id: PluginDescription.java,v 1.5 2008/11/27 20:11:49 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Contains a meta data of a plugin.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class PluginDescription
 {
@@ -284,6 +284,19 @@ public class PluginDescription
 	
 	public boolean isOptional() {
 		return isOptional;
+	}
+
+	private boolean isPriorityPlugin = false;
+	
+	public boolean isPriorityPlugin() {
+		return isPriorityPlugin;
+	}
+	
+	public void setIsPriorityPlugin(String priority) {
+		if (priority!=null && priority.equalsIgnoreCase("true"))
+			isPriorityPlugin = true;
+		else
+			isPriorityPlugin = false;
 	}
 }
 

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.17 2008/11/27 16:33:02 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.18 2008/11/27 20:11:49 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -40,7 +40,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -294,75 +294,23 @@ public class DefaultPluginManager
         	}
         }
 
-        if (progressViewer!=null)
-        	progressViewer.setText("Load plugins...");
-		
-		ExecutorService run = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()); // plugins.length); // 
-		
+
 		final HashSet<String> loading = new HashSet<String>();
 		
-        for (PluginEntry plugin : plugins)
-        {
-			final URL pluginUrl;
-			try {
-				pluginUrl = plugin.getPluginUrl();
-			} catch (MalformedURLException e1) {
-				ErrorMsg.addErrorMessage(e1);
-				continue;
-			}
-			final PluginDescription desc = plugin.getDescription();
-			run.submit(new Runnable() {
-				public void run() {
-					try {
-			        	if (desc.getDependencies().size()>0)
-			        		return;
-			        	
-			        	synchronized(loading) {
-			        		loading.add(desc.getName());
-			        	}
-			        	
-						if (!loadPlugin(pluginUrl, desc, progressViewer)) {
-							ErrorMsg.addErrorMessage("ERROR: could not load plugin: "+desc.getName());
-			        	} else {
-				        	synchronized(loading) {
-				        		loading.remove(desc.getName());
-				        	}
-			        		loadChilds(desc);
-			        	}
+		if (progressViewer!=null)
+        	progressViewer.setText("Load priority plugins...");
 
-					} catch (PluginAlreadyLoadedException info) {
-						System.out.println(info.getMessage());
-						// can be ignored
-					} catch (Exception e) {
-						ErrorMsg.addErrorMessage(e);
-					}
-				}
+		ExecutorService runVIP = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()); 
+        loadSetOfPlugins(plugins, progressViewer, runVIP, loading, true);
+        runVIP.shutdown();
 
-				private void loadChilds(PluginDescription desc) {
-					for (PluginEntry pe : desc.getChildPlugins()) {
-						URL url;
-						try {
-							url = pe.getPluginUrl();
-				        	synchronized(loading) {
-				        		loading.add(pe.getDescription().getName());
-				        	}
-							if (!loadPlugin(url, pe.getDescription(), progressViewer))
-								ErrorMsg.addErrorMessage("ERROR: could not load plugin: "+desc.getName());
-							else {
-					        	synchronized(loading) {
-					        		loading.remove(pe.getDescription().getName());
-					        	}
-								loadChilds(pe.getDescription());
-							}
-						} catch(Exception err) {
-							ErrorMsg.addErrorMessage(err);
-							continue;
-						}
-					}
-
-				}});
-        }
+        if (progressViewer!=null)
+        	progressViewer.setText("Load plugins...");
+        
+		ExecutorService run = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()); 
+        loadSetOfPlugins(plugins, progressViewer, run, loading, false);
         run.shutdown();
+		
         int maxTime = 60;
         try {
         	if (run.awaitTermination(maxTime, TimeUnit.SECONDS)) {
@@ -388,6 +336,73 @@ public class DefaultPluginManager
         }
         savePrefs();
     }
+
+	private void loadSetOfPlugins(final PluginEntry[] plugins,
+			final ProgressViewer progressViewer, ExecutorService run,
+			final HashSet<String> loading, boolean loadPriorityPlugins) {
+		for (PluginEntry plugin : plugins)
+        {
+			final URL pluginUrl;
+			try {
+				pluginUrl = plugin.getPluginUrl();
+			} catch (MalformedURLException e1) {
+				ErrorMsg.addErrorMessage(e1);
+				continue;
+			}
+			final PluginDescription desc = plugin.getDescription();
+			if ( (loadPriorityPlugins && desc.isPriorityPlugin()) || (!loadPriorityPlugins && !desc.isPriorityPlugin()))
+			run.submit(new Runnable() {
+				public void run() {
+					try {
+			        	if (desc.getDependencies().size()>0)
+			        		return;
+			        	
+			        	synchronized(loading) {
+			        		loading.add(desc.getName());
+			        	}
+			        	
+						if (!loadPlugin(pluginUrl, desc, progressViewer)) {
+							ErrorMsg.addErrorMessage("ERROR: could not load plugin: "+pluginUrl);
+			        	} else {
+				        	synchronized(loading) {
+				        		loading.remove(desc.getName());
+				        	}
+			        		loadChilds(desc);
+			        	}
+
+					} catch (PluginAlreadyLoadedException info) {
+						System.out.println(info.getMessage());
+						// can be ignored
+					} catch (Exception e) {
+						ErrorMsg.addErrorMessage(e);
+					}
+				}
+
+				private void loadChilds(PluginDescription desc) {
+					for (PluginEntry pe : desc.getChildPlugins()) {
+						URL url;
+						try {
+							url = pe.getPluginUrl();
+				        	synchronized(loading) {
+				        		loading.add(pe.getDescription().getName());
+				        	}
+							if (!loadPlugin(url, pe.getDescription(), progressViewer))
+								ErrorMsg.addErrorMessage("ERROR: could not load plugin: "+url);
+							else {
+					        	synchronized(loading) {
+					        		loading.remove(pe.getDescription().getName());
+					        	}
+								loadChilds(pe.getDescription());
+							}
+						} catch(Exception err) {
+							ErrorMsg.addErrorMessage(err);
+							continue;
+						}
+					}
+
+				}});
+        }
+	}
 
 
 	/**
