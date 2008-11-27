@@ -19,7 +19,7 @@
   * the name of the plugin
   * the main class of the plugin (including classpath)
   * the version of the plugin -->
-<!ELEMENT plugindesc (name, main, version, available)>
+<!ELEMENT plugindesc (name, main, version, optional?, available)>
 
 <!-- a short name of the plugin. e.g.: myplugin -->
 <!ELEMENT name (#PCDATA)*>
@@ -40,6 +40,8 @@
   address, an url etc.; the ideal case would be to place the url of the
   corresponding .jar-file or zip-file here -->
 <!ELEMENT available (#PCDATA)*>
+
+<!ELEMENT optional (#PCDATA)*>
 
 <!-- the dependencies on other plugins that must be satisfied in order to
   have the plugin properly run -->

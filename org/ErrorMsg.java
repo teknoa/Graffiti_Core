@@ -8,12 +8,16 @@ package org;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
+
+import javax.swing.SwingUtilities;
 
 public class ErrorMsg {
     public static final String Unicode = "UTF-8";
@@ -345,12 +349,35 @@ public class ErrorMsg {
 	
 	private static boolean apploadingCompleted = false;
 
+	private static Collection<Runnable> finishedListeners = new ArrayList<Runnable>();
+
 	public static boolean isAppLoadingCompleted() {
 		return apploadingCompleted;
 	}
+	
 	public static void setAppLoadingCompleted(boolean status) {
 		apploadingCompleted = status;
+		if (isAppLoadingCompleted()) {
+			synchronized(finishedListeners) {
+				for (Runnable r : finishedListeners) {
+					SwingUtilities.invokeLater(r);
+				}
+			}
+		}
 	}
+
+	
+	public static void addOnApploadingFinishedAction(
+			Runnable actionListener) {
+		if (isAppLoadingCompleted()) {
+			SwingUtilities.invokeLater(actionListener);
+		} else {
+			synchronized(finishedListeners) {
+				finishedListeners.add(actionListener);
+			}
+		}
+	}
+
 	
 	public static boolean isMac() {
 		return AttributeHelper.macOSrunning();
@@ -449,4 +476,5 @@ public class ErrorMsg {
 		
 		return tu; 
 	}
+	
 }

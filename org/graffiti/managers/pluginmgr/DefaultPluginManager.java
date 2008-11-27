@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.16 2008/11/26 14:33:07 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.17 2008/11/27 16:33:02 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -40,7 +40,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -267,11 +267,17 @@ public class DefaultPluginManager
         
         HashMap<String, PluginEntry> name2plugin = new HashMap<String, PluginEntry>();
         for (PluginEntry plugin : plugins) {
-        	if (name2plugin.containsKey(plugin.getDescription().getName()))
-        		System.err.println("Non-unique plugin name: "+plugin.getDescription().getName()+" // "+plugin.getFileName());
-        	name2plugin.put(plugin.getDescription().getName(), plugin);
+        	if (plugin.getDescription()==null) {
+        		System.err.println("Invalid plugin description for "+plugin.getFileName());
+        	} else {
+	        	if (name2plugin.containsKey(plugin.getDescription().getName()))
+	        		System.err.println("Non-unique plugin name: "+plugin.getDescription().getName()+" // "+plugin.getFileName());
+	        	name2plugin.put(plugin.getDescription().getName(), plugin);
+        	}
         }
         for (PluginEntry plugin : plugins) {
+        	if (plugin.getDescription()==null)
+        		continue;
         	List<PluginDependency> deps = plugin.getDescription().getDependencies();
         	if (deps!=null && deps.size()>0) {
         		for (PluginDependency dep : deps) {
@@ -623,7 +629,8 @@ public class DefaultPluginManager
 	            new DefaultPluginEntry(description, plugin, loadOnStartup,
 	                pluginLocation));
 	        // inform all listeners about the new plugin.
-	       	firePluginAdded(plugin, description);
+	        if (!description.isOptional() || org.SettingsHelperDefaultIsTrue.isEnabled(description.getName()))
+	        	firePluginAdded(plugin, description);
     	}
        	
        	// construct the path for the plugin in the preferences        

@@ -5,29 +5,24 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDescription.java,v 1.3 2008/11/26 14:33:07 klukas Exp $
+// $Id: PluginDescription.java,v 1.4 2008/11/27 16:33:02 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Contains a meta data of a plugin.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class PluginDescription
 {
     //~ Static fields/initializers =============================================
-
-    /** The logger for the current class. */
-    private static final Logger logger = Logger.getLogger(PluginDescription.class.getName());
 
     //~ Instance fields ========================================================
 
@@ -100,7 +95,6 @@ public class PluginDescription
     public void setAvailable(String available)
     {
         this.available = available;
-        logger.fine("available set to: " + available);
     }
 
     /**
@@ -141,7 +135,6 @@ public class PluginDescription
     public void setDescription(String description)
     {
         this.description = description;
-        logger.fine("description set to: " + description);
     }
 
     /**
@@ -162,7 +155,6 @@ public class PluginDescription
     public void setMain(String main)
     {
         this.main = main;
-        logger.fine("main set to: " + main);
     }
 
     /**
@@ -183,7 +175,6 @@ public class PluginDescription
     public void setName(String name)
     {
         this.name = name;
-        logger.fine("name set to: " + name);
     }
 
     /**
@@ -214,7 +205,6 @@ public class PluginDescription
     public void setVersion(String version)
     {
         this.version = version;
-        logger.fine("version set to: " + version);
     }
 
     /**
@@ -281,6 +271,19 @@ public class PluginDescription
 		synchronized(childPlugins) {
 			return childPlugins;
 		}
+	}
+
+	private boolean isOptional = false;
+	
+	public void setIsOptional(String optional) {
+		if (optional!=null && optional.equalsIgnoreCase("true"))
+			isOptional = true;
+		else
+			isOptional = false;
+	}
+	
+	public boolean isOptional() {
+		return isOptional;
 	}
 }
 
