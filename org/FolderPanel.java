@@ -212,6 +212,16 @@ public class FolderPanel extends JComponent {
 		}
 	}
 
+	public void exchangeGuiComponentRow(GuiRow guiRow, GuiRow newRow, boolean updateLayout) {
+		synchronized (guiComponentRows) {
+			int idx = guiComponentRows.indexOf(guiRow);
+			guiComponentRows.remove(guiRow);
+			guiComponentRows.add(idx, newRow);
+			if (updateLayout)
+				layoutRows();
+		}
+	}
+
 	/**
 	 * Removes all current known GUI component rows from the internal list. Use
 	 * <code>addGuiComponentRow</code> to refill this list and
