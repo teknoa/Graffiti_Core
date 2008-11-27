@@ -9,6 +9,7 @@
 package org;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
@@ -24,6 +25,12 @@ public class ReleaseInfo {
 		currentRelease = currentReleaseStatus;
 	}
 	
+	private static HashSet<FeatureSet> enabledFeatures = new HashSet<FeatureSet>();
+	
+	public static void enableFeature(FeatureSet fs) {
+		enabledFeatures.add(fs);
+	}
+	
 	public static boolean getIsAllowedFeature(FeatureSet fs) {
 		
 		try {
@@ -37,6 +44,9 @@ public class ReleaseInfo {
 				return false;
 			return true;
 		}
+		
+		if (enabledFeatures!=null && enabledFeatures.contains(fs))
+			return true;
 		
 		switch (fs) {
 			case KEGG_ACCESS :
@@ -68,14 +78,12 @@ public class ReleaseInfo {
 				if (currentRelease==Release.DEBUG || currentRelease==Release.RELEASE_IPK)
 					return true;
 				break;
+			case MetaCrop_ACCESS :
+				return false; // enabled by add-on
 			case DBE_ACCESS :
 				if (currentRelease==Release.DEBUG || currentRelease==Release.RELEASE_IPK)
 					return true;
 				break;
-			case MetaCrop_ACCESS :
-				if (currentRelease!=Release.KGML_EDITOR)
-					return true;
-				break;	
 			case DATA_CARD_ACCESS :
 					return false;
 				// if (currentRelease==Release.DEBUG || currentRelease==Release.RELEASE_IPK)
@@ -115,14 +123,7 @@ public class ReleaseInfo {
 				break;
 				
 			case TAB_PATTERNSEARCH :
-				if (currentRelease==Release.KGML_EDITOR)
-					return false;
-				else
-					return true;
-				// return false;
-				// if (currentRelease==Release.DEBUG)
-				//	return true;
-				// break;
+				return false;
 			case DATAMAPPING :
 				if (currentRelease!=Release.RELEASE_CLUSTERVIS && currentRelease!=Release.KGML_EDITOR)
 					return true;
@@ -134,9 +135,7 @@ public class ReleaseInfo {
 			case FUNCAT_ACCESS :
 				return true;
 			case SBGN :
-				if (currentRelease!=Release.KGML_EDITOR)
-					return true;
-				break;
+				return false;
 			case URL_NODE_ANNOTATION :
 				if (currentRelease==Release.KGML_EDITOR)
 					return false;
