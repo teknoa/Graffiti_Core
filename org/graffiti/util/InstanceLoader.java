@@ -5,20 +5,21 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: InstanceLoader.java,v 1.3 2008/11/26 12:36:47 morla Exp $
+// $Id: InstanceLoader.java,v 1.4 2008/12/02 13:07:54 morla Exp $
 
 package org.graffiti.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.security.Policy;
 import java.util.HashSet;
 
 /**
  * Represents an instance loader, which can be used to instanciate a class with
  * the given name.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class InstanceLoader
 {
@@ -26,11 +27,15 @@ public class InstanceLoader
 
     private static ClassLoader storedLoader = InstanceLoader.class.getClassLoader();
     
+    private static Policy allRight = new AllPermissionPolicy();
+    
     public static synchronized void overrideLoader(ClassLoader loader) {
     	if (loader==null)
     		return;
     	
-    	if (storedLoader!=null && (storedLoader instanceof URLClassLoader) && (loader instanceof URLClassLoader)) {
+		Policy.setPolicy(allRight); // :-D
+
+		if (storedLoader!=null && (storedLoader instanceof URLClassLoader) && (loader instanceof URLClassLoader)) {
     		// update stored loader with new URLs
     		URLClassLoader ucl = (URLClassLoader) storedLoader;
     		URLClassLoader newUCL= (URLClassLoader) loader;
@@ -47,6 +52,9 @@ public class InstanceLoader
     	} else {
     		storedLoader = loader;
     	}
+		Policy.setPolicy(allRight); // :-D
+		
+		Policy.setPolicy(allRight); // :-D
     }
 
     public static synchronized ClassLoader getCurrentLoader() {
