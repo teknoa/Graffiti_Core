@@ -117,12 +117,12 @@ public class ReleaseInfo {
 						 || currentRelease==Release.DEBUG)
 					return true;*/
 				// break;
-			case TAB_STATISTICS :
-				if (currentRelease==Release.RELEASE_IPK || 
-						currentRelease==Release.RELEASE_PUBLIC || currentRelease==Release.DEBUG )
-					return true;
-				break;
-				
+			case STATISTIC_FUNCTIONS :
+//				if (currentRelease==Release.RELEASE_IPK || 
+//						currentRelease==Release.RELEASE_PUBLIC || currentRelease==Release.DEBUG )
+//					return true;
+//				break;
+				return false;
 			case TAB_PATTERNSEARCH :
 				return false;
 			case DATAMAPPING :
