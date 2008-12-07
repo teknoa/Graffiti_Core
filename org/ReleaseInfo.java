@@ -28,6 +28,7 @@ public class ReleaseInfo {
 	private static HashSet<FeatureSet> enabledFeatures = new HashSet<FeatureSet>();
 	
 	public static void enableFeature(FeatureSet fs) {
+		System.out.println("Enable feature "+fs.toString());
 		enabledFeatures.add(fs);
 	}
 	
@@ -125,9 +126,9 @@ public class ReleaseInfo {
 			case TAB_PATTERNSEARCH :
 				return false;
 			case DATAMAPPING :
-				if (currentRelease!=Release.RELEASE_CLUSTERVIS && currentRelease!=Release.KGML_EDITOR)
-					return true;
-				break;
+				return false;
+//				if (currentRelease!=Release.RELEASE_CLUSTERVIS && currentRelease!=Release.KGML_EDITOR)
+//					return true;
 			case AGLET_NETWORK :
 				if (currentRelease!=Release.RELEASE_CLUSTERVIS && currentRelease!=Release.KGML_EDITOR)
 					return true;
