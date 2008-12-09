@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.59 $
+ * @version $Revision: 1.60 $
  */
 public class AttributeHelper {
 
@@ -103,7 +103,7 @@ public class AttributeHelper {
 			}
 			url = p1 + "?" + p2;
 			url = ErrorMsg.stringReplace(url, "%3D", "=");
-			url = ErrorMsg.stringReplace(url, "%26", "&amp;");
+			url = ErrorMsg.stringReplace(url, "%26", "&");
 			url = ErrorMsg.stringReplace(url, "%2B", "%2B");
 		}
 		String osName = System.getProperty("os.name");
