@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.4 2008/09/30 14:40:56 klukas Exp $
+// $Id: XMLHelper.java,v 1.5 2008/12/17 11:05:33 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -102,7 +102,9 @@ public class XMLHelper {
 		outerXmlTransformer.setOutputProperty("omit-xml-declaration", "yes");
 		outerXmlTransformer.transform(nodeSource, streamResult);
 
-		return resultStringWriter.toString();
+		String result = resultStringWriter.toString();
+		result = ErrorMsg.stringReplace(result, "'", "");
+		return result;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -113,7 +115,9 @@ public class XMLHelper {
 		XMLOutputter serializer = new XMLOutputter();
 		serializer.setFormat(Format.getPrettyFormat());
 		serializer.output(getJDOMfromDOM(doc), resultStringWriter);
-		return resultStringWriter.toString();
+		String result = resultStringWriter.toString();
+		result = ErrorMsg.stringReplace(result, "'", "");
+		return result;
 	}
 	
 	public static org.jdom.Document getJDOMfromDOM(org.w3c.dom.Document doc) {
@@ -167,6 +171,9 @@ public class XMLHelper {
 							+ e.getLocalizedMessage());
 		} catch (ParserConfigurationException e) {
 			ErrorMsg.addErrorMessage("Format Parser Configuration Exception while processing experimental data.<br>"
+							+ e.getLocalizedMessage());
+		} catch (Exception e) {
+			ErrorMsg.addErrorMessage("Exception, data could not be processed.<br>"
 							+ e.getLocalizedMessage());
 		}
 		return null;
