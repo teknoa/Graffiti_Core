@@ -306,7 +306,23 @@ public class ReleaseInfo {
 		return folder;
 	}
 	
+	public static String getAppSubdirFolder(String subDir1, String subDir2) {
+		String folder1 = getAppFolderWithFinalSep()+subDir1;
+		String folder2 = folder1+getFileSeparator()+subDir2;
+		File dir = new File(folder1);
+		if(!dir.exists()) 
+			dir.mkdir();
+		File dir2 = new File(folder2);
+		if(!dir2.exists()) 
+			dir2.mkdir();
+		return folder2;
+	}
+	
 	public static String getAppSubdirFolderWithFinalSep(String folderName) {
 		return getAppSubdirFolder(folderName)+getFileSeparator();
+	}
+	
+	public static String getAppSubdirFolderWithFinalSep(String folderName, String folderName2) {
+		return getAppSubdirFolder(folderName, folderName2)+getFileSeparator();
 	}
 }

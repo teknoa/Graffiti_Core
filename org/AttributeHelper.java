@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.60 $
+ * @version $Revision: 1.61 $
  */
 public class AttributeHelper {
 
@@ -3463,6 +3463,16 @@ public class AttributeHelper {
 			return false;
 	}
 
+	public static boolean windowsRunning() {
+		Properties p = System.getProperties();
+		String os = (String) p.get("os.name");
+		if (os != null && os.toUpperCase().contains("WINDOWS")) {
+			return true;
+		} else
+			return false;
+	}
+
+	
 	public static String getShapeClassFromShapeName(String s) {
 		if (s.equals("oval"))
 			return "org.graffiti.plugins.views.defaults.EllipseNodeShape";
