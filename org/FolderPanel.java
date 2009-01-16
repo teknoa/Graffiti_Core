@@ -34,12 +34,19 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
@@ -1107,4 +1114,19 @@ public class FolderPanel extends JComponent {
 		for (GuiRow gr : toBeAdded)
 			addGuiComponentRow(gr, false);
 	}
+	
+	public void setPanelContentEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		enableContent(this,enabled);
+	}
+
+	private void enableContent(JComponent comp, boolean enabled) {
+			for(int i=0;i<comp.getComponentCount();i++)
+				if(comp.getComponent(i) instanceof JComponent)
+					enableContent((JComponent) comp.getComponent(i),enabled);
+			comp.setEnabled(enabled);				
+	}
+	
+	
+	
 }
