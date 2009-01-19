@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.61 $
+ * @version $Revision: 1.62 $
  */
 public class AttributeHelper {
 
@@ -1006,14 +1006,11 @@ public class AttributeHelper {
 			return false;
 		} catch (Exception err2) {
 			if (n == null)
-				System.err
-						.println("hasAttribute Function called with Null argument for attributeable!");
+				System.err.println("hasAttribute Function called with Null argument for attributeable!");
 			if (attributeName == null)
-				System.err
-						.println("hasAttribute Function called with Null argument for attributeName!");
+				System.err.println("hasAttribute Function called with Null argument for attributeName!");
 			if (n != null && attributeName != null)
-				System.err
-						.println("hasAttribute Function received exception while retreiving attribute! ("
+				System.err.println("hasAttribute Function received exception while retreiving attribute! ("
 								+ err2.getMessage() + ")");
 			return false;
 		}
