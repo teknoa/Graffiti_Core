@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.5 2008/12/17 11:05:33 klukas Exp $
+// $Id: XMLHelper.java,v 1.6 2009/01/19 09:31:04 belau Exp $
 
 package org.graffiti.plugin;
 
@@ -164,8 +164,7 @@ public class XMLHelper {
 			ErrorMsg.addErrorMessage("Null Pointer Exception, data could not be retrieved.<br>"
 							+ e.getLocalizedMessage());
 		} catch (SAXException e) {
-			ErrorMsg.addErrorMessage("Format Parser (SAX) Exception while processing experimental data.<br>"
-							+ e.getLocalizedMessage());
+			System.out.println("Invalid XML: "+res);
 		} catch (IOException e) {
 			ErrorMsg.addErrorMessage("IO Exception while processing experimental data.<br>"
 							+ e.getLocalizedMessage());
