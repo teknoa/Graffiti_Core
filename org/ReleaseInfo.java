@@ -62,11 +62,6 @@ public class ReleaseInfo {
 						return true;
 		          else
 		         	 return false;
-			case AUTO_NEWS_DOWNLOAD :
-	          if ((new File(getAppFolderWithFinalSep()+"setting_news_download_enabled")).exists())
-					return true;
-	          else
-	         	 return false;
 			case TRANSPATH_ACCESS :
 				if (currentRelease==Release.DEBUG || currentRelease==Release.RELEASE_IPK)
 					return true;

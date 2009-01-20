@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.62 $
+ * @version $Revision: 1.63 $
  */
 public class AttributeHelper {
 
@@ -559,6 +559,8 @@ public class AttributeHelper {
 		idToNiceId.put("absHor", "Label:" + disabled + "Horizontal Offset");
 		idToNiceId.put("absVert", "Label:" + disabled + "Vertical Offset");
 		idToNiceId.put("relAlign", "Label:" + disabled + "Relative Alignment");
+		
+		idToNiceId.put("oldlabel", "Label: Old Label");
 
 		idToNiceId.put(".mapping.chartposition.absVert", chartSelN
 				+ " (Chart-Position on Edge): Position (X-offset)");

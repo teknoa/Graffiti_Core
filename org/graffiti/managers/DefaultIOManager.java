@@ -5,11 +5,12 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.9 2008/11/14 14:40:49 morla Exp $
+// $Id: DefaultIOManager.java,v 1.10 2009/01/20 16:23:02 klukas Exp $
 
 package org.graffiti.managers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.security.AccessControlException;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -151,7 +152,7 @@ public class DefaultIOManager implements IOManager {
 	/*
 	 * @see org.graffiti.managers.IOManager#createInputSerializer(java.lang.String)
 	 */
-	public InputSerializer createInputSerializer(MyInputStreamCreator in, String extSearch) {
+	public InputSerializer createInputSerializer(MyInputStreamCreator in, String extSearch) throws FileNotFoundException {
 		ArrayList<InputSerializer> ins = new ArrayList<InputSerializer>();
 		for (InputSerializer is : inputSerializer) {
 			String[] ext = is.getExtensions();
@@ -171,6 +172,8 @@ public class DefaultIOManager implements IOManager {
 					System.out.println(ins.size()+" input serializers for file extension "+extSearch+". Selected "+is.getClass().getCanonicalName());
 					return is;
 				}
+			} catch(FileNotFoundException fne) {
+				throw fne;
 			} catch (Exception e) {
 				ErrorMsg.addErrorMessage(e);
 			}
