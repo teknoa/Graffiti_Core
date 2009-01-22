@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.6 2009/01/19 09:31:04 belau Exp $
+// $Id: XMLHelper.java,v 1.7 2009/01/22 11:53:50 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -103,7 +103,7 @@ public class XMLHelper {
 		outerXmlTransformer.transform(nodeSource, streamResult);
 
 		String result = resultStringWriter.toString();
-		result = ErrorMsg.stringReplace(result, "'", "");
+		result = ErrorMsg.stringReplace(result, "'", "\'");
 		return result;
 	}
 
@@ -116,7 +116,7 @@ public class XMLHelper {
 		serializer.setFormat(Format.getPrettyFormat());
 		serializer.output(getJDOMfromDOM(doc), resultStringWriter);
 		String result = resultStringWriter.toString();
-		result = ErrorMsg.stringReplace(result, "'", "");
+		result = ErrorMsg.stringReplace(result, "'", "\'");
 		return result;
 	}
 	
@@ -322,20 +322,20 @@ public class XMLHelper {
 		e.removeAttribute("ttest-level");
 	}
 	
-	public static void setTTestSetSampleSignificane(Node sampleNode,
-			boolean different, double level) {
-		Attr attr = sampleNode.getOwnerDocument().createAttribute("ttest");
-		Attr attrLevel = sampleNode.getOwnerDocument().createAttribute("ttest-level");
-		if (different)
-			attr.setNodeValue("H1");
-		else
-			attr.setNodeValue("H0");
-		// System.out.println(attr.getNodeValue());
-		attrLevel.setNodeValue(level+"");
-		Element e = (Element) sampleNode;
-		e.setAttributeNode(attr);
-		e.setAttributeNode(attrLevel);
-	}
+//	public static void setTTestSetSampleSignificane(Node sampleNode,
+//			boolean different, double level) {
+//		Attr attr = sampleNode.getOwnerDocument().createAttribute("ttest");
+//		Attr attrLevel = sampleNode.getOwnerDocument().createAttribute("ttest-level");
+//		if (different)
+//			attr.setNodeValue("H1");
+//		else
+//			attr.setNodeValue("H0");
+//		// System.out.println(attr.getNodeValue());
+//		attrLevel.setNodeValue(level+"");
+//		Element e = (Element) sampleNode;
+//		e.setAttributeNode(attr);
+//		e.setAttributeNode(attrLevel);
+//	}
 
 	/**
 	 * @param samplenode
