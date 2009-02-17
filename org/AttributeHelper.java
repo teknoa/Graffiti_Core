@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.63 $
+ * @version $Revision: 1.64 $
  */
 public class AttributeHelper {
 
@@ -1888,6 +1888,9 @@ public class AttributeHelper {
 		return Double.NaN;
 	}
 
+	
+
+	
 	/**
 	 * @param node
 	 * @param oldPos
@@ -3183,9 +3186,19 @@ public class AttributeHelper {
 				defaultReturn, new Double(0), setDefault);
 		return z;
 	}
-
+	
 	public static void setPositionZ(Node a, double z) {
 		setAttribute(a, "graphics", "z_", z);
+	}
+	
+	public static double getDepth(Node a, double defaultReturn, boolean setDefault) {
+		double z = (Double) getAttributeValue(a, "graphics", "depth",
+				defaultReturn, new Double(0), setDefault);
+		return z;
+	}
+
+	public static void setDepth(Node a, double depth) {
+		setAttribute(a, "graphics", "depth", depth);
 	}
 
 	public static boolean isHiddenGraphElement(GraphElement ge) {
