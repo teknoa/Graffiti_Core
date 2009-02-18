@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.64 $
+ * @version $Revision: 1.65 $
  */
 public class AttributeHelper {
 
@@ -1856,6 +1856,11 @@ public class AttributeHelper {
 		return null;
 	}
 
+	public static Vector3d getSize3D(Node myNode, double defaultDepth, boolean setDefault) {
+		Vector2d size = getSize(myNode);
+		return new Vector3d(size.x, size.y, getDepth(myNode, defaultDepth, setDefault));
+	}
+	
 	public static double getWidth(Node myNode) {
 		try {
 			double width;
