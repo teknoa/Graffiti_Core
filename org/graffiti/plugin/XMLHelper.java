@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.7 2009/01/22 11:53:50 klukas Exp $
+// $Id: XMLHelper.java,v 1.8 2009/02/26 12:52:27 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -103,11 +103,10 @@ public class XMLHelper {
 		outerXmlTransformer.transform(nodeSource, streamResult);
 
 		String result = resultStringWriter.toString();
-		result = ErrorMsg.stringReplace(result, "'", "\'");
+		result = ErrorMsg.stringReplace(result, "'", "&apos;");
 		return result;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static String getOuterXmlPretty(Node n) throws IOException, TransformerException, JDOMException {
 		ByteArrayInputStream is = new ByteArrayInputStream(getOuterXml(n).getBytes("UTF-8"));
 		Document doc = getDocument(is);
@@ -116,7 +115,7 @@ public class XMLHelper {
 		serializer.setFormat(Format.getPrettyFormat());
 		serializer.output(getJDOMfromDOM(doc), resultStringWriter);
 		String result = resultStringWriter.toString();
-		result = ErrorMsg.stringReplace(result, "'", "\'");
+		result = ErrorMsg.stringReplace(result, "'", "&apos;");
 		return result;
 	}
 	
