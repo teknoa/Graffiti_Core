@@ -5,12 +5,13 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Node.java,v 1.2 2007/09/12 11:38:29 klukas Exp $
+// $Id: Node.java,v 1.3 2009/03/18 19:38:00 klukas Exp $
 
 package org.graffiti.graph;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Provides an interfaces for a graph node. All directed edges whose source is
@@ -19,7 +20,7 @@ import java.util.Iterator;
  * Undirected edges are regarded separately since a <code>Graph</code> can
  * have <b>both</b> directed and indirected edges.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see Edge
  * @see GraphElement
@@ -139,7 +140,7 @@ public interface Node
      * @return a collection containing the neighbor nodes belonging to incoming
      *         edges.
      */
-    public Collection<Node> getInNeighbors();
+    public Set<Node> getInNeighbors();
 
     /**
      * Returns an iterator over the neighbor nodes belonging to incoming edges.
@@ -157,7 +158,7 @@ public interface Node
      * @return a collection containing all the neighbor nodes of the current
      *         <code>Node</code>.
      */
-    public Collection<Node> getNeighbors();
+    public Set<Node> getNeighbors();
 
     /**
      * Returns an interator over the neighbor nodes of the current
@@ -190,7 +191,7 @@ public interface Node
      * @return a collection containing all the neighbor nodes of the current
      *         <code>Node</code> connected by an outgoing <code>Edge</code>.
      */
-    public Collection<Node> getOutNeighbors();
+    public Set<Node> getOutNeighbors();
 
     /**
      * Returns an iterator containing all the neighbors of the current

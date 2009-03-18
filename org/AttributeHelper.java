@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.65 $
+ * @version $Revision: 1.66 $
  */
 public class AttributeHelper {
 
@@ -660,6 +660,11 @@ public class AttributeHelper {
 		idToNiceId.put("degree", nodestat + "Degree");
 		idToNiceId.put("degree_in", nodestat + "In-Degree");
 		idToNiceId.put("degree_out", nodestat + "Out-Degree");
+		
+		idToNiceId.put("clustering_coeff_undir", nodestat + "Clustering coeff. (undir.)");
+		idToNiceId.put("clustering_coeff_dir", nodestat + "Clustering coeff. (dir.)");
+		
+		
 		String mapstat = "<html><!--z-->Mapping Statistics&nbsp;<small><font color=\"gray\">(not auto-updated)</font>:";
 		idToNiceId.put("datamapping_cnt", mapstat + "Number of mappings");
 		idToNiceId.put("lines_cnt", mapstat + "Number of lines");

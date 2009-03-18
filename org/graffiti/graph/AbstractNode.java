@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractNode.java,v 1.5 2008/04/04 09:36:54 klukas Exp $
+// $Id: AbstractNode.java,v 1.6 2009/03/18 19:38:00 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -24,7 +24,7 @@ import org.graffiti.util.MultipleIterator;
  * Abstract class <code>AbstractNode</code> common functionality for
  * <code>Node</code> implementations.
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *
  * @see AdjListNode
  */
@@ -197,7 +197,7 @@ public abstract class AbstractNode
      * @return a collection containing the neighbor nodes belonging to incoming
      *         edges.
      */
-    public Collection<Node> getInNeighbors()
+    public Set<Node> getInNeighbors()
     {
         Set<Node> s = new LinkedHashSet<Node>(getUndirectedNeighbors());
 
@@ -233,7 +233,7 @@ public abstract class AbstractNode
      * @return a collection containing all the neighbor nodes of the current
      *         <code>Node</code>.
      */
-    public Collection<Node> getNeighbors()
+    public Set<Node> getNeighbors()
     {
         Set<Node> s = new LinkedHashSet<Node>();
         for(Edge e : getEdges())
@@ -283,7 +283,7 @@ public abstract class AbstractNode
      * @return a collection containing all the neighbor nodes of the current
      *         <code>Node</code> connected by an outgoing <code>Edge</code>.
      */
-    public Collection<Node> getOutNeighbors()
+    public Set<Node> getOutNeighbors()
     {
         Set<Node> s = new LinkedHashSet<Node>(getUndirectedNeighbors());
 
