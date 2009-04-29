@@ -429,7 +429,7 @@ public class ErrorMsg {
 		int tagApos = textWithHtmlTags.indexOf(tagA);
 		while (tagApos>=0) {
 			int tagBpos = textWithHtmlTags.indexOf(tagB, tagApos+tagB.length())+tagB.length();
-			if (tagBpos>0) {
+			if (tagB.length()>0 && tagBpos>0) {
 				textWithHtmlTags = textWithHtmlTags.substring(0, tagApos) + textWithHtmlTags.substring(tagBpos);
 				tagApos = textWithHtmlTags.indexOf(tagA);
 			} else {
@@ -437,7 +437,7 @@ public class ErrorMsg {
 				tagApos = textWithHtmlTags.indexOf(tagA);
 			}
 		}
-		if (textWithHtmlTags.indexOf(tagB)>=0)
+		if (tagB.length()>0 && textWithHtmlTags.indexOf(tagB)>=0)
 			textWithHtmlTags = textWithHtmlTags.substring(textWithHtmlTags.indexOf(tagB)+tagB.length());
 		return textWithHtmlTags; 
 	}
