@@ -37,10 +37,7 @@ public class PositionGridGenerator {
         this.curY=ySpace;
     }
     
-    /**
-     * @return
-     */
-    public Point2D getNextPosition() {
+   public Point2D getNextPosition() {
         curX+=xSpace;
         Point2D result=new Point2D.Double(curX, curY);
         
@@ -52,4 +49,15 @@ public class PositionGridGenerator {
         return result;
     }
 
+   public Vector2d getNextPositionVec2d() {
+      curX+=xSpace;
+      Vector2d result=new Vector2d(curX, curY);
+      
+      if (curX>maxX+xSpace) {
+          curX=xSpace;
+          curY+=ySpace;
+      }
+      
+      return result;
+  }
 }

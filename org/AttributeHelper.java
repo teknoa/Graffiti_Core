@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.66 $
+ * @version $Revision: 1.67 $
  */
 public class AttributeHelper {
 
@@ -2531,6 +2531,11 @@ public class AttributeHelper {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
 				.getAttribute(EdgeGraphicAttribute.GRAPHICS);
 		return ega.getLineMode().getDashArray();
+	}
+	
+	public static CollectionAttribute getDefaultGraphicsAttributeForNode(
+			Vector2d position) {
+		return getDefaultGraphicsAttributeForNode(position.x, position.y);
 	}
 
 	public static CollectionAttribute getDefaultGraphicsAttributeForNode(

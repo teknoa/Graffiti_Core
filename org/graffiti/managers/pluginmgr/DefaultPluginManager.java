@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.18 2008/11/27 20:11:49 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.19 2009/05/05 15:50:06 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -13,7 +13,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -24,8 +23,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
-
-import javax.swing.JOptionPane;
 
 import org.ErrorMsg;
 import org.graffiti.core.StringBundle;
@@ -40,7 +37,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -350,6 +347,9 @@ public class DefaultPluginManager
 				continue;
 			}
 			final PluginDescription desc = plugin.getDescription();
+			if (desc==null)
+				System.err.println("Invalid plugin description for file "+pluginUrl.toString());
+			else
 			if ( (loadPriorityPlugins && desc.isPriorityPlugin()) || (!loadPriorityPlugins && !desc.isPriorityPlugin()))
 			run.submit(new Runnable() {
 				public void run() {
