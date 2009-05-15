@@ -104,6 +104,12 @@ public class FolderPanel extends JComponent {
 	private SearchFilter searchFilter;
 	protected JTextField currentSearchInputField;
 	private int activeSearchResult = -1;
+	private boolean lockRowCount;
+	private Iconsize bigIcons = Iconsize.SMALL;
+
+	public void setIconSize(Iconsize bigIcons) {
+		this.bigIcons = bigIcons;
+	}
 
 	public FolderPanel(String title, boolean openCondensed,
 			boolean showCondenseButton, boolean sortRows,
@@ -559,7 +565,7 @@ public class FolderPanel extends JComponent {
 		cmdButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		// result.setOpaque(false);
 		ClassLoader cl = this.getClass().getClassLoader();
-		String path = this.getClass().getPackage().getName().replace('.', '/');
+		String path = this.getClass().getPackage().getName().replace('.', '/')+"/images";
 		if (condenseStyle == CondenseButtonLayout.RIGHT) {
 			condensedIcon = new ImageIcon(cl.getResource(path + "/unfold.png"));
 			uncondensedIcon = new ImageIcon(cl.getResource(path + "/fold.png"));
@@ -692,7 +698,7 @@ public class FolderPanel extends JComponent {
 	public static ImageIcon getSearchIcon() {
 		ClassLoader cl = FolderPanel.class.getClassLoader();
 		String path = FolderPanel.class.getPackage().getName()
-				.replace('.', '/');
+				.replace('.', '/')+"/images";
 		ImageIcon searchIcon = new ImageIcon(cl.getResource(path + "/lupe.png"));
 		return searchIcon;
 	}
@@ -709,8 +715,8 @@ public class FolderPanel extends JComponent {
 						TableLayout.PREFERRED, TableLayout.PREFERRED,
 						TableLayout.PREFERRED }, { TableLayout.FILL } }));
 
-		final JButton cmdButtonL = new JButton(); // less rows
-		final JButton cmdButtonM = new JButton(); // more rows
+		final JButton cmdButtonReduceMaximumRowCount = new JButton(); // less rows
+		final JButton cmdButtonIncreaseMaximumRowCount = new JButton(); // more rows
 
 		final JButton cmdButton1 = new JButton();
 		final JButton cmdButton2 = new JButton();
@@ -725,13 +731,13 @@ public class FolderPanel extends JComponent {
 		if (gcs % maxRowCount > 0)
 			pages++;
 
-		cmdButtonL.setEnabled(maxRowCount > 1 && gcs > 0);
-		cmdButtonM.setEnabled(gcs > 0);
+		cmdButtonReduceMaximumRowCount.setEnabled(maxRowCount > 1 && gcs > 0);
+		cmdButtonIncreaseMaximumRowCount.setEnabled(gcs > 0);
 
 		cmdButton1.setEnabled(currentPage > 0);
 		cmdButton2.setEnabled(currentPage + 1 < pages);
 
-		cmdButtonL.addActionListener(new ActionListener() {
+		cmdButtonReduceMaximumRowCount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				maxRowCount--;
 				currentPage = 0;
@@ -742,7 +748,7 @@ public class FolderPanel extends JComponent {
 				}
 			}
 		});
-		cmdButtonM.addActionListener(new ActionListener() {
+		cmdButtonIncreaseMaximumRowCount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				maxRowCount++;
 				currentPage = 0;
@@ -775,15 +781,15 @@ public class FolderPanel extends JComponent {
 			}
 		});
 
-		cmdButtonL.setBackground(frameColor);
-		cmdButtonL.setBorderPainted(false);
-		cmdButtonL.setRolloverEnabled(true);
-		cmdButtonL.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		cmdButtonReduceMaximumRowCount.setBackground(frameColor);
+		cmdButtonReduceMaximumRowCount.setBorderPainted(false);
+		cmdButtonReduceMaximumRowCount.setRolloverEnabled(true);
+		cmdButtonReduceMaximumRowCount.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-		cmdButtonM.setBackground(frameColor);
-		cmdButtonM.setBorderPainted(false);
-		cmdButtonM.setRolloverEnabled(true);
-		cmdButtonM.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		cmdButtonIncreaseMaximumRowCount.setBackground(frameColor);
+		cmdButtonIncreaseMaximumRowCount.setBorderPainted(false);
+		cmdButtonIncreaseMaximumRowCount.setRolloverEnabled(true);
+		cmdButtonIncreaseMaximumRowCount.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		cmdButton1.setBackground(frameColor);
 		cmdButton1.setBorderPainted(false);
@@ -795,31 +801,47 @@ public class FolderPanel extends JComponent {
 		cmdButton2.setRolloverEnabled(true);
 		cmdButton2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-		cmdButtonL.setToolTipText("reduce row count");
-		cmdButtonM.setToolTipText("increase row count");
+		cmdButtonReduceMaximumRowCount.setToolTipText("reduce row count");
+		cmdButtonIncreaseMaximumRowCount.setToolTipText("increase row count");
 		cmdButton1.setToolTipText("turn page");
 		cmdButton2.setToolTipText("turn page");
 
 		// result.setOpaque(false);
 		ClassLoader cl = this.getClass().getClassLoader();
-		String path = this.getClass().getPackage().getName().replace('.', '/');
-		ImageIcon leftIcon = new ImageIcon(cl
-				.getResource(path + "/bw_left.png"));
-		ImageIcon rightIcon = new ImageIcon(cl.getResource(path
-				+ "/bw_right.png"));
+		String path = this.getClass().getPackage().getName().replace('.', '/')+"/images";
+		ImageIcon leftIcon = null;
+		ImageIcon rightIcon = null;
 		ImageIcon lessIcon = new ImageIcon(cl
 				.getResource(path + "/bw_fold.png"));
 		ImageIcon moreIcon = new ImageIcon(cl.getResource(path
 				+ "/bw_unfold.png"));
+		
+		if (bigIcons==Iconsize.LARGE) {
+			leftIcon = new ImageIcon(cl
+					.getResource(path + "/large_left.png"));
+			rightIcon = new ImageIcon(cl.getResource(path
+					+ "/large_right.png"));
+		} else if (bigIcons==Iconsize.MIDDLE) {
+			leftIcon = new ImageIcon(cl
+					.getResource(path + "/middle_left.png"));
+			rightIcon = new ImageIcon(cl.getResource(path
+					+ "/middle_right.png"));
+		} else if (bigIcons==Iconsize.SMALL) {
+			leftIcon = new ImageIcon(cl
+					.getResource(path + "/bw_left.png"));
+			rightIcon = new ImageIcon(cl.getResource(path
+					+ "/bw_right.png"));
+		}
+		
 		cmdButton1.setIcon(leftIcon);
 		cmdButton2.setIcon(rightIcon);
-		cmdButtonL.setIcon(lessIcon);
-		cmdButtonM.setIcon(moreIcon);
+		cmdButtonReduceMaximumRowCount.setIcon(lessIcon);
+		cmdButtonIncreaseMaximumRowCount.setIcon(moreIcon);
 		int s = 0;
 		cmdButton1.setMargin(new Insets(s, s, s, s));
 		cmdButton2.setMargin(new Insets(s, s, s, s));
-		cmdButtonL.setMargin(new Insets(s, s, s, s));
-		cmdButtonM.setMargin(new Insets(s, s, s, s));
+		cmdButtonReduceMaximumRowCount.setMargin(new Insets(s, s, s, s));
+		cmdButtonIncreaseMaximumRowCount.setMargin(new Insets(s, s, s, s));
 		String pt = "<html><font color='gray'><small>" + (currentPage + 1)
 				+ "/" + (pages);
 		if (((currentPage + 1) + "/" + (pages)).equals("1/0"))
@@ -827,8 +849,10 @@ public class FolderPanel extends JComponent {
 		JLabel pageLabel = new JLabel(pt);
 		pageLabel.setBackground(frameColor);
 		pageLabel.setOpaque(true);
-		tb.add(cmdButtonL, "0,0");
-		tb.add(cmdButtonM, "1,0");
+		if (!lockRowCount) {
+			tb.add(cmdButtonReduceMaximumRowCount, "0,0");
+			tb.add(cmdButtonIncreaseMaximumRowCount, "1,0");
+		}
 		tb.add(cmdButton1, "2,0");
 		tb.add(pageLabel, "3,0");
 		tb.add(cmdButton2, "4,0");
@@ -853,7 +877,7 @@ public class FolderPanel extends JComponent {
 		result.setOpaque(frameColor != null);
 		ClassLoader cl = FolderPanel.class.getClassLoader();
 		String path = FolderPanel.class.getPackage().getName()
-				.replace('.', '/');
+				.replace('.', '/')+"/images";
 
 		result.setIcon(new ImageIcon(cl.getResource(path + "/help2.png")));
 		result.addActionListener(helpActionListener);
@@ -1010,7 +1034,12 @@ public class FolderPanel extends JComponent {
 	}
 
 	public void setMaximumRowCount(int maxRowCount) {
+		setMaximumRowCount(maxRowCount, false);
+	}
+
+	public void setMaximumRowCount(int maxRowCount, boolean locked) {
 		this.maxRowCount = maxRowCount;
+		this.lockRowCount = locked;
 	}
 
 	public void setRowBackground0(Color col0) {
@@ -1127,6 +1156,8 @@ public class FolderPanel extends JComponent {
 			comp.setEnabled(enabled);				
 	}
 	
-	
+	public enum Iconsize {
+		SMALL, MIDDLE, LARGE
+	}
 	
 }

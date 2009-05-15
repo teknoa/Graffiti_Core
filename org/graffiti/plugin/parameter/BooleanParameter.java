@@ -5,14 +5,14 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: BooleanParameter.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: BooleanParameter.java,v 1.2 2009/05/15 13:08:33 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
 /**
  * Parameter that contains a <code>Boolean</code> value.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class BooleanParameter
     extends AbstractSingleParameter
@@ -21,6 +21,7 @@ public class BooleanParameter
 
     /** The value of this parameter. */
     private Boolean value = null;
+	private boolean left_aligned;
 
     //~ Constructors ===========================================================
 
@@ -113,6 +114,14 @@ public class BooleanParameter
     public String toXMLString() {
         return getStandardXML(value.booleanValue() ? "true" : "false");
     }
+
+	public boolean isLeftAligned() {
+		return left_aligned;
+	}
+	
+	public void setLeftAligned(boolean left_aligned) {
+		this.left_aligned = left_aligned;
+	}
 
 }
 
