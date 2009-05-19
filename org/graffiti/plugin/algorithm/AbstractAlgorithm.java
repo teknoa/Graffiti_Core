@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAlgorithm.java,v 1.2 2009/05/07 07:06:35 klukas Exp $
+// $Id: AbstractAlgorithm.java,v 1.3 2009/05/19 13:42:40 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -125,14 +125,6 @@ public abstract class AbstractAlgorithm implements Algorithm {
 
 	public void setActionEvent(ActionEvent a) {
 		actionEvent = a;
-	}
-
-	public void execute() {
-		throw new RuntimeException("NOT IMPLEMENTED (OVERRIDE METHOD)");
-	}
-
-	public String getName() {
-		throw new RuntimeException("NOT IMPLEMENTED (OVERRIDE METHOD)");
 	}
 }
 
