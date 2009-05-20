@@ -87,11 +87,11 @@ public class ReleaseInfo {
 				// break;					
 			case METHOUSE_ACCESS :
 				if (currentRelease==Release.DEBUG || currentRelease==Release.RELEASE_IPK)
-					return true;
+					return false;
 				break;
 			case FLAREX_ACCESS :
 				if (currentRelease==Release.DEBUG || currentRelease==Release.RELEASE_IPK)
-					return true;
+					return false;
 				break;
 			case SCRIPT_ACCESS :
 				return true; /*
