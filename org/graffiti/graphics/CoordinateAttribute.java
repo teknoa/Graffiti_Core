@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: CoordinateAttribute.java,v 1.3 2008/10/10 22:26:46 klukas Exp $
+// $Id: CoordinateAttribute.java,v 1.4 2009/05/21 20:22:17 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -18,13 +18,11 @@ import org.graffiti.attributes.DoubleAttribute;
 import org.graffiti.attributes.HashMapAttribute;
 import org.graffiti.event.AttributeEvent;
 
-import sun.security.action.GetLongAction;
-
 /**
  * Contains the coordinate graphic attribute.
  *
  * @author breu
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class CoordinateAttribute
     extends HashMapAttribute
