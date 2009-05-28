@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.67 $
+ * @version $Revision: 1.68 $
  */
 public class AttributeHelper {
 
@@ -3166,54 +3166,66 @@ public class AttributeHelper {
 		return ErrorMsg.stringReplace(attributeName, " ", "_");
 	}
 
-	public static Vector3d getPositionVec3d(Node a, boolean setDefaultZ) {
+	/**
+	 * If setDefault is true, values will be initilized, saved and returned as 0.
+	 * Behaviour may be different between different getPosition* methods.
+	 * (AAA)
+	 * @param node
+	 * @param setDefault
+	 * @return Position vector (3D)
+	 */
+	public static Vector3d getPositionVec3d(Node node, boolean setDefault) {
 		try {
-			CoordinateAttribute coA = (CoordinateAttribute) a
+			CoordinateAttribute coA = (CoordinateAttribute) node
 					.getAttribute(GraphicAttributeConstants.COORD_PATH);
 			Point2D r = coA.getCoordinate();
-			double z = getPositionZ(a, setDefaultZ);
+			double z = getPositionZ(node, setDefault);
 			return new Vector3d(r.getX(), r.getY(), z);
 		} catch (Exception ex) {
+			if (setDefault) {
+				setPosition(node, 0, 0);
+				setPositionZ(node, 0);
+			}
+			return new Vector3d(0,0,0);
 		}
-		return new Vector3d(Double.NaN, Double.NaN, Double.NaN);
 	}
 	
-	public static Vector3d getPositionVec3d(Node a, double zReturnIfNotAvailable, boolean setDefaultZ) {
+	public static Vector3d getPositionVec3d(Node node, double zReturnIfNotAvailable, boolean setDefaultZ) {
 		try {
-			CoordinateAttribute coA = (CoordinateAttribute) a
+			CoordinateAttribute coA = (CoordinateAttribute) node
 					.getAttribute(GraphicAttributeConstants.COORD_PATH);
 			Point2D r = coA.getCoordinate();
-			double z = getPositionZ(a, zReturnIfNotAvailable, setDefaultZ);
+			double z = getPositionZ(node, zReturnIfNotAvailable, setDefaultZ);
 			return new Vector3d(r.getX(), r.getY(), z);
 		} catch (Exception ex) {
 		}
 		return new Vector3d(Double.NaN, Double.NaN, Double.NaN);
 	}
 
-	public static double getPositionZ(Node a, boolean setDefault) {
-		double z = (Double) getAttributeValue(a, "graphics", "z_",
+	public static double getPositionZ(Node node, boolean setDefault) {
+		double z = (Double) getAttributeValue(node, "graphics", "z_",
 				new Double(0), new Double(0), setDefault);
 		return z;
 	}
 
-	public static double getPositionZ(Node a, double defaultReturn, boolean setDefault) {
-		double z = (Double) getAttributeValue(a, "graphics", "z_",
+	public static double getPositionZ(Node node, double defaultReturn, boolean setDefault) {
+		double z = (Double) getAttributeValue(node, "graphics", "z_",
 				defaultReturn, new Double(0), setDefault);
 		return z;
 	}
 	
-	public static void setPositionZ(Node a, double z) {
-		setAttribute(a, "graphics", "z_", z);
+	public static void setPositionZ(Node node, double z) {
+		setAttribute(node, "graphics", "z_", z);
 	}
 	
-	public static double getDepth(Node a, double defaultReturn, boolean setDefault) {
-		double z = (Double) getAttributeValue(a, "graphics", "depth",
+	public static double getDepth(Node node, double defaultReturn, boolean setDefault) {
+		double z = (Double) getAttributeValue(node, "graphics", "depth",
 				defaultReturn, new Double(0), setDefault);
 		return z;
 	}
 
-	public static void setDepth(Node a, double depth) {
-		setAttribute(a, "graphics", "depth", depth);
+	public static void setDepth(Node node, double depth) {
+		setAttribute(node, "graphics", "depth", depth);
 	}
 
 	public static boolean isHiddenGraphElement(GraphElement ge) {
