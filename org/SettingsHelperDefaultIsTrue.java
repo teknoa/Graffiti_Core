@@ -39,7 +39,7 @@ public class SettingsHelperDefaultIsTrue {
 	public static JComponent getBooleanSettingsEditor(String description, final String option, final Runnable enable, final Runnable disable) {
 		final JCheckBox result = new JCheckBox(description, isEnabled(option));
 		result.setOpaque(false);
-		final ObjectRef currentSetting = new ObjectRef("n/a", SettingsHelperDefaultIsTrue.isEnabled(option));
+//		final ObjectRef currentSetting = new ObjectRef("n/a", SettingsHelperDefaultIsTrue.isEnabled(option));
 		result.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean enabled = SettingsHelperDefaultIsTrue.isEnabled(option);
@@ -52,14 +52,17 @@ public class SettingsHelperDefaultIsTrue {
 					if (disable!=null)
 						disable.run();
 				}
-				currentSetting.setObject(enabled);
+//				currentSetting.setObject(enabled);
 			}});
 		Timer t = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean active = SettingsHelperDefaultIsTrue.isEnabled(option);
-				if (((Boolean)currentSetting.getObject())!=active) {
-					result.setSelected(active);
-				}
+//				boolean a = ((Boolean)currentSetting.getObject());
+				boolean b = active;
+				result.setSelected(b);
+//				if ((a && !b) || (!a && b) ) {
+//					result.setSelected(b);
+//				}
 			}});
 		t.start();
 		return result;
