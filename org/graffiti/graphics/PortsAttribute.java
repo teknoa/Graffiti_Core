@@ -5,10 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PortsAttribute.java,v 1.1 2007/05/31 12:55:57 klukas Exp $
+// $Id: PortsAttribute.java,v 1.2 2009/06/06 07:37:06 klukas Exp $
 
 package org.graffiti.graphics;
 
+import java.awt.geom.Point2D;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,7 +26,7 @@ import org.graffiti.util.MultipleIterator;
  * Contains ingoing, outgoing and common ports
  *
  * @author breu
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PortsAttribute
     extends HashMapAttribute
@@ -81,6 +82,8 @@ public class PortsAttribute
         add(this.ingoing, false);
         add(this.outgoing, false);
         add(this.common, false);
+        
+        // common.add(new PortAttribute("port1", "myPort", new Point2D.Double(200, 300)));
     }
 
     //~ Methods ================================================================

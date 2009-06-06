@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Port.java,v 1.1 2007/05/31 12:55:57 klukas Exp $
+// $Id: Port.java,v 1.2 2009/06/06 07:37:06 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -64,7 +64,7 @@ public class Port
     }
 
     /**
-     * Sets the x ccordinate of this port.
+     * Sets the x coordinate of this port.
      *
      * @param x
      */

@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.68 $
+ * @version $Revision: 1.69 $
  */
 public class AttributeHelper {
 
@@ -610,6 +610,9 @@ public class AttributeHelper {
 		idToNiceId.put(".labelgraphics.anchor", "Label: Position");
 
 		
+		idToNiceId.put("source", "Docking: Source/Target");
+		idToNiceId.put("target", "Docking: Source/Target");
+
 		idToNiceId.put("fontName", "Label (Annotation): Font");
 		idToNiceId.put("fontSize", "Label (Annotation): Font-Size");
 		idToNiceId.put("fontStyle", "Label (Annotation): Font-Style");
@@ -931,7 +934,7 @@ public class AttributeHelper {
 		}
 		return AlignmentSetting.CENTERED;
 	}
-
+	
 	/**
 	 * Sets the font to use when the label is drawed.
 	 * 
@@ -1810,7 +1813,7 @@ public class AttributeHelper {
 		DockingAttribute dock = graphics.getDocking();
 		dock.setSource("");
 		dock.setTarget("");
-		// graphics.setDocking(dock);
+		graphics.setDocking(dock);
 
 		// setting the graphic attributes to the default values stored
 		// in the preferences
