@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LinkedHashMapAttribute.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: LinkedHashMapAttribute.java,v 1.2 2009/06/07 12:44:24 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -19,7 +19,7 @@ import org.graffiti.plugin.XMLHelper;
 /**
  * DOCUMENT ME!
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class LinkedHashMapAttribute
     extends AbstractCollectionAttribute
@@ -162,6 +162,11 @@ public class LinkedHashMapAttribute
         
         return getStandardXML(valString.toString());
     }
+
+	@Override
+	public int size() {
+		return attributes.size();
+	}
 }
 
 //------------------------------------------------------------------------------

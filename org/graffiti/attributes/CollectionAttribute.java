@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: CollectionAttribute.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: CollectionAttribute.java,v 1.2 2009/06/07 12:44:24 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -40,7 +40,7 @@ import org.graffiti.core.DeepCopy;
  * </blockquote>
  * </p>
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public interface CollectionAttribute
     extends DeepCopy, Attribute
@@ -150,6 +150,8 @@ public interface CollectionAttribute
      */
     public void remove(Attribute att)
         throws AttributeNotFoundException;
+
+	public int size();
 }
 
 //------------------------------------------------------------------------------
