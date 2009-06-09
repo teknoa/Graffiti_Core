@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.69 $
+ * @version $Revision: 1.70 $
  */
 public class AttributeHelper {
 
@@ -3556,6 +3556,8 @@ public class AttributeHelper {
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.TruncProteinShape";
 		if (s.equals("sourcesink"))
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.SourceSinkShape";
+		if (s.equals("transition"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.TransitionShape";
 		if (s.equals("multinucleic"))
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.MultiNucleicAcidFeatureShape";
 		if (s.equals("multirectangle"))
@@ -3576,6 +3578,7 @@ public class AttributeHelper {
 				"Nucleic Acid Feature",
 				"Truncated Protein",
 				"Source or Sink",
+				"Transition",
 				"Multi Nucleic Acid Feature",
 				"Multi Rectangle",
 				"Multi Oval",
@@ -3615,6 +3618,7 @@ public class AttributeHelper {
 		                "nucleic",
 		                "truncprotein",
 		                "sourcesink",
+		                "transition",
 		                "multinucleic",
 		                "multirectangle",
 		                "mulitoval",
