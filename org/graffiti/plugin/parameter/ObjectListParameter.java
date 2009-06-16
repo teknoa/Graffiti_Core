@@ -3,17 +3,19 @@ package org.graffiti.plugin.parameter;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.swing.ListCellRenderer;
 
 /**
  * @author klukas
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class ObjectListParameter
     extends AbstractSingleParameter
 {
    @SuppressWarnings("unchecked")
    private Collection possibleValues;
+   private ListCellRenderer renderer;
 
 	@SuppressWarnings("unchecked")
 	public ObjectListParameter(Object val, String name, String description, Collection possibleValues) {
@@ -32,6 +34,14 @@ public class ObjectListParameter
 	@SuppressWarnings("unchecked")
 	public Collection getPossibleValues() {
 		return possibleValues;
+	}
+
+	public void setRenderer(ListCellRenderer renderer) {
+		this.renderer = renderer;
+	}
+	
+	public ListCellRenderer getRenderer() {
+		return renderer;
 	}
 }
 

@@ -2413,6 +2413,29 @@ public void invalidateLayout (Container target)
 		result.validate();
 		return result;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static JComponent getMultiSplitVertical(
+			Collection jComponentList, int spaceBetween) {
+		JPanel result = new JPanel();
+		result.setOpaque(false);
+		result.setBackground(null);
+		double[] height = new double[jComponentList.size()];
+		for (int i=0; i<height.length; i++)
+			height[i] = TableLayout.PREFERRED;
+		result.setLayout(getLayout(TableLayout.FILL, height));
+		int idx = 0;
+		int max = jComponentList.size();
+		for (Object o : jComponentList) {
+			JComponent jc = (JComponent)o;
+			if (idx+1<max)
+				jc = FolderPanel.getBorderedComponent(jc, 0, 0, spaceBetween, 0);
+			result.add(jc, "0,"+idx);
+			idx++;
+		}
+		result.validate();
+		return result;
+	}
 
 
 
