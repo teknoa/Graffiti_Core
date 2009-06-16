@@ -19,7 +19,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 
 public class MarkComponent extends JComponent {
@@ -35,6 +37,8 @@ public class MarkComponent extends JComponent {
 	private boolean marked;
 
 	private boolean requestFocus;
+	
+	private double intensity = 1d;
 
 	public MarkComponent(JComponent comp, boolean marked, double width, boolean requestFocus) {
 		
@@ -49,23 +53,78 @@ public class MarkComponent extends JComponent {
 		add(b2, "4,0");
 		this.marked = marked;
 		updateMarked();
+		
+		if (false)
+			initTimer();
 	}
 	
+	private void initTimer() {
+		final MarkComponent thisM = this;
+		final Timer t = new Timer(100, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!thisM.isVisible()) {
+					thisM.intensity = 1;
+//					((Timer)e.getSource()).stop();
+				} else {
+					if (marked) {
+						intensity+=0.02;
+						if (intensity>1)
+							intensity = -1;
+					} else
+						intensity = 1;
+				}
+				updateMarked();
+			}});
+		t.start();
+	}
+
 	private void updateMarked() {
 		b1.setOpaque(marked);
 		b2.setOpaque(marked);
 		bb1.setOpaque(marked);
 		bb2.setOpaque(marked);
 		if (marked) {
-			b1.setBackground(selCol);
-			b2.setBackground(selCol);
-			bb1.setBackground(selColBB);
-			bb2.setBackground(selColBB);
+			Color c1 = selCol;
+			Color c2 = selColBB;
+			float i = intensity>0 ? (float)intensity : (float)-intensity;
+//			if (i<1d) {
+				System.out.println(i);
+				if (c1!=null) {
+					Color c11 = Colors.getOppositeColor(c1);
+//					Color c11 = c1.darker(); // brighter();
+					c1 = Colors.getColor(i, 1d, c11, c1);
+				}
+				if (c2!=null) {
+//					Color c22 = Colors.getOppositeColor(c2);
+					Color c22 = c2.brighter();
+					c1 = Colors.getColor(i, 1d, c22, c2);
+				}
+//			}
+			b1.setBackground(c1);
+			b2.setBackground(c1);
+			bb1.setBackground(c2);
+			bb2.setBackground(c2);
 		} else {
 			b1.setBackground(null);
 			b2.setBackground(null);
 			bb1.setBackground(null);
 			bb2.setBackground(null);
+		}
+		if (isVisible()) {
+			if (SwingUtilities.isEventDispatchThread()) {
+				b1.repaint();
+				b2.repaint();
+				bb1.repaint();
+				bb2.repaint();
+			} else {
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						b1.repaint();
+						b2.repaint();
+						bb1.repaint();
+						bb2.repaint();
+					}});
+			}
 		}
 	}
 	
@@ -73,10 +132,6 @@ public class MarkComponent extends JComponent {
 		this.selCol = c;
 		this.selColBB = gapColor;
 		updateMarked();
-		b1.repaint();
-		b2.repaint();
-		bb1.repaint();
-		bb2.repaint();
 	}
 	
 	public void setMark(final boolean markedReq) {
@@ -86,7 +141,6 @@ public class MarkComponent extends JComponent {
 					return;
 				marked = markedReq;
 				updateMarked();
-				repaint();
 				if (marked && requestFocus)
 					comp.requestFocusInWindow();
 			}});
