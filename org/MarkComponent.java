@@ -87,19 +87,19 @@ public class MarkComponent extends JComponent {
 			Color c1 = selCol;
 			Color c2 = selColBB;
 			float i = intensity>0 ? (float)intensity : (float)-intensity;
-//			if (i<1d) {
-				System.out.println(i);
-				if (c1!=null) {
-					Color c11 = Colors.getOppositeColor(c1);
-//					Color c11 = c1.darker(); // brighter();
-					c1 = Colors.getColor(i, 1d, c11, c1);
-				}
-				if (c2!=null) {
-//					Color c22 = Colors.getOppositeColor(c2);
-					Color c22 = c2.brighter();
-					c1 = Colors.getColor(i, 1d, c22, c2);
-				}
-//			}
+////			if (i<1d) {
+//				System.out.println(i);
+//				if (c1!=null) {
+//					Color c11 = Colors.getOppositeColor(c1);
+////					Color c11 = c1.darker(); // brighter();
+//					c1 = Colors.getColor(i, 1d, c11, c1);
+//				}
+//				if (c2!=null) {
+////					Color c22 = Colors.getOppositeColor(c2);
+//					Color c22 = c2.brighter();
+//					c1 = Colors.getColor(i, 1d, c22, c2);
+//				}
+////			}
 			b1.setBackground(c1);
 			b2.setBackground(c1);
 			bb1.setBackground(c2);
