@@ -70,7 +70,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.70 $
+ * @version $Revision: 1.71 $
  */
 public class AttributeHelper {
 
@@ -1813,7 +1813,6 @@ public class AttributeHelper {
 		DockingAttribute dock = graphics.getDocking();
 		dock.setSource("");
 		dock.setTarget("");
-		graphics.setDocking(dock);
 
 		// setting the graphic attributes to the default values stored
 		// in the preferences
