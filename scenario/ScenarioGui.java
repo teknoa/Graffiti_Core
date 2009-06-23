@@ -8,6 +8,8 @@
  */
 package scenario;
 
+import javax.swing.Action;
+
 import org.graffiti.plugin.algorithm.Algorithm;
 import org.graffiti.plugin.parameter.Parameter;
 
@@ -15,4 +17,5 @@ public interface ScenarioGui {
 
 	void postWorkflowStep(Algorithm algorithm, Parameter[] params);
 
+	void postWorkflowStep(Action action);
 }

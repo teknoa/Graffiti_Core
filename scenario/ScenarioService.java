@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import org.HomeFolder;
+import javax.swing.Action;
+
 import org.ReleaseInfo;
 import org.graffiti.plugin.algorithm.Algorithm;
-import org.graffiti.plugin.parameter.BooleanParameter;
 import org.graffiti.plugin.parameter.Parameter;
 
 public class ScenarioService {
@@ -58,12 +58,38 @@ public class ScenarioService {
 	}
 
 	public static void postWorkflowStep(Algorithm algorithm, Parameter[] params) {
-		if (gui!=null)
-			gui.postWorkflowStep(algorithm, params);
 		if (isRecording()) {
+			if (gui!=null)
+				gui.postWorkflowStep(algorithm, params);
 			currentScenario.addImports(getImportsForAlgorithm(algorithm, params));
 			currentScenario.addCommands(getStartCommandsForAlgorithm(algorithm, params));
 		}
+	}
+	
+	public static void postWorkflowStep(Action action) {
+		if (isRecording()) { 
+			if (gui!=null)
+				gui.postWorkflowStep(action);
+			currentScenario.addImports(getImportsForAction(action));
+			currentScenario.addCommands(getCommandsForAction(action));
+		}
+	}
+
+	private static Collection<String> getCommandsForAction(Action action) {
+		ArrayList<String> res = new ArrayList<String>();
+
+		String name = (String)action.getValue("name");
+		res.add("GraffitiAction.performAction(\""+name+"\");");
+		
+		return res;
+	}
+
+	private static Collection<String> getImportsForAction(Action action) {
+		ArrayList<String> res = new ArrayList<String>();
+		
+		res.add("import org.graffiti.plugin.actions.GraffitiAction;");
+		
+		return res;
 	}
 
 	private static Collection<String> getImportsForAlgorithm(
@@ -113,6 +139,6 @@ public class ScenarioService {
 		}
 		return result;
 	}
-	
+
 	
 }
