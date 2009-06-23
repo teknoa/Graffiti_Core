@@ -19,11 +19,11 @@ public class HomeFolder {
 		return getTemporaryFolder()+ReleaseInfo.getFileSeparator();
 	}
 	
-	public static boolean saveFileInTemporaryFolder(File f)  {
-		return saveFileInTemporaryFolder(null, f);
+	public static boolean copyFileToTemporaryFolder(File f)  {
+		return copyFileToTemporaryFolder(null, f);
 	}
 	
-	public static boolean saveFileInTemporaryFolder(String subfolder, File f)  {
+	public static boolean copyFileToTemporaryFolder(String subfolder, File f)  {
 		BufferedInputStream in = null;
 		BufferedOutputStream out = null;
 		try {
