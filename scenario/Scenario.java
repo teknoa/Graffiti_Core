@@ -8,23 +8,74 @@
  */
 package scenario;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import org.ErrorMsg;
+import org.ReleaseInfo;
 
 public class Scenario {
 	
 	ArrayList<String> imports = new ArrayList<String>();
 	ArrayList<String> commands = new ArrayList<String>();
 	String scenarioName;
+	String menuGroup = "";
+	boolean readError = false;
+
 	
 	/**
 	 * Create a new scenario
 	 */
-	public Scenario(String scenarioName) {
+	public Scenario(String menuTitle, String scenarioName) {
 		this.scenarioName = scenarioName;
+		if (menuTitle==null)
+			this.menuGroup = "";
+		else
+			this.menuGroup = menuTitle;
 	}
 	
-	public void addImports(Collection<String> bshScriptCommands) {
+	public Scenario(File f) {
+    	readError = true;
+		try {
+	        BufferedReader in = new BufferedReader(new FileReader(f));
+	        String str;
+	        int line = 0;
+	        boolean headerRead = false;
+	        int importsRead = 0;
+	        while ((str = in.readLine()) != null) {
+	            line++;
+	            if (!headerRead && str.startsWith("//@")) {
+	            	headerRead = true;
+	            	String name = str.substring("//@".length());
+	            	if (name.indexOf(":")>=0) {
+	            		menuGroup = name.substring(0, name.indexOf(":"));
+	            		scenarioName = name.substring(name.indexOf(":")+":".length());
+	            	} else {
+	            		scenarioName = name;
+	            		menuGroup = "";
+	            	}
+	            }
+	            if (headerRead) {
+	            	if (str.startsWith("import ")) {
+	            		if (importsRead<1)
+	            			importsRead = 1;
+	            		imports.add(str);
+	            	} else {
+	            		commands.add(str);
+	            	}
+	            }
+	        }
+	        in.close();
+	    	readError = false;
+	    } catch (Exception e) {
+	    	ErrorMsg.addErrorMessage(e);
+	    }
+	}
+
+	public synchronized void addImports(Collection<String> bshScriptCommands) {
 		for (String i : bshScriptCommands) {
 			boolean found = false;
 			for (String s : imports) {
@@ -37,17 +88,21 @@ public class Scenario {
 				imports.add(i);
 		}
 	}
+	
+	public String getName() {
+		return scenarioName;
+	}
 
-	public void addCommands(Collection<String> bshScriptCommands) {
+	public synchronized void addCommands(Collection<String> bshScriptCommands) {
 		commands.addAll(bshScriptCommands);
 	}
 	
-	public void addPluginCommand(PluginWithScenarioSupport plugin) {
+	public synchronized void addPluginCommand(PluginWithScenarioSupport plugin) {
 		addImports(plugin.getScenarioImports());
 		addCommands(plugin.getScenarioCommands());
 	}
 	
-	public Collection<String> getScenarioCommands() {
+	public synchronized Collection<String> getScenarioCommands() {
 		ArrayList<String> result = new ArrayList<String>();
 		result.addAll(getHeader());
 		result.addAll(imports);
@@ -55,17 +110,46 @@ public class Scenario {
 		return result;
 	}
 	
-	private Collection<String> getHeader() {
+	private synchronized Collection<String> getHeader() {
 		ArrayList<String> header = new ArrayList<String>();
-		header.add("//@Workflow:"+scenarioName);
+		String menu = menuGroup.length() > 0 ? menuGroup+":" : "";
+		header.add("//@"+menu+scenarioName);
 		header.add("//");
 		return header;
 	}
 
-	/**
-	 * Writes this scenario as a BSH script file to the file system.
-	 */
-	public void writeScenarioToFile() {
+	public synchronized String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (String s : getScenarioCommands())
+			sb.append(s+"\r\n");
+		return sb.toString();
+	}
+
+	public boolean isValid() {
+		if (readError)
+			return false;
 		
+		boolean nameOk = scenarioName!=null && scenarioName.length()>0;
+		boolean importsOk = imports!=null;
+		boolean sourceOk = commands!=null;
+		return nameOk && importsOk && sourceOk;
+	}
+
+	public String getMenu() {
+		return menuGroup;
+	}
+
+	public String getFileName() {
+		String menu = menuGroup.length() > 0 ? menuGroup+"_" : "";
+		String path = ReleaseInfo.getAppFolderWithFinalSep(); 
+		return path+menu+scenarioName+".bsh";
+	}
+
+	public void setName(String name) {
+		this.scenarioName = name;
+	}
+
+	public void setMenuGroup(String group) {
+		this.menuGroup = group;
 	}
 }
