@@ -5,18 +5,16 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ClassPathPluginDescriptionCollector.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: ClassPathPluginDescriptionCollector.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -30,7 +28,7 @@ import java.util.logging.Logger;
 /**
  * Searches for plugin description files in the current <code>CLASSPATH</code>.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see PluginDescriptionCollector
  */

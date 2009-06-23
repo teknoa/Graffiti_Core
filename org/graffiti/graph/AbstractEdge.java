@@ -5,21 +5,20 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractEdge.java,v 1.2 2008/04/04 09:36:54 klukas Exp $
+// $Id: AbstractEdge.java,v 1.3 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.graph;
 
 import java.util.logging.Logger;
 
 import org.graffiti.attributes.CollectionAttribute;
-
 import org.graffiti.event.EdgeEvent;
 import org.graffiti.event.ListenerManager;
 
 /**
  * Provides default implementations of methods on edges.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class AbstractEdge
     extends AbstractGraphElement

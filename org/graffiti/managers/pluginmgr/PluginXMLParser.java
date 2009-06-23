@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginXMLParser.java,v 1.3 2008/11/27 20:11:49 klukas Exp $
+// $Id: PluginXMLParser.java,v 1.4 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -16,9 +16,7 @@ import java.util.logging.Logger;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.impl.Jdk14Logger;
 import org.apache.commons.logging.impl.NoOpLog;
-// import org.apache.commons.logging.impl.NoOpLog;
 import org.graffiti.core.StringBundle;
 import org.xml.sax.SAXException;
 
@@ -27,7 +25,7 @@ import org.xml.sax.SAXException;
  * The XML parser for the plugin descriptions.  The plugin description
  * (<tt>plugin.xml</tt>) file is validated by the <tt>plugin.dtd</tt>.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class PluginXMLParser
 {

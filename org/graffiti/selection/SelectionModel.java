@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: SelectionModel.java,v 1.1 2007/05/31 12:56:06 klukas Exp $
+// $Id: SelectionModel.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -18,7 +18,7 @@ import java.util.Iterator;
  * Contains a list of selections and a reference to the current selection.
  *
  * @author flierl
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class SelectionModel
 {
@@ -69,7 +69,7 @@ public class SelectionModel
     {
         if(this.activeSelection != null)
         {
-            Selection oldSel = (Selection) this.selections.get(this.activeSelection);
+            Selection oldSel = this.selections.get(this.activeSelection);
             oldSel.clear();
             this.selectionChanged();
         }
@@ -88,7 +88,7 @@ public class SelectionModel
     {
         if(this.activeSelection != null)
         {
-            Selection oldSel = (Selection) this.selections.get(this.activeSelection);
+            Selection oldSel = this.selections.get(this.activeSelection);
             oldSel.clear();
             this.selectionChanged();
         }
@@ -122,7 +122,7 @@ public class SelectionModel
         }
         else
         {
-            return (Selection) selections.get(activeSelection);
+            return selections.get(activeSelection);
         }
     }
 
@@ -190,7 +190,7 @@ public class SelectionModel
      */
     public void selectionChanged()
     {
-        Selection activeSel = (Selection) selections.get(activeSelection);
+        Selection activeSel = selections.get(activeSelection);
         SelectionEvent selectionEvent = new SelectionEvent(activeSel);
         ArrayList<SelectionListener> list = new ArrayList<SelectionListener>();
         list.addAll(listeners);

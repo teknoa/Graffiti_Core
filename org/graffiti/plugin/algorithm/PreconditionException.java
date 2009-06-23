@@ -5,10 +5,10 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PreconditionException.java,v 1.1 2007/05/31 12:55:54 klukas Exp $
+// $Id: PreconditionException.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
 
 /*
- * $Id: PreconditionException.java,v 1.1 2007/05/31 12:55:54 klukas Exp $
+ * $Id: PreconditionException.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
  */
 package org.graffiti.plugin.algorithm;
 
@@ -63,7 +63,8 @@ public class PreconditionException
     /**
      * @see java.lang.Throwable#getMessage()
      */
-    public String getMessage()
+    @Override
+	public String getMessage()
     {
         StringBuffer sb = new StringBuffer();
         sb.append("The following preconditions are not satisfied:<br><ul>");
@@ -115,7 +116,7 @@ public class PreconditionException
     /**
      * Contains a cause and the source object (ie.: a Graph, Node or Edge).
      *
-     * @version $Revision: 1.1 $
+     * @version $Revision: 1.2 $
      */
     class Entry
     {

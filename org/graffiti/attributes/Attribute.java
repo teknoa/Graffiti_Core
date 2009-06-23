@@ -5,12 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Attribute.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: Attribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.attributes;
 
 import org.graffiti.core.DeepCopy;
-
 import org.graffiti.plugin.Displayable;
 
 /**
@@ -18,7 +17,7 @@ import org.graffiti.plugin.Displayable;
  * <code>Attribute</code> may contain other <code>Attribute</code> instances
  * and thereby form a complete attribute hierarchy.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see AttributeTypesManager
  */

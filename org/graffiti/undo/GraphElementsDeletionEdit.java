@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphElementsDeletionEdit.java,v 1.3 2008/10/17 13:11:46 klukas Exp $
+// $Id: GraphElementsDeletionEdit.java,v 1.4 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.undo;
 
@@ -28,7 +28,7 @@ import org.graffiti.graph.Node;
  * undoable.
  *
  * @author $Author $
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class GraphElementsDeletionEdit
     extends GraphElementsEdit
@@ -77,7 +77,8 @@ public class GraphElementsDeletionEdit
      *
      * @see javax.swing.undo.UndoableEdit
      */
-    public String getPresentationName()
+    @Override
+	public String getPresentationName()
     {
         String name = "";
 
@@ -103,7 +104,8 @@ public class GraphElementsDeletionEdit
     /**
      * Executes the deletion of selected grpah elements
      */
-    public void execute()
+    @Override
+	public void execute()
     {
         executed = true;
         graph.getListenerManager().transactionStarted(this);
@@ -156,7 +158,8 @@ public class GraphElementsDeletionEdit
     /**
      * Deletes the GraphElements stored in this edit.
      */
-    public void redo()
+    @Override
+	public void redo()
     {
         super.redo();
 
@@ -206,7 +209,8 @@ public class GraphElementsDeletionEdit
     /**
      * Adds the deleted GraphElements stored in this edit.
      */
-    public void undo()
+    @Override
+	public void undo()
     {
         super.undo();
 

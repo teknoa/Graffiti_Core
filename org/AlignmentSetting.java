@@ -18,6 +18,7 @@ public enum AlignmentSetting {
 	BORDER_RIGHT_BOTTOM;
 
 	
+	@Override
 	public String toString() {
 		switch(this) {
 			case AUTO_OUTSIDE: return "outside (automatic)";

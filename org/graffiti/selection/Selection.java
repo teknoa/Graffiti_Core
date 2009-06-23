@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Selection.java,v 1.5 2008/09/04 09:56:08 klukas Exp $
+// $Id: Selection.java,v 1.6 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -20,7 +20,6 @@ import java.util.Set;
 
 import org.apache.commons.collections.set.ListOrderedSet;
 import org.graffiti.attributes.FieldAlreadySetException;
-
 import org.graffiti.graph.Edge;
 import org.graffiti.graph.Graph;
 import org.graffiti.graph.GraphElement;
@@ -52,7 +51,7 @@ import org.graffiti.graph.Node;
  * selectionChanged()</code>
  * </p>
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class Selection
 {
@@ -354,7 +353,8 @@ public class Selection
     /**
      * @see java.lang.Object#clone()
      */
-    public Object clone()
+    @Override
+	public Object clone()
     {
         Selection newSel = new Selection();
 
@@ -394,7 +394,8 @@ public class Selection
      * @return a string describing the selection. Default: number of selected
      *         nodes and edges in a sentence.
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return nodes.size() + " nodes and " + edges.size() + " edges selected";
     }

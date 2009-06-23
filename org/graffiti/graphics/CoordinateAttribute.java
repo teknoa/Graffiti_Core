@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: CoordinateAttribute.java,v 1.4 2009/05/21 20:22:17 klukas Exp $
+// $Id: CoordinateAttribute.java,v 1.5 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -22,7 +22,7 @@ import org.graffiti.event.AttributeEvent;
  * Contains the coordinate graphic attribute.
  *
  * @author breu
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class CoordinateAttribute
     extends HashMapAttribute
@@ -83,7 +83,8 @@ public class CoordinateAttribute
      *
      * @throws IllegalArgumentException DOCUMENT ME!
      */
-    public void setCollection(Map<String, Attribute> attrs) {
+    @Override
+	public void setCollection(Map<String, Attribute> attrs) {
         if(attrs.keySet().contains(X) && attrs.keySet().contains(Y)) {
             for(Iterator it = attrs.keySet().iterator(); it.hasNext();) {
                 String attrId = (String) it.next();
@@ -93,7 +94,7 @@ public class CoordinateAttribute
                 } else if(attrId.equals(Y)) {
                     setY(((DoubleAttribute) attrs.get(Y)).getDouble());
                 } else {
-                    this.add((Attribute) attrs.get(it.next()));
+                    this.add(attrs.get(it.next()));
                 }
             }
         } else {
@@ -172,7 +173,8 @@ public class CoordinateAttribute
      *
      * @return A deep copy of this object.
      */
-    public Object copy() {
+    @Override
+	public Object copy() {
         CoordinateAttribute copied = new CoordinateAttribute(this.getId(), getX(), getY());
         return copied;
     }

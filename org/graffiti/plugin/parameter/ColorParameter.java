@@ -33,7 +33,8 @@ public class ColorParameter
         return true;
     }
 
-    public void setValue(Object value)
+    @Override
+	public void setValue(Object value)
     {
         try
         {
@@ -50,7 +51,8 @@ public class ColorParameter
      *
      * @return the value of this parameter.
      */
-    public Object getValue()
+    @Override
+	public Object getValue()
     {
         return value;
     }
@@ -58,7 +60,8 @@ public class ColorParameter
     /**
      * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
      */
-    public String toXMLString() {
+    @Override
+	public String toXMLString() {
         return getStandardXML(ErrorMsg.getHexFromColor(value));
     }
 

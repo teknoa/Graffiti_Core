@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: OptionsDialog.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: OptionsDialog.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.options;
 
@@ -18,7 +18,6 @@ import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -31,6 +30,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.EventListenerList;
@@ -48,7 +49,7 @@ import org.graffiti.core.StringBundle;
 /**
  * Represents the options dialog.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class OptionsDialog
     extends JDialog
@@ -118,7 +119,7 @@ public class OptionsDialog
         /* currentLabel displays the path of the currently selected
            OptionPane at the top of the stage area */
         currentLabel = new JLabel();
-        currentLabel.setHorizontalAlignment(JLabel.LEFT);
+        currentLabel.setHorizontalAlignment(SwingConstants.LEFT);
         currentLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0,
                 Color.black));
         stage.add(currentLabel, BorderLayout.NORTH);
@@ -134,8 +135,8 @@ public class OptionsDialog
         paneTree.setShowsRootHandles(true);
         paneTree.setRootVisible(false);
         content.add(new JScrollPane(paneTree,
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED), BorderLayout.WEST);
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED), BorderLayout.WEST);
 
         JPanel buttons = new JPanel();
         buttons.setBorder(new EmptyBorder(12, 0, 0, 0));
@@ -418,7 +419,7 @@ public class OptionsDialog
     /**
      * Represents the tree of option panes.
      *
-     * @version $Revision: 1.1 $
+     * @version $Revision: 1.2 $
      */
     class OptionTreeModel
         implements TreeModel
@@ -671,7 +672,7 @@ public class OptionsDialog
      * DOCUMENT ME!
      *
      * @author $Author: klukas $
-     * @version $Revision: 1.1 $ $Date: 2007/05/31 12:55:59 $
+     * @version $Revision: 1.2 $ $Date: 2009/06/23 07:05:21 $
      */
     class PaneNameRenderer
         extends DefaultTreeCellRenderer
@@ -704,7 +705,8 @@ public class OptionsDialog
          *
          * @return DOCUMENT ME!
          */
-        public Component getTreeCellRendererComponent(JTree tree, Object value,
+        @Override
+		public Component getTreeCellRendererComponent(JTree tree, Object value,
             boolean selected, boolean expanded, boolean leaf, int row,
             boolean hasFocus)
         {

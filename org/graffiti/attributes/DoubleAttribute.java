@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DoubleAttribute.java,v 1.2 2008/10/08 17:26:47 klukas Exp $
+// $Id: DoubleAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -14,7 +14,7 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a double
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class DoubleAttribute
     extends AbstractAttribute {
@@ -117,7 +117,8 @@ public class DoubleAttribute
      * @exception IllegalArgumentException if the parameter has not the
      *            appropriate class for this attribute.
      */
-    protected void doSetValue(Object o)
+    @Override
+	protected void doSetValue(Object o)
         throws IllegalArgumentException {
         assert o != null;
 
@@ -131,7 +132,8 @@ public class DoubleAttribute
     /**
      * @see org.graffiti.plugin.Displayable#toXMLString()
      */
-    public String toXMLString() {
+    @Override
+	public String toXMLString() {
         return getStandardXML(String.valueOf(value));
     }
 }

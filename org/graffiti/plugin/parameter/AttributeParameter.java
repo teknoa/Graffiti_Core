@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeParameter.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: AttributeParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -15,7 +15,7 @@ import org.graffiti.attributes.Attribute;
  * This class is used for <code>Parameters</code> that satisfy the
  * <code>org.graffiti.attributes.Attribte</code> interface.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see Attribute
  */
@@ -90,7 +90,8 @@ public class AttributeParameter
      *
      * @param value the new value of the <code>AttributeParameter</code>.
      */
-    public void setValue(Object value)
+    @Override
+	public void setValue(Object value)
     {
         // TODO
     }
@@ -100,7 +101,8 @@ public class AttributeParameter
      *
      * @return the value of the <code>AttributeParameter</code>.
      */
-    public Object getValue()
+    @Override
+	public Object getValue()
     {
         return value;
     }
@@ -108,7 +110,8 @@ public class AttributeParameter
     /**
      * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
      */
-    public String toXMLString() {
+    @Override
+	public String toXMLString() {
         return getStandardXML(value.toXMLString());
     }
 }

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: NodeParameter.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: NodeParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -15,7 +15,7 @@ import org.graffiti.graph.Node;
 /**
  * This class contains a single <code>Node</code>.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class NodeParameter
     extends AbstractSingleParameter
@@ -49,7 +49,7 @@ public class NodeParameter
     public NodeParameter(Graph graph, Node initalNode, String name, String description)
     {
         super(name, description);
-        if (initalNode==null) initalNode = (Node) graph.getNodesIterator().next();
+        if (initalNode==null) initalNode = graph.getNodesIterator().next();
         value = initalNode;
         this.graph=graph;
     }
@@ -77,7 +77,8 @@ public class NodeParameter
      *
      * @param val the new value of the <code>AttributeParameter</code>.
      */
-    public void setValue(Object val)
+    @Override
+	public void setValue(Object val)
     {
         value = (Node)val;
     }
@@ -87,7 +88,8 @@ public class NodeParameter
      *
      * @return the value of this parameter.
      */
-    public Object getValue()
+    @Override
+	public Object getValue()
     {
         return value;
     }

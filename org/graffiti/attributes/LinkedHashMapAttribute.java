@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LinkedHashMapAttribute.java,v 1.3 2009/06/09 12:23:46 klukas Exp $
+// $Id: LinkedHashMapAttribute.java,v 1.4 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -19,7 +19,7 @@ import org.graffiti.plugin.XMLHelper;
 /**
  * DOCUMENT ME!
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class LinkedHashMapAttribute
     extends AbstractCollectionAttribute
@@ -105,7 +105,7 @@ public class LinkedHashMapAttribute
         //      bzw. hat eine kleinerer Konstante...
         for(Iterator i = attributes.keySet().iterator(); i.hasNext();) {
             String attrId = (String) i.next();
-            Attribute attr = (Attribute) attributes.get(attrId);
+            Attribute attr = attributes.get(attrId);
             Attribute copiedAttribute = (Attribute) attr.copy();
             copiedAttribute.setParent(this);
             copiedAttributes.attributes.put(attrId, copiedAttribute);
@@ -125,7 +125,8 @@ public class LinkedHashMapAttribute
      * @exception IllegalArgumentException if the parameter has not the
      *            appropriate class for this attribute.
      */
-    protected void doSetValue(Object o)
+    @Override
+	protected void doSetValue(Object o)
         throws IllegalArgumentException {
         assert o != null;
 
@@ -148,7 +149,8 @@ public class LinkedHashMapAttribute
     /**
      * @see org.graffiti.plugin.Displayable#toXMLString()
      */
-    public String toXMLString() {
+    @Override
+	public String toXMLString() {
         StringBuffer valString = new StringBuffer();
         valString.append("<subAttributes>" + XMLHelper.getDelimiter());
         for (Iterator it = attributes.values().iterator(); it.hasNext();) {

@@ -29,6 +29,7 @@ public class Vector2df {
         y=b;
     }
 
+	@Override
 	public String toString() {
 		return "Vector2df["+x+", "+y+"]";
 	}

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ShortAttribute.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: ShortAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -14,7 +14,7 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a short
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class ShortAttribute
     extends AbstractAttribute {
@@ -117,7 +117,8 @@ public class ShortAttribute
      * @exception IllegalArgumentException if the parameter has not the
      *            appropriate class for this attribute.
      */
-    protected void doSetValue(Object o)
+    @Override
+	protected void doSetValue(Object o)
         throws IllegalArgumentException {
         assert o != null;
 
@@ -131,7 +132,8 @@ public class ShortAttribute
     /**
      * @see org.graffiti.plugin.Displayable#toXMLString()
      */
-    public String toXMLString() {
+    @Override
+	public String toXMLString() {
         return getStandardXML(String.valueOf(value));
     }
 }

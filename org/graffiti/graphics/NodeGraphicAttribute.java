@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: NodeGraphicAttribute.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: NodeGraphicAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -26,7 +26,7 @@ import org.graffiti.attributes.StringAttribute;
  * Defines all grahic attributes of a node
  *
  * @author breu
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class NodeGraphicAttribute
     extends GraphElementGraphicAttribute
@@ -157,7 +157,8 @@ public class NodeGraphicAttribute
      *
      * @throws IllegalArgumentException DOCUMENT ME!
      */
-    public void setCollection(Map<String, Attribute> attrs)
+    @Override
+	public void setCollection(Map<String, Attribute> attrs)
     {
         if(attrs.keySet().contains(COORDINATE) &&
             attrs.keySet().contains(DIMENSION) &&
@@ -211,7 +212,7 @@ public class NodeGraphicAttribute
                 }
                 else
                 {
-                    this.add((Attribute) attrs.get(it.next()));
+                    this.add(attrs.get(it.next()));
                 }
             }
         }

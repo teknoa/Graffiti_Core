@@ -29,6 +29,7 @@ public class Vector2d {
         y=b;
     }
 
+	@Override
 	public String toString() {
 		return "Vector2d["+x+", "+y+"]";
 	}

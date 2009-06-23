@@ -5,23 +5,20 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: MultipleIterator.java,v 1.2 2007/09/12 07:54:24 klukas Exp $
+// $Id: MultipleIterator.java,v 1.3 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.util;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import org.graffiti.graph.Edge;
 
 /**
  * Class <code>UniqueMultipleIterator</code> encapsulates a number of instances
  * implementing the <code>java.util.Iterator</code> interface. It is possible
  * to iterate over all the iterators one after the other.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class MultipleIterator
     implements Iterator

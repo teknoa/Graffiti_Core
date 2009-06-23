@@ -5,15 +5,13 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: HashMapAttribute.java,v 1.7 2009/06/09 12:23:46 klukas Exp $
+// $Id: HashMapAttribute.java,v 1.8 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.attributes;
 
 import java.lang.reflect.Constructor;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -28,7 +26,7 @@ import org.ErrorMsg;
  * 'Color'-CollectionAttribute. The subattributes 'red', 'green' and 'blue'
  * are not mapped in this Attribute!
  *
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *
  * @see CollectionAttribute
  * @see CompositeAttribute
@@ -97,7 +95,7 @@ public class HashMapAttribute
      */
     @SuppressWarnings("unchecked")
 	public Map<String,Attribute> getCollection() {
-        return (Map<String, Attribute>)attributes;
+        return attributes;
     }
 
     /**
@@ -152,7 +150,8 @@ public class HashMapAttribute
      * @exception IllegalArgumentException if the parameter has not the
      *            appropriate class for this attribute.
      */
-    @SuppressWarnings("unchecked")
+    @Override
+	@SuppressWarnings("unchecked")
 	protected void doSetValue(Object o)
         throws IllegalArgumentException {
         assert o != null;

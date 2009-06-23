@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: EdgeLabelPositionAttribute.java,v 1.1 2007/05/31 12:55:57 klukas Exp $
+// $Id: EdgeLabelPositionAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -20,7 +20,7 @@ import org.graffiti.attributes.IntegerAttribute;
  * DOCUMENT ME!
  *
  * @author holleis
- * @version $Revision: 1.1 $ Specifies position of an edge label providing several parameters.
+ * @version $Revision: 1.2 $ Specifies position of an edge label providing several parameters.
  */
 public class EdgeLabelPositionAttribute
     extends PositionAttribute
@@ -176,7 +176,8 @@ public class EdgeLabelPositionAttribute
      *
      * @throws IllegalArgumentException DOCUMENT ME!
      */
-    public void setCollection(Map<String, Attribute> attrs)
+    @Override
+	public void setCollection(Map<String, Attribute> attrs)
     {
         if(attrs.keySet().contains(RELALIGN) &&
             attrs.keySet().contains(ALIGNSEGMENT) &&
@@ -205,7 +206,7 @@ public class EdgeLabelPositionAttribute
                 }
                 else
                 {
-                    this.add((Attribute) attrs.get(it.next()));
+                    this.add(attrs.get(it.next()));
                 }
             }
         }
@@ -240,7 +241,8 @@ public class EdgeLabelPositionAttribute
      *
      * @return A deep copy of this object.
      */
-    public Object copy()
+    @Override
+	public Object copy()
     {
         EdgeLabelPositionAttribute copied = new EdgeLabelPositionAttribute(this.getId());
         copied.setRelAlign(this.getRelAlign());

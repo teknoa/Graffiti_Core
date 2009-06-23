@@ -22,6 +22,7 @@ public class ObjectRef {
 		this.data = initData;
 	}
 	
+	@Override
 	public String toString() {
 		if (toStringVal==null)
 			return super.toString();

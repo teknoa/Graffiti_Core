@@ -5,12 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PortAttribute.java,v 1.1 2007/05/31 12:55:57 klukas Exp $
+// $Id: PortAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
 import java.awt.geom.Point2D;
-
 import java.util.Iterator;
 import java.util.Map;
 
@@ -22,7 +21,7 @@ import org.graffiti.attributes.StringAttribute;
  * Contains information about the port of a node
  *
  * @author breu
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PortAttribute
     extends HashMapAttribute
@@ -155,7 +154,8 @@ public class PortAttribute
      *
      * @throws IllegalArgumentException DOCUMENT ME!
      */
-    public void setCollection(Map<String, Attribute> attrs)
+    @Override
+	public void setCollection(Map<String, Attribute> attrs)
     {
         if(attrs.keySet().contains(NAME) &&
             attrs.keySet().contains(COORDINATE))
@@ -174,7 +174,7 @@ public class PortAttribute
                 }
                 else
                 {
-                    this.add((Attribute) attrs.get(it.next()));
+                    this.add(attrs.get(it.next()));
                 }
             }
         }
@@ -219,7 +219,8 @@ public class PortAttribute
      *
      * @return the 'name'-value of the encapsulated port.
      */
-    public String getName()
+    @Override
+	public String getName()
     {
         return this.name.getString();
     }
@@ -247,7 +248,8 @@ public class PortAttribute
      *
      * @return A deep copy of this object.
      */
-    public Object copy()
+    @Override
+	public Object copy()
     {
         PortAttribute copied = new PortAttribute(this.getId());
         copied.setName(this.getName());
@@ -259,7 +261,8 @@ public class PortAttribute
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    public boolean equals(Object obj)
+    @Override
+	public boolean equals(Object obj)
     {
         if(this == obj)
         {

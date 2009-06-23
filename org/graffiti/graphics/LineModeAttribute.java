@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LineModeAttribute.java,v 1.2 2008/08/06 15:12:14 klukas Exp $
+// $Id: LineModeAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -21,7 +21,7 @@ import org.graffiti.attributes.HashMapAttribute;
  * to specify stroke properties.
  *
  * @author schoeffl
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class LineModeAttribute
     extends CompositeAttribute {
@@ -58,7 +58,8 @@ public class LineModeAttribute
      * @see org.graffiti.attributes.CompositeAttribute#setAttribute(String,
      *      Attribute)
      */
-    public void setAttribute(String id, Attribute att)
+    @Override
+	public void setAttribute(String id, Attribute att)
         throws AttributeNotFoundException, IllegalArgumentException {
         throw new UnsupportedOperationException("TODO!");
     }
@@ -66,7 +67,8 @@ public class LineModeAttribute
     /**
      * @see org.graffiti.attributes.CompositeAttribute#getAttributes()
      */
-    public CollectionAttribute getAttributes() {
+    @Override
+	public CollectionAttribute getAttributes() {
         HashMapAttribute ret = new HashMapAttribute(this.id);
         HashMapAttribute da = new HashMapAttribute("dasharray");
         float[] dashArray = this.dash.getDashArray();
@@ -179,7 +181,8 @@ public class LineModeAttribute
     /**
      * @see org.graffiti.attributes.AbstractAttribute#doSetValue(Object)
      */
-    protected void doSetValue(Object v)
+    @Override
+	protected void doSetValue(Object v)
         throws IllegalArgumentException {
         try {
            if (v instanceof String) {

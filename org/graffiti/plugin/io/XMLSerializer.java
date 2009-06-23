@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLSerializer.java,v 1.2 2008/10/19 08:42:36 klukas Exp $
+// $Id: XMLSerializer.java,v 1.3 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.plugin.io;
 
@@ -30,7 +30,7 @@ import org.graffiti.graph.Node;
 /**
  * Reads and Writes a graph in XML.  TODO: specify the XML format.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class XMLSerializer
     extends AbstractIOSerializer
@@ -60,7 +60,8 @@ public class XMLSerializer
      * @param in The input stream to read the graph from.
      * @param g The graph to add the newly read graph to.
      */
-    public void read(InputStream in, Graph g)
+    @Override
+	public void read(InputStream in, Graph g)
     {
         // TODO
     }
@@ -294,7 +295,8 @@ public class XMLSerializer
     /* (non-Javadoc)
      * @see org.graffiti.plugin.io.InputSerializer#read(java.io.InputStream)
      */
-    public Graph read(InputStream in) {
+    @Override
+	public Graph read(InputStream in) {
         // TODO Auto-generated method stub
         return null;
     }

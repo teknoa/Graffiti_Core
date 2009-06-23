@@ -5,14 +5,13 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.7 2008/10/14 14:08:41 belau Exp $
+// $Id: AbstractCollectionAttribute.java,v 1.8 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.attributes;
 
 import java.util.Iterator;
 import java.util.Map;
 
-import org.ErrorMsg;
 import org.graffiti.event.AttributeEvent;
 import org.graffiti.plugin.XMLHelper;
 
@@ -21,7 +20,7 @@ import org.graffiti.plugin.XMLHelper;
  * instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
  *
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			implements CollectionAttribute {
@@ -95,6 +94,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	 *
 	 * @return the <code>Attribute</code>'s <code>Attributable</code>.
 	 */
+	@Override
 	public Attributable getAttributable() {
 		Attribute parent = getParent();
 
@@ -327,6 +327,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	/**
 	 * @see org.graffiti.attributes.Attribute#toString(int)
 	 */
+	@Override
 	public String toString(int n) {
 		StringBuffer sb = new StringBuffer();
 
@@ -345,6 +346,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	/**
 	 * @see org.graffiti.plugin.Displayable#toXMLString()
 	 */
+	@Override
 	public String toXMLString() {
 		StringBuffer valString = new StringBuffer();
 		valString.append(XMLHelper.spc(4) + "<subAttributes>"

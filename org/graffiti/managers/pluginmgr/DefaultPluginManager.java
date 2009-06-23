@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.19 2009/05/05 15:50:06 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.20 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -37,7 +37,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -117,7 +117,7 @@ public class DefaultPluginManager
      */
     public void setLoadOnStartup(String name, Boolean loadOnStartup)
     {
-        ((PluginEntry) pluginEntries.get(name)).setLoadOnStartup(loadOnStartup);
+        (pluginEntries.get(name)).setLoadOnStartup(loadOnStartup);
     }
 
     /**
@@ -142,7 +142,7 @@ public class DefaultPluginManager
     public GenericPlugin getPluginInstance(String name)
     {
     	synchronized (pluginEntries) {
-    		return ((PluginEntry) pluginEntries.get(name)).getPlugin();
+    		return (pluginEntries.get(name)).getPlugin();
     	}
     }
 

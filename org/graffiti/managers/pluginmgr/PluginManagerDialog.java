@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginManagerDialog.java,v 1.2 2008/05/30 10:52:48 klukas Exp $
+// $Id: PluginManagerDialog.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -16,12 +16,9 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.io.File;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -50,13 +47,12 @@ import javax.swing.table.TableColumn;
 
 import org.graffiti.core.ImageBundle;
 import org.graffiti.core.StringBundle;
-
 import org.graffiti.util.PluginHelper;
 
 /**
  * DOCUMENT ME!
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class PluginManagerDialog
     extends JDialog
@@ -254,7 +250,8 @@ public class PluginManagerDialog
     /**
      * Displays this dialog.
      */
-    public void show()
+    @Override
+	public void show()
     {
         pluginsTableModel.updateModel();
         updateGUI();
@@ -292,7 +289,7 @@ public class PluginManagerDialog
         }
         else
         {
-            PluginDescription desc = (PluginDescription) pluginsTableModel.getPluginDescription(pluginsSelectionModel.getMinSelectionIndex());
+            PluginDescription desc = pluginsTableModel.getPluginDescription(pluginsSelectionModel.getMinSelectionIndex());
 
             version.setText(desc.getVersion());
             author.setText(desc.getAuthor());
@@ -575,7 +572,7 @@ public class PluginManagerDialog
     /**
      * The list model of the dialog's jlist component.
      *
-     * @version $Revision: 1.2 $
+     * @version $Revision: 1.3 $
      */
     protected class PluginsTableModel
         extends AbstractTableModel
@@ -595,7 +592,8 @@ public class PluginManagerDialog
         /**
          * @see javax.swing.table.TableModel#isCellEditable(int, int)
          */
-        public boolean isCellEditable(int rowIndex, int columnIndex)
+        @Override
+		public boolean isCellEditable(int rowIndex, int columnIndex)
         {
             return columnIndex == 2;
         }
@@ -607,7 +605,8 @@ public class PluginManagerDialog
          *
          * @return the class at the given column.
          */
-        public Class getColumnClass(int columnIndex)
+        @Override
+		public Class getColumnClass(int columnIndex)
         {
             return getValueAt(0, columnIndex).getClass();
         }
@@ -623,7 +622,8 @@ public class PluginManagerDialog
         /**
          * @see javax.swing.table.TableModel#getColumnName(int)
          */
-        public String getColumnName(int columnIndex)
+        @Override
+		public String getColumnName(int columnIndex)
         {
             if(columnIndex == 0)
             {
@@ -680,12 +680,13 @@ public class PluginManagerDialog
          * @param rowIndex DOCUMENT ME!
          * @param columnIndex DOCUMENT ME!
          */
-        public void setValueAt(Object value, int rowIndex, int columnIndex)
+        @Override
+		public void setValueAt(Object value, int rowIndex, int columnIndex)
         {
             if(columnIndex == 2)
             {
             	// pluginsSelectionModel.getMinSelectionIndex()
-                String pluginName = ((PluginDescription) pluginsTableModel.getPluginDescription(rowIndex)).getName();
+                String pluginName = (pluginsTableModel.getPluginDescription(rowIndex)).getName();
 
                 pluginManager.setLoadOnStartup(pluginName, (Boolean) value);
                 modifiedPluginList = true;
@@ -727,7 +728,8 @@ public class PluginManagerDialog
          *
          * @return DOCUMENT ME!
          */
-        public String toString()
+        @Override
+		public String toString()
         {
             return pluginEntries.toString();
         }
@@ -756,7 +758,7 @@ public class PluginManagerDialog
      * DOCUMENT ME!
      *
      * @author $Author: klukas $
-     * @version $Revision: 1.2 $ $Date: 2008/05/30 10:52:48 $
+     * @version $Revision: 1.3 $ $Date: 2009/06/23 07:05:20 $
      */
     class EntryComparator
         implements Comparator

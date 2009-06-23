@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.10 2009/01/20 16:23:02 klukas Exp $
+// $Id: DefaultIOManager.java,v 1.11 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers;
 
@@ -35,7 +35,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -51,6 +51,7 @@ public class DefaultIOManager implements IOManager {
 		/* (non-Javadoc)
 		 * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
 		 */
+		@Override
 		public boolean accept(File file) {
 			if (file.isDirectory()) return true;
 			if (file.getName().lastIndexOf(".") > 0) {
@@ -74,6 +75,7 @@ public class DefaultIOManager implements IOManager {
 		/* (non-Javadoc)
 		 * @see javax.swing.filechooser.FileFilter#getDescription()
 		 */
+		@Override
 		public String getDescription() {
 			// return "Graph Files (" + getSupported("*", "; ") + ")";
 			return "Supported Graph Files";
@@ -312,6 +314,7 @@ public class DefaultIOManager implements IOManager {
 	 *
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString() {
 		return "inputSerializer: " + inputSerializer + " outputSerializer: "
 					+ outputSerializer;

@@ -5,13 +5,12 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: OverviewOptionPane.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: OverviewOptionPane.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.options;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import java.io.IOException;
 
 import javax.swing.JComponent;
@@ -21,7 +20,7 @@ import javax.swing.JScrollPane;
 /**
  * The overview pane for the options dialog.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class OverviewOptionPane
     extends AbstractOptionPane
@@ -41,7 +40,8 @@ public class OverviewOptionPane
     /*
      * @see org.graffiti.options.AbstractOptionPane#initDefault()
      */
-    protected void initDefault()
+    @Override
+	protected void initDefault()
     {
         setLayout(new BorderLayout());
 
@@ -68,7 +68,8 @@ public class OverviewOptionPane
     /*
      * @see org.graffiti.options.AbstractOptionPane#saveDefault()
      */
-    protected void saveDefault()
+    @Override
+	protected void saveDefault()
     {
         /* do nothing */
     }

@@ -7,6 +7,7 @@
 package org;
 
 import info.clearthought.layout.TableLayout;
+import info.clearthought.layout.TableLayoutConstants;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -19,7 +20,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -45,7 +45,7 @@ public class MarkComponent extends JComponent {
 		this.comp = comp;
 		this.requestFocus = requestFocus;
 		
-		setLayout(TableLayout.getLayout(new double[] {5, 1, width, 1, 5}, TableLayout.PREFERRED));
+		setLayout(TableLayout.getLayout(new double[] {5, 1, width, 1, 5}, TableLayoutConstants.PREFERRED));
 		add(b1, "0,0");
 		add(bb1, "1,0");
 		add(comp, "2,0");

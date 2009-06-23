@@ -17,10 +17,12 @@ public class AllPermissionPolicy extends Policy {
 		p.add(ap);
 	}
 	
+	@Override
 	public PermissionCollection getPermissions(CodeSource cs) {
 		return p;
 	}
 	
+	@Override
 	public void refresh() {
 	}
 }

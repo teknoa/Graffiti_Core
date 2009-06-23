@@ -842,6 +842,7 @@ public void deleteRow (int i)
  *         "{{col0, col1, col2, ..., colN}, {row0, row1, row2, ..., rowM}}"
  */
 
+@Override
 public String toString ()
 {
     int counter;
@@ -2132,7 +2133,8 @@ public void invalidateLayout (Container target)
          *            False, otherwise.
          */
 
-        public boolean equals (Object object)
+        @Override
+		public boolean equals (Object object)
         {
             boolean equal = false;
 
@@ -2365,8 +2367,8 @@ public void invalidateLayout (Container target)
 		result.setOpaque(false);
 		double[] width = new double[guiElements.size()];
 		for (int i=0; i<width.length; i++)
-			width[i] = TableLayout.FILL;
-		result.setLayout(getLayout(width, TableLayout.PREFERRED));
+			width[i] = TableLayoutConstants.FILL;
+		result.setLayout(getLayout(width, TableLayoutConstants.PREFERRED));
 		int idx = 0;
 		for (JComponent jc : guiElements) {
 			if (jc!=null)
@@ -2384,7 +2386,7 @@ public void invalidateLayout (Container target)
 		double[] width = new double[guiElements.size()];
 		for (int i=0; i<width.length; i++)
 			width[i] = componentsWidth;
-		result.setLayout(getLayout(width, TableLayout.PREFERRED));
+		result.setLayout(getLayout(width, TableLayoutConstants.PREFERRED));
 		int idx = 0;
 		for (JComponent jc : guiElements) {
 			result.add(FolderPanel.getBorderedComponent(jc, spaceT, spaceL, spaceB, spaceR), idx+",0");
@@ -2402,8 +2404,8 @@ public void invalidateLayout (Container target)
 		result.setBackground(null);
 		double[] height = new double[jComponentList.size()];
 		for (int i=0; i<height.length; i++)
-			height[i] = TableLayout.PREFERRED;
-		result.setLayout(getLayout(TableLayout.FILL, height));
+			height[i] = TableLayoutConstants.PREFERRED;
+		result.setLayout(getLayout(TableLayoutConstants.FILL, height));
 		int idx = 0;
 		for (Object o : jComponentList) {
 			JComponent jc = (JComponent)o;
@@ -2422,8 +2424,8 @@ public void invalidateLayout (Container target)
 		result.setBackground(null);
 		double[] height = new double[jComponentList.size()];
 		for (int i=0; i<height.length; i++)
-			height[i] = TableLayout.PREFERRED;
-		result.setLayout(getLayout(TableLayout.FILL, height));
+			height[i] = TableLayoutConstants.PREFERRED;
+		result.setLayout(getLayout(TableLayoutConstants.FILL, height));
 		int idx = 0;
 		int max = jComponentList.size();
 		for (Object o : jComponentList) {

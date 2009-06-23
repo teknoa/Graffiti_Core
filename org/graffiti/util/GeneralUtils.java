@@ -5,21 +5,20 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GeneralUtils.java,v 1.1 2007/05/31 12:56:03 klukas Exp $
+// $Id: GeneralUtils.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
 package org.graffiti.util;
-
-import org.graffiti.attributes.Attribute;
-import org.graffiti.attributes.CollectionAttribute;
-import org.graffiti.attributes.CompositeAttribute;
-
-import org.graffiti.graph.Edge;
-import org.graffiti.graph.Node;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.graffiti.attributes.Attribute;
+import org.graffiti.attributes.CollectionAttribute;
+import org.graffiti.attributes.CompositeAttribute;
+import org.graffiti.graph.Edge;
+import org.graffiti.graph.Node;
 
 
 /**

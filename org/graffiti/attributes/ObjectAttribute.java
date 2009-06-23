@@ -6,8 +6,6 @@
  */
 package org.graffiti.attributes;
 
-import org.graffiti.attributes.IllegalIdException;
-import org.graffiti.attributes.StringAttribute;
 
 /**
  * @author Christian Klukas
@@ -18,12 +16,14 @@ import org.graffiti.attributes.StringAttribute;
 public class ObjectAttribute extends StringAttribute {
     Object myValue;
     
-    public void setString(String value) {
+    @Override
+	public void setString(String value) {
     	// assert value!=null;
         myValue=value;
         super.setString(value);
     }
-    public String getString() {
+    @Override
+	public String getString() {
       if (myValue==null) return null;  
     	return myValue.toString();
     }
@@ -39,7 +39,8 @@ public class ObjectAttribute extends StringAttribute {
     /* (non-Javadoc)
      * @see org.graffiti.attributes.AbstractAttribute#doSetValue(java.lang.Object)
      */
-    protected void doSetValue(Object v) throws IllegalArgumentException {
+    @Override
+	protected void doSetValue(Object v) throws IllegalArgumentException {
     	// assert v!=null;
 		myValue = v;
     }
@@ -47,21 +48,24 @@ public class ObjectAttribute extends StringAttribute {
     /* (non-Javadoc)
      * @see org.graffiti.attributes.Attribute#setDefaultValue()
      */
-    public void setDefaultValue() {
+    @Override
+	public void setDefaultValue() {
         myValue = new Object();
     }
 
     /* (non-Javadoc)
      * @see org.graffiti.attributes.Attribute#getValue()
      */
-    public Object getValue() {
+    @Override
+	public Object getValue() {
         return myValue;
     }
 
     /* (non-Javadoc)
      * @see org.graffiti.core.DeepCopy#copy()
      */
-    public Object copy() {
+    @Override
+	public Object copy() {
         ObjectAttribute oa=new ObjectAttribute(getId());
         oa.setString(getString());
         return oa;

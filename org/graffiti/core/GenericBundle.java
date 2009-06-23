@@ -5,12 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericBundle.java,v 1.1 2007/05/31 12:55:55 klukas Exp $
+// $Id: GenericBundle.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.core;
 
 import java.net.URL;
-
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;

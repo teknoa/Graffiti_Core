@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginSelector.java,v 1.2 2008/05/30 10:52:48 klukas Exp $
+// $Id: PluginSelector.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -21,7 +21,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -46,7 +45,7 @@ import org.graffiti.core.StringBundle;
  * Represents a plugin selector. A simple dialog to pick the name of a plugin.
  * The dialog filters already loaded plugins from the list of plugins.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class PluginSelector
     extends JDialog
@@ -434,7 +433,8 @@ public class PluginSelector
          *
          * @return DOCUMENT ME!
          */
-        public Component getListCellRendererComponent(JList list, Object value,
+        @Override
+		public Component getListCellRendererComponent(JList list, Object value,
             int modelIndex, boolean isSelected, boolean cellHasFocus)
         {
             Component c = super.getListCellRendererComponent(list, value,
@@ -487,7 +487,7 @@ public class PluginSelector
      * DOCUMENT ME!
      *
      * @author $Author: klukas $
-     * @version $Revision: 1.2 $ $Date: 2008/05/30 10:52:48 $
+     * @version $Revision: 1.3 $ $Date: 2009/06/23 07:05:20 $
      */
     class EntryComparator
         implements Comparator

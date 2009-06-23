@@ -9,8 +9,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
-import org.graffiti.managers.MyInputStreamCreator;
-
 /**
  * @author klukas
  */

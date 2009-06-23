@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDependency.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: PluginDependency.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 /**
  * Models a dependency to another plugin.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PluginDependency
     implements Dependency
@@ -162,7 +162,8 @@ public class PluginDependency
      *
      * @return a human readable string representation of this object.
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "[name = " + name + ",main = " + main + "]";
     }

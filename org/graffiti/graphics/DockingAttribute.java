@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DockingAttribute.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: DockingAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -23,7 +23,7 @@ import org.graffiti.attributes.StringAttribute;
  * this correctly.
  *
  * @author breu
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class DockingAttribute
     extends HashMapAttribute
@@ -77,7 +77,8 @@ public class DockingAttribute
      *
      * @throws IllegalArgumentException DOCUMENT ME!
      */
-    public void setCollection(Map<String, Attribute> attrs)
+    @Override
+	public void setCollection(Map<String, Attribute> attrs)
     {
         if(attrs.keySet().contains(SOURCE) && attrs.keySet().contains(TARGET))
         {
@@ -95,7 +96,7 @@ public class DockingAttribute
                 }
                 else
                 {
-                    this.add((Attribute) attrs.get(it.next()));
+                    this.add(attrs.get(it.next()));
                 }
             }
         }
@@ -150,7 +151,8 @@ public class DockingAttribute
      *
      * @return A deep copy of this object.
      */
-    public Object copy()
+    @Override
+	public Object copy()
     {
         DockingAttribute copied = new DockingAttribute(this.getId());
         copied.setSource(this.getSource());

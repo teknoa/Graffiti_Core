@@ -2,7 +2,6 @@ package org.graffiti.plugin;
 
 import java.awt.Component;
 import java.util.Stack;
-import java.util.regex.Pattern;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: OptAdjListGraph.java,v 1.1 2007/05/31 12:55:55 klukas Exp $
+// $Id: OptAdjListGraph.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
 package org.graffiti.graph;
 
 import java.util.ArrayList;
@@ -15,9 +15,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.graffiti.attributes.CollectionAttribute;
-
 import org.graffiti.event.ListenerManager;
-
 import org.graffiti.util.MultipleIterator;
 
 /**
@@ -27,7 +25,7 @@ import org.graffiti.util.MultipleIterator;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see org.graffiti.graph.Graph
  * @see org.graffiti.graph.AbstractGraph
@@ -174,7 +172,8 @@ public class OptAdjListGraph
      *
      * @return a boolean indicating whether the graph is directed.
      */
-    public boolean isDirected()
+    @Override
+	public boolean isDirected()
     {
     	return isDirected;
     	/*
@@ -191,7 +190,8 @@ public class OptAdjListGraph
      * @return a <code>java.util.Collection</code> containing all the edges of
      *         the current graph.
      */
-    public Collection getEdges()
+    @Override
+	public Collection getEdges()
     {
         return (Collection) ((ArrayList) edges).clone();
     }
@@ -202,7 +202,8 @@ public class OptAdjListGraph
      *
      * @return an iterator containing the edges of the graph.
      */
-    public Iterator getEdgesIterator()
+    @Override
+	public Iterator getEdgesIterator()
     {
         return new MultipleIterator(edges.iterator());
     }
@@ -214,7 +215,8 @@ public class OptAdjListGraph
      * @return <code>true</code> if the graph is empty, <code>false</code>
      *         otherwise.
      */
-    public boolean isEmpty()
+    @Override
+	public boolean isEmpty()
     {
         return nodes.size() == 0;
     }
@@ -227,7 +229,8 @@ public class OptAdjListGraph
      * @return a new <code>java.util.List</code> containing all the nodes 
      * of the graph.
      */
-    public List getNodes()
+    @Override
+	public List getNodes()
     {
         return (List) ((ArrayList) nodes).clone();
     }
@@ -238,7 +241,8 @@ public class OptAdjListGraph
      *
      * @return an iterator containing the nodes of the graph.
      */
-    public Iterator getNodesIterator()
+    @Override
+	public Iterator getNodesIterator()
     {
         return new MultipleIterator(nodes.iterator());
     }
@@ -248,7 +252,8 @@ public class OptAdjListGraph
      *
      * @return the number of directed edges of the graph.
      */
-    public int getNumberOfDirectedEdges()
+    @Override
+	public int getNumberOfDirectedEdges()
     {
         return noDirectedEdges;
     }
@@ -258,7 +263,8 @@ public class OptAdjListGraph
      *
      * @return the number of edges of the graph.
      */
-    public int getNumberOfEdges()
+    @Override
+	public int getNumberOfEdges()
     {
         return edges.size();
     }
@@ -268,7 +274,8 @@ public class OptAdjListGraph
      *
      * @return the number of nodes of the graph.
      */
-    public int getNumberOfNodes()
+    @Override
+	public int getNumberOfNodes()
     {
         return nodes.size();
     }
@@ -278,7 +285,8 @@ public class OptAdjListGraph
      *
      * @return the number of undirected edges in the graph.
      */
-    public int getNumberOfUndirectedEdges()
+    @Override
+	public int getNumberOfUndirectedEdges()
     {
         return noUndirectedEdges;
     }
@@ -289,7 +297,8 @@ public class OptAdjListGraph
      *
      * @return A boolean indicating whether the graph is undirected.
      */
-    public boolean isUndirected()
+    @Override
+	public boolean isUndirected()
     {
     	if (edges.size()==0)
     		return !isDirected;
@@ -306,7 +315,8 @@ public class OptAdjListGraph
      * @return <code>true</code>, if the graph contains the edge e,
      *         <code>false</code> otherwise.
      */
-    public boolean containsEdge(Edge e)
+    @Override
+	public boolean containsEdge(Edge e)
     {
         assert e != null;
 
@@ -322,7 +332,8 @@ public class OptAdjListGraph
      * @return <code>true</code>, if the graph contains the node n,
      *         <code>false</code> otherwise.
      */
-    public boolean containsNode(Node n)
+    @Override
+	public boolean containsNode(Node n)
     {
         assert n != null;
 
@@ -356,7 +367,8 @@ public class OptAdjListGraph
      *
      * @return a copy of the graph.
      */
-    public Object copy()
+    @Override
+	public Object copy()
     {
         OptAdjListGraph newGraph = new OptAdjListGraph((CollectionAttribute) this.getAttributes()
                                                                                  .copy());
@@ -376,7 +388,8 @@ public class OptAdjListGraph
      *
      * @return the new edge.
      */
-    protected Edge doAddEdge(Node source, Node target, boolean directed)
+    @Override
+	protected Edge doAddEdge(Node source, Node target, boolean directed)
     {
         assert (source != null) && (target != null);
         assert (noDirectedEdges + noUndirectedEdges) == edges.size();
@@ -412,7 +425,8 @@ public class OptAdjListGraph
      *
      * @return the new edge.
      */
-    protected Edge doAddEdge(Node source, Node target, boolean directed,
+    @Override
+	protected Edge doAddEdge(Node source, Node target, boolean directed,
         CollectionAttribute col)
     {
         assert (source != null) && (target != null) && (col != null);
@@ -443,7 +457,8 @@ public class OptAdjListGraph
      *
      * @param node DOCUMENT ME!
      */
-    protected void doAddNode(Node node)
+    @Override
+	protected void doAddNode(Node node)
     {
         assert node != null;
         nodes.add(node);
@@ -461,7 +476,8 @@ public class OptAdjListGraph
      * will be empty. A special event for clearing the graph will be passed to
      * the listener manager.
      */
-    protected void doClear()
+    @Override
+	protected void doClear()
     {
         assert (noDirectedEdges + noUndirectedEdges) == edges.size();
         this.nodes = new ArrayList();
@@ -478,7 +494,8 @@ public class OptAdjListGraph
      *
      * @param e the edge to delete.
      */
-    protected void doDeleteEdge(Edge e)
+    @Override
+	protected void doDeleteEdge(Edge e)
     {
         assert e != null;
         assert (noDirectedEdges + noUndirectedEdges) == edges.size();
@@ -495,8 +512,8 @@ public class OptAdjListGraph
         }
         ((AdjListEdge) e).setGraphToNull();
 
-        ((AdjListNode) (e.getSource())).removeOutEdge((AdjListEdge) e);
-        ((AdjListNode) (e.getTarget())).removeInEdge((AdjListEdge) e);
+        ((AdjListNode) (e.getSource())).removeOutEdge(e);
+        ((AdjListNode) (e.getTarget())).removeInEdge(e);
         assert (noDirectedEdges + noUndirectedEdges) == edges.size();
     }
 
@@ -509,7 +526,8 @@ public class OptAdjListGraph
      *
      * @throws GraphElementNotFoundException DOCUMENT ME!
      */
-    protected void doDeleteNode(Node n)
+    @Override
+	protected void doDeleteNode(Node n)
         throws GraphElementNotFoundException
     {
         assert n != null;

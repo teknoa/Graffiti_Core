@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
 
 
@@ -34,6 +33,7 @@ public class OpenFileDialogService {
 		openDialog.setMultiSelectionEnabled(false);
 		openDialog.resetChoosableFileFilters();
 		openDialog.setFileFilter(new FileFilter() {
+			@Override
 			public boolean accept(File f) {
 				return (f.isDirectory()) || 
 				((f.canRead() && extensionOK(f.getName(), valid_extensions)));
@@ -47,6 +47,7 @@ public class OpenFileDialogService {
 				return false;
 			}
 
+			@Override
 			public String getDescription() {
 				return description;
 			}});
@@ -64,6 +65,7 @@ public class OpenFileDialogService {
 		openDialog.setMultiSelectionEnabled(false);
 		openDialog.resetChoosableFileFilters();
 		openDialog.setFileFilter(new FileFilter() {
+			@Override
 			public boolean accept(File f) {
 				return (f.isDirectory()) || 
 				((f.canRead() && extensionOK(f.getName(), valid_extensions)));
@@ -77,6 +79,7 @@ public class OpenFileDialogService {
 				return false;
 			}
 
+			@Override
 			public String getDescription() {
 				return description;
 			}});
@@ -95,6 +98,7 @@ public class OpenFileDialogService {
 		openDialog.resetChoosableFileFilters();
 		openDialog.setMultiSelectionEnabled(false);
 		openDialog.setFileFilter(new FileFilter() {
+			@Override
 			public boolean accept(File f) {
 				return (f.isDirectory()) || 
 				((f.canRead() && extensionOK(f.getName(), valid_extensions)));
@@ -108,6 +112,7 @@ public class OpenFileDialogService {
 				return false;
 			}
 
+			@Override
 			public String getDescription() {
 				return description;
 			}});
@@ -128,6 +133,7 @@ public class OpenFileDialogService {
 		}
 		openDialog.resetChoosableFileFilters();
 		openDialog.setFileFilter(new FileFilter() {
+			@Override
 			public boolean accept(File f) {
 				return (f.isDirectory()) || 
 				((f.canRead() && extensionOK(f.getName(), valid_extensions)));
@@ -141,6 +147,7 @@ public class OpenFileDialogService {
 				return false;
 			}
 
+			@Override
 			public String getDescription() {
 				return description;
 			}});

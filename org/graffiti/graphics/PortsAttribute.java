@@ -5,11 +5,10 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PortsAttribute.java,v 1.3 2009/06/07 12:44:26 klukas Exp $
+// $Id: PortsAttribute.java,v 1.4 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
-import java.awt.geom.Point2D;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,14 +18,13 @@ import java.util.Map;
 import org.graffiti.attributes.Attribute;
 import org.graffiti.attributes.CollectionAttribute;
 import org.graffiti.attributes.HashMapAttribute;
-
 import org.graffiti.util.MultipleIterator;
 
 /**
  * Contains ingoing, outgoing and common ports
  *
  * @author breu
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class PortsAttribute
     extends HashMapAttribute
@@ -94,7 +92,8 @@ public class PortsAttribute
      *
      * @throws IllegalArgumentException DOCUMENT ME!
      */
-    public void setCollection(Map<String, Attribute> attrs)
+    @Override
+	public void setCollection(Map<String, Attribute> attrs)
     {
         if(attrs.keySet().contains(IN) && attrs.keySet().contains(OUT) &&
             attrs.keySet().contains(COMMON))
@@ -117,7 +116,7 @@ public class PortsAttribute
                 }
                 else
                 {
-                    this.add((Attribute) attrs.get(it.next()));
+                    this.add(attrs.get(it.next()));
                 }
             }
         }
@@ -263,7 +262,8 @@ public class PortsAttribute
      *
      * @return A deep copy of this object.
      */
-    public Object copy()
+    @Override
+	public Object copy()
     {
         PortsAttribute copied = new PortsAttribute(this.getId(), getIngoing(), getOutgoing(), getCommon());
         return copied;

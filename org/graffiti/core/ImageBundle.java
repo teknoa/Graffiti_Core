@@ -5,12 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ImageBundle.java,v 1.1 2007/05/31 12:55:55 klukas Exp $
+// $Id: ImageBundle.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.core;
 
 import java.awt.Image;
-
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -141,7 +140,8 @@ public class ImageBundle
     /**
      * @see org.graffiti.core.GenericBundle#getBundleLocation()
      */
-    protected String getBundleLocation()
+    @Override
+	protected String getBundleLocation()
     {
         return "org/graffiti/core/ImageBundle";
     }

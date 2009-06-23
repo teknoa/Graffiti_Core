@@ -31,6 +31,7 @@ public class Vector3d {
         z=c;
     }
 
+	@Override
 	public String toString() {
 		return "Vector2d["+x+", "+y+", "+z+"]";
 	}

@@ -1,18 +1,12 @@
 package org.graffiti.plugin.parameter;
 
-import java.awt.image.BufferedImage;
-import java.util.Collection;
-import java.util.List;
-
 import javax.swing.JComponent;
-
-import org.graffiti.plugin.parameter.AbstractSingleParameter;
 
 
 /**
  * @author klukas
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class JComponentParameter
     extends AbstractSingleParameter

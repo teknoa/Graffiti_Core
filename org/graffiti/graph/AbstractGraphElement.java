@@ -5,15 +5,12 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractGraphElement.java,v 1.2 2008/03/26 15:11:48 klukas Exp $
+// $Id: AbstractGraphElement.java,v 1.3 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.graph;
 
-import java.util.logging.Logger;
-
 import org.graffiti.attributes.AbstractAttributable;
 import org.graffiti.attributes.CollectionAttribute;
-
 import org.graffiti.event.ListenerManager;
 
 /**

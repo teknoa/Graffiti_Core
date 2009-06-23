@@ -5,14 +5,14 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: BooleanParameter.java,v 1.2 2009/05/15 13:08:33 morla Exp $
+// $Id: BooleanParameter.java,v 1.3 2009/06/23 07:05:19 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
 /**
  * Parameter that contains a <code>Boolean</code> value.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class BooleanParameter
     extends AbstractSingleParameter
@@ -86,7 +86,8 @@ public class BooleanParameter
      * @exception IllegalArgumentException thrown if <code>value</code> is not
      *            of the correct type.
      */
-    public void setValue(Object value)
+    @Override
+	public void setValue(Object value)
     {
         try
         {
@@ -103,7 +104,8 @@ public class BooleanParameter
      *
      * @return the value of this parameter.
      */
-    public Object getValue()
+    @Override
+	public Object getValue()
     {
         return value;
     }
@@ -111,7 +113,8 @@ public class BooleanParameter
     /**
      * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
      */
-    public String toXMLString() {
+    @Override
+	public String toXMLString() {
         return getStandardXML(value.booleanValue() ? "true" : "false");
     }
 

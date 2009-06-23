@@ -5,12 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ShapeDescriptionAttribute.java,v 1.2 2008/07/16 11:39:54 klukas Exp $
+// $Id: ShapeDescriptionAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
 import java.awt.geom.Point2D;
-
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -160,7 +159,8 @@ public class ShapeDescriptionAttribute
      *
      * @return a copy of the <code>CollectionAttribute</code>.
      */
-    public Object copy()
+    @Override
+	public Object copy()
     {
         ShapeDescriptionAttribute copy = new ShapeDescriptionAttribute(this.getId());
 

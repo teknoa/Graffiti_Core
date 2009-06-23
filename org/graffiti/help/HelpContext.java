@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: HelpContext.java,v 1.1 2007/05/31 12:56:09 klukas Exp $
+// $Id: HelpContext.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.help;
 
@@ -17,7 +17,7 @@ import javax.swing.JComponent;
  * Represents the help context of an algorithm or a gui element in the editor.
  *
  * @author flierl
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class HelpContext
 {
@@ -105,7 +105,8 @@ public class HelpContext
      *
      * @return a human readable string of this help context.
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return helpID;
     }

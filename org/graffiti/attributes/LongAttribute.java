@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LongAttribute.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: LongAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -14,7 +14,7 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a long
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class LongAttribute
     extends AbstractAttribute {
@@ -118,7 +118,8 @@ public class LongAttribute
      * @exception IllegalArgumentException if the parameter has not the
      *            appropriate class for this attribute.
      */
-    protected void doSetValue(Object o)
+    @Override
+	protected void doSetValue(Object o)
         throws IllegalArgumentException {
         assert o != null;
 
@@ -136,7 +137,8 @@ public class LongAttribute
     /**
      * @see org.graffiti.plugin.Displayable#toXMLString()
      */
-    public String toXMLString() {
+    @Override
+	public String toXMLString() {
         return getStandardXML(String.valueOf(value));
     }
 }

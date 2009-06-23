@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListEdge.java,v 1.3 2008/03/28 09:37:24 klukas Exp $
+// $Id: AdjListEdge.java,v 1.4 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -17,7 +17,7 @@ import org.graffiti.attributes.CollectionAttribute;
  * Implementation of the <code>Edge</code> interface for a <code>Graph</code>
  * with adjacency list representation.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *
  * @see AdjListGraph
  * @see AdjListNode
@@ -135,7 +135,8 @@ public class AdjListEdge
      * @exception IllegalArgumentException if target is not of type
      *            <code>AdjListNode</code>.
      */
-    public void doSetTarget(Node target)
+    @Override
+	public void doSetTarget(Node target)
         throws GraphElementNotFoundException, IllegalArgumentException
     {
         assert target != null;
@@ -170,7 +171,8 @@ public class AdjListEdge
     /**
      * Swaps source and target of the edge.
      */
-    protected void doReverse()
+    @Override
+	protected void doReverse()
     {
         AdjListNode oldSource = (AdjListNode) this.getSource();
         logger.finest("setting the new source");
@@ -186,7 +188,8 @@ public class AdjListEdge
      * @param directed <code>true</code>, if the <code>Edge</code> is destined
      *        to be directed, <code>false</code> otherwise.
      */
-    protected void doSetDirected(boolean directed)
+    @Override
+	protected void doSetDirected(boolean directed)
     {
         if(directed != this.directed)
         {
@@ -212,7 +215,8 @@ public class AdjListEdge
      * @exception IllegalArgumentException if source is not of type
      *            <code>AdjListNode</code>
      */
-    protected void doSetSource(Node source)
+    @Override
+	protected void doSetSource(Node source)
         throws GraphElementNotFoundException, IllegalArgumentException
     {
         assert source != null;
@@ -255,6 +259,7 @@ public class AdjListEdge
 		this.graph=graph;
 	}
 
+	@Override
 	public String toString() {
 		return "Edge ID="+getID();
 	}

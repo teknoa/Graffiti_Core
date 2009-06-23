@@ -5,14 +5,14 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ObjectParameter.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: ObjectParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
 /**
  * Parameter that contains an <code>Object</code> value.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class ObjectParameter
     extends AbstractSingleParameter
@@ -54,7 +54,8 @@ public class ObjectParameter
     /**
      * @see org.graffiti.plugin.Displayable#setValue(java.lang.Object)
      */
-    public void setValue(Object val)
+    @Override
+	public void setValue(Object val)
         throws IllegalArgumentException
     {
         object = val;
@@ -63,7 +64,8 @@ public class ObjectParameter
     /* (non-Javadoc)
      * @see org.graffiti.plugin.Displayable#getValue()
      */
-    public Object getValue()
+    @Override
+	public Object getValue()
     {
         return object;
     }

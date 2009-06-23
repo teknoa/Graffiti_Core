@@ -5,20 +5,19 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AlgorithmManager.java,v 1.1 2007/05/31 12:56:06 klukas Exp $
+// $Id: AlgorithmManager.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers;
 
 import java.util.List;
 
 import org.graffiti.managers.pluginmgr.PluginManagerListener;
-
 import org.graffiti.plugin.algorithm.Algorithm;
 
 /**
  * Provides a generic interface for a component managing a set of algorithms.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see org.graffiti.managers.pluginmgr.PluginManagerListener
  */

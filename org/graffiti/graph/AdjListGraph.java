@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListGraph.java,v 1.3 2008/07/14 10:56:55 klukas Exp $
+// $Id: AdjListGraph.java,v 1.4 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-// import java.util.logging.Logger;
 
 import org.ErrorMsg;
 import org.graffiti.attributes.CollectionAttribute;
@@ -30,7 +29,7 @@ import org.graffiti.event.ListenerManager;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see Graph
  * @see AbstractGraph
@@ -54,6 +53,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	private String idName = null;
 
+	@Override
 	public String toString() {
 		return "Graph ID=" + id + " / "+getName();
 	}
@@ -91,6 +91,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * 
 	 * @see org.graffiti.graph.Graph#getNumberOfNodes()
 	 */
+	@Override
 	public int getNumberOfNodes() {
 		return nodes.size();
 	}
@@ -100,6 +101,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * 
 	 * @see org.graffiti.graph.Graph#getNodes()
 	 */
+	@Override
 	public List<Node> getNodes() {
 		return nodes;
 	}
@@ -242,6 +244,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * 
 	 * @return the new edge.
 	 */
+	@Override
 	protected Edge doAddEdge(Node source, Node target, boolean directed) {
 		assert (source != null) && (target != null);
 
@@ -270,6 +273,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * 
 	 * @return the new edge.
 	 */
+	@Override
 	protected Edge doAddEdge(Node source, Node target, boolean directed,
 			CollectionAttribute col) {
 		assert (source != null) && (target != null) && (col != null);
@@ -291,6 +295,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * @param node
 	 *           DOCUMENT ME!
 	 */
+	@Override
 	protected void doAddNode(Node node) {
 		assert node != null;
 		setModified(true);
@@ -303,6 +308,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * be empty. A special event for clearing the graph will be passed to the
 	 * listener manager.
 	 */
+	@Override
 	protected void doClear() {
 		setModified(true);
 		this.nodes = new ArrayList<Node>();
@@ -317,6 +323,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * @param e
 	 *           the edge to delete.
 	 */
+	@Override
 	protected void doDeleteEdge(Edge e) {
 		assert e != null;
 		if (((AdjListNode) (e.getSource())).getAllInEdges().contains(e))
@@ -346,6 +353,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * @throws GraphElementNotFoundException
 	 *            DOCUMENT ME!
 	 */
+	@Override
 	protected void doDeleteNode(Node n) throws GraphElementNotFoundException {
 		assert n != null;
 
@@ -365,6 +373,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * 
 	 * @return the newly created node.
 	 */
+	@Override
 	protected Node createNode() {
 		setModified(true);
 		return new AdjListNode(this);
@@ -379,6 +388,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * 
 	 * @return the newly created node.
 	 */
+	@Override
 	protected Node createNode(CollectionAttribute col) {
 		assert col != null;
 
@@ -452,6 +462,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * 
 	 * @see org.graffiti.graph.Graph#getEdges()
 	 */
+	@Override
 	public Collection<Edge> getEdges() {
 		return edges;
 	}
@@ -461,6 +472,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * 
 	 * @see org.graffiti.graph.Graph#getNumberOfEdges()
 	 */
+	@Override
 	public int getNumberOfEdges() {
 		return edges.size();
 	}
@@ -471,6 +483,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * @see org.graffiti.graph.Graph#getEdges(org.graffiti.graph.Node,
 	 *      org.graffiti.graph.Node)
 	 */
+	@Override
 	public Collection<Edge> getEdges(Node n1, Node n2) {
 		HashSet<Edge> result = new HashSet<Edge>();
 		for (Edge edge : n1.getEdges())

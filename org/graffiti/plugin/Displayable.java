@@ -5,11 +5,10 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Displayable.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: Displayable.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.plugin;
 
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 /**

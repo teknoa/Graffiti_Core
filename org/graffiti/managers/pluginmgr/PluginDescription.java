@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDescription.java,v 1.5 2008/11/27 20:11:49 klukas Exp $
+// $Id: PluginDescription.java,v 1.6 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Contains a meta data of a plugin.
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class PluginDescription
 {
@@ -242,7 +242,8 @@ public class PluginDescription
      *
      * @return a human readable string representation of this object.
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return "[name = " + name + ", version = " + version + ", " +
         " main = " + main + ", number of dependencies = " +

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ChangeAttributesEdit.java,v 1.2 2007/08/25 12:18:34 klukas Exp $
+// $Id: ChangeAttributesEdit.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.undo;
 
@@ -13,12 +13,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import org.ErrorMsg;
 import org.graffiti.attributes.Attribute;
 import org.graffiti.attributes.AttributeNotFoundException;
-
 import org.graffiti.graph.Graph;
 import org.graffiti.graph.GraphElement;
 
@@ -26,7 +24,7 @@ import org.graffiti.graph.GraphElement;
  * ChangeAttributesEdit
  *
  * @author wirch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class ChangeAttributesEdit
     extends GraffitiAbstractUndoableEdit
@@ -77,7 +75,8 @@ public class ChangeAttributesEdit
     /**
      * @see javax.swing.undo.UndoableEdit#getPresentationName()
      */
-    public String getPresentationName()
+    @Override
+	public String getPresentationName()
     {
         String name = "";
 
@@ -97,7 +96,8 @@ public class ChangeAttributesEdit
     /*
      * @see org.graffiti.undo.GraffitiAbstractUndoableEdit#execute()
      */
-    public void execute()
+    @Override
+	public void execute()
     {
         //do nothing
     }
@@ -105,7 +105,8 @@ public class ChangeAttributesEdit
     /**
      * @see javax.swing.undo.UndoableEdit#redo()
      */
-    public void redo()
+    @Override
+	public void redo()
     {
         super.redo();
         changeValues();
@@ -114,7 +115,8 @@ public class ChangeAttributesEdit
     /**
      * @see javax.swing.undo.UndoableEdit#undo()
      */
-    public void undo()
+    @Override
+	public void undo()
     {
         super.undo();
         changeValues();

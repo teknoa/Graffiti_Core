@@ -5,12 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeTypesManager.java,v 1.4 2008/09/06 19:18:35 klukas Exp $
+// $Id: AttributeTypesManager.java,v 1.5 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.attributes;
 
 import java.lang.reflect.Constructor;
-
 import java.security.AccessControlException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,7 +20,6 @@ import java.util.logging.Logger;
 import org.AttributeHelper;
 import org.graffiti.managers.pluginmgr.PluginDescription;
 import org.graffiti.managers.pluginmgr.PluginManagerListener;
-
 import org.graffiti.plugin.GenericPlugin;
 
 /**
@@ -31,7 +29,7 @@ import org.graffiti.plugin.GenericPlugin;
  * can be added and then used in an arbitrary <code>Attribute</code> hierarchy
  * associated with this <code>AttributeTypesManager</code>.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class AttributeTypesManager
     implements PluginManagerListener

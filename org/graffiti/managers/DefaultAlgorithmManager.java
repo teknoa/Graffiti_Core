@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultAlgorithmManager.java,v 1.1 2007/05/31 12:56:07 klukas Exp $
+// $Id: DefaultAlgorithmManager.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers;
 
@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.graffiti.managers.pluginmgr.PluginDescription;
-
 import org.graffiti.plugin.GenericPlugin;
 import org.graffiti.plugin.algorithm.Algorithm;
 
@@ -24,7 +23,7 @@ import org.graffiti.plugin.algorithm.Algorithm;
  * Manages the map of available algorithms: key = algorithm class names, 
  * value = algorithm
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class DefaultAlgorithmManager
     implements AlgorithmManager

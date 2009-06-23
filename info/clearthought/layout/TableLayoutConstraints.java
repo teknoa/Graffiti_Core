@@ -2,7 +2,8 @@ package info.clearthought.layout;
 
 
 
-import java.util.*;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
 
 
 
@@ -176,6 +177,7 @@ public TableLayoutConstraints
  *         "row, column, horizontal justification, vertical justification"
  */
 
+@Override
 public String toString ()
 {
     StringBuffer buffer = new StringBuffer();

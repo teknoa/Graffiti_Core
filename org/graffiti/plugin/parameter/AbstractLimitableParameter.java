@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractLimitableParameter.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: AbstractLimitableParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -14,7 +14,7 @@ package org.graffiti.plugin.parameter;
  * method, using the <code>compareTo</code> method of the
  * <code>Comparable</code> interface.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class AbstractLimitableParameter
     extends AbstractSingleParameter
@@ -38,7 +38,8 @@ public abstract class AbstractLimitableParameter
     /**
      * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
      */
-    public String toXMLString() {
+    @Override
+	public String toXMLString() {
         return getStandardXML(getValue().toString());
     }
     

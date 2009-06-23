@@ -26,7 +26,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -34,19 +33,12 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JSlider;
-import javax.swing.JSpinner;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
@@ -191,6 +183,7 @@ public class FolderPanel extends JComponent {
 		layoutRows();
 	}
 
+	@Override
 	public void setBackground(Color backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
@@ -371,12 +364,12 @@ public class FolderPanel extends JComponent {
 				if (searchEnabled) {
 					JComponent sfield = getSearchField();
 					titleComp = TableLayout.getSplit(titleLabel, sfield,
-							TableLayout.FILL, TableLayout.PREFERRED);
+							TableLayoutConstants.FILL, TableLayoutConstants.PREFERRED);
 				}
 				if (maxRowCount > 0) {
 					JComponent lrb = getLeftRightButton();
 					titleComp = TableLayout.getSplit(titleComp, lrb,
-							TableLayout.FILL, TableLayout.PREFERRED);
+							TableLayoutConstants.FILL, TableLayoutConstants.PREFERRED);
 				}
 				if (showCondenseButton) {
 					final JComponent condenseCmdPanel = getCondenseButton();
@@ -392,23 +385,23 @@ public class FolderPanel extends JComponent {
 				if (button1 != null && button2 == null) {
 					if (condenseStyle == CondenseButtonLayout.RIGHT)
 						labelPanel = TableLayout.getSplit(titleComp, button1,
-								TableLayout.FILL, TableLayout.PREFERRED);
+								TableLayoutConstants.FILL, TableLayoutConstants.PREFERRED);
 					else
 						labelPanel = TableLayout.getSplit(button1, titleComp,
-								TableLayout.PREFERRED, TableLayout.FILL);
+								TableLayoutConstants.PREFERRED, TableLayoutConstants.FILL);
 				}
 				if (button2 != null && button1 == null)
 					labelPanel = TableLayout.getSplit(titleComp, button2,
-							TableLayout.FILL, TableLayout.PREFERRED);
+							TableLayoutConstants.FILL, TableLayoutConstants.PREFERRED);
 				if (button1 != null && button2 != null) {
 					if (condenseStyle == CondenseButtonLayout.RIGHT)
 						labelPanel = TableLayout.getSplit(titleComp, TableLayout
-								.getSplit(button2, button1, TableLayout.PREFERRED,
-										TableLayout.PREFERRED), TableLayout.FILL,
-								TableLayout.PREFERRED);
+								.getSplit(button2, button1, TableLayoutConstants.PREFERRED,
+										TableLayoutConstants.PREFERRED), TableLayoutConstants.FILL,
+								TableLayoutConstants.PREFERRED);
 					else
 						labelPanel = TableLayout.getSplit(button1, TableLayout
-								.getSplit(titleComp, button2, TableLayout.FILL,
+								.getSplit(titleComp, button2, TableLayoutConstants.FILL,
 										TableLayout.PREFERRED),
 								TableLayout.PREFERRED, TableLayout.FILL);
 				}
@@ -867,8 +860,8 @@ public class FolderPanel extends JComponent {
 		tb.setFloatable(false);
 		tb.setOpaque(false);
 		tb.setBackground(frameColor);
-		tb.setLayout(new TableLayout(new double[][] { { TableLayout.FILL },
-				{ TableLayout.FILL } }));
+		tb.setLayout(new TableLayout(new double[][] { { TableLayoutConstants.FILL },
+				{ TableLayoutConstants.FILL } }));
 		// tb.setBackground(frameColor);
 		final JButton result = new JButton();
 		result.setBackground(frameColor);
@@ -930,7 +923,7 @@ public class FolderPanel extends JComponent {
 		if (comp == null)
 			return null;
 		JComponent result = TableLayout.getSplitVertical(comp, null,
-				TableLayout.PREFERRED, 0);
+				TableLayoutConstants.PREFERRED, 0);
 		result.setBorder(BorderFactory.createEmptyBorder(top, left, bottom,
 				right));
 		result.setBackground(null);

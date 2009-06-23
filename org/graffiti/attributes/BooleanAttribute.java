@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: BooleanAttribute.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: BooleanAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -133,7 +133,8 @@ public class BooleanAttribute
      * @exception IllegalArgumentException if the parameter has not the
      *            appropriate class for this attribute.
      */
-    protected void doSetValue(Object o)
+    @Override
+	protected void doSetValue(Object o)
         throws IllegalArgumentException {
         assert o != null;
 
@@ -155,7 +156,8 @@ public class BooleanAttribute
     /**
      * @see org.graffiti.plugin.Displayable#toXMLString()
      */
-    public String toXMLString() {
+    @Override
+	public String toXMLString() {
         return getStandardXML(value ? "true" : "false");
     }
 

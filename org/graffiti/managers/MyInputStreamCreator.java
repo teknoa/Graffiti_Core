@@ -2,10 +2,8 @@ package org.graffiti.managers;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URL;
 import java.util.zip.GZIPInputStream;
 

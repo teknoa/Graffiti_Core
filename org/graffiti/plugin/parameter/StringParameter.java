@@ -5,14 +5,14 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: StringParameter.java,v 1.1 2007/05/31 12:56:07 klukas Exp $
+// $Id: StringParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
 /**
  * Parameter that contains an <code>Integer</code> value.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class StringParameter
     extends AbstractSingleParameter
@@ -57,7 +57,8 @@ public class StringParameter
      * @exception IllegalArgumentException thrown if <code>value</code> is not
      *            of the correct type.
      */
-    public void setValue(Object value)
+    @Override
+	public void setValue(Object value)
     {
         try
         {
@@ -74,7 +75,8 @@ public class StringParameter
      *
      * @return the value of this parameter.
      */
-    public Object getValue()
+    @Override
+	public Object getValue()
     {
         return value;
     }
@@ -82,7 +84,8 @@ public class StringParameter
     /**
      * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
      */
-    public String toXMLString() {
+    @Override
+	public String toXMLString() {
         return getStandardXML(value.toString());
     }
 }

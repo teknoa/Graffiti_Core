@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: SimpleFormatter.java,v 1.1 2007/05/31 12:56:06 klukas Exp $
+// $Id: SimpleFormatter.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.util.logging;
 
@@ -15,7 +15,7 @@ import java.util.logging.LogRecord;
 /**
  * Provides a brief summary of the LogRecord in a human readable format.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class SimpleFormatter
     extends Formatter
@@ -29,7 +29,8 @@ public class SimpleFormatter
      *
      * @return a human readable string of the log record's message.
      */
-    public String format(LogRecord record)
+    @Override
+	public String format(LogRecord record)
     {
         return record.getMessage() + "\n";
     }

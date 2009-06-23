@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericFileFilter.java,v 1.1 2007/05/31 12:55:56 klukas Exp $
+// $Id: GenericFileFilter.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.core;
 
@@ -17,7 +17,7 @@ import javax.swing.filechooser.FileFilter;
  * Contains a generic file filter for filtering file extensions in the file
  * chooser dialog.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class GenericFileFilter
     extends FileFilter
@@ -46,7 +46,8 @@ public class GenericFileFilter
      *
      * @return DOCUMENT ME!
      */
-    public String getDescription()
+    @Override
+	public String getDescription()
     {
         return "*" + extension;
     }
@@ -68,7 +69,8 @@ public class GenericFileFilter
      *
      * @return DOCUMENT ME!
      */
-    public boolean accept(File f)
+    @Override
+	public boolean accept(File f)
     {
         boolean accept = f.isDirectory();
 

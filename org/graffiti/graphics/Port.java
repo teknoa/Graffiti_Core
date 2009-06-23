@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Port.java,v 1.2 2009/06/06 07:37:06 klukas Exp $
+// $Id: Port.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -106,7 +106,8 @@ public class Port
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    public boolean equals(Object obj)
+    @Override
+	public boolean equals(Object obj)
     {
         if(this == obj)
         {

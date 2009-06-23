@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginFileFilter.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: PluginFileFilter.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -18,7 +18,7 @@ import org.graffiti.core.StringBundle;
 /**
  * Represents a file filter for graffiti plugins.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PluginFileFilter
     extends FileFilter
@@ -73,7 +73,8 @@ public class PluginFileFilter
     /**
      * @see javax.swing.filechooser.FileFilter#getDescription()
      */
-    public String getDescription()
+    @Override
+	public String getDescription()
     {
         return description;
     }
@@ -103,7 +104,8 @@ public class PluginFileFilter
     /**
      * @see javax.swing.filechooser.FileFilter#accept(File)
      */
-    public boolean accept(File f)
+    @Override
+	public boolean accept(File f)
     {
         if(f.isDirectory())
         {

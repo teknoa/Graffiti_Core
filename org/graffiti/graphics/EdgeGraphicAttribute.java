@@ -5,15 +5,13 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: EdgeGraphicAttribute.java,v 1.2 2008/07/23 08:15:32 klukas Exp $
+// $Id: EdgeGraphicAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import org.graffiti.attributes.Attribute;
 import org.graffiti.attributes.AttributeNotFoundException;
@@ -28,7 +26,7 @@ import org.graffiti.attributes.StringAttribute;
  * Defines all graphic attributes of an edge
  *
  * @author breu
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class EdgeGraphicAttribute
     extends GraphElementGraphicAttribute
@@ -219,7 +217,8 @@ public class EdgeGraphicAttribute
      *
      * @throws IllegalArgumentException DOCUMENT ME!
      */
-    public void setCollection(Map<String, Attribute> attrs)
+    @Override
+	public void setCollection(Map<String, Attribute> attrs)
     {
         if(attrs.keySet().contains(ARROWHEAD) &&
             attrs.keySet().contains(ARROWTAIL) &&
@@ -288,7 +287,7 @@ public class EdgeGraphicAttribute
                 }
                 else
                 {
-                    this.add((Attribute) attrs.get(it.next()));
+                    this.add(attrs.get(it.next()));
                 }
             }
         }
@@ -364,7 +363,8 @@ public class EdgeGraphicAttribute
      *
      * @return A deep copy of this object.
      */
-    public Object copy()
+    @Override
+	public Object copy()
     {
         EdgeGraphicAttribute copied = new EdgeGraphicAttribute();
 

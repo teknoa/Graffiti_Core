@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AddEdgeEdit.java,v 1.1 2007/05/31 12:56:09 klukas Exp $
+// $Id: AddEdgeEdit.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.undo;
 
@@ -20,7 +20,7 @@ import org.graffiti.graph.Node;
  * Class <code>AddNodeEdit</code> makes the add edge action undoable.
  *
  * @author Walter Wirch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class AddEdgeEdit extends GraphElementsEdit {
 	//~ Instance fields ========================================================
@@ -52,6 +52,7 @@ public class AddEdgeEdit extends GraphElementsEdit {
 	 *
 	 * @see javax.swing.undo.UndoableEdit
 	 */
+	@Override
 	public String getPresentationName() {
 		return sBundle.getString("undo.addEdge");
 	}
@@ -59,6 +60,7 @@ public class AddEdgeEdit extends GraphElementsEdit {
 	/*
 	 * @see org.graffiti.undo.GraffitiAbstractUndoableEdit#execute()
 	 */
+	@Override
 	public void execute() {
 	}
 
@@ -66,6 +68,7 @@ public class AddEdgeEdit extends GraphElementsEdit {
 	 * Adds the same edge that was added through the method that created  this
 	 * edit.
 	 */
+	@Override
 	public void redo() {
 		super.redo();
 
@@ -79,6 +82,7 @@ public class AddEdgeEdit extends GraphElementsEdit {
 	/**
 	 * Deletes the edge whose addition is stored in this edit.
 	 */
+	@Override
 	public void undo() {
 		super.undo();
 

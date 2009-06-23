@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Algorithm.java,v 1.1 2007/05/31 12:55:54 klukas Exp $
+// $Id: Algorithm.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -14,8 +14,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.KeyStroke;
 
 import org.graffiti.graph.Graph;
-
-import org.graffiti.plugin.parameter.*;
+import org.graffiti.plugin.parameter.Parameter;
 import org.graffiti.selection.Selection;
 
 /**
@@ -24,7 +23,7 @@ import org.graffiti.selection.Selection;
  * possibility to provide the <code>Algorithm</code> with apropriate
  * parameters.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public interface Algorithm
 {

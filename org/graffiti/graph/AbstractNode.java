@@ -5,13 +5,12 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractNode.java,v 1.6 2009/03/18 19:38:00 klukas Exp $
+// $Id: AbstractNode.java,v 1.7 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.graph;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -24,7 +23,7 @@ import org.graffiti.util.MultipleIterator;
  * Abstract class <code>AbstractNode</code> common functionality for
  * <code>Node</code> implementations.
  *
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see AdjListNode
  */

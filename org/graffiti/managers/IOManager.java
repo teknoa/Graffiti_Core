@@ -5,24 +5,22 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: IOManager.java,v 1.3 2009/01/20 16:23:02 klukas Exp $
+// $Id: IOManager.java,v 1.4 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.managers;
 
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 import javax.swing.JFileChooser;
 
 import org.graffiti.managers.pluginmgr.PluginManagerListener;
-
 import org.graffiti.plugin.io.InputSerializer;
 import org.graffiti.plugin.io.OutputSerializer;
 
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public interface IOManager
     extends PluginManagerListener
@@ -117,7 +115,7 @@ public interface IOManager
     /**
      * Interfaces an io manager listener.
      *
-     * @version $Revision: 1.3 $
+     * @version $Revision: 1.4 $
      */
     public interface IOManagerListener
     {

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AddNodeEdit.java,v 1.1 2007/05/31 12:56:09 klukas Exp $
+// $Id: AddNodeEdit.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.undo;
 
@@ -19,7 +19,7 @@ import org.graffiti.graph.Node;
  * Class <code>AddNodeEdit</code> makes the add node action undoable.
  *
  * @author Walter Wirch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class AddNodeEdit
     extends GraphElementsEdit {
@@ -51,12 +51,14 @@ public class AddNodeEdit
      *
      * @see javax.swing.undo.UndoableEdit
      */
-    public String getPresentationName() {
+    @Override
+	public String getPresentationName() {
         return sBundle.getString("undo.addNode");
     }
 /*
  * @see org.graffiti.undo.GraffitiAbstractUndoableEdit#execute()
  */
+@Override
 public void execute() {
     }
 
@@ -64,7 +66,8 @@ public void execute() {
      * Adds the same node that was added through the method that created this
      * edit.
      */
-    public void redo() {
+    @Override
+	public void redo() {
         super.redo();
 
         Node newNode = graph.addNodeCopy(node);
@@ -74,7 +77,8 @@ public void execute() {
     /**
      * Deletes the node that is stored in this edit.
      */
-    public void undo() {
+    @Override
+	public void undo() {
         super.undo();
 
         node = (Node) getNewGraphElement(node);

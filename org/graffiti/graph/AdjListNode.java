@@ -5,12 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListNode.java,v 1.4 2008/03/28 09:37:24 klukas Exp $
+// $Id: AdjListNode.java,v 1.5 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.graph;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -23,7 +22,7 @@ import org.graffiti.util.MultipleIterator;
 /**
  * Implements a graph node with adjacency list representation.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *
  * @see AdjListGraph
  * @see AdjListEdge
@@ -137,7 +136,8 @@ public class AdjListNode
      *
      * @return the in-degree of the current <code>Node</code>.
      */
-    public int getInDegree()
+    @Override
+	public int getInDegree()
     {
         return directedInEdges.size() + undirectedEdges.size();
     }
@@ -149,7 +149,8 @@ public class AdjListNode
      *
      * @return the out-degree of the current <code>Node</code>.
      */
-    public int getOutDegree()
+    @Override
+	public int getOutDegree()
     {
         return directedOutEdges.size() + undirectedEdges.size();
     }
@@ -166,7 +167,8 @@ public class AdjListNode
         return new MultipleIterator(undirectedEdges.iterator());
     }
     
-    public Collection<Edge> getEdges()
+    @Override
+	public Collection<Edge> getEdges()
     {
         Set<Edge> c = new LinkedHashSet<Edge>();
         c.addAll(directedInEdges);
@@ -394,6 +396,7 @@ public class AdjListNode
 	}
 
 	
+	@Override
 	public String toString() {
 		return "Node ID="+getID();
 	}

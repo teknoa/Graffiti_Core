@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: SelectionParameter.java,v 1.1 2007/05/31 12:56:07 klukas Exp $
+// $Id: SelectionParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -14,7 +14,7 @@ import org.graffiti.selection.Selection;
 /**
  * This class contains a single <code>Node</code>.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class SelectionParameter
     extends AbstractSingleParameter
@@ -90,7 +90,8 @@ public class SelectionParameter
      *
      * @param value the new value of the <code>AttributeParameter</code>.
      */
-    public void setValue(Object value)
+    @Override
+	public void setValue(Object value)
     {
         this.value = (Selection) value;
     }
@@ -100,7 +101,8 @@ public class SelectionParameter
      *
      * @return the value of this parameter.
      */
-    public Object getValue()
+    @Override
+	public Object getValue()
     {
         return value;
     }

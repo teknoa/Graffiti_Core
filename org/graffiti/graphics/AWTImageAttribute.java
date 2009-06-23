@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AWTImageAttribute.java,v 1.1 2007/05/31 12:55:57 klukas Exp $
+// $Id: AWTImageAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -21,7 +21,7 @@ import org.graffiti.attributes.CompositeAttribute;
  * Contains the awt image graphic attribute.
  *
  * @author breu
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class AWTImageAttribute
     extends CompositeAttribute {
@@ -59,14 +59,16 @@ public class AWTImageAttribute
      * @see org.graffiti.attributes.CompositeAttribute#setAttribute(String,
      *      Attribute)
      */
-    public void setAttribute(String id, Attribute att)
+    @Override
+	public void setAttribute(String id, Attribute att)
         throws AttributeNotFoundException, IllegalArgumentException {
     }
 
     /**
      * @see org.graffiti.attributes.CompositeAttribute#getAttribute(String)
      */
-    public Attribute getAttribute(String id)
+    @Override
+	public Attribute getAttribute(String id)
         throws AttributeNotFoundException {
         throw new RuntimeException("still to implement!");
     }
@@ -74,7 +76,8 @@ public class AWTImageAttribute
     /**
      * @see org.graffiti.attributes.CompositeAttribute#getAttributes()
      */
-    public CollectionAttribute getAttributes() {
+    @Override
+	public CollectionAttribute getAttributes() {
         throw new RuntimeException("still to implement!");
     }
 
@@ -135,7 +138,8 @@ public class AWTImageAttribute
      *
      * @throws IllegalArgumentException DOCUMENT ME!
      */
-    protected void doSetValue(Object o) {
+    @Override
+	protected void doSetValue(Object o) {
         if(o instanceof Image) {
             image = (Image) o;
         } else {

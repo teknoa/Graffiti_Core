@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractSingleParameter.java,v 1.1 2007/05/31 12:56:07 klukas Exp $
+// $Id: AbstractSingleParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -18,7 +18,7 @@ import org.graffiti.plugin.XMLHelper;
 /**
  * Implements functions that are common in all SingleParameters.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class AbstractSingleParameter
     implements SingleParameter
@@ -127,7 +127,8 @@ public abstract class AbstractSingleParameter
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         if(getValue() == null)
         {

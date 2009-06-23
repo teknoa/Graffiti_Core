@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractOptionPane.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: AbstractOptionPane.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
 
 package org.graffiti.options;
 
@@ -29,7 +29,7 @@ import org.graffiti.core.StringBundle;
  * The default implementation of the option pane interface. It lays out
  * components in a vertical fashion.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class AbstractOptionPane
     extends JPanel
@@ -88,7 +88,8 @@ public abstract class AbstractOptionPane
      *
      * @return the internal name of the option pane.
      */
-    public String getName()
+    @Override
+	public String getName()
     {
         return name;
     }
@@ -153,7 +154,7 @@ public abstract class AbstractOptionPane
         Box box = new Box(BoxLayout.X_AXIS);
         Box box2 = new Box(BoxLayout.Y_AXIS);
         box2.add(Box.createGlue());
-        box2.add(new JSeparator(JSeparator.HORIZONTAL));
+        box2.add(new JSeparator(SwingConstants.HORIZONTAL));
         box2.add(Box.createGlue());
         box.add(box2);
 
@@ -163,7 +164,7 @@ public abstract class AbstractOptionPane
 
         Box box3 = new Box(BoxLayout.Y_AXIS);
         box3.add(Box.createGlue());
-        box3.add(new JSeparator(JSeparator.HORIZONTAL));
+        box3.add(new JSeparator(SwingConstants.HORIZONTAL));
         box3.add(Box.createGlue());
         box.add(box3);
 

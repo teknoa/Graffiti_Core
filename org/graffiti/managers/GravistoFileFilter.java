@@ -23,7 +23,8 @@ public class GravistoFileFilter extends GenericFileFilter {
         this.description=description;
     }
 
-    public String getDescription() {
+    @Override
+	public String getDescription() {
         return description+" (*"+getExtension()+")";
     }
 }

@@ -5,14 +5,14 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: IntegerParameter.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: IntegerParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
 /**
  * Parameter that contains an <code>Integer</code> value.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class IntegerParameter
     extends AbstractLimitableParameter
@@ -92,7 +92,8 @@ public class IntegerParameter
      *
      * @return the maximum of the intervall.
      */
-    public Comparable getMax()
+    @Override
+	public Comparable getMax()
     {
         return max;
     }
@@ -102,7 +103,8 @@ public class IntegerParameter
      *
      * @return the minimum of the intervall.
      */
-    public Comparable getMin()
+    @Override
+	public Comparable getMin()
     {
         return min;
     }
@@ -112,7 +114,8 @@ public class IntegerParameter
      *
      * @return DOCUMENT ME!
      */
-    public boolean isValid()
+    @Override
+	public boolean isValid()
     {
         if(value == null)
         {
@@ -135,7 +138,8 @@ public class IntegerParameter
      * @exception IllegalArgumentException thrown if <code>value</code> is not
      *            of the correct type.
      */
-    public void setValue(Object value)
+    @Override
+	public void setValue(Object value)
     {
         try
         {
@@ -152,7 +156,8 @@ public class IntegerParameter
      *
      * @return the value of this parameter.
      */
-    public Object getValue()
+    @Override
+	public Object getValue()
     {
         return value;
     }

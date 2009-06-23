@@ -5,12 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: StringAttribute.java,v 1.2 2008/10/13 08:45:08 klukas Exp $
+// $Id: StringAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.attributes;
 
 import java.lang.reflect.Constructor;
-import java.util.HashMap;
 
 import org.ErrorMsg;
 import org.graffiti.event.AttributeEvent;
@@ -18,7 +17,7 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a String.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class StringAttribute
     extends AbstractAttribute {
@@ -158,7 +157,8 @@ public class StringAttribute
     /**
 	 * @see org.graffiti.attributes.Attribute#toString(int)
 	 */
-    public String toString(int n) {
+    @Override
+	public String toString(int n) {
         return getSpaces(n) + getId() + " = \"" + value + "\"";
     }
 
@@ -172,7 +172,8 @@ public class StringAttribute
      * @exception IllegalArgumentException if the parameter has not the
      *            appropriate class for this <code>Attribute</code>.
      */
-    protected void doSetValue(Object o)
+    @Override
+	protected void doSetValue(Object o)
         throws IllegalArgumentException {
         assert o != null;
 
@@ -186,7 +187,8 @@ public class StringAttribute
     /**
      * @see org.graffiti.plugin.Displayable#toXMLString()
      */
-    public String toXMLString() {
+    @Override
+	public String toXMLString() {
         return getStandardXML(value);
     }
     

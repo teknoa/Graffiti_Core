@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PositionAttribute.java,v 1.1 2007/05/31 12:55:58 klukas Exp $
+// $Id: PositionAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -17,7 +17,7 @@ import org.graffiti.attributes.HashMapAttribute;
 /**
  * Contains properties of the attribute position for a label
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class PositionAttribute
     extends HashMapAttribute
@@ -45,7 +45,8 @@ public abstract class PositionAttribute
      *
      * @throws IllegalArgumentException DOCUMENT ME!
      */
-    public void setCollection(Map<String, Attribute> attrs)
+    @Override
+	public void setCollection(Map<String, Attribute> attrs)
     {
         if(!attrs.keySet().isEmpty())
         {

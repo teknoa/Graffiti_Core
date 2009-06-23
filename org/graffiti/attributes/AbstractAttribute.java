@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttribute.java,v 1.7 2008/09/11 13:39:05 klukas Exp $
+// $Id: AbstractAttribute.java,v 1.8 2009/06/23 07:05:20 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -29,7 +29,7 @@ import org.graffiti.plugin.XMLHelper;
  * <code>parent</code> and <code>attributable</code> of the
  * <code>Attribute</code>.
  *
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public abstract class AbstractAttribute
     implements Attribute
@@ -316,7 +316,8 @@ public abstract class AbstractAttribute
      *
      * @return DOCUMENT ME!
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return this.getId();
     }
