@@ -25,6 +25,7 @@ public class Scenario {
 	String menuGroup = "";
 	boolean readError = false;
 
+	File file;
 	
 	/**
 	 * Create a new scenario
@@ -38,6 +39,7 @@ public class Scenario {
 	}
 	
 	public Scenario(File f) {
+		file = f;
     	readError = true;
 		try {
 	        BufferedReader in = new BufferedReader(new FileReader(f));
@@ -140,6 +142,8 @@ public class Scenario {
 	}
 
 	public String getFileName() {
+		if (file!=null)
+			return file.getAbsolutePath();
 		String menu = menuGroup.length() > 0 ? menuGroup+"_" : "";
 		String path = ReleaseInfo.getAppFolderWithFinalSep(); 
 		return path+menu+scenarioName+".bsh";
