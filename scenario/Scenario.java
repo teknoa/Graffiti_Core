@@ -76,6 +76,15 @@ public class Scenario {
 	    	ErrorMsg.addErrorMessage(e);
 	    }
 	}
+	
+	public synchronized void addImports(String[] bshScriptCommands) {
+		if (bshScriptCommands==null || bshScriptCommands.length==0)
+			return;
+		ArrayList<String> cmdl = new ArrayList<String>();
+		for (String s : bshScriptCommands)
+			cmdl.add(s);
+		addImports(cmdl);
+	}
 
 	public synchronized void addImports(Collection<String> bshScriptCommands) {
 		for (String i : bshScriptCommands) {
@@ -93,6 +102,15 @@ public class Scenario {
 	
 	public String getName() {
 		return scenarioName;
+	}
+	
+	public synchronized void addCommands(String[] bshScriptCommands) {
+		if (bshScriptCommands==null || bshScriptCommands.length==0)
+			return;
+		ArrayList<String> cmdl = new ArrayList<String>();
+		for (String s : bshScriptCommands)
+			cmdl.add(s);
+		addCommands(cmdl);
 	}
 
 	public synchronized void addCommands(Collection<String> bshScriptCommands) {

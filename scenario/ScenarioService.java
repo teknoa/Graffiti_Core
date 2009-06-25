@@ -140,5 +140,14 @@ public class ScenarioService {
 		return result;
 	}
 
+	public static void postWorkflowStep(String title, String[] imports, String[] commands) {
+		if (isRecording()) { 
+			if (gui!=null)
+				gui.postWorkflowStep(title, imports, commands);
+			currentScenario.addImports(imports);
+			currentScenario.addCommands(commands);
+		}
+	}
+
 	
 }

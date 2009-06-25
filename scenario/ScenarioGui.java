@@ -18,4 +18,6 @@ public interface ScenarioGui {
 	void postWorkflowStep(Algorithm algorithm, Parameter[] params);
 
 	void postWorkflowStep(Action action);
+	
+	void postWorkflowStep(String title, String[] imports, String[] commands);
 }
