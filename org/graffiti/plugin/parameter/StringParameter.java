@@ -5,17 +5,23 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: StringParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
+// $Id: StringParameter.java,v 1.3 2009/06/26 11:11:38 klukas Exp $
 
 package org.graffiti.plugin.parameter;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import scenario.ProvidesScenarioSupportCommand;
 
 /**
  * Parameter that contains an <code>Integer</code> value.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class StringParameter
     extends AbstractSingleParameter
+    implements ProvidesScenarioSupportCommand
 {
     //~ Instance fields ========================================================
 
@@ -88,6 +94,19 @@ public class StringParameter
 	public String toXMLString() {
         return getStandardXML(value.toString());
     }
+    
+	@Override
+	public String getScenarioCommand() {
+		return "new StringParameter(\""+
+			getString()+"\", \""+getName()+"\", \""+getDescription()+"\")";
+	}
+
+	@Override
+	public Collection<String> getScenarioImports() {
+		ArrayList<String> res = new ArrayList<String>();
+		res.add("import org.graffiti.plugin.parameter.StringParameter;");
+		return res;
+	}
 }
 
 //------------------------------------------------------------------------------

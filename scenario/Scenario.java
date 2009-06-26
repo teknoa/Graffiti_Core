@@ -117,7 +117,7 @@ public class Scenario {
 		commands.addAll(bshScriptCommands);
 	}
 	
-	public synchronized void addPluginCommand(PluginWithScenarioSupport plugin) {
+	public synchronized void addPluginCommand(ProvidesScenarioSupportCommands plugin) {
 		addImports(plugin.getScenarioImports());
 		addCommands(plugin.getScenarioCommands());
 	}
@@ -126,6 +126,7 @@ public class Scenario {
 		ArrayList<String> result = new ArrayList<String>();
 		result.addAll(getHeader());
 		result.addAll(imports);
+		result.add("");
 		result.addAll(commands);
 		return result;
 	}

@@ -99,10 +99,14 @@ public class ScenarioService {
 		res.add("import org.graffiti.editor.GravistoService;");
 		res.add("import org.graffiti.editor.MainFrame;");
 		
-//		Package p = algorithm.getClass().getPackage();
-//		res.add("import "+p.getName());
-//		if (params!=null)
-//			res.add("import org.graffiti.plugin.parameter.*");
+		Package p = algorithm.getClass().getPackage();
+		res.add("import "+p.getName()+".*;");
+		
+		boolean canStoreParams = getCanStoreParams(params);
+		if (canStoreParams) {
+			for (String i : getParameterInstanciationImports(params))
+				res.add(i);
+		}
 		return res;
 	}
 
@@ -110,18 +114,77 @@ public class ScenarioService {
 			Algorithm algorithm, Parameter[] params) {
 		ArrayList<String> res = new ArrayList<String>();
 		
+		boolean canStoreParams = getCanStoreParams(params);
+		
 		res.add("// Starting Algorithm "+algorithm.getName());
 		res.add("{");
-		res.add("   GravistoService.getInstance().runPlugin(\""+algorithm.getName()+"\", MainFrame.getInstance().getActiveEditorSession().getGraph());");
-//		res.add("   "+algorithm.getClass().getName()+" algo = new "+algorithm.getClass().getName()+"();");
-//		res.add("   algo.attach( MainFrame.getInstance().getActiveEditorSession().getGraph(), MainFrame.getInstance().getActiveEditorSession().getSelectionModel().getActiveSelection());");
-//		res.add("   algo.check();");
-//		res.add("   algo.execute();");
-//		res.add("   algo.reset();");
+		if (canStoreParams) {
+			res.add("   "+algorithm.getClass().getSimpleName()+" algo = new "+algorithm.getClass().getSimpleName()+"();");
+			res.add("   GravistoService.attachData(algo);");
+			for (String c : getParameterInstanciationCommands(params, "   "))
+				res.add(c);
+			res.add("   algo.setParameters(params);");
+			res.add("   algo.check();");
+			res.add("   algo.execute();");
+			res.add("   algo.reset();");
+		} else {
+			res.add("   GravistoService.run(\""+algorithm.getName()+"\");");
+		}
 		res.add("}");
-		
-//		algo.setParameters(params);
 		return res;
+	}
+	
+	private static Collection<String> getParameterInstanciationImports(Parameter[] params) {
+		ArrayList<String> res = new ArrayList<String>();
+		if (params == null || params.length==0)
+			return res;
+		else {
+			res.add("import org.graffiti.plugin.parameter.Parameter;");
+			for (Parameter p : params) {
+				ProvidesScenarioSupportCommand sp = (ProvidesScenarioSupportCommand)p;
+				for (String i : sp.getScenarioImports())
+					res.add(i);
+			}
+		}
+		return res;
+	}
+
+	private static Collection<String> getParameterInstanciationCommands(
+			Parameter[] params, String frontSpace) {
+		ArrayList<String> res = new ArrayList<String>();
+		if (params == null)
+			res.add(frontSpace+"Parameter[] params = null;");
+		else {
+			if (params.length==0)
+				res.add(frontSpace+"Parameter[] params = new Parameter[] {};");
+			else {
+				res.add(frontSpace+"Parameter[] params = new Parameter[] {");
+				int idx = 0;
+				int max = params.length-1;
+				for (Parameter p : params) {
+					ProvidesScenarioSupportCommand sp = (ProvidesScenarioSupportCommand)p;
+					res.add(frontSpace+frontSpace+sp.getScenarioCommand() + (idx<max ? "," : ""));
+					idx++;
+				}
+				res.add(frontSpace+"};");
+			}
+		}
+		return res;
+	}
+
+	private static boolean getCanStoreParams(Parameter[] params) {
+		if (params==null || params.length==0)
+			return true;
+		else {
+			boolean allOK = true;
+			for (Parameter p : params) {
+				if (!(p instanceof ProvidesScenarioSupportCommand)) {
+					allOK = false;
+					break;
+				}
+			}
+			return allOK;
+		}
 	}
 
 	public static Collection<Scenario> getAvailableScnenarios() {

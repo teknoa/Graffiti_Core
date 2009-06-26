@@ -10,7 +10,7 @@ package scenario;
 
 import java.util.Collection;
 
-public interface PluginWithScenarioSupport {
+public interface ProvidesScenarioSupportCommands {
 
 	Collection<String> getScenarioImports();
 
