@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: BooleanParameter.java,v 1.4 2009/06/26 11:11:38 klukas Exp $
+// $Id: BooleanParameter.java,v 1.5 2009/06/29 20:26:20 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -17,7 +17,7 @@ import scenario.ProvidesScenarioSupportCommand;
 /**
  * Parameter that contains a <code>Boolean</code> value.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class BooleanParameter
     extends AbstractSingleParameter
@@ -132,13 +132,11 @@ public class BooleanParameter
 		this.left_aligned = left_aligned;
 	}
 
-	@Override
 	public String getScenarioCommand() {
 		return "new BooleanParameter("+
 			(getBoolean() ? "true" : "false")+", \""+getName()+"\", \""+getDescription()+"\")";
 	}
 
-	@Override
 	public Collection<String> getScenarioImports() {
 		ArrayList<String> res = new ArrayList<String>();
 		res.add("import org.graffiti.plugin.parameter.BooleanParameter;");

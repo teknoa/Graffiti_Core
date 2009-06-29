@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DoubleParameter.java,v 1.3 2009/06/26 11:11:38 klukas Exp $
+// $Id: DoubleParameter.java,v 1.4 2009/06/29 20:26:20 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -17,7 +17,7 @@ import scenario.ProvidesScenarioSupportCommand;
 /**
  * Represents a double parameter.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class DoubleParameter
     extends AbstractLimitableParameter
@@ -142,13 +142,11 @@ public class DoubleParameter
         return value;
     }
     
-	@Override
 	public String getScenarioCommand() {
 		return "new DoubleParameter("+
 			getDouble()+", \""+getName()+"\", \""+getDescription()+"\")";
 	}
 
-	@Override
 	public Collection<String> getScenarioImports() {
 		ArrayList<String> res = new ArrayList<String>();
 		res.add("import org.graffiti.plugin.parameter.DoubleParameter;");
