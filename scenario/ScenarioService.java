@@ -119,15 +119,20 @@ public class ScenarioService {
 		res.add("// Starting Algorithm "+algorithm.getName());
 		res.add("{");
 		if (canStoreParams) {
-			res.add("   "+algorithm.getClass().getSimpleName()+" algo = new "+algorithm.getClass().getSimpleName()+"();");
-			res.add("   GravistoService.attachData(algo);");
-			for (String c : getParameterInstanciationCommands(params, "   "))
+			res.add("   if (useStoredParameters) {");
+			res.add("      "+algorithm.getClass().getSimpleName()+" algo = new "+algorithm.getClass().getSimpleName()+"();");
+			res.add("      GravistoService.attachData(algo);");
+			for (String c : getParameterInstanciationCommands(params, "      "))
 				res.add(c);
-			res.add("   algo.setParameters(params);");
-			res.add("   algo.check();");
-			res.add("   algo.execute();");
-			res.add("   algo.reset();");
+			res.add("      algo.setParameters(params);");
+			res.add("      algo.check();");
+			res.add("      algo.execute();");
+			res.add("      algo.reset();");
+			res.add("   } else {");
+			res.add("      GravistoService.run(\""+algorithm.getName()+"\");");
+			res.add("   }");
 		} else {
+			res.add("   // complex parameters could not be stored as script commands, using user-provided parameters instead");
 			res.add("   GravistoService.run(\""+algorithm.getName()+"\");");
 		}
 		res.add("}");

@@ -127,6 +127,8 @@ public class Scenario {
 		result.addAll(getHeader());
 		result.addAll(imports);
 		result.add("");
+		result.add("// set to false, to enable user to customize algorithm parameters");
+		result.add("boolean useStoredParameters = true;");
 		result.addAll(commands);
 		return result;
 	}
