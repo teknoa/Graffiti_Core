@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeTypesManager.java,v 1.5 2009/06/23 07:05:20 klukas Exp $
+// $Id: AttributeTypesManager.java,v 1.6 2009/06/29 21:45:10 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -29,8 +29,9 @@ import org.graffiti.plugin.GenericPlugin;
  * can be added and then used in an arbitrary <code>Attribute</code> hierarchy
  * associated with this <code>AttributeTypesManager</code>.
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
+@SuppressWarnings("unchecked")
 public class AttributeTypesManager
     implements PluginManagerListener
 {
@@ -73,7 +74,7 @@ public class AttributeTypesManager
      * @return an instance of the class that is associated with the name of the
      *         attribute.
      */
-    public Object getAttributeInstance(String attrName, String id)
+	public Object getAttributeInstance(String attrName, String id)
     {
         assert (attrName != null) && (id != null);
 

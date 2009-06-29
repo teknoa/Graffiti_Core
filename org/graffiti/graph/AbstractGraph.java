@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractGraph.java,v 1.1 2007/05/31 12:55:55 klukas Exp $
+// $Id: AbstractGraph.java,v 1.2 2009/06/29 21:45:10 klukas Exp $
 package org.graffiti.graph;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import org.graffiti.event.ListenerManager;
 /**
  * Provides further functionality for graphs.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see Graph
  * @see AdjListGraph
@@ -77,7 +77,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	private CollectionAttribute defaultNodeAttribute;
 
 	/** Contains a set of attribute consumers. */
-	private Set attributeConsumers;
+	private Set<AttributeConsumer> attributeConsumers;
 
 	//~ Constructors ===========================================================
 
@@ -88,7 +88,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 */
 	public AbstractGraph() {
 		this.listenerManager = new ListenerManager();
-		this.attributeConsumers = new HashSet();
+		this.attributeConsumers = new HashSet<AttributeConsumer>();
 		BooleanAttribute a  = (BooleanAttribute) getAttributes().getCollection().get("direced");
 		if (a==null)
 			setBoolean("directed", true);
@@ -107,7 +107,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	public AbstractGraph(CollectionAttribute coll) {
 		super(coll);
 		this.listenerManager = new ListenerManager();
-		this.attributeConsumers = new HashSet();
+		this.attributeConsumers = new HashSet<AttributeConsumer>();
 		setBoolean("directed", true);
 	}
 
@@ -119,7 +119,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 */
 	public AbstractGraph(ListenerManager listenerManager) {
 		this.listenerManager = listenerManager;
-		this.attributeConsumers = new HashSet();
+		this.attributeConsumers = new HashSet<AttributeConsumer>();
 		setBoolean("directed", true);
 	}
 
@@ -135,7 +135,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 			CollectionAttribute coll) {
 		super(coll);
 		this.listenerManager = listenerManager;
-		this.attributeConsumers = new HashSet();
+		this.attributeConsumers = new HashSet<AttributeConsumer>();
 	}
 
 	//~ Methods ================================================================
@@ -173,7 +173,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 */
 	public void setDirected(boolean directed) {
 		isDirected = directed;
-		for (Iterator it = getEdgesIterator(); it.hasNext();) {
+		for (Iterator<Edge> it = getEdgesIterator(); it.hasNext();) {
 			Edge edge = (Edge) it.next();
 			if (directed != edge.isDirected()) {
 				edge.setDirected(directed);
@@ -193,7 +193,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	public void setDirected(boolean directed, boolean adjustArrows) {
 		isDirected = directed; 
 		if (adjustArrows) {
-			for (Iterator it = getEdgesIterator(); it.hasNext();) {
+			for (Iterator<Edge> it = getEdgesIterator(); it.hasNext();) {
 				Edge edge = (Edge) it.next();
 				if (directed != edge.isDirected()) {
 					edge.setDirected(directed);
@@ -222,7 +222,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	public Collection<Edge> getEdges() {
 		Set<Edge> h = new HashSet<Edge>();
 
-		for (Iterator nodeIt = getNodesIterator(); nodeIt.hasNext();) {
+		for (Iterator<Node> nodeIt = getNodesIterator(); nodeIt.hasNext();) {
 			Node n = (Node) (nodeIt.next());
 
 			h.addAll(n.getEdges());
@@ -253,7 +253,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 		Collection<Edge> col = new LinkedList<Edge>();
 
 		if ((this == n1.getGraph()) && (this == n2.getGraph())) {
-			for (Iterator it = n1.getEdgesIterator(); it.hasNext();) {
+			for (Iterator<Edge> it = n1.getEdgesIterator(); it.hasNext();) {
 				Edge e = (Edge) it.next();
 
 				if ((n2 == e.getSource()) || (n2 == e.getTarget())) {
@@ -273,7 +273,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 *
 	 * @return an iterator over the edges of the graph.
 	 */
-	public Iterator getEdgesIterator() {
+	public Iterator<Edge> getEdgesIterator() {
 		return getEdges().iterator();
 	}
 
@@ -332,7 +332,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	public int getNumberOfDirectedEdges() {
 		int numberOfDirectedEdges = 0;
 
-		for (Iterator edgeIt = getEdgesIterator(); edgeIt.hasNext();) {
+		for (Iterator<Edge> edgeIt = getEdgesIterator(); edgeIt.hasNext();) {
 			Edge testedEdge = (Edge) edgeIt.next();
 
 			if (testedEdge.isDirected()) {
@@ -971,7 +971,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 				if (defaultEdgeAttribute instanceof HashMapAttribute) {
 					//                if (attClazName
 					//                    .equals("org.graffiti.attributes.HashMapAttribute")) {
-					for (Iterator i = c.getCollection().keySet().iterator(); i
+					for (Iterator<String> i = c.getCollection().keySet().iterator(); i
 							.hasNext();) {
 						String id = (String) i.next();
 
@@ -987,7 +987,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 					//                        "org.graffiti.attributes.HashMapAttribute")) {
 					CollectionAttribute tmp = (CollectionAttribute) c.copy();
 
-					for (Iterator i = defaultEdgeAttribute.getCollection().keySet()
+					for (Iterator<String> i = defaultEdgeAttribute.getCollection().keySet()
 							.iterator(); i.hasNext();) {
 						String id = (String) i.next();
 
@@ -1033,7 +1033,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 				//                        "org.graffiti.attributes.HashMapAttribute"))
 				//                if(defaultNodeAttribute instanceof CollectionAttribute)
 				{
-					for (Iterator i = c.getCollection().keySet().iterator(); i
+					for (Iterator<String> i = c.getCollection().keySet().iterator(); i
 							.hasNext();) {
 						String id = (String) i.next();
 
@@ -1050,7 +1050,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 				{
 					CollectionAttribute tmp = (CollectionAttribute) c.copy();
 
-					for (Iterator i = defaultNodeAttribute.getCollection().keySet()
+					for (Iterator<String> i = defaultNodeAttribute.getCollection().keySet()
 							.iterator(); i.hasNext();) {
 						String id = (String) i.next();
 

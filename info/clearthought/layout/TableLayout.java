@@ -101,6 +101,7 @@ import org.FolderPanel;
  * @author  Daniel E. Barbalace
  */
 
+@SuppressWarnings("unchecked")
 public class TableLayout implements
     java.awt.LayoutManager2,
     java.io.Serializable,
@@ -2396,7 +2397,6 @@ public void invalidateLayout (Container target)
 		return result;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static JComponent getMultiSplitVertical(
 			Collection jComponentList) {
 		JPanel result = new JPanel();
@@ -2416,7 +2416,6 @@ public void invalidateLayout (Container target)
 		return result;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static JComponent getMultiSplitVertical(
 			Collection jComponentList, int spaceBetween) {
 		JPanel result = new JPanel();

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: OptAdjListGraph.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
+// $Id: OptAdjListGraph.java,v 1.3 2009/06/29 21:45:10 klukas Exp $
 package org.graffiti.graph;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import org.graffiti.util.MultipleIterator;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see org.graffiti.graph.Graph
  * @see org.graffiti.graph.AbstractGraph
@@ -46,10 +46,10 @@ public class OptAdjListGraph
     //~ Instance fields ========================================================
 
     /** The list containing the edges of the graph. */
-    private List edges;
+    private List<Edge> edges;
 
     /** The list containing the nodes of the graph. */
-    private List nodes;
+    private List<Node> nodes;
 
     /** The number of directed edges. */
     private int noDirectedEdges;
@@ -67,8 +67,8 @@ public class OptAdjListGraph
     public OptAdjListGraph()
     {
         super();
-        this.nodes = new ArrayList();
-        this.edges = new ArrayList();
+        this.nodes = new ArrayList<Node>();
+        this.edges = new ArrayList<Edge>();
         noUndirectedEdges = 0;
         noDirectedEdges = 0;
     }
@@ -84,8 +84,8 @@ public class OptAdjListGraph
     public OptAdjListGraph(CollectionAttribute coll)
     {
         super(coll);
-        this.nodes = new ArrayList();
-        this.edges = new ArrayList();
+        this.nodes = new ArrayList<Node>();
+        this.edges = new ArrayList<Edge>();
         noUndirectedEdges = 0;
         noDirectedEdges = 0;
     }
@@ -99,8 +99,8 @@ public class OptAdjListGraph
     public OptAdjListGraph(ListenerManager listenerManager)
     {
         super(listenerManager);
-        this.nodes = new ArrayList();
-        this.edges = new ArrayList();
+        this.nodes = new ArrayList<Node>();
+        this.edges = new ArrayList<Edge>();
         noUndirectedEdges = 0;
         noDirectedEdges = 0;
     }
@@ -117,8 +117,8 @@ public class OptAdjListGraph
         CollectionAttribute coll)
     {
         super(listenerManager, coll);
-        this.nodes = new ArrayList();
-        this.edges = new ArrayList();
+        this.nodes = new ArrayList<Node>();
+        this.edges = new ArrayList<Edge>();
         noUndirectedEdges = 0;
         noDirectedEdges = 0;
     }
@@ -135,8 +135,8 @@ public class OptAdjListGraph
     public OptAdjListGraph(Graph g, ListenerManager listenerManager)
     {
         super(listenerManager);
-        this.nodes = new ArrayList();
-        this.edges = new ArrayList();
+        this.nodes = new ArrayList<Node>();
+        this.edges = new ArrayList<Edge>();
         this.addGraph(g);
         noUndirectedEdges = 0;
         noDirectedEdges = 0;
@@ -157,8 +157,8 @@ public class OptAdjListGraph
         CollectionAttribute coll)
     {
         super(listenerManager, coll);
-        this.nodes = new ArrayList();
-        this.edges = new ArrayList();
+        this.nodes = new ArrayList<Node>();
+        this.edges = new ArrayList<Edge>();
         noUndirectedEdges = 0;
         noDirectedEdges = 0;
         this.addGraph(g);
@@ -190,10 +190,11 @@ public class OptAdjListGraph
      * @return a <code>java.util.Collection</code> containing all the edges of
      *         the current graph.
      */
-    @Override
-	public Collection getEdges()
+    @SuppressWarnings("unchecked")
+	@Override
+	public Collection<Edge> getEdges()
     {
-        return (Collection) ((ArrayList) edges).clone();
+        return (Collection<Edge>) ((ArrayList<Edge>) edges).clone();
     }
 
     /**
@@ -202,8 +203,9 @@ public class OptAdjListGraph
      *
      * @return an iterator containing the edges of the graph.
      */
-    @Override
-	public Iterator getEdgesIterator()
+    @SuppressWarnings("unchecked")
+	@Override
+	public Iterator<Edge> getEdgesIterator()
     {
         return new MultipleIterator(edges.iterator());
     }
@@ -229,10 +231,11 @@ public class OptAdjListGraph
      * @return a new <code>java.util.List</code> containing all the nodes 
      * of the graph.
      */
-    @Override
-	public List getNodes()
+    @SuppressWarnings("unchecked")
+	@Override
+	public List<Node> getNodes()
     {
-        return (List) ((ArrayList) nodes).clone();
+        return (List<Node>) ((ArrayList) nodes).clone();
     }
 
     /**
@@ -241,8 +244,9 @@ public class OptAdjListGraph
      *
      * @return an iterator containing the nodes of the graph.
      */
-    @Override
-	public Iterator getNodesIterator()
+    @SuppressWarnings("unchecked")
+	@Override
+	public Iterator<Node> getNodesIterator()
     {
         return new MultipleIterator(nodes.iterator());
     }
@@ -480,8 +484,8 @@ public class OptAdjListGraph
 	protected void doClear()
     {
         assert (noDirectedEdges + noUndirectedEdges) == edges.size();
-        this.nodes = new ArrayList();
-        this.edges = new ArrayList();
+        this.nodes = new ArrayList<Node>();
+        this.edges = new ArrayList<Edge>();
         noUndirectedEdges = 0;
         noDirectedEdges = 0;
         assert (noDirectedEdges + noUndirectedEdges) == edges.size();
@@ -535,7 +539,7 @@ public class OptAdjListGraph
         int idx = nodes.indexOf(n);
         logger.fine("removing all edges adjacent to this node");
 
-        for(Iterator edgeIt = n.getEdgesIterator(); edgeIt.hasNext();)
+        for(Iterator<Edge> edgeIt = n.getEdgesIterator(); edgeIt.hasNext();)
         {
             Edge e = (Edge) edgeIt.next();
             this.deleteEdge(e);

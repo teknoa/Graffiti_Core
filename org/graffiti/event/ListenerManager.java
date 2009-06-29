@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ListenerManager.java,v 1.3 2008/10/14 14:39:05 belau Exp $
+// $Id: ListenerManager.java,v 1.4 2009/06/29 21:45:10 klukas Exp $
 
 package org.graffiti.event;
 
@@ -31,8 +31,9 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
+@SuppressWarnings("unchecked")
 public class ListenerManager {
 	//~ Instance fields ========================================================
 
@@ -857,7 +858,7 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = delayedEdgeListenerList.iterator();
+			Iterator<EdgeListener> it = delayedEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postTargetNodeChanged(event);
@@ -872,7 +873,7 @@ public class ListenerManager {
 			// log objects that are (probably) affected
 			changedObjects.add(event.getSource());
 
-			Iterator it = alltimeEdgeListenerList.iterator();
+			Iterator<EdgeListener> it = alltimeEdgeListenerList.iterator();
 
 			while (it.hasNext()) {
 				((EdgeListener) it.next()).postTargetNodeChanged(event);
