@@ -33,7 +33,7 @@ public class Vector3d {
 
 	@Override
 	public String toString() {
-		return "Vector2d["+x+", "+y+", "+z+"]";
+		return "Vector3d["+x+", "+y+", "+z+"]";
 	}
     /**
      * @param position
