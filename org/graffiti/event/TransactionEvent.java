@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: TransactionEvent.java,v 1.1 2007/05/31 12:56:05 klukas Exp $
+// $Id: TransactionEvent.java,v 1.2 2009/06/30 20:53:49 klukas Exp $
 
 package org.graffiti.event;
 
@@ -16,7 +16,7 @@ import java.util.Set;
  * passed to every <code>TransactionListener</code> object which is registered
  * to receive a transaction event.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see TransactionListener
  */
@@ -30,7 +30,7 @@ public class TransactionEvent
      * Contains the objects that have been changed during the lifetime of a
      * transaction.
      */
-    private Set changedObjects;
+    private Set<Object> changedObjects;
 
     //~ Constructors ===========================================================
 
@@ -41,7 +41,7 @@ public class TransactionEvent
      * @param source the source component of the transaction.
      * @param changedObjects DOCUMENT ME!
      */
-    public TransactionEvent(Object source, Set changedObjects)
+    public TransactionEvent(Object source, Set<Object> changedObjects)
     {
         this(source);
         this.changedObjects = changedObjects;
@@ -67,7 +67,7 @@ public class TransactionEvent
      *
      * @return the graph that originated this event.
      */
-    public Set getChangedObjects()
+    public Set<Object> getChangedObjects()
     {
         return changedObjects;
     }

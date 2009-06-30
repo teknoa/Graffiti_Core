@@ -55,6 +55,7 @@ import org.graffiti.graph.Node;
 import org.graffiti.graphics.ColorAttribute;
 import org.graffiti.graphics.CoordinateAttribute;
 import org.graffiti.graphics.Dash;
+import org.graffiti.graphics.DimensionAttribute;
 import org.graffiti.graphics.DockingAttribute;
 import org.graffiti.graphics.EdgeGraphicAttribute;
 import org.graffiti.graphics.EdgeLabelAttribute;
@@ -70,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.71 $
+ * @version $Revision: 1.72 $
  */
 public class AttributeHelper {
 
@@ -1278,14 +1279,9 @@ public class AttributeHelper {
 	 */
 	public static void setSize(Node myNode, Vector2d newSize) {
 		try {
-			DoubleAttribute da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMW_PATH);
+			DimensionAttribute da = (DimensionAttribute) myNode.getAttribute(GraphicAttributeConstants.DIM_PATH);
 
-			da.setDouble(newSize.x);
-
-			da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMH_PATH);
-			da.setDouble(newSize.y);
+			da.setDimension(newSize.x, newSize.y);
 		} catch (Exception ex) {
 			ErrorMsg.addErrorMessage("Set-Size-Failure: "
 					+ ex.getLocalizedMessage());
