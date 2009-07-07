@@ -71,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.72 $
+ * @version $Revision: 1.73 $
  */
 public class AttributeHelper {
 
@@ -999,7 +999,7 @@ public class AttributeHelper {
 	}
 
 	/**
-	 * Check the existance of a named Attribute
+	 * Check the existence of a named Attribute
 	 * 
 	 * @param n
 	 *            The node to work with
