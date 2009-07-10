@@ -9,6 +9,7 @@ package org;
 import org.graffiti.graphics.GraphicAttributeConstants;
 
 public enum AlignmentSetting {
+	HIDDEN, 
 	AUTO_OUTSIDE, BELOW, ABOVE, RIGHT, LEFT, INSIDEBOTTOM, INSIDETOP,
 	CENTERED, BELOWRIGHT, BELOWLEFT, ABOVELEFT, ABOVERIGHT, NEARSOURCE, 
 	NEARTARGET, BORDER_TOP_LEFT, BORDER_TOP_CENTER, 
@@ -21,6 +22,7 @@ public enum AlignmentSetting {
 	@Override
 	public String toString() {
 		switch(this) {
+			case HIDDEN : return "hidden (not shown)";
 			case AUTO_OUTSIDE: return "outside (automatic)";
 			case BELOW : return "below";
 			case ABOVE : return "above";
@@ -54,6 +56,7 @@ public enum AlignmentSetting {
 	
 	public String toGMLstring() {
 		switch(this) {
+			case HIDDEN: return "hidden";
 			case AUTO_OUTSIDE: return "auto_outside";
 			case BELOW : return GraphicAttributeConstants.BELOW;
 			case ABOVE : return GraphicAttributeConstants.ABOVE;

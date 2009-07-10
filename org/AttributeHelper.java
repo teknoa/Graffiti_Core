@@ -71,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.73 $
+ * @version $Revision: 1.74 $
  */
 public class AttributeHelper {
 
@@ -933,7 +933,10 @@ public class AttributeHelper {
 		} catch (Exception ex) {
 			// empty
 		}
-		return AlignmentSetting.CENTERED;
+		if (index<=0)
+			return AlignmentSetting.CENTERED;
+		else
+			return AlignmentSetting.HIDDEN;
 	}
 	
 	/**
@@ -977,6 +980,22 @@ public class AttributeHelper {
 			ErrorMsg.addErrorMessage(ex);
 			return defaultReturn;
 		}
+	}
+	
+	public static ArrayList<String> getLabels(GraphElement graphElement) {
+		ArrayList<String> result = new ArrayList<String>();
+		
+		String nodeName = getLabel(graphElement, null);
+		if (nodeName!=null && nodeName.length()>0);
+			result.add(nodeName);
+			
+		for (int idx = 1; idx<=graphElement.getAttributes().size(); idx++) {
+			String lbl = getLabel(idx, graphElement, null);
+			if (lbl!=null && lbl.length()>0);
+				result.add(lbl);
+		}
+			
+		return result;
 	}
 	
 	public static String getLabel(int index, Attributable node, String defaultReturn) {
