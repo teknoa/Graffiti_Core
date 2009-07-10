@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.8 2009/06/23 07:05:20 klukas Exp $
+// $Id: AbstractCollectionAttribute.java,v 1.9 2009/07/10 08:17:45 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -20,7 +20,7 @@ import org.graffiti.plugin.XMLHelper;
  * instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
  *
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			implements CollectionAttribute {
@@ -331,7 +331,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	public String toString(int n) {
 		StringBuffer sb = new StringBuffer();
 
-		sb.append(getSpaces(n) + id + " " + getClass().getName() + " {\n");
+		sb.append(getSpaces(n) + idd + " " + getClass().getName() + " {\n");
 
 		for (Iterator it = attributes.values().iterator(); it.hasNext();) {
 			Attribute attr = (Attribute) it.next();

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LineModeAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
+// $Id: LineModeAttribute.java,v 1.4 2009/07/10 08:17:44 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -21,7 +21,7 @@ import org.graffiti.attributes.HashMapAttribute;
  * to specify stroke properties.
  *
  * @author schoeffl
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class LineModeAttribute
     extends CompositeAttribute {
@@ -69,7 +69,7 @@ public class LineModeAttribute
      */
     @Override
 	public CollectionAttribute getAttributes() {
-        HashMapAttribute ret = new HashMapAttribute(this.id);
+        HashMapAttribute ret = new HashMapAttribute(getId());
         HashMapAttribute da = new HashMapAttribute("dasharray");
         float[] dashArray = this.dash.getDashArray();
 
@@ -165,7 +165,7 @@ public class LineModeAttribute
         float[] oldDA = dash.getDashArray();
 
         if(oldDA == null) {
-            return new LineModeAttribute(id, new Dash(null, dash.getDashPhase()));
+            return new LineModeAttribute(idd, new Dash(null, dash.getDashPhase()));
         } else {
             float[] newDA = new float[oldDA.length];
 
@@ -173,7 +173,7 @@ public class LineModeAttribute
                 newDA[i] = oldDA[i];
             }
 
-            return new LineModeAttribute(id,
+            return new LineModeAttribute(idd,
                 new Dash(newDA, dash.getDashPhase()));
         }
     }

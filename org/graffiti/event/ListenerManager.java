@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ListenerManager.java,v 1.4 2009/06/29 21:45:10 klukas Exp $
+// $Id: ListenerManager.java,v 1.5 2009/07/10 08:17:44 klukas Exp $
 
 package org.graffiti.event;
 
@@ -14,6 +14,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.BackgroundTaskStatusProvider;
+import org.BackgroundTaskStatusProviderSupportingExternalCall;
 import org.graffiti.util.MultipleIterator;
 
 /**
@@ -31,7 +33,7 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 @SuppressWarnings("unchecked")
 public class ListenerManager {
@@ -1794,6 +1796,10 @@ public class ListenerManager {
 	}
 	
 	public void transactionFinished(Object source, boolean forgetChanges) {
+		transactionFinished(source, forgetChanges, null);
+	}
+	
+	public void transactionFinished(Object source, boolean forgetChanges, BackgroundTaskStatusProviderSupportingExternalCall status) {
 		postDebugTransactionFinished(source);
 		this.transactionsActive--;
 		assert this.transactionsActive >= 0;
@@ -1814,10 +1820,18 @@ public class ListenerManager {
 				alltimeEdgeListenerList.iterator(),
 				alltimeAttributeListenerList.iterator(),
 				alltimeGraphListenerList.iterator() });
-
+		if (status!=null)
+			status.setCurrentStatusValue(-1);
+		if (status!=null)
+			status.setCurrentStatusText1("Processing graph changes ("+changedObjects.size()+")...");
 		while (mIter.hasNext()) {
-			((TransactionListener) mIter.next()).transactionFinished(event);
+			TransactionListener l = (TransactionListener) mIter.next();
+			if (status!=null)
+				status.setCurrentStatusText2("Inform listener "+l.getClass().getSimpleName());
+			l.transactionFinished(event, status);
 		}
+		if (status!=null)
+			status.setCurrentStatusValue(100);
 
 		// only clear list when no transactions are active
 		if (transactionsActive == 0)

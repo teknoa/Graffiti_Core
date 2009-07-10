@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AWTImageAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: AWTImageAttribute.java,v 1.3 2009/07/10 08:17:44 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -21,7 +21,7 @@ import org.graffiti.attributes.CompositeAttribute;
  * Contains the awt image graphic attribute.
  *
  * @author breu
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class AWTImageAttribute
     extends CompositeAttribute {
@@ -126,7 +126,7 @@ public class AWTImageAttribute
      * @see org.graffiti.core.DeepCopy#copy()
      */
     public Object copy() {
-        return new AWTImageAttribute(this.id,
+        return new AWTImageAttribute(getId(),
             image.getScaledInstance(image.getWidth(null),
                 image.getHeight(null), Image.SCALE_DEFAULT));
     }

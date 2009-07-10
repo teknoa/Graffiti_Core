@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttribute.java,v 1.8 2009/06/23 07:05:20 klukas Exp $
+// $Id: AbstractAttribute.java,v 1.9 2009/07/10 08:17:45 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -29,7 +29,7 @@ import org.graffiti.plugin.XMLHelper;
  * <code>parent</code> and <code>attributable</code> of the
  * <code>Attribute</code>.
  *
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public abstract class AbstractAttribute
     implements Attribute
@@ -40,7 +40,13 @@ public abstract class AbstractAttribute
 	protected static HashMap<String,Class> typedAttributesID2TypeForEdges = getDefaultEdgeTypedAttributes();
 	 
 	 public void setId(String id) {
-		 this.id = id;
+		 if (id==null)
+			 return;
+		 this.idd = knownAttributeNames.get(id);
+		 if (this.idd==null) {
+			 knownAttributeNames.put(id, id);
+			 this.idd = knownAttributeNames.get(id);
+		 }
 	 }
 	 
 	 @SuppressWarnings("unchecked")
@@ -100,9 +106,10 @@ public abstract class AbstractAttribute
  			return typedAttributesID2TypeForEdges.containsKey(id);
 	}
     
+ 	private static final HashMap<String, String> knownAttributeNames = new HashMap<String, String>();
 
 	/** The identifier of this <code>Attribute</code>. */
-    protected String id;
+    protected String idd;
 
     /**
      * The parent <code>attribute</code>. It is set when the
@@ -140,7 +147,7 @@ public abstract class AbstractAttribute
                 "An id must not contain the SEPARATOR character.");
         }
 
-        this.id = id;
+        setId(id);
         // logger.info("id set to " + id + ".");
 
         setDefaultValue();
@@ -176,6 +183,8 @@ public abstract class AbstractAttribute
             return par.getAttributable();
         }
     }
+    
+    private static final HashMap<String, String> knownAttributeDescriptions = new HashMap<String,String>();
 
     /**
      * Provides a description for this attribute. Used in tooltips etc.
@@ -184,7 +193,13 @@ public abstract class AbstractAttribute
      */
     public void setDescription(String desc)
     {
-        this.description = desc;
+    	if (desc==null)
+    		return;
+        this.description = knownAttributeDescriptions.get(desc);
+        if (description==null) {
+        	knownAttributeDescriptions.put(desc, desc);
+            this.description = knownAttributeDescriptions.get(desc);
+        }
     }
 
     /**
@@ -205,7 +220,7 @@ public abstract class AbstractAttribute
      */
     public String getId()
     {
-        return id;
+        return idd;
     }
 
     /**
@@ -213,7 +228,7 @@ public abstract class AbstractAttribute
      */
     public String getName()
     {
-        return this.getId();
+        return getId();
     }
 
     /**
@@ -370,7 +385,7 @@ public abstract class AbstractAttribute
      * @param v the new value.
      *
      * @exception IllegalArgumentException if <code>v</code> is not of the
-     *            apropriate type.
+     *            appropriate type.
      */
     protected abstract void doSetValue(Object v)
         throws IllegalArgumentException;
@@ -540,7 +555,7 @@ public abstract class AbstractAttribute
     }
 
 	public JComponent getIcon() {
-		ImageIcon icon = AttributeHelper.getDefaultAttributeIconFor(id);
+		ImageIcon icon = AttributeHelper.getDefaultAttributeIconFor(idd);
 		if (icon!=null)
 			return new JLabel(icon);
 		else
