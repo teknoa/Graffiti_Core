@@ -24,43 +24,37 @@ public class HomeFolder {
 	}
 	
 	public static boolean copyFileToTemporaryFolder(String subfolder, File f)  {
-		BufferedInputStream in = null;
-		BufferedOutputStream out = null;
 		try {
-			in = new BufferedInputStream(new FileInputStream(f));
 			String outfile = getTemporaryFolderWithFinalSep()+f.getName();
 			
 			if(subfolder!=null&&!subfolder.equalsIgnoreCase("")) {
 				new File(getTemporaryFolderWithFinalSep()+ReleaseInfo.getFileSeparator()+subfolder+ReleaseInfo.getFileSeparator()).mkdirs();
 				outfile = getTemporaryFolderWithFinalSep()+ReleaseInfo.getFileSeparator()+subfolder+ReleaseInfo.getFileSeparator()+f.getName();
 			}
-			out = new BufferedOutputStream(new FileOutputStream(outfile, false));
-			in.close();
-			out.close();
-			if(f.getPath().endsWith(".hdr".toLowerCase())) {
-				in = new BufferedInputStream(new FileInputStream(new File(f.getPath().replaceFirst(".hdr",".img"))));
-				out = new BufferedOutputStream(new FileOutputStream(outfile = getTemporaryFolderWithFinalSep()+ReleaseInfo.getFileSeparator()+subfolder+ReleaseInfo.getFileSeparator()+f.getName().replaceFirst(".hdr",".img"), false));
-				copyFile(in, out);  
-				in.close();
-				out.close();
-			}
+				
+			copyFile(f, new File(outfile), true);
+	
+			if(f.getPath().endsWith(".hdr".toLowerCase()))
+				copyFile(new File(f.getPath().replaceFirst(".hdr",".img")),new File(outfile.replaceFirst(".hdr",".img")), true);
+			
 			return true;
 		} catch(Exception e) {
 			ErrorMsg.addErrorMessage(e);
 			return false;
-		} finally {
-			try {
-				if(in!=null)
-					in.close();
-				if(out!=null)
-					out.close();
-			} catch (IOException e) {
-				ErrorMsg.addErrorMessage(e);
-			}
 		}
+
 	}
 
-	public static void copyFile(BufferedInputStream in,BufferedOutputStream out) throws IOException {
+	private static BufferedInputStream in;
+	private static BufferedOutputStream out;
+	
+	public static void copyFile(File oldfile,File newfile, boolean deleteNewFileIfExists) throws IOException {
+		if(deleteNewFileIfExists&&newfile.exists())
+			newfile.delete();
+		
+		in = new BufferedInputStream(new FileInputStream(oldfile));
+		out = new BufferedOutputStream(new FileOutputStream(newfile, true));
+		
 		byte[] buffer = new byte[ 0xFFFF ]; 
 		for ( int len; (len = in.read(buffer)) != -1; ) 
 		    out.write( buffer, 0, len );

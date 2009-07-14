@@ -2256,6 +2256,25 @@ public void invalidateLayout (Container target)
 		return result;
 	}
 	
+	public static JComponent get4Split(
+			JComponent left, JComponent middle1, JComponent middle2, JComponent right, 
+			double w1, double w2, double w3, double w4, double spaceBetween, double border) {
+		JPanel result = new JPanel();
+		result.setOpaque(false);
+		double[][] size =
+			{
+				{border, w1, spaceBetween, w2, spaceBetween, w3, spaceBetween, w4, border}, // Columns
+				{border, TableLayoutConstants.FILL, border}
+		}; // Rows
+		result.setLayout(new TableLayout(size));
+		if (left!=null) result.add(left, "1,1");
+		if (middle1!=null) result.add(middle1, "3,1");
+		if (middle2!=null) result.add(middle2, "5,1");
+		if (right!=null) result.add(right, "7,1");
+		result.validate();
+		return result;
+	}
+	
 	public static JComponent get3SplitVertical(
 			JComponent top, JComponent middle, JComponent bottom, 
 			double sizeTop, double sizeMiddle, double sizeBottom) {
