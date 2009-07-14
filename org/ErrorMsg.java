@@ -475,5 +475,24 @@ public class ErrorMsg {
 		
 		return tu; 
 	}
+	public static String getWordWrap(String desc, int width) {
+		String[] words = desc.split(" ");
+		String result = "";
+		int rowCount = 0;
+		for (int i=0; i<words.length; i++) {
+			if (i>0 && rowCount+words[i].length()>width) {
+				result = result+"<br>"+words[i];
+				rowCount = words[i].length();
+			} else
+				if (i>0) {
+					result = result + " " + words[i];
+					rowCount += words[i].length();
+				} else {
+					result = words[0];
+					rowCount = words[0].length();
+				}
+		}
+		return result;
+	}
 	
 }

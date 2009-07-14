@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericPluginAdapter.java,v 1.5 2009/07/14 12:36:03 morla Exp $
+// $Id: GenericPluginAdapter.java,v 1.6 2009/07/14 21:11:52 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -25,7 +25,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * An adapter class for the generic plugin interface.
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public abstract class GenericPluginAdapter
     implements GenericPlugin
@@ -162,7 +162,7 @@ public abstract class GenericPluginAdapter
     		return DEFAULT_ICON;
     }
     
-    private static ImageIcon getAddonIcon() {
+    public static ImageIcon getAddonIcon() {
 		ClassLoader cl = GenericPlugin.class.getClassLoader();
         String path = GenericPlugin.class.getPackage().getName().replace('.', '/');
         ImageIcon i = new ImageIcon(cl.getResource(path+"/addon-icon.png"));
