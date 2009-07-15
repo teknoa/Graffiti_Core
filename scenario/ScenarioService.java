@@ -26,7 +26,7 @@ public class ScenarioService {
 	private static boolean recordingActive = false;
 	
 	private static ScenarioGui gui;
-
+	
 	public static Scenario getCurrentScenario() {
 		return currentScenario;
 	}
@@ -59,6 +59,8 @@ public class ScenarioService {
 
 	public static void postWorkflowStep(Algorithm algorithm, Parameter[] params) {
 		if (isRecording()) {
+			if (algorithm instanceof ScenarioServiceIgnoreAlgorithm)
+				return;
 			if (gui!=null)
 				gui.postWorkflowStep(algorithm, params);
 			currentScenario.addImports(getImportsForAlgorithm(algorithm, params));
@@ -115,9 +117,14 @@ public class ScenarioService {
 		ArrayList<String> res = new ArrayList<String>();
 		
 		boolean canStoreParams = getCanStoreParams(params);
-		
+		boolean processesStoredParamsByItself = (algorithm instanceof ScenarioServiceHandlesStoredParametersOption);
 		res.add("// Starting Algorithm "+algorithm.getName());
 		res.add("{");
+		if (processesStoredParamsByItself) {
+			res.add("   if (!useStoredParameters) {");
+			res.add("      GravistoService.run(\""+algorithm.getName()+"\");");
+			res.add("   }");
+		} else
 		if (canStoreParams) {
 			res.add("   if (useStoredParameters) {");
 			res.add("      "+algorithm.getClass().getSimpleName()+" algo = new "+algorithm.getClass().getSimpleName()+"();");
@@ -213,9 +220,16 @@ public class ScenarioService {
 			if (gui!=null)
 				gui.postWorkflowStep(title, imports, commands);
 			currentScenario.addImports(imports);
+			ArrayList<String> comments = new ArrayList<String>();
+			comments.add("// "+title);
+			comments.add("{");
+			currentScenario.addCommands(comments);
+			for (int i=0; i<commands.length; i++)
+				commands[i] = "   "+commands[i];
 			currentScenario.addCommands(commands);
+			comments.clear();
+			comments.add("}");
+			currentScenario.addCommands(comments);
 		}
 	}
-
-	
 }

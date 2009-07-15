@@ -77,6 +77,14 @@ public class Scenario {
 	    }
 	}
 	
+	public synchronized void addImport(String bshScriptCommand) {
+		if (bshScriptCommand==null || bshScriptCommand.length()==0)
+			return;
+		ArrayList<String> cmdl = new ArrayList<String>();
+		cmdl.add(bshScriptCommand);
+		addImports(cmdl);
+	}
+	
 	public synchronized void addImports(String[] bshScriptCommands) {
 		if (bshScriptCommands==null || bshScriptCommands.length==0)
 			return;
@@ -129,6 +137,7 @@ public class Scenario {
 		result.add("");
 		result.add("// set to false, to enable user to customize algorithm parameters");
 		result.add("boolean useStoredParameters = true;");
+		result.add("");
 		result.addAll(commands);
 		return result;
 	}
