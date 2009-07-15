@@ -49,15 +49,19 @@ public class HomeFolder {
 	private static BufferedOutputStream out;
 	
 	public static void copyFile(File oldfile,File newfile, boolean deleteNewFileIfExists) throws IOException {
-		if(deleteNewFileIfExists&&newfile.exists())
-			newfile.delete();
+		if(oldfile.compareTo(newfile)!=0) {
 		
-		in = new BufferedInputStream(new FileInputStream(oldfile));
-		out = new BufferedOutputStream(new FileOutputStream(newfile, true));
-		
-		byte[] buffer = new byte[ 0xFFFF ]; 
-		for ( int len; (len = in.read(buffer)) != -1; ) 
-		    out.write( buffer, 0, len );
+			if(deleteNewFileIfExists&&newfile.exists())
+				newfile.delete();
+			
+			in = new BufferedInputStream(new FileInputStream(oldfile));
+			out = new BufferedOutputStream(new FileOutputStream(newfile, true));
+			
+			byte[] buffer = new byte[ 0xFFFF ]; 
+			for ( int len; (len = in.read(buffer)) != -1; ) 
+			    out.write( buffer, 0, len );
+			
+		}
 	}
 	
 }
