@@ -32,10 +32,10 @@ public class HomeFolder {
 				outfile = getTemporaryFolderWithFinalSep()+ReleaseInfo.getFileSeparator()+subfolder+ReleaseInfo.getFileSeparator()+f.getName();
 			}
 				
-			copyFile(f, new File(outfile), true);
+			copyFile(f, new File(outfile));
 	
 			if(f.getPath().endsWith(".hdr".toLowerCase()))
-				copyFile(new File(f.getPath().replaceFirst(".hdr",".img")),new File(outfile.replaceFirst(".hdr",".img")), true);
+				copyFile(new File(f.getPath().replaceFirst(".hdr",".img")),new File(outfile.replaceFirst(".hdr",".img")));
 			
 			return true;
 		} catch(Exception e) {
@@ -48,18 +48,18 @@ public class HomeFolder {
 	private static BufferedInputStream in;
 	private static BufferedOutputStream out;
 	
-	public static void copyFile(File oldfile,File newfile, boolean deleteNewFileIfExists) throws IOException {
+	public static void copyFile(File oldfile,File newfile) throws IOException {
 		if(oldfile.compareTo(newfile)!=0) {
-		
-			if(deleteNewFileIfExists&&newfile.exists())
-				newfile.delete();
 			
 			in = new BufferedInputStream(new FileInputStream(oldfile));
-			out = new BufferedOutputStream(new FileOutputStream(newfile, true));
+			out = new BufferedOutputStream(new FileOutputStream(newfile, false));
 			
 			byte[] buffer = new byte[ 0xFFFF ]; 
 			for ( int len; (len = in.read(buffer)) != -1; ) 
 			    out.write( buffer, 0, len );
+			
+			in.close();
+			out.close();
 			
 		}
 	}
