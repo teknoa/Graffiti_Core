@@ -71,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.74 $
+ * @version $Revision: 1.75 $
  */
 public class AttributeHelper {
 
@@ -2727,59 +2727,34 @@ public class AttributeHelper {
 		}
 	}
 	
-	public static void setLabelStyleBox(int index, Node n, boolean showBox) {
+	public static void setLabelFrameStyle(int index, Node n, LabelFrameSetting setting) {
 		LabelAttribute la = getLabel(index, n);
 		if (la!=null) {
 			String currentStyle = la.getFontStyle();
 			if (currentStyle==null)
 				currentStyle = "";
-			if (showBox && currentStyle.contains("box"))
-				return;
-			if (!showBox) {
-				if (currentStyle.contains("box,")) {
-					currentStyle = ErrorMsg.stringReplace(currentStyle, "box,", "");
+			for (LabelFrameSetting lfs : LabelFrameSetting.values()) {
+				if (currentStyle.contains(lfs.toGMLstring()+",")) {
+					currentStyle = ErrorMsg.stringReplace(currentStyle, lfs.toGMLstring()+",", "");
 				} else
-					if (currentStyle.contains("box")) {
-						currentStyle = ErrorMsg.stringReplace(currentStyle, "box", "");
-					}
-			} else {
+					if (currentStyle.contains(","+lfs.toGMLstring())) {
+						currentStyle = ErrorMsg.stringReplace(currentStyle, ","+lfs.toGMLstring(), "");
+					} else
+						if (currentStyle.equals(lfs.toGMLstring())) {
+							currentStyle = "";
+						}
+			}
+			if (setting!=LabelFrameSetting.NO_FRAME) {
 				if (currentStyle.length()>0)
-					currentStyle = currentStyle+",box";
+					currentStyle = currentStyle+","+setting.toGMLstring();
 				else
-					currentStyle = "box";
+					currentStyle = setting.toGMLstring();
 			}
 			currentStyle = ErrorMsg.stringReplace(currentStyle, " ", "");
 			la.setFontStyle(currentStyle);
 		}
 	}
 	
-	public static void setLabelStyleOval(int index, Node n, boolean showOval) {
-		LabelAttribute la = getLabel(index, n);
-		if (la!=null) {
-			String currentStyle = la.getFontStyle();
-			if (currentStyle==null)
-				currentStyle = "";
-			if (showOval && currentStyle.contains("oval"))
-				return;
-			if (!showOval) {
-				if (currentStyle.contains("oval,")) {
-					currentStyle = ErrorMsg.stringReplace(currentStyle, "oval,", "");
-				} else
-					if (currentStyle.contains("oval")) {
-						currentStyle = ErrorMsg.stringReplace(currentStyle, "oval", "");
-					}
-			} else {
-				if (currentStyle.length()>0)
-					currentStyle = currentStyle+",oval";
-				else
-					currentStyle = "oval";
-			}
-			currentStyle = ErrorMsg.stringReplace(currentStyle, " ", "");
-			la.setFontStyle(currentStyle);
-		}
-	}
-
-
 	public static String formatNumber(double d, String pattern) {
 		return ErrorMsg.getDecimalFormat(pattern).format(d);
 	}
