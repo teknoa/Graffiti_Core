@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDescription.java,v 1.8 2009/07/17 19:31:09 klukas Exp $
+// $Id: PluginDescription.java,v 1.9 2009/07/17 20:52:49 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
 /**
  * Contains a meta data of a plugin.
  *
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class PluginDescription
 {
@@ -292,7 +292,6 @@ public class PluginDescription
 	}
 	
 	public void setIsOptionalDefaultTrue(String optionalDefaultValue) {
-		System.out.println(">> "+optionalDefaultValue);
 		if (optionalDefaultValue!=null && optionalDefaultValue.equalsIgnoreCase("false"))
 			isOptionalDefaultTrue = false;
 		else

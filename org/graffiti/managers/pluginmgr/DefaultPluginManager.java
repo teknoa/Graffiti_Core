@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.20 2009/06/23 07:05:20 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.21 2009/07/17 20:52:49 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import org.ErrorMsg;
+import org.SettingsHelperDefaultIsTrue;
 import org.graffiti.core.StringBundle;
 import org.graffiti.options.GravistoPreferences;
 import org.graffiti.plugin.GenericPlugin;
@@ -37,7 +38,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -644,7 +645,7 @@ public class DefaultPluginManager
 	            new DefaultPluginEntry(description, plugin, loadOnStartup,
 	                pluginLocation));
 	        // inform all listeners about the new plugin.
-	        if (!description.isOptional() || org.SettingsHelperDefaultIsTrue.isEnabled(description.getName()))
+	        if (!description.isOptional() || new org.SettingsHelperDefaultIsTrue().isEnabled(description.getName()))
 	        	firePluginAdded(plugin, description);
     	}
        	

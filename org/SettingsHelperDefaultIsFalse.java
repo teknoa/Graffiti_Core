@@ -8,11 +8,11 @@ import java.io.IOException;
  */
 public class SettingsHelperDefaultIsFalse extends SettingsHelperDefaultIsTrue {
 
-	public static boolean isEnabled(String name) {
+	public boolean isEnabled(String name) {
 		return new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_enabled_"+encode(name)).exists();
 	}
 
-	public static void setEnabled(String name, boolean b) {
+	public void setEnabled(String name, boolean b) {
 		if (b)
 			try {
 				new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_enabled_"+encode(name)).createNewFile();

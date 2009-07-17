@@ -14,7 +14,7 @@ import javax.swing.Timer;
  */
 public class SettingsHelperDefaultIsTrue {
 
-	public static boolean isEnabled(String name) {
+	public boolean isEnabled(String name) {
 		return !new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_disabled_"+encode(name)).exists();
 	}
 
@@ -22,7 +22,7 @@ public class SettingsHelperDefaultIsTrue {
 		return ErrorMsg.removeHTMLtags(name).replaceAll(" ", "_").replaceAll("/", "_");
 	}
 
-	public static void setEnabled(String name, boolean b) {
+	public void setEnabled(String name, boolean b) {
 		if (!b)
 			try {
 				new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_disabled_"+encode(name)).createNewFile();
@@ -34,14 +34,14 @@ public class SettingsHelperDefaultIsTrue {
 		}
 	}
 
-	public static JComponent getBooleanSettingsEditor(String description, final String option, final Runnable enable, final Runnable disable) {
+	public JComponent getBooleanSettingsEditor(String description, final String option, final Runnable enable, final Runnable disable) {
 		final JCheckBox result = new JCheckBox(description, isEnabled(option));
 		result.setOpaque(false);
 		result.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean enabled = isEnabled(option);
 				enabled = !enabled;
-				SettingsHelperDefaultIsTrue.setEnabled(option, enabled);
+				setEnabled(option, enabled);
 				if (enabled) {
 					if (enable!=null)
 						enable.run();
