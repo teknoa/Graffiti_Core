@@ -11,7 +11,7 @@ public enum LabelFrameSetting {
 	RECTANGLE, ELLIPSE, 
 	CAPSULE, 
 	RECTANGLE_ROUNDED, RECTANGLE_BOTTOM_ROUND, RECTANGLE_CORNER_CUT, 
-	CIRCLE, CIRCLE_HALF_FILLED, CIRCLE_FILLED, 
+	CIRCLE_HALF_FILLED, CIRCLE_FILLED, CIRCLE,
 	PIN, 
 	SIDE_LINES;
 
@@ -19,17 +19,17 @@ public enum LabelFrameSetting {
 	public String toString() {
 		switch(this) {
 			case NO_FRAME  					: return "no frame";
-			case RECTANGLE 					: return "rectangle";
-			case ELLIPSE 					: return "ellipse";
-			case CAPSULE					: return "capsule";
-			case RECTANGLE_ROUNDED			: return "rectangle rounded";
-			case RECTANGLE_BOTTOM_ROUND		: return "rectangle bottom rounded";
-			case RECTANGLE_CORNER_CUT		: return "rectangle corner cut";
-			case CIRCLE						: return "circle";
-			case CIRCLE_HALF_FILLED			: return "circle half filled";
-			case CIRCLE_FILLED				: return "circle filled";
+			case RECTANGLE 					: return "rectangle frame";
+			case ELLIPSE 					: return "ellipse frame";
+			case CAPSULE					: return "capsule frame";
+			case RECTANGLE_ROUNDED			: return "rectangle rounded f.";
+			case RECTANGLE_BOTTOM_ROUND		: return "rectangle bottom r. f.";
+			case RECTANGLE_CORNER_CUT		: return "rectangle corner cut f.";
+			case CIRCLE_HALF_FILLED			: return "circle half filled f.";
+			case CIRCLE_FILLED				: return "circle filled frame";
+			case CIRCLE						: return "circle frame";
 			case PIN						: return "pin";
-			case SIDE_LINES					: return "side lines";
+			case SIDE_LINES					: return "side lines frame";
 			default 						: return null;
 		}
 	}
@@ -43,12 +43,22 @@ public enum LabelFrameSetting {
 			case RECTANGLE_ROUNDED			: return "roundrect";
 			case RECTANGLE_BOTTOM_ROUND		: return "roundrect2";
 			case RECTANGLE_CORNER_CUT		: return "cutrect";
-			case CIRCLE						: return "circle";
 			case CIRCLE_HALF_FILLED			: return "hcircle";
 			case CIRCLE_FILLED				: return "fcircle";
+			case CIRCLE						: return "circle";
 			case PIN						: return "pin";
 			case SIDE_LINES					: return "lines";
 			default 						: return null;
 		}
+	}
+
+	public static LabelFrameSetting getSettingFromString(String s) {
+		if (s==null || s.length()==0)
+			return NO_FRAME;
+		for (LabelFrameSetting lfs : values()) {
+			if (lfs!=NO_FRAME && s.contains(lfs.toGMLstring()))
+				return lfs;
+		}
+		return LabelFrameSetting.NO_FRAME;
 	}
 }

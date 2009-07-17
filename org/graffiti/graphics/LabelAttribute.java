@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LabelAttribute.java,v 1.9 2009/07/10 08:17:44 klukas Exp $
+// $Id: LabelAttribute.java,v 1.10 2009/07/17 11:43:24 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -20,6 +20,7 @@ import javax.swing.SwingUtilities;
 
 import org.AttributeHelper;
 import org.ErrorMsg;
+import org.LabelFrameSetting;
 import org.graffiti.attributes.Attribute;
 import org.graffiti.attributes.AttributeExistsException;
 import org.graffiti.attributes.ColorSetAndGetSupport;
@@ -32,7 +33,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public abstract class LabelAttribute extends HashMapAttribute implements
 		GraphicAttributeConstants {
@@ -119,7 +120,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		add(StringAttribute.getTypedStringAttribute(LABEL, l), false);
 		add(StringAttribute.getTypedStringAttribute(FONTNAME, defaultFont),
 				false);
-		add(StringAttribute.getTypedStringAttribute(ALIGNMENT, "left"/*
+		add(StringAttribute.getTypedStringAttribute(ALIGNMENT, "center"/* "left"
 																	 * right,center
 																	 */), false);
 		add(new IntegerAttribute(FONTSIZE, defaultSize), false);
@@ -360,14 +361,12 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		return s.contains("SHADOW");
 	}
 
-	public boolean getUseBoxedLabel() {
-		String s = getFontStyle().toUpperCase();
-		return s.contains("BOX");
-	}
-
-	public boolean getUseOvalLabel() {
-		String s = getFontStyle().toUpperCase();
-		return s.contains("OVAL");
+	public LabelFrameSetting getLabelFrameSetting() {
+		String s = getFontStyle();
+		for (LabelFrameSetting lfs : LabelFrameSetting.values())
+			if (lfs!=LabelFrameSetting.NO_FRAME && s.contains(lfs.toGMLstring()))
+				return lfs;
+		return LabelFrameSetting.NO_FRAME;
 	}
 
 	public int getShadowOffX() {
