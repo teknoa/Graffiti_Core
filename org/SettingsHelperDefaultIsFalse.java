@@ -6,14 +6,10 @@ import java.io.IOException;
 /**
  * @author klukas
  */
-public class SettingsHelperDefaultIsFalse {
+public class SettingsHelperDefaultIsFalse extends SettingsHelperDefaultIsTrue {
 
 	public static boolean isEnabled(String name) {
 		return new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_enabled_"+encode(name)).exists();
-	}
-
-	private static String encode(String name) {
-		return name.replaceAll(" ", "_");
 	}
 
 	public static void setEnabled(String name, boolean b) {
@@ -27,5 +23,4 @@ public class SettingsHelperDefaultIsFalse {
 			new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_enabled_"+encode(name)).delete();
 		}
 	}
-
 }

@@ -55,123 +55,118 @@ public class ReleaseInfo {
 			return true;
 
 		switch (fs) {
-		case KEGG_ACCESS:
-			if ((new File(getAppFolderWithFinalSep() + "license_kegg_accepted"))
-					.exists())
-				return true;
-			else
-				return false;
-		case KEGG_ACCESS_ENH:
-			if (!(currentRelease == Release.RELEASE_PUBLIC
-					|| currentRelease == Release.KGML_EDITOR || currentRelease == Release.DEBUG))
-				return false;
-			if ((new File(getAppFolderWithFinalSep() + "license_kegg_accepted"))
-					.exists())
-				return true;
-			else
-				return false;
-		case TRANSPATH_ACCESS:
-			if (currentRelease == Release.DEBUG
-					|| currentRelease == Release.RELEASE_IPK)
-				return true;
-			break;
-		case URL_HELPTEXT:
-			if (currentRelease == Release.DEBUG
-					|| currentRelease == Release.RELEASE_IPK)
-				return true;
-			break;
-		case URL_RELEASEINFO:
-			if (currentRelease == Release.DEBUG
-					|| currentRelease == Release.RELEASE_IPK)
-				return true;
-			break;
-		case MetaCrop_ACCESS:
-			return false; // enabled by add-on
-		case DBE_ACCESS:
-			if (currentRelease == Release.DEBUG
-					|| currentRelease == Release.RELEASE_IPK)
-				return true;
-			break;
-		case DATA_CARD_ACCESS:
-			return false;
-			// if (currentRelease==Release.DEBUG ||
-			// currentRelease==Release.RELEASE_IPK)
-			// return true;
-			// break;
-		case METHOUSE_ACCESS:
-			if (currentRelease == Release.DEBUG
-					|| currentRelease == Release.RELEASE_IPK)
-				return false;
-			break;
-		case FLAREX_ACCESS:
-			if (currentRelease == Release.DEBUG
-					|| currentRelease == Release.RELEASE_IPK)
-				return false;
-			break;
-		case SCRIPT_ACCESS:
-			return true; /*
-						 * if (currentRelease==Release.DEBUG) return true;
-						 * break;
-						 */
-		case GravistoJavaHelp:
-			if (currentRelease != Release.RELEASE_CLUSTERVIS
-					&& currentRelease != Release.KGML_EDITOR) {
-				if ((new File(getAppFolderWithFinalSep()
-						+ "setting_help_enabled")).exists())
+			case KEGG_ACCESS:
+				if ((new File(getAppFolderWithFinalSep() + "license_kegg_accepted")).exists())
 					return true;
 				else
 					return false;
-			}
-			break;
-		case TAB_LAYOUT:
-			return true; /*
-						 * if (currentRelease==Release.RELEASE_CLUSTERVIS ||
-						 * currentRelease==Release.KGML_EDITOR ||
-						 * currentRelease==Release.DEBUG) return true;
-						 */
-			// break;
-		case STATISTIC_FUNCTIONS:
-			// if (currentRelease==Release.RELEASE_IPK ||
-			// currentRelease==Release.RELEASE_PUBLIC ||
-			// currentRelease==Release.DEBUG )
-			// return true;
-			// break;
-			return false;
-		case TAB_PATTERNSEARCH:
-			return false;
-		case DATAMAPPING:
-			return false;
-			// if (currentRelease!=Release.RELEASE_CLUSTERVIS &&
-			// currentRelease!=Release.KGML_EDITOR)
-			// return true;
-		case AGLET_NETWORK:
-			if (currentRelease != Release.RELEASE_CLUSTERVIS
-					&& currentRelease != Release.KGML_EDITOR)
-				return true;
-			break;
-		case FUNCAT_ACCESS:
-			return true;
-		case SBGN:
-			return false;
-		case URL_NODE_ANNOTATION:
-			if (currentRelease == Release.KGML_EDITOR)
+			case KEGG_ACCESS_ENH:
+				if (!(currentRelease == Release.RELEASE_PUBLIC
+						|| currentRelease == Release.KGML_EDITOR || currentRelease == Release.DEBUG))
+					return false;
+				if ((new File(getAppFolderWithFinalSep() + "license_kegg_accepted"))
+						.exists())
+					return true;
+				else
+					return false;
+			case TRANSPATH_ACCESS:
+				if (currentRelease == Release.DEBUG
+						|| currentRelease == Release.RELEASE_IPK)
+					return true;
+				else
+					return false;
+			case URL_HELPTEXT:
+				if (currentRelease == Release.DEBUG
+						|| currentRelease == Release.RELEASE_IPK)
+					return true;
+				else
+					return false;
+			case URL_RELEASEINFO:
+				if (currentRelease == Release.DEBUG
+						|| currentRelease == Release.RELEASE_IPK)
+					return true;
+				else
+					return false;
+			case MetaCrop_ACCESS:
+				return false; // enabled by add-on
+			case DBE_ACCESS:
 				return false;
-			else
-				return true;
-		case TOOLTIPS:
-			if (currentRelease == Release.KGML_EDITOR)
+			case DATA_CARD_ACCESS:
 				return false;
-			else
-				return true;
-		case PATHWAY_FILE_REFERENCE:
-			if (currentRelease == Release.KGML_EDITOR)
+				// if (currentRelease==Release.DEBUG ||
+				// currentRelease==Release.RELEASE_IPK)
+				// return true;
+				// break;
+			case METHOUSE_ACCESS:
 				return false;
-			else
+			case FLAREX_ACCESS:
+				return false;
+			case SCRIPT_ACCESS:
+				return true; /*
+							 * if (currentRelease==Release.DEBUG) return true;
+							 * break;
+							 */
+			case GravistoJavaHelp:
+				if (currentRelease != Release.RELEASE_CLUSTERVIS
+						&& currentRelease != Release.KGML_EDITOR) {
+					if ((new File(getAppFolderWithFinalSep()
+							+ "setting_help_enabled")).exists())
+						return true;
+					else
+						return false;
+				}
+				return false;
+			case TAB_LAYOUT:
+				return true; /*
+							 * if (currentRelease==Release.RELEASE_CLUSTERVIS ||
+							 * currentRelease==Release.KGML_EDITOR ||
+							 * currentRelease==Release.DEBUG) return true;
+							 */
+				// break;
+			case STATISTIC_FUNCTIONS:
+				// if (currentRelease==Release.RELEASE_IPK ||
+				// currentRelease==Release.RELEASE_PUBLIC ||
+				// currentRelease==Release.DEBUG )
+				// return true;
+				// break;
+				return false;
+			case TAB_PATTERNSEARCH:
+				return false;
+			case DATAMAPPING:
+				return false;
+				// if (currentRelease!=Release.RELEASE_CLUSTERVIS &&
+				// currentRelease!=Release.KGML_EDITOR)
+				// return true;
+			case AGLET_NETWORK:
+				if (currentRelease != Release.RELEASE_CLUSTERVIS
+						&& currentRelease != Release.KGML_EDITOR)
+					return true;
+				else
+					return true;
+			case FUNCAT_ACCESS:
 				return true;
-		default:
-			return true;
+			case SBGN:
+				return false;
+			case URL_NODE_ANNOTATION:
+				if (currentRelease == Release.KGML_EDITOR)
+					return false;
+				else
+					return true;
+			case TOOLTIPS:
+				if (currentRelease == Release.KGML_EDITOR)
+					return false;
+				else
+					return true;
+			case PATHWAY_FILE_REFERENCE:
+				if (currentRelease == Release.KGML_EDITOR)
+					return false;
+				else
+					return true;
+			case MacroRecorder :
+				return false; // enabled by optional plugin 
+			default:
+				return false;
 		}
-		return false;
 	}
 
 	public static String getAppFolder() {

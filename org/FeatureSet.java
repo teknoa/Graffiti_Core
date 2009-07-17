@@ -30,5 +30,6 @@ public enum FeatureSet {
 	DATA_CARD_ACCESS, 
 	AGLET_NETWORK, 
 	TOOLTIPS, 
-	SBGN
+	SBGN, 
+	MacroRecorder
 }

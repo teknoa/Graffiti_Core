@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginXMLParser.java,v 1.4 2009/06/23 07:05:20 klukas Exp $
+// $Id: PluginXMLParser.java,v 1.5 2009/07/17 19:31:09 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -25,7 +25,7 @@ import org.xml.sax.SAXException;
  * The XML parser for the plugin descriptions.  The plugin description
  * (<tt>plugin.xml</tt>) file is validated by the <tt>plugin.dtd</tt>.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class PluginXMLParser
 {
@@ -87,6 +87,7 @@ public class PluginXMLParser
         parser.addCallMethod("plugin/plugindesc/version", "setVersion", 0);
         parser.addCallMethod("plugin/plugindesc/available", "setAvailable", 0);
         parser.addCallMethod("plugin/plugindesc/optional", "setIsOptional", 0);
+        parser.addCallMethod("plugin/plugindesc/optionaldefault", "setIsOptionalDefaultTrue", 0);
         parser.addCallMethod("plugin/plugindesc/priority", "setIsPriorityPlugin", 0);
 
         // the rules for the plugin's dependencies			
