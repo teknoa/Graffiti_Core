@@ -71,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.75 $
+ * @version $Revision: 1.76 $
  */
 public class AttributeHelper {
 
@@ -3555,6 +3555,8 @@ public class AttributeHelper {
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.MultiEllipseShape";
 		if (s.equals("doubleoval"))
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.DoubleEllipseShape";
+		if (s.equals("paper"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.PaperShape";
 		
 		return s;
 	}
@@ -3571,7 +3573,8 @@ public class AttributeHelper {
 				"Multi Nucleic Acid Feature",
 				"Multi Rectangle",
 				"Multi Oval",
-				"Double Oval"};
+				"Double Oval",
+				"Paper"};
 	}
 	
 	public static String getShapeClassFromDescription(String desc) {
@@ -3611,7 +3614,8 @@ public class AttributeHelper {
 		                "multinucleic",
 		                "multirectangle",
 		                "mulitoval",
-		                "doubleoval"
+		                "doubleoval",
+		                "paper"
 		            };	
 		}
 
