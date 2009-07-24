@@ -557,8 +557,8 @@ public class FolderPanel extends JComponent {
 		cmdButton.setRolloverEnabled(true);
 		cmdButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		// result.setOpaque(false);
-		ClassLoader cl = this.getClass().getClassLoader();
-		String path = this.getClass().getPackage().getName().replace('.', '/')+"/images";
+		ClassLoader cl = FolderPanel.class.getClassLoader();
+		String path = FolderPanel.class.getPackage().getName().replace('.', '/')+"/images";
 		if (condenseStyle == CondenseButtonLayout.RIGHT) {
 			condensedIcon = new ImageIcon(cl.getResource(path + "/unfold.png"));
 			uncondensedIcon = new ImageIcon(cl.getResource(path + "/fold.png"));
@@ -800,8 +800,8 @@ public class FolderPanel extends JComponent {
 		cmdButton2.setToolTipText("turn page");
 
 		// result.setOpaque(false);
-		ClassLoader cl = this.getClass().getClassLoader();
-		String path = this.getClass().getPackage().getName().replace('.', '/')+"/images";
+		ClassLoader cl = FolderPanel.class.getClassLoader();
+		String path = FolderPanel.class.getPackage().getName().replace('.', '/')+"/images";
 		ImageIcon leftIcon = null;
 		ImageIcon rightIcon = null;
 		ImageIcon lessIcon = new ImageIcon(cl
