@@ -10,7 +10,7 @@ public enum LabelFrameSetting {
 	NO_FRAME, 
 	RECTANGLE, ELLIPSE, 
 	CAPSULE, 
-	RECTANGLE_ROUNDED, RECTANGLE_BOTTOM_ROUND, RECTANGLE_CORNER_CUT, 
+	RECTANGLE_BOTTOM_ROUND, RECTANGLE_ROUNDED, RECTANGLE_CORNER_CUT, 
 	CIRCLE_HALF_FILLED, CIRCLE_FILLED, CIRCLE,
 	PIN, 
 	SIDE_LINES;
@@ -40,8 +40,8 @@ public enum LabelFrameSetting {
 			case RECTANGLE 					: return "box";
 			case ELLIPSE 					: return "oval";
 			case CAPSULE					: return "capsule";
-			case RECTANGLE_ROUNDED			: return "roundrect";
 			case RECTANGLE_BOTTOM_ROUND		: return "roundrect2";
+			case RECTANGLE_ROUNDED			: return "roundrect";
 			case RECTANGLE_CORNER_CUT		: return "cutrect";
 			case CIRCLE_HALF_FILLED			: return "hcircle";
 			case CIRCLE_FILLED				: return "fcircle";

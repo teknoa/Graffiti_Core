@@ -71,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.76 $
+ * @version $Revision: 1.77 $
  */
 public class AttributeHelper {
 
@@ -2734,6 +2734,8 @@ public class AttributeHelper {
 			if (currentStyle==null)
 				currentStyle = "";
 			for (LabelFrameSetting lfs : LabelFrameSetting.values()) {
+				if (lfs.toGMLstring().length()==0)
+					continue;
 				if (currentStyle.contains(lfs.toGMLstring()+",")) {
 					currentStyle = ErrorMsg.stringReplace(currentStyle, lfs.toGMLstring()+",", "");
 				} else
@@ -2742,6 +2744,7 @@ public class AttributeHelper {
 					} else
 						if (currentStyle.equals(lfs.toGMLstring())) {
 							currentStyle = "";
+							;
 						}
 			}
 			if (setting!=LabelFrameSetting.NO_FRAME) {
@@ -2751,6 +2754,7 @@ public class AttributeHelper {
 					currentStyle = setting.toGMLstring();
 			}
 			currentStyle = ErrorMsg.stringReplace(currentStyle, " ", "");
+			
 			la.setFontStyle(currentStyle);
 		}
 	}
