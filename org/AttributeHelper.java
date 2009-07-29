@@ -71,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.77 $
+ * @version $Revision: 1.78 $
  */
 public class AttributeHelper {
 
@@ -3420,12 +3420,9 @@ public class AttributeHelper {
 	}
 
 	public static void removePathwayReferences(Attributable a, boolean includeNonIndexed) {
-		String nonIndexedURL = null;
-		if (!includeNonIndexed)
-			nonIndexedURL = (String) getAttributeValue(a, "", "pathway_ref_url", null, "", false);
+		if (includeNonIndexed)
+			deleteAttribute(a, "", "pathway_ref_url");
 		deleteAttribute(a, "", "pathway_ref_url*");
-		if (!includeNonIndexed && nonIndexedURL!=null)
-			setAttribute(a, "", "pathway_ref_url", nonIndexedURL); 
 	}
 
 	public static String getPathwayReference(Attributable a) {
