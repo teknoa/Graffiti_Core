@@ -2230,9 +2230,12 @@ public void invalidateLayout (Container target)
 				{border, TableLayoutConstants.FILL, border}
 		}; // Rows
 		result.setLayout(new TableLayout(size));
-		if (left!=null) result.add(left, "1,1");
-		if (middle!=null) result.add(middle, "3,1");
-		if (right!=null) result.add(right, "5,1");
+		if (left!=null) 
+			result.add(left, "1,1");
+		if (middle!=null) 
+			result.add(middle, "3,1");
+		if (right!=null) 
+			result.add(right, "5,1");
 		result.validate();
 		return result;
 	}
@@ -2435,6 +2438,24 @@ public void invalidateLayout (Container target)
 		return result;
 	}
 	
+	public static JComponent getMultiSplitVerticalNonPrefHeight(
+			Collection jComponentList, double h) {
+		JPanel result = new JPanel();
+		result.setOpaque(false);
+		result.setBackground(null);
+		double[] height = new double[jComponentList.size()];
+		for (int i=0; i<height.length; i++)
+			height[i] = h;
+		result.setLayout(getLayout(TableLayoutConstants.FILL, height));
+		int idx = 0;
+		for (Object o : jComponentList) {
+			JComponent jc = (JComponent)o;
+			result.add(jc, "0,"+idx);
+			idx++;
+		}
+		result.validate();
+		return result;
+	}
 	public static JComponent getMultiSplitVertical(
 			Collection jComponentList, int spaceBetween) {
 		JPanel result = new JPanel();
