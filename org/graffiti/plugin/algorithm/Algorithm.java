@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Algorithm.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
+// $Id: Algorithm.java,v 1.3 2009/07/30 12:19:23 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -23,7 +23,7 @@ import org.graffiti.selection.Selection;
  * possibility to provide the <code>Algorithm</code> with apropriate
  * parameters.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public interface Algorithm
 {
@@ -111,6 +111,8 @@ public interface Algorithm
 	public void setActionEvent(ActionEvent a);
 	
 	public ActionEvent getActionEvent();
+
+	public boolean mayWorkOnMultipleGraphs();
 }
 
 //------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAlgorithm.java,v 1.3 2009/05/19 13:42:40 klukas Exp $
+// $Id: AbstractAlgorithm.java,v 1.4 2009/07/30 12:19:23 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -125,6 +125,10 @@ public abstract class AbstractAlgorithm implements Algorithm {
 
 	public void setActionEvent(ActionEvent a) {
 		actionEvent = a;
+	}
+	
+	public boolean mayWorkOnMultipleGraphs() {
+		return false;
 	}
 }
 
