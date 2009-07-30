@@ -98,6 +98,7 @@ public class FolderPanel extends JComponent {
 	private int activeSearchResult = -1;
 	private boolean lockRowCount;
 	private Iconsize bigIcons = Iconsize.SMALL;
+	private boolean hideSearch;
 
 	public void setIconSize(Iconsize bigIcons) {
 		this.bigIcons = bigIcons;
@@ -418,7 +419,7 @@ public class FolderPanel extends JComponent {
 			validate();
 			repaint();
 	
-			if (lastSearchText.length() > 0 && currentSearchInputField != null) {
+			if (!hideSearch && lastSearchText.length() > 0 && currentSearchInputField != null) {
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						currentSearchInputField.requestFocusInWindow();
@@ -605,6 +606,8 @@ public class FolderPanel extends JComponent {
 		final JButton cmdButtonS = new JButton();
 		cmdButtonS.setToolTipText(getSearchHintText());
 		final JTextField input = new JTextField();
+		if (hideSearch)
+			input.setVisible(false);
 		currentSearchInputField = input;
 		input.setToolTipText(getSearchHintText());
 		input.setBorder(BorderFactory.createEtchedBorder(Color.WHITE,
@@ -1048,10 +1051,20 @@ public class FolderPanel extends JComponent {
 	}
 
 	public void addDefaultTextSearchFilter() {
+		addDefaultTextSearchFilterFixed(null);
+	}
+	
+	public void addDefaultTextSearchFilterFixed(final String optFixedSearch) {
+		if (optFixedSearch!=null) {
+			lastSearchText = optFixedSearch;
+			hideSearch = true;
+		}
 		addSearchFilter(new SearchFilter() {
 			public boolean accept(GuiRow gr, String searchText) {
 				if (gr.left == null || gr.right == null || searchText == null)
 					return true;
+				if (optFixedSearch!=null)
+					searchText = optFixedSearch;
 				searchText = searchText.toUpperCase();
 				String c1 = "";
 				String c2 = "";
@@ -1060,22 +1073,46 @@ public class FolderPanel extends JComponent {
 				if (left != null && left instanceof JButton) {
 					JButton jb = (JButton) left;
 					c1 = jb.getText().toUpperCase();
+				} else
+				if (left != null && left instanceof JLabel) {
+					JLabel jb = (JLabel) left;
+					c1 = jb.getText().toUpperCase();
+				} else
+				if (left != null && left instanceof JComponent) {
+					StringBuilder sb = new StringBuilder();
+					getSubText(left, sb);
+					c1 = sb.toString().toUpperCase();
 				}
 				if (right != null && right instanceof JButton) {
 					JButton jb = (JButton) right;
 					c2 = jb.getText().toUpperCase();
-				}
-				if (left != null && left instanceof JLabel) {
-					JLabel jb = (JLabel) left;
-					c1 = jb.getText().toUpperCase();
-				}
+				} else
 				if (right != null && right instanceof JLabel) {
 					JLabel jb = (JLabel) right;
 					c2 = jb.getText().toUpperCase();
+				} else
+				if (right != null && right instanceof JComponent) {
+					StringBuilder sb = new StringBuilder();
+					getSubText(right, sb);
+					c2 = sb.toString().toUpperCase();
 				}
 				if (c1.length() <= 0 && c2.length() <= 0)
 					return true;
 				return c2.contains(searchText) || c1.contains(searchText);
+			}
+
+			private void getSubText(JComponent c, StringBuilder sb) {
+				for (Component jc : c.getComponents()) {
+					if (jc instanceof JLabel)
+						sb.append("/"+((JLabel)jc).getText());
+					else
+						if (jc instanceof JButton)
+							sb.append("/"+((JButton)jc).getText());
+						else
+							if (jc instanceof JComponent)
+								getSubText((JComponent)jc, sb);
+
+				}
 			}
 
 			private JComponent findMyComponent(JComponent jc) {
@@ -1151,6 +1188,14 @@ public class FolderPanel extends JComponent {
 	
 	public enum Iconsize {
 		SMALL, MIDDLE, LARGE
+	}
+
+	public void setShowCondenseButton(boolean b) {
+		showCondenseButton = b;
+	}
+
+	public int getFixedSearchFilterMatchCount() {
+		return getFilteredList(guiComponentRows).size();
 	}
 	
 }

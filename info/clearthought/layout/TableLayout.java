@@ -2478,6 +2478,27 @@ public void invalidateLayout (Container target)
 		return result;
 	}
 
+	public static JComponent getMultiSplitVertical(
+			Collection jComponentList, double width, int spaceBetween) {
+		JPanel result = new JPanel();
+		result.setOpaque(false);
+		result.setBackground(null);
+		double[] height = new double[jComponentList.size()];
+		for (int i=0; i<height.length; i++)
+			height[i] = TableLayoutConstants.PREFERRED;
+		result.setLayout(getLayout(width, height));
+		int idx = 0;
+		int max = jComponentList.size();
+		for (Object o : jComponentList) {
+			JComponent jc = (JComponent)o;
+			if (idx+1<max)
+				jc = FolderPanel.getBorderedComponent(jc, 0, 0, spaceBetween, 0);
+			result.add(jc, "0,"+idx);
+			idx++;
+		}
+		result.validate();
+		return result;
+	}
 
 
 	public static JComponent getLeftDivider(JComponent gui, double layout, Color color, int width) {
