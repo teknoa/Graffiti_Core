@@ -16,6 +16,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
 
+import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class ErrorMsg {
@@ -396,6 +398,28 @@ public class ErrorMsg {
 	    	return ActionEvent.CTRL_MASK;*/
 	}
 
+	@SuppressWarnings("unchecked")
+	public static Object findChildComponent(Component c, Class searchClass) {
+		if (c==null)
+			return null;
+		// System.out.println(c.getClass().getCanonicalName());
+		if (c.getClass()==searchClass)
+			return c;
+		try {
+			Object o = c.getClass().asSubclass(searchClass);
+			if (o!=null)
+				return c;
+		} catch(Exception err) {
+			// Component c is not of desired type
+		}
+		if (c instanceof JComponent)
+		for (Component jj : ((JComponent)c).getComponents()) {
+			Object res = findChildComponent(jj, searchClass);
+			if (res!=null)
+				return res;
+		}
+		return null;
+	}
 	@SuppressWarnings("unchecked")
 	public static Object findParentComponent(Component c, Class searchClass) {
 		if (c==null)
