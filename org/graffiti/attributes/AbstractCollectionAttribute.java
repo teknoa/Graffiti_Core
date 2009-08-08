@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.9 2009/07/10 08:17:45 klukas Exp $
+// $Id: AbstractCollectionAttribute.java,v 1.10 2009/08/08 20:43:11 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -20,7 +20,7 @@ import org.graffiti.plugin.XMLHelper;
  * instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
  *
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			implements CollectionAttribute {
@@ -126,22 +126,22 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			if (sepPos<0) {
 				Attribute attr = attributes.get(path);
 				if (attr == null)
-					throw new AttributeNotFoundException("Did not find sub attribute with ID " + path);
+					throw new AttributeNotFoundException(null); // "Did not find sub attribute with ID " + path);
 				return attr;
 			} else {
 				String s0 = path.substring(0, sepPos);
 				String s1 = path.substring(sepPos+sepLen);
 				Attribute attr = attributes.get(s0);
 				if (attr == null) {
-					throw new AttributeNotFoundException("Did not find sub attribute with ID " + path);
+					throw new AttributeNotFoundException(null); // "Did not find sub attribute with ID " + path);
 				} else {
 					try {
 						return ((CollectionAttribute) attr).getAttribute(s1);
 					} catch (ClassCastException cce) {
-						throw new AttributeNotFoundException("Attribute with ID "
+						throw new AttributeNotFoundException(null); /*"Attribute with ID "
 									+ s0 + " is no "
 									+ "CollectionAttribute and therefore can't "
-									+ "contain subattribute with ID " + s1);
+									+ "contain subattribute with ID " + s1); */
 					}
 				}
 			}

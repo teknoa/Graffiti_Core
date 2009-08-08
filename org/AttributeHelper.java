@@ -71,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.79 $
+ * @version $Revision: 1.80 $
  */
 public class AttributeHelper {
 
@@ -1599,8 +1599,7 @@ public class AttributeHelper {
 			if (resultType != null && !res.getClass().equals(resultType.getClass())) {
 				if (res instanceof String && !(resultType instanceof Boolean)) {
 					res = ObjectAttributeService.createAndInitObjectFromString((String) res);
-					if (res == null
-							|| !res.getClass().equals(resultType.getClass())) {
+					if (res == null || !res.getClass().equals(resultType.getClass())) {
 						if ((res != null) && (res instanceof String)
 								&& resultType instanceof StringAttribute) {
 							a.remove(attributeName);
