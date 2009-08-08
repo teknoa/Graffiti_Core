@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: SelectionModel.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: SelectionModel.java,v 1.3 2009/08/08 11:39:17 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -18,7 +18,7 @@ import java.util.Iterator;
  * Contains a list of selections and a reference to the current selection.
  *
  * @author flierl
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class SelectionModel
 {
@@ -71,7 +71,6 @@ public class SelectionModel
         {
             Selection oldSel = this.selections.get(this.activeSelection);
             oldSel.clear();
-            this.selectionChanged();
         }
 
         this.activeSelection = selectionName;

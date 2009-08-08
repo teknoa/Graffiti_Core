@@ -75,10 +75,10 @@ public class FolderPanel extends JComponent {
 	private List<ActionListener> collapse_listeners = new ArrayList<ActionListener>();
 
 	private JPanel rowPanel;
-	private JLabel titleLabel;
 	private static HashMap<String, Boolean> showCondensed = new HashMap<String, Boolean>();
 	private boolean showCondenseButton;
 	private boolean showHelpButton;
+	private JLabel titleLabel;
 	private boolean searchEnabled = false;
 
 	private boolean sortedRows;
@@ -1059,70 +1059,7 @@ public class FolderPanel extends JComponent {
 			lastSearchText = optFixedSearch;
 			hideSearch = true;
 		}
-		addSearchFilter(new SearchFilter() {
-			public boolean accept(GuiRow gr, String searchText) {
-				if (gr.left == null || gr.right == null || searchText == null)
-					return true;
-				if (optFixedSearch!=null)
-					searchText = optFixedSearch;
-				searchText = searchText.toUpperCase();
-				String c1 = "";
-				String c2 = "";
-				JComponent left = findMyComponent(gr.left);
-				JComponent right = findMyComponent(gr.right);
-				if (left != null && left instanceof JButton) {
-					JButton jb = (JButton) left;
-					c1 = jb.getText().toUpperCase();
-				} else
-				if (left != null && left instanceof JLabel) {
-					JLabel jb = (JLabel) left;
-					c1 = jb.getText().toUpperCase();
-				} else
-				if (left != null && left instanceof JComponent) {
-					StringBuilder sb = new StringBuilder();
-					getSubText(left, sb);
-					c1 = sb.toString().toUpperCase();
-				}
-				if (right != null && right instanceof JButton) {
-					JButton jb = (JButton) right;
-					c2 = jb.getText().toUpperCase();
-				} else
-				if (right != null && right instanceof JLabel) {
-					JLabel jb = (JLabel) right;
-					c2 = jb.getText().toUpperCase();
-				} else
-				if (right != null && right instanceof JComponent) {
-					StringBuilder sb = new StringBuilder();
-					getSubText(right, sb);
-					c2 = sb.toString().toUpperCase();
-				}
-				if (c1.length() <= 0 && c2.length() <= 0)
-					return true;
-				return c2.contains(searchText) || c1.contains(searchText);
-			}
-
-			private void getSubText(JComponent c, StringBuilder sb) {
-				for (Component jc : c.getComponents()) {
-					if (jc instanceof JLabel)
-						sb.append("/"+((JLabel)jc).getText());
-					else
-						if (jc instanceof JButton)
-							sb.append("/"+((JButton)jc).getText());
-						else
-							if (jc instanceof JComponent)
-								getSubText((JComponent)jc, sb);
-
-				}
-			}
-
-			private JComponent findMyComponent(JComponent jc) {
-				if (jc instanceof JPanel) {
-					JPanel jp = (JPanel) jc;
-					return (JComponent) jp.getComponent(0);
-				} else
-					return jc;
-			}
-		});
+		addSearchFilter(getDefaultSearchFilter(optFixedSearch));	
 	}
 
 	public String getTitle() {
@@ -1196,6 +1133,73 @@ public class FolderPanel extends JComponent {
 
 	public int getFixedSearchFilterMatchCount() {
 		return getFilteredList(guiComponentRows).size();
+	}
+
+	public static SearchFilter getDefaultSearchFilter(final String optFixedSearch) {
+		return new SearchFilter() {
+			public boolean accept(GuiRow gr, String searchText) {
+				if (gr.left == null || gr.right == null || searchText == null)
+					return true;
+				if (optFixedSearch!=null)
+					searchText = optFixedSearch;
+				searchText = searchText.toUpperCase();
+				String c1 = "";
+				String c2 = "";
+				JComponent left = findMyComponent(gr.left);
+				JComponent right = findMyComponent(gr.right);
+				if (left != null && left instanceof JButton) {
+					JButton jb = (JButton) left;
+					c1 = jb.getText().toUpperCase();
+				} else
+				if (left != null && left instanceof JLabel) {
+					JLabel jb = (JLabel) left;
+					c1 = jb.getText().toUpperCase();
+				} else
+				if (left != null && left instanceof JComponent) {
+					StringBuilder sb = new StringBuilder();
+					getSubText(left, sb);
+					c1 = sb.toString().toUpperCase();
+				}
+				if (right != null && right instanceof JButton) {
+					JButton jb = (JButton) right;
+					c2 = jb.getText().toUpperCase();
+				} else
+				if (right != null && right instanceof JLabel) {
+					JLabel jb = (JLabel) right;
+					c2 = jb.getText().toUpperCase();
+				} else
+				if (right != null && right instanceof JComponent) {
+					StringBuilder sb = new StringBuilder();
+					getSubText(right, sb);
+					c2 = sb.toString().toUpperCase();
+				}
+				if (c1.length() <= 0 && c2.length() <= 0)
+					return true;
+				return c2.contains(searchText) || c1.contains(searchText);
+			}
+
+			private void getSubText(JComponent c, StringBuilder sb) {
+				for (Component jc : c.getComponents()) {
+					if (jc instanceof JLabel)
+						sb.append("/"+((JLabel)jc).getText());
+					else
+						if (jc instanceof JButton)
+							sb.append("/"+((JButton)jc).getText());
+						else
+							if (jc instanceof JComponent)
+								getSubText((JComponent)jc, sb);
+
+				}
+			}
+
+			private JComponent findMyComponent(JComponent jc) {
+				if (jc instanceof JPanel) {
+					JPanel jp = (JPanel) jc;
+					return (JComponent) jp.getComponent(0);
+				} else
+					return jc;
+			}
+		};
 	}
 	
 }
