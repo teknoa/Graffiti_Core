@@ -71,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.78 $
+ * @version $Revision: 1.79 $
  */
 public class AttributeHelper {
 
@@ -3450,7 +3450,7 @@ public class AttributeHelper {
 
 	public static double getHeatMapLowerBound(Graph graph) {
 		return ((Double) getAttributeValue(graph, "", "hm_lower_bound",
-				new Double(-10), new Double(-10))).doubleValue();
+				new Double(-2), new Double(-2))).doubleValue();
 	}
 
 	public static double getHeatMapMiddleBound(Graph graph) {
@@ -3460,7 +3460,7 @@ public class AttributeHelper {
 
 	public static double getHeatMapUpperBound(Graph graph) {
 		return ((Double) getAttributeValue(graph, "", "hm_upper_bound",
-				new Double(10d), new Double(10))).doubleValue();
+				new Double(2d), new Double(2d))).doubleValue();
 	}
 
 	public static double getHeatMapGamma(Graph graph) {

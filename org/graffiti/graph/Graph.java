@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Graph.java,v 1.1 2007/05/31 12:55:55 klukas Exp $
+// $Id: Graph.java,v 1.2 2009/08/08 16:21:15 klukas Exp $
 package org.graffiti.graph;
 
 import java.util.Collection;
@@ -18,6 +18,7 @@ import org.graffiti.attributes.AttributeTypesManager;
 import org.graffiti.attributes.CollectionAttribute;
 import org.graffiti.attributes.UnificationException;
 import org.graffiti.core.DeepCopy;
+import org.graffiti.event.ListenerManager;
 
 /**
  * A <code>Graph</code> consists of a set of nodes and a set of edges. These
@@ -55,7 +56,7 @@ import org.graffiti.core.DeepCopy;
  * </blockquote>
  * </p>
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see Node
  * @see Edge
@@ -422,6 +423,8 @@ public interface Graph
 	public void numberGraphElements();
 
 	public void checkMaxGraphElementId(long id);
+
+	public void setListenerManager(ListenerManager object);
 }
 
 //------------------------------------------------------------------------------

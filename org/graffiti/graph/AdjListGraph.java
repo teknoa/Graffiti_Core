@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListGraph.java,v 1.4 2009/06/23 07:05:21 klukas Exp $
+// $Id: AdjListGraph.java,v 1.5 2009/08/08 16:21:15 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -29,7 +29,7 @@ import org.graffiti.event.ListenerManager;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see Graph
  * @see AbstractGraph
@@ -569,6 +569,10 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public void checkMaxGraphElementId(long id) {
 		if (id > maxGraphElementId)
 			maxGraphElementId = id;
+	}
+
+	public void setListenerManager(ListenerManager l) {
+		listenerManager = l;
 	}
 }
 
