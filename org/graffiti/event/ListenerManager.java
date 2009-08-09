@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ListenerManager.java,v 1.5 2009/07/10 08:17:44 klukas Exp $
+// $Id: ListenerManager.java,v 1.6 2009/08/09 08:08:52 klukas Exp $
 
 package org.graffiti.event;
 
@@ -33,7 +33,7 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 @SuppressWarnings("unchecked")
 public class ListenerManager {
@@ -188,7 +188,7 @@ public class ListenerManager {
 	 * @throws ListenerRegistrationException DOCUMENT ME!
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
-	public void addDelayedAttributeListener(AttributeListener l)
+	public synchronized void addDelayedAttributeListener(AttributeListener l)
 			throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
