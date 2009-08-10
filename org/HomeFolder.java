@@ -11,7 +11,9 @@ public class HomeFolder {
 
 	public static String getTemporaryFolder() {
 		String s = ReleaseInfo.getAppFolder()+ReleaseInfo.getFileSeparator()+"tmp";
-		new File(s).mkdirs();
+		File f = new File(s);
+		f.mkdirs();
+		f.deleteOnExit();
 		return s;
 	}
 	
@@ -28,15 +30,21 @@ public class HomeFolder {
 			String outfile = getTemporaryFolderWithFinalSep()+f.getName();
 			
 			if(subfolder!=null&&!subfolder.equalsIgnoreCase("")) {
-				new File(getTemporaryFolderWithFinalSep()+ReleaseInfo.getFileSeparator()+subfolder+ReleaseInfo.getFileSeparator()).mkdirs();
-				outfile = getTemporaryFolderWithFinalSep()+ReleaseInfo.getFileSeparator()+subfolder+ReleaseInfo.getFileSeparator()+f.getName();
+				File newDir = new File(getTemporaryFolderWithFinalSep()+ReleaseInfo.getFileSeparator()+subfolder);
+				newDir.mkdirs();
+				newDir.deleteOnExit();
+				outfile = newDir+ReleaseInfo.getFileSeparator()+f.getName();
 			}
 				
 			copyFile(f, new File(outfile));
 	
-			if(f.getPath().endsWith(".hdr".toLowerCase()))
-				copyFile(new File(f.getPath().replaceFirst(".hdr",".img")),new File(outfile.replaceFirst(".hdr",".img")));
+			if(f.getPath().endsWith(".hdr".toLowerCase())) {
+				File vol_data = new File(outfile.replaceFirst(".hdr",".img"));
+				vol_data.deleteOnExit();
+				copyFile(new File(f.getPath().replaceFirst(".hdr",".img")),vol_data);
+			}
 			
+			new File(outfile).deleteOnExit();
 			return true;
 		} catch(Exception e) {
 			ErrorMsg.addErrorMessage(e);
