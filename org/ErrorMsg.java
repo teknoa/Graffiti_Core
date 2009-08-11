@@ -502,21 +502,29 @@ public class ErrorMsg {
 	public static String getWordWrap(String desc, int width) {
 		String[] words = desc.split(" ");
 		String result = "";
-		int rowCount = 0;
+		int column = 0;
 		for (int i=0; i<words.length; i++) {
-			if (i>0 && rowCount+words[i].length()>width) {
+			if (i>0 && column+words[i].length()>width) {
 				result = result+"<br>"+words[i];
-				rowCount = words[i].length();
+				column = words[i].length();
 			} else
 				if (i>0) {
 					result = result + " " + words[i];
-					rowCount += words[i].length();
+					column += words[i].length();
 				} else {
 					result = words[0];
-					rowCount = words[0].length();
+					column = words[0].length();
 				}
 		}
 		return result;
+	}
+	
+	public static String getWordWrap(String[] desc, int width) {
+		StringBuilder sb = new StringBuilder();
+		for (String s : desc) {
+			sb.append(getWordWrap(s, width));
+		}
+		return sb.toString();
 	}
 	
 }
