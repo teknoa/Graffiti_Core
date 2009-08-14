@@ -71,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.80 $
+ * @version $Revision: 1.81 $
  */
 public class AttributeHelper {
 
@@ -1981,6 +1981,16 @@ public class AttributeHelper {
 					GraphicAttributeConstants.GRAPHICS);
 		ega.setThickness(arrowSize);
 	}
+	
+	public static double getArrowSize(Edge edge) {
+		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		if (ega == null)
+			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK,
+					Color.BLACK, edge.isDirected()),
+					GraphicAttributeConstants.GRAPHICS);
+		return ega.getThickness();
+	}
+
 
 	/**
 	 * @param attr
