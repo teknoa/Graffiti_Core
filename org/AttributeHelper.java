@@ -71,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.81 $
+ * @version $Revision: 1.82 $
  */
 public class AttributeHelper {
 
@@ -2730,6 +2730,24 @@ public class AttributeHelper {
 			if (index<0)
 				idx = "";
 			NodeLabelAttribute labelAttr = (NodeLabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS+idx);
+			return labelAttr;
+		} catch (Exception ex) {
+			return null;
+		}
+	}
+	
+	/**
+	 * Get EdgeLabelAttribute (if available)
+	 * @param index Use -1 to get main label, use 0..99 to get annotation labels
+	 * @param edge Edge to be processed
+	 * @return EdgeLabelAttribute, if present, otherwise null.
+	 */
+	public static EdgeLabelAttribute getLabel(int index, Edge edge) {
+		try {
+			String idx = ""+index;
+			if (index<0)
+				idx = "";
+			EdgeLabelAttribute labelAttr = (EdgeLabelAttribute) edge.getAttribute(GraphicAttributeConstants.LABELGRAPHICS+idx);
 			return labelAttr;
 		} catch (Exception ex) {
 			return null;
