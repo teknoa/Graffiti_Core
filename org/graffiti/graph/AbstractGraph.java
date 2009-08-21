@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractGraph.java,v 1.2 2009/06/29 21:45:10 klukas Exp $
+// $Id: AbstractGraph.java,v 1.3 2009/08/21 08:26:19 klukas Exp $
 package org.graffiti.graph;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import org.graffiti.event.ListenerManager;
 /**
  * Provides further functionality for graphs.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see Graph
  * @see AdjListGraph
@@ -535,6 +535,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 				.copy();
 		Edge newEdge = addEdge(source, target, edge.isDirected(), col);
 		newEdge.setID(edge.getID()); // copied edges share the same edge id
+		newEdge.setViewID(edge.getViewID());
 		newEdge.setGraph(this);
 		return newEdge;
 	}
@@ -584,6 +585,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 				ErrorMsg.addErrorMessage("Node is NULL");
 			} else {
 				Edge newEdge = this.addEdge(source, target, oldEdge.isDirected(), col);
+				newEdge.setViewID(oldEdge.getViewID());
 				newElements.add(newEdge);
 			}
 		}
@@ -668,6 +670,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 				.copy();
 		Node newNode = this.addNode(col);
 		newNode.setID(node.getID()); // copied nodes share the same ID
+		newNode.setViewID(node.getViewID());
 		newNode.setGraph(this);
 		return newNode;
 	}
