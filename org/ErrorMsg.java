@@ -12,6 +12,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
@@ -184,6 +185,22 @@ public class ErrorMsg {
         for (int i=0; i<characters.length; i++) {
             char curChar = characters[i];
             if (curChar<128 && Character.isLetterOrDigit(curChar)) {
+                result.append(curChar);
+            } else {
+                String html="&#"+new Integer(curChar).toString()+";";
+                while (html.length()<8) html=stringReplace(html, "&#", "&#0");
+                result.append(html);
+            }
+        }
+        return result.toString();
+	}
+	
+	public synchronized static String UnicodeToHtml(String unicodeText, HashSet<Character> badChars) {
+	    StringBuffer result = new StringBuffer();
+	    char[] characters = unicodeText.toCharArray();
+        for (int i=0; i<characters.length; i++) {
+            char curChar = characters[i];
+            if (!badChars.contains(curChar)) {
                 result.append(curChar);
             } else {
                 String html="&#"+new Integer(curChar).toString()+";";
