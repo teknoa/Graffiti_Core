@@ -37,12 +37,6 @@ public class HomeFolder {
 			}
 				
 			copyFile(f, new File(outfile));
-	
-			if(f.getPath().endsWith(".hdr".toLowerCase())) {
-				File vol_data = new File(outfile.replaceFirst(".hdr",".img"));
-				vol_data.deleteOnExit();
-				copyFile(new File(f.getPath().replaceFirst(".hdr",".img")),vol_data);
-			}
 			
 			new File(outfile).deleteOnExit();
 			return true;
