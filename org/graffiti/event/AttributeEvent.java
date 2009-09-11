@@ -5,16 +5,17 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeEvent.java,v 1.2 2008/10/08 17:26:48 klukas Exp $
+// $Id: AttributeEvent.java,v 1.3 2009/09/11 12:28:37 morla Exp $
 
 package org.graffiti.event;
 
+import org.graffiti.attributes.Attributable;
 import org.graffiti.attributes.Attribute;
 
 /**
  * Contains an attribute event.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class AttributeEvent
     extends AbstractEvent
@@ -69,6 +70,10 @@ public class AttributeEvent
     public String getPath()
     {
         return path;
+    }
+
+    public Attributable getAttributeable() {
+    	return getAttribute().getAttributable();
     }
 }
 

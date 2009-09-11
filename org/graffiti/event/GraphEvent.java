@@ -5,10 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphEvent.java,v 1.1 2007/05/31 12:56:04 klukas Exp $
+// $Id: GraphEvent.java,v 1.2 2009/09/11 12:28:37 morla Exp $
 
 package org.graffiti.event;
 
+import org.graffiti.attributes.Attributable;
 import org.graffiti.graph.Edge;
 import org.graffiti.graph.Graph;
 import org.graffiti.graph.Node;
@@ -22,7 +23,7 @@ import org.graffiti.graph.Node;
  * <code>GraphListener</code> interface.) Each such listener object gets a
  * <code>GraphEvent</code> containing the graph event.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see GraphListener
  * @see AbstractGraphListener
@@ -154,6 +155,18 @@ public class GraphEvent
     public Node getSecondNode()
     {
         return secondNode;
+    }
+    
+    public Attributable getAttributeable() {
+    	if (graph!=null)
+    		return graph;
+    	if (edge!=null)
+    		return edge;
+    	if (node!=null)
+    		return node;
+    	if (secondNode!=null)
+    		return secondNode;
+    	return null;
     }
 }
 

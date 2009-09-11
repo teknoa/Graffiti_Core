@@ -5,10 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: EdgeEvent.java,v 1.1 2007/05/31 12:56:04 klukas Exp $
+// $Id: EdgeEvent.java,v 1.2 2009/09/11 12:28:37 morla Exp $
 
 package org.graffiti.event;
 
+import org.graffiti.attributes.Attributable;
 import org.graffiti.graph.Edge;
 
 /**
@@ -20,7 +21,7 @@ import org.graffiti.graph.Edge;
  * <code>EdgeListener</code> interface.) Each such listener object gets an
  * <code>EdgeEvent</code> containing the edge event.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see EdgeListener
  * @see AbstractEdgeListener
@@ -50,6 +51,12 @@ public class EdgeEvent
     public Edge getEdge()
     {
         return (Edge) getSource();
+    }
+
+    public Attributable getAttributeable() {
+		if (getEdge()!=null)
+			return getEdge();
+		return null;
     }
 }
 

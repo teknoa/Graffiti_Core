@@ -5,19 +5,20 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: TransactionListener.java,v 1.2 2009/07/10 08:17:44 klukas Exp $
+// $Id: TransactionListener.java,v 1.3 2009/09/11 12:28:37 morla Exp $
 
 package org.graffiti.event;
 
 import java.util.EventListener;
 
 import org.BackgroundTaskStatusProviderSupportingExternalCall;
+import org.graffiti.attributes.Attributable;
 
 /**
  * Interface, that contains methods which are called when transactions are
  * started or finished.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public interface TransactionListener
     extends EventListener
@@ -26,6 +27,13 @@ public interface TransactionListener
 
     /**
      * Called when a transaction has stopped.
+     * <br>
+     * The class {@link TransactionHashMap} merges duplicate {@link AttributeEvent}s.
+     * In case the Attribute path for the same {@link Attributable} is not equal,
+     * detailed information about Attribute path is lost. Instead a generic {@link AttributeEvent}
+     * containing just the {@link Attributable} is in the list of changed Objects (see {@link TransactionEvent}).<br>
+     * In case no detailed information about an Attribute change is available, your code
+     * should completely re-process the affected {@link Attributable}.
      *
      * @param e the EdgeEvent detailing the changes.
      */

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListNode.java,v 1.5 2009/06/23 07:05:21 klukas Exp $
+// $Id: AdjListNode.java,v 1.6 2009/09/11 12:28:37 morla Exp $
 
 package org.graffiti.graph;
 
@@ -22,7 +22,7 @@ import org.graffiti.util.MultipleIterator;
 /**
  * Implements a graph node with adjacency list representation.
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *
  * @see AdjListGraph
  * @see AdjListEdge
@@ -203,11 +203,11 @@ public class AdjListNode
         if(edge.isDirected())
         {
             // logger.fine("adding an ingoing edge to this node");
-      	  if (listMan!=null)
-            listMan.preInEdgeAdded(new NodeEvent(this, edge));
+//      	  if (listMan!=null)
+//            listMan.preInEdgeAdded(new NodeEvent(this, edge));
             directedInEdges.add(edge);
-       	  if (listMan!=null)
-            listMan.postInEdgeAdded(new NodeEvent(this, edge));
+//       	  if (listMan!=null)
+//            listMan.postInEdgeAdded(new NodeEvent(this, edge));
         }
         else
         {
@@ -237,11 +237,11 @@ public class AdjListNode
         if(edge.isDirected())
         {
             //logger.info("adding an outgoing edge to this node");
-      	  if (listMan!=null)
-            listMan.preOutEdgeAdded(new NodeEvent(this, edge));
+//      	  if (listMan!=null)
+//            listMan.preOutEdgeAdded(new NodeEvent(this, edge));
             this.directedOutEdges.add(edge);
-       	  if (listMan!=null)
-            listMan.postOutEdgeAdded(new NodeEvent(this, edge));
+//       	  if (listMan!=null)
+//            listMan.postOutEdgeAdded(new NodeEvent(this, edge));
         }
         else
         {
@@ -277,12 +277,12 @@ public class AdjListNode
             // logger.fine("removing an inEdge");
             if(directedInEdges.contains(edge))
             {
-          	  if (listMan!=null)
-                listMan.preInEdgeRemoved(new NodeEvent(this, edge));
+//          	  if (listMan!=null)
+//                listMan.preInEdgeRemoved(new NodeEvent(this, edge));
                 directedInEdges.remove(edge);
                 
-           	  if (listMan!=null)
-                listMan.postInEdgeRemoved(new NodeEvent(this, edge));
+//           	  if (listMan!=null)
+//                listMan.postInEdgeRemoved(new NodeEvent(this, edge));
             }
             else
             {
@@ -342,11 +342,11 @@ public class AdjListNode
 
             if(directedOutEdges.contains(edge))
             {
-          	  if (listMan!=null)
-                listMan.preOutEdgeRemoved(new NodeEvent(this, edge));
+//          	  if (listMan!=null)
+//                listMan.preOutEdgeRemoved(new NodeEvent(this, edge));
                 this.directedOutEdges.remove(edge);
-           	  if (listMan!=null)
-                listMan.postOutEdgeRemoved(new NodeEvent(this, edge));
+//           	  if (listMan!=null)
+//                listMan.postOutEdgeRemoved(new NodeEvent(this, edge));
             }
             else
             {

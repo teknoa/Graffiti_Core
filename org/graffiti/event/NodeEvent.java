@@ -5,10 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: NodeEvent.java,v 1.1 2007/05/31 12:56:04 klukas Exp $
+// $Id: NodeEvent.java,v 1.2 2009/09/11 12:28:37 morla Exp $
 
 package org.graffiti.event;
 
+import org.graffiti.attributes.Attributable;
 import org.graffiti.graph.Edge;
 import org.graffiti.graph.Node;
 
@@ -21,7 +22,7 @@ import org.graffiti.graph.Node;
  * <code>NodeListener</code> interface.) Each such listener object gets a
  * <code>NodeEvent</code> containing the node event.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see NodeListener
  * @see AbstractNodeListener
@@ -70,6 +71,14 @@ public class NodeEvent
     public Node getNode()
     {
         return (Node) getSource();
+    }
+    
+    public Attributable getAttributeable() {
+    	if (getNode()!=null)
+    		return getNode();
+    	if (edge!=null)
+    		return edge;
+    	return null;
     }
 }
 
