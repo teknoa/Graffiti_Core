@@ -14,20 +14,27 @@ public class TransactionHashMap extends HashMap {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object put(Object key, Object value) {
+		
 		if (key==null || value==null)
 			return null;
 		Object oldValue = get(key);
+
 		
+		if (oldValue!=null && value!=null)
+			if (oldValue instanceof Node || oldValue instanceof Edge || oldValue instanceof Graph)
+				if (value instanceof Node || value instanceof Edge || value instanceof Graph)
+					if (oldValue!=value)
+						return null;
+
 		// in case events are at the same time about edges and nodes
 		// store change information about edges and nodes independently
 		if (value instanceof Edge && key instanceof Node) {
-			super.put(key, key);
 			key = value;
 		}
 		
-		if (oldValue==null || value instanceof Node || value instanceof Edge || value instanceof Graph)
+		if (oldValue==null || value instanceof Node || value instanceof Edge || value instanceof Graph) {
 			return super.put(key, value);
-		else {
+		} else {
 			if (oldValue instanceof Node || oldValue instanceof Edge || oldValue instanceof Graph) {
 				return oldValue;
 			} else {
@@ -49,7 +56,8 @@ public class TransactionHashMap extends HashMap {
 					}
 						
 				} else {
-					System.err.println(oldValue.getClass().getCanonicalName());
+					//Here we should handle attribute deletion events (value instanceof attribute)
+					System.err.println("unexpected event type: "+oldValue.getClass().getCanonicalName());
 					return super.put(key, value);
 				}
 			}

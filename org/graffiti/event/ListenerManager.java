@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ListenerManager.java,v 1.7 2009/09/11 12:28:37 morla Exp $
+// $Id: ListenerManager.java,v 1.8 2009/10/01 11:38:51 morla Exp $
 
 package org.graffiti.event;
 
@@ -34,7 +34,7 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  *
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 @SuppressWarnings("unchecked")
 public class ListenerManager {
@@ -458,6 +458,7 @@ public class ListenerManager {
 		} else {
 			// log objects that are (probably) affected
 			changedObjects.put(event.getAttributeable(), event.getSource());
+			changedObjects.put(event.getAttributeable(), event.getAttributeable());
 
 			if (event.getEdge() != null)
 				changedObjects.put(event.getAttributeable(), event.getEdge());

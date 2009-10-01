@@ -44,6 +44,7 @@ public enum PathComparisonResult {
 				return result;
 			}
 		}
+		result.setCommonPath(commonPath.toString());
 		return result;
 	}
 
