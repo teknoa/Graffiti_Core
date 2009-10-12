@@ -94,7 +94,6 @@ public class MarkComponent extends JComponent {
 			}});
 		t.start();
 		Timer t2 = new Timer(animationtime, new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				t.stop();
 				intensity=1;
