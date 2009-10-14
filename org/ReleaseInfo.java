@@ -312,6 +312,16 @@ public class ReleaseInfo {
 	private static boolean updateCheckRun = false;
 	private static String lastVersion = null;
 	
+	
+	public static UpdateInfoResult isUpdated() {
+		if (!updateCheckRun)
+			return UpdateInfoResult.UNKNOWN;
+		if (lastVersion!=null)
+			return UpdateInfoResult.UPDATED;
+		else
+			return UpdateInfoResult.NOT_UPDATED;
+	}
+	
 	/**
 	 * @param currentVersion
 	 * @return null, if not updated / "", if updated but old version is unknown

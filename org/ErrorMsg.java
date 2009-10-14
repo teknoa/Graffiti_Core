@@ -164,12 +164,20 @@ public class ErrorMsg {
 		while (p >= 0) {
 			String s = uni.substring(p + 1);
 			int p2 = s.indexOf(";"); //$NON-NLS-1$
-			String code = s.substring(1, p2);
+			String code = null;
+			try {
+				code = s.substring(1, p2);
+			} catch(Exception err) { 
+				System.err.println("Invalid String (Error Type 1): "+html);
+				ErrorMsg.addErrorMessage("Invalid String (Error Type 1): "+html);
+				break;
+			}
 			int ic;
 			try {
 				ic = Integer.parseInt(code);
 			} catch(Exception ee) {
-				System.err.println("Invalid String: "+html);
+				System.err.println("Invalid String (Error Type 2): "+html);
+				ErrorMsg.addErrorMessage("Invalid String (Error Type 2): "+html);
 				break;
 			}
 			char c = (char) ic;
