@@ -8,7 +8,11 @@ package org;
 
 
 
-
+/**
+ * 
+ * @author klukas
+ *
+ */
 public interface BackgroundTaskStatusProviderSupportingExternalCall 
 		extends BackgroundTaskStatusProvider {
 	public abstract void setCurrentStatusValueFine(double value);

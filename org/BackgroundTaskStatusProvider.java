@@ -5,6 +5,11 @@
  *******************************************************************************/
 package org;
 
+/**
+ * 
+ * @author klukas
+ *
+ */
 public interface BackgroundTaskStatusProvider {
 	/**
 	 * Returns the completion status. 

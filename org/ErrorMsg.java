@@ -21,6 +21,11 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+/**
+ * 
+ * @author klukas
+ *
+ */
 public class ErrorMsg {
     public static final String Unicode = "UTF-8";
     
