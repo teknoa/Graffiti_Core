@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: HashMapAttribute.java,v 1.9 2009/07/10 08:17:45 klukas Exp $
+// $Id: HashMapAttribute.java,v 1.10 2009/10/30 12:24:02 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -26,7 +26,7 @@ import org.ErrorMsg;
  * 'Color'-CollectionAttribute. The subattributes 'red', 'green' and 'blue'
  * are not mapped in this Attribute!
  *
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  *
  * @see CollectionAttribute
  * @see CompositeAttribute
@@ -117,8 +117,12 @@ public class HashMapAttribute
     public Object copy() {
    	 if (this.getClass()==HashMapAttribute.class) {
    		 HashMapAttribute ha = new HashMapAttribute(getId());
-   		 ha.setId(getId());
-   		 ha.setCollection(getCollection());
+   		 ha.setId(getId()); 
+   		 try {
+	   		 ha.setCollection(getCollection());
+   		 } catch(Exception e) {
+   			 ErrorMsg.addErrorMessage(e);
+   		 }
    		 return ha;
 		} else {
 			 try {

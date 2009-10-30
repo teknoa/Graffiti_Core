@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractGraph.java,v 1.3 2009/08/21 08:26:19 klukas Exp $
+// $Id: AbstractGraph.java,v 1.4 2009/10/30 12:24:09 klukas Exp $
 package org.graffiti.graph;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import org.graffiti.event.ListenerManager;
 /**
  * Provides further functionality for graphs.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *
  * @see Graph
  * @see AdjListGraph
@@ -582,11 +582,15 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 			Node source = hm.get(oldEdge.getSource());
 			Node target = hm.get(oldEdge.getTarget());
 			if (source==null || target==null) {
-				ErrorMsg.addErrorMessage("Node is NULL");
+				ErrorMsg.addErrorMessage("Src or Tgt node is NULL");
 			} else {
-				Edge newEdge = this.addEdge(source, target, oldEdge.isDirected(), col);
-				newEdge.setViewID(oldEdge.getViewID());
-				newElements.add(newEdge);
+				try {
+					Edge newEdge = this.addEdge(source, target, oldEdge.isDirected(), col);
+					newEdge.setViewID(oldEdge.getViewID());
+					newElements.add(newEdge);
+				} catch(Exception e) {
+					ErrorMsg.addErrorMessage(e);
+				}
 			}
 		}
 		return newElements;
