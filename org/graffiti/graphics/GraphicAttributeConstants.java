@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphicAttributeConstants.java,v 1.6 2008/10/08 17:26:48 klukas Exp $
+// $Id: GraphicAttributeConstants.java,v 1.7 2009/11/10 14:23:20 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -119,7 +119,10 @@ public interface GraphicAttributeConstants
 
     /** Constant used to specify the position of a label according to a node. */
     public static final String CENTERED = "c";
-
+    
+    /** Constant used to specify the position of a label according to a node. */
+    public static final String CENTERED_FIT = "cf";
+    
     /** Constant used to specify the position of a label according to a node. */
     public static final String BELOWRIGHT = "se";
 
