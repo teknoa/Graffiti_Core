@@ -71,7 +71,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.82 $
+ * @version $Revision: 1.83 $
  */
 public class AttributeHelper {
 
@@ -534,6 +534,7 @@ public class AttributeHelper {
 		idToNiceId.put("kegg_title", "KEGG: Map Title");
 		idToNiceId.put("kegg_reaction", "KEGG: Reaction ID");
 		idToNiceId.put("kegg_name", "KEGG: Kegg ID");
+		idToNiceId.put("kegg_name_old", "KEGG: Kegg ID (previous)");
 		idToNiceId.put("kegg_link", "KEGG: Reference");
 		idToNiceId.put("kegg_link_os", "KEGG (Organism-Specific): Reference");
 		idToNiceId.put("present", "KEGG: Presence in spec. Pathway");

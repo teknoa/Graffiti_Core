@@ -556,5 +556,15 @@ public class ErrorMsg {
 		}
 		return sb.toString();
 	}
+	/**
+	 * @param mapName
+	 * @return
+	 */
+	final static String[] numbers = new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+	public static String removeNumbersFromString(String s) {
+		for (String r : numbers)
+			 s= ErrorMsg.stringReplace(s, r, "");
+		return s;
+	}
 	
 }
