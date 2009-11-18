@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.10 2009/06/23 07:05:20 klukas Exp $
+// $Id: XMLHelper.java,v 1.11 2009/11/18 07:44:37 morla Exp $
 
 package org.graffiti.plugin;
 
@@ -15,15 +15,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 
 import org.ErrorMsg;
 import org.jdom.JDOMException;
@@ -202,6 +207,13 @@ public class XMLHelper {
 		}
 		return null;
 	}
+
+	public static void validate(Document doc, URL xsdLocation) throws Exception {
+        SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+        Schema schema = factory.newSchema(xsdLocation);
+        Validator validator = schema.newValidator();
+        validator.validate(new DOMSource(doc));
+    }
 }
 
 // ------------------------------------------------------------------------------
