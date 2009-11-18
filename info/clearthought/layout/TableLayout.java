@@ -2438,11 +2438,19 @@ public void invalidateLayout (Container target)
 		return result;
 	}
 	
-	public static JComponent getMultiSplitVerticalNonPrefHeight(
+	public static JPanel getMultiSplitVerticalNonPrefHeight(
 			Collection jComponentList, double h) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		result.setBackground(null);
+		setMultiSplitVerticalNonPrefHeight_Contents(jComponentList, h, result);
+		return result;
+	}
+
+
+
+	public static void setMultiSplitVerticalNonPrefHeight_Contents(
+			Collection jComponentList, double h, JPanel result) {
 		double[] height = new double[jComponentList.size()];
 		for (int i=0; i<height.length; i++)
 			height[i] = h;
@@ -2454,8 +2462,8 @@ public void invalidateLayout (Container target)
 			idx++;
 		}
 		result.validate();
-		return result;
 	}
+	
 	public static JComponent getMultiSplitVertical(
 			Collection jComponentList, int spaceBetween) {
 		JPanel result = new JPanel();
