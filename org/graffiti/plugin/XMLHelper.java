@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.11 2009/11/18 07:44:37 morla Exp $
+// $Id: XMLHelper.java,v 1.12 2009/11/26 13:26:44 morla Exp $
 
 package org.graffiti.plugin;
 
@@ -31,6 +31,7 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.ErrorMsg;
+import org.HelperClass;
 import org.jdom.JDOMException;
 import org.jdom.input.DOMBuilder;
 import org.jdom.output.Format;
@@ -45,7 +46,7 @@ import com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl;
 /**
  * Contains some (static) auxiliary methods for writing XML.
  */
-public class XMLHelper {
+public class XMLHelper implements HelperClass {
 	// ~ Static fields/initializers =============================================
 
 	/** Indicates whether or not indent XML elements. */

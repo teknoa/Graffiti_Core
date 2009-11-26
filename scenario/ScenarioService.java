@@ -16,11 +16,12 @@ import java.util.Date;
 
 import javax.swing.Action;
 
+import org.HelperClass;
 import org.ReleaseInfo;
 import org.graffiti.plugin.algorithm.Algorithm;
 import org.graffiti.plugin.parameter.Parameter;
 
-public class ScenarioService {
+public class ScenarioService implements HelperClass {
 	
 	private static Scenario currentScenario;
 	private static boolean recordingActive = false;

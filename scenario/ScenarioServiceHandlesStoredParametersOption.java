@@ -1,5 +1,7 @@
 package scenario;
 
-public interface ScenarioServiceHandlesStoredParametersOption {
+import org.HelperClass;
+
+public interface ScenarioServiceHandlesStoredParametersOption extends HelperClass {
 
 }

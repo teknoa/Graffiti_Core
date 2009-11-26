@@ -24,7 +24,7 @@ import java.util.List;
  * (c) 2004 IPK-Gatersleben
  *
  */
-public class ObjectAttributeService {
+public class ObjectAttributeService implements HelperClass {
 
     public static String objectToStringMappingPossible_StringPrefix = "$STRINGOBJECT$";
 

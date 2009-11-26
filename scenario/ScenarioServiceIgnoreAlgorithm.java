@@ -1,5 +1,7 @@
 package scenario;
 
-public interface ScenarioServiceIgnoreAlgorithm {
+import org.HelperClass;
+
+public interface ScenarioServiceIgnoreAlgorithm extends HelperClass {
 
 }

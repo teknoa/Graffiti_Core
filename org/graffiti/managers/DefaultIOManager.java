@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.11 2009/06/23 07:05:20 klukas Exp $
+// $Id: DefaultIOManager.java,v 1.12 2009/11/26 13:26:44 morla Exp $
 
 package org.graffiti.managers;
 
@@ -35,7 +35,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -182,6 +182,18 @@ public class DefaultIOManager implements IOManager {
 
 		}
 		return null;
+	}
+	
+	public Set<String> getGraphFileExtensions() {
+		Set<String> knownExt = new TreeSet<String>();
+		for (Iterator itr = inputSerializer.iterator(); itr.hasNext();) {
+			InputSerializer is = (InputSerializer) itr.next();
+			String[] ext = is.getExtensions();
+			for (int i = 0; i < ext.length; i++) {
+				knownExt.add(ext[i]);
+			}
+		}
+		return knownExt;
 	}
 
 	/*

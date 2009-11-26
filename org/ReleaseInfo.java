@@ -19,7 +19,7 @@ import java.util.HashSet;
 
 import javax.swing.JOptionPane;
 
-public class ReleaseInfo {
+public class ReleaseInfo implements HelperClass {
 	private static Release currentRelease = Release.DEBUG;
 
 	public static Release getRunningReleaseStatus() {

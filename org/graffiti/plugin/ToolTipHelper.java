@@ -7,6 +7,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import org.HelperClass;
+
 /**
  * @author C. Klukas
  *
@@ -15,7 +17,7 @@ import javax.swing.JPanel;
  * descriptive text. 
  * The first character of the toolTipText is changed to upper case.
  */
-public class ToolTipHelper {
+public class ToolTipHelper implements HelperClass {
 	public static void addToolTip(JComponent jcomp, String toolTipText) {
 		if (toolTipText==null) return;
 		toolTipText=toolTipText.trim();

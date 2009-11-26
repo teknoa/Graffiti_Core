@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class HomeFolder {
+public class HomeFolder implements HelperClass {
 
 	public static String getTemporaryFolder() {
 		String s = ReleaseInfo.getAppFolder()+ReleaseInfo.getFileSeparator()+"tmp";

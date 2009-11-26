@@ -8,7 +8,7 @@
  */
 package org;
 
-public class ObjectRef {
+public class ObjectRef implements HelperClass {
 
 	private Object data;
 	private String toStringVal = null; 

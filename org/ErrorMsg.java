@@ -26,7 +26,7 @@ import javax.swing.SwingUtilities;
  * @author klukas
  *
  */
-public class ErrorMsg {
+public class ErrorMsg implements HelperClass {
     public static final String Unicode = "UTF-8";
     
 	private static LinkedList<String> errorMessages=new LinkedList<String>();

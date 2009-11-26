@@ -22,7 +22,7 @@ import javax.swing.filechooser.FileFilter;
  * (c) 2006 IPK-Gatersleben
  *
  */
-public class OpenFileDialogService {
+public class OpenFileDialogService implements HelperClass {
 
 	private static JFileChooser openDialog = null;
 

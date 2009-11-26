@@ -71,9 +71,9 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.83 $
+ * @version $Revision: 1.84 $
  */
-public class AttributeHelper {
+public class AttributeHelper implements HelperClass {
 
 	private static HashMap<String, String> idToNiceId = new HashMap<String, String>();
 	private static boolean idInit = false;

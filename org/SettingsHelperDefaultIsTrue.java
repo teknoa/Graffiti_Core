@@ -12,7 +12,7 @@ import javax.swing.Timer;
 /**
  * @author klukas
  */
-public class SettingsHelperDefaultIsTrue {
+public class SettingsHelperDefaultIsTrue implements HelperClass {
 
 	public boolean isEnabled(String name) {
 		return !new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_disabled_"+encode(name)).exists();

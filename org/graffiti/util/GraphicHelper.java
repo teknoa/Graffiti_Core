@@ -5,17 +5,19 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphicHelper.java,v 1.1 2007/05/31 12:56:03 klukas Exp $
+// $Id: GraphicHelper.java,v 1.2 2009/11/26 13:26:44 morla Exp $
 
 package org.graffiti.util;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
+import org.HelperClass;
+
 /**
  *
  */
-public class GraphicHelper
+public class GraphicHelper implements HelperClass 
 {
     //~ Methods ================================================================
 
