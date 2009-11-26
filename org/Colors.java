@@ -4,7 +4,7 @@
  * 
  *******************************************************************************/
 /* Copyright (c) 2003 IPK Gatersleben
- * $Id: Colors.java,v 1.4 2009/06/23 07:05:20 klukas Exp $
+ * $Id: Colors.java,v 1.5 2009/11/26 14:44:08 klukas Exp $
  */
 
 /*
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class Colors
+public class Colors implements HelperClass
 {
 
     /**
