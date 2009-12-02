@@ -13,6 +13,7 @@ package org;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
@@ -71,7 +72,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.84 $
+ * @version $Revision: 1.85 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -3739,6 +3740,16 @@ public class AttributeHelper implements HelperClass {
 
 	public static Rectangle2D.Double getNodeRectangle(Node node) {
 		Rectangle2D.Double result = new Rectangle2D.Double();
+		Vector2d left = AttributeHelper.getPositionVec2d(node);
+		Vector2d size = AttributeHelper.getSize(node);
+		left.x-=size.x/2d;
+		left.y-=size.y/2d;
+		result.setFrame(left.x, left.y, size.x, size.y);
+		return result;
+	}
+	
+	public static Rectangle getNodeRectangleAWT(Node node) {
+		Rectangle result = new Rectangle();
 		Vector2d left = AttributeHelper.getPositionVec2d(node);
 		Vector2d size = AttributeHelper.getSize(node);
 		left.x-=size.x/2d;
