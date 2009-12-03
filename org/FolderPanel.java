@@ -1201,5 +1201,14 @@ public class FolderPanel extends JComponent {
 			}
 		};
 	}
+
 	
+	public static ImageIcon getLeftOrRightIcon(boolean left) {
+		ClassLoader cl = FolderPanel.class.getClassLoader();
+		String path = FolderPanel.class.getPackage().getName().replace('.', '/')+"/images";
+		if (left)
+			return new ImageIcon(cl.getResource(path + "/large_left.png"));
+		else
+			return new ImageIcon(cl.getResource(path+ "/large_right.png"));
+	}
 }

@@ -33,14 +33,20 @@ public class NamedColorSet {
 		ArrayList<Color> lightColors = new ArrayList<Color>();
 		ArrayList<Color> intenseColors = new ArrayList<Color>();
 		
+		boolean generate = false;
+		
 		for (String group : groups) {
 			if (unusedColorsLight.isEmpty() || unusedColorsIntense.isEmpty()) {
 				System.out.println("Generate named colors (round "+generationRound+")");
-				for (Color c : org.Colors.get(6*generationRound, 0.4f))
+				for (Color c : org.Colors.get(7*generationRound, 0.4f))
 					unusedColorsLight.push(c);
-				for (Color c : org.Colors.get(6*generationRound, 0.7f))
+				for (Color c : org.Colors.get(7*generationRound, 0.7f))
 					unusedColorsIntense.push(c);
 				generationRound++;
+				generate = true;
+				
+				for (String k : groups)
+					System.out.println(k);
 			}
 		
 			if (!name2colorLight.containsKey(group))
