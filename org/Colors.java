@@ -4,7 +4,7 @@
  * 
  *******************************************************************************/
 /* Copyright (c) 2003 IPK Gatersleben
- * $Id: Colors.java,v 1.5 2009/11/26 14:44:08 klukas Exp $
+ * $Id: Colors.java,v 1.6 2009/12/03 16:27:49 klukas Exp $
  */
 
 /*
@@ -39,7 +39,6 @@ public class Colors implements HelperClass
     public static ArrayList<Color> get(int numberOfColors, double saturation) {
     	return get(numberOfColors, (float)saturation);
     }
-    
     
     /**
      * creates the specified number of color objects which can be
