@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractGraph.java,v 1.5 2009/12/10 18:22:51 klukas Exp $
+// $Id: AbstractGraph.java,v 1.6 2009/12/10 21:31:38 klukas Exp $
 package org.graffiti.graph;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import org.graffiti.event.ListenerManager;
 /**
  * Provides further functionality for graphs.
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *
  * @see Graph
  * @see AdjListGraph
@@ -184,7 +184,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 		for (Edge e : el)
 			deleteEdge(e);
 		for (Edge e : el)
-			addEdge(e.getSource(), e.getTarget(), e.isDirected(), e.getAttributes());
+			addEdgeCopy(e, e.getSource(), e.getTarget());
 	}
 
 	/**
@@ -215,6 +215,11 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 			}
 		}
 		setBoolean("directed", directed);
+		ArrayList<Edge> el = new ArrayList<Edge>(getEdges());
+		for (Edge e : el)
+			deleteEdge(e);
+		for (Edge e : el)
+			addEdgeCopy(e, e.getSource(), e.getTarget());
 	}
 
 	/**
