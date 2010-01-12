@@ -8,7 +8,7 @@ import javax.swing.ListCellRenderer;
 /**
  * @author klukas
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class ObjectListParameter
     extends AbstractSingleParameter
@@ -16,6 +16,7 @@ public class ObjectListParameter
    @SuppressWarnings("unchecked")
    private Collection possibleValues;
    private ListCellRenderer renderer;
+   private boolean left_aligned;
 
 	@SuppressWarnings("unchecked")
 	public ObjectListParameter(Object val, String name, String description, Collection possibleValues) {
@@ -42,6 +43,14 @@ public class ObjectListParameter
 	
 	public ListCellRenderer getRenderer() {
 		return renderer;
+	}
+
+	public boolean isLeftAligned() {
+		return left_aligned;
+	}
+	
+	public void setLeftAligned(boolean left_aligned) {
+		this.left_aligned = left_aligned;
 	}
 }
 
