@@ -1211,4 +1211,34 @@ public class FolderPanel extends JComponent {
 		else
 			return new ImageIcon(cl.getResource(path+ "/large_right.png"));
 	}
+	
+	public int getMaxRowCount()
+	{
+		return this.maxRowCount;
+	}
+	public int getCurrentPage()
+	{
+		return this.currentPage;
+	}
+	public void setCurrentPage(int page)
+	{
+		// page valid?
+		int maxPage = this.guiComponentRows.size() / this.maxRowCount - ((this.guiComponentRows.size() % this.maxRowCount == 0) ? 1 : 0);
+		if(maxPage < page)
+			// page too big
+			page = maxPage;
+		
+		if(page < 0 || this.currentPage == page)
+			// invalid or redundant
+			return;
+		
+		// set it!
+		this.currentPage = page;
+		this.layoutRows();
+		
+		for (ActionListener al : collapse_listeners)
+			al.actionPerformed(new ActionEvent(this, condensedState ? 0 : 1, "collapseevent"));
+		
+		// all OK!
+	}
 }
