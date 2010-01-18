@@ -19,4 +19,5 @@ public interface BackgroundTaskStatusProviderSupportingExternalCall
 	public boolean wantsToStop();
 	public abstract void setCurrentStatusText1(String status);
 	public abstract void setCurrentStatusText2(String status);
+	public abstract void setCurrentStatusValueFineAdd(double smallProgressStep);
 }

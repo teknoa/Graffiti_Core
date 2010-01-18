@@ -567,4 +567,18 @@ public class ErrorMsg implements HelperClass {
 		return s;
 	}
 	
+
+	public static String GetNumbersFromString(String s) {
+		StringBuilder res = new StringBuilder();
+		for (Character c : s.toCharArray()) {
+			for (String n : numbers) {
+				if (n.equals(c+"")) {
+					res.append(n);
+					break;
+				}
+			}
+		}
+		return res.toString();
+	}
+	
 }
