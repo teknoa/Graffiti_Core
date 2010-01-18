@@ -1002,6 +1002,7 @@ public class FolderPanel extends JComponent {
 		if (pc != null && pc instanceof JDialog) {
 			JDialog jf = (JDialog) pc;
 			jf.pack();
+			jf.pack();
 			jf.repaint();
 		}
 		if (pc != null && pc instanceof JFrame) {
