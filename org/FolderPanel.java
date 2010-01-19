@@ -214,9 +214,12 @@ public class FolderPanel extends JComponent {
 	public void removeGuiComponentRow(GuiRow guiRow, boolean updateLayout) {
 		synchronized (guiComponentRows) {
 			guiComponentRows.remove(guiRow);
-			if (updateLayout)
-				layoutRows();
 		}
+		synchronized (guiComponentInvisibleRows) {
+			guiComponentInvisibleRows.remove(guiRow);
+		}
+		if (updateLayout)
+			layoutRows();
 	}
 
 	public void exchangeGuiComponentRow(GuiRow guiRow, GuiRow newRow, boolean updateLayout) {
