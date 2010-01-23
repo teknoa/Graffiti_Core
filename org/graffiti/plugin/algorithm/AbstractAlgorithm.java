@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAlgorithm.java,v 1.4 2009/07/30 12:19:23 klukas Exp $
+// $Id: AbstractAlgorithm.java,v 1.5 2010/01/23 08:45:21 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -113,6 +113,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
 		this.graph = null;
 		this.parameters = null;
 		this.actionEvent = null;
+		this.selection = null;
 	}
 
 	public boolean isLayoutAlgorithm() {
@@ -130,6 +131,8 @@ public abstract class AbstractAlgorithm implements Algorithm {
 	public boolean mayWorkOnMultipleGraphs() {
 		return false;
 	}
+	
+	
 }
 
 //------------------------------------------------------------------------------

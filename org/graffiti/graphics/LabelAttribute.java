@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LabelAttribute.java,v 1.10 2009/07/17 11:43:24 klukas Exp $
+// $Id: LabelAttribute.java,v 1.11 2010/01/23 08:45:17 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -33,7 +33,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public abstract class LabelAttribute extends HashMapAttribute implements
 		GraphicAttributeConstants {
@@ -66,14 +66,14 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 			return (new JLabel(getLabel())).getPreferredSize().width;
 	}
 
-	private JLabel lastLabel = null;
+//	private JLabel lastLabel = null;
 
 	private static final int defaultSize = 12; // new
 												// JLabel().getFont().getSize();
 	private static final String defaultFont = getDefaultFont();
 
 	public void setLastLabel(JLabel lastLabel) {
-		this.lastLabel = lastLabel;
+//		this.lastLabel = lastLabel;
 	}
 
 	private static final String defaultFontName = "Arial";
@@ -299,54 +299,54 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		}
 	}
 
-	public void wordWrap() {
-		if (!(getAttributable() instanceof Node))
-			return;
-		if (lastLabel == null)
-			lastLabel = new JLabel(getLabel());
-		String fontName = getFontName();
-		int fontStyleInt = getFontStyleJava();
-		;
-		int fontSize = getFontSize();
-		lastLabel.setFont(new Font(fontName, fontStyleInt, fontSize));
-
-		FontMetrics fm = lastLabel.getFontMetrics(lastLabel.getFont());
-		int containerWidth = (int) AttributeHelper
-				.getSize((Node) getAttributable()).x;
-
-		BreakIterator boundary = BreakIterator.getWordInstance();
-
-		boundary.setText(getLabel(true));
-
-		StringBuffer trial = new StringBuffer();
-		StringBuffer real = new StringBuffer("<html>");
-
-		int start = boundary.first();
-		for (int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary
-				.next()) {
-			String word = getLabel(true).substring(start, end);
-			trial.append(word);
-			int trialWidth = SwingUtilities.computeStringWidth(fm, trial
-					.toString());
-			if (trialWidth > containerWidth) {
-				trial = new StringBuffer(word);
-				if (word.length() > 2 && !real.toString().endsWith("-")
-						&& !real.toString().endsWith("("))
-					real.append("<br>");
-			}
-			real.append(word);
-		}
-
-		String result = real.toString();
-		result = ErrorMsg.stringReplace(result, "<html><br>", "<html>");
-		result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
-		result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
-		if (result.indexOf("<br>") <= 0) {
-			result = ErrorMsg.stringReplace(result, "<html>", "");
-			result = ErrorMsg.stringReplace(result, "</html>", "");
-		}
-		setLabel(result);
-	}
+//	public void wordWrap() {
+//		if (!(getAttributable() instanceof Node))
+//			return;
+//		if (lastLabel == null)
+//			lastLabel = new JLabel(getLabel());
+//		String fontName = getFontName();
+//		int fontStyleInt = getFontStyleJava();
+//		;
+//		int fontSize = getFontSize();
+//		lastLabel.setFont(new Font(fontName, fontStyleInt, fontSize));
+//
+//		FontMetrics fm = lastLabel.getFontMetrics(lastLabel.getFont());
+//		int containerWidth = (int) AttributeHelper
+//				.getSize((Node) getAttributable()).x;
+//
+//		BreakIterator boundary = BreakIterator.getWordInstance();
+//
+//		boundary.setText(getLabel(true));
+//
+//		StringBuffer trial = new StringBuffer();
+//		StringBuffer real = new StringBuffer("<html>");
+//
+//		int start = boundary.first();
+//		for (int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary
+//				.next()) {
+//			String word = getLabel(true).substring(start, end);
+//			trial.append(word);
+//			int trialWidth = SwingUtilities.computeStringWidth(fm, trial
+//					.toString());
+//			if (trialWidth > containerWidth) {
+//				trial = new StringBuffer(word);
+//				if (word.length() > 2 && !real.toString().endsWith("-")
+//						&& !real.toString().endsWith("("))
+//					real.append("<br>");
+//			}
+//			real.append(word);
+//		}
+//
+//		String result = real.toString();
+//		result = ErrorMsg.stringReplace(result, "<html><br>", "<html>");
+//		result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
+//		result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
+//		if (result.indexOf("<br>") <= 0) {
+//			result = ErrorMsg.stringReplace(result, "<html>", "");
+//			result = ErrorMsg.stringReplace(result, "</html>", "");
+//		}
+//		setLabel(result);
+//	}
 
 	private String getLabel(boolean stripHTML) {
 		String result = getLabel();
@@ -396,7 +396,55 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		Color resultCol = colorAtt.getColor();
 		return resultCol;
 	}
-}
+
+	public void wordWrap() {
+		if (!(getAttributable() instanceof Node))
+			return;
+		JLabel lastLabel = new JLabel(getLabel());
+		String fontName = getFontName();
+		int fontStyleInt = getFontStyleJava();
+		;
+		int fontSize = getFontSize();
+		lastLabel.setFont(new Font(fontName, fontStyleInt, fontSize));
+	
+		FontMetrics fm = lastLabel.getFontMetrics(lastLabel.getFont());
+		int containerWidth = (int) AttributeHelper
+				.getSize((Node) getAttributable()).x;
+	
+		BreakIterator boundary = BreakIterator.getWordInstance();
+	
+		boundary.setText(getLabel(true));
+	
+		StringBuffer trial = new StringBuffer();
+		StringBuffer real = new StringBuffer("<html>");
+	
+		int start = boundary.first();
+		for (int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary
+				.next()) {
+			String word = getLabel(true).substring(start, end);
+			trial.append(word);
+			int trialWidth = SwingUtilities.computeStringWidth(fm, trial
+					.toString());
+			if (trialWidth > containerWidth) {
+				trial = new StringBuffer(word);
+				if (word.length() > 2 && !real.toString().endsWith("-")
+						&& !real.toString().endsWith("("))
+					real.append("<br>");
+			}
+			real.append(word);
+		}
+	
+		String result = real.toString();
+		result = ErrorMsg.stringReplace(result, "<html><br>", "<html>");
+		result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
+		result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
+		if (result.indexOf("<br>") <= 0) {
+			result = ErrorMsg.stringReplace(result, "<html>", "");
+			result = ErrorMsg.stringReplace(result, "</html>", "");
+		}
+		setLabel(result);
+	}
+	}
 
 // ------------------------------------------------------------------------------
 // end of file
