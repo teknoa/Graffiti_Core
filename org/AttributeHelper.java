@@ -72,7 +72,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.85 $
+ * @version $Revision: 1.86 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -2796,6 +2796,13 @@ public class AttributeHelper implements HelperClass {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
 				.getAttribute(EdgeGraphicAttribute.GRAPHICS);
 		ega.getLineMode().setDashArray(dashArray);
+	}
+
+	public static void setDashArray(Edge edge, float[] dashArray, float dashphase) {
+		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
+				.getAttribute(EdgeGraphicAttribute.GRAPHICS);
+		ega.getLineMode().setDashArray(dashArray);
+		ega.getLineMode().setDashPhase(dashphase);
 	}
 
 	public static void setShapeEllipse(Node node) {
