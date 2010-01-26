@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.12 2009/11/26 13:26:44 morla Exp $
+// $Id: DefaultIOManager.java,v 1.13 2010/01/26 14:15:43 morla Exp $
 
 package org.graffiti.managers;
 
@@ -35,7 +35,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -160,7 +160,7 @@ public class DefaultIOManager implements IOManager {
 			String[] ext = is.getExtensions();
 			extsearch: for (int i = 0; i < ext.length; i++)
 				if (ext[i].equalsIgnoreCase(extSearch)) {
-					System.out.println("Possible reader: "+is.getClass().getCanonicalName());
+//					System.out.println("Possible reader: "+is.getClass().getCanonicalName());
 					ins.add(is);
 					break extsearch;
 				}
@@ -171,7 +171,7 @@ public class DefaultIOManager implements IOManager {
 			try {
 				InputStream inps = in.getNewInputStream();
 				if (is.validFor(inps)) {
-					System.out.println(ins.size()+" input serializers for file extension "+extSearch+". Selected "+is.getClass().getCanonicalName());
+//					System.out.println(ins.size()+" input serializers for file extension "+extSearch+". Selected "+is.getClass().getCanonicalName());
 					return is;
 				}
 			} catch(FileNotFoundException fne) {
