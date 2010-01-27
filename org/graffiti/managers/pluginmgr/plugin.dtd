@@ -19,7 +19,7 @@
   * the name of the plugin
   * the main class of the plugin (including classpath)
   * the version of the plugin -->
-<!ELEMENT plugindesc (name, main, version, optional?, optionaldefault?, priority?, available)>
+<!ELEMENT plugindesc (name, main, version, optional?, optionaldefault?, priority?, feedname?, feedurl?, available)>
 
 <!-- a short name of the plugin. e.g.: myplugin -->
 <!ELEMENT name (#PCDATA)*>
@@ -45,6 +45,10 @@
 <!ELEMENT optionaldefault (#PCDATA)*>
 
 <!ELEMENT priority (#PCDATA)*>
+
+<!ELEMENT feedname (#PCDATA)*>
+
+<!ELEMENT feedurl (#PCDATA)*>
 
 <!-- the dependencies on other plugins that must be satisfied in order to
   have the plugin properly run -->

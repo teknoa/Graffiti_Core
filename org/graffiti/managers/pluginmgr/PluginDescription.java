@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDescription.java,v 1.9 2009/07/17 20:52:49 klukas Exp $
+// $Id: PluginDescription.java,v 1.10 2010/01/27 14:15:42 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
 /**
  * Contains a meta data of a plugin.
  *
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class PluginDescription
 {
@@ -303,6 +303,10 @@ public class PluginDescription
 	}
 
 	private boolean isPriorityPlugin = false;
+
+	private String rssFeedURL;
+
+	private String rssFeedName;
 	
 	public boolean isPriorityPlugin() {
 		return isPriorityPlugin;
@@ -313,6 +317,22 @@ public class PluginDescription
 			isPriorityPlugin = true;
 		else
 			isPriorityPlugin = false;
+	}
+
+	public boolean hasRSSfeedDefined() {
+		return rssFeedURL!=null && rssFeedName!=null;
+	}
+
+	public RSSfeedDefinition getFeed() {
+		return new RSSfeedDefinition(rssFeedURL, rssFeedName);
+	}
+	
+	public void setRSSfeedName(String name) {
+		this.rssFeedName = name;
+	}
+	
+	public void setRSSfeedURL(String url) {
+		this.rssFeedURL = url;
 	}
 }
 
