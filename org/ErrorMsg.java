@@ -396,6 +396,16 @@ public class ErrorMsg implements HelperClass {
 			}
 		}
 	}
+	
+	public static boolean areApploadingAndFinishActionsCompleted() {
+		if (!isAppLoadingCompleted())
+			return false;
+		boolean result;
+		synchronized(finishedListeners) {
+			result = finishedListeners.size()==0;
+		}
+		return result;
+	}
 
 	
 	public static void addOnApploadingFinishedAction(

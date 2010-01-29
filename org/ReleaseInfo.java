@@ -33,7 +33,7 @@ public class ReleaseInfo implements HelperClass {
 	private static HashSet<FeatureSet> enabledFeatures = new HashSet<FeatureSet>();
 
 	public static void enableFeature(FeatureSet fs) {
-		System.out.println("Enable feature " + fs.toString());
+//		System.out.println("Enable feature " + fs.toString());
 		enabledFeatures.add(fs);
 	}
 
