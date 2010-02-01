@@ -72,7 +72,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.86 $
+ * @version $Revision: 1.87 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -1431,113 +1431,115 @@ public class AttributeHelper implements HelperClass {
 	 * 
 	 * @author Christian Klukas
 	 */
-	public synchronized static void setAttribute(Attributable attributable, String path,
+	public static void setAttribute(Attributable attributable, String path,
 			String attributeName, Object attributeValue) {
-		if (!hasAttribute(attributable, path)) {
-			addAttributeFolder(attributable, path);
-		}
-		HashMapAttribute a = (HashMapAttribute) getAttribute(attributable, path);
-		if (attributeValue instanceof Attribute) {
-			try {
-				Attribute b = a.getAttribute(path + attributeSeparator
-						+ attributeName);
-				b.setValue(((Attribute) attributeValue).getValue());
-			} catch (AttributeNotFoundException e) {
-				a.add((Attribute) attributeValue);
+		synchronized(attributable) {
+			if (!hasAttribute(attributable, path)) {
+				addAttributeFolder(attributable, path);
 			}
-			return;
-		}
-		if (attributeValue instanceof Boolean) {
-			try {
-				attributable.setBoolean(path + attributeSeparator
-						+ attributeName, ((Boolean) attributeValue)
-						.booleanValue());
+			HashMapAttribute a = (HashMapAttribute) getAttribute(attributable, path);
+			if (attributeValue instanceof Attribute) {
+				try {
+					Attribute b = a.getAttribute(path + attributeSeparator
+							+ attributeName);
+					b.setValue(((Attribute) attributeValue).getValue());
+				} catch (AttributeNotFoundException e) {
+					a.add((Attribute) attributeValue);
+				}
 				return;
-			} catch (Exception e) {
-
 			}
-		}
-		if (attributeValue instanceof Color) {
-			try {
-				ColorAttribute colorAtt = null;
-				colorAtt = (ColorAttribute) attributable.getAttribute(path
-						+ attributeSeparator + attributeName);
-				colorAtt.setColor((Color) attributeValue);
-				return;
-			} catch (Exception e) {
-
-			}
-		}
-		if (attributeValue instanceof Byte) {
-			attributable.setByte(path + attributeSeparator + attributeName,
-					((Byte) attributeValue).byteValue());
-			return;
-		}
-		if (attributeValue instanceof Double) {
-			try {
-				if (((Double) attributeValue).doubleValue() == Double.NaN)
+			if (attributeValue instanceof Boolean) {
+				try {
+					attributable.setBoolean(path + attributeSeparator
+							+ attributeName, ((Boolean) attributeValue)
+							.booleanValue());
 					return;
-				attributable.setDouble(path + attributeSeparator
-						+ attributeName, ((Double) attributeValue)
-						.doubleValue());
-			} catch (IllegalArgumentException e) {
-				String s = "" + ((Double) attributeValue).doubleValue();
-				if (s.endsWith(".0"))
-					s = s.substring(0, s.length() - 2);
-				attributable.setString(path + attributeSeparator
-						+ attributeName, s);
+				} catch (Exception e) {
+	
+				}
 			}
-			return;
-		}
-		if (attributeValue instanceof Float) {
-			if (((Float) attributeValue).floatValue() == Float.NaN)
+			if (attributeValue instanceof Color) {
+				try {
+					ColorAttribute colorAtt = null;
+					colorAtt = (ColorAttribute) attributable.getAttribute(path
+							+ attributeSeparator + attributeName);
+					colorAtt.setColor((Color) attributeValue);
+					return;
+				} catch (Exception e) {
+	
+				}
+			}
+			if (attributeValue instanceof Byte) {
+				attributable.setByte(path + attributeSeparator + attributeName,
+						((Byte) attributeValue).byteValue());
 				return;
-			attributable.setFloat(path + attributeSeparator + attributeName,
-					((Float) attributeValue).floatValue());
-			return;
-		}
-		if (attributeValue instanceof Integer) {
-			if (((Integer) attributeValue).intValue() == Integer.MAX_VALUE)
+			}
+			if (attributeValue instanceof Double) {
+				try {
+					if (((Double) attributeValue).doubleValue() == Double.NaN)
+						return;
+					attributable.setDouble(path + attributeSeparator
+							+ attributeName, ((Double) attributeValue)
+							.doubleValue());
+				} catch (IllegalArgumentException e) {
+					String s = "" + ((Double) attributeValue).doubleValue();
+					if (s.endsWith(".0"))
+						s = s.substring(0, s.length() - 2);
+					attributable.setString(path + attributeSeparator
+							+ attributeName, s);
+				}
 				return;
-			attributable.setInteger(path + attributeSeparator + attributeName,
-					((Integer) attributeValue).intValue());
-			return;
-		}
-		if (attributeValue instanceof Long) {
-			if (((Long) attributeValue).intValue() == Long.MAX_VALUE)
+			}
+			if (attributeValue instanceof Float) {
+				if (((Float) attributeValue).floatValue() == Float.NaN)
+					return;
+				attributable.setFloat(path + attributeSeparator + attributeName,
+						((Float) attributeValue).floatValue());
 				return;
-			attributable.setLong(path + attributeSeparator + attributeName,
-					((Long) attributeValue).longValue());
-			return;
-		}
-		if (attributeValue instanceof Short) {
-			if (((Short) attributeValue).shortValue() == Short.MAX_VALUE)
+			}
+			if (attributeValue instanceof Integer) {
+				if (((Integer) attributeValue).intValue() == Integer.MAX_VALUE)
+					return;
+				attributable.setInteger(path + attributeSeparator + attributeName,
+						((Integer) attributeValue).intValue());
 				return;
-			attributable.setShort(path + attributeSeparator + attributeName,
-					((Short) attributeValue).shortValue());
-			return;
+			}
+			if (attributeValue instanceof Long) {
+				if (((Long) attributeValue).intValue() == Long.MAX_VALUE)
+					return;
+				attributable.setLong(path + attributeSeparator + attributeName,
+						((Long) attributeValue).longValue());
+				return;
+			}
+			if (attributeValue instanceof Short) {
+				if (((Short) attributeValue).shortValue() == Short.MAX_VALUE)
+					return;
+				attributable.setShort(path + attributeSeparator + attributeName,
+						((Short) attributeValue).shortValue());
+				return;
+			}
+			if (attributeValue instanceof String) {
+				attributable.setString(path + attributeSeparator + attributeName,
+						(String) attributeValue);
+				return;
+			}
+			// If unknown type, then add a ObjectAttribute
+			org.graffiti.attributes.ObjectAttribute myNewAttribute;
+			try {
+				myNewAttribute = (org.graffiti.attributes.ObjectAttribute) a
+						.getAttribute(attributeName);
+			} catch (AttributeNotFoundException e) {
+				myNewAttribute = new org.graffiti.attributes.ObjectAttribute(
+						attributeName);
+				a.add(myNewAttribute, true);
+			} catch (ClassCastException cce) {
+				a.remove(attributeName);
+				myNewAttribute = new org.graffiti.attributes.ObjectAttribute(
+						attributeName);
+				a.add(myNewAttribute, true);
+			}
+			myNewAttribute.setValue(attributeValue);
 		}
-		if (attributeValue instanceof String) {
-			attributable.setString(path + attributeSeparator + attributeName,
-					(String) attributeValue);
-			return;
-		}
-		// If unknown type, then add a ObjectAttribute
-		org.graffiti.attributes.ObjectAttribute myNewAttribute;
-		try {
-			myNewAttribute = (org.graffiti.attributes.ObjectAttribute) a
-					.getAttribute(attributeName);
-		} catch (AttributeNotFoundException e) {
-			myNewAttribute = new org.graffiti.attributes.ObjectAttribute(
-					attributeName);
-			a.add(myNewAttribute, true);
-		} catch (ClassCastException cce) {
-			a.remove(attributeName);
-			myNewAttribute = new org.graffiti.attributes.ObjectAttribute(
-					attributeName);
-			a.add(myNewAttribute, true);
-		}
-		myNewAttribute.setValue(attributeValue);
 	}
 
 	/**

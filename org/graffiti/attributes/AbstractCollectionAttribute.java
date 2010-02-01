@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.10 2009/08/08 20:43:11 klukas Exp $
+// $Id: AbstractCollectionAttribute.java,v 1.11 2010/02/01 18:11:04 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -20,7 +20,7 @@ import org.graffiti.plugin.XMLHelper;
  * instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
  *
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			implements CollectionAttribute {
@@ -186,6 +186,8 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	public void add(Attribute a) throws AttributeExistsException,
 				FieldAlreadySetException {
 		if (a == null)
+			return;
+		if (a.getId() == null)
 			return;
 		
 		assert a != null;
