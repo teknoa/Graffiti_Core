@@ -66,7 +66,7 @@ public class HomeFolder implements HelperClass {
 		}
 	}
 
-	public static boolean deleteTemporaryFolder() {
+	private static boolean deleteTemporaryFolder() {
 		return dirDelete(new File(getTemporaryFolder()));
 		
 	}
