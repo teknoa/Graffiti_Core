@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListGraph.java,v 1.5 2009/08/08 16:21:15 klukas Exp $
+// $Id: AdjListGraph.java,v 1.6 2010/02/04 20:35:30 morla Exp $
 
 package org.graffiti.graph;
 
@@ -29,7 +29,7 @@ import org.graffiti.event.ListenerManager;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
  * @see Graph
  * @see AbstractGraph
@@ -539,6 +539,9 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 			if (idName.lastIndexOf(File.separator) > 0)
 				res = idName.substring(idName.lastIndexOf(File.separator)
 						+ File.separator.length());
+			else if (idName.lastIndexOf("/") > 0)
+				res = idName.substring(idName.lastIndexOf("/")
+						+ "/".length());
 			else
 				res = idName;
 			if (modified)
