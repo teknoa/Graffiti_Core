@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListGraph.java,v 1.6 2010/02/04 20:35:30 morla Exp $
+// $Id: AdjListGraph.java,v 1.7 2010/02/05 08:40:34 morla Exp $
 
 package org.graffiti.graph;
 
@@ -29,7 +29,7 @@ import org.graffiti.event.ListenerManager;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * 
  * @see Graph
  * @see AbstractGraph
@@ -161,7 +161,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		super(listenerManager);
 		this.addGraph(g);
 	}
-
 	/**
 	 * Constructs a new instance of an <code>AdjListGraph</code> from an
 	 * instance of any <code>Graph</code> implementation. Copies all nodes and
@@ -527,13 +526,10 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	}
 
 	public String getName(boolean fullName) {
-		String mark = "*";
-		if (ErrorMsg.isMac())
-			mark = "";
 		if (idName == null)
-			return "[not saved] "+(modified ? mark : "");
+			return "[not saved "+id+"]";
 		if (fullName)
-			return idName+(modified ? mark : "");
+			return idName;
 		else {
 			String res;
 			if (idName.lastIndexOf(File.separator) > 0)
@@ -544,10 +540,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 						+ "/".length());
 			else
 				res = idName;
-			if (modified)
-				return res + mark;
-			else
-				return res;
+			return res;
 		}
 	}
 
