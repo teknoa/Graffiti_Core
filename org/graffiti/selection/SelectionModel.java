@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: SelectionModel.java,v 1.4 2010/01/26 14:15:43 morla Exp $
+// $Id: SelectionModel.java,v 1.5 2010/02/08 10:43:13 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -18,7 +18,7 @@ import java.util.Iterator;
  * Contains a list of selections and a reference to the current selection.
  *
  * @author flierl
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class SelectionModel
 {
@@ -187,7 +187,7 @@ public class SelectionModel
     /**
      * Informs the registered listeners that the active session has changed.
      */
-    public synchronized void selectionChanged()
+    public void selectionChanged()
     {
     	if (selections==null || activeSelection==null)
     		return;
