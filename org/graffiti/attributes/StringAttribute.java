@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: StringAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
+// $Id: StringAttribute.java,v 1.4 2010/02/09 11:19:27 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -17,7 +17,7 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a String.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class StringAttribute
     extends AbstractAttribute {
@@ -72,7 +72,7 @@ public class StringAttribute
         return newInstance;    
     }
     
-    public static synchronized Attribute getTypedStringAttribute(String id, String value) {
+    public static Attribute getTypedStringAttribute(String id, String value) {
         Attribute newInstance=null;
         Class ct = typedAttributesID2TypeForNodes.get(id);
         if (ct!=null) {
@@ -195,7 +195,7 @@ public class StringAttribute
     /**
      * @author klukas
      */
-    public static synchronized void putAttributeType(String id, Class attributeType) {
+    public static void putAttributeType(String id, Class attributeType) {
        if (typedAttributesID2TypeForNodes.containsKey(id))
       	 typedAttributesID2TypeForNodes.remove(id);
    	 typedAttributesID2TypeForNodes.put(id, attributeType);

@@ -192,7 +192,7 @@ public class ErrorMsg implements HelperClass {
 		return uni;
 	}
 	
-	public synchronized static String UnicodeToHtml(String unicodeText) {
+	public static String UnicodeToHtml(String unicodeText) {
 	    StringBuffer result = new StringBuffer();
 	    char[] characters = unicodeText.toCharArray();
         for (int i=0; i<characters.length; i++) {
@@ -208,7 +208,7 @@ public class ErrorMsg implements HelperClass {
         return result.toString();
 	}
 	
-	public synchronized static String UnicodeToHtml(String unicodeText, HashSet<Character> badChars) {
+	public static String UnicodeToHtml(String unicodeText, HashSet<Character> badChars) {
 	    StringBuffer result = new StringBuffer();
 	    char[] characters = unicodeText.toCharArray();
         for (int i=0; i<characters.length; i++) {
@@ -224,7 +224,7 @@ public class ErrorMsg implements HelperClass {
         return result.toString();
 	}
 	
-	public synchronized static String UnicodeToURLsyntax(String unicodeText) {
+	public static String UnicodeToURLsyntax(String unicodeText) {
 	    StringBuffer result = new StringBuffer();
 	    char[] characters = unicodeText.toCharArray();
         for (int i=0; i<characters.length; i++) {
@@ -389,10 +389,12 @@ public class ErrorMsg implements HelperClass {
 	public static void setAppLoadingCompleted(boolean status) {
 		apploadingCompleted = status;
 		if (isAppLoadingCompleted()) {
+			Collection<Runnable> fl;
 			synchronized(finishedListeners) {
-				for (Runnable r : finishedListeners) {
-					SwingUtilities.invokeLater(r);
-				}
+				fl = new ArrayList<Runnable>(finishedListeners);
+			}
+			for (Runnable r : fl) {
+				SwingUtilities.invokeLater(r);
 			}
 		}
 	}
@@ -578,7 +580,7 @@ public class ErrorMsg implements HelperClass {
 	}
 	
 
-	public static String GetNumbersFromString(String s) {
+	public static String getNumbersFromString(String s) {
 		StringBuilder res = new StringBuilder();
 		for (Character c : s.toCharArray()) {
 			for (String n : numbers) {

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.23 2010/01/27 14:23:18 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.24 2010/02/09 11:19:27 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -38,7 +38,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -750,26 +750,30 @@ public class DefaultPluginManager
             addPluginManagerListener((PluginManagerListener) plugin);
         }
 
+        ArrayList<PluginManagerListener> pml = new ArrayList<PluginManagerListener>();
         synchronized (pluginManagerListeners) {
-            for(Iterator i = pluginManagerListeners.iterator(); i.hasNext();)
-            {
-                PluginManagerListener listener = (PluginManagerListener) i.next();
-
-                if(plugin != null) {
-                	try {
-                		listener.pluginAdded(plugin, desc);
-                	} catch(Exception e) {
-                	    ErrorMsg.addErrorMessage(e);
-                	}
-                }
-            }
+        	pml.addAll(pluginManagerListeners);
 		}
-
+        
+        for(PluginManagerListener listener : pml)
+        {
+            if(plugin != null) {
+            	try {
+            		listener.pluginAdded(plugin, desc);
+            	} catch(Exception e) {
+            	    ErrorMsg.addErrorMessage(e);
+            	}
+            }
+        }
     }
     
 	public synchronized Collection<RSSfeedDefinition> getPluginFeeds() {
 		ArrayList<RSSfeedDefinition> feeds = new ArrayList<RSSfeedDefinition>();
-		for (PluginEntry pe : pluginEntries.values()) {
+		ArrayList<PluginEntry> pes = new ArrayList<PluginEntry>();
+		synchronized (pluginEntries) {
+			pes.addAll(pluginEntries.values());
+		}
+		for (PluginEntry pe : pes) {
 			if (pe.getDescription().hasRSSfeedDefined())
 				feeds.add(pe.getDescription().getFeed());
 		}
