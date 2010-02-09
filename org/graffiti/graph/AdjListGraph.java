@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListGraph.java,v 1.7 2010/02/05 08:40:34 morla Exp $
+// $Id: AdjListGraph.java,v 1.8 2010/02/09 15:28:30 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -16,7 +16,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import org.ErrorMsg;
 import org.graffiti.attributes.CollectionAttribute;
 import org.graffiti.event.ListenerManager;
 
@@ -29,7 +28,7 @@ import org.graffiti.event.ListenerManager;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * 
  * @see Graph
  * @see AbstractGraph

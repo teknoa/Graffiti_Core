@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: OptAdjListGraph.java,v 1.3 2009/06/29 21:45:10 klukas Exp $
+// $Id: OptAdjListGraph.java,v 1.4 2010/02/09 15:28:30 klukas Exp $
 package org.graffiti.graph;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import org.graffiti.util.MultipleIterator;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *
  * @see org.graffiti.graph.Graph
  * @see org.graffiti.graph.AbstractGraph
@@ -413,6 +413,7 @@ public class OptAdjListGraph
         }
 
         assert (noDirectedEdges + noUndirectedEdges) == edges.size();
+        setModified(true);
 
         return edge;
     }
@@ -451,6 +452,8 @@ public class OptAdjListGraph
         }
 
         assert (noDirectedEdges + noUndirectedEdges) == edges.size();
+        
+        setModified(true);
 
         return edge;
     }
@@ -466,6 +469,7 @@ public class OptAdjListGraph
     {
         assert node != null;
         nodes.add(node);
+        setModified(true);
     }
 
     /**
@@ -488,6 +492,7 @@ public class OptAdjListGraph
         this.edges = new ArrayList<Edge>();
         noUndirectedEdges = 0;
         noDirectedEdges = 0;
+        setModified(true);
         assert (noDirectedEdges + noUndirectedEdges) == edges.size();
     }
 
@@ -519,6 +524,8 @@ public class OptAdjListGraph
         ((AdjListNode) (e.getSource())).removeOutEdge(e);
         ((AdjListNode) (e.getTarget())).removeInEdge(e);
         assert (noDirectedEdges + noUndirectedEdges) == edges.size();
+        
+        setModified(true);
     }
 
     /**
@@ -547,6 +554,8 @@ public class OptAdjListGraph
 
         nodes.remove(idx);
         ((AdjListNode) n).setGraphToNull();
+        
+        setModified(true);
     }
 }
 
