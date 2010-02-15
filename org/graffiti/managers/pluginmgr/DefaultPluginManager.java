@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.24 2010/02/09 11:19:27 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.25 2010/02/15 13:32:15 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -35,10 +35,12 @@ import org.graffiti.util.PluginHelper;
 import org.graffiti.util.ProgressViewer;
 import org.graffiti.util.StringSplitter;
 
+import sun.awt.geom.AreaOp.AddOp;
+
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.24 $
+ * @version $Revision: 1.25 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -777,6 +779,7 @@ public class DefaultPluginManager
 			if (pe.getDescription().hasRSSfeedDefined())
 				feeds.add(pe.getDescription().getFeed());
 		}
+		
 		return feeds;
 	}
 

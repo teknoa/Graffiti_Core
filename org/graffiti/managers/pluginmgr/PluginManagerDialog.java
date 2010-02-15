@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginManagerDialog.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
+// $Id: PluginManagerDialog.java,v 1.4 2010/02/15 13:32:15 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -52,7 +51,7 @@ import org.graffiti.util.PluginHelper;
 /**
  * DOCUMENT ME!
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class PluginManagerDialog
     extends JDialog
@@ -61,9 +60,6 @@ public class PluginManagerDialog
     //~ Static fields/initializers =============================================
 
     private static final long serialVersionUID = 1L;
-
-    /** The logger for the current class. */
-    private static final Logger logger = Logger.getLogger(PluginManagerDialog.class.getName());
 
     //~ Instance fields ========================================================
 
@@ -251,8 +247,9 @@ public class PluginManagerDialog
      * Displays this dialog.
      */
     @Override
-	public void show()
+	public void setVisible(boolean show)
     {
+    	if (show) {
         pluginsTableModel.updateModel();
         updateGUI();
 
@@ -260,8 +257,8 @@ public class PluginManagerDialog
         {
             pluginsSelectionModel.setLeadSelectionIndex(0);
         }
-
-        super.show();
+    	}
+        super.setVisible(show);
     }
 
     /**
@@ -572,18 +569,21 @@ public class PluginManagerDialog
     /**
      * The list model of the dialog's jlist component.
      *
-     * @version $Revision: 1.3 $
+     * @version $Revision: 1.4 $
      */
     protected class PluginsTableModel
         extends AbstractTableModel
     {
-        /** DOCUMENT ME! */
-        private List pluginEntries;
+		private static final long serialVersionUID = 1L;
+
+        @SuppressWarnings("unchecked")
+		private List pluginEntries;
 
         /**
          * Constructs a new table model from the plugin managers plugin list.
          */
-        public PluginsTableModel()
+        @SuppressWarnings("unchecked")
+		public PluginsTableModel()
         {
             pluginEntries = new ArrayList();
             updateModel();
@@ -605,7 +605,8 @@ public class PluginManagerDialog
          *
          * @return the class at the given column.
          */
-        @Override
+        @SuppressWarnings("unchecked")
+		@Override
 		public Class getColumnClass(int columnIndex)
         {
             return getValueAt(0, columnIndex).getClass();
@@ -673,13 +674,6 @@ public class PluginManagerDialog
             return pluginEntries.size();
         }
 
-        /**
-         * DOCUMENT ME!
-         *
-         * @param value DOCUMENT ME!
-         * @param rowIndex DOCUMENT ME!
-         * @param columnIndex DOCUMENT ME!
-         */
         @Override
 		public void setValueAt(Object value, int rowIndex, int columnIndex)
         {
@@ -734,10 +728,8 @@ public class PluginManagerDialog
             return pluginEntries.toString();
         }
 
-        /**
-         * DOCUMENT ME!
-         */
-        public void updateModel()
+        @SuppressWarnings("unchecked")
+		public void updateModel()
         {
             pluginEntries.clear();
 
@@ -755,12 +747,11 @@ public class PluginManagerDialog
     }
 
     /**
-     * DOCUMENT ME!
-     *
      * @author $Author: klukas $
-     * @version $Revision: 1.3 $ $Date: 2009/06/23 07:05:20 $
+     * @version $Revision: 1.4 $ $Date: 2010/02/15 13:32:15 $
      */
-    class EntryComparator
+    @SuppressWarnings("unchecked")
+	class EntryComparator
         implements Comparator
     {
         /**

@@ -19,7 +19,7 @@
   * the name of the plugin
   * the main class of the plugin (including classpath)
   * the version of the plugin -->
-<!ELEMENT plugindesc (name, main, version, optional?, optionaldefault?, priority?, feedname?, feedurl?, available)>
+<!ELEMENT plugindesc (name, main, version, optional?, optionaldefault?, priority?, feedname?, feedurl?, compatibility?, available)>
 
 <!-- a short name of the plugin. e.g.: myplugin -->
 <!ELEMENT name (#PCDATA)*>
@@ -35,6 +35,8 @@
 
 <!-- a brief description of the plugin -->
 <!ELEMENT description (#PCDATA)*>
+
+<!ELEMENT compatibility (#PCDATA)*>
 
 <!-- the place where the dependent plugin can be obtained; this can be an
   address, an url etc.; the ideal case would be to place the url of the

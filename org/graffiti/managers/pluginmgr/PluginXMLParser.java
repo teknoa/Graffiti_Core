@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginXMLParser.java,v 1.6 2010/01/27 14:15:42 morla Exp $
+// $Id: PluginXMLParser.java,v 1.7 2010/02/15 13:32:15 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Logger;
 
+import org.ErrorMsg;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,7 +26,7 @@ import org.xml.sax.SAXException;
  * The XML parser for the plugin descriptions.  The plugin description
  * (<tt>plugin.xml</tt>) file is validated by the <tt>plugin.dtd</tt>.
  *
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class PluginXMLParser
 {
@@ -65,13 +66,7 @@ public class PluginXMLParser
         parser.setValidating(true);
         parser.setErrorHandler(new PluginXMLParserErrorHandler());
 
-        Log log = LogFactory.getLog(this.getClass());
-		
-//        if (log.getClass().getCanonicalName().indexOf("NoOp")<=0)
-//      	  System.out.println("Logger: "+log.getClass().getCanonicalName());
-        
         parser.setLogger(new NoOpLog());
-        // parser.setLogger(new Jdk14Logger("pluginXMLParserLogger"));
 
         // register an alternative plugin.dtd URL
         parser.register(PUBLIC_DTD_IDENTIFIER, PLUGIN_DTD_LOCAL);
@@ -84,6 +79,7 @@ public class PluginXMLParser
 
         parser.addCallMethod("plugin/plugindesc/name", "setName", 0);
         parser.addCallMethod("plugin/plugindesc/main", "setMain", 0);
+        parser.addCallMethod("plugin/plugindesc/compatibility", "setCompatibleVersion", 0);
         parser.addCallMethod("plugin/plugindesc/version", "setVersion", 0);
         parser.addCallMethod("plugin/plugindesc/available", "setAvailable", 0);
         parser.addCallMethod("plugin/plugindesc/optional", "setIsOptional", 0);
@@ -99,8 +95,8 @@ public class PluginXMLParser
         parser.addCallMethod("plugin/deps/plugindesc/name", "setName", 0);
         parser.addCallMethod("plugin/deps/plugindesc/main", "setMain", 0);
         parser.addCallMethod("plugin/deps/plugindesc/version", "setVersion", 0);
-        parser.addCallMethod("plugin/deps/plugindesc/avaliable",
-            "setAvailable", 0);
+        
+        parser.addCallMethod("plugin/deps/plugindesc/avaliable", "setAvailable", 0);
 
         // add the parsed plugin dependency to the list of dependencies
         parser.addSetNext("plugin/deps/plugindesc", "addPluginDependency",
@@ -145,6 +141,7 @@ public class PluginXMLParser
         }
         catch(SAXException saxe)
         {
+        	ErrorMsg.addErrorMessage(saxe);
             return null;
         }
 
@@ -154,7 +151,8 @@ public class PluginXMLParser
         }
         catch(SAXException saxe)
         {
-            return null;
+        	ErrorMsg.addErrorMessage(saxe);
+        	return null;
         }
 
         return description;

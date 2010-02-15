@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDescription.java,v 1.10 2010/01/27 14:15:42 morla Exp $
+// $Id: PluginDescription.java,v 1.11 2010/02/15 13:32:15 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
 /**
  * Contains a meta data of a plugin.
  *
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public class PluginDescription
 {
@@ -56,6 +56,8 @@ public class PluginDescription
 
     /** The version of this plugin. */
     private String version;
+    
+    private String compatibleVersion;
 
     //~ Constructors ===========================================================
 
@@ -218,6 +220,27 @@ public class PluginDescription
     {
         return version;
     }
+    
+    /**
+     * Sets the version for compatibility.
+     *
+     * @param version The version to set
+     */
+    public void setCompatibleVersion(String v)
+    {
+        this.compatibleVersion = v;
+    }
+
+    /**
+     * Returns the version for compatibility.
+     *
+     * @return Version
+     */
+    public String getCompatibleVersion()
+    {
+        return compatibleVersion;
+    }
+
 
     /**
      * Adds the given dependency to the list of dependencies.
