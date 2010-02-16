@@ -21,6 +21,8 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import com.sun.corba.se.impl.oa.poa.AOMEntry;
+
 /**
  * 
  * @author klukas
@@ -378,17 +380,18 @@ public class ErrorMsg implements HelperClass {
 		}
 	}
 	
-	private static boolean apploadingCompleted = false;
+	private static ApplicationStatus apploadingCompleted = ApplicationStatus.INITALIZATION;
 
 	private static Collection<Runnable> finishedListeners = new ArrayList<Runnable>();
+	private static Collection<Runnable> finishedAddonLoadingListeners = new ArrayList<Runnable>();
 
-	public static boolean isAppLoadingCompleted() {
+	public static ApplicationStatus getAppLoadingStatus() {
 		return apploadingCompleted;
 	}
 	
-	public static void setAppLoadingCompleted(boolean status) {
+	public static void setAppLoadingCompleted(ApplicationStatus status) {
 		apploadingCompleted = status;
-		if (isAppLoadingCompleted()) {
+		if (apploadingCompleted==ApplicationStatus.PROGRAM_LOADING_FINISHED) {
 			Collection<Runnable> fl;
 			synchronized(finishedListeners) {
 				fl = new ArrayList<Runnable>(finishedListeners);
@@ -396,11 +399,30 @@ public class ErrorMsg implements HelperClass {
 			for (Runnable r : fl) {
 				SwingUtilities.invokeLater(r);
 			}
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					finishedListeners.clear();
+				}
+			});
+		}
+		if (apploadingCompleted==ApplicationStatus.ADDONS_LOADED) {
+			Collection<Runnable> fl;
+			synchronized(finishedAddonLoadingListeners) {
+				fl = new ArrayList<Runnable>(finishedAddonLoadingListeners);
+			}
+			for (Runnable r : fl) {
+				SwingUtilities.invokeLater(r);
+			}
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					finishedAddonLoadingListeners.clear();
+				}
+			});
 		}
 	}
 	
 	public static boolean areApploadingAndFinishActionsCompleted() {
-		if (!isAppLoadingCompleted())
+		if (getAppLoadingStatus()==ApplicationStatus.INITALIZATION)
 			return false;
 		boolean result;
 		synchronized(finishedListeners) {
@@ -410,9 +432,9 @@ public class ErrorMsg implements HelperClass {
 	}
 
 	
-	public static void addOnApploadingFinishedAction(
+	public static void addOnAppLoadingFinishedAction(
 			Runnable actionListener) {
-		if (isAppLoadingCompleted()) {
+		if (getAppLoadingStatus()!=ApplicationStatus.INITALIZATION) {
 			SwingUtilities.invokeLater(actionListener);
 		} else {
 			synchronized(finishedListeners) {
@@ -591,6 +613,13 @@ public class ErrorMsg implements HelperClass {
 			}
 		}
 		return res.toString();
+	}
+	
+	public static void addOnAppAndAddOnLoadingFinishedAction(Runnable runnable) {
+		if (getAppLoadingStatus()==ApplicationStatus.ADDONS_LOADED)
+			runnable.run();
+		else
+			finishedAddonLoadingListeners.add(runnable);
 	}
 	
 }
