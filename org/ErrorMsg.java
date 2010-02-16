@@ -615,7 +615,7 @@ public class ErrorMsg implements HelperClass {
 		return res.toString();
 	}
 	
-	public static void addOnAppAndAddOnLoadingFinishedAction(Runnable runnable) {
+	public static void addOnAddonLoadingFinishedAction(Runnable runnable) {
 		if (getAppLoadingStatus()==ApplicationStatus.ADDONS_LOADED)
 			runnable.run();
 		else
