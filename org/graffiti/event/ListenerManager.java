@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ListenerManager.java,v 1.10 2010/02/17 14:15:18 klukas Exp $
+// $Id: ListenerManager.java,v 1.11 2010/02/17 15:30:25 klukas Exp $
 
 package org.graffiti.event;
 
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
 
 import org.BackgroundTaskStatusProvider;
@@ -35,7 +36,7 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  *
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 @SuppressWarnings("unchecked")
 public class ListenerManager {
@@ -981,16 +982,17 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			Iterator it = delayedAttributeListenerList.iterator();
-
-			while (it.hasNext()) {
-				((AttributeListener) it.next()).preAttributeAdded(event);
+			LinkedList<AttributeListener> ll = new LinkedList<AttributeListener>();
+			ll.addAll(delayedAttributeListenerList);
+			for (AttributeListener l : ll) {
+				l.preAttributeAdded(event);
 			}
 
-			it = alltimeAttributeListenerList.iterator();
-
-			while (it.hasNext()) {
-				((AttributeListener) it.next()).preAttributeAdded(event);
+			ll.clear();
+			ll.addAll(alltimeAttributeListenerList);
+			
+			for (AttributeListener l : ll) {
+				l.preAttributeAdded(event);
 			}
 		} else {
 			// log objects that are (probably) affected
