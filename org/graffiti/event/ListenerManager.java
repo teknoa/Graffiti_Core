@@ -5,11 +5,12 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ListenerManager.java,v 1.9 2010/02/09 11:19:27 klukas Exp $
+// $Id: ListenerManager.java,v 1.10 2010/02/17 14:15:18 klukas Exp $
 
 package org.graffiti.event;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -34,7 +35,7 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  *
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 @SuppressWarnings("unchecked")
 public class ListenerManager {
@@ -286,7 +287,8 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
 		if (transactionsActive == 0) {
-			for (AttributeListener al : delayedAttributeListenerList) {
+			Collection<AttributeListener> list = new ArrayList<AttributeListener>(delayedAttributeListenerList);
+			for (AttributeListener al : list) {
 				al.postAttributeAdded(event);
 			}
 		} else {
