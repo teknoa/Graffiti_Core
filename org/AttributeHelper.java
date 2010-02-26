@@ -39,6 +39,7 @@ import java.util.Map.Entry;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import org.color.ColorUtil;
 import org.graffiti.attributes.Attributable;
 import org.graffiti.attributes.Attribute;
 import org.graffiti.attributes.AttributeNotFoundException;
@@ -72,7 +73,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.88 $
+ * @version $Revision: 1.89 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -2296,7 +2297,8 @@ public class AttributeHelper implements HelperClass {
 			"yellow green" // 9ACD32
 	};
 
-	public static final Color[] knownColors = { new Color(0xFFF0F8FF), // aliceblue
+	public static final Color[] knownColors = {
+			new Color(0xFFF0F8FF), // aliceblue
 			new Color(0xFFFAEBD7), // antiquewhite
 			new Color(0xFF00FFFF), // aqua
 			new Color(0xFF7FFFD4), // aquamarine
@@ -2483,47 +2485,25 @@ public class AttributeHelper implements HelperClass {
 		}
 		return ifUnkown;
 	}
+	
+
 
 	public static String getColorName(Color attrColor) {
 		if (attrColor == null)
 			return "not set (null)";
-		int r = attrColor.getRed();
-		int g = attrColor.getGreen();
-		int b = attrColor.getBlue();
-		float[] hsbVals = new float[3];
-		float[] hsbValsTest = new float[3];
-		Color.RGBtoHSB(r, g, b, hsbVals);
+		
 		int nearest = -1;
 		int i = 0;
-		float diff = Float.MAX_VALUE;
+		double diff = Double.MAX_VALUE;
 		for (Color testColor : knownColors) {
-			int r0 = testColor.getRed();
-			int g0 = testColor.getGreen();
-			int b0 = testColor.getBlue();
-			float dr, dg, db;
-			dr = r - r0;
-			dg = g - g0;
-			db = b - b0;
-			// float tDiff = (float)Math.sqrt ( 0.3*( dr * dr ) + 0.59*( dg * dg
-			// ) + 0.11*( db * db ) );
-			float tDiff = (float) Math.sqrt((dr * dr) + (dg * dg) + (db * db));
+			double tDiff = ColorUtil.deltaE2000(attrColor, testColor);
 			if (tDiff < diff) {
 				nearest = i;
 				diff = tDiff;
 			}
 			i++;
 		}
-		if (hsbVals[1] < 0.05) {
-			if (hsbVals[2] > 0.9)
-				return "white";
-			if (hsbVals[2] < 0.1)
-				return "black";
-			if (hsbVals[2] < 0.4)
-				return "dark gray";
-			if (hsbVals[2] > 0.7)
-				return "light gray";
-			return "gray";
-		} else if (nearest >= 0) {
+		if (nearest >= 0) {
 			return knownColorNames[nearest];
 		} else
 			return "";
