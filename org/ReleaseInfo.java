@@ -87,7 +87,9 @@ public class ReleaseInfo implements HelperClass {
 				else
 					return false;
 			case MetaCrop_ACCESS:
+			case RIMAS_ACCESS:
 				return false; // enabled by add-on
+				
 			case DBE_ACCESS:
 				return false;
 			case DATA_CARD_ACCESS:

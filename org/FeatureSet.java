@@ -31,5 +31,6 @@ public enum FeatureSet {
 	AGLET_NETWORK, 
 	TOOLTIPS, 
 	SBGN, 
-	MacroRecorder
+	MacroRecorder, 
+	RIMAS_ACCESS
 }
