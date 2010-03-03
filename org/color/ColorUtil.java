@@ -9,11 +9,11 @@
 
 package org.color;
 
+import static org.junit.Assert.assertEquals;
+
 import java.awt.Color;
 
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * @author klukas
@@ -39,6 +39,16 @@ public class ColorUtil {
 		assertEquals(63.308, cie.getL(),  0.001);
 		assertEquals(40.951, cie.getA(), 0.001);
 		assertEquals(70.696, cie.getB(), 0.001);
+		
+		cx1 = cie.getColorXYZ();
+		assertEquals(42.652, cx1.x, 0.001);
+		assertEquals(31.958, cx1.y, 0.001);
+		assertEquals(3.921, cx1.z, 0.001);
+		
+		c1 = cx1.getColor();
+		assertEquals(240, c1.getRed(), 0.001);
+		assertEquals(120, c1.getGreen(), 0.001);
+		assertEquals(0, c1.getBlue(), 0.001);
 	}
 	
 	public static ColorXYZ colorRGB2XYZ(double R, double G, double B) {

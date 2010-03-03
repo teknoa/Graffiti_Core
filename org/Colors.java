@@ -4,7 +4,7 @@
  * 
  *******************************************************************************/
 /* Copyright (c) 2003 IPK Gatersleben
- * $Id: Colors.java,v 1.6 2009/12/03 16:27:49 klukas Exp $
+ * $Id: Colors.java,v 1.7 2010/03/03 13:36:21 klukas Exp $
  */
 
 /*
@@ -112,10 +112,10 @@ public class Colors implements HelperClass
     }
     
     public static Color[] getAlphaColors(int numberOfColors, int alpha) {
-    	Collection r = get(numberOfColors);
+    	Collection<Color> r = get(numberOfColors);
     	Color[] result = new Color[r.size()];
     	int i=0;
-    	for (Iterator it=r.iterator(); it.hasNext();) {
+    	for (Iterator<Color> it=r.iterator(); it.hasNext();) {
     		Color t = (Color) it.next();
     		Color c = new Color(t.getRed(), t.getGreen(), t.getBlue(), alpha);
     		result[i++]=c;
@@ -124,10 +124,10 @@ public class Colors implements HelperClass
     }
     
     public static Color[] getColors(int numberOfColors) {
-    	Collection r = get(numberOfColors);
+    	Collection<Color> r = get(numberOfColors);
     	Color[] result = new Color[r.size()];
     	int i=0;
-    	for (Iterator it=r.iterator(); it.hasNext();) {
+    	for (Iterator<Color> it=r.iterator(); it.hasNext();) {
     		Color t = (Color) it.next();
     		Color c = new Color(t.getRed(), t.getGreen(), t.getBlue());
     		result[i++]=c;

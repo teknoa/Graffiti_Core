@@ -66,4 +66,26 @@ public class Color_CIE_Lab {
 		return b;
 	}
 
+	public ColorXYZ getColorXYZ() {
+		double var_Y = ( l + 16 ) / 116d;
+		double var_X = a / 500d + var_Y;
+		double var_Z = var_Y - b / 200d;
+
+		if ( Math.pow(var_Y, 3d) > 0.008856 ) var_Y = Math.pow(var_Y,3);
+		else                      var_Y = ( var_Y - 16d / 116d ) / 7.787d;
+		if ( Math.pow(var_X, 3d) > 0.008856 ) var_X = Math.pow(var_X,3);
+		else                      var_X = ( var_X - 16 / 116 ) / 7.787;
+		if ( Math.pow(var_Z,3) > 0.008856 ) var_Z = Math.pow(var_Z,3);
+		else                      var_Z = ( var_Z - 16 / 116 ) / 7.787d;
+
+		double ref_X =  95.047;  // Observer= 2°, Illuminant= D65
+		double ref_Y = 100.000;
+		double ref_Z = 108.883;
+
+		double X = ref_X * var_X;     //ref_X =  95.047     Observer= 2°, Illuminant= D65
+		double Y = ref_Y * var_Y;     //ref_Y = 100.000
+		double Z = ref_Z * var_Z;     //ref_Z = 108.883
+		
+		return new ColorXYZ(X, Y, Z);
+	}
 }
