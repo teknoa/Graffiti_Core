@@ -8,6 +8,7 @@ package org;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -484,6 +485,29 @@ public class ErrorMsg implements HelperClass {
 		}
 		return null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static void findChildComponents(Component c, Class searchClass, ArrayList<Object> result) {
+		if (c==null)
+			return;
+		// System.out.println(c.getClass().getCanonicalName());
+		if (c.getClass()==searchClass)
+			result.add(c);
+		else {
+			try {
+				Object o = c.getClass().asSubclass(searchClass);
+				if (o!=null)
+					result.add(o);
+			} catch(Exception err) {
+				// Component c is not of desired type
+			}
+		}
+		if (c instanceof Container)
+		for (Component jj : ((Container)c).getComponents()) {
+			findChildComponents(jj, searchClass, result);
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static Object findParentComponent(Component c, Class searchClass) {
 		if (c==null)

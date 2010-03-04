@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractSingleParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
+// $Id: AbstractSingleParameter.java,v 1.3 2010/03/04 13:07:41 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -18,7 +18,7 @@ import org.graffiti.plugin.XMLHelper;
 /**
  * Implements functions that are common in all SingleParameters.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class AbstractSingleParameter
     implements SingleParameter
@@ -37,7 +37,11 @@ public abstract class AbstractSingleParameter
     /** The name of the parameter. */
     private String name;
 
+	private boolean left_aligned;
+
     //~ Constructors ===========================================================
+    
+    
 
     /**
      * Constructs a new abstract single parameter class.
@@ -176,7 +180,14 @@ public abstract class AbstractSingleParameter
 	public JComponent getIcon() {
 		return null;
 	}
-    
+
+	public boolean isLeftAligned() {
+		return left_aligned;
+	}
+	
+	public void setLeftAligned(boolean left_aligned) {
+		this.left_aligned = left_aligned;
+	}
     
 }
 

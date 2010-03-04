@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: BooleanParameter.java,v 1.5 2009/06/29 20:26:20 klukas Exp $
+// $Id: BooleanParameter.java,v 1.6 2010/03/04 13:07:41 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -17,7 +17,7 @@ import scenario.ProvidesScenarioSupportCommand;
 /**
  * Parameter that contains a <code>Boolean</code> value.
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class BooleanParameter
     extends AbstractSingleParameter
@@ -27,8 +27,8 @@ public class BooleanParameter
 
     /** The value of this parameter. */
     private Boolean value = null;
-	private boolean left_aligned;
-
+	private BooleanParameter[] dependentParameters;
+	
     //~ Constructors ===========================================================
 
     /**
@@ -124,13 +124,7 @@ public class BooleanParameter
         return getStandardXML(value.booleanValue() ? "true" : "false");
     }
 
-	public boolean isLeftAligned() {
-		return left_aligned;
-	}
 	
-	public void setLeftAligned(boolean left_aligned) {
-		this.left_aligned = left_aligned;
-	}
 
 	public String getScenarioCommand() {
 		return "new BooleanParameter("+
@@ -143,6 +137,16 @@ public class BooleanParameter
 		return res;
 	}
 
+	/**
+	 * @param booleanParameters
+	 */
+	public void addDependentParameters(BooleanParameter[] booleanParameters) {
+		this.dependentParameters = booleanParameters;
+	}
+
+	public BooleanParameter[] getDependentParameters() {
+		return dependentParameters;
+	}
 }
 
 //------------------------------------------------------------------------------
