@@ -30,6 +30,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -1159,8 +1160,8 @@ public class FolderPanel extends JComponent {
 				String c2 = "";
 				JComponent left = findMyComponent(gr.left);
 				JComponent right = findMyComponent(gr.right);
-				if (left != null && left instanceof JButton) {
-					JButton jb = (JButton) left;
+				if (left != null && left instanceof AbstractButton) {
+					AbstractButton jb = (AbstractButton) left;
 					c1 = jb.getText().toUpperCase();
 				} else
 				if (left != null && left instanceof JLabel) {
@@ -1172,8 +1173,8 @@ public class FolderPanel extends JComponent {
 					getSubText(left, sb);
 					c1 = sb.toString().toUpperCase();
 				}
-				if (right != null && right instanceof JButton) {
-					JButton jb = (JButton) right;
+				if (right != null && right instanceof AbstractButton) {
+					AbstractButton jb = (AbstractButton) right;
 					c2 = jb.getText().toUpperCase();
 				} else
 				if (right != null && right instanceof JLabel) {
