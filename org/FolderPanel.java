@@ -270,6 +270,14 @@ public class FolderPanel extends JComponent {
 	}
 
 	public void layoutRows() {
+		if (!SwingUtilities.isEventDispatchThread()) {
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					layoutRows();
+					return;
+				}
+			});
+		};
 		synchronized (guiComponentRows) {
 			checkCondensedState();
 			removeAll();
