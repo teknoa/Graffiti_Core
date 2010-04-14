@@ -341,13 +341,12 @@ public class FolderPanel extends JComponent {
 			
 			rowPanel.setLayout(new TableLayout(size));
 	
-			
 			for (GuiRow gr : workSet) {
 				if (rowSpacing > 0 || colSpacing > 0) {
-					rowPanel.add(getBorderedComponent(gr.left, 0, 0, rowSpacing,
+					rowPanel.add(getBorderedComponent(gr.left, 0, 0, gr!=workSet.get(workSet.size()-1) ? rowSpacing : 0,
 							colSpacing), "0," + row + ", l"); // left orientation
 					rowPanel.add(
-							getBorderedComponent(gr.right, 0, 0, rowSpacing, 0),
+							getBorderedComponent(gr.right, 0, 0, gr!=workSet.get(workSet.size()-1) ? rowSpacing : 0, 0),
 							"1," + row);
 				} else {
 					rowPanel.add(gr.left, "0," + row + ", l"); // left orientation
