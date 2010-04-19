@@ -1,5 +1,7 @@
 package org;
 
+import static org.junit.Assert.assertEquals;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -8,6 +10,8 @@ import java.io.IOException;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.Timer;
+
+import org.junit.Test;
 
 /**
  * @author klukas
@@ -20,6 +24,11 @@ public class SettingsHelperDefaultIsTrue implements HelperClass {
 
 	protected static String encode(String name) {
 		return ErrorMsg.removeHTMLtags(name).replaceAll(" ", "_").replaceAll("/", "_");
+	}
+	
+	@Test
+	public void testEncode() {
+		assertEquals("Setting Encode", "test_test_2", encode("test/test 2"));
 	}
 
 	public void setEnabled(String name, boolean b) {
