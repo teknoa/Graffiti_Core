@@ -73,7 +73,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.90 $
+ * @version $Revision: 1.91 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -136,7 +136,7 @@ public class AttributeHelper implements HelperClass {
 			r.exec(cmd + " " + par);
 		} catch (IOException e) {
 			try {
-				String cmd = "gnome-open";
+				String cmd = "gnome-open"; // xdg-open
 				String par = url;
 				r.exec(new String[] { cmd, par });
 			} catch (Exception e2) {
