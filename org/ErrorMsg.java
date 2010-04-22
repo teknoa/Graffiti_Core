@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JComponent;
@@ -381,7 +382,7 @@ public class ErrorMsg implements HelperClass {
 		}
 	}
 	
-	private static ApplicationStatus apploadingCompleted = ApplicationStatus.INITALIZATION;
+	private static ApplicationStatus apploadingCompleted = ApplicationStatus.INITIALIZATION;
 
 	private static Collection<Runnable> finishedListeners = new ArrayList<Runnable>();
 	private static Collection<Runnable> finishedAddonLoadingListeners = new ArrayList<Runnable>();
@@ -423,7 +424,7 @@ public class ErrorMsg implements HelperClass {
 	}
 	
 	public static boolean areApploadingAndFinishActionsCompleted() {
-		if (getAppLoadingStatus()==ApplicationStatus.INITALIZATION)
+		if (getAppLoadingStatus()==ApplicationStatus.INITIALIZATION)
 			return false;
 		boolean result;
 		synchronized(finishedListeners) {
@@ -435,7 +436,7 @@ public class ErrorMsg implements HelperClass {
 	
 	public static void addOnAppLoadingFinishedAction(
 			Runnable actionListener) {
-		if (getAppLoadingStatus()!=ApplicationStatus.INITALIZATION) {
+		if (getAppLoadingStatus()!=ApplicationStatus.INITIALIZATION) {
 			SwingUtilities.invokeLater(actionListener);
 		} else {
 			synchronized(finishedListeners) {
@@ -638,6 +639,31 @@ public class ErrorMsg implements HelperClass {
 		}
 		return res.toString();
 	}
+	
+	 public static List<Integer> getAllNumbersFromString(String str) {
+		    
+		    if (str == null || str.length() == 0) {
+		        return null;
+		    }
+			 ArrayList<Integer> ints = new ArrayList<Integer>();
+
+		    StringBuffer strBuff = new StringBuffer();
+		    char c;
+		    
+		    for (int i = 0; i < str.length() ; i++) {
+		        c = str.charAt(i);
+		        
+		        if (Character.isDigit(c))
+		        	strBuff.append(c);
+		        else
+		        	if(strBuff.length()>0) {
+			        	ints.add(new Integer(strBuff.toString()));
+			        	strBuff = new StringBuffer();
+		        }
+		    }
+		    return ints;
+		}
+
 	
 	public static void addOnAddonLoadingFinishedAction(Runnable runnable) {
 		if (getAppLoadingStatus()==ApplicationStatus.ADDONS_LOADED)
