@@ -73,7 +73,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.91 $
+ * @version $Revision: 1.92 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -399,6 +399,7 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("x", "Position");
 		idToNiceId.put("y", "Position");
 		idToNiceId.put("z_", "Z");
+		idToNiceId.put("depth", "Depth");
 		idToNiceId.put("mol", "Molecule Structure:3D MOL View");
 		idToNiceId.put("rounding", "Shape: Rounded Corners");
 		idToNiceId.put("Edge:shape", "Shape");
