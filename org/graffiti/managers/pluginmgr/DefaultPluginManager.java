@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.25 2010/02/15 13:32:15 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.26 2010/04/27 15:58:32 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import org.ErrorMsg;
+import org.ReleaseInfo;
 import org.SettingsHelperDefaultIsTrue;
 import org.graffiti.core.StringBundle;
 import org.graffiti.options.GravistoPreferences;
@@ -40,7 +41,7 @@ import sun.awt.geom.AreaOp.AddOp;
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -145,7 +146,10 @@ public class DefaultPluginManager
     public GenericPlugin getPluginInstance(String name)
     {
     	synchronized (pluginEntries) {
-    		return (pluginEntries.get(name)).getPlugin();
+    		if (pluginEntries.get(name)!=null)
+    			return (pluginEntries.get(name)).getPlugin();
+    		else
+    			return null;
     	}
     }
 
@@ -300,14 +304,25 @@ public class DefaultPluginManager
 		if (progressViewer!=null)
         	progressViewer.setText("Load priority plugins...");
 
-		ExecutorService runVIP = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()); 
+		ExecutorService runVIP;
+		if (ReleaseInfo.isRunningAsApplet())
+			runVIP = Executors.newFixedThreadPool(1);
+		else
+			runVIP = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		
+		
         loadSetOfPlugins(plugins, progressViewer, runVIP, loading, true);
         runVIP.shutdown();
 
         if (progressViewer!=null)
         	progressViewer.setText("Load plugins...");
         
-		ExecutorService run = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()); 
+		ExecutorService run;
+		if (ReleaseInfo.isRunningAsApplet())
+			run = Executors.newFixedThreadPool(1);
+		else
+			run = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		
         loadSetOfPlugins(plugins, progressViewer, run, loading, false);
         run.shutdown();
 		
@@ -699,9 +714,14 @@ public class DefaultPluginManager
     		return null;
     	}
     	String name = description.getName();
+    	boolean loaded = false;
         if(isInstalled(name))
         {
-        	throw new PluginAlreadyLoadedException("Plugin name "+name+" already defined/plugin already loaded!");
+      	  loaded = true;
+      	  if (!ReleaseInfo.isRunningAsApplet()) {
+      		  System.err.println("Applet? "+ReleaseInfo.isRunningAsApplet());
+      		  throw new PluginAlreadyLoadedException("Plugin name "+name+" already defined/plugin already loaded!");
+      	  }
         }
 
         // If available show statustext to the user
@@ -712,7 +732,11 @@ public class DefaultPluginManager
 
         try
         { // to instanciate the plugin's main class
-            pluginInstance = (GenericPlugin) InstanceLoader.createInstance(description.getMain());
+      	  if (!loaded)
+      		  pluginInstance = (GenericPlugin) InstanceLoader.createInstance(description.getMain());
+      	  else {
+      		  pluginInstance = getPluginInstance(description.getName());
+      	  }
         }
         catch(InstanceCreationException ice)
         {

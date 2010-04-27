@@ -290,14 +290,14 @@ public class ReleaseInfo implements HelperClass {
 		return helpIntro;
 	}
 
+	private static boolean applet = false;
+	
+	public static void setRunningAsApplet() {
+		applet = true;
+	}
+
 	public static boolean isRunningAsApplet() {
-		try {
-			@SuppressWarnings("unused")
-			String s = System.getProperty("user.home");
-			return false;
-		} catch (Exception e) {
-			return true;
-		}
+		return applet;
 	}
 
 	private static boolean firstRun = false;
