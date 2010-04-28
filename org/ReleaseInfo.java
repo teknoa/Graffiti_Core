@@ -8,6 +8,7 @@
  */
 package org;
 
+import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,6 +17,7 @@ import java.io.FileWriter;
 import java.io.Writer;
 import java.util.HashSet;
 
+import javax.swing.JApplet;
 import javax.swing.JOptionPane;
 
 public class ReleaseInfo implements HelperClass {
@@ -291,9 +293,11 @@ public class ReleaseInfo implements HelperClass {
 	}
 
 	private static boolean applet = false;
+	private static JApplet appletContext = null;
 	
-	public static void setRunningAsApplet() {
+	public static void setRunningAsApplet(JApplet appletContext) {
 		applet = true;
+		ReleaseInfo.appletContext = appletContext;
 	}
 
 	public static boolean isRunningAsApplet() {
@@ -403,5 +407,12 @@ public class ReleaseInfo implements HelperClass {
 	public static String getAppSubdirFolderWithFinalSep(String folderName,
 			String folderName2) {
 		return getAppSubdirFolder(folderName, folderName2) + getFileSeparator();
+	}
+
+	/**
+	 * @return
+	 */
+	public static JApplet getAppletContext() {
+			return appletContext;
 	}
 }
