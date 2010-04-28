@@ -73,7 +73,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.92 $
+ * @version $Revision: 1.93 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -410,25 +410,25 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("Edge:gradient", "<html>Gradient Fill<br>(0=off)");
 
 		idToNiceId.put("useCustomRange", chartSelN
-				+ ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;Custom Min/Max");
+				+ ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Custom Min/Max");
 		idToNiceId
 				.put(
 						"useCustomRangeSteps",
 						chartSelN
-								+ ":<html>&nbsp;Range Axis: <br>&nbsp;&nbsp;&nbsp;<!--A-->Custom Step Size");
+								+ ":<html>&nbsp;Range Axis: <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Custom Step Size");
 		idToNiceId
 				.put(
 						"rangeStepSize",
 						chartSelN
-								+ ":<html>&nbsp;Range Axis:  <br>&nbsp;&nbsp;&nbsp;<!--A-->Step Size");
+								+ ":<html>&nbsp;Range Axis:  <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Step Size");
 
 		idToNiceId.put("max_charts_in_column", chartSelN
 				+ ": Number of Charts in a Row");
 
 		idToNiceId.put("minRange", chartSelN
-				+ ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;Minimum");
+				+ ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Minimum");
 		idToNiceId.put("maxRange", chartSelN
-				+ ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;Maximum");
+				+ ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Maximum");
 		idToNiceId.put("connectPriorItems", chartAllLine
 				+ ": No gaps for missing data");
 		idToNiceId.put("Node:outline", "Shape: Frame-Color");
