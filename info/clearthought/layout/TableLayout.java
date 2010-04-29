@@ -2172,7 +2172,7 @@ public void invalidateLayout (Container target)
 		return result;
     }
 
-	 public static JComponent getSplitVertical(Component topComponent, Component bottomComponent, double topSize, double bottomSize) {
+	 public static JPanel getSplitVertical(Component topComponent, Component bottomComponent, double topSize, double bottomSize) {
       JPanel result = new JPanel();
 		result.setOpaque(false);
       double border = 0;
