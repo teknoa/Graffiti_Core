@@ -73,7 +73,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.94 $
+ * @version $Revision: 1.95 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -3110,7 +3110,9 @@ public class AttributeHelper implements HelperClass {
 			"org.graffiti.plugins.views.defaults.PolyLineEdgeShape",
 			"org.graffiti.plugins.views.defaults.StraightLineEdgeShape",
 			"org.graffiti.plugins.views.defaults.SmoothLineEdgeShape",
-			"org.graffiti.plugins.views.defaults.QuadCurveEdgeShape" };
+			"org.graffiti.plugins.views.defaults.QuadCurveEdgeShape",
+			"de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.DynamicStraightLineEdgeShape"
+	};
 	public static String preFilePath = "filepath|";
 
 	public static void setEdgeBendStyle(Edge edge, String shape) {
