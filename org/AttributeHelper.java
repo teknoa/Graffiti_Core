@@ -73,7 +73,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.93 $
+ * @version $Revision: 1.94 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -122,6 +122,7 @@ public class AttributeHelper implements HelperClass {
 	public static void showInBrowser(String url) {
 		if (url==null)
 			return;
+		System.out.println("Open URL: "+url);
 		if(url.indexOf('@')>0&&url.indexOf(':')==-1) url="mailto:"+url;
 		url = getEncodedUrl(url);
 		Runtime r = Runtime.getRuntime();
