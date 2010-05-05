@@ -412,7 +412,7 @@ public class ReleaseInfo implements HelperClass {
 	/**
 	 * @return
 	 */
-	public static JApplet getAppletContext() {
+	public static JApplet getApplet() {
 			return appletContext;
 	}
 }
