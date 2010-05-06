@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: InstanceLoader.java,v 1.4 2008/12/02 13:07:54 morla Exp $
+// $Id: InstanceLoader.java,v 1.5 2010/05/06 15:58:43 klukas Exp $
 
 package org.graffiti.util;
 
@@ -19,7 +19,7 @@ import java.util.HashSet;
  * Represents an instance loader, which can be used to instanciate a class with
  * the given name.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class InstanceLoader
 {
@@ -70,7 +70,8 @@ public class InstanceLoader
      *
      * @throws InstanceCreationException DOCUMENT ME!
      */
-    public static Object createInstance(Class theClass)
+    @SuppressWarnings("unchecked")
+	public static Object createInstance(Class theClass)
         throws InstanceCreationException
     {
         try
@@ -96,7 +97,8 @@ public class InstanceLoader
      *
      * @throws InstanceCreationException DOCUMENT ME!
      */
-    public static synchronized Object createInstance(String name)
+    @SuppressWarnings("unchecked")
+	public static synchronized Object createInstance(String name)
         throws InstanceCreationException
     {
         try
@@ -236,7 +238,8 @@ public class InstanceLoader
      *
      * @throws InstanceCreationException DOCUMENT ME!
      */
-    public static Object createInstance(Class theClass, Object param)
+    @SuppressWarnings("unchecked")
+	public static Object createInstance(Class theClass, Object param)
         throws InstanceCreationException
     {
         try
