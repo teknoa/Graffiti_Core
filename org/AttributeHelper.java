@@ -73,7 +73,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.95 $
+ * @version $Revision: 1.96 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -175,7 +175,7 @@ public class AttributeHelper implements HelperClass {
 	public static boolean macOSrunning() {
 		try {
 			return System.getProperty("mrj.version") != null;
-		} catch (AccessControlException ace) {
+		} catch (Exception ace) {
 			return false;
 		}
 	}
