@@ -866,6 +866,34 @@ public class FolderPanel extends JComponent {
 		tb.validate();
 		return tb;
 	}
+	
+	public static ImageIcon getLeftRightIcon(Iconsize bigIcons, boolean left) {
+		ClassLoader cl = FolderPanel.class.getClassLoader();
+		String path = FolderPanel.class.getPackage().getName().replace('.', '/')+"/images";
+		ImageIcon leftIcon = null;
+		ImageIcon rightIcon = null;
+
+		if (bigIcons==Iconsize.LARGE) {
+			leftIcon = new ImageIcon(cl
+					.getResource(path + "/large_left.png"));
+			rightIcon = new ImageIcon(cl.getResource(path
+					+ "/large_right.png"));
+		} else if (bigIcons==Iconsize.MIDDLE) {
+			leftIcon = new ImageIcon(cl
+					.getResource(path + "/middle_left.png"));
+			rightIcon = new ImageIcon(cl.getResource(path
+					+ "/middle_right.png"));
+		} else if (bigIcons==Iconsize.SMALL) {
+			leftIcon = new ImageIcon(cl
+					.getResource(path + "/bw_left.png"));
+			rightIcon = new ImageIcon(cl.getResource(path
+					+ "/bw_right.png"));
+		}
+		if (left)
+			return leftIcon;
+		else
+			return rightIcon;
+	}
 
 	public static JComponent getHelpButton(ActionListener helpActionListener,
 			Color frameColor) {
