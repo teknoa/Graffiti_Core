@@ -4,7 +4,7 @@
  * 
  *******************************************************************************/
 /* Copyright (c) 2003 IPK Gatersleben
- * $Id: Colors.java,v 1.7 2010/03/03 13:36:21 klukas Exp $
+ * $Id: Colors.java,v 1.8 2010/05/11 15:07:45 klukas Exp $
  */
 
 /*
@@ -16,6 +16,7 @@
 package org;
 
 import java.awt.Color;
+import java.awt.color.ColorSpace;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -162,4 +163,16 @@ public class Colors implements HelperClass
 //        return r;
     	return new Color(color.getRGB()^0x00ffffff);
     }
+
+	public static Color brighten(Color color, double saturation, double value) {
+		float[] hsb = new float[3];
+		Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), hsb);
+		hsb[1] = (float) (hsb[1]*saturation);
+		if (hsb[1]>1)
+			hsb[1] = 1;
+		hsb[2] = (float) (hsb[2]*value);
+		if (hsb[2]>1)
+			hsb[2] = 1;
+		return Color.getHSBColor(hsb[0], hsb[1], hsb[2]);
+	}
 }
