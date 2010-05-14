@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ProgressViewer.java,v 1.1 2007/05/31 12:56:03 klukas Exp $
+// $Id: ProgressViewer.java,v 1.2 2010/05/14 07:35:44 klukas Exp $
 
 package org.graffiti.util;
 
@@ -13,7 +13,7 @@ package org.graffiti.util;
  * A class that displays in some sense progress made while a long running task.
  *
  * @author Michael Forster
- * @version $Revision: 1.1 $ $Date: 2007/05/31 12:56:03 $
+ * @version $Revision: 1.2 $ $Date: 2010/05/14 07:35:44 $
  */
 public interface ProgressViewer
 {
@@ -51,6 +51,8 @@ public interface ProgressViewer
      * @return DOCUMENT ME!
      */
     int getValue();
+    
+    int getMaximum();
 }
 
 //------------------------------------------------------------------------------

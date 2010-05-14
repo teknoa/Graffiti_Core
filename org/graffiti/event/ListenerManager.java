@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ListenerManager.java,v 1.11 2010/02/17 15:30:25 klukas Exp $
+// $Id: ListenerManager.java,v 1.12 2010/05/14 07:38:18 klukas Exp $
 
 package org.graffiti.event;
 
@@ -36,7 +36,7 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  *
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 @SuppressWarnings("unchecked")
 public class ListenerManager {
@@ -475,7 +475,7 @@ public class ListenerManager {
 			Iterator it = alltimeGraphListenerList.iterator();
 
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preEdgeRemoved(event);
+				((GraphListener) it.next()).postEdgeRemoved(event);
 			}
 		}
 	}
