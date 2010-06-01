@@ -37,4 +37,14 @@ public class ObjectRef implements HelperClass {
 	public synchronized Object getObject() {
 		return data;
 	}
+
+	public synchronized void setIfGreater(int v) {
+		if ((Integer)data<v)
+			data = v;
+	}
+	
+	public synchronized void setIfLess(int v) {
+		if ((Integer)data>v)
+			data = v;
+	}
 }

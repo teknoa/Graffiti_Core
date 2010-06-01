@@ -90,7 +90,7 @@ public class OpenFileDialogService implements HelperClass {
 			return null;
 	}
 	
-	public static Collection<File> getFiles(final String[] valid_extensions, final String description) {
+	public static ArrayList<File> getFiles(final String[] valid_extensions, final String description) {
 		ArrayList<File> result = new ArrayList<File>();
 		if (openDialog==null) {
 			openDialog = new JFileChooser();
