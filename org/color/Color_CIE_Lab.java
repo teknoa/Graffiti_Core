@@ -19,9 +19,9 @@ public class Color_CIE_Lab {
 	private double b;
 
 	public Color_CIE_Lab(double l, double a, double b) {
-		this.setL(l);
-		this.setA(a);
-		this.setB(b);
+		this.l = l;
+		this.a = a;
+		this.b = b;
 	}
 
 	/**

@@ -98,6 +98,19 @@ public class ColorUtil {
 		return new Color_CIE_Lab(CIE_L, CIE_a, CIE_b);
 	}
 	
+	public static double deltaE2000simu(int rgb1, int rgb2) {
+//		int alpha = (rgb1 >> 24) & 0xff;
+		int red   = (rgb1 >> 16) & 0xff;
+		int green = (rgb1 >>  8) & 0xff;
+		int blue  = (rgb1      ) & 0xff;
+
+//		int alpha2 = (rgb2 >> 24) & 0xff;
+		int red2   = (rgb2 >> 16) & 0xff;
+		int green2 = (rgb2 >>  8) & 0xff;
+		int blue2  = (rgb2      ) & 0xff;
+		return Math.abs(red-red2)+Math.abs(green-green2)+Math.abs(blue-blue2);
+	}
+	
 	public static double deltaE2000(Color c1, Color c2) {
 		Color_CIE_Lab cCL1 = colorXYZ2CIELAB(colorRGB2XYZ(c1.getRed(), c1.getGreen(), c1.getBlue()));
 		Color_CIE_Lab cCL2 = colorXYZ2CIELAB(colorRGB2XYZ(c2.getRed(), c2.getGreen(), c2.getBlue()));
