@@ -343,14 +343,23 @@ public class FolderPanel extends JComponent {
 	
 			for (GuiRow gr : workSet) {
 				if (rowSpacing > 0 || colSpacing > 0) {
-					rowPanel.add(getBorderedComponent(gr.left, 0, 0, gr!=workSet.get(workSet.size()-1) ? rowSpacing : 0,
-							colSpacing), "0," + row + ", l"); // left orientation
-					rowPanel.add(
-							getBorderedComponent(gr.right, 0, 0, gr!=workSet.get(workSet.size()-1) ? rowSpacing : 0, 0),
-							"1," + row);
+					if (gr.span) {
+						rowPanel.add(getBorderedComponent(gr.left, 0, 0, gr!=workSet.get(workSet.size()-1) ? rowSpacing : 0,
+								colSpacing), "0," + row + ", 1, " + row); // left orientation
+					} else {
+						rowPanel.add(getBorderedComponent(gr.left, 0, 0, gr!=workSet.get(workSet.size()-1) ? rowSpacing : 0,
+								colSpacing), "0," + row + ", l"); // left orientation
+						rowPanel.add(
+								getBorderedComponent(gr.right, 0, 0, gr!=workSet.get(workSet.size()-1) ? rowSpacing : 0, 0),
+								"1," + row);
+					}
 				} else {
-					rowPanel.add(gr.left, "0," + row + ", l"); // left orientation
-					rowPanel.add(gr.right, "1," + row);
+					if (gr.span) {
+						rowPanel.add(gr.left, "0," + row + ", 1, " + row); 
+					} else {
+						rowPanel.add(gr.left, "0," + row + ", l"); // left orientation
+						rowPanel.add(gr.right, "1," + row);
+					}
 				}
 				row++;
 				colorRow(firstColumn, gr.left, gr.right);
