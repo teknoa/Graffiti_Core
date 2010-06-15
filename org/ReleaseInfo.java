@@ -56,6 +56,11 @@ public class ReleaseInfo implements HelperClass {
 			return true;
 
 		switch (fs) {
+			case ADDON_LOADING:
+				if (ReleaseInfo.isRunningAsApplet())
+					return false;
+				else
+					return true;
 			case KEGG_ACCESS:
 				if ((new File(getAppFolderWithFinalSep() + "license_kegg_accepted")).exists())
 					return true;

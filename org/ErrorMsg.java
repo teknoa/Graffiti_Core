@@ -407,7 +407,9 @@ public class ErrorMsg implements HelperClass {
 				}
 			});
 		}
-		if (apploadingCompleted==ApplicationStatus.ADDONS_LOADED) {
+		if (apploadingCompleted==ApplicationStatus.ADDONS_LOADED ||
+				(   apploadingCompleted==ApplicationStatus.PROGRAM_LOADING_FINISHED 
+				 && ReleaseInfo.getIsAllowedFeature(FeatureSet.ADDON_LOADING))) {
 			Collection<Runnable> fl;
 			synchronized(finishedAddonLoadingListeners) {
 				fl = new ArrayList<Runnable>(finishedAddonLoadingListeners);

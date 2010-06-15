@@ -32,5 +32,6 @@ public enum FeatureSet {
 	TOOLTIPS, 
 	SBGN, 
 	MacroRecorder, 
-	RIMAS_ACCESS
+	RIMAS_ACCESS,
+	ADDON_LOADING
 }
