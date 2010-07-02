@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListEdge.java,v 1.4 2009/06/23 07:05:21 klukas Exp $
+// $Id: AdjListEdge.java,v 1.5 2010/07/02 10:37:18 tczauderna Exp $
 
 package org.graffiti.graph;
 
@@ -17,7 +17,7 @@ import org.graffiti.attributes.CollectionAttribute;
  * Implementation of the <code>Edge</code> interface for a <code>Graph</code>
  * with adjacency list representation.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *
  * @see AdjListGraph
  * @see AdjListNode
@@ -196,7 +196,8 @@ public class AdjListEdge
             AdjListNode source = (AdjListNode) getSource();
             AdjListNode target = (AdjListNode) getTarget();
             source.removeOutEdge(this);
-            target.removeInEdge(this);
+            if (source!=target)
+            	target.removeInEdge(this);
             this.directed = directed;
             source.addOutEdge(this);
             target.addInEdge(this);
