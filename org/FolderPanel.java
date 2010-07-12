@@ -24,6 +24,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowStateListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -1032,12 +1036,19 @@ public class FolderPanel extends JComponent {
 	
 	public void dialogSizeUpdate() {
 		final FolderPanel fp = this;
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				Component pc = fp.getParent();
+		try {
+			final Component pc = fp.getParent();
+			if (!SwingUtilities.isEventDispatchThread())
+				SwingUtilities.invokeAndWait(new Runnable() {
+					public void run() {
+						performDialogResize(pc);
+					}
+				});
+			else
 				performDialogResize(pc);
-			}
-		});
+		} catch (Exception e) {
+			ErrorMsg.addErrorMessage(e);
+		}
 	}
 
 	public static void performDialogResize(Component startComponent) {
@@ -1048,10 +1059,36 @@ public class FolderPanel extends JComponent {
 			pc = pc.getParent();
 		}
 		if (pc != null && pc instanceof JDialog) {
-			JDialog jf = (JDialog) pc;
+			final JDialog jf = (JDialog) pc;
 			jf.pack();
 			jf.pack();
 			jf.repaint();
+			jf.addWindowListener(new WindowListener() {
+				@Override
+				public void windowOpened(WindowEvent e) {
+					jf.pack();
+					jf.pack();
+					jf.repaint();
+				}
+				
+				@Override
+				public void windowIconified(WindowEvent e) { }
+				
+				@Override
+				public void windowDeiconified(WindowEvent e) { }
+				
+				@Override
+				public void windowDeactivated(WindowEvent e) { }
+				
+				@Override
+				public void windowClosing(WindowEvent e) { }
+				
+				@Override
+				public void windowClosed(WindowEvent e) { }
+				
+				@Override
+				public void windowActivated(WindowEvent e) { }
+			});
 		}
 		if (pc != null && pc instanceof JFrame) {
 			JFrame jf = (JFrame) pc;
