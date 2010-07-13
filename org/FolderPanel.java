@@ -1063,32 +1063,6 @@ public class FolderPanel extends JComponent {
 			jf.pack();
 			jf.pack();
 			jf.repaint();
-			jf.addWindowListener(new WindowListener() {
-				@Override
-				public void windowOpened(WindowEvent e) {
-					jf.pack();
-					jf.pack();
-					jf.repaint();
-				}
-				
-				@Override
-				public void windowIconified(WindowEvent e) { }
-				
-				@Override
-				public void windowDeiconified(WindowEvent e) { }
-				
-				@Override
-				public void windowDeactivated(WindowEvent e) { }
-				
-				@Override
-				public void windowClosing(WindowEvent e) { }
-				
-				@Override
-				public void windowClosed(WindowEvent e) { }
-				
-				@Override
-				public void windowActivated(WindowEvent e) { }
-			});
 		}
 		if (pc != null && pc instanceof JFrame) {
 			JFrame jf = (JFrame) pc;
