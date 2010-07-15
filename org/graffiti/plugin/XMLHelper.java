@@ -5,12 +5,13 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.12 2009/11/26 13:26:44 morla Exp $
+// $Id: XMLHelper.java,v 1.13 2010/07/15 09:36:03 morla Exp $
 
 package org.graffiti.plugin;
 
 //Java imports
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -20,6 +21,7 @@ import java.net.URL;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
