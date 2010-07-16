@@ -5,7 +5,7 @@ package org.graffiti.plugin.parameter;
 
 import java.awt.Color;
 
-import org.ErrorMsg;
+import org.color.ColorUtil;
 
 public class ColorParameter
     extends AbstractSingleParameter
@@ -62,7 +62,7 @@ public class ColorParameter
      */
     @Override
 	public String toXMLString() {
-        return getStandardXML(ErrorMsg.getHexFromColor(value));
+        return getStandardXML(ColorUtil.getHexFromColor(value));
     }
 
 }

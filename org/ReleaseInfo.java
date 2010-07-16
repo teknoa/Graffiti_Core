@@ -231,7 +231,7 @@ public class ReleaseInfo implements HelperClass {
 	private static String getAppFolderNameNewStyle() {
 		String home = System.getProperty("user.home");
 		boolean windows = false;
-		if (ErrorMsg.isMac())
+		if (SystemInfo.isMac())
 			home = home + getFileSeparator() + "Library" + getFileSeparator()
 					+ "Preferences";
 		else {
@@ -251,7 +251,7 @@ public class ReleaseInfo implements HelperClass {
 			}
 		}
 
-		if (ErrorMsg.isMac() || windows) {
+		if (SystemInfo.isMac() || windows) {
 			if (getRunningReleaseStatus() == Release.KGML_EDITOR)
 				return home + getFileSeparator() + "KGML_EDITOR";
 			else

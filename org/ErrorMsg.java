@@ -6,7 +6,6 @@
 
 package org;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.text.DecimalFormat;
@@ -16,14 +15,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
-import com.sun.corba.se.impl.oa.poa.AOMEntry;
 
 /**
  * 
@@ -39,7 +34,7 @@ public class ErrorMsg implements HelperClass {
 
 	 
 	 public static DecimalFormat getDecimalFormat(String pattern) {
-	    	pattern = ErrorMsg.stringReplace(pattern, ",", "");
+	    	pattern = StringManipulationTools.stringReplace(pattern, ",", "");
 	    	NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
 	    	DecimalFormat df = (DecimalFormat)nf;
 	    	df.applyPattern(pattern);		
@@ -136,12 +131,12 @@ public class ErrorMsg implements HelperClass {
 			for (Iterator<String> it=errorMessagesShort.iterator(); it.hasNext(); ) {
 				String s = it.next();
 				if (s!=null && s.length()>0) {
-					s = ErrorMsg.stringReplace(s, "\"", "");
-					s = ErrorMsg.stringReplace(s, ">", "");
-					s = ErrorMsg.stringReplace(s, "<", "");
-					s = ErrorMsg.stringReplace(s, "#", "");
-					s = ErrorMsg.stringReplace(s, "?", "");
-					s = ErrorMsg.stringReplace(s, "&", "");
+					s = StringManipulationTools.stringReplace(s, "\"", "");
+					s = StringManipulationTools.stringReplace(s, ">", "");
+					s = StringManipulationTools.stringReplace(s, "<", "");
+					s = StringManipulationTools.stringReplace(s, "#", "");
+					s = StringManipulationTools.stringReplace(s, "?", "");
+					s = StringManipulationTools.stringReplace(s, "&", "");
 				} else
 					s = "";
 				result[(i++)] = s;
@@ -190,7 +185,7 @@ public class ErrorMsg implements HelperClass {
 				break;
 			}
 			char c = (char) ic;
-			uni = stringReplace(uni, "&#" + code + ";", c + ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			uni = StringManipulationTools.stringReplace(uni, "&#" + code + ";", c + ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			p = uni.indexOf("&#"); //$NON-NLS-1$
 		}
 		return uni;
@@ -205,7 +200,7 @@ public class ErrorMsg implements HelperClass {
                 result.append(curChar);
             } else {
                 String html="&#"+new Integer(curChar).toString()+";";
-                while (html.length()<8) html=stringReplace(html, "&#", "&#0");
+                while (html.length()<8) html=StringManipulationTools.stringReplace(html, "&#", "&#0");
                 result.append(html);
             }
         }
@@ -221,7 +216,7 @@ public class ErrorMsg implements HelperClass {
                 result.append(curChar);
             } else {
                 String html="&#"+new Integer(curChar).toString()+";";
-                while (html.length()<8) html=stringReplace(html, "&#", "&#0");
+                while (html.length()<8) html=StringManipulationTools.stringReplace(html, "&#", "&#0");
                 result.append(html);
             }
         }
@@ -243,100 +238,6 @@ public class ErrorMsg implements HelperClass {
         return result.toString();
 	}
 	
-	/**
-     * 
-     * Replace occurrences of a substring.
-     * http://ostermiller.org/utils/StringHelper.html
-     *
-     * StringHelper.replace("1-2-3", "-", "|");<br>
-     * result: "1|2|3"<br>
-     * StringHelper.replace("-1--2-", "-", "|");<br>
-     * result: "|1||2|"<br>
-     * StringHelper.replace("123", "", "|");<br>
-     * result: "123"<br>
-     * StringHelper.replace("1-2---3----4", "--", "|");<br>
-     * result: "1-2|-3||4"<br>
-     * StringHelper.replace("1-2---3----4", "--", "---");<br>
-     * result: "1-2----3------4"<br>
-     *
-     * @param s String to be modified.
-     * @param find String to find.
-     * @param replace String to replace.
-     * @return a string with all the occurrences of the string to find replaced.
-     * @throws NullPointerException if s is null.
-     *
-     */
-    public static String stringReplace(String s, String find, String replace){
-        int findLength;
-        // the next statement has the side effect of throwing a null pointer
-        // exception if s is null.
-        int stringLength = s.length();
-        if (find == null || (findLength = find.length()) == 0){
-            // If there is nothing to find, we won't try and find it.
-            return s;
-        }
-        if (replace == null){
-            // a null string and an empty string are the same
-            // for replacement purposes.
-            replace = ""; //$NON-NLS-1$
-        }
-        int replaceLength = replace.length();
-
-        // We need to figure out how long our resulting string will be.
-        // This is required because without it, the possible resizing
-        // and copying of memory structures could lead to an unacceptable runtime.
-        // In the worst case it would have to be resized n times with each
-        // resize having a O(n) copy leading to an O(n^2) algorithm.
-        int length;
-        if (findLength == replaceLength){
-            // special case in which we don't need to count the replacements
-            // because the count falls out of the length formula.
-            length = stringLength;
-        } else {
-            int count;
-            int start;
-            int end;
-
-            // Scan s and count the number of times we find our target.
-            count = 0;
-            start = 0;
-            while((end = s.indexOf(find, start)) != -1) {
-                count++;
-                start = end + findLength;
-            }
-            if (count == 0){
-                // special case in which on first pass, we find there is nothing
-                // to be replaced.  No need to do a second pass or create a string buffer.
-                return s;
-            }
-            length = stringLength - (count * (findLength - replaceLength));
-        }
-
-        int start = 0;
-        int end = s.indexOf(find, start);
-        if (end == -1){
-            // nothing was found in the string to replace.
-            // we can get this if the find and replace strings
-            // are the same length because we didn't check before.
-            // in this case, we will return the original string
-            return s;
-        }
-        // it looks like we actually have something to replace
-        // *sigh* allocate memory for it.
-        StringBuffer sb = new StringBuffer(length);
-
-        // Scan s and do the replacements
-        while (end != -1) {
-            sb.append(s.substring(start, end).toString());
-            sb.append(replace.toString());
-            start = end + findLength;
-            end = s.indexOf(find, start);
-        }
-        end = stringLength;
-        sb.append(s.substring(start, end).toString());
-
-        return (sb.toString());
-    }
 
 	public static void addErrorMessage(Exception e) {
 		addErrorMessage(e.toString()+"<p><p>"+e.getLocalizedMessage());
@@ -351,41 +252,10 @@ public class ErrorMsg implements HelperClass {
 		return statusMsg;
 	}
 
-	public static String getHexFromColor(Color c) {
-		String r = Integer.toHexString(c.getRed());
-      String g = Integer.toHexString(c.getGreen());
-      String b = Integer.toHexString(c.getBlue());
-
-      if(r.length() < 2)
-          r = "0" + r;
-
-      if(g.length() < 2)
-          g = "0" + g;
-
-      if(b.length() < 2)
-          b = "0" + b;
-
-      return "#" + (r + g + b);
-	}
-
-	public static Color getColorFromHex(String colorString) {
-		try {
-			String r = colorString.substring(1, 3);
-			String g = colorString.substring(3, 5);
-			String b = colorString.substring(5, 7);
-			int ri = Integer.decode("0x"+r);
-			int gi = Integer.decode("0x"+g);
-			int bi = Integer.decode("0x"+b);
-			return new Color(ri, gi, bi);
-		} catch(Exception e) {
-			return Color.BLACK;
-		}
-	}
-	
 	private static ApplicationStatus apploadingCompleted = ApplicationStatus.INITIALIZATION;
 
 	private static Collection<Runnable> finishedListeners = new ArrayList<Runnable>();
-	private static Collection<Runnable> finishedAddonLoadingListeners = new ArrayList<Runnable>();
+	static Collection<Runnable> finishedAddonLoadingListeners = new ArrayList<Runnable>();
 
 	public static ApplicationStatus getAppLoadingStatus() {
 		return apploadingCompleted;
@@ -448,24 +318,6 @@ public class ErrorMsg implements HelperClass {
 	}
 
 	
-	public static boolean isMac() {
-		return AttributeHelper.macOSrunning();
-	}
-
-	public static boolean isLinux() {
-		return AttributeHelper.linuxRunning();
-	}
-
-	public static int getAccelModifier() {
-		return java.awt.Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-		/*
-		String vers = System.getProperty("os.name").toLowerCase();
-	    if (vers.indexOf("mac") >= 0)
-	    	return ActionEvent.META_MASK;
-	    else
-	    	return ActionEvent.CTRL_MASK;*/
-	}
-
 	@SuppressWarnings("unchecked")
 	public static Object findChildComponent(Component c, Class searchClass) {
 		if (c==null)
@@ -526,152 +378,6 @@ public class ErrorMsg implements HelperClass {
 			// Component c is not of desired type
 		}
 		return findParentComponent(c.getParent(), searchClass);
-	}
-	
-	public static String removeHTMLtags(String textWithHtmlTags) {
-		if (textWithHtmlTags==null)
-			return null;
-		String res = removeTags(textWithHtmlTags, "<", ">");
-		res = stringReplace(res, "&nbsp;", " ");
-		res = stringReplace(res, "%20", " ");
-		return res;
-	}
-	
-	public static String removeTags(String textWithHtmlTags, String tagA, String tagB) {
-		if (textWithHtmlTags==null) 
-			return null;
-		int tagApos = textWithHtmlTags.indexOf(tagA);
-		while (tagApos>=0) {
-			int tagBpos = textWithHtmlTags.indexOf(tagB, tagApos+tagB.length())+tagB.length();
-			if (tagB.length()>0 && tagBpos>0) {
-				textWithHtmlTags = textWithHtmlTags.substring(0, tagApos) + textWithHtmlTags.substring(tagBpos);
-				tagApos = textWithHtmlTags.indexOf(tagA);
-			} else {
-				textWithHtmlTags = textWithHtmlTags.substring(0, tagApos);
-				tagApos = textWithHtmlTags.indexOf(tagA);
-			}
-		}
-		if (tagB.length()>0 && textWithHtmlTags.indexOf(tagB)>=0)
-			textWithHtmlTags = textWithHtmlTags.substring(textWithHtmlTags.indexOf(tagB)+tagB.length());
-		return textWithHtmlTags; 
-	}
-	
-	/**
-	 * Removes the tags from a html-text and gives back the striped text.
-	 * 
-	 * @param textWithHtmlTags the text with html tags
-	 * @param tagA The left tag (e.g. <a>)
-	 * @param tagB The right tag (e.g. </a>)
-	 * 
-	 * @return The array list< string>, where get(0) is the striped text and all other are the striped texts
-	 */
-	public static ArrayList<String> removeTagsGetTextAndRemovedTexts(String textWithHtmlTags, String tagA, String tagB) {
-		ArrayList<String> tu = new ArrayList<String>();
-		if (textWithHtmlTags==null) 
-			return null;
-
-		tu.add(textWithHtmlTags);
-		int tagApos = tu.get(0).indexOf(tagA);
-		while (tagApos>=0) {
-			int tagBpos = tu.get(0).indexOf(tagB, tagApos+tagB.length())+tagB.length();
-			if (tagBpos>0) {
-				tu.add(tu.get(0).substring(tagApos+tagA.length(),tagBpos-tagB.length()));
-				tu.set(0,tu.get(0).substring(0, tagApos) + tu.get(0).substring(tagBpos));
-				tagApos = tu.get(0).indexOf(tagA);
-			} else {
-				tu.add(tu.get(0).substring(tagApos+1));
-				tu.set(0,tu.get(0).substring(0, tagApos));
-				tagApos = tu.get(0).indexOf(tagA);
-			}
-		}
-		if (tu.get(0).indexOf(tagB)>=0)
-			tu.set(0,tu.get(0).substring(tu.get(0).indexOf(tagB)+tagB.length()));
-		
-		
-		return tu; 
-	}
-	public static String getWordWrap(String desc, int width) {
-		String[] words = desc.split(" ");
-		String result = "";
-		int column = 0;
-		for (int i=0; i<words.length; i++) {
-			if (i>0 && column+words[i].length()>width) {
-				result = result+"<br>"+words[i];
-				column = words[i].length();
-			} else
-				if (i>0) {
-					result = result + " " + words[i];
-					column += words[i].length();
-				} else {
-					result = words[0];
-					column = words[0].length();
-				}
-		}
-		return result;
-	}
-	
-	public static String getWordWrap(String[] desc, int width) {
-		StringBuilder sb = new StringBuilder();
-		for (String s : desc) {
-			sb.append(getWordWrap(s, width));
-		}
-		return sb.toString();
-	}
-	/**
-	 * @param mapName
-	 * @return
-	 */
-	final static String[] numbers = new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-	public static String removeNumbersFromString(String s) {
-		for (String r : numbers)
-			 s= ErrorMsg.stringReplace(s, r, "");
-		return s;
-	}
-	
-
-	public static String getNumbersFromString(String s) {
-		StringBuilder res = new StringBuilder();
-		for (Character c : s.toCharArray()) {
-			for (String n : numbers) {
-				if (n.equals(c+"")) {
-					res.append(n);
-					break;
-				}
-			}
-		}
-		return res.toString();
-	}
-	
-	 public static List<Integer> getAllNumbersFromString(String str) {
-		    
-		    if (str == null || str.length() == 0) {
-		        return null;
-		    }
-			 ArrayList<Integer> ints = new ArrayList<Integer>();
-
-		    StringBuffer strBuff = new StringBuffer();
-		    char c;
-		    
-		    for (int i = 0; i < str.length() ; i++) {
-		        c = str.charAt(i);
-		        
-		        if (Character.isDigit(c))
-		        	strBuff.append(c);
-		        else
-		        	if(strBuff.length()>0) {
-			        	ints.add(new Integer(strBuff.toString()));
-			        	strBuff = new StringBuffer();
-		        }
-		    }
-		    return ints;
-		}
-
-	
-	public static void addOnAddonLoadingFinishedAction(Runnable runnable) {
-		if (getAppLoadingStatus()==ApplicationStatus.ADDONS_LOADED)
-			runnable.run();
-		else
-			finishedAddonLoadingListeners.add(runnable);
 	}
 	
 }

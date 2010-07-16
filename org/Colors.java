@@ -4,7 +4,7 @@
  * 
  *******************************************************************************/
 /* Copyright (c) 2003 IPK Gatersleben
- * $Id: Colors.java,v 1.8 2010/05/11 15:07:45 klukas Exp $
+ * $Id: Colors.java,v 1.9 2010/07/16 20:32:40 klukas Exp $
  */
 
 /*
@@ -16,7 +16,6 @@
 package org;
 
 import java.awt.Color;
-import java.awt.color.ColorSpace;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;

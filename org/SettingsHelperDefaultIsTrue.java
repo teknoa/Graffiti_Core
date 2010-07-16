@@ -23,7 +23,7 @@ public class SettingsHelperDefaultIsTrue implements HelperClass {
 	}
 
 	protected static String encode(String name) {
-		return ErrorMsg.removeHTMLtags(name).replaceAll(" ", "_").replaceAll("/", "_");
+		return StringManipulationTools.removeHTMLtags(name).replaceAll(" ", "_").replaceAll("/", "_");
 	}
 	
 	@Test

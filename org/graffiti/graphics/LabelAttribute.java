@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LabelAttribute.java,v 1.11 2010/01/23 08:45:17 klukas Exp $
+// $Id: LabelAttribute.java,v 1.12 2010/07/16 20:32:41 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -21,6 +21,8 @@ import javax.swing.SwingUtilities;
 import org.AttributeHelper;
 import org.ErrorMsg;
 import org.LabelFrameSetting;
+import org.StringManipulationTools;
+import org.color.ColorUtil;
 import org.graffiti.attributes.Attribute;
 import org.graffiti.attributes.AttributeExistsException;
 import org.graffiti.attributes.ColorSetAndGetSupport;
@@ -33,7 +35,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  * 
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public abstract class LabelAttribute extends HashMapAttribute implements
 		GraphicAttributeConstants {
@@ -127,7 +129,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		add(StringAttribute.getTypedStringAttribute(FONTSTYLE, "plain"/*
 																	 * italic,bold
 																	 */), false);
-		add(StringAttribute.getTypedStringAttribute(TEXTCOLOR, ErrorMsg
+		add(StringAttribute.getTypedStringAttribute(TEXTCOLOR, ColorUtil
 				.getHexFromColor(java.awt.Color.BLACK)), false);
 		add(new StringAttribute("type", "text"), false);
 	}
@@ -282,7 +284,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 	}
 
 	public void setTextcolor(Color c) {
-		cacheSetS((StringAttribute) attributes.get(TEXTCOLOR), ErrorMsg.getHexFromColor(c));
+		cacheSetS((StringAttribute) attributes.get(TEXTCOLOR), ColorUtil.getHexFromColor(c));
 	}
 
 	/**
@@ -292,7 +294,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 	 */
 	public Color getTextcolor() {
 		try {
-			return ErrorMsg.getColorFromHex((((StringAttribute) attributes
+			return ColorUtil.getColorFromHex((((StringAttribute) attributes
 					.get(TEXTCOLOR)).getString()));
 		} catch (Exception err) {
 			return Color.black;
@@ -351,7 +353,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 	private String getLabel(boolean stripHTML) {
 		String result = getLabel();
 		if (stripHTML) {
-			result = ErrorMsg.removeHTMLtags(result);
+			result = StringManipulationTools.removeHTMLtags(result);
 		}
 		return result;
 	}
@@ -386,7 +388,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 	public Color getShadowTextColor() {
 		if (!attributes.containsKey(GraphicAttributeConstants.SHADOWCOLOR)) {
 			Attribute newAtt = StringAttribute.getTypedStringAttribute(
-					GraphicAttributeConstants.SHADOWCOLOR, ErrorMsg
+					GraphicAttributeConstants.SHADOWCOLOR, ColorUtil
 							.getHexFromColor(Color.LIGHT_GRAY));
 			newAtt.setParent(this);
 			attributes.put(GraphicAttributeConstants.SHADOWCOLOR, newAtt);
@@ -435,12 +437,12 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		}
 	
 		String result = real.toString();
-		result = ErrorMsg.stringReplace(result, "<html><br>", "<html>");
-		result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
-		result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
+		result = StringManipulationTools.stringReplace(result, "<html><br>", "<html>");
+		result = StringManipulationTools.stringReplace(result, "<br> <br>", " <br>");
+		result = StringManipulationTools.stringReplace(result, "<br> <br>", " <br>");
 		if (result.indexOf("<br>") <= 0) {
-			result = ErrorMsg.stringReplace(result, "<html>", "");
-			result = ErrorMsg.stringReplace(result, "</html>", "");
+			result = StringManipulationTools.stringReplace(result, "<html>", "");
+			result = StringManipulationTools.stringReplace(result, "</html>", "");
 		}
 		setLabel(result);
 	}

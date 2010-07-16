@@ -73,7 +73,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.96 $
+ * @version $Revision: 1.97 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -99,15 +99,15 @@ public class AttributeHelper implements HelperClass {
 			String p2 = url.substring(url.indexOf("?") + "?".length());
 			try {
 				p2 = java.net.URLEncoder.encode(p2, "UTF-8");
-				p2 = ErrorMsg.stringReplace(p2, "%2B", "+");
+				p2 = StringManipulationTools.stringReplace(p2, "%2B", "+");
 			} catch (UnsupportedEncodingException e) {
 				ErrorMsg
 						.addErrorMessage("Internal Error: UTF-8 encoding is not supported by runtime environment.");
 			}
 			url = p1 + "?" + p2;
-			url = ErrorMsg.stringReplace(url, "%3D", "=");
-			url = ErrorMsg.stringReplace(url, "%26", "&");
-			url = ErrorMsg.stringReplace(url, "%2B", "%2B");
+			url = StringManipulationTools.stringReplace(url, "%3D", "=");
+			url = StringManipulationTools.stringReplace(url, "%26", "&");
+			url = StringManipulationTools.stringReplace(url, "%2B", "%2B");
 		}
 		String osName = System.getProperty("os.name");
 		if (osName.startsWith("Mac OS")) {
@@ -255,22 +255,22 @@ public class AttributeHelper implements HelperClass {
 				while (endNumber.length() < 5)
 					endNumber = "0" + endNumber;
 				String endS = result.substring(idx + 1);
-				endS = ErrorMsg.stringReplace(endS, " ", "&nbsp;");
+				endS = StringManipulationTools.stringReplace(endS, " ", "&nbsp;");
 				if (ReleaseInfo.getRunningReleaseStatus() == Release.KGML_EDITOR)
 					result = result.substring(0, idx) + " (list):"
 							+ "<html><!-- " + endNumber + " -->"
-							+ ErrorMsg.stringReplace(endS, "<html>", "");
+							+ StringManipulationTools.stringReplace(endS, "<html>", "");
 				else {
 					if (result.substring(0, idx).length() > 0)
 						result = result.substring(0, idx) + ":" + "<html><!-- "
 								+ endNumber + " -->"
-								+ ErrorMsg.stringReplace(endS, "<html>", "");
+								+ StringManipulationTools.stringReplace(endS, "<html>", "");
 					else
 						result = "<html><!-- "
 								+ endNumber
 								+ " -->"
-								+ ErrorMsg.stringReplace(
-										ErrorMsg.stringReplace(endS, "&nbsp;",
+								+ StringManipulationTools.stringReplace(
+										StringManipulationTools.stringReplace(endS, "&nbsp;",
 												" "), "<html>", "").trim();
 				}
 			}
@@ -2472,20 +2472,20 @@ public class AttributeHelper implements HelperClass {
 				return knownColors[i];
 			i++;
 		}
-		name = ErrorMsg.stringReplace(name, "0", "");
-		name = ErrorMsg.stringReplace(name, "1", "");
-		name = ErrorMsg.stringReplace(name, "2", "");
-		name = ErrorMsg.stringReplace(name, "3", "");
-		name = ErrorMsg.stringReplace(name, "4", "");
-		name = ErrorMsg.stringReplace(name, "5", "");
-		name = ErrorMsg.stringReplace(name, "6", "");
-		name = ErrorMsg.stringReplace(name, "7", "");
-		name = ErrorMsg.stringReplace(name, "8", "");
-		name = ErrorMsg.stringReplace(name, "9", "");
-		name = ErrorMsg.stringReplace(name, " ", "");
+		name = StringManipulationTools.stringReplace(name, "0", "");
+		name = StringManipulationTools.stringReplace(name, "1", "");
+		name = StringManipulationTools.stringReplace(name, "2", "");
+		name = StringManipulationTools.stringReplace(name, "3", "");
+		name = StringManipulationTools.stringReplace(name, "4", "");
+		name = StringManipulationTools.stringReplace(name, "5", "");
+		name = StringManipulationTools.stringReplace(name, "6", "");
+		name = StringManipulationTools.stringReplace(name, "7", "");
+		name = StringManipulationTools.stringReplace(name, "8", "");
+		name = StringManipulationTools.stringReplace(name, "9", "");
+		name = StringManipulationTools.stringReplace(name, " ", "");
 		i = 0;
 		for (String cname : knownColorNames) {
-			cname = ErrorMsg.stringReplace(cname, " ", "");
+			cname = StringManipulationTools.stringReplace(cname, " ", "");
 			if (cname.equalsIgnoreCase(name))
 				return knownColors[i];
 			i++;
@@ -2673,7 +2673,7 @@ public class AttributeHelper implements HelperClass {
 			String attVal = (String) getAttributeValue(a, path, name, "", "",
 					false);
 			if (attVal.length() > 0) {
-				attVal = ErrorMsg.stringReplace(attVal, searchString,
+				attVal = StringManipulationTools.stringReplace(attVal, searchString,
 						replaceString);
 				setAttribute(a, path, copyTo, attVal);
 			}
@@ -2753,10 +2753,10 @@ public class AttributeHelper implements HelperClass {
 				if (lfs.toGMLstring().length()==0)
 					continue;
 				if (currentStyle.contains(lfs.toGMLstring()+",")) {
-					currentStyle = ErrorMsg.stringReplace(currentStyle, lfs.toGMLstring()+",", "");
+					currentStyle = StringManipulationTools.stringReplace(currentStyle, lfs.toGMLstring()+",", "");
 				} else
 					if (currentStyle.contains(","+lfs.toGMLstring())) {
-						currentStyle = ErrorMsg.stringReplace(currentStyle, ","+lfs.toGMLstring(), "");
+						currentStyle = StringManipulationTools.stringReplace(currentStyle, ","+lfs.toGMLstring(), "");
 					} else
 						if (currentStyle.equals(lfs.toGMLstring())) {
 							currentStyle = "";
@@ -2769,7 +2769,7 @@ public class AttributeHelper implements HelperClass {
 				else
 					currentStyle = setting.toGMLstring();
 			}
-			currentStyle = ErrorMsg.stringReplace(currentStyle, " ", "");
+			currentStyle = StringManipulationTools.stringReplace(currentStyle, " ", "");
 			
 			la.setFontStyle(currentStyle);
 		}
@@ -2970,14 +2970,14 @@ public class AttributeHelper implements HelperClass {
 					.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
 							+ NodeLabelAttribute.LABELGRAPHICS+idx);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
-			o.setString(ErrorMsg.getHexFromColor(color));
+			o.setString(ColorUtil.getHexFromColor(color));
 		} catch (AttributeNotFoundException e) {
 			setLabel(n, getLabel(n, ""));
 			HashMapAttribute l = (HashMapAttribute) n
 					.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
 							+ NodeLabelAttribute.LABELGRAPHICS+idx);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
-			o.setString(ErrorMsg.getHexFromColor(color));
+			o.setString(ColorUtil.getHexFromColor(color));
 		}
 	}
 
@@ -2987,7 +2987,7 @@ public class AttributeHelper implements HelperClass {
 					.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
 							+ NodeLabelAttribute.LABELGRAPHICS);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
-			return ErrorMsg.getColorFromHex(o.getString());
+			return ColorUtil.getColorFromHex(o.getString());
 		} catch (Exception e) {
 			return Color.black;
 		}
@@ -3184,7 +3184,7 @@ public class AttributeHelper implements HelperClass {
 	public static String getSaveAttributeName(String attributeName) {
 		if (attributeName == null)
 			return null;
-		return ErrorMsg.stringReplace(attributeName, " ", "_");
+		return StringManipulationTools.stringReplace(attributeName, " ", "_");
 	}
 
 	/**

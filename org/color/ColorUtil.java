@@ -51,6 +51,37 @@ public class ColorUtil {
 		assertEquals(0, c1.getBlue(), 0.001);
 	}
 	
+	public static Color getColorFromHex(String colorString) {
+		try {
+			String r = colorString.substring(1, 3);
+			String g = colorString.substring(3, 5);
+			String b = colorString.substring(5, 7);
+			int ri = Integer.decode("0x"+r);
+			int gi = Integer.decode("0x"+g);
+			int bi = Integer.decode("0x"+b);
+			return new Color(ri, gi, bi);
+		} catch(Exception e) {
+			return Color.BLACK;
+		}
+	}
+
+	public static String getHexFromColor(Color c) {
+		String r = Integer.toHexString(c.getRed());
+	   String g = Integer.toHexString(c.getGreen());
+	   String b = Integer.toHexString(c.getBlue());
+	
+	   if(r.length() < 2)
+	       r = "0" + r;
+	
+	   if(g.length() < 2)
+	       g = "0" + g;
+	
+	   if(b.length() < 2)
+	       b = "0" + b;
+	
+	   return "#" + (r + g + b);
+	}
+
 	public static ColorXYZ colorRGB2XYZ(double R, double G, double B) {
 		double var_R = ( R / 255 );        //R from 0 to 255
 		double var_G = ( G / 255 );        //G from 0 to 255

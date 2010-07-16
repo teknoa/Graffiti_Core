@@ -527,19 +527,19 @@ public class FolderPanel extends JComponent {
 				String label2 = "";
 				if (jc1 instanceof JLabel) {
 					label1 = ((JLabel) jc1).getText();
-					label1 = ErrorMsg.stringReplace(label1, " ", "");
-					label1 = ErrorMsg.stringReplace(label1, "<html>", "");
-					label1 = ErrorMsg.stringReplace(label1, "<small>", "");
-					label1 = ErrorMsg.stringReplace(label1, "<br>", "");
-					label1 = ErrorMsg.stringReplace(label1, "&nbsp;", "");
+					label1 = StringManipulationTools.stringReplace(label1, " ", "");
+					label1 = StringManipulationTools.stringReplace(label1, "<html>", "");
+					label1 = StringManipulationTools.stringReplace(label1, "<small>", "");
+					label1 = StringManipulationTools.stringReplace(label1, "<br>", "");
+					label1 = StringManipulationTools.stringReplace(label1, "&nbsp;", "");
 				}
 				if (jc2 instanceof JLabel) {
 					label2 = ((JLabel) jc2).getText();
-					label2 = ErrorMsg.stringReplace(label2, " ", "");
-					label2 = ErrorMsg.stringReplace(label2, "<html>", "");
-					label2 = ErrorMsg.stringReplace(label2, "<small>", "");
-					label2 = ErrorMsg.stringReplace(label2, "<br>", "");
-					label2 = ErrorMsg.stringReplace(label2, "&nbsp;", "");
+					label2 = StringManipulationTools.stringReplace(label2, " ", "");
+					label2 = StringManipulationTools.stringReplace(label2, "<html>", "");
+					label2 = StringManipulationTools.stringReplace(label2, "<small>", "");
+					label2 = StringManipulationTools.stringReplace(label2, "<br>", "");
+					label2 = StringManipulationTools.stringReplace(label2, "&nbsp;", "");
 				}
 
 				return label1.compareTo(label2);

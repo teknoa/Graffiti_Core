@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.13 2010/07/15 09:36:03 morla Exp $
+// $Id: XMLHelper.java,v 1.14 2010/07/16 20:32:41 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -34,6 +34,7 @@ import javax.xml.validation.Validator;
 
 import org.ErrorMsg;
 import org.HelperClass;
+import org.StringManipulationTools;
 import org.jdom.JDOMException;
 import org.jdom.input.DOMBuilder;
 import org.jdom.output.Format;
@@ -102,7 +103,7 @@ public class XMLHelper implements HelperClass {
 		outerXmlTransformer.transform(nodeSource, streamResult);
 
 		String result = resultStringWriter.toString();
-		result = ErrorMsg.stringReplace(result, "'", "&apos;");
+		result = StringManipulationTools.stringReplace(result, "'", "&apos;");
 		return result;
 	}
 
@@ -114,7 +115,7 @@ public class XMLHelper implements HelperClass {
 		serializer.setFormat(Format.getPrettyFormat());
 		serializer.output(getJDOMfromDOM(doc), resultStringWriter);
 		String result = resultStringWriter.toString();
-		result = ErrorMsg.stringReplace(result, "'", "&apos;");
+		result = StringManipulationTools.stringReplace(result, "'", "&apos;");
 		return result;
 	}
 	
