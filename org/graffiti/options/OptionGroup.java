@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: OptionGroup.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: OptionGroup.java,v 1.2 2010/07/17 22:00:20 klukas Exp $
 
 package org.graffiti.options;
 
@@ -15,7 +15,7 @@ import java.util.Vector;
 /**
  * Represents an option pane group.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class OptionGroup
 {
@@ -25,7 +25,7 @@ public class OptionGroup
     private String name;
 
     /** The list of members of this option group. */
-    private Vector members;
+    private Vector<Object> members;
 
     //~ Constructors ===========================================================
 
@@ -37,7 +37,7 @@ public class OptionGroup
     public OptionGroup(String name)
     {
         this.name = name;
-        members = new Vector();
+        members = new Vector<Object>();
     }
 
     //~ Methods ================================================================
@@ -82,7 +82,7 @@ public class OptionGroup
      *
      * @return an enumeration of all members on this option group.
      */
-    public Enumeration getMembers()
+    public Enumeration<Object> getMembers()
     {
         return members.elements();
     }
@@ -132,7 +132,7 @@ public class OptionGroup
      */
     public void save()
     {
-        Enumeration enum2 = members.elements();
+        Enumeration<Object> enum2 = members.elements();
 
         while(enum2.hasMoreElements())
         {

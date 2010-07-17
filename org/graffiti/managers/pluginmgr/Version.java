@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Version.java,v 1.1 2007/05/31 12:55:59 klukas Exp $
+// $Id: Version.java,v 1.2 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -13,10 +13,10 @@ package org.graffiti.managers.pluginmgr;
  * Represents an object, which contains a version number.
  *
  * @author flierl
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class Version
-    implements Comparable
+    implements Comparable<Object>
 {
     //~ Instance fields ========================================================
 

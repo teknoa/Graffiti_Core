@@ -55,7 +55,7 @@ public class ToolTipHelper implements HelperClass {
 		if (oldTooltip.length()>0)
 			toolTipText = "<html>"+toolTipText+"<br><b>"+oldTooltip+"</b>";
 		
-        Stack s = new Stack();
+		Stack<Component> s = new Stack<Component>();
     	s.add(jcomp);
     	while (!s.empty()) {
     		Object se = s.pop();

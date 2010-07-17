@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDescription.java,v 1.12 2010/02/16 12:26:34 morla Exp $
+// $Id: PluginDescription.java,v 1.13 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -15,12 +15,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-
 /**
  * Contains a meta data of a plugin.
  *
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public class PluginDescription
 {
@@ -196,7 +194,7 @@ public class PluginDescription
      *
      * @return an iterator over the plugin dependency list.
      */
-    public Iterator getPluginDependenciesIterator()
+    public Iterator<PluginDependency> getPluginDependenciesIterator()
     {
         return dependencies.iterator();
     }

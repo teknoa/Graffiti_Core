@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LinkedHashMapAttribute.java,v 1.4 2009/06/23 07:05:20 klukas Exp $
+// $Id: LinkedHashMapAttribute.java,v 1.5 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -19,7 +19,7 @@ import org.graffiti.plugin.XMLHelper;
 /**
  * DOCUMENT ME!
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class LinkedHashMapAttribute
     extends AbstractCollectionAttribute
@@ -34,7 +34,7 @@ public class LinkedHashMapAttribute
      */
     public LinkedHashMapAttribute(String id) {
         super(id);
-        this.attributes = new LinkedHashMap();
+        this.attributes = new LinkedHashMap<String, Attribute>();
     }
 
     //~ Methods ================================================================
@@ -49,9 +49,9 @@ public class LinkedHashMapAttribute
      */
     public void setCollection(Map<String, Attribute> attrs) {
         assert attrs != null;
-        attributes = new LinkedHashMap();
+        attributes = new LinkedHashMap<String, Attribute>();
 
-        Iterator it = attrs.values().iterator();
+        Iterator<Attribute> it = attrs.values().iterator();
 
         if(getAttributable() == null) {
             while(it.hasNext()) {
@@ -75,7 +75,8 @@ public class LinkedHashMapAttribute
      * @return a clone of the list of attributes in this
      *         <code>CollectionAttribute</code>.
      */
-    public Map<String, Attribute> getCollection() {
+    @SuppressWarnings("unchecked")
+	public Map<String, Attribute> getCollection() {
         return (LinkedHashMap) ((LinkedHashMap) attributes).clone();
     }
     
@@ -103,7 +104,7 @@ public class LinkedHashMapAttribute
         //M.S.: w�re es hier nicht sinnvoller �ber attributes.values() zu
         //      iterieren? getId() ist wahrscheinlich schneller als get(Id)
         //      bzw. hat eine kleinerer Konstante...
-        for(Iterator i = attributes.keySet().iterator(); i.hasNext();) {
+        for(Iterator<String> i = attributes.keySet().iterator(); i.hasNext();) {
             String attrId = (String) i.next();
             Attribute attr = attributes.get(attrId);
             Attribute copiedAttribute = (Attribute) attr.copy();
@@ -125,7 +126,8 @@ public class LinkedHashMapAttribute
      * @exception IllegalArgumentException if the parameter has not the
      *            appropriate class for this attribute.
      */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
 	protected void doSetValue(Object o)
         throws IllegalArgumentException {
         assert o != null;
@@ -153,7 +155,7 @@ public class LinkedHashMapAttribute
 	public String toXMLString() {
         StringBuffer valString = new StringBuffer();
         valString.append("<subAttributes>" + XMLHelper.getDelimiter());
-        for (Iterator it = attributes.values().iterator(); it.hasNext();) {
+        for (Iterator<Attribute> it = attributes.values().iterator(); it.hasNext();) {
             Attribute attr = (Attribute)it.next();
             valString.append(XMLHelper.spc(6) + "<subattr>" + 
                 attr.toXMLString() + "</subattr>" + XMLHelper.getDelimiter());

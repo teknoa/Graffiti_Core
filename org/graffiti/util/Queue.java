@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Queue.java,v 1.1 2007/05/31 12:56:03 klukas Exp $
+// $Id: Queue.java,v 1.2 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.util;
 
@@ -14,14 +14,14 @@ import java.util.LinkedList;
 /**
  * A simple queue.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class Queue
 {
     //~ Instance fields ========================================================
 
     /** The queue's data structure. */
-    private LinkedList list;
+    private LinkedList<Object> list;
 
     //~ Constructors ===========================================================
 
@@ -30,7 +30,7 @@ public class Queue
      */
     public Queue()
     {
-        list = new LinkedList();
+        list = new LinkedList<Object>();
     }
 
     //~ Methods ================================================================

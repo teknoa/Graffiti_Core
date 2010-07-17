@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: EdgeLabelAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
+// $Id: EdgeLabelAttribute.java,v 1.4 2010/07/17 22:00:20 klukas Exp $
 package org.graffiti.graphics;
 
 import java.util.Iterator;
@@ -20,7 +20,7 @@ import org.graffiti.attributes.StringAttribute;
  * DOCUMENT ME!
  *
  * @author holleis
- * @version $Revision: 1.3 $ Extends LabelAttribute by a PositionAttribute specific for edges.
+ * @version $Revision: 1.4 $ Extends LabelAttribute by a PositionAttribute specific for edges.
  */
 public class EdgeLabelAttribute extends LabelAttribute
 {
@@ -122,7 +122,7 @@ public class EdgeLabelAttribute extends LabelAttribute
                // attrs.keySet().contains(TEXTCOLOR)
                )
         {
-            for (Iterator it = attrs.keySet().iterator(); it.hasNext();)
+            for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
             {
                 String attrId = (String) it.next();
 
@@ -159,10 +159,10 @@ public class EdgeLabelAttribute extends LabelAttribute
 
             this.attributes = attrs;
         }
-        else
-        {
-            throw new IllegalArgumentException("Invalid value type.");
-        }
+//        else
+//        {
+//            throw new IllegalArgumentException("Invalid value type.");
+//        }
     }
 
     /**

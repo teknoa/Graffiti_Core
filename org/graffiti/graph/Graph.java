@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Graph.java,v 1.2 2009/08/08 16:21:15 klukas Exp $
+// $Id: Graph.java,v 1.3 2010/07/17 22:00:19 klukas Exp $
 package org.graffiti.graph;
 
 import java.util.Collection;
@@ -56,7 +56,7 @@ import org.graffiti.event.ListenerManager;
  * </blockquote>
  * </p>
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see Node
  * @see Edge
@@ -154,7 +154,7 @@ public interface Graph
      *
      * @return an iterator over the edges of the <code>Graph</code>.
      */
-    public Iterator getEdgesIterator();
+    public Iterator<Edge> getEdgesIterator();
 
     /**
      * Returns <code>true</code> if the <code>Graph</code> is empty. E.g. the

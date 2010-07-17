@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListGraph.java,v 1.8 2010/02/09 15:28:30 klukas Exp $
+// $Id: AdjListGraph.java,v 1.9 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -28,7 +28,7 @@ import org.graffiti.event.ListenerManager;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * 
  * @see Graph
  * @see AbstractGraph
@@ -210,7 +210,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * 
 	 * @return an iterator containing the nodes of the graph.
 	 */
-	public Iterator getNodesIterator() {
+	public Iterator<Node> getNodesIterator() {
 		return nodes.iterator();
 	}
 

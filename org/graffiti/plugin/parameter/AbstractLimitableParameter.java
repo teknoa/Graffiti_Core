@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractLimitableParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
+// $Id: AbstractLimitableParameter.java,v 1.3 2010/07/17 22:00:18 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -14,7 +14,7 @@ package org.graffiti.plugin.parameter;
  * method, using the <code>compareTo</code> method of the
  * <code>Comparable</code> interface.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class AbstractLimitableParameter
     extends AbstractSingleParameter
@@ -48,14 +48,14 @@ public abstract class AbstractLimitableParameter
      *
      * @return the maximum of the intervall.
      */
-    public abstract Comparable getMax();
+    public abstract Comparable<?> getMax();
 
     /**
      * Returns the minimum of the intervall.
      *
      * @return the minimum of the intervall.
      */
-    public abstract Comparable getMin();
+    public abstract Comparable<?> getMin();
 
     /**
      * Returns <code>true</code> if the value is between the minimum and the

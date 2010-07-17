@@ -2,16 +2,14 @@ package org.graffiti.event;
 
 import java.util.HashMap;
 
-import org.graffiti.attributes.Attributable;
 import org.graffiti.attributes.Attribute;
 import org.graffiti.graph.Edge;
 import org.graffiti.graph.Graph;
 import org.graffiti.graph.Node;
 
-public class TransactionHashMap extends HashMap {
+public class TransactionHashMap extends HashMap<Object, Object> {
 	private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Object put(Object key, Object value) {
 		
@@ -51,8 +49,8 @@ public class TransactionHashMap extends HashMap {
 						return super.put(key, currentChange);
 					else {
 						// generate new event with most common attribute path
-						String path = pcr.getCommonPath();
-						AttributeEvent ae = new AttributeEvent(path, ((Attributable) key).getAttribute(path));
+//						String path = pcr.getCommonPath();
+//						AttributeEvent ae = new AttributeEvent(path, ((Attributable) key).getAttribute(path));
 					}
 						
 				} else {

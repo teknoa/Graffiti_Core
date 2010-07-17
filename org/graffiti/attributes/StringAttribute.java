@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: StringAttribute.java,v 1.4 2010/02/09 11:19:27 klukas Exp $
+// $Id: StringAttribute.java,v 1.5 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -17,7 +17,7 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a String.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class StringAttribute
     extends AbstractAttribute {
@@ -54,7 +54,8 @@ public class StringAttribute
         super();
     }
 
-    public static Attribute getTypedStringAttribute(String id) {
+    @SuppressWarnings("unchecked")
+	public static Attribute getTypedStringAttribute(String id) {
         Attribute newInstance=null;
         Class ct = typedAttributesID2TypeForNodes.get(id);
         if (ct!=null) {
@@ -72,7 +73,8 @@ public class StringAttribute
         return newInstance;    
     }
     
-    public static Attribute getTypedStringAttribute(String id, String value) {
+    @SuppressWarnings("unchecked")
+	public static Attribute getTypedStringAttribute(String id, String value) {
         Attribute newInstance=null;
         Class ct = typedAttributesID2TypeForNodes.get(id);
         if (ct!=null) {
@@ -139,6 +141,7 @@ public class StringAttribute
 	 * 
 	 * @return a deep copy of this instance.
 	 */
+	@SuppressWarnings("unchecked")
 	public Object copy() {
 		if (this.getClass() == StringAttribute.class)
 			return new StringAttribute(getId(), value);
@@ -195,7 +198,8 @@ public class StringAttribute
     /**
      * @author klukas
      */
-    public static void putAttributeType(String id, Class attributeType) {
+    @SuppressWarnings("unchecked")
+	public static void putAttributeType(String id, Class attributeType) {
        if (typedAttributesID2TypeForNodes.containsKey(id))
       	 typedAttributesID2TypeForNodes.remove(id);
    	 typedAttributesID2TypeForNodes.put(id, attributeType);

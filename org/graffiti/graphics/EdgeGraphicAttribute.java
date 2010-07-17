@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: EdgeGraphicAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
+// $Id: EdgeGraphicAttribute.java,v 1.4 2010/07/17 22:00:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -26,7 +26,7 @@ import org.graffiti.attributes.StringAttribute;
  * Defines all graphic attributes of an edge
  *
  * @author breu
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class EdgeGraphicAttribute
     extends GraphElementGraphicAttribute
@@ -232,7 +232,7 @@ public class EdgeGraphicAttribute
             attrs.keySet().contains(LINEMODE) &&
             attrs.keySet().contains(SHAPE))
         {
-            for(Iterator it = attrs.keySet().iterator(); it.hasNext();)
+            for(Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
             {
                 String attrId = (String) it.next();
 
@@ -369,7 +369,7 @@ public class EdgeGraphicAttribute
         EdgeGraphicAttribute copied = new EdgeGraphicAttribute();
 
         // copy ALL of the subattributes
-        for(Iterator iter = attributes.values().iterator(); iter.hasNext();)
+        for(Iterator<?> iter = attributes.values().iterator(); iter.hasNext();)
         {
             Attribute attr = (Attribute) iter.next();
             Attribute copAttr = (Attribute) attr.copy();

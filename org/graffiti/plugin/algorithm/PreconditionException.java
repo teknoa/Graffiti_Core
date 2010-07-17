@@ -5,10 +5,10 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PreconditionException.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
+// $Id: PreconditionException.java,v 1.3 2010/07/17 22:00:19 klukas Exp $
 
 /*
- * $Id: PreconditionException.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
+ * $Id: PreconditionException.java,v 1.3 2010/07/17 22:00:19 klukas Exp $
  */
 package org.graffiti.plugin.algorithm;
 
@@ -24,8 +24,12 @@ public class PreconditionException
 {
     //~ Instance fields ========================================================
 
-    /** DOCUMENT ME! */
-    private List errors;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/** DOCUMENT ME! */
+    private List<Entry> errors;
 
     //~ Constructors ===========================================================
 
@@ -45,7 +49,7 @@ public class PreconditionException
      */
     public PreconditionException()
     {
-        this.errors = new LinkedList();
+        this.errors = new LinkedList<Entry>();
     }
 
     //~ Methods ================================================================
@@ -69,7 +73,7 @@ public class PreconditionException
         StringBuffer sb = new StringBuffer();
         sb.append("The following preconditions are not satisfied:<br><ul>");
 
-        for(Iterator i = errors.iterator(); i.hasNext();)
+        for(Iterator<Entry> i = errors.iterator(); i.hasNext();)
         {
             Entry error = (Entry) i.next();
             sb.append("<li>");
@@ -106,7 +110,7 @@ public class PreconditionException
      *
      * @return an iterator.
      */
-    public Iterator iterator()
+    public Iterator<Entry> iterator()
     {
         return errors.iterator();
     }
@@ -116,7 +120,7 @@ public class PreconditionException
     /**
      * Contains a cause and the source object (ie.: a Graph, Node or Edge).
      *
-     * @version $Revision: 1.2 $
+     * @version $Revision: 1.3 $
      */
     class Entry
     {

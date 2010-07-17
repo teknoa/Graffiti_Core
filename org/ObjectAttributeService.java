@@ -65,7 +65,7 @@ public class ObjectAttributeService implements HelperClass {
             }
             byte[] buf = new byte[bytes.size()];
             int idx = 0;
-            for (Iterator it = bytes.iterator(); it.hasNext();) {
+            for (Iterator<Byte> it = bytes.iterator(); it.hasNext();) {
                 buf[idx++]=((Byte)it.next()).byteValue();
             }
             ByteArrayInputStream is = new ByteArrayInputStream(buf);
@@ -102,7 +102,7 @@ public class ObjectAttributeService implements HelperClass {
 			string=string.substring(objectToStringMappingPossible_StringPrefix.length());
 			try {
 				String cn = string.substring(0, string.indexOf("$"));
-				Class cl = Class.forName(cn);
+				Class<?> cl = Class.forName(cn);
 				Object o = cl.newInstance();
 				if (o instanceof ProvidesStringInitMethod) {
 					((ProvidesStringInitMethod)o).fromString(objstring);

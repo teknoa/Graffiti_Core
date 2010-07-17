@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ShapeDescriptionAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
+// $Id: ShapeDescriptionAttribute.java,v 1.4 2010/07/17 22:00:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -59,7 +59,8 @@ public class ShapeDescriptionAttribute
      *
      * @param points a <code>List</code> of <code>Point2D</code> objects.
      */
-    public void setCoordinates(List points)
+    @SuppressWarnings("unchecked")
+	public void setCoordinates(List points)
     {
         attributes = new LinkedHashMap();
 
@@ -139,12 +140,12 @@ public class ShapeDescriptionAttribute
      *
      * @return DOCUMENT ME!
      */
-    public List getCoordinates()
+    public List<Point2D> getCoordinates()
     {
-        List points = new LinkedList();
+        List<Point2D> points = new LinkedList<Point2D>();
         CoordinateAttribute coord;
 
-        for(Iterator it = this.attributes.values().iterator(); it.hasNext();)
+        for(Iterator<?> it = this.attributes.values().iterator(); it.hasNext();)
         {
             coord = (CoordinateAttribute) it.next();
             points.add(coord.getCoordinate());
@@ -168,7 +169,7 @@ public class ShapeDescriptionAttribute
         //      iterieren? getId() ist wahrscheinlich schneller als get(Id)
         //      bzw. hat eine kleinerer Konstante...
         //ph: done
-        for(Iterator i = attributes.values().iterator(); i.hasNext();)
+        for(Iterator<?> i = attributes.values().iterator(); i.hasNext();)
         {
             //String id = (String) i.next();
             //Attribute attr = (Attribute) attributes.get(id);

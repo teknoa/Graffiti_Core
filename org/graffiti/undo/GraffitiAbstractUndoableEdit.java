@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraffitiAbstractUndoableEdit.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: GraffitiAbstractUndoableEdit.java,v 1.3 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.undo;
 
@@ -19,13 +19,18 @@ import org.graffiti.graph.GraphElement;
 /**
  * GraffitiAbstractUndoableEdit
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class GraffitiAbstractUndoableEdit
     extends AbstractUndoableEdit {
     //~ Instance fields ========================================================
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * The reference for the map between graph elements recreated after undo
      * processing and  original graph elements.
      */

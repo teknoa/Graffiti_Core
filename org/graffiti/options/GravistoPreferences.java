@@ -14,12 +14,14 @@ import java.util.HashMap;
  */
 public class GravistoPreferences {
     
-    HashMap optionsAndValues;
+    @SuppressWarnings("unchecked")
+	HashMap<String, Comparable> optionsAndValues;
     String preferencesNodeName;
     
-    public GravistoPreferences(String preferencesNodeName) {
+    @SuppressWarnings("unchecked")
+	public GravistoPreferences(String preferencesNodeName) {
         this.preferencesNodeName=preferencesNodeName;
-        optionsAndValues=new HashMap();
+        optionsAndValues=new HashMap<String, Comparable>();
     }
 
     public double getDouble(String optionName, double defaultValue) {
@@ -70,7 +72,7 @@ public class GravistoPreferences {
      * @param class1
      * @return
      */
-    public static GravistoPreferences userNodeForPackage(Class classValue) {
+    public static GravistoPreferences userNodeForPackage(Class<?> classValue) {
     	try {
     		return new GravistoPreferences(classValue.getPackage().getName()+"/"+classValue.getName());
     	} catch(NullPointerException npe) {

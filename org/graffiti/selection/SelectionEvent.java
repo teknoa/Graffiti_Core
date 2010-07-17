@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: SelectionEvent.java,v 1.1 2007/05/31 12:56:06 klukas Exp $
+// $Id: SelectionEvent.java,v 1.2 2010/07/17 22:00:22 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -14,14 +14,18 @@ import org.graffiti.event.AbstractEvent;
 /**
  * DOCUMENT ME!
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class SelectionEvent
     extends AbstractEvent
 {
     //~ Instance fields ========================================================
 
-    /** DOCUMENT ME! */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/** DOCUMENT ME! */
     private boolean added;
 
     //~ Constructors ===========================================================

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.11 2010/02/01 18:11:04 klukas Exp $
+// $Id: AbstractCollectionAttribute.java,v 1.12 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -20,7 +20,7 @@ import org.graffiti.plugin.XMLHelper;
  * instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
  *
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			implements CollectionAttribute {
@@ -314,7 +314,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			callPreAttributeRemoved(attrEvent);
 
 			// remove all subattributes
-			for (Iterator itr = getCollection().keySet().iterator(); itr.hasNext();) {
+			for (Iterator<?> itr = getCollection().keySet().iterator(); itr.hasNext();) {
 				String s = (String) itr.next();
 				attributes.remove(s);
 			}
@@ -335,7 +335,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 
 		sb.append(getSpaces(n) + idd + " " + getClass().getName() + " {\n");
 
-		for (Iterator it = attributes.values().iterator(); it.hasNext();) {
+		for (Iterator<Attribute> it = attributes.values().iterator(); it.hasNext();) {
 			Attribute attr = (Attribute) it.next();
 			sb.append(attr.toString(n + 1) + "\n");
 		}
@@ -354,7 +354,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 		valString.append(XMLHelper.spc(4) + "<subAttributes>"
 					+ XMLHelper.getDelimiter());
 
-		for (Iterator it = attributes.values().iterator(); it.hasNext();) {
+		for (Iterator<Attribute> it = attributes.values().iterator(); it.hasNext();) {
 			Attribute attr = (Attribute) it.next();
 			valString.append(XMLHelper.spc(6) + "<subattr>" + attr.toXMLString()
 						+ "</subattr>" + XMLHelper.getDelimiter());

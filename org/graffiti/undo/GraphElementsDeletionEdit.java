@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphElementsDeletionEdit.java,v 1.4 2009/06/23 07:05:20 klukas Exp $
+// $Id: GraphElementsDeletionEdit.java,v 1.5 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.undo;
 
@@ -28,14 +28,17 @@ import org.graffiti.graph.Node;
  * undoable.
  *
  * @author $Author $
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
+@SuppressWarnings("unchecked")
 public class GraphElementsDeletionEdit
     extends GraphElementsEdit
 {
     //~ Static fields/initializers =============================================
 
-    /** The logger for the current class. */
+	private static final long serialVersionUID = 1L;
+
+	/** The logger for the current class. */
     private static final Logger logger = Logger.getLogger(GraphElementsDeletionEdit.class.getName());
 
     //~ Instance fields ========================================================
@@ -104,7 +107,7 @@ public class GraphElementsDeletionEdit
     /**
      * Executes the deletion of selected grpah elements
      */
-    @Override
+	@Override
 	public void execute()
     {
         executed = true;

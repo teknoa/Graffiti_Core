@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: MultipleIterator.java,v 1.3 2009/06/23 07:05:21 klukas Exp $
+// $Id: MultipleIterator.java,v 1.4 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.util;
 
@@ -18,8 +18,9 @@ import java.util.Set;
  * implementing the <code>java.util.Iterator</code> interface. It is possible
  * to iterate over all the iterators one after the other.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
+@SuppressWarnings("unchecked")
 public class MultipleIterator
     implements Iterator
 {

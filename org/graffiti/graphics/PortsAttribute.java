@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PortsAttribute.java,v 1.4 2009/06/23 07:05:20 klukas Exp $
+// $Id: PortsAttribute.java,v 1.5 2010/07/17 22:00:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -24,7 +24,7 @@ import org.graffiti.util.MultipleIterator;
  * Contains ingoing, outgoing and common ports
  *
  * @author breu
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class PortsAttribute
     extends HashMapAttribute
@@ -98,7 +98,7 @@ public class PortsAttribute
         if(attrs.keySet().contains(IN) && attrs.keySet().contains(OUT) &&
             attrs.keySet().contains(COMMON))
         {
-            for(Iterator it = attrs.keySet().iterator(); it.hasNext();)
+            for(Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
             {
                 String attrId = (String) it.next();
 
@@ -153,7 +153,8 @@ public class PortsAttribute
      *
      * @param ports DOCUMENT ME!
      */
-    public void setCommonPorts(List ports)
+    @SuppressWarnings("unchecked")
+	public void setCommonPorts(List ports)
     {
         Map portsMap = new HashMap();
         int i = 1;
@@ -226,9 +227,9 @@ public class PortsAttribute
      */
     public PortAttribute getPort(String name, boolean out)
     {
-        Map commonPortAttributesMap = this.common.getCollection();
-        Collection commonPortAttributes = commonPortAttributesMap.values();
-        Map otherPortAttributesMap;
+        Map<?, ?> commonPortAttributesMap = this.common.getCollection();
+        Collection<?> commonPortAttributes = commonPortAttributesMap.values();
+        Map<?, ?> otherPortAttributesMap;
 
         if(out)
         {
@@ -239,7 +240,7 @@ public class PortsAttribute
             otherPortAttributesMap = ingoing.getCollection();
         }
 
-        Collection otherPortAttributes = otherPortAttributesMap.values();
+        Collection<?> otherPortAttributes = otherPortAttributesMap.values();
 
         MultipleIterator it = new MultipleIterator(commonPortAttributes.iterator(),
                 otherPortAttributes.iterator());

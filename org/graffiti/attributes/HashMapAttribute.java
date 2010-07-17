@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: HashMapAttribute.java,v 1.10 2009/10/30 12:24:02 klukas Exp $
+// $Id: HashMapAttribute.java,v 1.11 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -26,14 +26,14 @@ import org.ErrorMsg;
  * 'Color'-CollectionAttribute. The subattributes 'red', 'green' and 'blue'
  * are not mapped in this Attribute!
  *
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  *
  * @see CollectionAttribute
  * @see CompositeAttribute
  */
 public class HashMapAttribute
     extends AbstractCollectionAttribute
-    implements CollectionAttribute, Comparable {
+    implements CollectionAttribute, Comparable<Object> {
     //~ Constructors ===========================================================
 
     /**
@@ -66,7 +66,7 @@ public class HashMapAttribute
         assert attrs != null;
         attributes = new TreeMap<String,Attribute>();
 
-        Iterator it = attrs.values().iterator();
+        Iterator<Attribute> it = attrs.values().iterator();
 
         if(getAttributable() == null) {
             while(it.hasNext()) {
@@ -93,8 +93,7 @@ public class HashMapAttribute
      *
      * @return a clone of the list of attributes in this attribute.
      */
-    @SuppressWarnings("unchecked")
-	public Map<String,Attribute> getCollection() {
+    public Map<String,Attribute> getCollection() {
         return attributes;
     }
 
@@ -126,7 +125,7 @@ public class HashMapAttribute
    		 return ha;
 		} else {
 			 try {
-		 		 Constructor con = this.getClass().getConstructor(new Class[] { String.class });
+		 		 Constructor<? extends HashMapAttribute> con = this.getClass().getConstructor(new Class[] { String.class });
 				 HashMapAttribute copiedAttributes = (HashMapAttribute) con.newInstance(new Object[] { getId() });
 				 Collection<Attribute> values = attributes.values();
 				 for(Attribute attr : values) {

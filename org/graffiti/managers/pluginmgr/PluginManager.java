@@ -5,12 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginManager.java,v 1.5 2010/01/27 14:15:42 morla Exp $
+// $Id: PluginManager.java,v 1.6 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.graffiti.plugin.GenericPlugin;

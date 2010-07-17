@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ParserException.java,v 1.1 2007/05/31 12:56:00 klukas Exp $
+// $Id: ParserException.java,v 1.2 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.plugin.io;
 
@@ -23,6 +23,11 @@ public class ParserException
     //~ Constructors ===========================================================
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Constructs a new <code>ParserException</code>.
      *
      * @param message the message for this exception.

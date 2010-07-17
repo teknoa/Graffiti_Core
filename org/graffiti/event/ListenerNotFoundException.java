@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ListenerNotFoundException.java,v 1.1 2007/05/31 12:56:04 klukas Exp $
+// $Id: ListenerNotFoundException.java,v 1.2 2010/07/17 22:00:18 klukas Exp $
 
 package org.graffiti.event;
 
@@ -13,7 +13,7 @@ package org.graffiti.event;
  * Will be thrown, if a method tries to deal with a listener that cannot be
  * found in the listener list.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class ListenerNotFoundException
     extends Exception
@@ -21,6 +21,11 @@ public class ListenerNotFoundException
     //~ Constructors ===========================================================
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Constructs a <code>ListenerNotFoundException</code>  with the specified
      * detail message.
      *

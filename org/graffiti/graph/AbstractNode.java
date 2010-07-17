@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractNode.java,v 1.7 2009/06/23 07:05:21 klukas Exp $
+// $Id: AbstractNode.java,v 1.8 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -23,7 +23,7 @@ import org.graffiti.util.MultipleIterator;
  * Abstract class <code>AbstractNode</code> common functionality for
  * <code>Node</code> implementations.
  *
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *
  * @see AdjListNode
  */
@@ -213,12 +213,14 @@ public abstract class AbstractNode
      *
      * @return an iterator over the neighbor nodes belonging to incoming edges.
      */
-    public Iterator<Node> getInNeighborsIterator()
+    @SuppressWarnings("unchecked")
+	public Iterator<Node> getInNeighborsIterator()
     {
         return new MultipleIterator(getInNeighbors().iterator());
     }
     
-    public Iterator<Node> getUndirectedNeighborsIterator()
+    @SuppressWarnings("unchecked")
+	public Iterator<Node> getUndirectedNeighborsIterator()
     {
         return new MultipleIterator(getUndirectedNeighbors().iterator());
     }
@@ -286,7 +288,7 @@ public abstract class AbstractNode
     {
         Set<Node> s = new LinkedHashSet<Node>(getUndirectedNeighbors());
 
-        for(Iterator it = getDirectedOutEdgesIterator(); it.hasNext();)
+        for(Iterator<?> it = getDirectedOutEdgesIterator(); it.hasNext();)
         {
             s.add(((Edge) (it.next())).getTarget());
         }
@@ -301,7 +303,8 @@ public abstract class AbstractNode
      * @return a Iterator containing all the neighbor nodes of the current
      *         <code>Node</code> connected by an outgoing <code>Edge</code>.
      */
-    public Iterator<Node> getOutNeighborsIterator()
+    @SuppressWarnings("unchecked")
+	public Iterator<Node> getOutNeighborsIterator()
     {
         return new MultipleIterator(getOutNeighbors().iterator());
     }
@@ -338,7 +341,7 @@ public abstract class AbstractNode
         Set<Node> s = new LinkedHashSet<Node>();
         Edge e;
 
-        for(Iterator it = getUndirectedEdgesIterator(); it.hasNext();)
+        for(Iterator<?> it = getUndirectedEdgesIterator(); it.hasNext();)
         {
             e = (Edge) (it.next());
 

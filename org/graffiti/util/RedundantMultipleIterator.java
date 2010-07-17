@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: RedundantMultipleIterator.java,v 1.1 2007/05/31 12:56:03 klukas Exp $
+// $Id: RedundantMultipleIterator.java,v 1.2 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.util;
 
@@ -17,15 +17,16 @@ import java.util.NoSuchElementException;
  * implementing the <code>java.util.Iterator</code> interface. It is possible
  * to iterate over all the iterators one after the other.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class RedundantMultipleIterator
-    implements Iterator
+    implements Iterator<Object>
 {
     //~ Instance fields ========================================================
 
     /** The iterators to iterate over. */
-    private Iterator[] iters;
+    @SuppressWarnings("unchecked")
+	private Iterator[] iters;
 
     /** Points to the current iterator. */
     private int current;
@@ -37,7 +38,8 @@ public class RedundantMultipleIterator
      *
      * @param iters the iterators over which to iterate.
      */
-    public RedundantMultipleIterator(Iterator[] iters)
+    @SuppressWarnings("unchecked")
+	public RedundantMultipleIterator(Iterator[] iters)
     {
         current = 0;
         this.iters = iters;
@@ -48,7 +50,7 @@ public class RedundantMultipleIterator
      *
      * @param itr the iterator over which to iterate.
      */
-    public RedundantMultipleIterator(Iterator itr)
+    public RedundantMultipleIterator(Iterator<?> itr)
     {
         iters = new Iterator[1];
         iters[0] = itr;
@@ -60,7 +62,7 @@ public class RedundantMultipleIterator
      * @param itr1 the first iterator over which to iterate.
      * @param itr2 the second iterator over which to iterate.
      */
-    public RedundantMultipleIterator(Iterator itr1, Iterator itr2)
+    public RedundantMultipleIterator(Iterator<?> itr1, Iterator<?> itr2)
     {
         iters = new Iterator[2];
         iters[0] = itr1;
@@ -74,7 +76,7 @@ public class RedundantMultipleIterator
      * @param itr2 the second iterator over which to iterate.
      * @param itr3 the third iterator over which to iterate.
      */
-    public RedundantMultipleIterator(Iterator itr1, Iterator itr2, Iterator itr3)
+    public RedundantMultipleIterator(Iterator<?> itr1, Iterator<?> itr2, Iterator<?> itr3)
     {
         iters = new Iterator[3];
         iters[0] = itr1;

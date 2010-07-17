@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphEvent.java,v 1.2 2009/09/11 12:28:37 morla Exp $
+// $Id: GraphEvent.java,v 1.3 2010/07/17 22:00:18 klukas Exp $
 
 package org.graffiti.event;
 
@@ -23,7 +23,7 @@ import org.graffiti.graph.Node;
  * <code>GraphListener</code> interface.) Each such listener object gets a
  * <code>GraphEvent</code> containing the graph event.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see GraphListener
  * @see AbstractGraphListener
@@ -34,6 +34,11 @@ public class GraphEvent
     //~ Instance fields ========================================================
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * The edge that has been changed by the event. <code>Null</code> if no
      * edge is concerned.
      */

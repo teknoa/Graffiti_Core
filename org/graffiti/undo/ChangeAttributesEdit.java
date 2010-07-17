@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ChangeAttributesEdit.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
+// $Id: ChangeAttributesEdit.java,v 1.4 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.undo;
 
@@ -24,7 +24,7 @@ import org.graffiti.graph.GraphElement;
  * ChangeAttributesEdit
  *
  * @author wirch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class ChangeAttributesEdit
     extends GraffitiAbstractUndoableEdit
@@ -34,7 +34,7 @@ public class ChangeAttributesEdit
     //~ Instance fields ========================================================
 
     /** map from an attribute to its old value */
-    private Map attributeToOldValueMap;
+    private Map<Attribute, Object> attributeToOldValueMap;
     
     private Graph g = null;
 
@@ -47,7 +47,8 @@ public class ChangeAttributesEdit
      *        value.
      * @param geMap map between the old graph elements and the new ones.
      */
-    public ChangeAttributesEdit(Graph graph, Map attributeToOldValueMap, Map geMap)
+    @SuppressWarnings("unchecked")
+	public ChangeAttributesEdit(Graph graph, Map attributeToOldValueMap, Map geMap)
     {
         super(geMap);
         this.attributeToOldValueMap = attributeToOldValueMap;
@@ -61,7 +62,8 @@ public class ChangeAttributesEdit
      * @param attribute the changed attribute.
      * @param geMap map between the old graph elements and the new ones.
      */
-    public ChangeAttributesEdit(Graph graph, Attribute attribute, Map geMap)
+    @SuppressWarnings("unchecked")
+	public ChangeAttributesEdit(Graph graph, Attribute attribute, Map geMap)
     {
         super(geMap);
         this.attributeToOldValueMap = new HashMap();
@@ -136,9 +138,9 @@ public class ChangeAttributesEdit
 	         * a deleted graph element - to a new possibly created attribute
 	         * at a new graph element
 	         */
-	        HashMap attributesMap = new LinkedHashMap();
+	        HashMap<Attribute, Attribute> attributesMap = new LinkedHashMap<Attribute, Attribute>();
 	
-	        for(Iterator iter = attributeToOldValueMap.keySet().iterator();
+	        for(Iterator<Attribute> iter = attributeToOldValueMap.keySet().iterator();
 	            iter.hasNext();)
 	        {
 	            Attribute attribute = (Attribute) iter.next();
@@ -178,7 +180,7 @@ public class ChangeAttributesEdit
 	
 	        if(!attributesMap.isEmpty())
 	        {
-	            for(Iterator iterator = attributesMap.keySet().iterator();
+	            for(Iterator<Attribute> iterator = attributesMap.keySet().iterator();
 	                iterator.hasNext();)
 	            {
 	                Attribute attribute = (Attribute) iterator.next();

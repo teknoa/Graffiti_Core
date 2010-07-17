@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultAlgorithmResult.java,v 1.1 2007/05/31 12:55:54 klukas Exp $
+// $Id: DefaultAlgorithmResult.java,v 1.2 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -23,7 +23,7 @@ public class DefaultAlgorithmResult
     //~ Instance fields ========================================================
 
     /** DOCUMENT ME! */
-    protected Map resultMap = new HashMap();
+    protected Map<String, Object> resultMap = new HashMap<String, Object>();
 
     //~ Constructors ===========================================================
 
@@ -40,7 +40,7 @@ public class DefaultAlgorithmResult
      *
      * @param resultMap DOCUMENT ME!
      */
-    public DefaultAlgorithmResult(Map resultMap)
+    public DefaultAlgorithmResult(Map<String, Object> resultMap)
     {
         super();
         this.resultMap = resultMap;
@@ -51,7 +51,7 @@ public class DefaultAlgorithmResult
     /**
      * @see org.graffiti.plugin.algorithm.AlgorithmResult#getResult()
      */
-    public Map getResult()
+    public Map<String, Object> getResult()
     {
         return this.resultMap;
     }

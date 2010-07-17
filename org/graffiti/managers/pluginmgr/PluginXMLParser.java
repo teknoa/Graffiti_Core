@@ -5,18 +5,15 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginXMLParser.java,v 1.7 2010/02/15 13:32:15 klukas Exp $
+// $Id: PluginXMLParser.java,v 1.8 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Logger;
 
 import org.ErrorMsg;
 import org.apache.commons.digester.Digester;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.NoOpLog;
 import org.graffiti.core.StringBundle;
 import org.xml.sax.SAXException;
@@ -26,7 +23,7 @@ import org.xml.sax.SAXException;
  * The XML parser for the plugin descriptions.  The plugin description
  * (<tt>plugin.xml</tt>) file is validated by the <tt>plugin.dtd</tt>.
  *
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class PluginXMLParser
 {
@@ -42,9 +39,6 @@ public class PluginXMLParser
     /** The local plugin dtd. */
     public static String PLUGIN_DTD_LOCAL = sBundle.getRes("plugin.dtd.local")
                                                    .toString();
-
-    /** The logger for the current class. */
-    private static final Logger logger = Logger.getLogger(PluginXMLParser.class.getName());
 
     //~ Instance fields ========================================================
 

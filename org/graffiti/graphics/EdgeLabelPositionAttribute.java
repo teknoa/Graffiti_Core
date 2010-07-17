@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: EdgeLabelPositionAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: EdgeLabelPositionAttribute.java,v 1.3 2010/07/17 22:00:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -20,7 +20,7 @@ import org.graffiti.attributes.IntegerAttribute;
  * DOCUMENT ME!
  *
  * @author holleis
- * @version $Revision: 1.2 $ Specifies position of an edge label providing several parameters.
+ * @version $Revision: 1.3 $ Specifies position of an edge label providing several parameters.
  */
 public class EdgeLabelPositionAttribute
     extends PositionAttribute
@@ -184,7 +184,7 @@ public class EdgeLabelPositionAttribute
             attrs.keySet().contains(ABSHOR) &&
             attrs.keySet().contains(ABSVERT))
         {
-            for(Iterator it = attrs.keySet().iterator(); it.hasNext();)
+            for(Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
             {
                 String attrId = (String) it.next();
 

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListNode.java,v 1.6 2009/09/11 12:28:37 morla Exp $
+// $Id: AdjListNode.java,v 1.7 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -22,7 +22,7 @@ import org.graffiti.util.MultipleIterator;
 /**
  * Implements a graph node with adjacency list representation.
  *
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see AdjListGraph
  * @see AdjListEdge
@@ -97,7 +97,8 @@ public class AdjListNode
      * @return an iterator containing the directed ingoing edges of the
      *         <code>Node</code>.
      */
-    public Iterator<Edge> getDirectedInEdgesIterator()
+    @SuppressWarnings("unchecked")
+	public Iterator<Edge> getDirectedInEdgesIterator()
     {
         return new MultipleIterator(directedInEdges.iterator());
     }
@@ -109,7 +110,8 @@ public class AdjListNode
      * @return an iterator containing the outgoing directed edges of the
      *         <code>Node</code>.
      */
-    public Iterator<Edge> getDirectedOutEdgesIterator()
+    @SuppressWarnings("unchecked")
+	public Iterator<Edge> getDirectedOutEdgesIterator()
     {
         return new MultipleIterator(directedOutEdges.iterator());
     }
@@ -123,9 +125,10 @@ public class AdjListNode
      * @return an iterator containing all ingoing and outgoing directed and
      *         undirected edges of the current <code>Node</code>.
      */
-    public Iterator<Edge> getEdgesIterator()
+    @SuppressWarnings("unchecked")
+	public Iterator<Edge> getEdgesIterator()
     {
-        return new MultipleIterator(directedInEdges.iterator(),
+        return (Iterator)new MultipleIterator(directedInEdges.iterator(),
             undirectedEdges.iterator(), directedOutEdges.iterator());
     }
 
@@ -162,7 +165,8 @@ public class AdjListNode
      * @return a iterator containing the undirected ingoing and outgoing edges
      *         of the <code>Node</code>.
      */
-    public Iterator<Edge> getUndirectedEdgesIterator()
+    @SuppressWarnings("unchecked")
+	public Iterator<Edge> getUndirectedEdgesIterator()
     {
         return new MultipleIterator(undirectedEdges.iterator());
     }

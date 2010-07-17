@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DoubleParameter.java,v 1.4 2009/06/29 20:26:20 klukas Exp $
+// $Id: DoubleParameter.java,v 1.5 2010/07/17 22:00:18 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -17,7 +17,7 @@ import scenario.ProvidesScenarioSupportCommand;
 /**
  * Represents a double parameter.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class DoubleParameter
     extends AbstractLimitableParameter
@@ -92,7 +92,7 @@ public class DoubleParameter
      * @return DOCUMENT ME!
      */
     @Override
-	public Comparable getMax()
+	public Comparable<?> getMax()
     {
         return null; // TODO
     }
@@ -103,7 +103,7 @@ public class DoubleParameter
      * @return DOCUMENT ME!
      */
     @Override
-	public Comparable getMin()
+	public Comparable<?> getMin()
     {
         return null; // TODO
     }

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DimensionAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
+// $Id: DimensionAttribute.java,v 1.4 2010/07/17 22:00:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -22,7 +22,7 @@ import org.graffiti.attributes.HashMapAttribute;
  * surrounding rectangle
  *
  * @author breu
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class DimensionAttribute
     extends HashMapAttribute
@@ -104,7 +104,7 @@ public class DimensionAttribute
     {
         // if(attrs.keySet().contains(WIDTH) && attrs.keySet().contains(HEIGHT))
         // {
-            for(Iterator it = attrs.keySet().iterator(); it.hasNext();)
+            for(Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
             {
                 String attrId = (String) it.next();
 

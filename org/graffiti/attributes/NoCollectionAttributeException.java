@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: NoCollectionAttributeException.java,v 1.1 2007/05/31 12:55:53 klukas Exp $
+// $Id: NoCollectionAttributeException.java,v 1.2 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -14,7 +14,7 @@ package org.graffiti.attributes;
  * tries to add an attribute to an attribute which is no
  * <code>CollectionAttribute</code>.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class NoCollectionAttributeException
     extends RuntimeException
@@ -22,6 +22,11 @@ public class NoCollectionAttributeException
     //~ Constructors ===========================================================
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Constructs a <code>NoCollectionAttributeException</code> with the
      * specified detail message.
      *

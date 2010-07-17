@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginHelper.java,v 1.5 2009/11/26 13:26:44 morla Exp $
+// $Id: PluginHelper.java,v 1.6 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.util;
 
@@ -36,6 +36,7 @@ import org.graffiti.managers.pluginmgr.PluginXMLParser;
 /**
  *
  */
+@SuppressWarnings("unchecked")
 public class PluginHelper implements HelperClass 
 {
     //~ Methods ================================================================

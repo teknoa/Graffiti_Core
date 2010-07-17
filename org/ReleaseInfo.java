@@ -8,7 +8,6 @@
  */
 package org;
 
-import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -41,7 +40,7 @@ public class ReleaseInfo implements HelperClass {
 	public static boolean getIsAllowedFeature(FeatureSet fs) {
 
 		try {
-			String s = getAppFolder();
+//			String s = getAppFolder();
 		} catch (Exception e) {
 			if (fs == FeatureSet.GravistoJavaHelp)
 				return false;

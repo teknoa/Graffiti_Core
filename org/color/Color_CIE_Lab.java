@@ -25,13 +25,6 @@ public class Color_CIE_Lab {
 	}
 
 	/**
-	 * @param l the l to set
-	 */
-	private void setL(double l) {
-		this.l = l;
-	}
-
-	/**
 	 * @return the l
 	 */
 	public double getL() {

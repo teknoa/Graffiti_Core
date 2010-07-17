@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: HelpContext.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
+// $Id: HelpContext.java,v 1.3 2010/07/17 22:00:20 klukas Exp $
 
 package org.graffiti.help;
 
@@ -17,15 +17,15 @@ import javax.swing.JComponent;
  * Represents the help context of an algorithm or a gui element in the editor.
  *
  * @author flierl
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class HelpContext
 {
     //~ Static fields/initializers =============================================
 
     /** A reference to the default help context, of no help is available. */
-    private static final HelpContext DEFAULT_HELP = new HelpContext(HelpContext.class.getName() +
-            "DEFAULT_HELP");
+//    private static final HelpContext DEFAULT_HELP = new HelpContext(HelpContext.class.getName() +
+//            "DEFAULT_HELP");
 
     //~ Instance fields ========================================================
 
@@ -61,7 +61,7 @@ public class HelpContext
      *
      * @param clazz the class to construct a help context from.
      */
-    public HelpContext(Class clazz)
+    public HelpContext(Class<?> clazz)
     {
     }
 

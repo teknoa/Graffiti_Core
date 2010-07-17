@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: LimitableParameter.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: LimitableParameter.java,v 1.2 2010/07/17 22:00:18 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -13,7 +13,7 @@ package org.graffiti.plugin.parameter;
  * The value of a <code>LimitableParameter</code> can be limited by giving
  * maximum and minimum values.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public interface LimitableParameter
     extends SingleParameter
@@ -25,14 +25,14 @@ public interface LimitableParameter
      *
      * @return the maximum value for this <code>LimitableParameter</code>.
      */
-    public Comparable getMax();
+    public Comparable<?> getMax();
 
     /**
      * Returns the minimum value for this <code>LimitableParameter</code>.
      *
      * @return the minimum value for this <code>LimitableParameter</code>.
      */
-    public Comparable getMin();
+    public Comparable<?> getMin();
 
     /**
      * Returns <code>true</code> if the value is between the minimum and the

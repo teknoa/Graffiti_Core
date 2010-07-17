@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultPluginManager.java,v 1.26 2010/04/27 15:58:32 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.27 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -26,7 +26,6 @@ import java.util.logging.Logger;
 
 import org.ErrorMsg;
 import org.ReleaseInfo;
-import org.SettingsHelperDefaultIsTrue;
 import org.graffiti.core.StringBundle;
 import org.graffiti.options.GravistoPreferences;
 import org.graffiti.plugin.GenericPlugin;
@@ -36,12 +35,10 @@ import org.graffiti.util.PluginHelper;
 import org.graffiti.util.ProgressViewer;
 import org.graffiti.util.StringSplitter;
 
-import sun.awt.geom.AreaOp.AddOp;
-
 /**
  * Manages the list of plugins.
  *
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.27 $
  */
 public class DefaultPluginManager
     implements PluginManager
@@ -68,7 +65,7 @@ public class DefaultPluginManager
      * Holds the plugin entries of the last search. This avoids researching
      * everytime a dependent plugin is automatically searched.
      */
-    private List<PluginEntry> entries;
+//    private List<PluginEntry> entries;
 
     /** The list of plugin manager listeners. */
     private List<PluginManagerListener> pluginManagerListeners;
@@ -436,7 +433,7 @@ public class DefaultPluginManager
 
 		    if (desc==null) return true;
 
-		    List deps = null;
+		    List<?> deps = null;
 		    if (desc!=null) 
 		    	deps = desc.getDependencies();
 
@@ -449,7 +446,7 @@ public class DefaultPluginManager
 		        // check if deps are satisfied
 		        boolean satisfied = true;
 
-		        for(Iterator it = deps.iterator(); it.hasNext();)
+		        for(Iterator<?> it = deps.iterator(); it.hasNext();)
 		        {
 		            PluginDependency dep = (PluginDependency) it.next();
 
@@ -504,7 +501,7 @@ public class DefaultPluginManager
         if(progressViewer != null)
             progressViewer.setMaximum(numberOfPlugins);
 
-        List messages = new LinkedList();
+        List<String> messages = new LinkedList<String>();
 
         PluginEntry[] pluginEntries = new PluginEntry[numberOfPlugins];
 
@@ -545,7 +542,7 @@ public class DefaultPluginManager
         {
             String msg = "";
 
-            for(Iterator itr = messages.iterator(); itr.hasNext();)
+            for(Iterator<String> itr = messages.iterator(); itr.hasNext();)
             {
                 msg += ((String) itr.next() + "\n");
             }
@@ -590,9 +587,9 @@ public class DefaultPluginManager
 
             // search for all plugins, which should be loaded at startup
             // and put their urls into this list
-            List plugins = new LinkedList();
+            List<URL> plugins = new LinkedList<URL>();
 
-            for(Iterator i = pluginEntries.values().iterator(); i.hasNext();)
+            for(Iterator<PluginEntry> i = pluginEntries.values().iterator(); i.hasNext();)
             {
                 PluginEntry e = (PluginEntry) i.next();
 
@@ -607,7 +604,7 @@ public class DefaultPluginManager
 
             int count = 1;
 
-            for(Iterator i = plugins.iterator(); i.hasNext();)
+            for(Iterator<URL> i = plugins.iterator(); i.hasNext();)
             {
                 prefs.put("pluginLocation" + count, i.next().toString());
                 count++;

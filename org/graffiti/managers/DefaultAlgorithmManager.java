@@ -5,12 +5,11 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultAlgorithmManager.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: DefaultAlgorithmManager.java,v 1.3 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.managers;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,7 @@ import org.graffiti.plugin.algorithm.Algorithm;
  * Manages the map of available algorithms: key = algorithm class names, 
  * value = algorithm
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class DefaultAlgorithmManager
     implements AlgorithmManager
@@ -31,7 +30,7 @@ public class DefaultAlgorithmManager
     //~ Instance fields ========================================================
 
     /** The algorithms: key = algorithm class names, value = algorithm */
-    private Map algorithms;
+    private Map<String, Algorithm> algorithms;
 
     //~ Constructors ===========================================================
 
@@ -40,7 +39,7 @@ public class DefaultAlgorithmManager
      */
     public DefaultAlgorithmManager()
     {
-        algorithms = new HashMap();
+        algorithms = new HashMap<String, Algorithm>();
     }
 
     //~ Methods ================================================================
@@ -48,24 +47,10 @@ public class DefaultAlgorithmManager
     /*
      * @see org.graffiti.managers.AlgorithmManager#getAlgorithms()
      */
-    public List getAlgorithms()
+    @SuppressWarnings("unchecked")
+	public List getAlgorithms()
     {
         return new LinkedList(algorithms.values());
-    }
-
-    /*
-     * @see org.graffiti.managers.AlgorithmManager#getClassName(org.graffiti.plugin.algorithm.Algorithm)
-     */
-    public String getClassName(Algorithm algorithm)
-    {
-        for (Iterator it = algorithms.keySet().iterator(); it.hasNext();) {
-			Map.Entry entry = (Map.Entry)it.next();
-			if (entry.getValue() == algorithm) {
-				return (String)entry.getKey();
-			}
-		}
-		// not found:
-        return null;
     }
 
     /*

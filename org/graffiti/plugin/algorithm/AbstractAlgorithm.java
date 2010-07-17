@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAlgorithm.java,v 1.5 2010/01/23 08:45:21 klukas Exp $
+// $Id: AbstractAlgorithm.java,v 1.6 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -98,7 +98,8 @@ public abstract class AbstractAlgorithm implements Algorithm {
 	 * @see org.graffiti.plugin.algorithm.Algorithm#check()
 	 */
 	public void check() throws PreconditionException {
-		if (false)
+		boolean v = false;
+		if (v)
 			throw new PreconditionException();
 	}
 

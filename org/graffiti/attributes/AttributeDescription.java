@@ -9,8 +9,7 @@ public class AttributeDescription {
 	
 	private boolean isNodeDesc, isEdgeDesc;
 
-	@SuppressWarnings("unchecked")
-	public AttributeDescription(String id, Class attributeClass, String user_description, boolean isNodeDesc, boolean isEdgeDesc) {
+	public AttributeDescription(String id, Class<?> attributeClass, String user_description, boolean isNodeDesc, boolean isEdgeDesc) {
 		this.setId(id);
 		this.setAttributeClass(attributeClass);
 		this.setUser_description(user_description);

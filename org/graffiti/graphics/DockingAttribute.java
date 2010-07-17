@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DockingAttribute.java,v 1.3 2009/10/30 12:24:09 klukas Exp $
+// $Id: DockingAttribute.java,v 1.4 2010/07/17 22:00:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -23,7 +23,7 @@ import org.graffiti.attributes.StringAttribute;
  * this correctly.
  *
  * @author breu
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class DockingAttribute
     extends HashMapAttribute
@@ -82,7 +82,7 @@ public class DockingAttribute
     {
         if(attrs.keySet().contains(SOURCE) || attrs.keySet().contains(TARGET))
         {
-            for(Iterator it = attrs.keySet().iterator(); it.hasNext();)
+            for(Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
             {
                 String attrId = (String) it.next();
 

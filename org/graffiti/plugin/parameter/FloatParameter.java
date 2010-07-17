@@ -5,14 +5,14 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: FloatParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
+// $Id: FloatParameter.java,v 1.3 2010/07/17 22:00:18 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
 /**
  * Parameter that contains a float value.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class FloatParameter
     extends AbstractLimitableParameter
@@ -53,7 +53,7 @@ public class FloatParameter
      * @return DOCUMENT ME!
      */
     @Override
-	public Comparable getMax()
+	public Comparable<?> getMax()
     {
         return null; // TODO
     }
@@ -64,7 +64,7 @@ public class FloatParameter
      * @return DOCUMENT ME!
      */
     @Override
-	public Comparable getMin()
+	public Comparable<?> getMin()
     {
         return null; // TODO
     }

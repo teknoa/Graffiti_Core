@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttribute.java,v 1.9 2009/07/10 08:17:45 klukas Exp $
+// $Id: AbstractAttribute.java,v 1.10 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -29,14 +29,14 @@ import org.graffiti.plugin.XMLHelper;
  * <code>parent</code> and <code>attributable</code> of the
  * <code>Attribute</code>.
  *
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public abstract class AbstractAttribute
     implements Attribute
 {
-	 @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	protected static HashMap<String,Class> typedAttributesID2TypeForNodes = getDefaultNodeTypedAttributes();
-	 @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	protected static HashMap<String,Class> typedAttributesID2TypeForEdges = getDefaultEdgeTypedAttributes();
 	 
 	 public void setId(String id) {
@@ -49,16 +49,14 @@ public abstract class AbstractAttribute
 		 }
 	 }
 	 
-	 @SuppressWarnings("unchecked")
-	public static void addNodeAttributeType(String id, Class type) {
+	 public static void addNodeAttributeType(String id, Class<?> type) {
 		 if (typedAttributesID2TypeForNodes.containsKey(id)) {
 			 // System.out.println("Information: overwriting previous attribute class mapping for id "+id+"");
 		 }
 		 typedAttributesID2TypeForNodes.put(id, type);
 	 }
 
-	 @SuppressWarnings("unchecked")
-	public static void addEdgeAttributeType(String id, Class type) {
+	 public static void addEdgeAttributeType(String id, Class<?> type) {
 		 if (typedAttributesID2TypeForEdges.containsKey(id)) {
 			 // System.out.println("Information: overwriting previous attribute class mapping for id "+id+"");
 		 }

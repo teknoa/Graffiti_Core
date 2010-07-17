@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ImageAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: ImageAttribute.java,v 1.3 2010/07/17 22:00:20 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -23,7 +23,7 @@ import org.graffiti.attributes.StringAttribute;
  * Contains the graphic attribute image.
  *
  * @author breu
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class ImageAttribute
     extends HashMapAttribute
@@ -132,7 +132,7 @@ public class ImageAttribute
         if(attrs.keySet().contains(TILED) && attrs.keySet().contains(MAXIMIZE) &&
             attrs.keySet().contains(IMAGE) && attrs.keySet().contains(REF))
         {
-            for(Iterator it = attrs.keySet().iterator(); it.hasNext();)
+            for(Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
             {
                 String attrId = (String) it.next();
 
@@ -287,7 +287,7 @@ public class ImageAttribute
         catch(ClassCastException cce)
         {
             try {
-                Map map = (Map)v;
+                Map<?, ?> map = (Map<?, ?>)v;
                 Attribute tiledAttr = (Attribute)map.get(TILED);
                 if (tiledAttr instanceof IntegerAttribute) {
                     tiledAttr = new BooleanAttribute(tiledAttr.getId(),

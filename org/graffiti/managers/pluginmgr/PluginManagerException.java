@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginManagerException.java,v 1.2 2008/11/14 14:40:49 morla Exp $
+// $Id: PluginManagerException.java,v 1.3 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -15,14 +15,19 @@ import org.graffiti.core.StringBundle;
  * <code>PluginManagerException</code> is thrown, iff an error occured during
  * the loading of a plugin.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class PluginManagerException
     extends Exception
 {
     //~ Static fields/initializers =============================================
 
-    /** The <code>StringBundle</code> of the exception. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** The <code>StringBundle</code> of the exception. */
     protected static StringBundle sBundle = StringBundle.getInstance();
 
     //~ Instance fields ========================================================

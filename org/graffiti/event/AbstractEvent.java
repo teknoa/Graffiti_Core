@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractEvent.java,v 1.1 2007/05/31 12:56:04 klukas Exp $
+// $Id: AbstractEvent.java,v 1.2 2010/07/17 22:00:18 klukas Exp $
 
 package org.graffiti.event;
 
@@ -16,7 +16,7 @@ import java.util.EventObject;
  * could imagine that common things could be added right there (for example
  * the timestamp of the event). Otherwise the class is empty.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class AbstractEvent
     extends EventObject
@@ -24,6 +24,11 @@ public abstract class AbstractEvent
     //~ Constructors ===========================================================
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Constructs an AbstractEvent with object o as source.
      *
      * @param o the object that is considered as source of the event.

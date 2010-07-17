@@ -33,7 +33,7 @@ public class NamedColorSet {
 		ArrayList<Color> lightColors = new ArrayList<Color>();
 		ArrayList<Color> intenseColors = new ArrayList<Color>();
 		
-		boolean generate = false;
+//		boolean generate = false;
 		
 		for (String group : groups) {
 			if (unusedColorsLight.isEmpty() || unusedColorsIntense.isEmpty()) {
@@ -43,7 +43,6 @@ public class NamedColorSet {
 				for (Color c : org.Colors.get(7*generationRound, 0.7f))
 					unusedColorsIntense.push(c);
 				generationRound++;
-				generate = true;
 				
 				for (String k : groups)
 					System.out.println(k);

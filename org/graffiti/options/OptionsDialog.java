@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: OptionsDialog.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
+// $Id: OptionsDialog.java,v 1.3 2010/07/17 22:00:20 klukas Exp $
 
 package org.graffiti.options;
 
@@ -19,7 +19,6 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
-import java.util.Hashtable;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -49,7 +48,7 @@ import org.graffiti.core.StringBundle;
 /**
  * Represents the options dialog.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class OptionsDialog
     extends JDialog
@@ -57,13 +56,18 @@ public class OptionsDialog
 {
     //~ Static fields/initializers =============================================
 
-    /** The <code>StringBundle</code> of this options dialog. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** The <code>StringBundle</code> of this options dialog. */
     private static StringBundle sBundle = StringBundle.getInstance();
 
     //~ Instance fields ========================================================
 
     /** DOCUMENT ME! */
-    private Hashtable panes;
+//    private Hashtable panes;
 
     /** The <code>ImageBundle</code> of this options dialog. */
     private ImageBundle iBundle = ImageBundle.getInstance();
@@ -87,7 +91,7 @@ public class OptionsDialog
     private JTree paneTree;
 
     /** DOCUMENT ME! */
-    private OptionGroup editGroup;
+//    private OptionGroup editGroup;
 
     /** DOCUMENT ME! */
     private OptionGroup pluginsGroup;
@@ -338,7 +342,7 @@ public class OptionsDialog
      */
     private void addOptionGroup(OptionGroup child, OptionGroup parent)
     {
-        Enumeration enum2 = child.getMembers();
+        Enumeration<?> enum2 = child.getMembers();
 
         while(enum2.hasMoreElements())
         {
@@ -419,7 +423,7 @@ public class OptionsDialog
     /**
      * Represents the tree of option panes.
      *
-     * @version $Revision: 1.2 $
+     * @version $Revision: 1.3 $
      */
     class OptionTreeModel
         implements TreeModel
@@ -672,12 +676,17 @@ public class OptionsDialog
      * DOCUMENT ME!
      *
      * @author $Author: klukas $
-     * @version $Revision: 1.2 $ $Date: 2009/06/23 07:05:21 $
+     * @version $Revision: 1.3 $ $Date: 2010/07/17 22:00:20 $
      */
     class PaneNameRenderer
         extends DefaultTreeCellRenderer
     {
-        /** DOCUMENT ME! */
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		/** DOCUMENT ME! */
         private Font groupFont;
 
         /** DOCUMENT ME! */

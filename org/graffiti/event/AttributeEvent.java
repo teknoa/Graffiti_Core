@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeEvent.java,v 1.3 2009/09/11 12:28:37 morla Exp $
+// $Id: AttributeEvent.java,v 1.4 2010/07/17 22:00:18 klukas Exp $
 
 package org.graffiti.event;
 
@@ -15,14 +15,18 @@ import org.graffiti.attributes.Attribute;
 /**
  * Contains an attribute event.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class AttributeEvent
     extends AbstractEvent
 {
     //~ Instance fields ========================================================
 
-    /** The path that has been assigned to the attribute by the event. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/** The path that has been assigned to the attribute by the event. */
     private String path;
 
     //~ Constructors ===========================================================

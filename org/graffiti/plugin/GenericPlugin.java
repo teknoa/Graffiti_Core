@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericPlugin.java,v 1.3 2008/08/06 15:12:14 klukas Exp $
+// $Id: GenericPlugin.java,v 1.4 2010/07/17 22:00:18 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -52,7 +52,8 @@ public interface GenericPlugin
      *
      * @return the attribute types provided by this plugin.
      */
-    public Class[] getAttributes();
+	@SuppressWarnings("unchecked")
+	public Class[] getAttributes();
     
     public AttributeDescription[] getAttributeDescriptions();
 

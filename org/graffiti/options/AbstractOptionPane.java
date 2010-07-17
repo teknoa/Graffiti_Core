@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractOptionPane.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
+// $Id: AbstractOptionPane.java,v 1.3 2010/07/17 22:00:20 klukas Exp $
 
 package org.graffiti.options;
 
@@ -29,7 +29,7 @@ import org.graffiti.core.StringBundle;
  * The default implementation of the option pane interface. It lays out
  * components in a vertical fashion.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class AbstractOptionPane
     extends JPanel
@@ -37,7 +37,12 @@ public abstract class AbstractOptionPane
 {
     //~ Static fields/initializers =============================================
 
-    /** The <code>StringBundle</code> of this option pane. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** The <code>StringBundle</code> of this option pane. */
     protected static StringBundle sBundle = StringBundle.getInstance();
 
     //~ Instance fields ========================================================

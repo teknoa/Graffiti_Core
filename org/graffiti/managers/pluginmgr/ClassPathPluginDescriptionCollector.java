@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ClassPathPluginDescriptionCollector.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: ClassPathPluginDescriptionCollector.java,v 1.3 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -23,12 +23,11 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.logging.Logger;
 
 /**
  * Searches for plugin description files in the current <code>CLASSPATH</code>.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see PluginDescriptionCollector
  */
@@ -37,8 +36,6 @@ public class ClassPathPluginDescriptionCollector
 {
     //~ Static fields/initializers =============================================
 
-    /** The logger for the current class. */
-    private static final Logger logger = Logger.getLogger(ClassPathPluginDescriptionCollector.class.getName());
 
     //~ Constructors ===========================================================
 
@@ -57,7 +54,8 @@ public class ClassPathPluginDescriptionCollector
      * @return An enumeration of all plugin description files from the given
      *         class path.
      */
-    public List collectPluginDescriptions()
+    @SuppressWarnings("unchecked")
+	public List collectPluginDescriptions()
     {
         HashSet result = new HashSet();
 
@@ -65,7 +63,7 @@ public class ClassPathPluginDescriptionCollector
                 System.getProperty("path.separator")), result);
 
         // create a list of all plugin entries
-        List descriptions = new LinkedList();
+        List<DefaultPluginEntry> descriptions = new LinkedList<DefaultPluginEntry>();
 
         for(Iterator i = result.iterator(); i.hasNext();)
         {
@@ -140,9 +138,9 @@ public class ClassPathPluginDescriptionCollector
      *
      * @return DOCUMENT ME!
      */
-    List splitClassPath(String classPath, String separator)
+    List<String> splitClassPath(String classPath, String separator)
     {
-        List result = new LinkedList();
+        List<String> result = new LinkedList<String>();
 
         StringTokenizer tokenizer = new StringTokenizer(classPath, separator);
 
@@ -177,9 +175,9 @@ public class ClassPathPluginDescriptionCollector
      * @param acc the accumulator, which will contain the result of the
      *        recursive search.
      */
-    private void collectFilesInRoots(List roots, HashSet acc)
+    private void collectFilesInRoots(List<String> roots, HashSet<String> acc)
     {
-        for(Iterator i = roots.iterator(); i.hasNext();)
+        for(Iterator<String> i = roots.iterator(); i.hasNext();)
         {
             gatherFiles(new File((String) i.next()), "", acc);
         }
@@ -192,7 +190,7 @@ public class ClassPathPluginDescriptionCollector
      * @param fileName DOCUMENT ME!
      * @param acc DOCUMENT ME!
      */
-    private void gatherFiles(File classRoot, String fileName, HashSet acc)
+    private void gatherFiles(File classRoot, String fileName, HashSet<String> acc)
     {
         File root = new File(classRoot, fileName);
 
@@ -213,7 +211,7 @@ public class ClassPathPluginDescriptionCollector
                     System.out.println(e);
                 }
 
-                Enumeration entries = jarFile.entries();
+                Enumeration<?> entries = jarFile.entries();
 
                 while(entries.hasMoreElements())
                 {

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GeneralUtils.java,v 1.2 2009/06/23 07:05:21 klukas Exp $
+// $Id: GeneralUtils.java,v 1.3 2010/07/17 22:00:21 klukas Exp $
 package org.graffiti.util;
 
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.HelperClass;
 import org.graffiti.attributes.Attribute;
 import org.graffiti.attributes.CollectionAttribute;
 import org.graffiti.attributes.CompositeAttribute;
@@ -24,7 +25,7 @@ import org.graffiti.graph.Node;
 /**
  *
  */
-public class GeneralUtils
+public class GeneralUtils implements HelperClass
 {
     /**
      * Returns a <code>Collection</code> of edges between <code>n1</code>
@@ -40,11 +41,11 @@ public class GeneralUtils
      *
      * @return Collection
      */
-    public static final Collection getEdges(Node n1, Node n2)
+    public static final Collection<Edge> getEdges(Node n1, Node n2)
     {
-        Collection col = new LinkedList();
+        Collection<Edge> col = new LinkedList<Edge>();
 
-        for (Iterator iter = n1.getEdgesIterator(); iter.hasNext();)
+        for (Iterator<Edge> iter = n1.getEdgesIterator(); iter.hasNext();)
         {
             Edge edge = (Edge) iter.next();
 
@@ -77,7 +78,7 @@ public class GeneralUtils
     public static final int[] getPositionOfOnes(String s)
     {
         int len = s.length();
-        ArrayList pos = new ArrayList(len / 2);
+        ArrayList<Integer> pos = new ArrayList<Integer>(len / 2);
 
         for (int i = 0; i < len; i++)
         {
@@ -91,7 +92,7 @@ public class GeneralUtils
 
         int cnt = 0;
 
-        for (Iterator it = pos.iterator(); it.hasNext();)
+        for (Iterator<Integer> it = pos.iterator(); it.hasNext();)
         {
             intarray[cnt++] = ((Integer) it.next()).intValue();
         }
@@ -148,7 +149,7 @@ public class GeneralUtils
      */
     public boolean existsEdge(Node n1, Node n2)
     {
-        for (Iterator iter = n1.getEdgesIterator(); iter.hasNext();)
+        for (Iterator<Edge> iter = n1.getEdgesIterator(); iter.hasNext();)
         {
             Edge edge = (Edge) iter.next();
 
@@ -222,7 +223,8 @@ public class GeneralUtils
      * @return first child (depth first) of attr that matches class type
      *         attributeType.
      */
-    public static final Attribute searchForAttribute(Attribute attr,
+    @SuppressWarnings("unchecked")
+	public static final Attribute searchForAttribute(Attribute attr,
         Class attributeType)
     {
         if (attributeType.isInstance(attr))
@@ -233,7 +235,7 @@ public class GeneralUtils
         {
             if (attr instanceof CollectionAttribute)
             {
-                Iterator it = ((CollectionAttribute) attr).getCollection()
+                Iterator<Attribute> it = ((CollectionAttribute) attr).getCollection()
                                .values().iterator();
 
                 while (it.hasNext())
@@ -265,7 +267,8 @@ public class GeneralUtils
      * @param attributeType class to match
      * @param attributesList list which will be filled with found attributes.
      */
-    public static void searchForAttributes(Attribute attr, Class attributeType,
+    @SuppressWarnings("unchecked")
+	public static void searchForAttributes(Attribute attr, Class attributeType,
         List attributesList)
     {
         if (attributeType.isInstance(attr))

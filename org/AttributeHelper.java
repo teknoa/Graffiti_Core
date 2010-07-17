@@ -24,7 +24,6 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -73,7 +72,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.97 $
+ * @version $Revision: 1.98 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -111,7 +110,7 @@ public class AttributeHelper implements HelperClass {
 		}
 		String osName = System.getProperty("os.name");
 		if (osName.startsWith("Mac OS")) {
-			String cmd = "open";
+//			String cmd = "open";
 			if (url != null && url.contains("?") && url.startsWith("mailto:")) {
 				url = url.substring(0, url.indexOf("?"));
 			}
@@ -1645,9 +1644,9 @@ public class AttributeHelper implements HelperClass {
 						int r = ((Integer) res).intValue();
 						return new Double(r);
 					}
-					if (res instanceof LinkedHashMap
+					if (res instanceof LinkedHashMap<?, ?>
 							&& resultType instanceof Color) {
-						LinkedHashMap lhm = (LinkedHashMap) res;
+						LinkedHashMap<?, ?> lhm = (LinkedHashMap<?, ?>) res;
 						IntegerAttribute r = (IntegerAttribute) lhm.get("red");
 						IntegerAttribute g = (IntegerAttribute) lhm.get("green");
 						IntegerAttribute b = (IntegerAttribute) lhm.get("blue");
@@ -1895,7 +1894,7 @@ public class AttributeHelper implements HelperClass {
 	public static double getWidth(Node myNode) {
 		try {
 			double width;
-			double height;
+//			double height;
 			DoubleAttribute da = (DoubleAttribute) myNode
 					.getAttribute(GraphicAttributeConstants.DIMW_PATH);
 			width = ((Double) da.getValue()).doubleValue();

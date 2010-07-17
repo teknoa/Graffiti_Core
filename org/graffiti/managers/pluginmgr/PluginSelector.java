@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginSelector.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
+// $Id: PluginSelector.java,v 1.4 2010/07/17 22:00:19 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -26,7 +26,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
@@ -45,7 +44,7 @@ import org.graffiti.core.StringBundle;
  * Represents a plugin selector. A simple dialog to pick the name of a plugin.
  * The dialog filters already loaded plugins from the list of plugins.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class PluginSelector
     extends JDialog
@@ -54,8 +53,12 @@ public class PluginSelector
 {
     //~ Static fields/initializers =============================================
 
-    /** The logger for the current class. */
-    private static final Logger logger = Logger.getLogger(PluginSelector.class.getName());
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** The logger for the current class. */
 
     //~ Instance fields ========================================================
 
@@ -92,7 +95,8 @@ public class PluginSelector
      * @param parent the parent dialog.
      * @param pluginDescriptionCollector the collector of plugin descriptions.
      */
-    public PluginSelector(PluginManagerDialog parent,
+    @SuppressWarnings("unchecked")
+	public PluginSelector(PluginManagerDialog parent,
         PluginDescriptionCollector pluginDescriptionCollector)
     {
         super(parent, true);
@@ -351,7 +355,7 @@ public class PluginSelector
      *
      * @see PluginEntry
      */
-    private List createPluginDescriptionList(
+    private List<?> createPluginDescriptionList(
         PluginDescriptionCollector collector)
     {
         return collector.collectPluginDescriptions();
@@ -416,6 +420,11 @@ public class PluginSelector
         extends DefaultListCellRenderer
     {
         /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		/**
          * Constructs a new plugin description cell renderer.
          */
         public PluginDescriptionCellRenderer()
@@ -487,10 +496,10 @@ public class PluginSelector
      * DOCUMENT ME!
      *
      * @author $Author: klukas $
-     * @version $Revision: 1.3 $ $Date: 2009/06/23 07:05:20 $
+     * @version $Revision: 1.4 $ $Date: 2010/07/17 22:00:19 $
      */
     class EntryComparator
-        implements Comparator
+        implements Comparator<Object>
     {
         /**
          * Compares to entries via <code>getDescription().getName()</code>. A

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: IntegerParameter.java,v 1.4 2009/06/29 20:26:20 klukas Exp $
+// $Id: IntegerParameter.java,v 1.5 2010/07/17 22:00:18 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -17,7 +17,7 @@ import scenario.ProvidesScenarioSupportCommand;
 /**
  * Parameter that contains an <code>Integer</code> value.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class IntegerParameter
     extends AbstractLimitableParameter
@@ -99,7 +99,7 @@ public class IntegerParameter
      * @return the maximum of the intervall.
      */
     @Override
-	public Comparable getMax()
+	public Comparable<?> getMax()
     {
         return max;
     }
@@ -110,7 +110,7 @@ public class IntegerParameter
      * @return the minimum of the intervall.
      */
     @Override
-	public Comparable getMin()
+	public Comparable<?> getMin()
     {
         return min;
     }

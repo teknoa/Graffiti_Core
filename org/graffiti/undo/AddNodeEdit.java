@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AddNodeEdit.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: AddNodeEdit.java,v 1.3 2010/07/17 22:00:21 klukas Exp $
 
 package org.graffiti.undo;
 
@@ -19,13 +19,17 @@ import org.graffiti.graph.Node;
  * Class <code>AddNodeEdit</code> makes the add node action undoable.
  *
  * @author Walter Wirch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class AddNodeEdit
     extends GraphElementsEdit {
     //~ Instance fields ========================================================
 
-    /** added node */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/** added node */
     private Node node;
 
     //~ Constructors ===========================================================

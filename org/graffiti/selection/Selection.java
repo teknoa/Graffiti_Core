@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Selection.java,v 1.6 2009/06/23 07:05:20 klukas Exp $
+// $Id: Selection.java,v 1.7 2010/07/17 22:00:22 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -51,7 +51,7 @@ import org.graffiti.graph.Node;
  * selectionChanged()</code>
  * </p>
  *
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class Selection
 {
@@ -91,7 +91,8 @@ public class Selection
     /**
      * Constructs a new <code>Selection</code> instance with the given name.
      */
-    public Selection()
+    @SuppressWarnings("unchecked")
+	public Selection()
     {
         this.nodes = new ListOrderedSet();
         this.edges = new ListOrderedSet();
@@ -104,7 +105,8 @@ public class Selection
      *
      * @param name the name of this selection.
      */
-    public Selection(String name)
+    @SuppressWarnings("unchecked")
+	public Selection(String name)
     {
         this.name = name;
         this.nodes = new ListOrderedSet();
@@ -293,13 +295,13 @@ public class Selection
      *
      * @param newElements
      */
-    public void addAll(Collection newElements)
+    public void addAll(Collection<?> newElements)
     {
         for(Object ge : newElements)
             add((GraphElement) ge);
     }
     
-    public void removeAll(Collection elements)
+    public void removeAll(Collection<?> elements)
     {
         for(Object ge : elements) {
             remove((GraphElement) ge);
@@ -324,7 +326,7 @@ public class Selection
      */
     public void addSelection(Selection sel)
     {
-        for(Iterator it = sel.getElements().iterator(); it.hasNext();)
+        for(Iterator<?> it = sel.getElements().iterator(); it.hasNext();)
         {
             add((GraphElement) it.next());
         }
@@ -333,16 +335,17 @@ public class Selection
     /**
      * Remove all elements from this selection.
      */
-    public void clear()
+    @SuppressWarnings("unchecked")
+	public void clear()
     {
-        for(Iterator it = nodes.iterator(); it.hasNext();)
+        for(Iterator<Node> it = nodes.iterator(); it.hasNext();)
         {
-            newUnmarked.put((Node)it.next(), null);
+            newUnmarked.put(it.next(), null);
         }
 
-        for(Iterator it = edges.iterator(); it.hasNext();)
+        for(Iterator<Edge> it = edges.iterator(); it.hasNext();)
         {
-            newUnmarked.put((Edge)it.next(), null);
+            newUnmarked.put(it.next(), null);
         }
 
         nodes = new ListOrderedSet();
@@ -358,7 +361,7 @@ public class Selection
     {
         Selection newSel = new Selection();
 
-        for(Iterator it = getElements().iterator(); it.hasNext();)
+        for(Iterator<?> it = getElements().iterator(); it.hasNext();)
         {
             GraphElement ge = (GraphElement) it.next();
             newSel.add(ge);
