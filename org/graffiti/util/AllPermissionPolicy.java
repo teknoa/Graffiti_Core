@@ -13,15 +13,15 @@ public class AllPermissionPolicy extends Policy {
 		p = new Permissions();
 
 		AllPermission ap = new AllPermission();
-		
+
 		p.add(ap);
 	}
-	
+
 	@Override
 	public PermissionCollection getPermissions(CodeSource cs) {
 		return p;
 	}
-	
+
 	@Override
 	public void refresh() {
 	}

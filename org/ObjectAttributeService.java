@@ -26,61 +26,61 @@ import java.util.List;
  */
 public class ObjectAttributeService implements HelperClass {
 
-    public static String objectToStringMappingPossible_StringPrefix = "$STRINGOBJECT$";
+	public static String objectToStringMappingPossible_StringPrefix = "$STRINGOBJECT$";
 
-    public static String getStringRepresentationFor(Object myInstance) throws IOException {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        // ObjectOutputStream oos = new ObjectOutputStream(os);
-        // oos.writeObject(myInstance);
-        byte[] obj = os.toByteArray();
-        StringBuffer sb = new StringBuffer();
-        for (int i=0; i<obj.length; i++) {
-            String number;
-            if (obj[i]<0)
-                 number = new Integer(-obj[i]+Byte.MAX_VALUE).toString(); 
-            else number = new Integer(obj[i]).toString();
-            while (number.length()<3) number="0"+number;
-            sb.append(number);
-        }
-        return objectToStringMappingPossible_StringPrefix+sb.toString();
-    }
-    
-    /**
-     * @param string
-     * @return
-     * @throws InvalidClassException
-     */
-    public static Object getObjectFromString(String serializedObject) 
-    	throws InvalidClassException, IOException, ClassNotFoundException {
-        if (serializedObject.startsWith(objectToStringMappingPossible_StringPrefix)) {
-            serializedObject=serializedObject.substring(objectToStringMappingPossible_StringPrefix.length());
-            List<Byte> bytes = new LinkedList<Byte>();
-            while (serializedObject.length()>=3) {
-                String curNumber = serializedObject.substring(0, 3);
-                Integer curVal = new Integer(curNumber);
-                if (curVal.intValue()>Byte.MAX_VALUE)
-                     bytes.add(new Byte( (byte) -(curVal.intValue()-Byte.MAX_VALUE) ));
-                else bytes.add(new Byte( curVal.byteValue()));
-                serializedObject = serializedObject.substring(3);
-            }
-            byte[] buf = new byte[bytes.size()];
-            int idx = 0;
-            for (Iterator<Byte> it = bytes.iterator(); it.hasNext();) {
-                buf[idx++]=((Byte)it.next()).byteValue();
-            }
-            ByteArrayInputStream is = new ByteArrayInputStream(buf);
-            ObjectInputStream ois = new ObjectInputStream(is);
-            return ois.readObject();
-        } else 
-            throw new InvalidClassException("The given String is not a valid serialized StringObjectAttribute!");
-    }
+	public static String getStringRepresentationFor(Object myInstance) throws IOException {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		// ObjectOutputStream oos = new ObjectOutputStream(os);
+		// oos.writeObject(myInstance);
+		byte[] obj = os.toByteArray();
+		StringBuffer sb = new StringBuffer();
+		for (int i=0; i<obj.length; i++) {
+			String number;
+			if (obj[i]<0)
+				number = new Integer(-obj[i]+Byte.MAX_VALUE).toString();
+			else number = new Integer(obj[i]).toString();
+			while (number.length()<3) number="0"+number;
+			sb.append(number);
+		}
+		return objectToStringMappingPossible_StringPrefix+sb.toString();
+	}
 
-    
-    
-    public static void main(String[] args) {
-        System.out.println("Serialization - Test (IPK, CK)");
-        
-    }
+	/**
+	 * @param string
+	 * @return
+	 * @throws InvalidClassException
+	 */
+	public static Object getObjectFromString(String serializedObject)
+	throws InvalidClassException, IOException, ClassNotFoundException {
+		if (serializedObject.startsWith(objectToStringMappingPossible_StringPrefix)) {
+			serializedObject=serializedObject.substring(objectToStringMappingPossible_StringPrefix.length());
+			List<Byte> bytes = new LinkedList<Byte>();
+			while (serializedObject.length()>=3) {
+				String curNumber = serializedObject.substring(0, 3);
+				Integer curVal = new Integer(curNumber);
+				if (curVal.intValue()>Byte.MAX_VALUE)
+					bytes.add(new Byte( (byte) -(curVal.intValue()-Byte.MAX_VALUE) ));
+				else bytes.add(new Byte( curVal.byteValue()));
+				serializedObject = serializedObject.substring(3);
+			}
+			byte[] buf = new byte[bytes.size()];
+			int idx = 0;
+			for (Iterator<Byte> it = bytes.iterator(); it.hasNext();) {
+				buf[idx++]=((Byte)it.next()).byteValue();
+			}
+			ByteArrayInputStream is = new ByteArrayInputStream(buf);
+			ObjectInputStream ois = new ObjectInputStream(is);
+			return ois.readObject();
+		} else
+			throw new InvalidClassException("The given String is not a valid serialized StringObjectAttribute!");
+	}
+
+
+
+	public static void main(String[] args) {
+		System.out.println("Serialization - Test (IPK, CK)");
+
+	}
 
 	/**
 	 * @param list

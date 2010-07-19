@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DoubleAttribute.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
+// $Id: DoubleAttribute.java,v 1.4 2010/07/19 12:59:22 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -14,128 +14,128 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a double
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class DoubleAttribute
-    extends AbstractAttribute {
-    //~ Instance fields ========================================================
+extends AbstractAttribute {
+	//~ Instance fields ========================================================
 
-    /** The value of this attribute */
-    public double value;
+	/** The value of this attribute */
+	public double value;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new instance of a <code>DoubleAttribute</code>.
-     *
-     * @param id the id of the attribute
-     */
-    public DoubleAttribute(String id) {
-        super(id);
-    }
+	/**
+	 * Constructs a new instance of a <code>DoubleAttribute</code>.
+	 *
+	 * @param id the id of the attribute
+	 */
+	public DoubleAttribute(String id) {
+		super(id);
+	}
 
-    /**
-     * Constructs a new instance of a <code>DoubleAttribute</code> with the
-     * given value.
-     *
-     * @param id the id of the attribute.
-     * @param value the value of the attribute.
-     */
-    public DoubleAttribute(String id, double value) {
-        super(id);
-        this.value = value;
-    }
+	/**
+	 * Constructs a new instance of a <code>DoubleAttribute</code> with the
+	 * given value.
+	 *
+	 * @param id the id of the attribute.
+	 * @param value the value of the attribute.
+	 */
+	public DoubleAttribute(String id, double value) {
+		super(id);
+		this.value = value;
+	}
 
-    /**
-     * Constructs a new instance of a <code>DoubleAttribute</code> with the
-     * given value.
-     *
-     * @param id the id of the attribute.
-     * @param value the value of the attribute.
-     */
-    public DoubleAttribute(String id, Double value) {
-        super(id);
-        this.value = value.doubleValue();
-    }
+	/**
+	 * Constructs a new instance of a <code>DoubleAttribute</code> with the
+	 * given value.
+	 *
+	 * @param id the id of the attribute.
+	 * @param value the value of the attribute.
+	 */
+	public DoubleAttribute(String id, Double value) {
+		super(id);
+		this.value = value.doubleValue();
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * @see org.graffiti.attributes.Attribute#setDefaultValue()
-     */
-    public void setDefaultValue() {
-        value = 0.0;
-    }
+	/**
+	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
+	 */
+	public void setDefaultValue() {
+		value = 0.0;
+	}
 
-    /**
-     * Set the value of this Object.
-     *
-     * @param value the new value for this object.
-     */
-    public void setDouble(double value) {
-        AttributeEvent ae = new AttributeEvent(this);
-        callPreAttributeChanged(ae);
-        this.value = value;
-        callPostAttributeChanged(ae);
-    }
+	/**
+	 * Set the value of this Object.
+	 *
+	 * @param value the new value for this object.
+	 */
+	public void setDouble(double value) {
+		AttributeEvent ae = new AttributeEvent(this);
+		callPreAttributeChanged(ae);
+		this.value = value;
+		callPostAttributeChanged(ae);
+	}
 
-    /**
-     * Returns the value of this attribute wrapped in an <code>Double</code>
-     * object.
-     *
-     * @return the value of this attribute wrapped in an <code>Double</code>
-     *         object.
-     */
-    public double getDouble() {
-        return value;
-    }
+	/**
+	 * Returns the value of this attribute wrapped in an <code>Double</code>
+	 * object.
+	 *
+	 * @return the value of this attribute wrapped in an <code>Double</code>
+	 *         object.
+	 */
+	public double getDouble() {
+		return value;
+	}
 
-    /**
-     * Returns the value of the attribute.
-     *
-     * @return the value of the attribute.
-     */
-    public Object getValue() {
-        return new Double(value);
-    }
+	/**
+	 * Returns the value of the attribute.
+	 *
+	 * @return the value of the attribute.
+	 */
+	public Object getValue() {
+		return new Double(value);
+	}
 
-    /**
-     * Returns a deep copy of this instance.
-     *
-     * @return a deep copy of this instance.
-     */
-    public Object copy() {
-        return new DoubleAttribute(this.getId(), this.value);
-    }
+	/**
+	 * Returns a deep copy of this instance.
+	 *
+	 * @return a deep copy of this instance.
+	 */
+	public Object copy() {
+		return new DoubleAttribute(this.getId(), this.value);
+	}
 
-    /**
-     * Sets the value of the attribute. The <code>ListenerManager</code> is
-     * informed by the method <code>setValue()</code>.
-     *
-     * @param o the new value of the attribute.
-     *
-     * @exception IllegalArgumentException if the parameter has not the
-     *            appropriate class for this attribute.
-     */
-    @Override
+	/**
+	 * Sets the value of the attribute. The <code>ListenerManager</code> is
+	 * informed by the method <code>setValue()</code>.
+	 *
+	 * @param o the new value of the attribute.
+	 *
+	 * @exception IllegalArgumentException if the parameter has not the
+	 *            appropriate class for this attribute.
+	 */
+	@Override
 	protected void doSetValue(Object o)
-        throws IllegalArgumentException {
-        assert o != null;
+	throws IllegalArgumentException {
+		assert o != null;
 
-        try {
-            value = ((Double) o).doubleValue();
-        } catch(ClassCastException cce) {
-            throw new IllegalArgumentException("Invalid value type.");
-        }
-    }
+		try {
+			value = ((Double) o).doubleValue();
+		} catch(ClassCastException cce) {
+			throw new IllegalArgumentException("Invalid value type.");
+		}
+	}
 
-    /**
-     * @see org.graffiti.plugin.Displayable#toXMLString()
-     */
-    @Override
+	/**
+	 * @see org.graffiti.plugin.Displayable#toXMLString()
+	 */
+	@Override
 	public String toXMLString() {
-        return getStandardXML(String.valueOf(value));
-    }
+		return getStandardXML(String.valueOf(value));
+	}
 }
 
 //------------------------------------------------------------------------------

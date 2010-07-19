@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.12 2010/07/17 22:00:21 klukas Exp $
+// $Id: AbstractCollectionAttribute.java,v 1.13 2010/07/19 12:59:19 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -20,10 +20,10 @@ import org.graffiti.plugin.XMLHelper;
  * instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
  *
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
-			implements CollectionAttribute {
+implements CollectionAttribute {
 	//~ Static fields/initializers =============================================
 
 	//~ Instance fields ========================================================
@@ -74,11 +74,11 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	 * @throws FieldAlreadySetException DOCUMENT ME!
 	 */
 	public void setAttributable(Attributable att)
-				throws FieldAlreadySetException {
+	throws FieldAlreadySetException {
 		assert att != null : "must not set attributable to null";
 		assert this.getParent() == null : "Only the root attribute has a reference to the attributable "
-					+ " the hierarchy belongs to. Only call setAttributable on "
-					+ "attributes where parent == null.";
+			+ " the hierarchy belongs to. Only call setAttributable on "
+			+ "attributes where parent == null.";
 
 		// different from setParent, attributable is only null when
 		// not set before
@@ -104,7 +104,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			return parent.getAttributable();
 		}
 	}
-	
+
 	private static int sepLen = Attribute.SEPARATOR.length();
 
 	/**
@@ -184,12 +184,12 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	 *            parent or attributable associated with it.
 	 */
 	public void add(Attribute a) throws AttributeExistsException,
-				FieldAlreadySetException {
+	FieldAlreadySetException {
 		if (a == null)
 			return;
 		if (a.getId() == null)
 			return;
-		
+
 		assert a != null;
 
 		String attrId = a.getId();
@@ -204,7 +204,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 					callPreAttributeAdded(attrEvent);
 					a.setParent(this);
 					attributes.put(attrId, a);
-					callPostAttributeAdded(attrEvent); 
+					callPostAttributeAdded(attrEvent);
 				} catch(Exception e2) {
 					throw new AttributeExistsException("Attribute with ID " + attrId
 							+ " already exists in " + "this HashMapAttribute!");
@@ -215,7 +215,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			callPreAttributeAdded(attrEvent);
 			a.setParent(this);
 			attributes.put(attrId, a);
-			callPostAttributeAdded(attrEvent); 
+			callPostAttributeAdded(attrEvent);
 		}
 	}
 
@@ -234,7 +234,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	 *            parent or attributable associated with it.
 	 */
 	public void add(Attribute a, boolean inform)
-				throws AttributeExistsException, FieldAlreadySetException {
+	throws AttributeExistsException, FieldAlreadySetException {
 		assert a != null;
 
 		if (inform)
@@ -244,15 +244,15 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			//                "informing the ListenerManager.");
 
 			if (a==null)
-				System.err.println("internal error: try to add null attribute...");	
+				System.err.println("internal error: try to add null attribute...");
 			String attrId = a.getId();
-//			if (attributes.containsKey(attrId)) {
-//				attributes.remove(attrId);
-//			}
+			//			if (attributes.containsKey(attrId)) {
+			//				attributes.remove(attrId);
+			//			}
 			if (attributes.containsKey(attrId)) {
 				//System.out.println("Attribute with id " + attrId + " already exists.");
 				throw new AttributeExistsException("Attribute with ID " + attrId
-							+ "already exists in " + "this HashMapAttribute!");
+						+ "already exists in " + "this HashMapAttribute!");
 			} else {
 				a.setParent(this);
 				attributes.put(attrId, a);
@@ -275,13 +275,13 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 		assert attrId != null;
 		if (attrId.indexOf(Attribute.SEPARATOR) != -1) {
 			throw new IllegalIdException(
-						"An id must not contain the SEPARATOR chararcter.");
+			"An id must not contain the SEPARATOR chararcter.");
 		} else {
 			Attribute attr = attributes.get(attrId);
 
 			if (attr == null) {
 				throw new AttributeNotFoundException("Attribute with ID " + attrId
-							+ "does not exist in " + "this HashMapAttribute");
+						+ "does not exist in " + "this HashMapAttribute");
 			} else {
 				// notify ListenerManager
 				AttributeEvent attrEvent = new AttributeEvent(attr);
@@ -352,17 +352,17 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	public String toXMLString() {
 		StringBuffer valString = new StringBuffer();
 		valString.append(XMLHelper.spc(4) + "<subAttributes>"
-					+ XMLHelper.getDelimiter());
+				+ XMLHelper.getDelimiter());
 
 		for (Iterator<Attribute> it = attributes.values().iterator(); it.hasNext();) {
 			Attribute attr = (Attribute) it.next();
 			valString.append(XMLHelper.spc(6) + "<subattr>" + attr.toXMLString()
-						+ "</subattr>" + XMLHelper.getDelimiter());
+					+ "</subattr>" + XMLHelper.getDelimiter());
 		}
 
 		valString.append(XMLHelper.spc(4) + "</subAttributes>"
-					+ XMLHelper.getDelimiter() + XMLHelper.spc(4)
-					+ "<sorted>false</sorted>");
+				+ XMLHelper.getDelimiter() + XMLHelper.spc(4)
+				+ "<sorted>false</sorted>");
 
 		return getStandardXML(valString.toString());
 	}

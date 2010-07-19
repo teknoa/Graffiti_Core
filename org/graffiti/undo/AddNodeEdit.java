@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AddNodeEdit.java,v 1.3 2010/07/17 22:00:21 klukas Exp $
+// $Id: AddNodeEdit.java,v 1.4 2010/07/19 13:02:05 morla Exp $
 
 package org.graffiti.undo;
 
@@ -19,75 +19,75 @@ import org.graffiti.graph.Node;
  * Class <code>AddNodeEdit</code> makes the add node action undoable.
  *
  * @author Walter Wirch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class AddNodeEdit
-    extends GraphElementsEdit {
-    //~ Instance fields ========================================================
+extends GraphElementsEdit {
+	//~ Instance fields ========================================================
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	/** added node */
-    private Node node;
+	private Node node;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructor for AddNodeEdit.
-     *
-     * @param node
-     * @param graph
-     * @param geMap
-     */
-    public AddNodeEdit(Node node, Graph graph, Map<GraphElement,GraphElement> geMap) {
-        super(graph, geMap);
-        this.node = node;
-    }
+	/**
+	 * Constructor for AddNodeEdit.
+	 *
+	 * @param node
+	 * @param graph
+	 * @param geMap
+	 */
+	public AddNodeEdit(Node node, Graph graph, Map<GraphElement,GraphElement> geMap) {
+		super(graph, geMap);
+		this.node = node;
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Used to display the name for this edit.
-     *
-     * @return the name of this edit.
-     *
-     * @see javax.swing.undo.UndoableEdit
-     */
-    @Override
+	/**
+	 * Used to display the name for this edit.
+	 *
+	 * @return the name of this edit.
+	 *
+	 * @see javax.swing.undo.UndoableEdit
+	 */
+	@Override
 	public String getPresentationName() {
-        return sBundle.getString("undo.addNode");
-    }
-/*
- * @see org.graffiti.undo.GraffitiAbstractUndoableEdit#execute()
- */
-@Override
-public void execute() {
-    }
+		return sBundle.getString("undo.addNode");
+	}
+	/*
+	 * @see org.graffiti.undo.GraffitiAbstractUndoableEdit#execute()
+	 */
+	@Override
+	public void execute() {
+	}
 
-    /**
-     * Adds the same node that was added through the method that created this
-     * edit.
-     */
-    @Override
+	/**
+	 * Adds the same node that was added through the method that created this
+	 * edit.
+	 */
+	@Override
 	public void redo() {
-        super.redo();
+		super.redo();
 
-        Node newNode = graph.addNodeCopy(node);
-        geMap.put(node, newNode);
-    }
+		Node newNode = graph.addNodeCopy(node);
+		geMap.put(node, newNode);
+	}
 
-    /**
-     * Deletes the node that is stored in this edit.
-     */
-    @Override
+	/**
+	 * Deletes the node that is stored in this edit.
+	 */
+	@Override
 	public void undo() {
-        super.undo();
+		super.undo();
 
-        node = (Node) getNewGraphElement(node);
-        graph.deleteNode(node);
-    }
+		node = (Node) getNewGraphElement(node);
+		graph.deleteNode(node);
+	}
 }
 
 //------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericBundle.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: GenericBundle.java,v 1.3 2010/07/19 13:00:57 morla Exp $
 
 package org.graffiti.core;
 
@@ -19,83 +19,83 @@ import java.util.ResourceBundle;
  */
 public abstract class GenericBundle
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** Resource bundle. */
-    protected ResourceBundle resources;
+	/** Resource bundle. */
+	protected ResourceBundle resources;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs new <code>GenericBundle</code>.
-     */
-    protected GenericBundle()
-    {
-        try
-        {
-            resources = ResourceBundle.getBundle(getBundleLocation(),
-                    Locale.getDefault());
-        }
-        catch(MissingResourceException mre)
-        {
-            System.err.println(getBundleLocation() + ".properties not found.");
-            mre.printStackTrace(System.err);
-        }
-    }
+	/**
+	 * Constructs new <code>GenericBundle</code>.
+	 */
+	protected GenericBundle()
+	{
+		try
+		{
+			resources = ResourceBundle.getBundle(getBundleLocation(),
+					Locale.getDefault());
+		}
+		catch(MissingResourceException mre)
+		{
+			System.err.println(getBundleLocation() + ".properties not found.");
+			mre.printStackTrace(System.err);
+		}
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns the relative location of the specified resource.
-     *
-     * @param s the name of the resource.
-     *
-     * @return the relative location of the specified resource.
-     */
-    public URL getRes(String s)
-    {
-        if(s == null)
-        {
-            return null;
-        }
+	/**
+	 * Returns the relative location of the specified resource.
+	 *
+	 * @param s the name of the resource.
+	 *
+	 * @return the relative location of the specified resource.
+	 */
+	public URL getRes(String s)
+	{
+		if(s == null)
+		{
+			return null;
+		}
 
-        String res = getString(s);
+		String res = getString(s);
 
-        if(res == null)
-        {
-            return null;
-        }
+		if(res == null)
+		{
+			return null;
+		}
 
-        return GenericBundle.class.getClassLoader().getResource(res);
-    }
+		return GenericBundle.class.getClassLoader().getResource(res);
+	}
 
-    /**
-     * Returns the specified String from the properties, <code>null</code>  if
-     * there is no such key.
-     *
-     * @param id the key of the String to look up.
-     *
-     * @return the value of the looked up key.
-     */
-    public String getString(String id)
-    {
-        try
-        {
-            return resources.getString(id);
-        }
-        catch(MissingResourceException mre)
-        {
-            return null;
-        }
-    }
+	/**
+	 * Returns the specified String from the properties, <code>null</code>  if
+	 * there is no such key.
+	 *
+	 * @param id the key of the String to look up.
+	 *
+	 * @return the value of the looked up key.
+	 */
+	public String getString(String id)
+	{
+		try
+		{
+			return resources.getString(id);
+		}
+		catch(MissingResourceException mre)
+		{
+			return null;
+		}
+	}
 
-    /**
-     * Returns the location of the bundle. This is a String like
-     * <code>package/subpackage/classname</code>.
-     *
-     * @return the location of the bundle.
-     */
-    protected abstract String getBundleLocation();
+	/**
+	 * Returns the location of the bundle. This is a String like
+	 * <code>package/subpackage/classname</code>.
+	 *
+	 * @return the location of the bundle.
+	 */
+	protected abstract String getBundleLocation();
 }
 
 //------------------------------------------------------------------------------

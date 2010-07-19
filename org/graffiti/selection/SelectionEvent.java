@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: SelectionEvent.java,v 1.2 2010/07/17 22:00:22 klukas Exp $
+// $Id: SelectionEvent.java,v 1.3 2010/07/19 13:01:51 morla Exp $
 
 package org.graffiti.selection;
 
@@ -14,63 +14,63 @@ import org.graffiti.event.AbstractEvent;
 /**
  * DOCUMENT ME!
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class SelectionEvent
-    extends AbstractEvent
+extends AbstractEvent
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	/** DOCUMENT ME! */
-    private boolean added;
+	private boolean added;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new <code>SelectionEvent</code>.
-     *
-     * @param selection the (new / updated) selection.
-     */
-    public SelectionEvent(Selection selection)
-    {
-        super(selection);
-    }
+	/**
+	 * Constructs a new <code>SelectionEvent</code>.
+	 *
+	 * @param selection the (new / updated) selection.
+	 */
+	public SelectionEvent(Selection selection)
+	{
+		super(selection);
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Sets the added.
-     *
-     * @param added The added to set
-     */
-    public void setAdded(boolean added)
-    {
-        this.added = added;
-    }
+	/**
+	 * Sets the added.
+	 *
+	 * @param added The added to set
+	 */
+	public void setAdded(boolean added)
+	{
+		this.added = added;
+	}
 
-    /**
-     * Returns the selection contained in the event.
-     *
-     * @return the selection contained in the event.
-     */
-    public Selection getSelection()
-    {
-        return (Selection) getSource();
-    }
+	/**
+	 * Returns the selection contained in the event.
+	 *
+	 * @return the selection contained in the event.
+	 */
+	public Selection getSelection()
+	{
+		return (Selection) getSource();
+	}
 
-    /**
-     * Returns the added.
-     *
-     * @return boolean
-     */
-    public boolean toBeAdded()
-    {
-        return added;
-    }
+	/**
+	 * Returns the added.
+	 *
+	 * @return boolean
+	 */
+	public boolean toBeAdded()
+	{
+		return added;
+	}
 }
 
 //------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginDependency.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: PluginDependency.java,v 1.3 2010/07/19 13:01:31 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -14,159 +14,159 @@ import java.util.logging.Logger;
 /**
  * Models a dependency to another plugin.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class PluginDependency
-    implements Dependency
+implements Dependency
 {
-    //~ Static fields/initializers =============================================
+	//~ Static fields/initializers =============================================
 
-    /** The logger for the current class. */
-    private static final Logger logger = Logger.getLogger(PluginDependency.class.getName());
+	/** The logger for the current class. */
+	private static final Logger logger = Logger.getLogger(PluginDependency.class.getName());
 
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** The author of the plugin. */
-    private String author;
+	/** The author of the plugin. */
+	private String author;
 
-    /**
-     * An URL or short description about the location of this plugin in the
-     * internet.
-     */
-    private String available;
+	/**
+	 * An URL or short description about the location of this plugin in the
+	 * internet.
+	 */
+	private String available;
 
-    /** The name of the main class of the plugin dependency. */
-    private String main;
+	/** The name of the main class of the plugin dependency. */
+	private String main;
 
-    //    /**
-    //     * Constructs a new plugin dependency.
-    //     */
-    //    public PluginDependency() {
-    //    }
+	//    /**
+	//     * Constructs a new plugin dependency.
+	//     */
+	//    public PluginDependency() {
+	//    }
 
-    /** The name of the plugin, this dependency depends on. */
-    private String name;
+	/** The name of the plugin, this dependency depends on. */
+	private String name;
 
-    /** The version of this plugin. */
-    private String version;
+	/** The version of this plugin. */
+	private String version;
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Sets the author.
-     *
-     * @param author The author to set
-     */
-    public void setAuthor(String author)
-    {
-        this.author = author;
-        logger.fine("author set to: " + author);
-    }
+	/**
+	 * Sets the author.
+	 *
+	 * @param author The author to set
+	 */
+	public void setAuthor(String author)
+	{
+		this.author = author;
+		logger.fine("author set to: " + author);
+	}
 
-    /**
-     * Returns the author.
-     *
-     * @return String
-     */
-    public String getAuthor()
-    {
-        return author;
-    }
+	/**
+	 * Returns the author.
+	 *
+	 * @return String
+	 */
+	public String getAuthor()
+	{
+		return author;
+	}
 
-    /**
-     * Sets the available.
-     *
-     * @param available The available to set
-     */
-    public void setAvailable(String available)
-    {
-        this.available = available;
-        logger.fine("available set to: " + available);
-    }
+	/**
+	 * Sets the available.
+	 *
+	 * @param available The available to set
+	 */
+	public void setAvailable(String available)
+	{
+		this.available = available;
+		logger.fine("available set to: " + available);
+	}
 
-    /**
-     * Returns the available.
-     *
-     * @return String
-     */
-    public String getAvailable()
-    {
-        return available;
-    }
+	/**
+	 * Returns the available.
+	 *
+	 * @return String
+	 */
+	public String getAvailable()
+	{
+		return available;
+	}
 
-    /**
-     * Sets the main.
-     *
-     * @param main The main to set
-     */
-    public void setMain(String main)
-    {
-        this.main = main;
-        logger.fine("main set to: " + main);
-    }
+	/**
+	 * Sets the main.
+	 *
+	 * @param main The main to set
+	 */
+	public void setMain(String main)
+	{
+		this.main = main;
+		logger.fine("main set to: " + main);
+	}
 
-    /**
-     * Returns the main.
-     *
-     * @return String
-     */
-    public String getMain()
-    {
-        return main;
-    }
+	/**
+	 * Returns the main.
+	 *
+	 * @return String
+	 */
+	public String getMain()
+	{
+		return main;
+	}
 
-    /**
-     * Sets the name.
-     *
-     * @param name The name to set
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-        logger.fine("name set to: " + name);
-    }
+	/**
+	 * Sets the name.
+	 *
+	 * @param name The name to set
+	 */
+	public void setName(String name)
+	{
+		this.name = name;
+		logger.fine("name set to: " + name);
+	}
 
-    /**
-     * Returns the name.
-     *
-     * @return String
-     */
-    public String getName()
-    {
-        return name;
-    }
+	/**
+	 * Returns the name.
+	 *
+	 * @return String
+	 */
+	public String getName()
+	{
+		return name;
+	}
 
-    /**
-     * Sets the version.
-     *
-     * @param version The version to set
-     */
-    public void setVersion(String version)
-    {
-        this.version = version;
-        logger.fine("version set to: " + version);
-    }
+	/**
+	 * Sets the version.
+	 *
+	 * @param version The version to set
+	 */
+	public void setVersion(String version)
+	{
+		this.version = version;
+		logger.fine("version set to: " + version);
+	}
 
-    /**
-     * Returns the version.
-     *
-     * @return String
-     */
-    public String getVersion()
-    {
-        return version;
-    }
+	/**
+	 * Returns the version.
+	 *
+	 * @return String
+	 */
+	public String getVersion()
+	{
+		return version;
+	}
 
-    /**
-     * Returns a human readable string of this object.
-     *
-     * @return a human readable string representation of this object.
-     */
-    @Override
+	/**
+	 * Returns a human readable string of this object.
+	 *
+	 * @return a human readable string representation of this object.
+	 */
+	@Override
 	public String toString()
-    {
-        return "[name = " + name + ",main = " + main + "]";
-    }
+	{
+		return "[name = " + name + ",main = " + main + "]";
+	}
 }
 
 //------------------------------------------------------------------------------

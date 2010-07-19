@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractLimitableParameter.java,v 1.3 2010/07/17 22:00:18 klukas Exp $
+// $Id: AbstractLimitableParameter.java,v 1.4 2010/07/19 13:01:54 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -14,57 +14,57 @@ package org.graffiti.plugin.parameter;
  * method, using the <code>compareTo</code> method of the
  * <code>Comparable</code> interface.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public abstract class AbstractLimitableParameter
-    extends AbstractSingleParameter
-    implements LimitableParameter
+extends AbstractSingleParameter
+implements LimitableParameter
 {
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new abstract limitable parameter.
-     *
-     * @param name the name of the parameter.
-     * @param description the description of the parameter.
-     */
-    public AbstractLimitableParameter(String name, String description)
-    {
-        super(name, description);
-    }
+	/**
+	 * Constructs a new abstract limitable parameter.
+	 *
+	 * @param name the name of the parameter.
+	 * @param description the description of the parameter.
+	 */
+	public AbstractLimitableParameter(String name, String description)
+	{
+		super(name, description);
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
-     */
-    @Override
+	/**
+	 * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
+	 */
+	@Override
 	public String toXMLString() {
-        return getStandardXML(getValue().toString());
-    }
-    
-    /**
-     * Returns the maximum of the intervall.
-     *
-     * @return the maximum of the intervall.
-     */
-    public abstract Comparable<?> getMax();
+		return getStandardXML(getValue().toString());
+	}
 
-    /**
-     * Returns the minimum of the intervall.
-     *
-     * @return the minimum of the intervall.
-     */
-    public abstract Comparable<?> getMin();
+	/**
+	 * Returns the maximum of the intervall.
+	 *
+	 * @return the maximum of the intervall.
+	 */
+	public abstract Comparable<?> getMax();
 
-    /**
-     * Returns <code>true</code> if the value is between the minimum and the
-     * maximum, <code>false</code> otherwise.
-     *
-     * @return <code>true</code> if the value is between the minimum and the
-     *         maximum, <code>false</code> otherwise.
-     */
-    public abstract boolean isValid();
+	/**
+	 * Returns the minimum of the intervall.
+	 *
+	 * @return the minimum of the intervall.
+	 */
+	public abstract Comparable<?> getMin();
+
+	/**
+	 * Returns <code>true</code> if the value is between the minimum and the
+	 * maximum, <code>false</code> otherwise.
+	 *
+	 * @return <code>true</code> if the value is between the minimum and the
+	 *         maximum, <code>false</code> otherwise.
+	 */
+	public abstract boolean isValid();
 }
 
 //------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: EdgeEvent.java,v 1.3 2010/07/17 22:00:18 klukas Exp $
+// $Id: EdgeEvent.java,v 1.4 2010/07/19 13:01:43 morla Exp $
 
 package org.graffiti.event;
 
@@ -21,48 +21,48 @@ import org.graffiti.graph.Edge;
  * <code>EdgeListener</code> interface.) Each such listener object gets an
  * <code>EdgeEvent</code> containing the edge event.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *
  * @see EdgeListener
  * @see AbstractEdgeListener
  */
 public class EdgeEvent
-    extends AbstractEvent
+extends AbstractEvent
 {
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-     * Constructs an edge event object with the specified source component.
-     *
-     * @param edge the edge that originated the event.
-     */
-    public EdgeEvent(Edge edge)
-    {
-        super(edge);
-    }
+	 * Constructs an edge event object with the specified source component.
+	 *
+	 * @param edge the edge that originated the event.
+	 */
+	public EdgeEvent(Edge edge)
+	{
+		super(edge);
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns the originator of the event.
-     *
-     * @return the edge that has been changed by this event.
-     */
-    public Edge getEdge()
-    {
-        return (Edge) getSource();
-    }
+	/**
+	 * Returns the originator of the event.
+	 *
+	 * @return the edge that has been changed by this event.
+	 */
+	public Edge getEdge()
+	{
+		return (Edge) getSource();
+	}
 
-    public Attributable getAttributeable() {
+	public Attributable getAttributeable() {
 		if (getEdge()!=null)
 			return getEdge();
 		return null;
-    }
+	}
 }
 
 //------------------------------------------------------------------------------

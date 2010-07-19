@@ -12,7 +12,7 @@ public enum Release {
 	DEBUG, RELEASE_IPK, RELEASE_PUBLIC, RELEASE_CLUSTERVIS, KGML_EDITOR;
 
 	private static MultipleFileLoader fileLoader = null;
-	
+
 	public static void setFileLoadHelper(MultipleFileLoader fileLoader) {
 		Release.fileLoader = fileLoader;
 	}

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
+// $Id: AttributeParameter.java,v 1.3 2010/07/19 13:01:54 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -15,105 +15,105 @@ import org.graffiti.attributes.Attribute;
  * This class is used for <code>Parameters</code> that satisfy the
  * <code>org.graffiti.attributes.Attribte</code> interface.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see Attribute
  */
 public class AttributeParameter
-    extends AbstractSingleParameter
+extends AbstractSingleParameter
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** The value of the <code>AttributeParameter</code>. */
-    private Attribute value = null;
+	/** The value of the <code>AttributeParameter</code>. */
+	private Attribute value = null;
 
-    /**
-     * The path to the attribute this <code>AttributeParameter</code>
-     * represents.
-     */
-    private String path;
+	/**
+	 * The path to the attribute this <code>AttributeParameter</code>
+	 * represents.
+	 */
+	private String path;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new attribute parameter.
-     *
-     * @param name the name of the attribute.
-     * @param description the description of the attribute.
-     */
-    public AttributeParameter(String name, String description)
-    {
-        super(name, description);
-    }
+	/**
+	 * Constructs a new attribute parameter.
+	 *
+	 * @param name the name of the attribute.
+	 * @param description the description of the attribute.
+	 */
+	public AttributeParameter(String name, String description)
+	{
+		super(name, description);
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Sets the <code>Attribute</code> the <code>AttributeParameter</code>
-     * represents. <b>Implementation Note</b>: has to update the
-     * <code>path</code>.
-     *
-     * @param value the new <code>Attribute</code> the
-     *        <code>AttributeParameter</code> represents.
-     */
-    public void setAttribute(Attribute value)
-    {
-        // TODO
-    }
+	/**
+	 * Sets the <code>Attribute</code> the <code>AttributeParameter</code>
+	 * represents. <b>Implementation Note</b>: has to update the
+	 * <code>path</code>.
+	 *
+	 * @param value the new <code>Attribute</code> the
+	 *        <code>AttributeParameter</code> represents.
+	 */
+	public void setAttribute(Attribute value)
+	{
+		// TODO
+	}
 
-    /**
-     * Returns the <code>Attribute</code> the <code>AttributeParameter</code>
-     * represents.
-     *
-     * @return the <code>Attribute</code> the <code>AttributeParameter</code>
-     *         represents.
-     */
-    public Attribute getAttribute()
-    {
-        return value;
-    }
+	/**
+	 * Returns the <code>Attribute</code> the <code>AttributeParameter</code>
+	 * represents.
+	 *
+	 * @return the <code>Attribute</code> the <code>AttributeParameter</code>
+	 *         represents.
+	 */
+	public Attribute getAttribute()
+	{
+		return value;
+	}
 
-    /**
-     * Returns the path to the <code>Attribute</code> the
-     * <code>AttributeParameter</code> represents.
-     *
-     * @return the path to the <code>Attribute</code> the
-     *         <code>AttributeParameter</code> represents.
-     */
-    public String getPath()
-    {
-        return path;
-    }
+	/**
+	 * Returns the path to the <code>Attribute</code> the
+	 * <code>AttributeParameter</code> represents.
+	 *
+	 * @return the path to the <code>Attribute</code> the
+	 *         <code>AttributeParameter</code> represents.
+	 */
+	public String getPath()
+	{
+		return path;
+	}
 
-    /**
-     * Sets the value of the <code>AttributeParameter</code>.
-     *
-     * @param value the new value of the <code>AttributeParameter</code>.
-     */
-    @Override
+	/**
+	 * Sets the value of the <code>AttributeParameter</code>.
+	 *
+	 * @param value the new value of the <code>AttributeParameter</code>.
+	 */
+	@Override
 	public void setValue(Object value)
-    {
-        // TODO
-    }
+	{
+		// TODO
+	}
 
-    /**
-     * Returns the value of the <code>AttributeParameter</code>.
-     *
-     * @return the value of the <code>AttributeParameter</code>.
-     */
-    @Override
+	/**
+	 * Returns the value of the <code>AttributeParameter</code>.
+	 *
+	 * @return the value of the <code>AttributeParameter</code>.
+	 */
+	@Override
 	public Object getValue()
-    {
-        return value;
-    }
+	{
+		return value;
+	}
 
-    /**
-     * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
-     */
-    @Override
+	/**
+	 * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
+	 */
+	@Override
 	public String toXMLString() {
-        return getStandardXML(value.toXMLString());
-    }
+		return getStandardXML(value.toXMLString());
+	}
 }
 
 //------------------------------------------------------------------------------

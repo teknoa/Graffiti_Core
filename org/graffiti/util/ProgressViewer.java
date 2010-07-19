@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ProgressViewer.java,v 1.2 2010/05/14 07:35:44 klukas Exp $
+// $Id: ProgressViewer.java,v 1.3 2010/07/19 13:01:43 morla Exp $
 
 package org.graffiti.util;
 
@@ -13,46 +13,46 @@ package org.graffiti.util;
  * A class that displays in some sense progress made while a long running task.
  *
  * @author Michael Forster
- * @version $Revision: 1.2 $ $Date: 2010/05/14 07:35:44 $
+ * @version $Revision: 1.3 $ $Date: 2010/07/19 13:01:43 $
  */
 public interface ProgressViewer
 {
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Sets the progress viewer's maximum value to n. By default, the maximum
-     * value is 100.
-     *
-     * @param n the new maximum
-     */
-    void setMaximum(int n);
+	/**
+	 * Sets the progress viewer's maximum value to n. By default, the maximum
+	 * value is 100.
+	 *
+	 * @param n the new maximum
+	 */
+	void setMaximum(int n);
 
-    /**
-     * Sets the value of the progress text. By default, this string is null. If
-     * you have provided a custom progress string and want to revert to the
-     * built-in behavior, set the string back to null.
-     *
-     * @param text the value of the progress string
-     */
-    void setText(String text);
+	/**
+	 * Sets the value of the progress text. By default, this string is null. If
+	 * you have provided a custom progress string and want to revert to the
+	 * built-in behavior, set the string back to null.
+	 *
+	 * @param text the value of the progress string
+	 */
+	void setText(String text);
 
-    /**
-     * Sets the progress viewer's current value to n.
-     *
-     * @param n the new value
-     */
-    void setValue(int n);
+	/**
+	 * Sets the progress viewer's current value to n.
+	 *
+	 * @param n the new value
+	 */
+	void setValue(int n);
 
-    /**
-     * Returns the progress viewer's current value. The value is always between
-     * the zero and the maximum values, inclusive. By default, the value is
-     * initialized to zero.
-     *
-     * @return DOCUMENT ME!
-     */
-    int getValue();
-    
-    int getMaximum();
+	/**
+	 * Returns the progress viewer's current value. The value is always between
+	 * the zero and the maximum values, inclusive. By default, the value is
+	 * initialized to zero.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	int getValue();
+
+	int getMaximum();
 }
 
 //------------------------------------------------------------------------------

@@ -13,18 +13,18 @@ import org.graffiti.core.GenericFileFilter;
  */
 public class GravistoFileFilter extends GenericFileFilter {
 
-    String description;
-    
-    /**
-     * @param extension
-     */
-    public GravistoFileFilter(String extension, String description) {
-        super(extension);
-        this.description=description;
-    }
+	String description;
 
-    @Override
+	/**
+	 * @param extension
+	 */
+	public GravistoFileFilter(String extension, String description) {
+		super(extension);
+		this.description=description;
+	}
+
+	@Override
 	public String getDescription() {
-        return description+" (*"+getExtension()+")";
-    }
+		return description+" (*"+getExtension()+")";
+	}
 }

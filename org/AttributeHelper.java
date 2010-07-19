@@ -72,14 +72,14 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.98 $
+ * @version $Revision: 1.99 $
  */
 public class AttributeHelper implements HelperClass {
 
 	private static HashMap<String, String> idToNiceId = new HashMap<String, String>();
 	private static boolean idInit = false;
 	public static String attributeSeparator = String
-			.valueOf(Attribute.SEPARATOR);
+	.valueOf(Attribute.SEPARATOR);
 
 	public static String id_ttestCircleSize = "ttestCircleSize";
 
@@ -101,7 +101,7 @@ public class AttributeHelper implements HelperClass {
 				p2 = StringManipulationTools.stringReplace(p2, "%2B", "+");
 			} catch (UnsupportedEncodingException e) {
 				ErrorMsg
-						.addErrorMessage("Internal Error: UTF-8 encoding is not supported by runtime environment.");
+				.addErrorMessage("Internal Error: UTF-8 encoding is not supported by runtime environment.");
 			}
 			url = p1 + "?" + p2;
 			url = StringManipulationTools.stringReplace(url, "%3D", "=");
@@ -110,7 +110,7 @@ public class AttributeHelper implements HelperClass {
 		}
 		String osName = System.getProperty("os.name");
 		if (osName.startsWith("Mac OS")) {
-//			String cmd = "open";
+			//			String cmd = "open";
 			if (url != null && url.contains("?") && url.startsWith("mailto:")) {
 				url = url.substring(0, url.indexOf("?"));
 			}
@@ -155,14 +155,14 @@ public class AttributeHelper implements HelperClass {
 					} catch (Exception e4) {
 						JOptionPane.showMessageDialog(null,
 								"<html>Error executing command. Error Messages:<p>"
-										+ e.getLocalizedMessage()
-										+ " (Windows File Open)<p>"
-										+ e2.getLocalizedMessage()
-										+ " (gnome File Open)<p>"
-										+ e3.getLocalizedMessage()
-										+ " (Mac OS X File Open)<p>"
-										+ e4.getLocalizedMessage()
-										+ " (KDE File Open)</html>",
+								+ e.getLocalizedMessage()
+								+ " (Windows File Open)<p>"
+								+ e2.getLocalizedMessage()
+								+ " (gnome File Open)<p>"
+								+ e3.getLocalizedMessage()
+								+ " (Mac OS X File Open)<p>"
+								+ e4.getLocalizedMessage()
+								+ " (KDE File Open)</html>",
 								"Error opening file",
 								JOptionPane.WARNING_MESSAGE);
 					}
@@ -188,7 +188,7 @@ public class AttributeHelper implements HelperClass {
 
 		// System.setProperty("apple.awt.window.position.forceSafeCreation",
 		// "true");
-		
+
 		System.setProperty("apple.awt.showGrowBox", "true");
 		System.setProperty("com.apple.mrj.application.apple.menu.about.name", applicationName);
 		System.setProperty("apple.awt.rendering", "VALUE_RENDER_SPEED");
@@ -226,10 +226,10 @@ public class AttributeHelper implements HelperClass {
 		if (idToNiceId.containsKey(pathUntilNumber)) {
 			if (!pathUntilNumber.equals(a.getPath()))
 				result = idToNiceId.get(pathUntilNumber)
-						+ getSubStringFromNumber(a.getPath(), ".") + ": " + id;
+				+ getSubStringFromNumber(a.getPath(), ".") + ": " + id;
 			else
 				result = idToNiceId.get(pathUntilNumber)
-						+ getSubStringFromNumber(a.getPath(), ".");
+				+ getSubStringFromNumber(a.getPath(), ".");
 		} else {
 			if (idToNiceId.containsKey(tabName + ":" + id))
 				result = idToNiceId.get(tabName + ":" + id);
@@ -241,9 +241,9 @@ public class AttributeHelper implements HelperClass {
 			// id = id.substring(0, 1).toUpperCase() + id.substring(1);
 			// }
 			String folder = a.getParent() != null
-					&& a.getParent().getName() != null ? a.getParent()
+			&& a.getParent().getName() != null ? a.getParent()
 					.getName() : tabName;
-			result = folder + ": " + id + endNumber;
+					result = folder + ": " + id + endNumber;
 		} else
 			result = result + " " + endNumber;
 		if (true) {
@@ -257,20 +257,20 @@ public class AttributeHelper implements HelperClass {
 				endS = StringManipulationTools.stringReplace(endS, " ", "&nbsp;");
 				if (ReleaseInfo.getRunningReleaseStatus() == Release.KGML_EDITOR)
 					result = result.substring(0, idx) + " (list):"
-							+ "<html><!-- " + endNumber + " -->"
-							+ StringManipulationTools.stringReplace(endS, "<html>", "");
+					+ "<html><!-- " + endNumber + " -->"
+					+ StringManipulationTools.stringReplace(endS, "<html>", "");
 				else {
 					if (result.substring(0, idx).length() > 0)
 						result = result.substring(0, idx) + ":" + "<html><!-- "
-								+ endNumber + " -->"
-								+ StringManipulationTools.stringReplace(endS, "<html>", "");
+						+ endNumber + " -->"
+						+ StringManipulationTools.stringReplace(endS, "<html>", "");
 					else
 						result = "<html><!-- "
-								+ endNumber
-								+ " -->"
-								+ StringManipulationTools.stringReplace(
-										StringManipulationTools.stringReplace(endS, "&nbsp;",
-												" "), "<html>", "").trim();
+							+ endNumber
+							+ " -->"
+							+ StringManipulationTools.stringReplace(
+									StringManipulationTools.stringReplace(endS, "&nbsp;",
+									" "), "<html>", "").trim();
 				}
 			}
 		}
@@ -360,7 +360,7 @@ public class AttributeHelper implements HelperClass {
 		}
 		idToNiceId.put(attributeID, description);
 	}
-	
+
 	public static String getNiceIdFromAttributeId(String attributeId) {
 		if (!idInit)
 			initNiceIds();
@@ -387,10 +387,10 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("Node:frameThickness", "Shape: Border-Width");
 		idToNiceId.put("Edge:frameThickness", "Thickness");
 		idToNiceId
-				.put("Edge:relation_subtype", "KEGG - Relations: Sub-Type(s)");
+		.put("Edge:relation_subtype", "KEGG - Relations: Sub-Type(s)");
 		idToNiceId.put("Edge:relation_type", "KEGG - Relations: Type");
 		idToNiceId.put("Edge:relation_src_tgt",
-				"KEGG - Relations: Source/Target");
+		"KEGG - Relations: Source/Target");
 		idToNiceId.put("Node:linemode", "Shape: Border Drawing");
 		idToNiceId.put("Edge:linemode", "Drawing");
 		idToNiceId.put("component", chartSelN + ": Diagram");
@@ -412,15 +412,15 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("useCustomRange", chartSelN
 				+ ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Custom Min/Max");
 		idToNiceId
-				.put(
-						"useCustomRangeSteps",
-						chartSelN
-								+ ":<html>&nbsp;Range Axis: <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Custom Step Size");
+		.put(
+				"useCustomRangeSteps",
+				chartSelN
+				+ ":<html>&nbsp;Range Axis: <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Custom Step Size");
 		idToNiceId
-				.put(
-						"rangeStepSize",
-						chartSelN
-								+ ":<html>&nbsp;Range Axis:  <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Step Size");
+		.put(
+				"rangeStepSize",
+				chartSelN
+				+ ":<html>&nbsp;Range Axis:  <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Step Size");
 
 		idToNiceId.put("max_charts_in_column", chartSelN
 				+ ": Number of Charts in a Row");
@@ -435,10 +435,10 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("Edge:outline", "Color");
 		idToNiceId.put("show_legend", chartSelN + ": Show Legend");
 		idToNiceId
-				.put(
-						"background_color",
-						chartSelN
-								+ ":<html>&nbsp;Background-Color<br>&nbsp;<small><font color=\"gray\">(black=translucent)");
+		.put(
+				"background_color",
+				chartSelN
+				+ ":<html>&nbsp;Background-Color<br>&nbsp;<small><font color=\"gray\">(black=translucent)");
 		idToNiceId.put("node_showCategoryAxis", chartAll
 				+ ": Show Category Labels");
 		idToNiceId.put("node_lineChartShowShapes", chartAllLine
@@ -458,22 +458,22 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("node_categoryBackgroundColorA", chartDiagram
 				+ ":<html>&nbsp;Background Color left of A");
 		idToNiceId
-				.put(
-						"node_categoryBackgroundColorB",
-						chartDiagram
-								+ ":<html>&nbsp;Background Color<br>&nbsp;<small><font color=\"gray\">(black=translucent)");
+		.put(
+				"node_categoryBackgroundColorB",
+				chartDiagram
+				+ ":<html>&nbsp;Background Color<br>&nbsp;<small><font color=\"gray\">(black=translucent)");
 		idToNiceId.put("node_categoryBackgroundColorC", chartDiagram
 				+ ":<html>&nbsp;Background Color right of B");
 		idToNiceId
-				.put(
-						"node_categoryBackgroundColorIndexA",
-						chartDiagram
-								+ ":<html>&nbsp;Time A<br>&nbsp;<small><font color=\"gray\">(-1 = disabled, 0...x enabled)");
+		.put(
+				"node_categoryBackgroundColorIndexA",
+				chartDiagram
+				+ ":<html>&nbsp;Time A<br>&nbsp;<small><font color=\"gray\">(-1 = disabled, 0...x enabled)");
 		idToNiceId
-				.put(
-						"node_categoryBackgroundColorIndexC",
-						chartDiagram
-								+ ":<html>&nbsp;Time B<br>&nbsp;<small><font color=\"gray\">(-1 = disabled, 0...x enabled)");
+		.put(
+				"node_categoryBackgroundColorIndexC",
+				chartDiagram
+				+ ":<html>&nbsp;Time B<br>&nbsp;<small><font color=\"gray\">(-1 = disabled, 0...x enabled)");
 
 		idToNiceId.put(GraphicAttributeConstants.HEATMAP_LOWER_COL,
 				chartHeatMap + ": Lower Color");
@@ -491,16 +491,16 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("node_usePieScale", chartAll + ": Scale Pie-Chart");
 		idToNiceId.put("node_chartShapeSize", chartAllLine + ": Shape-Size");
 		idToNiceId
-				.put("node_lineChartShowLines", chartAllLine + ": Show Lines");
+		.put("node_lineChartShowLines", chartAllLine + ": Show Lines");
 		idToNiceId.put("node_lineChartShowStdDev", chartAllLine
 				+ ": Show Error as vert. Line");
 		idToNiceId.put("node_lineChartShowStdDevRangeLine", chartAllLine
 				+ ": Show Error as Fill-Range");
-		
+
 		idToNiceId.put("node_lineChartFillTimeGaps", chartAllLine
 				+ ": Fill Time-Gaps (linear X-Axis)");
-		
-		
+
+
 		idToNiceId.put("node_chartStdDevLineWidth", chartAllLine
 				+ ": Error-Bar Line-Thickness");
 		idToNiceId.put("node_chartStdDevTopWidth", chartAll
@@ -517,7 +517,7 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("scatter_showLegend", "Scatter-Plot: Show Legend");
 		idToNiceId.put("scatter_showTickMarks", "Scatter-Plot: Show X-axis");
 		idToNiceId.put("scatter_outlineBorderWidth",
-				"Scatter-Plot: Datapoint Size");
+		"Scatter-Plot: Datapoint Size");
 		idToNiceId.put("nodefont", chartSelN + ": Label-Font");
 		idToNiceId.put("charttitlefont", chartSelN + ": Diagram Title Font");
 		idToNiceId.put("legend_scale", chartSelN + ": Legend Size (scale)");
@@ -527,9 +527,9 @@ public class AttributeHelper implements HelperClass {
 				+ ": Category Labels-Skip");
 		idToNiceId.put("measurementdata", chartSelN + ": Measurement-Data");
 		idToNiceId.put("subgraphNodeCount",
-				"Corresponding subgraph: Number of Nodes");
+		"Corresponding subgraph: Number of Nodes");
 		idToNiceId.put("subgraphEdgeCount",
-				"Corresponding subgraph: Number of Edges");
+		"Corresponding subgraph: Number of Edges");
 		idToNiceId.put("kegg_number", "KEGG: Map Number");
 		idToNiceId.put("kegg_type", "KEGG: Type");
 		idToNiceId.put("kegg_org", "KEGG: Organism");
@@ -549,7 +549,7 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("kegg_link_reaction", "KEGG: Reaction Reference");
 		idToNiceId.put("kegg_image", "KEGG: Reference Image");
 		idToNiceId.put("kegg_image_os",
-				"KEGG (Organism-Specific): Reference Image");
+		"KEGG (Organism-Specific): Reference Image");
 		idToNiceId.put("kegg_map", "KEGG: ID of the map entry");
 		idToNiceId.put("kegg_map_link", "KEGG: Pathway");
 		idToNiceId.put("kegg_map_link_os", "KEGG (Organism-Specific): Pathway");
@@ -564,7 +564,7 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("absHor", "Label:" + disabled + "Horizontal Offset");
 		idToNiceId.put("absVert", "Label:" + disabled + "Vertical Offset");
 		idToNiceId.put("relAlign", "Label:" + disabled + "Relative Alignment");
-		
+
 		idToNiceId.put("oldlabel", "Label: Old Label");
 
 		idToNiceId.put(".mapping.chartposition.absVert", chartSelN
@@ -578,14 +578,14 @@ public class AttributeHelper implements HelperClass {
 
 		idToNiceId.put(".graphics.offX", "Shape: Multi-Offset (X)");
 		idToNiceId.put(".graphics.offY", "Shape: Multi-Offset (Y)");
-		
+
 		idToNiceId.put(".graphics.bends.bend", "Edge-Bend ");
 		idToNiceId.put(".graphics.bends.bend.x", "Edge-Bend 0: x");
 		idToNiceId.put(".graphics.bends.bend.y", "Edge-Bend 0: y");
 
 		idToNiceId.put("localAlign", "Label:" + disabled + "Local Alignment");
 
-		
+
 		idToNiceId.put(".srcLabel.fontName", "Label (Consumption): Font");
 		idToNiceId.put(".srcLabel.fontSize", "Label (Consumption): Font-Size");
 		idToNiceId.put(".srcLabel.fontStyle", "Label (Consumption): Font-Style");
@@ -594,7 +594,7 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put(".srcLabel.text", "Label (Consumption): Text");
 		idToNiceId.put(".srcLabel.color", "Label (Consumption): Color");
 		idToNiceId.put(".srcLabel.anchor", "Label (Consumption): Position");
-		
+
 		idToNiceId.put(".tgtLabel.fontName", "Label (Production): Font");
 		idToNiceId.put(".tgtLabel.fontSize", "Label (Production): Font-Size");
 		idToNiceId.put(".tgtLabel.fontStyle", "Label (Production): Font-Style");
@@ -604,7 +604,7 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put(".tgtLabel.color", "Label (Production): Color");
 		idToNiceId.put(".tgtLabel.anchor", "Label (Production): Position");
 
-		
+
 		idToNiceId.put(".labelgraphics.fontName", "Label: Font");
 		idToNiceId.put(".labelgraphics.fontSize", "Label: Font-Size");
 		idToNiceId.put(".labelgraphics.fontStyle", "Label: Font-Style");
@@ -614,7 +614,7 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put(".labelgraphics.color", "Label: Color");
 		idToNiceId.put(".labelgraphics.anchor", "Label: Position");
 
-		
+
 		idToNiceId.put("source", "Docking: Source/Target");
 		idToNiceId.put("target", "Docking: Source/Target");
 
@@ -626,8 +626,8 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("text", "Label (Annotation): Text");
 		idToNiceId.put("color", "Label (Annotation): Color");
 		idToNiceId.put("anchor", "Label (Annotation): Position");
-		
-		
+
+
 		idToNiceId.put("image_url", "Image:<html>&nbsp;URL<br><br>&nbsp;View");
 		idToNiceId.put("image_position", "Image: Position");
 		if (ReleaseInfo.getRunningReleaseStatus() == Release.KGML_EDITOR) {
@@ -668,11 +668,11 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("degree", nodestat + "Degree");
 		idToNiceId.put("degree_in", nodestat + "In-Degree");
 		idToNiceId.put("degree_out", nodestat + "Out-Degree");
-		
+
 		idToNiceId.put("clustering_coeff_undir", nodestat + "Clustering coeff. (undir.)");
 		idToNiceId.put("clustering_coeff_dir", nodestat + "Clustering coeff. (dir.)");
-		
-		
+
+
 		String mapstat = "<html><!--z-->Mapping Statistics&nbsp;<small><font color=\"gray\">(not auto-updated)</font>:";
 		idToNiceId.put("datamapping_cnt", mapstat + "Number of mappings");
 		idToNiceId.put("lines_cnt", mapstat + "Number of lines");
@@ -799,7 +799,7 @@ public class AttributeHelper implements HelperClass {
 
 			if (hasAttribute(edge, GraphicAttributeConstants.LABELGRAPHICS)) {
 				labelAttr = (EdgeLabelAttribute) edge
-						.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
+				.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
 			} else {
 				// no label - associate one
 				labelAttr = new EdgeLabelAttribute(
@@ -835,7 +835,7 @@ public class AttributeHelper implements HelperClass {
 			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS)) {
 				NodeLabelAttribute labelAttr;
 				labelAttr = (NodeLabelAttribute) node
-						.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
+				.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
 				labelAttr.getParent().remove(labelAttr);
 			}
 			return;
@@ -846,7 +846,7 @@ public class AttributeHelper implements HelperClass {
 			LabelAttribute labelAttr;
 			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS)) {
 				labelAttr = (LabelAttribute) node
-						.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
+				.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
 			} else {
 				// no label - associate one
 				labelAttr = new NodeLabelAttribute(
@@ -865,7 +865,7 @@ public class AttributeHelper implements HelperClass {
 			ErrorMsg.addErrorMessage(ex);
 		}
 	}
-	
+
 	public static void setLabel(int idx, Node node, String label, String fontName, String alignment) {
 		String index = ""+idx;
 		if (idx<0)
@@ -919,7 +919,7 @@ public class AttributeHelper implements HelperClass {
 			ErrorMsg.addErrorMessage(ex);
 		}
 	}
-	
+
 	public static AlignmentSetting getLabelAlignment(int index, Node node) {
 		try {
 			String idx = ""+index;
@@ -942,7 +942,7 @@ public class AttributeHelper implements HelperClass {
 		else
 			return AlignmentSetting.HIDDEN;
 	}
-	
+
 	/**
 	 * Sets the font to use when the label is drawed.
 	 * 
@@ -985,28 +985,28 @@ public class AttributeHelper implements HelperClass {
 			return defaultReturn;
 		}
 	}
-	
+
 	public static ArrayList<String> getLabels(GraphElement graphElement, boolean includeMainLabel) {
 		ArrayList<String> result = new ArrayList<String>();
-		
+
 		if (includeMainLabel) {
 			String nodeName = getLabel(graphElement, null);
 			if (nodeName!=null && nodeName.length()>0);
-				result.add(nodeName);
+			result.add(nodeName);
 		}
 		for (int idx = 1; idx<=graphElement.getAttributes().size(); idx++) {
 			String lbl = getLabel(idx, graphElement, null);
 			if (lbl!=null && lbl.length()>0);
-				result.add(lbl);
+			result.add(lbl);
 		}
-			
+
 		return result;
 	}
 
 	public static ArrayList<String> getLabels(GraphElement graphElement) {
 		return getLabels(graphElement, true);
 	}
-	
+
 	public static String getLabel(int index, Attributable node, String defaultReturn) {
 		try {
 			LabelAttribute labelAttr;
@@ -1050,7 +1050,7 @@ public class AttributeHelper implements HelperClass {
 				System.err.println("hasAttribute Function called with Null argument for attributeName!");
 			if (n != null && attributeName != null)
 				System.err.println("hasAttribute Function received exception while retreiving attribute! ("
-								+ err2.getMessage() + ")");
+						+ err2.getMessage() + ")");
 			return false;
 		}
 	}
@@ -1071,7 +1071,7 @@ public class AttributeHelper implements HelperClass {
 	public static void setPosition(Node n, Point2D p) {
 		try {
 			CoordinateAttribute cn = (CoordinateAttribute) n
-					.getAttribute(GraphicAttributeConstants.COORD_PATH);
+			.getAttribute(GraphicAttributeConstants.COORD_PATH);
 
 			cn.setCoordinate(p);
 		} catch (AttributeNotFoundException e) {
@@ -1099,7 +1099,7 @@ public class AttributeHelper implements HelperClass {
 	public static void setPosition(Node n, double x, double y) {
 		try {
 			CoordinateAttribute cn = (CoordinateAttribute) n
-					.getAttribute(GraphicAttributeConstants.COORD_PATH);
+			.getAttribute(GraphicAttributeConstants.COORD_PATH);
 
 			Point2D p = new Point2D.Double(x, y);
 			cn.setCoordinate(p);
@@ -1111,7 +1111,7 @@ public class AttributeHelper implements HelperClass {
 	public static void setPosition3d(Node n, double x, double y, double z) {
 		try {
 			CoordinateAttribute cn = (CoordinateAttribute) n
-					.getAttribute(GraphicAttributeConstants.COORD_PATH);
+			.getAttribute(GraphicAttributeConstants.COORD_PATH);
 
 			Point2D p = new Point2D.Double(x, y);
 			cn.setCoordinate(p);
@@ -1169,7 +1169,7 @@ public class AttributeHelper implements HelperClass {
 	public static Vector2d getPositionVec2d(Node a) {
 		try {
 			CoordinateAttribute coA = (CoordinateAttribute) a
-					.getAttribute(GraphicAttributeConstants.COORD_PATH);
+			.getAttribute(GraphicAttributeConstants.COORD_PATH);
 			Point2D r = coA.getCoordinate();
 			return new Vector2d(r.getX(), r.getY());
 		} catch (Exception ex) {
@@ -1188,7 +1188,7 @@ public class AttributeHelper implements HelperClass {
 	public static Vector2df getPositionVec2df(Node a) {
 		try {
 			CoordinateAttribute coA = (CoordinateAttribute) a
-					.getAttribute(GraphicAttributeConstants.COORD_PATH);
+			.getAttribute(GraphicAttributeConstants.COORD_PATH);
 			Point2D r = coA.getCoordinate();
 			return new Vector2df(r);
 		} catch (Exception ex) {
@@ -1206,7 +1206,7 @@ public class AttributeHelper implements HelperClass {
 	 */
 	public static double getPositionY(Node a) {
 		CoordinateAttribute coA = (CoordinateAttribute) a
-				.getAttribute(GraphicAttributeConstants.COORD_PATH);
+		.getAttribute(GraphicAttributeConstants.COORD_PATH);
 
 		return coA.getY();
 	}
@@ -1223,11 +1223,11 @@ public class AttributeHelper implements HelperClass {
 			double width;
 			double height;
 			DoubleAttribute da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMW_PATH);
+			.getAttribute(GraphicAttributeConstants.DIMW_PATH);
 
 			width = ((Double) da.getValue()).doubleValue();
 			da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMH_PATH);
+			.getAttribute(GraphicAttributeConstants.DIMH_PATH);
 			height = ((Double) da.getValue()).doubleValue();
 			return new Vector2d(width, height);
 		} catch (Exception ex) {
@@ -1249,12 +1249,12 @@ public class AttributeHelper implements HelperClass {
 	public static void setSize(Node myNode, double width, double height) {
 		try {
 			DoubleAttribute da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMW_PATH);
+			.getAttribute(GraphicAttributeConstants.DIMW_PATH);
 
 			da.setDouble(width);
 
 			da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMH_PATH);
+			.getAttribute(GraphicAttributeConstants.DIMH_PATH);
 			da.setDouble(height);
 		} catch (Exception ex) {
 		}
@@ -1263,7 +1263,7 @@ public class AttributeHelper implements HelperClass {
 	public static void setHeight(Node myNode, double height) {
 		try {
 			DoubleAttribute da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMH_PATH);
+			.getAttribute(GraphicAttributeConstants.DIMH_PATH);
 			da.setDouble(height);
 		} catch (Exception ex) {
 		}
@@ -1272,7 +1272,7 @@ public class AttributeHelper implements HelperClass {
 	public static void setWidth(Node myNode, double width) {
 		try {
 			DoubleAttribute da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMW_PATH);
+			.getAttribute(GraphicAttributeConstants.DIMW_PATH);
 
 			da.setDouble(width);
 		} catch (Exception ex) {
@@ -1333,7 +1333,7 @@ public class AttributeHelper implements HelperClass {
 			ColorAttribute colorAtt = null;
 
 			colorAtt = (ColorAttribute) attributable
-					.getAttribute(GraphicAttributeConstants.FILLCOLOR_PATH);
+			.getAttribute(GraphicAttributeConstants.FILLCOLOR_PATH);
 			colorAtt.setColor(color);
 		} catch (Exception ex) {
 			ErrorMsg.addErrorMessage("Set-Fill-Color-Failure: "
@@ -1355,7 +1355,7 @@ public class AttributeHelper implements HelperClass {
 		try {
 			ColorAttribute colorAtt = null;
 			colorAtt = (ColorAttribute) attributable
-					.getAttribute(GraphicAttributeConstants.FILLCOLOR_PATH);
+			.getAttribute(GraphicAttributeConstants.FILLCOLOR_PATH);
 			return colorAtt.getColor();
 		} catch (Exception ex) {
 			ErrorMsg.addErrorMessage("Set-Fill-Color-Failure: "
@@ -1384,10 +1384,10 @@ public class AttributeHelper implements HelperClass {
 			// color??
 			if (hasAttribute(attributable, GraphicAttributeConstants.FRAMECOLOR)) {
 				colorAtt = (ColorAttribute) attributable
-						.getAttribute(GraphicAttributeConstants.FRAMECOLOR);
+				.getAttribute(GraphicAttributeConstants.FRAMECOLOR);
 			} else {
 				colorAtt = (ColorAttribute) attributable
-						.getAttribute(GraphicAttributeConstants.OUTLINE_PATH);
+				.getAttribute(GraphicAttributeConstants.OUTLINE_PATH);
 			}
 
 			colorAtt.setColor(color);
@@ -1413,10 +1413,10 @@ public class AttributeHelper implements HelperClass {
 
 			if (hasAttribute(attributable, GraphicAttributeConstants.FRAMECOLOR)) {
 				colorAtt = (ColorAttribute) attributable
-						.getAttribute(GraphicAttributeConstants.FRAMECOLOR);
+				.getAttribute(GraphicAttributeConstants.FRAMECOLOR);
 			} else {
 				colorAtt = (ColorAttribute) attributable
-						.getAttribute(GraphicAttributeConstants.OUTLINE_PATH);
+				.getAttribute(GraphicAttributeConstants.OUTLINE_PATH);
 
 			}
 			return colorAtt.getColor();
@@ -1533,7 +1533,7 @@ public class AttributeHelper implements HelperClass {
 		org.graffiti.attributes.ObjectAttribute myNewAttribute;
 		try {
 			myNewAttribute = (org.graffiti.attributes.ObjectAttribute) a
-					.getAttribute(attributeName);
+			.getAttribute(attributeName);
 		} catch (AttributeNotFoundException e) {
 			myNewAttribute = new org.graffiti.attributes.ObjectAttribute(
 					attributeName);
@@ -1562,10 +1562,10 @@ public class AttributeHelper implements HelperClass {
 		Attribute myNewAttribute;
 
 		try {
-			myNewAttribute = (StringAttribute) a.getAttribute(attributeName);
+			myNewAttribute = a.getAttribute(attributeName);
 		} catch (Exception e) {
 			myNewAttribute = StringAttribute
-					.getTypedStringAttribute(attributeName);
+			.getTypedStringAttribute(attributeName);
 		}
 		myNewAttribute.setValue(attributeValue);
 		try {
@@ -1575,14 +1575,14 @@ public class AttributeHelper implements HelperClass {
 		}
 	}
 
-	
+
 	public static Set<Object> getAttributeValueSet(Collection<Attributable> attributables,
 			String path, String attributeName, Object defaultValue,
 			Object resultType, boolean setDefaultIfMissing) {
 		HashSet<Object> values = new HashSet<Object>();
 		for (Attributable a : attributables) {
 			Object o = getAttributeValue(a, path, attributeName,
-				defaultValue, resultType, setDefaultIfMissing);
+					defaultValue, resultType, setDefaultIfMissing);
 			values.add(o);
 		}
 		return values;
@@ -1645,7 +1645,7 @@ public class AttributeHelper implements HelperClass {
 						return new Double(r);
 					}
 					if (res instanceof LinkedHashMap<?, ?>
-							&& resultType instanceof Color) {
+					&& resultType instanceof Color) {
 						LinkedHashMap<?, ?> lhm = (LinkedHashMap<?, ?>) res;
 						IntegerAttribute r = (IntegerAttribute) lhm.get("red");
 						IntegerAttribute g = (IntegerAttribute) lhm.get("green");
@@ -1662,9 +1662,9 @@ public class AttributeHelper implements HelperClass {
 						return rr;
 					} else {
 						ErrorMsg.addErrorMessage("Attribute Type Invalid, is not the same as expected: "
-										+ res.getClass().getSimpleName()
-										+ " *#* "
-										+ resultType.getClass().getSimpleName());
+								+ res.getClass().getSimpleName()
+								+ " *#* "
+								+ resultType.getClass().getSimpleName());
 						if (defaultValue != null)
 							setAttribute(attributable, path, attributeName,
 									defaultValue);
@@ -1733,9 +1733,9 @@ public class AttributeHelper implements HelperClass {
 		try {
 			DoubleAttribute dblAtt = null;
 			dblAtt = (DoubleAttribute) ge
-					.getAttribute(GraphicAttributeConstants.GRAPHICS
-							+ Attribute.SEPARATOR
-							+ GraphicAttributeConstants.FRAMETHICKNESS);
+			.getAttribute(GraphicAttributeConstants.GRAPHICS
+					+ Attribute.SEPARATOR
+					+ GraphicAttributeConstants.FRAMETHICKNESS);
 
 			return dblAtt.getDouble();
 		} catch (Exception ex) {
@@ -1747,9 +1747,9 @@ public class AttributeHelper implements HelperClass {
 		try {
 			DoubleAttribute dblAtt = null;
 			dblAtt = (DoubleAttribute) ge
-					.getAttribute(GraphicAttributeConstants.GRAPHICS
-							+ Attribute.SEPARATOR
-							+ GraphicAttributeConstants.FRAMETHICKNESS);
+			.getAttribute(GraphicAttributeConstants.GRAPHICS
+					+ Attribute.SEPARATOR
+					+ GraphicAttributeConstants.FRAMETHICKNESS);
 
 			dblAtt.setDouble(frameThinkness);
 		} catch (Exception ex) {
@@ -1809,7 +1809,7 @@ public class AttributeHelper implements HelperClass {
 			graphics.getFillcolor().setColor(fillColor_0_100_250_100);
 		// setting the shape
 		graphics
-				.setShape("org.graffiti.plugins.views.defaults.RectangleNodeShape");
+		.setShape("org.graffiti.plugins.views.defaults.RectangleNodeShape");
 	}
 
 	/**
@@ -1849,10 +1849,10 @@ public class AttributeHelper implements HelperClass {
 		graphics.getFillcolor().setColor(colArrow);
 
 		graphics
-				.setShape("org.graffiti.plugins.views.defaults.StraightLineEdgeShape");
+		.setShape("org.graffiti.plugins.views.defaults.StraightLineEdgeShape");
 		if (directed) {
 			graphics
-					.setArrowhead("org.graffiti.plugins.views.defaults.StandardArrowShape");
+			.setArrowhead("org.graffiti.plugins.views.defaults.StandardArrowShape");
 		}
 		// setting the lineMode
 		graphics.getLineMode().setDashArray(null);
@@ -1872,11 +1872,11 @@ public class AttributeHelper implements HelperClass {
 			Double width;
 			Double height;
 			DoubleAttribute da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMW_PATH);
+			.getAttribute(GraphicAttributeConstants.DIMW_PATH);
 
 			width = (Double) da.getValue();
 			da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMH_PATH);
+			.getAttribute(GraphicAttributeConstants.DIMH_PATH);
 			height = (Double) da.getValue();
 			return new Dimension(width.intValue(), height.intValue());
 		} catch (Exception ex) {
@@ -1890,13 +1890,13 @@ public class AttributeHelper implements HelperClass {
 		Vector2d size = getSize(myNode);
 		return new Vector3d(size.x, size.y, getDepth(myNode, defaultDepth, setDefault));
 	}
-	
+
 	public static double getWidth(Node myNode) {
 		try {
 			double width;
-//			double height;
+			//			double height;
 			DoubleAttribute da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMW_PATH);
+			.getAttribute(GraphicAttributeConstants.DIMW_PATH);
 			width = ((Double) da.getValue()).doubleValue();
 			return width;
 		} catch (Exception ex) {
@@ -1910,10 +1910,10 @@ public class AttributeHelper implements HelperClass {
 		try {
 			double height;
 			DoubleAttribute da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMW_PATH);
+			.getAttribute(GraphicAttributeConstants.DIMW_PATH);
 
 			da = (DoubleAttribute) myNode
-					.getAttribute(GraphicAttributeConstants.DIMH_PATH);
+			.getAttribute(GraphicAttributeConstants.DIMH_PATH);
 			height = ((Double) da.getValue()).doubleValue();
 			return height;
 		} catch (Exception ex) {
@@ -1923,9 +1923,9 @@ public class AttributeHelper implements HelperClass {
 		return Double.NaN;
 	}
 
-	
 
-	
+
+
 	/**
 	 * @param node
 	 * @param oldPos
@@ -1933,7 +1933,7 @@ public class AttributeHelper implements HelperClass {
 	public static void setPosition(Node node, Vector2d position) {
 		try {
 			CoordinateAttribute cn = (CoordinateAttribute) node
-					.getAttribute(GraphicAttributeConstants.COORD_PATH);
+			.getAttribute(GraphicAttributeConstants.COORD_PATH);
 
 			Point2D p = new Point2D.Double(position.x, position.y);
 			cn.setCoordinate(p);
@@ -1959,7 +1959,7 @@ public class AttributeHelper implements HelperClass {
 
 	public static void setBorderWidth(Node node, double frameThickness) {
 		NodeGraphicAttribute na = (NodeGraphicAttribute) node
-				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		na.setFrameThickness(frameThickness);
 	}
 
@@ -1973,7 +1973,7 @@ public class AttributeHelper implements HelperClass {
 
 	public static void setBorderWidth(Edge edge, double frameThickness) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null)
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK,
 					Color.BLACK, edge.isDirected()),
@@ -1983,14 +1983,14 @@ public class AttributeHelper implements HelperClass {
 
 	public static void setArrowSize(Edge edge, double arrowSize) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null)
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK,
 					Color.BLACK, edge.isDirected()),
 					GraphicAttributeConstants.GRAPHICS);
 		ega.setThickness(arrowSize);
 	}
-	
+
 	public static double getArrowSize(Edge edge) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null)
@@ -2102,14 +2102,14 @@ public class AttributeHelper implements HelperClass {
 
 	public static void setRoundedEdges(Node node, double rounding) {
 		NodeGraphicAttribute na = (NodeGraphicAttribute) node
-				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		na.setRoundedEdges(rounding);
 	}
 
 	public static double getRoundedEdges(Node node) {
 		try {
 			NodeGraphicAttribute na = (NodeGraphicAttribute) node
-					.getAttribute(GraphicAttributeConstants.GRAPHICS);
+			.getAttribute(GraphicAttributeConstants.GRAPHICS);
 			return na.getRoundedEdges();
 		} catch (AttributeNotFoundException e) {
 			return 0;
@@ -2162,290 +2162,290 @@ public class AttributeHelper implements HelperClass {
 	// };
 
 	private static final String[] knownColorNames = { "alice blue", // F0F8FF
-			"antique white", // FAEBD7
-			"aqua", // 00FFFF
-			"aquamarine", // 7FFFD4
-			"azure", // F0FFFF
-			"beige", // F5F5DC
-			"bisque", // FFE4C4
-			"black", // 000000
-			"blanchedalmond", // FFEBCD
-			"blue", // 0000FF
-			"blue violet", // 8A2BE2
-			"brown", // A52A2A
-			"burlywood", // DEB887
-			"cadet blue", // 5F9EA0
-			"chartreuse", // 7FFF00
-			"chocolate", // D2691E
-			"coral", // FF7F50
-			"corn flower blue", // 6495ED
-			"cornsilk", // FFF8DC
-			"crimson", // DC143C
-			"cyan", // 00FFFF
-			"dark blue", // 00008B
-			"dark cyan", // 008B8B
-			"dark golden rod", // B8860B
-			"dark gray", // A9A9A9
-			"dark green", // 006400
-			"dark khaki", // BDB76B
-			"dark magenta", // 8B008B
-			"dark olive green", // 556B2F
-			"dark orange", // FF8C00
-			"dark orchid", // 9932CC
-			"dark red", // 8B0000
-			"dark salmon", // E9967A
-			"dark sea green", // 8FBC8F
-			"dark slate blue", // 483D8B
-			"dark slate gray", // 2F4F4F
-			"dark turquoise", // 00CED1
-			"dark violet", // 9400D3
-			"deep pink", // FF1493
-			"deep sky blue", // 00BFFF
-			"dim gray", // 696969
-			"dodger blue", // 1E90FF
-			"firebrick", // B22222
-			"floral white", // FFFAF0 16775920
-			"forest green", // 228B22
-			"fuchsia", // FF00FF
-			"gainsboro", // DCDCDC
-			"ghost white", // F8F8FF
-			"gold", // FFD700
-			"golden rod", // DAA520
-			"gray", // 808080
-			"green", // 008000
-			"green yellow", // ADFF2F
-			"honey dew", // F0FFF0
-			"hot pink", // FF69B4
-			"indian red", // CD5C5C
-			"indigo", // 4B0082
-			"ivory", // FFFFF0
-			"khaki", // F0E68C
-			"lavender", // E6E6FA
-			"lavenderblush", // FFF0F5
-			"lawn green", // 7CFC00
-			"lemon chiffon", // FFFACD
-			"light blue", // ADD8E6
-			"light coral", // F08080
-			"light cyan", // E0FFFF
-			"light golden rod yellow", // FAFAD2
-			"light green", // 90EE90
-			"light grey", // D3D3D3
-			"light pink", // FFB6C1
-			"light salmon", // FFA07A
-			"light sea green", // 20B2AA
-			"light sky blue", // 87CEFA
-			"light slate gray", // 778899
-			"light steel blue", // B0C4DE
-			"light yellow", // FFFFE0
-			"lime", // 00FF00
-			"lime green", // 32CD32
-			"linen", // FAF0E6
-			"magenta", // FF00FF
-			"maroon", // 800000
-			"medium aquamarine", // 66CDAA
-			"medium blue", // 0000CD
-			"medium orchid", // BA55D3
-			"medium purple", // 9370DB
-			"medium sea green", // 3CB371
-			"medium slate blue", // 7B68EE
-			"medium spring green", // 00FA9A
-			"medium turquoise", // 48D1CC
-			"medium violet red", // C71585
-			"midnight blue", // 191970
-			"mint cream", // F5FFFA
-			"misty rose", // FFE4E1
-			"moccasin", // FFE4B5
-			"navajo white", // FFDEAD
-			"navy", // 000080
-			"oldlace", // FDF5E6
-			"olive", // 808000
-			"olivedrab", // 6B8E23
-			"orange", // FFA500
-			"orange red", // FF4500
-			"orchid", // DA70D6
-			"pale golden rod", // EEE8AA
-			"pale green", // 98FB98
-			"paleturquoise", // AFEEEE
-			"paleviolet red", // DB7093
-			"papaya whip", // FFEFD5
-			"peach puff", // FFDAB9
-			"peru", // CD853F
-			"pink", // FFC0CB
-			"plum", // DDA0DD
-			"powder blue", // B0E0E6
-			"purple", // 800080
-			"red", // FF0000
-			"rosy brown", // BC8F8F
-			"royal blue", // 4169E1
-			"saddle brown", // 8B4513
-			"salmon", // FA8072
-			"sandy brown", // F4A460
-			"sea green", // 2E8B57
-			"seashell", // FFF5EE
-			"sienna", // A0522D
-			"silver", // C0C0C0
-			"sky blue", // 87CEEB
-			"slate blue", // 6A5ACD
-			"slate gray", // 708090
-			"snow", // FFFAFA 16775930
-			"spring green", // 00FF7F
-			"steel blue", // 4682B4
-			"tan", // D2B48C
-			"teal", // 008080
-			"thistle", // D8BFD8
-			"tomato", // FF6347
-			"turquoise", // 40E0D0
-			"violet", // EE82EE
-			"wheat", // F5DEB3
-			"white", // FFFFFF 16777215
-			"white smoke", // F5F5F5
-			"yellow", // FFFF00
-			"yellow green" // 9ACD32
+		"antique white", // FAEBD7
+		"aqua", // 00FFFF
+		"aquamarine", // 7FFFD4
+		"azure", // F0FFFF
+		"beige", // F5F5DC
+		"bisque", // FFE4C4
+		"black", // 000000
+		"blanchedalmond", // FFEBCD
+		"blue", // 0000FF
+		"blue violet", // 8A2BE2
+		"brown", // A52A2A
+		"burlywood", // DEB887
+		"cadet blue", // 5F9EA0
+		"chartreuse", // 7FFF00
+		"chocolate", // D2691E
+		"coral", // FF7F50
+		"corn flower blue", // 6495ED
+		"cornsilk", // FFF8DC
+		"crimson", // DC143C
+		"cyan", // 00FFFF
+		"dark blue", // 00008B
+		"dark cyan", // 008B8B
+		"dark golden rod", // B8860B
+		"dark gray", // A9A9A9
+		"dark green", // 006400
+		"dark khaki", // BDB76B
+		"dark magenta", // 8B008B
+		"dark olive green", // 556B2F
+		"dark orange", // FF8C00
+		"dark orchid", // 9932CC
+		"dark red", // 8B0000
+		"dark salmon", // E9967A
+		"dark sea green", // 8FBC8F
+		"dark slate blue", // 483D8B
+		"dark slate gray", // 2F4F4F
+		"dark turquoise", // 00CED1
+		"dark violet", // 9400D3
+		"deep pink", // FF1493
+		"deep sky blue", // 00BFFF
+		"dim gray", // 696969
+		"dodger blue", // 1E90FF
+		"firebrick", // B22222
+		"floral white", // FFFAF0 16775920
+		"forest green", // 228B22
+		"fuchsia", // FF00FF
+		"gainsboro", // DCDCDC
+		"ghost white", // F8F8FF
+		"gold", // FFD700
+		"golden rod", // DAA520
+		"gray", // 808080
+		"green", // 008000
+		"green yellow", // ADFF2F
+		"honey dew", // F0FFF0
+		"hot pink", // FF69B4
+		"indian red", // CD5C5C
+		"indigo", // 4B0082
+		"ivory", // FFFFF0
+		"khaki", // F0E68C
+		"lavender", // E6E6FA
+		"lavenderblush", // FFF0F5
+		"lawn green", // 7CFC00
+		"lemon chiffon", // FFFACD
+		"light blue", // ADD8E6
+		"light coral", // F08080
+		"light cyan", // E0FFFF
+		"light golden rod yellow", // FAFAD2
+		"light green", // 90EE90
+		"light grey", // D3D3D3
+		"light pink", // FFB6C1
+		"light salmon", // FFA07A
+		"light sea green", // 20B2AA
+		"light sky blue", // 87CEFA
+		"light slate gray", // 778899
+		"light steel blue", // B0C4DE
+		"light yellow", // FFFFE0
+		"lime", // 00FF00
+		"lime green", // 32CD32
+		"linen", // FAF0E6
+		"magenta", // FF00FF
+		"maroon", // 800000
+		"medium aquamarine", // 66CDAA
+		"medium blue", // 0000CD
+		"medium orchid", // BA55D3
+		"medium purple", // 9370DB
+		"medium sea green", // 3CB371
+		"medium slate blue", // 7B68EE
+		"medium spring green", // 00FA9A
+		"medium turquoise", // 48D1CC
+		"medium violet red", // C71585
+		"midnight blue", // 191970
+		"mint cream", // F5FFFA
+		"misty rose", // FFE4E1
+		"moccasin", // FFE4B5
+		"navajo white", // FFDEAD
+		"navy", // 000080
+		"oldlace", // FDF5E6
+		"olive", // 808000
+		"olivedrab", // 6B8E23
+		"orange", // FFA500
+		"orange red", // FF4500
+		"orchid", // DA70D6
+		"pale golden rod", // EEE8AA
+		"pale green", // 98FB98
+		"paleturquoise", // AFEEEE
+		"paleviolet red", // DB7093
+		"papaya whip", // FFEFD5
+		"peach puff", // FFDAB9
+		"peru", // CD853F
+		"pink", // FFC0CB
+		"plum", // DDA0DD
+		"powder blue", // B0E0E6
+		"purple", // 800080
+		"red", // FF0000
+		"rosy brown", // BC8F8F
+		"royal blue", // 4169E1
+		"saddle brown", // 8B4513
+		"salmon", // FA8072
+		"sandy brown", // F4A460
+		"sea green", // 2E8B57
+		"seashell", // FFF5EE
+		"sienna", // A0522D
+		"silver", // C0C0C0
+		"sky blue", // 87CEEB
+		"slate blue", // 6A5ACD
+		"slate gray", // 708090
+		"snow", // FFFAFA 16775930
+		"spring green", // 00FF7F
+		"steel blue", // 4682B4
+		"tan", // D2B48C
+		"teal", // 008080
+		"thistle", // D8BFD8
+		"tomato", // FF6347
+		"turquoise", // 40E0D0
+		"violet", // EE82EE
+		"wheat", // F5DEB3
+		"white", // FFFFFF 16777215
+		"white smoke", // F5F5F5
+		"yellow", // FFFF00
+		"yellow green" // 9ACD32
 	};
 
 	public static final Color[] knownColors = {
-			new Color(0xFFF0F8FF), // aliceblue
-			new Color(0xFFFAEBD7), // antiquewhite
-			new Color(0xFF00FFFF), // aqua
-			new Color(0xFF7FFFD4), // aquamarine
-			new Color(0xFFF0FFFF), // azure
-			new Color(0xFFF5F5DC), // beige
-			new Color(0xFFFFE4C4), // bisque
-			new Color(0xFF000000), // black
-			new Color(0xFFFFEBCD), // blanchedalmond
-			new Color(0xFF0000FF), // blue
-			new Color(0xFF8A2BE2), // blueviolet
-			new Color(0xFFA52A2A), // brown
-			new Color(0xFFDEB887), // burlywood
-			new Color(0xFF5F9EA0), // cadetblue
-			new Color(0xFF7FFF00), // chartreuse
-			new Color(0xFFD2691E), // chocolate
-			new Color(0xFFFF7F50), // coral
-			new Color(0xFF6495ED), // cornflowerblue
-			new Color(0xFFFFF8DC), // cornsilk
-			new Color(0xFFDC143C), // crimson
-			new Color(0xFF00FFFF), // cyan
-			new Color(0xFF00008B), // darkblue
-			new Color(0xFF008B8B), // darkcyan
-			new Color(0xFFB8860B), // darkgoldenrod
-			new Color(0xFFA9A9A9), // darkgray
-			new Color(0xFF006400), // darkgreen
-			new Color(0xFFBDB76B), // darkkhaki
-			new Color(0xFF8B008B), // darkmagenta
-			new Color(0xFF556B2F), // darkolivegreen
-			new Color(0xFFFF8C00), // darkorange
-			new Color(0xFF9932CC), // darkorchid
-			new Color(0xFF8B0000), // darkred
-			new Color(0xFFE9967A), // darksalmon
-			new Color(0xFF8FBC8F), // darkseagreen
-			new Color(0xFF483D8B), // darkslateblue
-			new Color(0xFF2F4F4F), // darkslategray
-			new Color(0xFF00CED1), // darkturquoise
-			new Color(0xFF9400D3), // darkviolet
-			new Color(0xFFFF1493), // deeppink
-			new Color(0xFF00BFFF), // deepskyblue
-			new Color(0xFF696969), // dimgray
-			new Color(0xFF1E90FF), // dodgerblue
-			new Color(0xFFB22222), // firebrick
-			new Color(0xFFFFFAF0), // floralwhite
-			new Color(0xFF228B22), // forestgreen
-			new Color(0xFFFF00FF), // fuchsia
-			new Color(0xFFDCDCDC), // gainsboro
-			new Color(0xFFF8F8FF), // ghostwhite
-			new Color(0xFFFFD700), // gold
-			new Color(0xFFDAA520), // goldenrod
-			new Color(0xFF808080), // gray
-			new Color(0xFF008000), // green
-			new Color(0xFFADFF2F), // greenyellow
-			new Color(0xFFF0FFF0), // honeydew
-			new Color(0xFFFF69B4), // hotpink
-			new Color(0xFFCD5C5C), // indianred
-			new Color(0xFF4B0082), // indigo
-			new Color(0xFFFFFFF0), // ivory
-			new Color(0xFFF0E68C), // khaki
-			new Color(0xFFE6E6FA), // lavender
-			new Color(0xFFFFF0F5), // lavenderblush
-			new Color(0xFF7CFC00), // lawngreen
-			new Color(0xFFFFFACD), // lemonchiffon
-			new Color(0xFFADD8E6), // lightblue
-			new Color(0xFFF08080), // lightcoral
-			new Color(0xFFE0FFFF), // lightcyan
-			new Color(0xFFFAFAD2), // lightgoldenrodyellow
-			new Color(0xFF90EE90), // lightgreen
-			new Color(0xFFD3D3D3), // lightgrey
-			new Color(0xFFFFB6C1), // lightpink
-			new Color(0xFFFFA07A), // lightsalmon
-			new Color(0xFF20B2AA), // lightseagreen
-			new Color(0xFF87CEFA), // lightskyblue
-			new Color(0xFF778899), // lightslategray
-			new Color(0xFFB0C4DE), // lightsteelblue
-			new Color(0xFFFFFFE0), // lightyellow
-			new Color(0xFF00FF00), // lime
-			new Color(0xFF32CD32), // limegreen
-			new Color(0xFFFAF0E6), // linen
-			new Color(0xFFFF00FF), // magenta
-			new Color(0xFF800000), // maroon
-			new Color(0xFF66CDAA), // mediumaquamarine
-			new Color(0xFF0000CD), // mediumblue
-			new Color(0xFFBA55D3), // mediumorchid
-			new Color(0xFF9370DB), // mediumpurple
-			new Color(0xFF3CB371), // mediumseagreen
-			new Color(0xFF7B68EE), // mediumslateblue
-			new Color(0xFF00FA9A), // mediumspringgreen
-			new Color(0xFF48D1CC), // mediumturquoise
-			new Color(0xFFC71585), // mediumvioletred
-			new Color(0xFF191970), // midnightblue
-			new Color(0xFFF5FFFA), // mintcream
-			new Color(0xFFFFE4E1), // mistyrose
-			new Color(0xFFFFE4B5), // moccasin
-			new Color(0xFFFFDEAD), // navajowhite
-			new Color(0xFF000080), // navy
-			new Color(0xFFFDF5E6), // oldlace
-			new Color(0xFF808000), // olive
-			new Color(0xFF6B8E23), // olivedrab
-			new Color(0xFFFFA500), // orange
-			new Color(0xFFFF4500), // orangered
-			new Color(0xFFDA70D6), // orchid
-			new Color(0xFFEEE8AA), // palegoldenrod
-			new Color(0xFF98FB98), // palegreen
-			new Color(0xFFAFEEEE), // paleturquoise
-			new Color(0xFFDB7093), // palevioletred
-			new Color(0xFFFFEFD5), // papayawhip
-			new Color(0xFFFFDAB9), // peachpuff
-			new Color(0xFFCD853F), // peru
-			new Color(0xFFFFC0CB), // pink
-			new Color(0xFFDDA0DD), // plum
-			new Color(0xFFB0E0E6), // powderblue
-			new Color(0xFF800080), // purple
-			new Color(0xFFFF0000), // red
-			new Color(0xFFBC8F8F), // rosybrown
-			new Color(0xFF4169E1), // royalblue
-			new Color(0xFF8B4513), // saddlebrown
-			new Color(0xFFFA8072), // salmon
-			new Color(0xFFF4A460), // sandybrown
-			new Color(0xFF2E8B57), // seagreen
-			new Color(0xFFFFF5EE), // seashell
-			new Color(0xFFA0522D), // sienna
-			new Color(0xFFC0C0C0), // silver
-			new Color(0xFF87CEEB), // skyblue
-			new Color(0xFF6A5ACD), // slateblue
-			new Color(0xFF708090), // slategray
-			new Color(0xFFFFFAFA), // snow
-			new Color(0xFF00FF7F), // springgreen
-			new Color(0xFF4682B4), // steelblue
-			new Color(0xFFD2B48C), // tan
-			new Color(0xFF008080), // teal
-			new Color(0xFFD8BFD8), // thistle
-			new Color(0xFFFF6347), // tomato
-			new Color(0xFF40E0D0), // turquoise
-			new Color(0xFFEE82EE), // violet
-			new Color(0xFFF5DEB3), // wheat
-			new Color(0xFFFFFFFF), // white
-			new Color(0xFFF5F5F5), // whitesmoke
-			new Color(0xFFFFFF00), // yellow
-			new Color(0xFF9ACD32), // yellowgreen
+		new Color(0xFFF0F8FF), // aliceblue
+		new Color(0xFFFAEBD7), // antiquewhite
+		new Color(0xFF00FFFF), // aqua
+		new Color(0xFF7FFFD4), // aquamarine
+		new Color(0xFFF0FFFF), // azure
+		new Color(0xFFF5F5DC), // beige
+		new Color(0xFFFFE4C4), // bisque
+		new Color(0xFF000000), // black
+		new Color(0xFFFFEBCD), // blanchedalmond
+		new Color(0xFF0000FF), // blue
+		new Color(0xFF8A2BE2), // blueviolet
+		new Color(0xFFA52A2A), // brown
+		new Color(0xFFDEB887), // burlywood
+		new Color(0xFF5F9EA0), // cadetblue
+		new Color(0xFF7FFF00), // chartreuse
+		new Color(0xFFD2691E), // chocolate
+		new Color(0xFFFF7F50), // coral
+		new Color(0xFF6495ED), // cornflowerblue
+		new Color(0xFFFFF8DC), // cornsilk
+		new Color(0xFFDC143C), // crimson
+		new Color(0xFF00FFFF), // cyan
+		new Color(0xFF00008B), // darkblue
+		new Color(0xFF008B8B), // darkcyan
+		new Color(0xFFB8860B), // darkgoldenrod
+		new Color(0xFFA9A9A9), // darkgray
+		new Color(0xFF006400), // darkgreen
+		new Color(0xFFBDB76B), // darkkhaki
+		new Color(0xFF8B008B), // darkmagenta
+		new Color(0xFF556B2F), // darkolivegreen
+		new Color(0xFFFF8C00), // darkorange
+		new Color(0xFF9932CC), // darkorchid
+		new Color(0xFF8B0000), // darkred
+		new Color(0xFFE9967A), // darksalmon
+		new Color(0xFF8FBC8F), // darkseagreen
+		new Color(0xFF483D8B), // darkslateblue
+		new Color(0xFF2F4F4F), // darkslategray
+		new Color(0xFF00CED1), // darkturquoise
+		new Color(0xFF9400D3), // darkviolet
+		new Color(0xFFFF1493), // deeppink
+		new Color(0xFF00BFFF), // deepskyblue
+		new Color(0xFF696969), // dimgray
+		new Color(0xFF1E90FF), // dodgerblue
+		new Color(0xFFB22222), // firebrick
+		new Color(0xFFFFFAF0), // floralwhite
+		new Color(0xFF228B22), // forestgreen
+		new Color(0xFFFF00FF), // fuchsia
+		new Color(0xFFDCDCDC), // gainsboro
+		new Color(0xFFF8F8FF), // ghostwhite
+		new Color(0xFFFFD700), // gold
+		new Color(0xFFDAA520), // goldenrod
+		new Color(0xFF808080), // gray
+		new Color(0xFF008000), // green
+		new Color(0xFFADFF2F), // greenyellow
+		new Color(0xFFF0FFF0), // honeydew
+		new Color(0xFFFF69B4), // hotpink
+		new Color(0xFFCD5C5C), // indianred
+		new Color(0xFF4B0082), // indigo
+		new Color(0xFFFFFFF0), // ivory
+		new Color(0xFFF0E68C), // khaki
+		new Color(0xFFE6E6FA), // lavender
+		new Color(0xFFFFF0F5), // lavenderblush
+		new Color(0xFF7CFC00), // lawngreen
+		new Color(0xFFFFFACD), // lemonchiffon
+		new Color(0xFFADD8E6), // lightblue
+		new Color(0xFFF08080), // lightcoral
+		new Color(0xFFE0FFFF), // lightcyan
+		new Color(0xFFFAFAD2), // lightgoldenrodyellow
+		new Color(0xFF90EE90), // lightgreen
+		new Color(0xFFD3D3D3), // lightgrey
+		new Color(0xFFFFB6C1), // lightpink
+		new Color(0xFFFFA07A), // lightsalmon
+		new Color(0xFF20B2AA), // lightseagreen
+		new Color(0xFF87CEFA), // lightskyblue
+		new Color(0xFF778899), // lightslategray
+		new Color(0xFFB0C4DE), // lightsteelblue
+		new Color(0xFFFFFFE0), // lightyellow
+		new Color(0xFF00FF00), // lime
+		new Color(0xFF32CD32), // limegreen
+		new Color(0xFFFAF0E6), // linen
+		new Color(0xFFFF00FF), // magenta
+		new Color(0xFF800000), // maroon
+		new Color(0xFF66CDAA), // mediumaquamarine
+		new Color(0xFF0000CD), // mediumblue
+		new Color(0xFFBA55D3), // mediumorchid
+		new Color(0xFF9370DB), // mediumpurple
+		new Color(0xFF3CB371), // mediumseagreen
+		new Color(0xFF7B68EE), // mediumslateblue
+		new Color(0xFF00FA9A), // mediumspringgreen
+		new Color(0xFF48D1CC), // mediumturquoise
+		new Color(0xFFC71585), // mediumvioletred
+		new Color(0xFF191970), // midnightblue
+		new Color(0xFFF5FFFA), // mintcream
+		new Color(0xFFFFE4E1), // mistyrose
+		new Color(0xFFFFE4B5), // moccasin
+		new Color(0xFFFFDEAD), // navajowhite
+		new Color(0xFF000080), // navy
+		new Color(0xFFFDF5E6), // oldlace
+		new Color(0xFF808000), // olive
+		new Color(0xFF6B8E23), // olivedrab
+		new Color(0xFFFFA500), // orange
+		new Color(0xFFFF4500), // orangered
+		new Color(0xFFDA70D6), // orchid
+		new Color(0xFFEEE8AA), // palegoldenrod
+		new Color(0xFF98FB98), // palegreen
+		new Color(0xFFAFEEEE), // paleturquoise
+		new Color(0xFFDB7093), // palevioletred
+		new Color(0xFFFFEFD5), // papayawhip
+		new Color(0xFFFFDAB9), // peachpuff
+		new Color(0xFFCD853F), // peru
+		new Color(0xFFFFC0CB), // pink
+		new Color(0xFFDDA0DD), // plum
+		new Color(0xFFB0E0E6), // powderblue
+		new Color(0xFF800080), // purple
+		new Color(0xFFFF0000), // red
+		new Color(0xFFBC8F8F), // rosybrown
+		new Color(0xFF4169E1), // royalblue
+		new Color(0xFF8B4513), // saddlebrown
+		new Color(0xFFFA8072), // salmon
+		new Color(0xFFF4A460), // sandybrown
+		new Color(0xFF2E8B57), // seagreen
+		new Color(0xFFFFF5EE), // seashell
+		new Color(0xFFA0522D), // sienna
+		new Color(0xFFC0C0C0), // silver
+		new Color(0xFF87CEEB), // skyblue
+		new Color(0xFF6A5ACD), // slateblue
+		new Color(0xFF708090), // slategray
+		new Color(0xFFFFFAFA), // snow
+		new Color(0xFF00FF7F), // springgreen
+		new Color(0xFF4682B4), // steelblue
+		new Color(0xFFD2B48C), // tan
+		new Color(0xFF008080), // teal
+		new Color(0xFFD8BFD8), // thistle
+		new Color(0xFFFF6347), // tomato
+		new Color(0xFF40E0D0), // turquoise
+		new Color(0xFFEE82EE), // violet
+		new Color(0xFFF5DEB3), // wheat
+		new Color(0xFFFFFFFF), // white
+		new Color(0xFFF5F5F5), // whitesmoke
+		new Color(0xFFFFFF00), // yellow
+		new Color(0xFF9ACD32), // yellowgreen
 	};
-	
+
 	public static Color getColorFrom3floatValues0to1(String color, Color ifUnkown) {
 		String[] col = color.split(" ");
 		if (col.length!=3)
@@ -2463,7 +2463,7 @@ public class AttributeHelper implements HelperClass {
 			return ifUnkown;
 		}
 	}
-	
+
 	public static Color getColorFromName(String name, Color ifUnkown) {
 		int i = 0;
 		for (String cname : knownColorNames) {
@@ -2491,13 +2491,13 @@ public class AttributeHelper implements HelperClass {
 		}
 		return ifUnkown;
 	}
-	
+
 
 
 	public static String getColorName(Color attrColor) {
 		if (attrColor == null)
 			return "not set (null)";
-		
+
 		int nearest = -1;
 		int i = 0;
 		double diff = Double.MAX_VALUE;
@@ -2526,7 +2526,7 @@ public class AttributeHelper implements HelperClass {
 		if (edgeOrNode instanceof Edge) {
 			Edge edge = (Edge) edgeOrNode;
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-					.getAttribute(EdgeGraphicAttribute.GRAPHICS);
+			.getAttribute(EdgeGraphicAttribute.GRAPHICS);
 			LineModeAttribute lma = new LineModeAttribute(
 					GraphicAttributeConstants.LINEMODE, dash);
 			ega.setLineMode(lma);
@@ -2534,7 +2534,7 @@ public class AttributeHelper implements HelperClass {
 		if (edgeOrNode instanceof Node) {
 			Node node = (Node) edgeOrNode;
 			NodeGraphicAttribute nga = (NodeGraphicAttribute) node
-					.getAttribute(NodeGraphicAttribute.GRAPHICS);
+			.getAttribute(NodeGraphicAttribute.GRAPHICS);
 			LineModeAttribute lma = new LineModeAttribute(
 					GraphicAttributeConstants.LINEMODE, dash);
 			nga.setLineMode(lma);
@@ -2543,10 +2543,10 @@ public class AttributeHelper implements HelperClass {
 
 	public static float[] getDashInfo(Edge edge) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-				.getAttribute(EdgeGraphicAttribute.GRAPHICS);
+		.getAttribute(EdgeGraphicAttribute.GRAPHICS);
 		return ega.getLineMode().getDashArray();
 	}
-	
+
 	public static CollectionAttribute getDefaultGraphicsAttributeForNode(
 			Vector2d position) {
 		return getDefaultGraphicsAttributeForNode(position.x, position.y);
@@ -2617,13 +2617,13 @@ public class AttributeHelper implements HelperClass {
 		helpTopics.put("NETWORK: GRAPH", "panel_graph_graph");
 		helpTopics.put("NETWORK: NETWORK ATTRIBUTES", "panel_graph_graph");
 		helpTopics
-				.put(
-						"NETWORK: CHARTING <SMALL><FONT COLOR=\"GRAY\">(ALL NODES)</FONT></SMALL>",
-						"panel_graph_charting");
+		.put(
+				"NETWORK: CHARTING <SMALL><FONT COLOR=\"GRAY\">(ALL NODES)</FONT></SMALL>",
+		"panel_graph_charting");
 		helpTopics
-				.put(
-						"NETWORK: CHARTING <SMALL><FONT COLOR=\"GRAY\">(ALL LINE-CHARTS)</FONT></SMALL>",
-						"panel_graph_chartinglines");
+		.put(
+				"NETWORK: CHARTING <SMALL><FONT COLOR=\"GRAY\">(ALL LINE-CHARTS)</FONT></SMALL>",
+		"panel_graph_chartinglines");
 		helpTopics.put("NETWORK: SCATTER-PLOT", "panel_graph_scatterplot");
 		helpTopics.put("NETWORK: KEGG", "panel_graph_kegg");
 
@@ -2631,9 +2631,9 @@ public class AttributeHelper implements HelperClass {
 		helpTopics.put("NODE: KEGG", "panel_node_kegg");
 		helpTopics.put("NODE: NODE ATTRIBUTES", "panel_node_node");
 		helpTopics
-				.put(
-						"NODE: CHARTING <SMALL><FONT COLOR=\"GRAY\">(SELECTED NODES)</FONT></SMALL>",
-						"panel_node_charting");
+		.put(
+				"NODE: CHARTING <SMALL><FONT COLOR=\"GRAY\">(SELECTED NODES)</FONT></SMALL>",
+		"panel_node_charting");
 
 		helpTopics.put("EDGE: EDGE ATTRIBUTES", "panel_edge_edge");
 		helpTopics.put("EDGE: KEGG", "panel_edge_kegg");
@@ -2641,26 +2641,26 @@ public class AttributeHelper implements HelperClass {
 		String paramDialog = ": PARAMETER DIALOG";
 		helpTopics.put("CIRCLE" + paramDialog, "layout_circle");
 		helpTopics
-				.put("CIRCLE (MIN. CROSSINGS)" + paramDialog, "layout_circle");
+		.put("CIRCLE (MIN. CROSSINGS)" + paramDialog, "layout_circle");
 		helpTopics.put("GRID LAYOUT" + paramDialog, "layout_grid");
 		helpTopics.put("RADIAL TREE" + paramDialog, "layoutmenu_layout");
 		helpTopics.put("REMOVE NODE-OVERLAP" + paramDialog,
-				"layoutmenu_removeoverlapp");
+		"layoutmenu_removeoverlapp");
 		helpTopics.put("TREE LAYOUT" + paramDialog, "layoutmenu_layout");
 		helpTopics.put("CLUSTER LAYOUT PARAMETERS" + paramDialog,
-				"layoutmenu_layoutcluster");
+		"layoutmenu_layoutcluster");
 		helpTopics.put("INTRODUCE BENDS PARAMETERS" + paramDialog,
-				"edgesmenu_addbends");
+		"edgesmenu_addbends");
 		helpTopics.put("INPUT TARGET URL" + paramDialog, "editmenu_refurl");
 		helpTopics.put("SELECT NODES" + paramDialog, "editmenu_seldatanodes");
 		helpTopics.put("CLUSTER DETECTION - TRAIN SOM" + paramDialog,
-				"analysismenu_som");
+		"analysismenu_som");
 		helpTopics.put("CLUSTER NODE-COLORING" + paramDialog,
-				"analysismenu_clusternodecoloring");
+		"analysismenu_clusternodecoloring");
 		helpTopics.put("David et al. Quicktest".toUpperCase() + paramDialog,
-				"analysismenu_david");
+		"analysismenu_david");
 		helpTopics.put("Grubbs' Test".toUpperCase() + paramDialog,
-				"analysismenu_grubbs");
+		"analysismenu_grubbs");
 		helpTopics.put("AVERAGE SUBSTANCE-LEVEL > BACKGROUND COLOR"
 				+ paramDialog, "nodesmenu_levelbackground");
 	}
@@ -2686,7 +2686,7 @@ public class AttributeHelper implements HelperClass {
 			setLabel((Edge) ge, label);
 		else
 			ErrorMsg
-					.addErrorMessage("Set Label only works on Node or Edge! (internal error)");
+			.addErrorMessage("Set Label only works on Node or Edge! (internal error)");
 	}
 
 	public static String getLabelPosition(Attributable attributable) {
@@ -2696,7 +2696,7 @@ public class AttributeHelper implements HelperClass {
 
 			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS)) {
 				labelAttr = (NodeLabelAttribute) node
-						.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
+				.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
 				return labelAttr.getAlignment();
 			} else {
 				return null;
@@ -2723,7 +2723,7 @@ public class AttributeHelper implements HelperClass {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Get EdgeLabelAttribute (if available)
 	 * @param index Use -1 to get main label, use 0..99 to get annotation labels
@@ -2741,7 +2741,7 @@ public class AttributeHelper implements HelperClass {
 			return null;
 		}
 	}
-	
+
 	public static void setLabelFrameStyle(int index, Node n, LabelFrameSetting setting) {
 		LabelAttribute la = getLabel(index, n);
 		if (la!=null) {
@@ -2769,56 +2769,56 @@ public class AttributeHelper implements HelperClass {
 					currentStyle = setting.toGMLstring();
 			}
 			currentStyle = StringManipulationTools.stringReplace(currentStyle, " ", "");
-			
+
 			la.setFontStyle(currentStyle);
 		}
 	}
-	
+
 	public static String formatNumber(double d, String pattern) {
 		return ErrorMsg.getDecimalFormat(pattern).format(d);
 	}
 
 	public static void setDashArray(Edge edge, float[] dashArray) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-				.getAttribute(EdgeGraphicAttribute.GRAPHICS);
+		.getAttribute(EdgeGraphicAttribute.GRAPHICS);
 		ega.getLineMode().setDashArray(dashArray);
 	}
 
 	public static void setDashArray(Edge edge, float[] dashArray, float dashphase) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-				.getAttribute(EdgeGraphicAttribute.GRAPHICS);
+		.getAttribute(EdgeGraphicAttribute.GRAPHICS);
 		ega.getLineMode().setDashArray(dashArray);
 		ega.getLineMode().setDashPhase(dashphase);
 	}
 
 	public static void setShapeEllipse(Node node) {
 		NodeGraphicAttribute nga = (NodeGraphicAttribute) node
-				.getAttribute(NodeGraphicAttribute.GRAPHICS);
+		.getAttribute(NodeGraphicAttribute.GRAPHICS);
 		nga.setShape(GraphicAttributeConstants.ELLIPSE_CLASSNAME);
 	}
 
 	public static void setShapeRectangle(Node node) {
 		NodeGraphicAttribute nga = (NodeGraphicAttribute) node
-				.getAttribute(NodeGraphicAttribute.GRAPHICS);
+		.getAttribute(NodeGraphicAttribute.GRAPHICS);
 		nga.setShape(GraphicAttributeConstants.RECTANGLE_CLASSNAME);
 	}
 
 	public static void setShape(Node node, String knownShapeClassName) {
 		NodeGraphicAttribute nga = (NodeGraphicAttribute) node
-				.getAttribute(NodeGraphicAttribute.GRAPHICS);
+		.getAttribute(NodeGraphicAttribute.GRAPHICS);
 		nga.setShape(knownShapeClassName);
 	}
 
 	public static void setShape(Edge edge, String knownShapeClassName) {
 		EdgeGraphicAttribute nga = (EdgeGraphicAttribute) edge
-				.getAttribute(NodeGraphicAttribute.GRAPHICS);
+		.getAttribute(NodeGraphicAttribute.GRAPHICS);
 		nga.setShape(knownShapeClassName);
 	}
 
 	public static String getShape(Node node) {
 		try {
 			NodeGraphicAttribute nga = (NodeGraphicAttribute) node
-					.getAttribute(NodeGraphicAttribute.GRAPHICS);
+			.getAttribute(NodeGraphicAttribute.GRAPHICS);
 			return nga.getShape();
 		} catch (Exception e) {
 			ErrorMsg.addErrorMessage(e);
@@ -2835,72 +2835,72 @@ public class AttributeHelper implements HelperClass {
 	 */
 	public static void setArrowtail(Edge edge, boolean show) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK,
 					Color.BLACK, edge.isDirected()),
 					GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge
-					.getAttribute(GraphicAttributeConstants.GRAPHICS);
+			.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		if (show)
 			ega
-					.setArrowtail("org.graffiti.plugins.views.defaults.StandardArrowShape");
+			.setArrowtail("org.graffiti.plugins.views.defaults.StandardArrowShape");
 		else
 			ega.setArrowtail("");
 	}
 
 	public static void setArrowhead(Edge edge, boolean show) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK,
 					Color.BLACK, edge.isDirected()),
 					GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge
-					.getAttribute(GraphicAttributeConstants.GRAPHICS);
+			.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		if (show)
 			ega.setArrowhead("org.graffiti.plugins.views.defaults.StandardArrowShape");
 		else
 			ega.setArrowhead("");
 	}
-	
+
 	public static String getArrowhead(Edge edge) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK,
 					Color.BLACK, edge.isDirected()),
 					GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge
-					.getAttribute(GraphicAttributeConstants.GRAPHICS);
+			.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		return ega.getArrowhead();
 	}
 
 	public static String getArrowtail(Edge edge) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK,
 					Color.BLACK, edge.isDirected()),
 					GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge
-					.getAttribute(GraphicAttributeConstants.GRAPHICS);
+			.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		return ega.getArrowtail();
 	}
 
 	public static void setArrowhead(Edge edge, String knownShapeClassName) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK,
 					Color.BLACK, edge.isDirected()),
 					GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge
-					.getAttribute(GraphicAttributeConstants.GRAPHICS);
+			.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		if (ega != null)
 			ega.setArrowhead(knownShapeClassName);
@@ -2908,13 +2908,13 @@ public class AttributeHelper implements HelperClass {
 
 	public static void setArrowtail(Edge edge, String knownShapeClassName) {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-				.getAttribute(GraphicAttributeConstants.GRAPHICS);
+		.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK,
 					Color.BLACK, edge.isDirected()),
 					GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge
-					.getAttribute(GraphicAttributeConstants.GRAPHICS);
+			.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		if (ega != null)
 			ega.setArrowtail(knownShapeClassName);
@@ -2952,7 +2952,7 @@ public class AttributeHelper implements HelperClass {
 				a.remove(name);
 			return true;
 		} catch (AttributeNotFoundException anf) {
-			// 
+			//
 			return false;
 		} catch (Exception e) {
 			ErrorMsg.addErrorMessage(e);
@@ -2966,15 +2966,15 @@ public class AttributeHelper implements HelperClass {
 			idx="";
 		try {
 			HashMapAttribute l = (HashMapAttribute) n
-					.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
-							+ NodeLabelAttribute.LABELGRAPHICS+idx);
+			.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
+					+ NodeLabelAttribute.LABELGRAPHICS+idx);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
 			o.setString(ColorUtil.getHexFromColor(color));
 		} catch (AttributeNotFoundException e) {
 			setLabel(n, getLabel(n, ""));
 			HashMapAttribute l = (HashMapAttribute) n
-					.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
-							+ NodeLabelAttribute.LABELGRAPHICS+idx);
+			.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
+					+ NodeLabelAttribute.LABELGRAPHICS+idx);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
 			o.setString(ColorUtil.getHexFromColor(color));
 		}
@@ -2983,8 +2983,8 @@ public class AttributeHelper implements HelperClass {
 	public static Color getLabelColor(Node n) {
 		try {
 			HashMapAttribute l = (HashMapAttribute) n
-					.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
-							+ NodeLabelAttribute.LABELGRAPHICS);
+			.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
+					+ NodeLabelAttribute.LABELGRAPHICS);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
 			return ColorUtil.getColorFromHex(o.getString());
 		} catch (Exception e) {
@@ -3000,21 +3000,21 @@ public class AttributeHelper implements HelperClass {
 	public static void addEdgeBends(Edge edge, Collection<Vector2d> points) {
 		try {
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-					.getAttribute("graphics");
+			.getAttribute("graphics");
 			for (Vector2d point : points) {
 				int cnt = ega.getBendCount() + 1;
 				ega.getBends().add(new CoordinateAttribute("bend" + cnt, point.x,
-										point.y), true);
+						point.y), true);
 			}
 		} catch (Exception e) {
 			((LinkedHashMapAttribute) edge.getAttribute("graphics.bends"))
-					.setCollection(new HashMap());
+			.setCollection(new HashMap());
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-					.getAttribute("graphics");
+			.getAttribute("graphics");
 			for (Vector2d point : points) {
 				int cnt = ega.getBendCount() + 1;
 				ega.getBends().add(new CoordinateAttribute("bend" + cnt, point.x,
-										point.y), true);
+						point.y), true);
 			}
 		}
 	}
@@ -3024,7 +3024,7 @@ public class AttributeHelper implements HelperClass {
 		CoordinateAttribute result = null;
 		try {
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-					.getAttribute("graphics");
+			.getAttribute("graphics");
 			int cnt = ega.getBendCount() + 1;
 			boolean added = false;
 			while (!added) {
@@ -3042,15 +3042,15 @@ public class AttributeHelper implements HelperClass {
 			}
 		} catch (Exception e) {
 			((LinkedHashMapAttribute) edge.getAttribute("graphics.bends"))
-					.setCollection(new HashMap());
+			.setCollection(new HashMap());
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-					.getAttribute("graphics");
+			.getAttribute("graphics");
 			result = new CoordinateAttribute("bend1", x, y);
 			ega.getBends().add(result, true);
 		}
 		return result;
 	}
-	
+
 	public static CoordinateAttribute addEdgeBend(Edge edge, double x, double y, boolean safeAdd) {
 		if (safeAdd) {
 			for (Vector2d bend : getEdgeBends(edge)) {
@@ -3061,12 +3061,12 @@ public class AttributeHelper implements HelperClass {
 		} else
 			return addEdgeBend(edge, x, y);
 	}
-	
+
 	public static ArrayList<Vector2d> getEdgeBends(Edge edge) {
 		ArrayList<Vector2d> result = new ArrayList<Vector2d>();
 		try {
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-					.getAttribute("graphics");
+			.getAttribute("graphics");
 			for (Attribute a : ega.getBends().getCollection().values()) {
 				CoordinateAttribute ca = (CoordinateAttribute) a;
 				result.add(new Vector2d(ca.getX(), ca.getY()));
@@ -3084,7 +3084,7 @@ public class AttributeHelper implements HelperClass {
 		ArrayList<CoordinateAttribute> result = new ArrayList<CoordinateAttribute>();
 		try {
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-					.getAttribute("graphics");
+			.getAttribute("graphics");
 			for (Attribute a : ega.getBends().getCollection().values()) {
 				CoordinateAttribute ca = (CoordinateAttribute) a;
 				result.add(ca);
@@ -3099,25 +3099,25 @@ public class AttributeHelper implements HelperClass {
 	public static void removeEdgeBends(Edge edge) {
 		try {
 			((LinkedHashMapAttribute) edge.getAttribute("graphics.bends"))
-					.setCollection(new HashMap());
+			.setCollection(new HashMap());
 		} catch (AttributeNotFoundException nfe) {
 			// empty
 		}
 	}
 
 	private static String[] edge_shapes = new String[] {
-			"org.graffiti.plugins.views.defaults.PolyLineEdgeShape",
-			"org.graffiti.plugins.views.defaults.StraightLineEdgeShape",
-			"org.graffiti.plugins.views.defaults.SmoothLineEdgeShape",
-			"org.graffiti.plugins.views.defaults.QuadCurveEdgeShape",
-			"de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.DynamicStraightLineEdgeShape"
+		"org.graffiti.plugins.views.defaults.PolyLineEdgeShape",
+		"org.graffiti.plugins.views.defaults.StraightLineEdgeShape",
+		"org.graffiti.plugins.views.defaults.SmoothLineEdgeShape",
+		"org.graffiti.plugins.views.defaults.QuadCurveEdgeShape",
+		"de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.DynamicStraightLineEdgeShape"
 	};
 	public static String preFilePath = "filepath|";
 
 	public static void setEdgeBendStyle(Edge edge, String shape) {
 		try {
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge
-					.getAttribute("graphics");
+			.getAttribute("graphics");
 			boolean found = false;
 			for (String knownShape : edge_shapes) {
 				if (knownShape.toUpperCase().indexOf(shape.toUpperCase()) >= 0) {
@@ -3132,7 +3132,7 @@ public class AttributeHelper implements HelperClass {
 			ErrorMsg.addErrorMessage(e);
 		}
 	}
-	
+
 	public static String getEdgeBendStyle(Edge edge) {
 		try {
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute("graphics");
@@ -3197,7 +3197,7 @@ public class AttributeHelper implements HelperClass {
 	public static Vector3d getPositionVec3d(Node node, boolean setDefault) {
 		try {
 			CoordinateAttribute coA = (CoordinateAttribute) node
-					.getAttribute(GraphicAttributeConstants.COORD_PATH);
+			.getAttribute(GraphicAttributeConstants.COORD_PATH);
 			Point2D r = coA.getCoordinate();
 			double z = getPositionZ(node, setDefault);
 			return new Vector3d(r.getX(), r.getY(), z);
@@ -3209,11 +3209,11 @@ public class AttributeHelper implements HelperClass {
 			return new Vector3d(0,0,0);
 		}
 	}
-	
+
 	public static Vector3d getPositionVec3d(Node node, double zReturnIfNotAvailable, boolean setDefaultZ) {
 		try {
 			CoordinateAttribute coA = (CoordinateAttribute) node
-					.getAttribute(GraphicAttributeConstants.COORD_PATH);
+			.getAttribute(GraphicAttributeConstants.COORD_PATH);
 			Point2D r = coA.getCoordinate();
 			double z = getPositionZ(node, zReturnIfNotAvailable, setDefaultZ);
 			return new Vector3d(r.getX(), r.getY(), z);
@@ -3233,11 +3233,11 @@ public class AttributeHelper implements HelperClass {
 				defaultReturn, new Double(0), setDefault);
 		return z;
 	}
-	
+
 	public static void setPositionZ(Node node, double z) {
 		setAttribute(node, "graphics", "z_", z);
 	}
-	
+
 	public static double getDepth(Node node, double defaultReturn, boolean setDefault) {
 		double z = (Double) getAttributeValue(node, "graphics", "depth",
 				defaultReturn, new Double(0), setDefault);
@@ -3285,7 +3285,7 @@ public class AttributeHelper implements HelperClass {
 			}
 		} finally {
 			firstNode.getGraph().getListenerManager()
-					.transactionFinished(nodes);
+			.transactionFinished(nodes);
 		}
 	}
 
@@ -3387,7 +3387,7 @@ public class AttributeHelper implements HelperClass {
 			return sb.toString();
 		}
 	}
-	
+
 	public static String getStringList(File[] elements, String div) {
 		if (elements == null || elements.length <= 0)
 			return "";
@@ -3401,7 +3401,7 @@ public class AttributeHelper implements HelperClass {
 			return sb.toString();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static String getStringList(Collection elements, String div) {
 		ArrayList<Object> al = new ArrayList<Object>();
@@ -3409,7 +3409,7 @@ public class AttributeHelper implements HelperClass {
 			al.add(o);
 		return getStringList(al, div);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static String getStringList(ArrayList elements, String div) {
 		if (elements == null || elements.size() <= 0)
@@ -3432,7 +3432,7 @@ public class AttributeHelper implements HelperClass {
 
 	public static String getReferenceURL(Attributable ge) {
 		return (String) AttributeHelper.getAttributeValue(ge, "", "url", null,
-				"");
+		"");
 	}
 
 	public static void setPathwayReference(GraphElement ge, String url) {
@@ -3456,7 +3456,7 @@ public class AttributeHelper implements HelperClass {
 			return ref.substring(preFilePath.length());
 		return ref;
 	}
-	
+
 	public static ArrayList<String> getPathwayReferences(Attributable a, boolean includeOnlyIndexed) {
 		ArrayList<String> result = new ArrayList<String>();
 		Map<String,Attribute> rr = a.getAttributes().getCollection();
@@ -3464,8 +3464,8 @@ public class AttributeHelper implements HelperClass {
 			if (!e.getKey().startsWith("pathway_ref_url"))
 				continue;
 			if (
-				   (!includeOnlyIndexed)
-				|| (includeOnlyIndexed && e.getKey().length()>"pathway_ref_url".length())) {
+					(!includeOnlyIndexed)
+					|| (includeOnlyIndexed && e.getKey().length()>"pathway_ref_url".length())) {
 				result.add((String)e.getValue().getValue());
 			}
 		}
@@ -3528,14 +3528,14 @@ public class AttributeHelper implements HelperClass {
 			return false;
 	}
 
-	
+
 	public static String getShapeClassFromShapeName(String s) {
 		if (s.equals("oval"))
 			return "org.graffiti.plugins.views.defaults.EllipseNodeShape";
 		if (s.equals("circle"))
 			return "org.graffiti.plugins.views.defaults.CircleNodeShape";
-		if (s.equals("rectangle")) 
-		    return  "org.graffiti.plugins.views.defaults.RectangleNodeShape";
+		if (s.equals("rectangle"))
+			return  "org.graffiti.plugins.views.defaults.RectangleNodeShape";
 		if (s.equals("diamond"))
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.DiamondShape";
 		if (s.equals("tag"))
@@ -3582,14 +3582,14 @@ public class AttributeHelper implements HelperClass {
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.DoubleEllipseShape";
 		if (s.equals("paper"))
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.PaperShape";
-		
+
 		return s;
 	}
 
 	public static String[] getShapeDescritions() {
-		return new String[] { "Rectangle", "Circle", "Ellipse", "Rhombus", 
+		return new String[] { "Rectangle", "Circle", "Ellipse", "Rhombus",
 				"Tag (right)", "Tag (left)", "Tag (up)", "Tag (down)", "Observable", "Pertubation", "Complex",
-				"Skewed Rect (right)", "Skewed Rect (left)", 
+				"Skewed Rect (right)", "Skewed Rect (left)",
 				"Receptor (down)", "Receptor (up)", "Receptor (left)", "Receptor (right)",
 				"Nucleic Acid Feature",
 				"Truncated Protein",
@@ -3599,9 +3599,9 @@ public class AttributeHelper implements HelperClass {
 				"Multi Rectangle",
 				"Multi Oval",
 				"Double Oval",
-				"Paper"};
+		"Paper"};
 	}
-	
+
 	public static String getShapeClassFromDescription(String desc) {
 		int i = 0;
 		for (String s : getShapeDescritions()) {
@@ -3614,35 +3614,35 @@ public class AttributeHelper implements HelperClass {
 
 	public static String[] getShapeClasses() {
 		return new String[]
-		            {
-		                "rectangle",
-		                "circle",
-		                "oval",
-		                "diamond",
-		                "tag",
-		                "tagl",
-		                "tagu",
-		                "tagd",
-		                "observable",
-		                "pertubation",
-		                "complex",
-		                "skewrectr",
-		                "skewrectl",
-		                "receptord",
-		                "receptoru",
-		                "receptorl",
-		                "receptorr",
-		                "nucleic",
-		                "truncprotein",
-		                "sourcesink",
-		                "transition",
-		                "multinucleic",
-		                "multirectangle",
-		                "mulitoval",
-		                "doubleoval",
-		                "paper"
-		            };	
-		}
+		                  {
+				"rectangle",
+				"circle",
+				"oval",
+				"diamond",
+				"tag",
+				"tagl",
+				"tagu",
+				"tagd",
+				"observable",
+				"pertubation",
+				"complex",
+				"skewrectr",
+				"skewrectl",
+				"receptord",
+				"receptoru",
+				"receptorl",
+				"receptorr",
+				"nucleic",
+				"truncprotein",
+				"sourcesink",
+				"transition",
+				"multinucleic",
+				"multirectangle",
+				"mulitoval",
+				"doubleoval",
+				"paper"
+		                  };
+	}
 
 	public static String getLabelConsumption(Edge e, String returnIfNull) {
 		try {
@@ -3652,14 +3652,14 @@ public class AttributeHelper implements HelperClass {
 				if (lbl==null)
 					return returnIfNull;
 				else
-					return lbl;	
+					return lbl;
 			} else
 				return returnIfNull;
 		} catch(Exception err) {
 			return returnIfNull;
 		}
 	}
-	
+
 	public static String getLabelProduction(Edge e, String returnIfNull) {
 		try {
 			Attribute a = e.getAttribute("tgtLabel");
@@ -3675,7 +3675,7 @@ public class AttributeHelper implements HelperClass {
 			return returnIfNull;
 		}
 	}
-	
+
 	public static void setLabelConsumption(Edge e, String srcLabel) {
 		Attribute a = null;
 		try {
@@ -3704,7 +3704,7 @@ public class AttributeHelper implements HelperClass {
 				ls.setLabel(srcLabel);
 		}
 	}
-	
+
 	public static void setLabelProduction(Edge e, String tgtLabel) {
 		Attribute a = null;
 		try {
@@ -3742,7 +3742,7 @@ public class AttributeHelper implements HelperClass {
 		result.setFrame(left.x, left.y, size.x, size.y);
 		return result;
 	}
-	
+
 	public static Rectangle getNodeRectangleAWT(Node node) {
 		Rectangle result = new Rectangle();
 		Vector2d left = AttributeHelper.getPositionVec2d(node);
@@ -3751,5 +3751,14 @@ public class AttributeHelper implements HelperClass {
 		left.y-=size.y/2d;
 		result.setFrame(left.x, left.y, size.x, size.y);
 		return result;
+	}
+
+	public static Color getColorFromAttribute(Attributable attr, String path, String name, Color defaultValue) {
+		return ColorUtil.getColorFromHex((String) getAttributeValue(attr, path, name, ColorUtil.getHexFromColor(defaultValue), "",false));
+	}
+
+	public static void setColorFromAttribute(Attributable attr, String path, String name, Color value) {
+		setAttribute(attr, path, name, ColorUtil.getHexFromColor(value));
+
 	}
 }

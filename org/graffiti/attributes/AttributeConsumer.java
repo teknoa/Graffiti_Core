@@ -5,10 +5,10 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeConsumer.java,v 1.1 2007/05/31 12:55:54 klukas Exp $
+// $Id: AttributeConsumer.java,v 1.2 2010/07/19 12:59:28 morla Exp $
 
 /*
- * $Id: AttributeConsumer.java,v 1.1 2007/05/31 12:55:54 klukas Exp $
+ * $Id: AttributeConsumer.java,v 1.2 2010/07/19 12:59:28 morla Exp $
  */
 package org.graffiti.attributes;
 
@@ -33,35 +33,35 @@ package org.graffiti.attributes;
  * Every time, a new node- or edge-object is created, it will contain
  * (deep-)copies of these collection attributes.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public interface AttributeConsumer
 {
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns the attribute, which should be available in a edge object.  May
-     * return <code>null</code>.
-     *
-     * @return DOCUMENT ME!
-     */
-    CollectionAttribute getEdgeAttribute();
+	/**
+	 * Returns the attribute, which should be available in a edge object.  May
+	 * return <code>null</code>.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	CollectionAttribute getEdgeAttribute();
 
-    /**
-     * Returns the attribute, which should be available in a graph object.  May
-     * return <code>null</code>.
-     *
-     * @return DOCUMENT ME!
-     */
-    CollectionAttribute getGraphAttribute();
+	/**
+	 * Returns the attribute, which should be available in a graph object.  May
+	 * return <code>null</code>.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	CollectionAttribute getGraphAttribute();
 
-    /**
-     * Returns the attribute, which should be available in a node object.  May
-     * return <code>null</code>.
-     *
-     * @return DOCUMENT ME!
-     */
-    CollectionAttribute getNodeAttribute();
+	/**
+	 * Returns the attribute, which should be available in a node object.  May
+	 * return <code>null</code>.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	CollectionAttribute getNodeAttribute();
 }
 
 //------------------------------------------------------------------------------

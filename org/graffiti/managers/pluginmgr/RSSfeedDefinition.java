@@ -1,7 +1,7 @@
 package org.graffiti.managers.pluginmgr;
 
 public class RSSfeedDefinition {
-	
+
 	private String url;
 	private String name;
 

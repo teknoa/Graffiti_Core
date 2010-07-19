@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AdjListGraph.java,v 1.9 2010/07/17 22:00:19 klukas Exp $
+// $Id: AdjListGraph.java,v 1.10 2010/07/19 13:00:50 morla Exp $
 
 package org.graffiti.graph;
 
@@ -28,7 +28,7 @@ import org.graffiti.event.ListenerManager;
  * method modifying the graph will inform the <code>ListenerManager</code>
  * about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * 
  * @see Graph
  * @see AbstractGraph
@@ -40,9 +40,9 @@ import org.graffiti.event.ListenerManager;
 public class AdjListGraph extends AbstractGraph implements Graph {
 	// ~ Static fields/initializers =============================================
 
-//	/** The logger for the current class. */
-//	private static final Logger logger = Logger.getLogger(AdjListGraph.class
-//			.getName());
+	//	/** The logger for the current class. */
+	//	private static final Logger logger = Logger.getLogger(AdjListGraph.class
+	//			.getName());
 
 	private int id;
 
@@ -328,13 +328,13 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 			((AdjListNode) (e.getSource())).removeInEdge(e);
 		if (((AdjListNode) (e.getTarget())).getAllInEdges().contains(e))
 			((AdjListNode) (e.getTarget())).removeInEdge(e);
-		
+
 
 		if (((AdjListNode) (e.getSource())).getAllOutEdges().contains(e))
 			((AdjListNode) (e.getSource())).removeOutEdge(e);
 		if (((AdjListNode) (e.getTarget())).getAllOutEdges().contains(e))
 			((AdjListNode) (e.getTarget())).removeOutEdge(e);
-		
+
 		((AdjListEdge) e).setGraphToNull();
 		edges.remove(e);
 		setModified(true);
@@ -362,7 +362,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 		((AdjListNode) n).setGraphToNull();
 		nodes.remove(n);
-		
+
 		setModified(true);
 	}
 

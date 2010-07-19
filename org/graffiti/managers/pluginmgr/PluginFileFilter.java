@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginFileFilter.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: PluginFileFilter.java,v 1.3 2010/07/19 13:01:31 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -18,117 +18,117 @@ import org.graffiti.core.StringBundle;
 /**
  * Represents a file filter for graffiti plugins.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class PluginFileFilter
-    extends FileFilter
+extends FileFilter
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** The <code>StringBundle</code> of the file filter. */
-    protected StringBundle sBundle = StringBundle.getInstance();
+	/** The <code>StringBundle</code> of the file filter. */
+	protected StringBundle sBundle = StringBundle.getInstance();
 
-    /** The description of this file filter. */
-    private String description;
+	/** The description of this file filter. */
+	private String description;
 
-    /** The list of extensions of this file to filter. */
-    private String[] extensions = null;
+	/** The list of extensions of this file to filter. */
+	private String[] extensions = null;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructor for PluginFileFilter.
-     *
-     * @param extension DOCUMENT ME!
-     */
-    public PluginFileFilter(String extension)
-    {
-        this(new String[] { extension });
-    }
+	/**
+	 * Constructor for PluginFileFilter.
+	 *
+	 * @param extension DOCUMENT ME!
+	 */
+	public PluginFileFilter(String extension)
+	{
+		this(new String[] { extension });
+	}
 
-    /**
-     * Constructs a new plugin file filter from the given array of extensions.
-     *
-     * @param extensions the array of extensions (<tt>String</tt>) to filter.
-     */
-    public PluginFileFilter(String[] extensions)
-    {
-        super();
+	/**
+	 * Constructs a new plugin file filter from the given array of extensions.
+	 *
+	 * @param extensions the array of extensions (<tt>String</tt>) to filter.
+	 */
+	public PluginFileFilter(String[] extensions)
+	{
+		super();
 
-        this.extensions = extensions;
+		this.extensions = extensions;
 
-        StringBuffer exts = new StringBuffer();
+		StringBuffer exts = new StringBuffer();
 
-        for(int i = 0; i < extensions.length; i++)
-        {
-            exts.append(extensions[i]);
-        }
+		for(int i = 0; i < extensions.length; i++)
+		{
+			exts.append(extensions[i]);
+		}
 
-        description = sBundle.getString("plugin.filter.description." +
-                exts.toString());
-    }
+		description = sBundle.getString("plugin.filter.description." +
+				exts.toString());
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * @see javax.swing.filechooser.FileFilter#getDescription()
-     */
-    @Override
+	/**
+	 * @see javax.swing.filechooser.FileFilter#getDescription()
+	 */
+	@Override
 	public String getDescription()
-    {
-        return description;
-    }
+	{
+		return description;
+	}
 
-    /**
-     * Returns the extension of the selected file.
-     *
-     * @param f DOCUMENT ME!
-     *
-     * @return the extension of the selected file.
-     */
-    public String getExtension(File f)
-    {
-        String ext = null;
-        String s = f.getName();
+	/**
+	 * Returns the extension of the selected file.
+	 *
+	 * @param f DOCUMENT ME!
+	 *
+	 * @return the extension of the selected file.
+	 */
+	public String getExtension(File f)
+	{
+		String ext = null;
+		String s = f.getName();
 
-        int i = s.lastIndexOf('.');
+		int i = s.lastIndexOf('.');
 
-        if((i > 0) && (i < (s.length() - 1)))
-        {
-            ext = s.substring(i + 1).toLowerCase();
-        }
+		if((i > 0) && (i < (s.length() - 1)))
+		{
+			ext = s.substring(i + 1).toLowerCase();
+		}
 
-        return ext;
-    }
+		return ext;
+	}
 
-    /**
-     * @see javax.swing.filechooser.FileFilter#accept(File)
-     */
-    @Override
+	/**
+	 * @see javax.swing.filechooser.FileFilter#accept(File)
+	 */
+	@Override
 	public boolean accept(File f)
-    {
-        if(f.isDirectory())
-        {
-            return true;
-        }
+	{
+		if(f.isDirectory())
+		{
+			return true;
+		}
 
-        String extension = getExtension(f);
+		String extension = getExtension(f);
 
-        if(extension == null)
-        {
-            return false;
-        }
+		if(extension == null)
+		{
+			return false;
+		}
 
-        for(int i = 0; i < extensions.length; i++)
-        {
-            if(extensions[i].compareTo(extension) == 0)
-            {
-                return true;
-            }
-        }
+		for(int i = 0; i < extensions.length; i++)
+		{
+			if(extensions[i].compareTo(extension) == 0)
+			{
+				return true;
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 }
 
 //------------------------------------------------------------------------------

@@ -125,7 +125,7 @@ public class StringManipulationTools implements HelperClass {
 		if (textWithHtmlTags == null)
 			return null;
 		String res = StringManipulationTools.removeTags(textWithHtmlTags, "<",
-				">");
+		">");
 		res = stringReplace(res, "&nbsp;", " ");
 		res = stringReplace(res, "%20", " ");
 		return res;
@@ -138,10 +138,10 @@ public class StringManipulationTools implements HelperClass {
 		int tagApos = textWithHtmlTags.indexOf(tagA);
 		while (tagApos >= 0) {
 			int tagBpos = textWithHtmlTags.indexOf(tagB, tagApos + tagB.length())
-					+ tagB.length();
+			+ tagB.length();
 			if (tagB.length() > 0 && tagBpos > 0) {
 				textWithHtmlTags = textWithHtmlTags.substring(0, tagApos)
-						+ textWithHtmlTags.substring(tagBpos);
+				+ textWithHtmlTags.substring(tagBpos);
 				tagApos = textWithHtmlTags.indexOf(tagA);
 			} else {
 				textWithHtmlTags = textWithHtmlTags.substring(0, tagApos);
@@ -178,7 +178,7 @@ public class StringManipulationTools implements HelperClass {
 		int tagApos = tu.get(0).indexOf(tagA);
 		while (tagApos >= 0) {
 			int tagBpos = tu.get(0).indexOf(tagB, tagApos + tagB.length())
-					+ tagB.length();
+			+ tagB.length();
 			if (tagBpos > 0) {
 				tu.add(tu.get(0).substring(tagApos + tagA.length(),
 						tagBpos - tagB.length()));
@@ -193,8 +193,8 @@ public class StringManipulationTools implements HelperClass {
 		}
 		if (tu.get(0).indexOf(tagB) >= 0)
 			tu
-					.set(0, tu.get(0).substring(
-							tu.get(0).indexOf(tagB) + tagB.length()));
+			.set(0, tu.get(0).substring(
+					tu.get(0).indexOf(tagB) + tagB.length()));
 
 		return tu;
 	}
@@ -231,7 +231,7 @@ public class StringManipulationTools implements HelperClass {
 	 * @return
 	 */
 	final static String[] numbers = new String[] { "0", "1", "2", "3", "4", "5",
-			"6", "7", "8", "9" };
+		"6", "7", "8", "9" };
 
 	public static String removeNumbersFromString(String s) {
 		for (String r : numbers)

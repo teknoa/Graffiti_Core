@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: SelectionModel.java,v 1.6 2010/07/17 22:00:22 klukas Exp $
+// $Id: SelectionModel.java,v 1.7 2010/07/19 13:01:49 morla Exp $
 
 package org.graffiti.selection;
 
@@ -18,190 +18,190 @@ import java.util.Iterator;
  * Contains a list of selections and a reference to the current selection.
  *
  * @author flierl
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class SelectionModel
 {
-    //~ Static fields/initializers =============================================
+	//~ Static fields/initializers =============================================
 
-    /** DOCUMENT ME! */
-    public static final String ACTIVE = "active";
+	/** DOCUMENT ME! */
+	public static final String ACTIVE = "active";
 
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /**
-     * The list of selections.  Maps a <code>Selection.name</code> to a
-     * <code>Selection</code> instance.
-     */
-    private Hashtable<String,Selection> selections;
+	/**
+	 * The list of selections.  Maps a <code>Selection.name</code> to a
+	 * <code>Selection</code> instance.
+	 */
+	private Hashtable<String,Selection> selections;
 
-    /**
-     * The list of listeners, that want to be informed about changes in the
-     * selection model.
-     *
-     * @see SelectionListener
-     */
-    private HashSet<SelectionListener> listeners;
+	/**
+	 * The list of listeners, that want to be informed about changes in the
+	 * selection model.
+	 *
+	 * @see SelectionListener
+	 */
+	private HashSet<SelectionListener> listeners;
 
-    /** The current active selection. */
-    private String activeSelection;
+	/** The current active selection. */
+	private String activeSelection;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new <code>SelectionModel</code>.
-     */
-    public SelectionModel()
-    {
-        selections = new Hashtable<String,Selection>();
-        listeners = new HashSet<SelectionListener>();
-    }
+	/**
+	 * Constructs a new <code>SelectionModel</code>.
+	 */
+	public SelectionModel()
+	{
+		selections = new Hashtable<String,Selection>();
+		listeners = new HashSet<SelectionListener>();
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Sets the active selection to the given value. Informs all listeners
-     * about the change.
-     *
-     * @param selectionName the name of the new selection.
-     */
-    public void setActiveSelection(String selectionName)
-    {
-        if(this.activeSelection != null)
-        {
-            Selection oldSel = this.selections.get(this.activeSelection);
-            oldSel.clear();
-        }
+	/**
+	 * Sets the active selection to the given value. Informs all listeners
+	 * about the change.
+	 *
+	 * @param selectionName the name of the new selection.
+	 */
+	public void setActiveSelection(String selectionName)
+	{
+		if(this.activeSelection != null)
+		{
+			Selection oldSel = this.selections.get(this.activeSelection);
+			oldSel.clear();
+		}
 
-        this.activeSelection = selectionName;
-        this.selectionChanged();
-    }
+		this.activeSelection = selectionName;
+		this.selectionChanged();
+	}
 
-    /**
-     * Sets the active selection to the given value. Informs all listeners
-     * about the change.
-     *
-     * @param sel the name of the new selection.
-     */
-    public void setActiveSelection(Selection sel)
-    {
-        if(this.activeSelection != null)
-        {
-            Selection oldSel = this.selections.get(this.activeSelection);
-            oldSel.clear();
-            this.selectionChanged();
-        }
+	/**
+	 * Sets the active selection to the given value. Informs all listeners
+	 * about the change.
+	 *
+	 * @param sel the name of the new selection.
+	 */
+	public void setActiveSelection(Selection sel)
+	{
+		if(this.activeSelection != null)
+		{
+			Selection oldSel = this.selections.get(this.activeSelection);
+			oldSel.clear();
+			this.selectionChanged();
+		}
 
-        this.activeSelection = sel.getName();
+		this.activeSelection = sel.getName();
 
-        if(selections.put(sel.getName(), sel) == null)
-        {
-            SelectionEvent selectionEvent = new SelectionEvent(sel);
-            selectionEvent.setAdded(true);
+		if(selections.put(sel.getName(), sel) == null)
+		{
+			SelectionEvent selectionEvent = new SelectionEvent(sel);
+			selectionEvent.setAdded(true);
 
-            for(Iterator<SelectionListener> it = listeners.iterator(); it.hasNext();)
-            {
-                ((SelectionListener) it.next()).selectionListChanged(selectionEvent);
-            }
-        }
+			for(Iterator<SelectionListener> it = listeners.iterator(); it.hasNext();)
+			{
+				((SelectionListener) it.next()).selectionListChanged(selectionEvent);
+			}
+		}
 
-        this.selectionChanged();
-    }
+		this.selectionChanged();
+	}
 
-    /**
-     * Returns the active selection.
-     *
-     * @return DOCUMENT ME!
-     */
-    public Selection getActiveSelection()
-    {
-        if(activeSelection == null)
-        {
-            return null;
-        }
-        else
-        {
-            return selections.get(activeSelection);
-        }
-    }
+	/**
+	 * Returns the active selection.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	public Selection getActiveSelection()
+	{
+		if(activeSelection == null)
+		{
+			return null;
+		}
+		else
+		{
+			return selections.get(activeSelection);
+		}
+	}
 
-    /**
-     * Adds the given selection to the list of selections.
-     *
-     * @param selection the selection object to add.
-     */
-    public void add(Selection selection)
-    {
-        selections.put(selection.getName(), selection);
+	/**
+	 * Adds the given selection to the list of selections.
+	 *
+	 * @param selection the selection object to add.
+	 */
+	public void add(Selection selection)
+	{
+		selections.put(selection.getName(), selection);
 
-        SelectionEvent selectionEvent = new SelectionEvent(selection);
-        selectionEvent.setAdded(true);
+		SelectionEvent selectionEvent = new SelectionEvent(selection);
+		selectionEvent.setAdded(true);
 
-        for(Iterator<SelectionListener> it = listeners.iterator(); it.hasNext();)
-        {
-            ((SelectionListener) it.next()).selectionListChanged(selectionEvent);
-        }
-    }
+		for(Iterator<SelectionListener> it = listeners.iterator(); it.hasNext();)
+		{
+			((SelectionListener) it.next()).selectionListChanged(selectionEvent);
+		}
+	}
 
-    /**
-     * Adds the given selection listener to the list of listeners.
-     *
-     * @param listener the selection listener to add.
-     */
-    public void addSelectionListener(SelectionListener listener)
-    {
-        if(!listeners.contains(listener))
-        {
-            listeners.add(listener);
-        }
-    }
+	/**
+	 * Adds the given selection listener to the list of listeners.
+	 *
+	 * @param listener the selection listener to add.
+	 */
+	public void addSelectionListener(SelectionListener listener)
+	{
+		if(!listeners.contains(listener))
+		{
+			listeners.add(listener);
+		}
+	}
 
-    /**
-     * Removes the given selection for the list of selections.
-     *
-     * @param selection the selection to remove from the list.
-     */
-    public void remove(Selection selection)
-    {
-        selections.remove(selection.getName());
+	/**
+	 * Removes the given selection for the list of selections.
+	 *
+	 * @param selection the selection to remove from the list.
+	 */
+	public void remove(Selection selection)
+	{
+		selections.remove(selection.getName());
 
-        SelectionEvent selectionEvent = new SelectionEvent(selection);
-        selectionEvent.setAdded(false);
+		SelectionEvent selectionEvent = new SelectionEvent(selection);
+		selectionEvent.setAdded(false);
 
-        for(Iterator<SelectionListener> it = listeners.iterator(); it.hasNext();)
-        {
-            ((SelectionListener) it.next()).selectionListChanged(selectionEvent);
-        }
-    }
+		for(Iterator<SelectionListener> it = listeners.iterator(); it.hasNext();)
+		{
+			((SelectionListener) it.next()).selectionListChanged(selectionEvent);
+		}
+	}
 
-    /**
-     * Removes the given selection listener from the list of listeners.
-     *
-     * @param listener the selection listener to remove.
-     */
-    public void removeSelectionListener(SelectionListener listener)
-    {
-        listeners.remove(listener);
-    }
+	/**
+	 * Removes the given selection listener from the list of listeners.
+	 *
+	 * @param listener the selection listener to remove.
+	 */
+	public void removeSelectionListener(SelectionListener listener)
+	{
+		listeners.remove(listener);
+	}
 
-    /**
-     * Informs the registered listeners that the active session has changed.
-     */
-    public void selectionChanged()
-    {
-    	if (selections==null || activeSelection==null)
-    		return;
-        Selection activeSel = selections.get(activeSelection);
-        SelectionEvent selectionEvent = new SelectionEvent(activeSel);
-        ArrayList<SelectionListener> list = new ArrayList<SelectionListener>();
-        list.addAll(listeners);
-        for(SelectionListener sl : list)
-        {
-            sl.selectionChanged(selectionEvent);
-        }
+	/**
+	 * Informs the registered listeners that the active session has changed.
+	 */
+	public void selectionChanged()
+	{
+		if (selections==null || activeSelection==null)
+			return;
+		Selection activeSel = selections.get(activeSelection);
+		SelectionEvent selectionEvent = new SelectionEvent(activeSel);
+		ArrayList<SelectionListener> list = new ArrayList<SelectionListener>();
+		list.addAll(listeners);
+		for(SelectionListener sl : list)
+		{
+			sl.selectionChanged(selectionEvent);
+		}
 
-        activeSel.committedChanges();
-    }
+		activeSel.committedChanges();
+	}
 }
 
 //------------------------------------------------------------------------------

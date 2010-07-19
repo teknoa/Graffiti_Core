@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: SortedCollectionAttribute.java,v 1.1 2007/05/31 12:55:54 klukas Exp $
+// $Id: SortedCollectionAttribute.java,v 1.2 2010/07/19 12:59:22 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -13,10 +13,10 @@ package org.graffiti.attributes;
  * Empty interface. Implementing classes must respect the ordering of its
  * elements (i.e. the order in which they have been inserted).
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public interface SortedCollectionAttribute
-    extends CollectionAttribute
+extends CollectionAttribute
 {
 }
 

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: StringParameter.java,v 1.4 2009/06/29 20:26:20 klukas Exp $
+// $Id: StringParameter.java,v 1.5 2010/07/19 13:01:51 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -17,87 +17,87 @@ import scenario.ProvidesScenarioSupportCommand;
 /**
  * Parameter that contains an <code>Integer</code> value.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class StringParameter
-    extends AbstractSingleParameter
-    implements ProvidesScenarioSupportCommand
+extends AbstractSingleParameter
+implements ProvidesScenarioSupportCommand
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** The value of this parameter. */
-    private String value = null;
+	/** The value of this parameter. */
+	private String value = null;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new integer parameter.
-     *
-     * @param value the new integer value. May be null.
-     * @param name the name of the parameter.
-     * @param description the description of the parameter.
-     */
-    public StringParameter(String value, String name, String description)
-    {
-        super(name, description);
-        this.value = value;
-    }
+	/**
+	 * Constructs a new integer parameter.
+	 *
+	 * @param value the new integer value. May be null.
+	 * @param name the name of the parameter.
+	 * @param description the description of the parameter.
+	 */
+	public StringParameter(String value, String name, String description)
+	{
+		super(name, description);
+		this.value = value;
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns the value of this parameter as an <code>String</code>.
-     *
-     * @return the value of this parameter as an <code>String</code>.
-     */
-    public String getString()
-    {
-        return value;
-    }
+	/**
+	 * Returns the value of this parameter as an <code>String</code>.
+	 *
+	 * @return the value of this parameter as an <code>String</code>.
+	 */
+	public String getString()
+	{
+		return value;
+	}
 
-    /**
-     * Sets the value of the <code>AttributeParameter</code>.
-     *
-     * @param value the new value of the <code>AttributeParameter</code>.
-     *
-     * @exception IllegalArgumentException thrown if <code>value</code> is not
-     *            of the correct type.
-     */
-    @Override
+	/**
+	 * Sets the value of the <code>AttributeParameter</code>.
+	 *
+	 * @param value the new value of the <code>AttributeParameter</code>.
+	 *
+	 * @exception IllegalArgumentException thrown if <code>value</code> is not
+	 *            of the correct type.
+	 */
+	@Override
 	public void setValue(Object value)
-    {
-        try
-        {
-            this.value = (String) value;
-        }
-        catch(Exception e)
-        {
-            throw new IllegalArgumentException(e.getMessage());
-        }
-    }
+	{
+		try
+		{
+			this.value = (String) value;
+		}
+		catch(Exception e)
+		{
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
 
-    /**
-     * Returns the value of this parameter.
-     *
-     * @return the value of this parameter.
-     */
-    @Override
+	/**
+	 * Returns the value of this parameter.
+	 *
+	 * @return the value of this parameter.
+	 */
+	@Override
 	public Object getValue()
-    {
-        return value;
-    }
+	{
+		return value;
+	}
 
-    /**
-     * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
-     */
-    @Override
+	/**
+	 * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
+	 */
+	@Override
 	public String toXMLString() {
-        return getStandardXML(value.toString());
-    }
-    
+		return getStandardXML(value.toString());
+	}
+
 	public String getScenarioCommand() {
 		return "new StringParameter(\""+
-			getString()+"\", \""+getName()+"\", \""+getDescription()+"\")";
+		getString()+"\", \""+getName()+"\", \""+getDescription()+"\")";
 	}
 
 	public Collection<String> getScenarioImports() {

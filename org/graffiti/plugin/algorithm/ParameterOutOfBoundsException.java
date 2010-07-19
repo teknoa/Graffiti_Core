@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ParameterOutOfBoundsException.java,v 1.2 2010/07/17 22:00:19 klukas Exp $
+// $Id: ParameterOutOfBoundsException.java,v 1.3 2010/07/19 13:00:48 morla Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -13,12 +13,12 @@ package org.graffiti.plugin.algorithm;
  * This exception is thrown if anyone tries to assign an invalid value to a
  * <code>LimitableParameter</code>.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see org.graffiti.plugin.parameter.LimitableParameter
  */
 public class ParameterOutOfBoundsException
-    extends Exception
+extends Exception
 {
 
 	/**

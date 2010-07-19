@@ -13,5 +13,5 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 public interface MultipleFileLoader {
-	 public void loadGraphInBackground(final File[] files, ActionEvent ae);
+	public void loadGraphInBackground(final File[] files, ActionEvent ae);
 }

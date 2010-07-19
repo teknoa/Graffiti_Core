@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: InputSerializer.java,v 1.2 2008/10/19 08:42:36 klukas Exp $
+// $Id: InputSerializer.java,v 1.3 2010/07/19 13:01:49 morla Exp $
 
 package org.graffiti.plugin.io;
 
@@ -20,61 +20,61 @@ import org.graffiti.graph.Graph;
  * Interfaces a serializer, which is able to reconstruct a graph from a given
  * input.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public interface InputSerializer
-    extends Serializer
+extends Serializer
 {
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Reads in a graph from the given filename.
-     *
-     * @param filename The name of the file to read the graph from.
-     * @param g The graph to add the newly read graph to.
-     *
-     * @exception IOException If an IO error occurs.
-     */
-    public void read(String filename, Graph g)
-        throws IOException;
-    
+	/**
+	 * Reads in a graph from the given filename.
+	 *
+	 * @param filename The name of the file to read the graph from.
+	 * @param g The graph to add the newly read graph to.
+	 *
+	 * @exception IOException If an IO error occurs.
+	 */
+	public void read(String filename, Graph g)
+	throws IOException;
+
 	public boolean validFor(InputStream reader);
 
-    /**
-     * Reads in the graph from the given url.
-     *
-     * @param url The URL to read the graph from.
-     * @param g The graph to add the newly read graph to.
-     *
-     * @exception IOException If an IO error occurs.
-     */
-    public void read(URL url, Graph g)
-        throws IOException;
+	/**
+	 * Reads in the graph from the given url.
+	 *
+	 * @param url The URL to read the graph from.
+	 * @param g The graph to add the newly read graph to.
+	 *
+	 * @exception IOException If an IO error occurs.
+	 */
+	public void read(URL url, Graph g)
+	throws IOException;
 
-    /**
-     * Reads in a graph from the given input stream.
-     *
-     * @param in The input stream to read the graph from.
-     * @param g The graph to add the newly read graph to.
-     *
-     * @exception IOException If an IO error occurs.
-     */
-    public void read(InputStream in, Graph g)
-        throws IOException;
+	/**
+	 * Reads in a graph from the given input stream.
+	 *
+	 * @param in The input stream to read the graph from.
+	 * @param g The graph to add the newly read graph to.
+	 *
+	 * @exception IOException If an IO error occurs.
+	 */
+	public void read(InputStream in, Graph g)
+	throws IOException;
 
-    /**
-     * Reads in a graph from the given input stream.
-     *
-     * @param in The input stream to read the graph from.
-     * @return The newly read graph.
-     *
-     * @exception IOException If an IO error occurs.
-     */
-    public Graph read(InputStream in)
-        throws IOException;
+	/**
+	 * Reads in a graph from the given input stream.
+	 *
+	 * @param in The input stream to read the graph from.
+	 * @return The newly read graph.
+	 *
+	 * @exception IOException If an IO error occurs.
+	 */
+	public Graph read(InputStream in)
+	throws IOException;
 
 	public void read(Reader reader, Graph newGraph)
-		throws Exception;
+	throws Exception;
 }
 
 //------------------------------------------------------------------------------

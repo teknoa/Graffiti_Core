@@ -18,7 +18,7 @@ public class MyInputStreamCreator {
 		this.absolutePath = absolutePath;
 		this.gzip = gzip;
 	}
-	
+
 	public MyInputStreamCreator(File file) {
 		this.file = file;
 	}

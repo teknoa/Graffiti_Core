@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PositionAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: PositionAttribute.java,v 1.3 2010/07/19 13:01:00 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -17,42 +17,42 @@ import org.graffiti.attributes.HashMapAttribute;
 /**
  * Contains properties of the attribute position for a label
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class PositionAttribute
-    extends HashMapAttribute
-    implements GraphicAttributeConstants
+extends HashMapAttribute
+implements GraphicAttributeConstants
 {
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructor for NodeLabelPositionAttribute.
-     *
-     * @param id
-     */
-    public PositionAttribute(String id)
-    {
-        super(id);
-    }
+	/**
+	 * Constructor for NodeLabelPositionAttribute.
+	 *
+	 * @param id
+	 */
+	public PositionAttribute(String id)
+	{
+		super(id);
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Sets the collection of attributes contained within this
-     * <tt>CollectionAttribute</tt>
-     *
-     * @param attrs the map that contains all attributes.
-     *
-     * @throws IllegalArgumentException DOCUMENT ME!
-     */
-    @Override
+	/**
+	 * Sets the collection of attributes contained within this
+	 * <tt>CollectionAttribute</tt>
+	 *
+	 * @param attrs the map that contains all attributes.
+	 *
+	 * @throws IllegalArgumentException DOCUMENT ME!
+	 */
+	@Override
 	public void setCollection(Map<String, Attribute> attrs)
-    {
-        if(!attrs.keySet().isEmpty())
-        {
-            throw new IllegalArgumentException("Invalid map.");
-        }
-    }
+	{
+		if(!attrs.keySet().isEmpty())
+		{
+			throw new IllegalArgumentException("Invalid map.");
+		}
+	}
 }
 
 //------------------------------------------------------------------------------

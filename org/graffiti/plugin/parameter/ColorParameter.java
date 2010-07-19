@@ -8,61 +8,61 @@ import java.awt.Color;
 import org.color.ColorUtil;
 
 public class ColorParameter
-    extends AbstractSingleParameter
+extends AbstractSingleParameter
 {
-    private Color value = null;
+	private Color value = null;
 
-    public ColorParameter(Color value, String name, String description)
-    {
-        super(name, description);
-        this.value = value;
-    }
+	public ColorParameter(Color value, String name, String description)
+	{
+		super(name, description);
+		this.value = value;
+	}
 
-    public Color getColor()
-    {
-        return value;
-    }
+	public Color getColor()
+	{
+		return value;
+	}
 
-    public boolean isValid()
-    {
-        if(value == null)
-        {
-            return false;
-        }
+	public boolean isValid()
+	{
+		if(value == null)
+		{
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
+	@Override
 	public void setValue(Object value)
-    {
-        try
-        {
-            this.value = (Color) value;
-        }
-        catch(Exception e)
-        {
-            throw new IllegalArgumentException(e.getMessage());
-        }
-    }
+	{
+		try
+		{
+			this.value = (Color) value;
+		}
+		catch(Exception e)
+		{
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
 
-    /**
-     * Returns the value of this parameter.
-     *
-     * @return the value of this parameter.
-     */
-    @Override
-	public Object getValue()
-    {
-        return value;
-    }
+	/**
+	 * Returns the value of this parameter.
+	 *
+	 * @return the value of this parameter.
+	 */
+	 @Override
+	 public Object getValue()
+	{
+		return value;
+	}
 
-    /**
-     * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
-     */
-    @Override
-	public String toXMLString() {
-        return getStandardXML(ColorUtil.getHexFromColor(value));
-    }
+	 /**
+	  * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
+	  */
+	 @Override
+	 public String toXMLString() {
+		 return getStandardXML(ColorUtil.getHexFromColor(value));
+	 }
 
 }

@@ -78,7 +78,7 @@ public class Color_CIE_Lab {
 		double X = ref_X * var_X;     //ref_X =  95.047     Observer= 2°, Illuminant= D65
 		double Y = ref_Y * var_Y;     //ref_Y = 100.000
 		double Z = ref_Z * var_Z;     //ref_Z = 108.883
-		
+
 		return new ColorXYZ(X, Y, Z);
 	}
 }

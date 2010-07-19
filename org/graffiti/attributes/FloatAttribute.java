@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: FloatAttribute.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: FloatAttribute.java,v 1.3 2010/07/19 12:59:22 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -14,131 +14,131 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a float
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class FloatAttribute
-    extends AbstractAttribute {
-    //~ Instance fields ========================================================
+extends AbstractAttribute {
+	//~ Instance fields ========================================================
 
-    /** The value of this attribute */
-    private float value;
+	/** The value of this attribute */
+	private float value;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new instance of a <code>FloatAttribute</code>.
-     *
-     * @param id the id of the attribute.
-     */
-    public FloatAttribute(String id) {
-        super(id);
-    }
+	/**
+	 * Constructs a new instance of a <code>FloatAttribute</code>.
+	 *
+	 * @param id the id of the attribute.
+	 */
+	public FloatAttribute(String id) {
+		super(id);
+	}
 
-    /**
-     * Constructs a new instance of a <code>FloatAttribute</code> with the
-     * given value.
-     *
-     * @param id the id of the attribute.
-     * @param value the value of the attribute.
-     */
-    public FloatAttribute(String id, float value) {
-        super(id);
-        this.value = value;
-    }
+	/**
+	 * Constructs a new instance of a <code>FloatAttribute</code> with the
+	 * given value.
+	 *
+	 * @param id the id of the attribute.
+	 * @param value the value of the attribute.
+	 */
+	public FloatAttribute(String id, float value) {
+		super(id);
+		this.value = value;
+	}
 
-    /**
-     * Constructs a new instance of a <code>FloatAttribute</code> with the
-     * given value.
-     *
-     * @param id the id of the attribute.
-     * @param value the value of the attribute.
-     */
-    public FloatAttribute(String id, Float value) {
-        super(id);
-        this.value = value.floatValue();
-    }
+	/**
+	 * Constructs a new instance of a <code>FloatAttribute</code> with the
+	 * given value.
+	 *
+	 * @param id the id of the attribute.
+	 * @param value the value of the attribute.
+	 */
+	public FloatAttribute(String id, Float value) {
+		super(id);
+		this.value = value.floatValue();
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * @see org.graffiti.attributes.Attribute#setDefaultValue()
-     */
-    public void setDefaultValue() {
-        value = 0f;
-    }
+	/**
+	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
+	 */
+	public void setDefaultValue() {
+		value = 0f;
+	}
 
-    /**
-     * Set the value of this Object.
-     *
-     * @param value the new value for this object.
-     */
-    public void setFloat(float value) {
-        AttributeEvent ae = new AttributeEvent(this);
-        callPreAttributeChanged(ae);
-        this.value = value;
-        callPostAttributeChanged(ae);
-    }
+	/**
+	 * Set the value of this Object.
+	 *
+	 * @param value the new value for this object.
+	 */
+	public void setFloat(float value) {
+		AttributeEvent ae = new AttributeEvent(this);
+		callPreAttributeChanged(ae);
+		this.value = value;
+		callPostAttributeChanged(ae);
+	}
 
-    /**
-     * Returns the value of this object.
-     *
-     * @return the value of this object.
-     */
-    public float getFloat() {
-        return value;
-    }
+	/**
+	 * Returns the value of this object.
+	 *
+	 * @return the value of this object.
+	 */
+	public float getFloat() {
+		return value;
+	}
 
-    /**
-     * Returns the value of the attribute wrapped in an <code>Float</code>
-     * object.
-     *
-     * @return the value of the attribute wrapped in an <code>Float</code>
-     *         object.
-     */
-    public Object getValue() {
-        return new Float(value);
-    }
+	/**
+	 * Returns the value of the attribute wrapped in an <code>Float</code>
+	 * object.
+	 *
+	 * @return the value of the attribute wrapped in an <code>Float</code>
+	 *         object.
+	 */
+	public Object getValue() {
+		return new Float(value);
+	}
 
-    /**
-     * Returns a deep copy of this instance.
-     *
-     * @return a deep copy of this instance.
-     */
-    public Object copy() {
-        return new FloatAttribute(this.getId(), this.value);
-    }
+	/**
+	 * Returns a deep copy of this instance.
+	 *
+	 * @return a deep copy of this instance.
+	 */
+	public Object copy() {
+		return new FloatAttribute(this.getId(), this.value);
+	}
 
-    /**
-     * Sets the value of the attribute. The <code>ListenerManager</code> is
-     * informed by the method <code>setValue()</code>.
-     *
-     * @param o the new value of the attribute.
-     *
-     * @exception IllegalArgumentException if the parameter has not the
-     *            appropriate class for this attribute.
-     */
-    @Override
+	/**
+	 * Sets the value of the attribute. The <code>ListenerManager</code> is
+	 * informed by the method <code>setValue()</code>.
+	 *
+	 * @param o the new value of the attribute.
+	 *
+	 * @exception IllegalArgumentException if the parameter has not the
+	 *            appropriate class for this attribute.
+	 */
+	@Override
 	protected void doSetValue(Object o)
-        throws IllegalArgumentException {
-        assert o != null;
+	throws IllegalArgumentException {
+		assert o != null;
 
-        try {
-            if (o instanceof Double)
-                value = ((Double)o).floatValue();
-            else
-                value = ((Float) o).floatValue();
-        } catch(ClassCastException cce) {
-            throw new IllegalArgumentException("Invalid value type.");
-        }
-    }
+		try {
+			if (o instanceof Double)
+				value = ((Double)o).floatValue();
+			else
+				value = ((Float) o).floatValue();
+		} catch(ClassCastException cce) {
+			throw new IllegalArgumentException("Invalid value type.");
+		}
+	}
 
-    /**
-     * @see org.graffiti.plugin.Displayable#toXMLString()
-     */
-    @Override
+	/**
+	 * @see org.graffiti.plugin.Displayable#toXMLString()
+	 */
+	@Override
 	public String toXMLString() {
-        return getStandardXML(String.valueOf(value));
-    }
+		return getStandardXML(String.valueOf(value));
+	}
 }
 
 //------------------------------------------------------------------------------

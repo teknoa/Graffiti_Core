@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractNodeListener.java,v 1.1 2007/05/31 12:56:05 klukas Exp $
+// $Id: AbstractNodeListener.java,v 1.2 2010/07/19 13:01:47 morla Exp $
 
 package org.graffiti.event;
 
@@ -31,153 +31,153 @@ package org.graffiti.event;
  * passed to it.
  * </p>
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see ListenerManager
  * @see NodeEvent
  */
 public abstract class AbstractNodeListener
-    implements NodeListener
+implements NodeListener
 {
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Called just after an incoming edge has been added to the node. (For
-     * undirected edges postUndirectedEdgeAdded is called instead.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void postInEdgeAdded(NodeEvent e)
-    {
-    }
+	/**
+	 * Called just after an incoming edge has been added to the node. (For
+	 * undirected edges postUndirectedEdgeAdded is called instead.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void postInEdgeAdded(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called after an incoming edge has been removed from the node. (For
-     * undirected edges postUndirectedEdgeRemoved is called.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void postInEdgeRemoved(NodeEvent e)
-    {
-    }
+	/**
+	 * Called after an incoming edge has been removed from the node. (For
+	 * undirected edges postUndirectedEdgeRemoved is called.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void postInEdgeRemoved(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called after an outgoing edge has been added to the node. (For
-     * undirected edges postUndirectedEdgeAdded is called instead.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void postOutEdgeAdded(NodeEvent e)
-    {
-    }
+	/**
+	 * Called after an outgoing edge has been added to the node. (For
+	 * undirected edges postUndirectedEdgeAdded is called instead.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void postOutEdgeAdded(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called after an outgoing edge has been removed from the node. (For
-     * undirected edges postUndirectedEdgeRemoved is called.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void postOutEdgeRemoved(NodeEvent e)
-    {
-    }
+	/**
+	 * Called after an outgoing edge has been removed from the node. (For
+	 * undirected edges postUndirectedEdgeRemoved is called.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void postOutEdgeRemoved(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called after an (undirected) edge has been added to the node. (For
-     * directed edges pre- In/Out- EdgeAdded is called.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void postUndirectedEdgeAdded(NodeEvent e)
-    {
-    }
+	/**
+	 * Called after an (undirected) edge has been added to the node. (For
+	 * directed edges pre- In/Out- EdgeAdded is called.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void postUndirectedEdgeAdded(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called after an (undirected) edge has been removed from the node. (For
-     * directed edges pre- In/Out- EdgeRemoved is called.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void postUndirectedEdgeRemoved(NodeEvent e)
-    {
-    }
+	/**
+	 * Called after an (undirected) edge has been removed from the node. (For
+	 * directed edges pre- In/Out- EdgeRemoved is called.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void postUndirectedEdgeRemoved(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called just before an incoming edge is added to the node. (For
-     * undirected edges preUndirectedEdgeAdded is called instead.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void preInEdgeAdded(NodeEvent e)
-    {
-    }
+	/**
+	 * Called just before an incoming edge is added to the node. (For
+	 * undirected edges preUndirectedEdgeAdded is called instead.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void preInEdgeAdded(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called just before an incoming edge is removed from the node. (For
-     * undirected edges preUndirectedEdgeRemoved is called.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void preInEdgeRemoved(NodeEvent e)
-    {
-    }
+	/**
+	 * Called just before an incoming edge is removed from the node. (For
+	 * undirected edges preUndirectedEdgeRemoved is called.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void preInEdgeRemoved(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called just before an outgoing edge is added to the node. (For
-     * undirected edges preUndirectedEdgeAdded is called instead.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void preOutEdgeAdded(NodeEvent e)
-    {
-    }
+	/**
+	 * Called just before an outgoing edge is added to the node. (For
+	 * undirected edges preUndirectedEdgeAdded is called instead.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void preOutEdgeAdded(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called just before an outgoing edge is removed from the node. (For
-     * undirected edges preUndirectedEdgeRemoved is called.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void preOutEdgeRemoved(NodeEvent e)
-    {
-    }
+	/**
+	 * Called just before an outgoing edge is removed from the node. (For
+	 * undirected edges preUndirectedEdgeRemoved is called.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void preOutEdgeRemoved(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called just before an (undirected) edge is added to the node. (For
-     * directed edges pre- In/Out- EdgeAdded is called.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void preUndirectedEdgeAdded(NodeEvent e)
-    {
-    }
+	/**
+	 * Called just before an (undirected) edge is added to the node. (For
+	 * directed edges pre- In/Out- EdgeAdded is called.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void preUndirectedEdgeAdded(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called just before an (undirected) edge is removed from the node. (For
-     * directed edges pre- In/Out- EdgeRemoved is called.)
-     *
-     * @param e The NodeEvent detailing the changes.
-     */
-    public void preUndirectedEdgeRemoved(NodeEvent e)
-    {
-    }
+	/**
+	 * Called just before an (undirected) edge is removed from the node. (For
+	 * directed edges pre- In/Out- EdgeRemoved is called.)
+	 *
+	 * @param e The NodeEvent detailing the changes.
+	 */
+	public void preUndirectedEdgeRemoved(NodeEvent e)
+	{
+	}
 
-    /**
-     * Called after a transaction has been finished.
-     *
-     * @param e gives details about the transaction.
-     */
-    public void transactionFinished(TransactionEvent e)
-    {
-    }
+	/**
+	 * Called after a transaction has been finished.
+	 *
+	 * @param e gives details about the transaction.
+	 */
+	public void transactionFinished(TransactionEvent e)
+	{
+	}
 
-    /**
-     * Called after a transaction has been started.
-     *
-     * @param e gives details about the transaction.
-     */
-    public void transactionStarted(TransactionEvent e)
-    {
-    }
+	/**
+	 * Called after a transaction has been started.
+	 *
+	 * @param e gives details about the transaction.
+	 */
+	public void transactionStarted(TransactionEvent e)
+	{
+	}
 }
 
 //------------------------------------------------------------------------------

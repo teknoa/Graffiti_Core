@@ -16,14 +16,14 @@ import javax.swing.JMenuItem;
  * 
  */
 public interface Extension {
-    /**
-     * Override this method in order to provide menu items, that are
-     * added to the main menu bar. 
-     * @return Return null, if no menus are provided or a <code>List</code> of <code>JMenuItems</code>
-     */
-    List<JMenuItem> getMenuItems();
-    
+	/**
+	 * Override this method in order to provide menu items, that are
+	 * added to the main menu bar.
+	 * @return Return null, if no menus are provided or a <code>List</code> of <code>JMenuItems</code>
+	 */
+	List<JMenuItem> getMenuItems();
+
 	public String getName();
-	
+
 	public String getCategory();
 }

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericFileFilter.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: GenericFileFilter.java,v 1.3 2010/07/19 13:00:57 morla Exp $
 
 package org.graffiti.core;
 
@@ -17,94 +17,94 @@ import javax.swing.filechooser.FileFilter;
  * Contains a generic file filter for filtering file extensions in the file
  * chooser dialog.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class GenericFileFilter
-    extends FileFilter
+extends FileFilter
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** The extension for filtering */
-    private String extension;
+	/** The extension for filtering */
+	private String extension;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructor for GenericFileFilter.
-     *
-     * @param extension a extension for which the filter will be built.
-     */
-    public GenericFileFilter(String extension)
-    {
-        this.extension = extension;
-    }
+	/**
+	 * Constructor for GenericFileFilter.
+	 *
+	 * @param extension a extension for which the filter will be built.
+	 */
+	public GenericFileFilter(String extension)
+	{
+		this.extension = extension;
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * The description of this filter. For example: ".gml"
-     *
-     * @return DOCUMENT ME!
-     */
-    @Override
+	/**
+	 * The description of this filter. For example: ".gml"
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	@Override
 	public String getDescription()
-    {
-        return "*" + extension;
-    }
+	{
+		return "*" + extension;
+	}
 
-    /**
-     * Return the extension string for files that this filter allows.
-     *
-     * @return DOCUMENT ME!
-     */
-    public String getExtension()
-    {
-        return extension;
-    }
+	/**
+	 * Return the extension string for files that this filter allows.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	public String getExtension()
+	{
+		return extension;
+	}
 
-    /**
-     * Whether the given file is accepted by this filter.
-     *
-     * @param f DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     */
-    @Override
+	/**
+	 * Whether the given file is accepted by this filter.
+	 *
+	 * @param f DOCUMENT ME!
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	@Override
 	public boolean accept(File f)
-    {
-        boolean accept = f.isDirectory();
+	{
+		boolean accept = f.isDirectory();
 
-        if(!accept)
-        {
-            String suffix = getExtension(f);
+		if(!accept)
+		{
+			String suffix = getExtension(f);
 
-            if(suffix != null)
-                accept = suffix.equals(extension);
-        }
+			if(suffix != null)
+				accept = suffix.equals(extension);
+		}
 
-        return accept;
-    }
+		return accept;
+	}
 
-    /**
-     * Get the extension of a file.
-     *
-     * @param f DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     */
-    private String getExtension(File f)
-    {
-        String ext = null;
-        String s = f.getPath();
-        int i = s.lastIndexOf('.');
+	/**
+	 * Get the extension of a file.
+	 *
+	 * @param f DOCUMENT ME!
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	private String getExtension(File f)
+	{
+		String ext = null;
+		String s = f.getPath();
+		int i = s.lastIndexOf('.');
 
-        if((i > 0) && (i < (s.length() - 1)))
-        {
-            ext = s.substring(i).toLowerCase();
-        }
+		if((i > 0) && (i < (s.length() - 1)))
+		{
+			ext = s.substring(i).toLowerCase();
+		}
 
-        return ext;
-    }
+		return ext;
+	}
 }
 
 //------------------------------------------------------------------------------

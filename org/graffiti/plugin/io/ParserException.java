@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ParserException.java,v 1.2 2010/07/17 22:00:21 klukas Exp $
+// $Id: ParserException.java,v 1.3 2010/07/19 13:01:49 morla Exp $
 
 package org.graffiti.plugin.io;
 
@@ -18,24 +18,24 @@ import java.io.IOException;
  * @see java.io.IoException
  */
 public class ParserException
-    extends IOException
+extends IOException
 {
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-     * Constructs a new <code>ParserException</code>.
-     *
-     * @param message the message for this exception.
-     */
-    public ParserException(String message)
-    {
-        super(message);
-    }
+	 * Constructs a new <code>ParserException</code>.
+	 *
+	 * @param message the message for this exception.
+	 */
+	public ParserException(String message)
+	{
+		super(message);
+	}
 }
 
 //------------------------------------------------------------------------------

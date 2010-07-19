@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.14 2010/07/17 22:00:21 klukas Exp $
+// $Id: DefaultIOManager.java,v 1.15 2010/07/19 13:01:31 morla Exp $
 
 package org.graffiti.managers;
 
@@ -34,7 +34,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -55,7 +55,7 @@ public class DefaultIOManager implements IOManager {
 			if (file.isDirectory()) return true;
 			if (file.getName().lastIndexOf(".") > 0) {
 				String fileExt = file.getName().substring(
-							file.getName().lastIndexOf("."));
+						file.getName().lastIndexOf("."));
 				if (fileExt.equalsIgnoreCase(".GZ")) {
 					String fileName = file.getName();
 					fileName = fileName.substring(0, fileName.length()-".gz".length());
@@ -120,11 +120,11 @@ public class DefaultIOManager implements IOManager {
 	 * @see org.graffiti.managers.IOManager#addInputSerializer(org.graffiti.plugin.io.InputSerializer)
 	 */
 	public void addInputSerializer(InputSerializer is) {
-//		String[] inExtensions = is.getExtensions();
+		//		String[] inExtensions = is.getExtensions();
 
-//		for (int j = 0; j < inExtensions.length; j++) {
-			inputSerializer.add(is);
-//		}
+		//		for (int j = 0; j < inExtensions.length; j++) {
+		inputSerializer.add(is);
+		//		}
 		fireInputSerializerAdded(is);
 	}
 
@@ -156,7 +156,7 @@ public class DefaultIOManager implements IOManager {
 			String[] ext = is.getExtensions();
 			extsearch: for (int i = 0; i < ext.length; i++)
 				if (ext[i].equalsIgnoreCase(extSearch)) {
-//					System.out.println("Possible reader: "+is.getClass().getCanonicalName());
+					//					System.out.println("Possible reader: "+is.getClass().getCanonicalName());
 					ins.add(is);
 					break extsearch;
 				}
@@ -167,7 +167,7 @@ public class DefaultIOManager implements IOManager {
 			try {
 				InputStream inps = in.getNewInputStream();
 				if (is.validFor(inps)) {
-//					System.out.println(ins.size()+" input serializers for file extension "+extSearch+". Selected "+is.getClass().getCanonicalName());
+					//					System.out.println(ins.size()+" input serializers for file extension "+extSearch+". Selected "+is.getClass().getCanonicalName());
 					return is;
 				}
 			} catch(FileNotFoundException fne) {
@@ -179,7 +179,7 @@ public class DefaultIOManager implements IOManager {
 		}
 		return null;
 	}
-	
+
 	public Set<String> getGraphFileExtensions() {
 		Set<String> knownExt = new TreeSet<String>();
 		for (Iterator<InputSerializer> itr = inputSerializer.iterator(); itr.hasNext();) {
@@ -204,13 +204,13 @@ public class DefaultIOManager implements IOManager {
 			String[] desc = is.getFileTypeDescriptions();
 			if (ext.length != desc.length) {
 				ErrorMsg.addErrorMessage("Error: File-Type descriptions do not match extensions - Class: "
-										+ is.toString());
+						+ is.toString());
 				continue;
 			}
 			for (int i = 0; i < ext.length; i++) {
-//				if (knownExt.contains(ext[i]))
-//							ErrorMsg.addErrorMessage("Internal Error: Duplicate Input File Type Extension - "
-//													+ ext[i] + " Class: " + is.toString());
+				//				if (knownExt.contains(ext[i]))
+				//							ErrorMsg.addErrorMessage("Internal Error: Duplicate Input File Type Extension - "
+				//													+ ext[i] + " Class: " + is.toString());
 				knownExt.add(ext[i]);
 				// System.out.println("Output: " + ext[i] + " Class: " + is.toString());
 				GravistoFileFilter gff = new GravistoFileFilter(ext[i], desc[i]);
@@ -253,18 +253,18 @@ public class DefaultIOManager implements IOManager {
 			String[] desc = os.getFileTypeDescriptions();
 			if (ext.length != desc.length) {
 				ErrorMsg.addErrorMessage("Error: File-Type descriptions do not match extensions - Class: "
-										+ os.toString());
+						+ os.toString());
 				continue;
 			}
 			for (int i = 0; i < ext.length; i++) {
 				if (knownExt.contains(ext[i]))
 					ErrorMsg.addErrorMessage("Error: Duplicate Output File Type Extension - "
-													+ ext[i] + " Class: " + os.toString());
+							+ ext[i] + " Class: " + os.toString());
 				knownExt.add(ext[i]);
 				GravistoFileFilter gff = new GravistoFileFilter(ext[i], desc[i]);
 
 				if (defaultFileFilter == null
-							&& gff.getExtension().equalsIgnoreCase(defaultExt)) {
+						&& gff.getExtension().equalsIgnoreCase(defaultExt)) {
 					defaultFileFilter = gff;
 				} else {
 					fc.addChoosableFileFilter(gff);
@@ -272,7 +272,7 @@ public class DefaultIOManager implements IOManager {
 			}
 		}
 		if (defaultFileFilter != null)
-					fc.addChoosableFileFilter(defaultFileFilter);
+			fc.addChoosableFileFilter(defaultFileFilter);
 		return fc;
 	}
 
@@ -325,7 +325,7 @@ public class DefaultIOManager implements IOManager {
 	@Override
 	public String toString() {
 		return "inputSerializer: " + inputSerializer + " outputSerializer: "
-					+ outputSerializer;
+		+ outputSerializer;
 	}
 
 	/**

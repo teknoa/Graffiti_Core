@@ -8,5 +8,5 @@ import org.graffiti.plugin.actions.URLattributeAction;
 public interface URLattributeActionManager extends PluginManagerListener {
 
 	public Collection<URLattributeAction> getActions();
-	
+
 }

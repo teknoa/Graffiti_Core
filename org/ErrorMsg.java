@@ -68,13 +68,13 @@ public class ErrorMsg implements HelperClass {
 						// caused the
 						// problem
 						res = res + "     Line: " + stack[i].getLineNumber()
-								+ " Method: " + stack[i].getClassName() + "/"
-								+ methodName + "<br>";
+						+ " Method: " + stack[i].getClassName() + "/"
+						+ methodName + "<br>";
 						if (firstMethod.length() <= 0 && methodName != null
 								&& !methodName.endsWith("addErrorMessage")) {
 							firstMethod = ", Line " + stack[i].getLineNumber()
-									+ " Method " + stack[i].getClassName() + "/"
-									+ methodName;
+							+ " Method " + stack[i].getClassName() + "/"
+							+ methodName;
 						}
 					}
 					if (stack[i].getMethodName().equalsIgnoreCase("addErrorMessage"))
@@ -167,8 +167,8 @@ public class ErrorMsg implements HelperClass {
 		if (errmsg != null)
 			for (int i = 0; i < errmsg.length; i++)
 				res += "<" + errorTag + ">"
-						+ StringManipulationTools.UnicodeToHtml(errmsg[i]) + "</"
-						+ errorTag + ">";
+				+ StringManipulationTools.UnicodeToHtml(errmsg[i]) + "</"
+				+ errorTag + ">";
 		return "<errormessages>" + res + "</errormessages>";
 	}
 

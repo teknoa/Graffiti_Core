@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractGraph.java,v 1.6 2009/12/10 21:31:38 klukas Exp $
+// $Id: AbstractGraph.java,v 1.7 2010/07/19 13:00:55 morla Exp $
 package org.graffiti.graph;
 
 import java.util.ArrayList;
@@ -36,13 +36,13 @@ import org.graffiti.event.ListenerManager;
 /**
  * Provides further functionality for graphs.
  *
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see Graph
  * @see AdjListGraph
  */
 public abstract class AbstractGraph extends AbstractAttributable implements
-		Graph {
+Graph {
 	//~ Static fields/initializers =============================================
 
 	/** The logger for the current class. */
@@ -59,7 +59,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 * graph.
 	 */
 	protected ListenerManager listenerManager;
-	
+
 	boolean isDirected = true;
 
 	/**
@@ -150,7 +150,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	}
 
 	/**
-	 * Indicates whether the graph is directed. 
+	 * Indicates whether the graph is directed.
 	 * A graph is directed if the graph setting states this.
 	 *
 	 * @return a boolean indicating whether the graph is directed.
@@ -188,7 +188,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	}
 
 	/**
-	 * When passing a true value, all undirected edges in the graph will be 
+	 * When passing a true value, all undirected edges in the graph will be
 	 * set to be directed. V.v. for a false value.
 	 * A second parameter indicates that if the edge arrows should be corrected.
 	 * 
@@ -196,7 +196,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 * @param adjustArrows
 	 */
 	public void setDirected(boolean directed, boolean adjustArrows) {
-		isDirected = directed; 
+		isDirected = directed;
 		if (adjustArrows) {
 			for (Iterator<Edge> it = getEdgesIterator(); it.hasNext();) {
 				Edge edge = (Edge) it.next();
@@ -207,7 +207,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 				if (directed) {
 					edge.setString("graphics.arrowtail", "");
 					edge.setString("graphics.arrowhead",
-							"org.graffiti.plugins.views.defaults.StandardArrowShape");
+					"org.graffiti.plugins.views.defaults.StandardArrowShape");
 				} else {
 					edge.setString("graphics.arrowtail", "");
 					edge.setString("graphics.arrowhead", "");
@@ -257,7 +257,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 *            contained in the graph.
 	 */
 	public Collection<Edge> getEdges(Node n1, Node n2)
-			throws GraphElementNotFoundException {
+	throws GraphElementNotFoundException {
 		assert (n1 != null) && (n2 != null);
 
 		Collection<Edge> col = new LinkedList<Edge>();
@@ -272,7 +272,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 			}
 		} else {
 			throw new GraphElementNotFoundException(
-					"one of the nodes is not in the graph");
+			"one of the nodes is not in the graph");
 		}
 
 		return col;
@@ -327,7 +327,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 * Removing elements from this collection will have no effect on the graph
 	 * whereas nodes can be modified.
 	 *
-	 * @return a new <code>java.util.List</code> containing all the nodes 
+	 * @return a new <code>java.util.List</code> containing all the nodes
 	 * of the graph.
 	 */
 	public List<Node> getNodes() {
@@ -381,7 +381,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 */
 	public int getNumberOfUndirectedEdges() {
 		int numberOfUndirectedEdges = getEdges().size()
-				- getNumberOfDirectedEdges();
+		- getNumberOfDirectedEdges();
 
 		logger.fine("this graph contains " + numberOfUndirectedEdges
 				+ " undirected edge(s)");
@@ -410,7 +410,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 * @throws UnificationException in the context of unification failures.
 	 */
 	public void addAttributeConsumer(AttributeConsumer attConsumer)
-			throws UnificationException {
+	throws UnificationException {
 		unifyWithNodeAttribute(attConsumer.getNodeAttribute());
 		unifyWithEdgeAttribute(attConsumer.getEdgeAttribute());
 		addAttributeToExistingNodes(attConsumer.getNodeAttribute());
@@ -435,7 +435,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 *            found in the graph.
 	 */
 	public Edge addEdge(Node source, Node target, boolean directed)
-			throws GraphElementNotFoundException {
+	throws GraphElementNotFoundException {
 		assert (source != null) && (target != null);
 		// logger.info("adding a new edge to the graph");
 
@@ -445,14 +445,14 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 			logger.severe("throwing GENFException, because the given source "
 					+ "was not in the same graph");
 			throw new GraphElementNotFoundException(
-					"source is not in the same graph as the edge");
+			"source is not in the same graph as the edge");
 		}
 
 		if (this != target.getGraph()) {
 			logger.severe("throwing GENFException, because the given target "
 					+ "was not in the same graph");
 			throw new GraphElementNotFoundException(
-					"target is not in the same graph as the edge");
+			"target is not in the same graph as the edge");
 		}
 
 		if (listMan!=null)
@@ -495,21 +495,21 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 
 		source.setGraph(this); // CK
 		target.setGraph(this); // CK
-		
+
 		// System.out.println("Add edge from "+source.toString()+" to "+target.toString());
 
 		if (this != source.getGraph()) {
 			logger.severe("throwing GENFException, because the given source "
 					+ "was not in the same graph");
 			throw new GraphElementNotFoundException(
-					"source is not in the same graph as the edge");
+			"source is not in the same graph as the edge");
 		}
 
 		if (this != target.getGraph()) {
 			logger.severe("throwing GENFException, because the given target "
 					+ "was not in the same graph");
 			throw new GraphElementNotFoundException(
-					"target is not in the same graph as the edge");
+			"target is not in the same graph as the edge");
 		}
 
 		//logger.info("adding a new edge to the graph");
@@ -542,7 +542,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 		assert (edge != null) && (source != null) && (target != null);
 
 		CollectionAttribute col = (CollectionAttribute) edge.getAttributes()
-				.copy();
+		.copy();
 		Edge newEdge = addEdge(source, target, edge.isDirected(), col);
 		newEdge.setID(edge.getID()); // copied edges share the same edge id
 		newEdge.setViewID(edge.getViewID());
@@ -564,7 +564,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 		for (Attribute a : g.getAttributes().getCollection().values()) {
 			try {
 				// try {
-					addAttribute((Attribute) a.copy(), "");
+				addAttribute((Attribute) a.copy(), "");
 				/*
 				} catch(AttributeNotFoundException e) {
 					attributes.getAttribute(a.getId()).setValue(a.getValue());
@@ -681,7 +681,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 		assert node != null;
 
 		CollectionAttribute col = (CollectionAttribute) node.getAttributes()
-				.copy();
+		.copy();
 		Node newNode = this.addNode(col);
 		newNode.setID(node.getID()); // copied nodes share the same ID
 		newNode.setViewID(node.getViewID());
@@ -703,7 +703,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 *            found in the graph.
 	 */
 	public boolean areConnected(Node n1, Node n2)
-			throws GraphElementNotFoundException {
+	throws GraphElementNotFoundException {
 		assert (n1 != null) && (n2 != null);
 
 		return getEdges(n1, n2).size() > 0;
@@ -844,7 +844,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 *            found in the graph.
 	 */
 	protected abstract Edge doAddEdge(Node source, Node target, boolean directed)
-			throws GraphElementNotFoundException;
+	throws GraphElementNotFoundException;
 
 	/**
 	 * Adds a new edge to the current graph. Informs the ListenerManager about
@@ -864,7 +864,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 */
 	protected abstract Edge doAddEdge(Node source, Node target,
 			boolean directed, CollectionAttribute col)
-			throws GraphElementNotFoundException;
+	throws GraphElementNotFoundException;
 
 	/**
 	 * Adds the node to the graph.
@@ -889,7 +889,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 *            found in the graph.
 	 */
 	protected abstract void doDeleteEdge(Edge e)
-			throws GraphElementNotFoundException;
+	throws GraphElementNotFoundException;
 
 	/**
 	 * Deletes the given node. First all in- and out-going edges will be
@@ -902,7 +902,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 *            found in the graph.
 	 */
 	protected abstract void doDeleteNode(Node n)
-			throws GraphElementNotFoundException;
+	throws GraphElementNotFoundException;
 
 	/**
 	 * Creates a new <code>Node</code>.
@@ -969,7 +969,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 	 * @throws UnificationException DOCUMENT ME!
 	 */
 	private void unifyWithEdgeAttribute(CollectionAttribute c)
-			throws UnificationException {
+	throws UnificationException {
 		if (c == null) { // base case
 
 			return;
@@ -989,7 +989,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 					//                if (attClazName
 					//                    .equals("org.graffiti.attributes.HashMapAttribute")) {
 					for (Iterator<String> i = c.getCollection().keySet().iterator(); i
-							.hasNext();) {
+					.hasNext();) {
 						String id = (String) i.next();
 
 						try {
@@ -1051,7 +1051,7 @@ public abstract class AbstractGraph extends AbstractAttributable implements
 				//                if(defaultNodeAttribute instanceof CollectionAttribute)
 				{
 					for (Iterator<String> i = c.getCollection().keySet().iterator(); i
-							.hasNext();) {
+					.hasNext();) {
 						String id = (String) i.next();
 
 						try {

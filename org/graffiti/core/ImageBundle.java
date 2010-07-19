@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ImageBundle.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: ImageBundle.java,v 1.3 2010/07/19 13:00:57 morla Exp $
 
 package org.graffiti.core;
 
@@ -22,129 +22,129 @@ import javax.swing.ImageIcon;
  * @see GenericBundle
  */
 public class ImageBundle
-    extends GenericBundle
+extends GenericBundle
 {
-    //~ Static fields/initializers =============================================
+	//~ Static fields/initializers =============================================
 
-    /** The only instance which will be created and returned. */
-    private static ImageBundle instance = null;
+	/** The only instance which will be created and returned. */
+	private static ImageBundle instance = null;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new <code>ImageBundle</code>.
-     */
-    protected ImageBundle()
-    {
-        super();
-    }
+	/**
+	 * Constructs a new <code>ImageBundle</code>.
+	 */
+	protected ImageBundle()
+	{
+		super();
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns the only instance of this class.
-     *
-     * @return the only instance of a <code>Bundle</code> this class generates.
-     */
-    public static ImageBundle getInstance()
-    {
-        if(instance == null)
-        {
-            instance = new ImageBundle();
-        }
+	/**
+	 * Returns the only instance of this class.
+	 *
+	 * @return the only instance of a <code>Bundle</code> this class generates.
+	 */
+	public static ImageBundle getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new ImageBundle();
+		}
 
-        return instance;
-    }
+		return instance;
+	}
 
-    /**
-     * Returns the specified image icon or a blank icon, if the specified image
-     * icon could not be found.
-     *
-     * @param name the property name of the icon.
-     *
-     * @return the specified image icon.
-     */
-    public ImageIcon getIcon(String name)
-    {
-        if(name == null)
-        {
-            return null;
-        }
+	/**
+	 * Returns the specified image icon or a blank icon, if the specified image
+	 * icon could not be found.
+	 *
+	 * @param name the property name of the icon.
+	 *
+	 * @return the specified image icon.
+	 */
+	public ImageIcon getIcon(String name)
+	{
+		if(name == null)
+		{
+			return null;
+		}
 
-        URL location = getRes(name);
+		URL location = getRes(name);
 
-        if(location != null)
-        {
-            return new ImageIcon(location);
-        }
-        else
-        {
-            return new ImageIcon(getRes("icon.blank"));
-        }
-    }
+		if(location != null)
+		{
+			return new ImageIcon(location);
+		}
+		else
+		{
+			return new ImageIcon(getRes("icon.blank"));
+		}
+	}
 
-    /**
-     * Returns the specified image or a blank image, if the specified image
-     * could not be found.
-     *
-     * @param name the property name of the icon.
-     *
-     * @return the specified icon.
-     */
-    public Image getImage(String name)
-    {
-        if(name == null)
-        {
-            return null;
-        }
+	/**
+	 * Returns the specified image or a blank image, if the specified image
+	 * could not be found.
+	 *
+	 * @param name the property name of the icon.
+	 *
+	 * @return the specified icon.
+	 */
+	public Image getImage(String name)
+	{
+		if(name == null)
+		{
+			return null;
+		}
 
-        URL location = getRes(name);
+		URL location = getRes(name);
 
-        if(location != null)
-        {
-            return new ImageIcon(location).getImage();
-        }
-        else
-        {
-            return new ImageIcon(getRes("icon.blank")).getImage();
-        }
-    }
+		if(location != null)
+		{
+			return new ImageIcon(location).getImage();
+		}
+		else
+		{
+			return new ImageIcon(getRes("icon.blank")).getImage();
+		}
+	}
 
-    /**
-     * Returns the specified image icon or a blank icon, if the specified image
-     * icon could not be found.
-     *
-     * @param name the property name of the icon.
-     *
-     * @return the specified image icon.
-     */
-    public ImageIcon getImageIcon(String name)
-    {
-        if(name == null)
-        {
-            return null;
-        }
+	/**
+	 * Returns the specified image icon or a blank icon, if the specified image
+	 * icon could not be found.
+	 *
+	 * @param name the property name of the icon.
+	 *
+	 * @return the specified image icon.
+	 */
+	public ImageIcon getImageIcon(String name)
+	{
+		if(name == null)
+		{
+			return null;
+		}
 
-        URL location = getRes(name);
+		URL location = getRes(name);
 
-        if(location != null)
-        {
-            return new ImageIcon(location);
-        }
-        else
-        {
-            return new ImageIcon(getRes("icon.blank"));
-        }
-    }
+		if(location != null)
+		{
+			return new ImageIcon(location);
+		}
+		else
+		{
+			return new ImageIcon(getRes("icon.blank"));
+		}
+	}
 
-    /**
-     * @see org.graffiti.core.GenericBundle#getBundleLocation()
-     */
-    @Override
+	/**
+	 * @see org.graffiti.core.GenericBundle#getBundleLocation()
+	 */
+	@Override
 	protected String getBundleLocation()
-    {
-        return "org/graffiti/core/ImageBundle";
-    }
+	{
+		return "org/graffiti/core/ImageBundle";
+	}
 }
 
 //------------------------------------------------------------------------------

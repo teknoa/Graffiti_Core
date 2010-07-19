@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DockingAttribute.java,v 1.4 2010/07/17 22:00:20 klukas Exp $
+// $Id: DockingAttribute.java,v 1.5 2010/07/19 13:01:00 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -23,166 +23,166 @@ import org.graffiti.attributes.StringAttribute;
  * this correctly.
  *
  * @author breu
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class DockingAttribute
-    extends HashMapAttribute
-    implements GraphicAttributeConstants
+extends HashMapAttribute
+implements GraphicAttributeConstants
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** Defines a port at source node */
-    private StringAttribute source;
+	/** Defines a port at source node */
+	private StringAttribute source;
 
-    /** Defines a port at target node */
-    private StringAttribute target;
+	/** Defines a port at target node */
+	private StringAttribute target;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructor for Docking.
-     *
-     * @param id the id of the attriubte.
-     */
-    public DockingAttribute(String id)
-    {
-        this(id, "", "");
-    }
+	/**
+	 * Constructor for Docking.
+	 *
+	 * @param id the id of the attriubte.
+	 */
+	public DockingAttribute(String id)
+	{
+		this(id, "", "");
+	}
 
-    /**
-     * Constructor for Docking.
-     *
-     * @param id the id of the attribute.
-     * @param source the source-value of the attribute.
-     * @param target the target-value of the attribute.
-     */
-    public DockingAttribute(String id, String source, String target)
-    {
-        super(id);
-        this.source = (StringAttribute)StringAttribute.getTypedStringAttribute(SOURCE, source);
-        this.target = (StringAttribute)StringAttribute.getTypedStringAttribute(TARGET, target);
-        add(this.source, false);
-        add(this.target, false);
-    }
+	/**
+	 * Constructor for Docking.
+	 *
+	 * @param id the id of the attribute.
+	 * @param source the source-value of the attribute.
+	 * @param target the target-value of the attribute.
+	 */
+	public DockingAttribute(String id, String source, String target)
+	{
+		super(id);
+		this.source = (StringAttribute)StringAttribute.getTypedStringAttribute(SOURCE, source);
+		this.target = (StringAttribute)StringAttribute.getTypedStringAttribute(TARGET, target);
+		add(this.source, false);
+		add(this.target, false);
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Sets the collection of attributes contained within this
-     * <tt>CollectionAttribute</tt>. The docking values are set, additional
-     * values are simply added (that means that if there exists  already a
-     * subattribute with the same id, an exception will be thrown).
-     *
-     * @param attrs the map that contains all attributes.
-     *
-     * @throws IllegalArgumentException DOCUMENT ME!
-     */
-    @Override
+	/**
+	 * Sets the collection of attributes contained within this
+	 * <tt>CollectionAttribute</tt>. The docking values are set, additional
+	 * values are simply added (that means that if there exists  already a
+	 * subattribute with the same id, an exception will be thrown).
+	 *
+	 * @param attrs the map that contains all attributes.
+	 *
+	 * @throws IllegalArgumentException DOCUMENT ME!
+	 */
+	@Override
 	public void setCollection(Map<String, Attribute> attrs)
-    {
-        if(attrs.keySet().contains(SOURCE) || attrs.keySet().contains(TARGET))
-        {
-            for(Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
-            {
-                String attrId = (String) it.next();
+	{
+		if(attrs.keySet().contains(SOURCE) || attrs.keySet().contains(TARGET))
+		{
+			for(Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
+			{
+				String attrId = (String) it.next();
 
-                if(attrId.equals(SOURCE))
-                {
-                    setSource(((StringAttribute) attrs.get(SOURCE)).getString());
-                }
-                else if(attrId.equals(TARGET))
-                {
-                    setTarget(((StringAttribute) attrs.get(TARGET)).getString());
-                }
-                else
-                {
-                    this.add(attrs.get(it.next()));
-                }
-            }
-        }
-        else
-        {
-            throw new IllegalArgumentException("Invalid value type.");
-        }
-    }
+				if(attrId.equals(SOURCE))
+				{
+					setSource(((StringAttribute) attrs.get(SOURCE)).getString());
+				}
+				else if(attrId.equals(TARGET))
+				{
+					setTarget(((StringAttribute) attrs.get(TARGET)).getString());
+				}
+				else
+				{
+					this.add(attrs.get(it.next()));
+				}
+			}
+		}
+		else
+		{
+			throw new IllegalArgumentException("Invalid value type.");
+		}
+	}
 
-    /**
-     * Sets the 'source'-value.
-     *
-     * @param s the 'source'-value to be set.
-     */
-    public void setSource(String s)
-    {
-        this.source.setString(s);
-    }
+	/**
+	 * Sets the 'source'-value.
+	 *
+	 * @param s the 'source'-value to be set.
+	 */
+	public void setSource(String s)
+	{
+		this.source.setString(s);
+	}
 
-    /**
-     * Returns the 'source'-value of the encapsulated docking.
-     *
-     * @return the 'source'-value of the encapsulated docking.
-     */
-    public String getSource()
-    {
-        return this.source.getString();
-    }
+	/**
+	 * Returns the 'source'-value of the encapsulated docking.
+	 *
+	 * @return the 'source'-value of the encapsulated docking.
+	 */
+	public String getSource()
+	{
+		return this.source.getString();
+	}
 
-    /**
-     * Sets the 'target'-value.
-     *
-     * @param t the 'target'-value to be set.
-     */
-    public void setTarget(String t)
-    {
-        this.target.setString(t);
-    }
+	/**
+	 * Sets the 'target'-value.
+	 *
+	 * @param t the 'target'-value to be set.
+	 */
+	public void setTarget(String t)
+	{
+		this.target.setString(t);
+	}
 
-    /**
-     * Returns the 'target'-value of the encapsulated docking.
-     *
-     * @return the 'target'-value of the encapsulated docking.
-     */
-    public String getTarget()
-    {
-        return this.target.getString();
-    }
+	/**
+	 * Returns the 'target'-value of the encapsulated docking.
+	 *
+	 * @return the 'target'-value of the encapsulated docking.
+	 */
+	public String getTarget()
+	{
+		return this.target.getString();
+	}
 
-    /**
-     * Returns a deep copy of this object.
-     *
-     * @return A deep copy of this object.
-     */
-    @Override
+	/**
+	 * Returns a deep copy of this object.
+	 *
+	 * @return A deep copy of this object.
+	 */
+	@Override
 	public Object copy()
-    {
-        DockingAttribute copied = new DockingAttribute(this.getId());
-        copied.setSource(this.getSource());
-        copied.setTarget(this.getTarget());
+	{
+		DockingAttribute copied = new DockingAttribute(this.getId());
+		copied.setSource(this.getSource());
+		copied.setTarget(this.getTarget());
 
-        return copied;
-    }
+		return copied;
+	}
 
-//    /**
-//     * Sets the value of this <code>Attribute</code> to the given value without
-//     * informing the <code>ListenerManager</code>.
-//     *
-//     * @param v the new value.
-//     *
-//     * @exception IllegalArgumentException if <code>v</code> is not of type
-//     *            <code>DockingAttribute</code>.
-//     */
-//    protected void doSetValue(Object v)
-//        throws IllegalArgumentException
-//    {
-//        try
-//        {
-//            this.source.setString(((DockingAttribute) v).getSource());
-//            this.target.setString(((DockingAttribute) v).getTarget());
-//        }
-//        catch(ClassCastException cce)
-//        {
-//            throw new IllegalArgumentException("Invalid value type.");
-//        }
-//    }
+	//    /**
+	//     * Sets the value of this <code>Attribute</code> to the given value without
+	//     * informing the <code>ListenerManager</code>.
+	//     *
+	//     * @param v the new value.
+	//     *
+	//     * @exception IllegalArgumentException if <code>v</code> is not of type
+	//     *            <code>DockingAttribute</code>.
+	//     */
+	//    protected void doSetValue(Object v)
+	//        throws IllegalArgumentException
+	//    {
+	//        try
+	//        {
+	//            this.source.setString(((DockingAttribute) v).getSource());
+	//            this.target.setString(((DockingAttribute) v).getTarget());
+	//        }
+	//        catch(ClassCastException cce)
+	//        {
+	//            throw new IllegalArgumentException("Invalid value type.");
+	//        }
+	//    }
 }
 
 //------------------------------------------------------------------------------

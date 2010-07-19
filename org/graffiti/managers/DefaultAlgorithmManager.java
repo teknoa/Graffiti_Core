@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultAlgorithmManager.java,v 1.3 2010/07/17 22:00:21 klukas Exp $
+// $Id: DefaultAlgorithmManager.java,v 1.4 2010/07/19 13:01:34 morla Exp $
 
 package org.graffiti.managers;
 
@@ -19,64 +19,64 @@ import org.graffiti.plugin.GenericPlugin;
 import org.graffiti.plugin.algorithm.Algorithm;
 
 /**
- * Manages the map of available algorithms: key = algorithm class names, 
+ * Manages the map of available algorithms: key = algorithm class names,
  * value = algorithm
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class DefaultAlgorithmManager
-    implements AlgorithmManager
+implements AlgorithmManager
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** The algorithms: key = algorithm class names, value = algorithm */
-    private Map<String, Algorithm> algorithms;
+	/** The algorithms: key = algorithm class names, value = algorithm */
+	private Map<String, Algorithm> algorithms;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new algorithm manager.
-     */
-    public DefaultAlgorithmManager()
-    {
-        algorithms = new HashMap<String, Algorithm>();
-    }
+	/**
+	 * Constructs a new algorithm manager.
+	 */
+	public DefaultAlgorithmManager()
+	{
+		algorithms = new HashMap<String, Algorithm>();
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /*
-     * @see org.graffiti.managers.AlgorithmManager#getAlgorithms()
-     */
-    @SuppressWarnings("unchecked")
+	/*
+	 * @see org.graffiti.managers.AlgorithmManager#getAlgorithms()
+	 */
+	@SuppressWarnings("unchecked")
 	public List getAlgorithms()
-    {
-        return new LinkedList(algorithms.values());
-    }
+	{
+		return new LinkedList(algorithms.values());
+	}
 
-    /*
-     * @see org.graffiti.managers.AlgorithmManager#addAlgorithm(org.graffiti.plugin.algorithm.Algorithm)
-     */
-    public void addAlgorithm(Algorithm algorithm)
-    {
-        algorithms.put(algorithm.getClass().getName(), algorithm);
-    }
+	/*
+	 * @see org.graffiti.managers.AlgorithmManager#addAlgorithm(org.graffiti.plugin.algorithm.Algorithm)
+	 */
+	public void addAlgorithm(Algorithm algorithm)
+	{
+		algorithms.put(algorithm.getClass().getName(), algorithm);
+	}
 
-    /*
-     * @see org.graffiti.managers.pluginmgr.PluginManagerListener#pluginAdded(org.graffiti.plugin.GenericPlugin, org.graffiti.managers.pluginmgr.PluginDescription)
-     */
-    public void pluginAdded(GenericPlugin plugin, PluginDescription desc)
-    {
-        if(plugin.getAlgorithms() != null)
-        {
-            Algorithm[] algorithms = plugin.getAlgorithms();
+	/*
+	 * @see org.graffiti.managers.pluginmgr.PluginManagerListener#pluginAdded(org.graffiti.plugin.GenericPlugin, org.graffiti.managers.pluginmgr.PluginDescription)
+	 */
+	public void pluginAdded(GenericPlugin plugin, PluginDescription desc)
+	{
+		if(plugin.getAlgorithms() != null)
+		{
+			Algorithm[] algorithms = plugin.getAlgorithms();
 
-            for(int i = 0; i < algorithms.length; i++)
-            {
-                if (algorithms[i]!=null)
-                	addAlgorithm(algorithms[i]);
-            }
-        }
-    }
+			for(int i = 0; i < algorithms.length; i++)
+			{
+				if (algorithms[i]!=null)
+					addAlgorithm(algorithms[i]);
+			}
+		}
+	}
 }
 
 //------------------------------------------------------------------------------

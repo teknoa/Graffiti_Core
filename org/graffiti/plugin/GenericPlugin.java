@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GenericPlugin.java,v 1.4 2010/07/17 22:00:18 klukas Exp $
+// $Id: GenericPlugin.java,v 1.5 2010/07/19 13:01:54 morla Exp $
 
 package org.graffiti.plugin;
 
@@ -30,131 +30,131 @@ import org.graffiti.plugin.io.OutputSerializer;
  */
 public interface GenericPlugin
 {
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns the array of <code>org.graffiti.algorithm.Algorithm</code>s the
-     * plugin contains.
-     *
-     * @return the array of <code>org.graffiti.algorithm.Algorithm</code>s the
-     *         plugin contains.
-     */
-    public Algorithm[] getAlgorithms();
-    
-    /**
-     * Returns an array of Extensions the plugin contains.
-     * @return A array of Extensions the plugin contains.
-     */
-    public Extension[] getExtensions();
+	/**
+	 * Returns the array of <code>org.graffiti.algorithm.Algorithm</code>s the
+	 * plugin contains.
+	 *
+	 * @return the array of <code>org.graffiti.algorithm.Algorithm</code>s the
+	 *         plugin contains.
+	 */
+	public Algorithm[] getAlgorithms();
 
-    /**
-     * Returns the attribute types provided by this plugin.
-     *
-     * @return the attribute types provided by this plugin.
-     */
+	/**
+	 * Returns an array of Extensions the plugin contains.
+	 * @return A array of Extensions the plugin contains.
+	 */
+	public Extension[] getExtensions();
+
+	/**
+	 * Returns the attribute types provided by this plugin.
+	 *
+	 * @return the attribute types provided by this plugin.
+	 */
 	@SuppressWarnings("unchecked")
 	public Class[] getAttributes();
-    
-    public AttributeDescription[] getAttributeDescriptions();
 
-    /**
-     * Returns the array containing the names of the plugin classes the current
-     * plugin depends on.
-     *
-     * @return the array containing the names of the plugin classes the current
-     *         plugin depends on.
-     */
-    public String[] getDependencies();
+	public AttributeDescription[] getAttributeDescriptions();
 
-    /**
-     * Returns the icon of the plugin.
-     *
-     * @return the icon of the plugin.
-     */
-    public ImageIcon getIcon();
+	/**
+	 * Returns the array containing the names of the plugin classes the current
+	 * plugin depends on.
+	 *
+	 * @return the array containing the names of the plugin classes the current
+	 *         plugin depends on.
+	 */
+	public String[] getDependencies();
 
-    /**
-     * Returns the input serializers the plugin provides.
-     *
-     * @return the input serializers the plugin provides.
-     */
-    public InputSerializer[] getInputSerializers();
+	/**
+	 * Returns the icon of the plugin.
+	 *
+	 * @return the icon of the plugin.
+	 */
+	public ImageIcon getIcon();
 
-    /**
-     * Returns the output serializers the plugin provides.
-     *
-     * @return the output serializers the plugin provides.
-     */
-    public OutputSerializer[] getOutputSerializers();
+	/**
+	 * Returns the input serializers the plugin provides.
+	 *
+	 * @return the input serializers the plugin provides.
+	 */
+	public InputSerializer[] getInputSerializers();
 
-    /**
-     * States whether this class wants to be registered as a
-     * <code>SelectionListener</code>.
-     *
-     * @return DOCUMENT ME!
-     */
-    public boolean isSelectionListener();
+	/**
+	 * Returns the output serializers the plugin provides.
+	 *
+	 * @return the output serializers the plugin provides.
+	 */
+	public OutputSerializer[] getOutputSerializers();
 
-    /**
-     * States whether this class wants to be registered as a
-     * <code>SessionListener</code>.
-     *
-     * @return DOCUMENT ME!
-     */
-    public boolean isSessionListener();
+	/**
+	 * States whether this class wants to be registered as a
+	 * <code>SelectionListener</code>.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	public boolean isSelectionListener();
 
-    /**
-     * States whether this class wants to be registered as a
-     * <code>ViewListener</code>, i.e. if it wants to get informed when
-     * another view in the same session becomes active. This method is not
-     * called when another session is activated. Implement
-     * <code>SessionListener</code> if you are interested in session changed
-     * events.
-     *
-     * @return DOCUMENT ME!
-     */
-    public boolean isViewListener();
+	/**
+	 * States whether this class wants to be registered as a
+	 * <code>SessionListener</code>.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	public boolean isSessionListener();
 
-    /**
-     * Returns the array of class names of the views, this plugin contains.
-     *
-     * @return the array of class names this plugin contains.
-     */
-    public String[] getViews();
+	/**
+	 * States whether this class wants to be registered as a
+	 * <code>ViewListener</code>, i.e. if it wants to get informed when
+	 * another view in the same session becomes active. This method is not
+	 * called when another session is activated. Implement
+	 * <code>SessionListener</code> if you are interested in session changed
+	 * events.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	public boolean isViewListener();
 
-    /**
-     * Runs configuration routines for the plugin, e.g. load preferences etc.
-     *
-     * @param prefs the 'plugins' preferences node.
-     */
-    public void configure(GravistoPreferences prefs);
+	/**
+	 * Returns the array of class names of the views, this plugin contains.
+	 *
+	 * @return the array of class names this plugin contains.
+	 */
+	public String[] getViews();
 
-    /**
-     * The routines to perform before the editor will exit.
-     */
-    public void doBeforeExit();
+	/**
+	 * Runs configuration routines for the plugin, e.g. load preferences etc.
+	 *
+	 * @param prefs the 'plugins' preferences node.
+	 */
+	public void configure(GravistoPreferences prefs);
 
-    /**
-     * Interrupts the running plugin.
-     */
-    public void interrupt();
+	/**
+	 * The routines to perform before the editor will exit.
+	 */
+	public void doBeforeExit();
 
-    /**
-     * States whether this class needs up-to-date information about the current
-     * editcomponents. If this method returns <code>true</code>, it must
-     * implement interface <code>NeedEditComponents</code>.
-     *
-     * @return DOCUMENT ME!
-     */
-    public boolean needsEditComponents();
+	/**
+	 * Interrupts the running plugin.
+	 */
+	public void interrupt();
 
-    /**
-     * Stops a running plugin. Performs exit routines.
-     */
-    public void stop();
+	/**
+	 * States whether this class needs up-to-date information about the current
+	 * editcomponents. If this method returns <code>true</code>, it must
+	 * implement interface <code>NeedEditComponents</code>.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	public boolean needsEditComponents();
+
+	/**
+	 * Stops a running plugin. Performs exit routines.
+	 */
+	public void stop();
 
 	public String getDefaultView();
-	
+
 	public URLattributeAction[] getURLattributeActions();
 }
 

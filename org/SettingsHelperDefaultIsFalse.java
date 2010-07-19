@@ -19,8 +19,8 @@ public class SettingsHelperDefaultIsFalse extends SettingsHelperDefaultIsTrue {
 			} catch (IOException e) {
 				ErrorMsg.addErrorMessage(e);
 			}
-		else {
-			new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_enabled_"+encode(name)).delete();
-		}
+			else {
+				new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_enabled_"+encode(name)).delete();
+			}
 	}
 }

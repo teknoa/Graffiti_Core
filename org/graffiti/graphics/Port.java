@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Port.java,v 1.3 2009/06/23 07:05:20 klukas Exp $
+// $Id: Port.java,v 1.4 2010/07/19 13:00:57 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -14,115 +14,115 @@ package org.graffiti.graphics;
  */
 public class Port
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** DOCUMENT ME! */
-    private String name;
+	/** DOCUMENT ME! */
+	private String name;
 
-    /** DOCUMENT ME! */
-    private double x;
+	/** DOCUMENT ME! */
+	private double x;
 
-    /** DOCUMENT ME! */
-    private double y;
+	/** DOCUMENT ME! */
+	private double y;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructor for Port.
-     *
-     * @param name DOCUMENT ME!
-     * @param x DOCUMENT ME!
-     * @param y DOCUMENT ME!
-     */
-    public Port(String name, double x, double y)
-    {
-        this.name = name;
-        this.x = x;
-        this.y = y;
-    }
+	/**
+	 * Constructor for Port.
+	 *
+	 * @param name DOCUMENT ME!
+	 * @param x DOCUMENT ME!
+	 * @param y DOCUMENT ME!
+	 */
+	public Port(String name, double x, double y)
+	{
+		this.name = name;
+		this.x = x;
+		this.y = y;
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Sets the name.
-     *
-     * @param name The name to set
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+	/**
+	 * Sets the name.
+	 *
+	 * @param name The name to set
+	 */
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 
-    /**
-     * Returns the name.
-     *
-     * @return String
-     */
-    public String getName()
-    {
-        return name;
-    }
+	/**
+	 * Returns the name.
+	 *
+	 * @return String
+	 */
+	public String getName()
+	{
+		return name;
+	}
 
-    /**
-     * Sets the x coordinate of this port.
-     *
-     * @param x
-     */
-    public void setX(double x)
-    {
-        this.x = x;
-    }
+	/**
+	 * Sets the x coordinate of this port.
+	 *
+	 * @param x
+	 */
+	public void setX(double x)
+	{
+		this.x = x;
+	}
 
-    /**
-     * Returns the x ccordinate of this port.
-     *
-     * @return double
-     */
-    public double getX()
-    {
-        return x;
-    }
+	/**
+	 * Returns the x ccordinate of this port.
+	 *
+	 * @return double
+	 */
+	public double getX()
+	{
+		return x;
+	}
 
-    /**
-     * Sets the y ccordinate of this port.
-     *
-     * @param y
-     */
-    public void setY(double y)
-    {
-        this.y = y;
-    }
+	/**
+	 * Sets the y ccordinate of this port.
+	 *
+	 * @param y
+	 */
+	public void setY(double y)
+	{
+		this.y = y;
+	}
 
-    /**
-     * Returns the y ccordinate of this port.
-     *
-     * @return double
-     */
-    public double getY()
-    {
-        return y;
-    }
+	/**
+	 * Returns the y ccordinate of this port.
+	 *
+	 * @return double
+	 */
+	public double getY()
+	{
+		return y;
+	}
 
-    /**
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
 	public boolean equals(Object obj)
-    {
-        if(this == obj)
-        {
-            return true;
-        }
+	{
+		if(this == obj)
+		{
+			return true;
+		}
 
-        if(!(obj instanceof Port))
-        {
-            return false;
-        }
+		if(!(obj instanceof Port))
+		{
+			return false;
+		}
 
-        Port po = (Port) obj;
+		Port po = (Port) obj;
 
-        return (name.equals(po.name) && (x == po.x) && (y == po.y));
-    }
+		return (name.equals(po.name) && (x == po.x) && (y == po.y));
+	}
 }
 
 //------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Graph.java,v 1.4 2010/07/18 14:26:54 klukas Exp $
+// $Id: Graph.java,v 1.5 2010/07/19 13:00:53 morla Exp $
 package org.graffiti.graph;
 
 import java.util.Collection;
@@ -57,7 +57,7 @@ import org.graffiti.event.ListenerManager;
  * </blockquote>
  * </p>
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see Node
  * @see Edge
@@ -235,7 +235,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *           the attribute consumer to add.
 	 */
 	public void addAttributeConsumer(AttributeConsumer attConsumer)
-			throws UnificationException;
+	throws UnificationException;
 
 	/**
 	 * Adds a new <code>Edge</code> to the current <code>Graph</code>. Informs
@@ -256,7 +256,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *               <code>Graph</code>.
 	 */
 	public Edge addEdge(Node source, Node target, boolean directed)
-			throws GraphElementNotFoundException;
+	throws GraphElementNotFoundException;
 
 	/**
 	 * Adds a new <code>Edge</code> to the current <code>Graph</code>. Informs

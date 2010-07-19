@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: OverviewOptionPane.java,v 1.3 2010/07/17 22:00:20 klukas Exp $
+// $Id: OverviewOptionPane.java,v 1.4 2010/07/19 13:02:05 morla Exp $
 
 package org.graffiti.options;
 
@@ -20,64 +20,64 @@ import javax.swing.JScrollPane;
 /**
  * The overview pane for the options dialog.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class OverviewOptionPane
-    extends AbstractOptionPane
+extends AbstractOptionPane
 {
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-     * Constructor for OverviewOptionPane.
-     */
-    public OverviewOptionPane()
-    {
-        super(sBundle.getString("options.overview.title"));
-    }
+	 * Constructor for OverviewOptionPane.
+	 */
+	public OverviewOptionPane()
+	{
+		super(sBundle.getString("options.overview.title"));
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /*
-     * @see org.graffiti.options.AbstractOptionPane#initDefault()
-     */
-    @Override
+	/*
+	 * @see org.graffiti.options.AbstractOptionPane#initDefault()
+	 */
+	@Override
 	protected void initDefault()
-    {
-        setLayout(new BorderLayout());
+	{
+		setLayout(new BorderLayout());
 
-        // add a JEditorPane, which contains an overview html page.
-        JEditorPane ep = new JEditorPane();
+		// add a JEditorPane, which contains an overview html page.
+		JEditorPane ep = new JEditorPane();
 
-        try
-        {
-            ep.setPage(sBundle.getRes("options.overview.html"));
-        }
-        catch(IOException ioe)
-        {
-            ioe.printStackTrace();
-        }
+		try
+		{
+			ep.setPage(sBundle.getRes("options.overview.html"));
+		}
+		catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
 
-        ep.setEditable(false);
+		ep.setEditable(false);
 
-        JScrollPane scroller = new JScrollPane(ep);
-        scroller.setPreferredSize(new Dimension(400, 0));
+		JScrollPane scroller = new JScrollPane(ep);
+		scroller.setPreferredSize(new Dimension(400, 0));
 
-        add(BorderLayout.CENTER, scroller);
-    }
+		add(BorderLayout.CENTER, scroller);
+	}
 
-    /*
-     * @see org.graffiti.options.AbstractOptionPane#saveDefault()
-     */
-    @Override
+	/*
+	 * @see org.graffiti.options.AbstractOptionPane#saveDefault()
+	 */
+	@Override
 	protected void saveDefault()
-    {
-        /* do nothing */
-    }
+	{
+		/* do nothing */
+	}
 
 	/* (non-Javadoc)
 	 * @see org.graffiti.options.OptionPane#getCategory()
@@ -93,21 +93,21 @@ public class OverviewOptionPane
 		return "Default Option";
 	}
 
-    /* (non-Javadoc)
-     * @see org.graffiti.options.OptionPane#init(javax.swing.JComponent)
-     */
-    public void init(JComponent options) {
-        // TODO Auto-generated method stub
-        
-    }
+	/* (non-Javadoc)
+	 * @see org.graffiti.options.OptionPane#init(javax.swing.JComponent)
+	 */
+	public void init(JComponent options) {
+		// TODO Auto-generated method stub
 
-    /* (non-Javadoc)
-     * @see org.graffiti.options.OptionPane#save(javax.swing.JComponent)
-     */
-    public void save(JComponent options) {
-        // TODO Auto-generated method stub
-        
-    }
+	}
+
+	/* (non-Javadoc)
+	 * @see org.graffiti.options.OptionPane#save(javax.swing.JComponent)
+	 */
+	public void save(JComponent options) {
+		// TODO Auto-generated method stub
+
+	}
 }
 
 //------------------------------------------------------------------------------

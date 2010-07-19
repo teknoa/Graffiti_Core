@@ -14,44 +14,44 @@ import javax.swing.JComponent;
  * </p>
  *
  * @author flierl
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public interface OptionPane
 {
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns the component, that should be displayed for this option pane.
-     *
-     * @return DOCUMENT ME!
-     */
-    JComponent getOptionDialogComponent();
+	/**
+	 * Returns the component, that should be displayed for this option pane.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	JComponent getOptionDialogComponent();
 
-    /**
-     * Returns the internal name of this option pane.  The option pane's label
-     * is set to the value of the property
-     * <code>options.<i>name</i>.label</code>.
-     *
-     * @return DOCUMENT ME!
-     */
-    String getName();
-    
-    String getCategory();
-    
-    String getOptionName();
+	/**
+	 * Returns the internal name of this option pane.  The option pane's label
+	 * is set to the value of the property
+	 * <code>options.<i>name</i>.label</code>.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	String getName();
 
-    /**
-     * This method is called every time this option pane is displayed. The
-     * <code>AbstractOptionPane</code> class uses this to create the option
-     * pane's GUI only when needed.
-     */
-    void init(JComponent options);
+	String getCategory();
 
-    /**
-     * Called when the options dialog's "ok" button is clicked. This should
-     * save any properties being edited in this option pane.
-     */
-    void save(JComponent options);
+	String getOptionName();
+
+	/**
+	 * This method is called every time this option pane is displayed. The
+	 * <code>AbstractOptionPane</code> class uses this to create the option
+	 * pane's GUI only when needed.
+	 */
+	void init(JComponent options);
+
+	/**
+	 * Called when the options dialog's "ok" button is clicked. This should
+	 * save any properties being edited in this option pane.
+	 */
+	void save(JComponent options);
 }
 
 //------------------------------------------------------------------------------

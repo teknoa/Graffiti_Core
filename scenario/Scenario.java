@@ -18,7 +18,7 @@ import org.ErrorMsg;
 import org.ReleaseInfo;
 
 public class Scenario {
-	
+
 	ArrayList<String> imports = new ArrayList<String>();
 	ArrayList<String> commands = new ArrayList<String>();
 	String scenarioName;
@@ -26,7 +26,7 @@ public class Scenario {
 	boolean readError = false;
 
 	File file;
-	
+
 	/**
 	 * Create a new scenario
 	 */
@@ -37,46 +37,46 @@ public class Scenario {
 		else
 			this.menuGroup = menuTitle;
 	}
-	
+
 	public Scenario(File f) {
 		file = f;
-    	readError = true;
+		readError = true;
 		try {
-	        BufferedReader in = new BufferedReader(new FileReader(f));
-	        String str;
-	        int line = 0;
-	        boolean headerRead = false;
-	        int importsRead = 0;
-	        while ((str = in.readLine()) != null) {
-	            line++;
-	            if (!headerRead && str.startsWith("//@")) {
-	            	headerRead = true;
-	            	String name = str.substring("//@".length());
-	            	if (name.indexOf(":")>=0) {
-	            		menuGroup = name.substring(0, name.indexOf(":"));
-	            		scenarioName = name.substring(name.indexOf(":")+":".length());
-	            	} else {
-	            		scenarioName = name;
-	            		menuGroup = "";
-	            	}
-	            }
-	            if (headerRead) {
-	            	if (str.startsWith("import ")) {
-	            		if (importsRead<1)
-	            			importsRead = 1;
-	            		imports.add(str);
-	            	} else {
-	            		commands.add(str);
-	            	}
-	            }
-	        }
-	        in.close();
-	    	readError = false;
-	    } catch (Exception e) {
-	    	ErrorMsg.addErrorMessage(e);
-	    }
+			BufferedReader in = new BufferedReader(new FileReader(f));
+			String str;
+			int line = 0;
+			boolean headerRead = false;
+			int importsRead = 0;
+			while ((str = in.readLine()) != null) {
+				line++;
+				if (!headerRead && str.startsWith("//@")) {
+					headerRead = true;
+					String name = str.substring("//@".length());
+					if (name.indexOf(":")>=0) {
+						menuGroup = name.substring(0, name.indexOf(":"));
+						scenarioName = name.substring(name.indexOf(":")+":".length());
+					} else {
+						scenarioName = name;
+						menuGroup = "";
+					}
+				}
+				if (headerRead) {
+					if (str.startsWith("import ")) {
+						if (importsRead<1)
+							importsRead = 1;
+						imports.add(str);
+					} else {
+						commands.add(str);
+					}
+				}
+			}
+			in.close();
+			readError = false;
+		} catch (Exception e) {
+			ErrorMsg.addErrorMessage(e);
+		}
 	}
-	
+
 	public synchronized void addImport(String bshScriptCommand) {
 		if (bshScriptCommand==null || bshScriptCommand.length()==0)
 			return;
@@ -84,7 +84,7 @@ public class Scenario {
 		cmdl.add(bshScriptCommand);
 		addImports(cmdl);
 	}
-	
+
 	public synchronized void addImports(String[] bshScriptCommands) {
 		if (bshScriptCommands==null || bshScriptCommands.length==0)
 			return;
@@ -107,11 +107,11 @@ public class Scenario {
 				imports.add(i);
 		}
 	}
-	
+
 	public String getName() {
 		return scenarioName;
 	}
-	
+
 	public synchronized void addCommands(String[] bshScriptCommands) {
 		if (bshScriptCommands==null || bshScriptCommands.length==0)
 			return;
@@ -124,12 +124,12 @@ public class Scenario {
 	public synchronized void addCommands(Collection<String> bshScriptCommands) {
 		commands.addAll(bshScriptCommands);
 	}
-	
+
 	public synchronized void addPluginCommand(ProvidesScenarioSupportCommands plugin) {
 		addImports(plugin.getScenarioImports());
 		addCommands(plugin.getScenarioCommands());
 	}
-	
+
 	public synchronized Collection<String> getScenarioCommands() {
 		ArrayList<String> result = new ArrayList<String>();
 		result.addAll(getHeader());
@@ -141,7 +141,7 @@ public class Scenario {
 		result.addAll(commands);
 		return result;
 	}
-	
+
 	private synchronized Collection<String> getHeader() {
 		ArrayList<String> header = new ArrayList<String>();
 		String menu = menuGroup.length() > 0 ? menuGroup+":" : "";
@@ -160,7 +160,7 @@ public class Scenario {
 	public boolean isValid() {
 		if (readError)
 			return false;
-		
+
 		boolean nameOk = scenarioName!=null && scenarioName.length()>0;
 		boolean importsOk = imports!=null;
 		boolean sourceOk = commands!=null;
@@ -175,7 +175,7 @@ public class Scenario {
 		if (file!=null)
 			return file.getAbsolutePath();
 		String menu = menuGroup.length() > 0 ? menuGroup+"_" : "";
-		String path = ReleaseInfo.getAppFolderWithFinalSep(); 
+		String path = ReleaseInfo.getAppFolderWithFinalSep();
 		return path+menu+scenarioName+".bsh";
 	}
 

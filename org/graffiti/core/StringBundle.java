@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: StringBundle.java,v 1.2 2009/06/23 07:05:20 klukas Exp $
+// $Id: StringBundle.java,v 1.3 2010/07/19 13:00:57 morla Exp $
 
 package org.graffiti.core;
 
@@ -18,50 +18,50 @@ package org.graffiti.core;
  * @see GenericBundle
  */
 public class StringBundle
-    extends GenericBundle
+extends GenericBundle
 {
-    //~ Static fields/initializers =============================================
+	//~ Static fields/initializers =============================================
 
-    /** The only instance which will be created and returned. */
-    private static StringBundle instance = null;
+	/** The only instance which will be created and returned. */
+	private static StringBundle instance = null;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new <code>StringBundle</code>.
-     */
-    protected StringBundle()
-    {
-        super();
-    }
+	/**
+	 * Constructs a new <code>StringBundle</code>.
+	 */
+	protected StringBundle()
+	{
+		super();
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns the only instance of this class.
-     *
-     * @return the only instance of a <code>Bundle</code> this class generates.
-     */
-    public static StringBundle getInstance()
-    {
-        if(instance == null)
-        {
-            instance = new StringBundle();
-        }
+	/**
+	 * Returns the only instance of this class.
+	 *
+	 * @return the only instance of a <code>Bundle</code> this class generates.
+	 */
+	public static StringBundle getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new StringBundle();
+		}
 
-        return instance;
-    }
+		return instance;
+	}
 
-    /**
-     * Returns the location of this <code>Bundle</code>.
-     *
-     * @return DOCUMENT ME!
-     */
-    @Override
+	/**
+	 * Returns the location of this <code>Bundle</code>.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	@Override
 	protected String getBundleLocation()
-    {
-        return "org/graffiti/core/StringBundle";
-    }
+	{
+		return "org/graffiti/core/StringBundle";
+	}
 }
 
 //------------------------------------------------------------------------------

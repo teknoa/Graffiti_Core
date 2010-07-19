@@ -5,18 +5,18 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: NoNextStepException.java,v 1.2 2010/07/17 22:00:19 klukas Exp $
+// $Id: NoNextStepException.java,v 1.3 2010/07/19 13:00:49 morla Exp $
 
 package org.graffiti.plugin.algorithm;
 
 /**
  * DOCUMENT ME!
  *
- * @author $Author: klukas $
- * @version $Revision: 1.2 $ $Date: 2010/07/17 22:00:19 $
+ * @author $Author: morla $
+ * @version $Revision: 1.3 $ $Date: 2010/07/19 13:00:49 $
  */
 public class NoNextStepException
-    extends RuntimeException
+extends RuntimeException
 {
 
 	/**

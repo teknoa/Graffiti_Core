@@ -20,32 +20,32 @@ import java.awt.geom.Point2D;
  * Window>Preferences>Java>Code Generation>Code and Comments
  */
 public class Vector2df {
-    
-    public float x;
-    public float y;
-    
-    public Vector2df(float a, float b) {
-        x=a;
-        y=b;
-    }
+
+	public float x;
+	public float y;
+
+	public Vector2df(float a, float b) {
+		x=a;
+		y=b;
+	}
 
 	@Override
 	public String toString() {
 		return "Vector2df["+x+", "+y+"]";
 	}
-    /**
-     * @param position
-     */
-    public Vector2df(Point2D position) {
-        x=(float) position.getX();
-        y=(float) position.getY();
-    }
+	/**
+	 * @param position
+	 */
+	public Vector2df(Point2D position) {
+		x=(float) position.getX();
+		y=(float) position.getY();
+	}
 
 	public Vector2df(Vector2df position) {
 		x = position.x;
 		y = position.y;
 	}
-	
+
 	public Vector2df(Vector2d position) {
 		x = (float)position.x;
 		y = (float)position.y;

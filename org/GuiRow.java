@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 public class GuiRow {
 	public JComponent left, right;
 	public boolean span;
-	
+
 	public GuiRow(JComponent left, JComponent right) {
 		if (left==null) left = new JLabel("");
 		if (right==null) right = new JLabel("");

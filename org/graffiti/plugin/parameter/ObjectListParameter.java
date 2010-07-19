@@ -8,15 +8,15 @@ import javax.swing.ListCellRenderer;
 /**
  * @author klukas
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class ObjectListParameter
-    extends AbstractSingleParameter
+extends AbstractSingleParameter
 {
-   @SuppressWarnings("unchecked")
-   private Collection possibleValues;
-   private ListCellRenderer renderer;
-   
+	@SuppressWarnings("unchecked")
+	private Collection possibleValues;
+	private ListCellRenderer renderer;
+
 	@SuppressWarnings("unchecked")
 	public ObjectListParameter(Object val, String name, String description, Collection possibleValues) {
 		super(val, name, description);
@@ -39,7 +39,7 @@ public class ObjectListParameter
 	public void setRenderer(ListCellRenderer renderer) {
 		this.renderer = renderer;
 	}
-	
+
 	public ListCellRenderer getRenderer() {
 		return renderer;
 	}

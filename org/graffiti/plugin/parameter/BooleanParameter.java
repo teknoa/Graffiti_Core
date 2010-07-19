@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: BooleanParameter.java,v 1.6 2010/03/04 13:07:41 klukas Exp $
+// $Id: BooleanParameter.java,v 1.7 2010/07/19 13:01:54 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -17,118 +17,118 @@ import scenario.ProvidesScenarioSupportCommand;
 /**
  * Parameter that contains a <code>Boolean</code> value.
  *
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class BooleanParameter
-    extends AbstractSingleParameter
-    implements ProvidesScenarioSupportCommand
+extends AbstractSingleParameter
+implements ProvidesScenarioSupportCommand
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** The value of this parameter. */
-    private Boolean value = null;
+	/** The value of this parameter. */
+	private Boolean value = null;
 	private BooleanParameter[] dependentParameters;
-	
-    //~ Constructors ===========================================================
 
-    /**
-     * Constructs a new boolean parameter.
-     *
-     * @param value the new Boolean value. May be null.
-     * @param name the name of the parameter.
-     * @param description the description of the parameter.
-     */
-    public BooleanParameter(Boolean value, String name, String description)
-    {
-        super(name, description);
-        this.value = value;
-    }
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new boolean parameter.
-     *
-     * @param value the new boolean value..
-     * @param name the name of the parameter.
-     * @param description the description of the parameter.
-     */
-    public BooleanParameter(boolean value, String name, String description)
-    {
-        super(name, description);
-        this.value = new Boolean(value);
-    }
+	/**
+	 * Constructs a new boolean parameter.
+	 *
+	 * @param value the new Boolean value. May be null.
+	 * @param name the name of the parameter.
+	 * @param description the description of the parameter.
+	 */
+	public BooleanParameter(Boolean value, String name, String description)
+	{
+		super(name, description);
+		this.value = value;
+	}
 
-    //~ Methods ================================================================
+	/**
+	 * Constructs a new boolean parameter.
+	 *
+	 * @param value the new boolean value..
+	 * @param name the name of the parameter.
+	 * @param description the description of the parameter.
+	 */
+	public BooleanParameter(boolean value, String name, String description)
+	{
+		super(name, description);
+		this.value = new Boolean(value);
+	}
 
-    /**
-     * Returns the value of this parameter as a <code>Boolean</code>.
-     *
-     * @return the value of this parameter as a <code>Boolean</code>.
-     */
-    public Boolean getBoolean()
-    {
-        return value;
-    }
+	//~ Methods ================================================================
 
-    /**
-     * Returns <code>true</code>, if the current value is valid.
-     *
-     * @return DOCUMENT ME!
-     */
-    public boolean isValid()
-    {
-        if(value == null)
-        {
-            return false;
-        }
+	/**
+	 * Returns the value of this parameter as a <code>Boolean</code>.
+	 *
+	 * @return the value of this parameter as a <code>Boolean</code>.
+	 */
+	public Boolean getBoolean()
+	{
+		return value;
+	}
 
-        return true;
-    }
+	/**
+	 * Returns <code>true</code>, if the current value is valid.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	public boolean isValid()
+	{
+		if(value == null)
+		{
+			return false;
+		}
 
-    /**
-     * Sets the value of the <code>AttributeParameter</code>.
-     *
-     * @param value the new value of the <code>AttributeParameter</code>.
-     *
-     * @exception IllegalArgumentException thrown if <code>value</code> is not
-     *            of the correct type.
-     */
-    @Override
+		return true;
+	}
+
+	/**
+	 * Sets the value of the <code>AttributeParameter</code>.
+	 *
+	 * @param value the new value of the <code>AttributeParameter</code>.
+	 *
+	 * @exception IllegalArgumentException thrown if <code>value</code> is not
+	 *            of the correct type.
+	 */
+	@Override
 	public void setValue(Object value)
-    {
-        try
-        {
-            this.value = (Boolean) value;
-        }
-        catch(Exception e)
-        {
-            throw new IllegalArgumentException(e.getMessage());
-        }
-    }
+	{
+		try
+		{
+			this.value = (Boolean) value;
+		}
+		catch(Exception e)
+		{
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
 
-    /**
-     * Returns the value of this parameter.
-     *
-     * @return the value of this parameter.
-     */
-    @Override
+	/**
+	 * Returns the value of this parameter.
+	 *
+	 * @return the value of this parameter.
+	 */
+	@Override
 	public Object getValue()
-    {
-        return value;
-    }
+	{
+		return value;
+	}
 
-    /**
-     * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
-     */
-    @Override
+	/**
+	 * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
+	 */
+	@Override
 	public String toXMLString() {
-        return getStandardXML(value.booleanValue() ? "true" : "false");
-    }
+		return getStandardXML(value.booleanValue() ? "true" : "false");
+	}
 
-	
+
 
 	public String getScenarioCommand() {
 		return "new BooleanParameter("+
-			(getBoolean() ? "true" : "false")+", \""+getName()+"\", \""+getDescription()+"\")";
+		(getBoolean() ? "true" : "false")+", \""+getName()+"\", \""+getDescription()+"\")";
 	}
 
 	public Collection<String> getScenarioImports() {

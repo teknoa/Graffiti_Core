@@ -33,14 +33,14 @@ public class ReleaseInfo implements HelperClass {
 	private static HashSet<FeatureSet> enabledFeatures = new HashSet<FeatureSet>();
 
 	public static void enableFeature(FeatureSet fs) {
-//		System.out.println("Enable feature " + fs.toString());
+		//		System.out.println("Enable feature " + fs.toString());
 		enabledFeatures.add(fs);
 	}
 
 	public static boolean getIsAllowedFeature(FeatureSet fs) {
 
 		try {
-//			String s = getAppFolder();
+			//			String s = getAppFolder();
 		} catch (Exception e) {
 			if (fs == FeatureSet.GravistoJavaHelp)
 				return false;
@@ -95,7 +95,7 @@ public class ReleaseInfo implements HelperClass {
 			case MetaCrop_ACCESS:
 			case RIMAS_ACCESS:
 				return false; // enabled by add-on
-				
+
 			case DBE_ACCESS:
 				return false;
 			case DATA_CARD_ACCESS:
@@ -110,9 +110,9 @@ public class ReleaseInfo implements HelperClass {
 				return false;
 			case SCRIPT_ACCESS:
 				return true; /*
-							 * if (currentRelease==Release.DEBUG) return true;
-							 * break;
-							 */
+				 * if (currentRelease==Release.DEBUG) return true;
+				 * break;
+				 */
 			case GravistoJavaHelp:
 				if (currentRelease != Release.RELEASE_CLUSTERVIS
 						&& currentRelease != Release.KGML_EDITOR) {
@@ -125,10 +125,10 @@ public class ReleaseInfo implements HelperClass {
 				return false;
 			case TAB_LAYOUT:
 				return true; /*
-							 * if (currentRelease==Release.RELEASE_CLUSTERVIS ||
-							 * currentRelease==Release.KGML_EDITOR ||
-							 * currentRelease==Release.DEBUG) return true;
-							 */
+				 * if (currentRelease==Release.RELEASE_CLUSTERVIS ||
+				 * currentRelease==Release.KGML_EDITOR ||
+				 * currentRelease==Release.DEBUG) return true;
+				 */
 				// break;
 			case STATISTIC_FUNCTIONS:
 				// if (currentRelease==Release.RELEASE_IPK ||
@@ -170,7 +170,7 @@ public class ReleaseInfo implements HelperClass {
 				else
 					return true;
 			case MacroRecorder :
-				return false; // enabled by optional plugin 
+				return false; // enabled by optional plugin
 			default:
 				return false;
 		}
@@ -232,12 +232,12 @@ public class ReleaseInfo implements HelperClass {
 		boolean windows = false;
 		if (SystemInfo.isMac())
 			home = home + getFileSeparator() + "Library" + getFileSeparator()
-					+ "Preferences";
+			+ "Preferences";
 		else {
 			if (new File(home + getFileSeparator() + "AppData"
 					+ getFileSeparator() + "Roaming").isDirectory()) {
 				home = home + getFileSeparator() + "AppData"
-						+ getFileSeparator() + "Roaming";
+				+ getFileSeparator() + "Roaming";
 				windows = true;
 			} else {
 				String hhh = System.getenv("APPDATA");
@@ -298,7 +298,7 @@ public class ReleaseInfo implements HelperClass {
 
 	private static boolean applet = false;
 	private static JApplet appletContext = null;
-	
+
 	public static void setRunningAsApplet(JApplet appletContext) {
 		applet = true;
 		ReleaseInfo.appletContext = appletContext;
@@ -320,8 +320,8 @@ public class ReleaseInfo implements HelperClass {
 
 	private static boolean updateCheckRun = false;
 	private static String lastVersion = null;
-	
-	
+
+
 	public static UpdateInfoResult isUpdated() {
 		if (!updateCheckRun)
 			return UpdateInfoResult.UNKNOWN;
@@ -330,7 +330,7 @@ public class ReleaseInfo implements HelperClass {
 		else
 			return UpdateInfoResult.NOT_UPDATED;
 	}
-	
+
 	/**
 	 * @param currentVersion
 	 * @return null, if not updated / "", if updated but old version is unknown
@@ -417,6 +417,6 @@ public class ReleaseInfo implements HelperClass {
 	 * @return
 	 */
 	public static JApplet getApplet() {
-			return appletContext;
+		return appletContext;
 	}
 }

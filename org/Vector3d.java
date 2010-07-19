@@ -20,29 +20,29 @@ import java.awt.geom.Point2D;
  * Window>Preferences>Java>Code Generation>Code and Comments
  */
 public class Vector3d {
-    
-    public double x;
-    public double y;
-    public double z;
-    
-    public Vector3d(double a, double b, double c) {
-        x=a;
-        y=b;
-        z=c;
-    }
+
+	public double x;
+	public double y;
+	public double z;
+
+	public Vector3d(double a, double b, double c) {
+		x=a;
+		y=b;
+		z=c;
+	}
 
 	@Override
 	public String toString() {
 		return "Vector3d["+x+", "+y+", "+z+"]";
 	}
-    /**
-     * @param position
-     */
-    public Vector3d(Point2D position) {
-        x=position.getX();
-        y=position.getY();
-        z=0;
-    }
+	/**
+	 * @param position
+	 */
+	public Vector3d(Point2D position) {
+		x=position.getX();
+		y=position.getY();
+		z=0;
+	}
 
 	public Vector3d(Vector3d position) {
 		x = position.x;

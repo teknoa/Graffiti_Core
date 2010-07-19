@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.15 2010/07/17 22:00:18 klukas Exp $
+// $Id: XMLHelper.java,v 1.16 2010/07/19 13:01:54 morla Exp $
 
 package org.graffiti.plugin;
 
@@ -94,7 +94,7 @@ public class XMLHelper implements HelperClass {
 		StreamResult streamResult = new StreamResult(resultStringWriter);
 
 		Transformer outerXmlTransformer = TransformerFactory.newInstance()
-				.newTransformer();
+		.newTransformer();
 		// System.out.println("OutTransformer:"+outerXmlTransformer.getClass().getCanonicalName());
 		outerXmlTransformer.setOutputProperty("omit-xml-declaration", "yes");
 		outerXmlTransformer.transform(nodeSource, streamResult);
@@ -115,7 +115,7 @@ public class XMLHelper implements HelperClass {
 		result = StringManipulationTools.stringReplace(result, "'", "&apos;");
 		return result;
 	}
-	
+
 	public static org.jdom.Document getJDOMfromDOM(org.w3c.dom.Document doc) {
 		DOMBuilder db = new DOMBuilder();
 		return db.build(doc);
@@ -134,7 +134,7 @@ public class XMLHelper implements HelperClass {
 	}
 
 	// private static DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-	private static DocumentBuilderFactory dbf = 
+	private static DocumentBuilderFactory dbf =
 		new DocumentBuilderFactoryImpl();
 
 	/**
@@ -158,22 +158,22 @@ public class XMLHelper implements HelperClass {
 			return doc;
 		} catch (NullPointerException e) {
 			ErrorMsg.addErrorMessage("Null Pointer Exception, data could not be retrieved.<br>"
-							+ e.getLocalizedMessage());
+					+ e.getLocalizedMessage());
 		} catch (SAXException e) {
 			System.out.println("Invalid XML: "+res);
 		} catch (IOException e) {
 			ErrorMsg.addErrorMessage("IO Exception while processing experimental data.<br>"
-							+ e.getLocalizedMessage());
+					+ e.getLocalizedMessage());
 		} catch (ParserConfigurationException e) {
 			ErrorMsg.addErrorMessage("Format Parser Configuration Exception while processing experimental data.<br>"
-							+ e.getLocalizedMessage());
+					+ e.getLocalizedMessage());
 		} catch (Exception e) {
 			ErrorMsg.addErrorMessage("Exception, data could not be processed.<br>"
-							+ e.getLocalizedMessage());
+					+ e.getLocalizedMessage());
 		}
 		return null;
 	}
-	
+
 	public static Document getDocument(InputStream inpS) {
 		// System.out.println("Try to parse:\n"+res);
 		// Set namespaceAware to true to get a DOM Level 2 tree with nodes
@@ -191,30 +191,30 @@ public class XMLHelper implements HelperClass {
 			return doc;
 		} catch (NullPointerException e) {
 			ErrorMsg
-					.addErrorMessage("Null Pointer Exception, data could not be retrieved.<br>"
-							+ e.getLocalizedMessage());
+			.addErrorMessage("Null Pointer Exception, data could not be retrieved.<br>"
+					+ e.getLocalizedMessage());
 		} catch (SAXException e) {
 			ErrorMsg
-					.addErrorMessage("Format Parser (SAX) Exception while processing experimental data.<br>"
-							+ e.getLocalizedMessage());
+			.addErrorMessage("Format Parser (SAX) Exception while processing experimental data.<br>"
+					+ e.getLocalizedMessage());
 		} catch (IOException e) {
 			ErrorMsg
-					.addErrorMessage("IO Exception while processing experimental data.<br>"
-							+ e.getLocalizedMessage());
+			.addErrorMessage("IO Exception while processing experimental data.<br>"
+					+ e.getLocalizedMessage());
 		} catch (ParserConfigurationException e) {
 			ErrorMsg
-					.addErrorMessage("Format Parser Configuration Exception while processing experimental data.<br>"
-							+ e.getLocalizedMessage());
+			.addErrorMessage("Format Parser Configuration Exception while processing experimental data.<br>"
+					+ e.getLocalizedMessage());
 		}
 		return null;
 	}
 
 	public static void validate(Document doc, URL xsdLocation) throws Exception {
-        SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
-        Schema schema = factory.newSchema(xsdLocation);
-        Validator validator = schema.newValidator();
-        validator.validate(new DOMSource(doc));
-    }
+		SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+		Schema schema = factory.newSchema(xsdLocation);
+		Validator validator = schema.newValidator();
+		validator.validate(new DOMSource(doc));
+	}
 }
 
 // ------------------------------------------------------------------------------

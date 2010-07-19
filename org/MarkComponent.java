@@ -26,7 +26,7 @@ import javax.swing.Timer;
 
 public class MarkComponent extends JComponent {
 	private static final long serialVersionUID = 1L;
-	
+
 	JLabel b1 = new JLabel();
 	JLabel b2 = new JLabel();
 	JLabel bb1 = new JLabel();
@@ -37,14 +37,14 @@ public class MarkComponent extends JComponent {
 	private boolean marked;
 
 	private boolean requestFocus;
-	
+
 	private double intensity = 1d;
-	
+
 	public MarkComponent(JComponent comp, boolean marked, double width, boolean requestFocus, double layoutHeight) {
-			
+
 		this.comp = comp;
 		this.requestFocus = requestFocus;
-		
+
 		setLayout(TableLayout.getLayout(new double[] {5, 1, width, 1, 5}, layoutHeight));
 		add(b1, "0,0");
 		add(bb1, "1,0");
@@ -56,10 +56,10 @@ public class MarkComponent extends JComponent {
 	}
 
 	public MarkComponent(JComponent comp, boolean marked, double width, boolean requestFocus) {
-		
+
 		this.comp = comp;
 		this.requestFocus = requestFocus;
-		
+
 		setLayout(TableLayout.getLayout(new double[] {5, 1, width, 1, 5}, TableLayoutConstants.PREFERRED));
 		add(b1, "0,0");
 		add(bb1, "1,0");
@@ -69,11 +69,11 @@ public class MarkComponent extends JComponent {
 		this.marked = marked;
 		updateMarked();
 	}
-	
+
 	public void setRequestFocus(boolean requestFocus) {
 		this.requestFocus = requestFocus;
 	}
-	
+
 	public void playAnimation(int animationtime) {
 		setMark(true);
 		final MarkComponent thisM = this;
@@ -81,7 +81,7 @@ public class MarkComponent extends JComponent {
 			public void actionPerformed(ActionEvent e) {
 				if (!thisM.isVisible()) {
 					thisM.intensity = 1;
-//					((Timer)e.getSource()).stop();
+					//					((Timer)e.getSource()).stop();
 				} else {
 					if (marked) {
 						intensity+=0.02;
@@ -103,7 +103,7 @@ public class MarkComponent extends JComponent {
 		t2.setRepeats(false);
 		t2.start();
 	}
-	
+
 	public boolean isMarked() {
 		return marked;
 	}
@@ -118,14 +118,14 @@ public class MarkComponent extends JComponent {
 			Color c2 = selColBB;
 			float i = intensity>0 ? (float)intensity : (float)-intensity;
 			if (i<1d) {
-//				System.out.println(i);
+				//				System.out.println(i);
 				if (c1!=null) {
 					Color c11 = Colors.getOppositeColor(c1);
-//					Color c11 = c1.darker(); // brighter();
+					//					Color c11 = c1.darker(); // brighter();
 					c1 = Colors.getColor(i, 1d, c11, c1);
 				}
 				if (c2!=null) {
-//					Color c22 = Colors.getOppositeColor(c2);
+					//					Color c22 = Colors.getOppositeColor(c2);
 					Color c22 = c2.brighter();
 					c1 = Colors.getColor(i, 1d, c22, c2);
 				}
@@ -157,13 +157,13 @@ public class MarkComponent extends JComponent {
 			}
 		}
 	}
-	
+
 	public void setMarkColor(Color c, Color gapColor) {
 		this.selCol = c;
 		this.selColBB = gapColor;
 		updateMarked();
 	}
-	
+
 	public void setMark(final boolean markedReq) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -188,13 +188,13 @@ public class MarkComponent extends JComponent {
 				JComboBox jc = (JComboBox)c;
 				final int ti = i;
 				jc.addActionListener(getUpdateCommand(mcs, ti, markGotoFromEnd, mark));
-				
+
 			}
 			if (c instanceof JCheckBox) {
 				JCheckBox jc = (JCheckBox)c;
 				final int ti = i;
 				jc.addActionListener(getUpdateCommand(mcs, ti, markGotoFromEnd, mark));
-				
+
 			}
 			if (c instanceof JButton) {
 				JButton jb = (JButton)c;
@@ -203,7 +203,7 @@ public class MarkComponent extends JComponent {
 			}
 		}
 	}
-	
+
 	private static boolean invokePending = false;
 
 	private static ActionListener getUpdateCommand(final ArrayList<MarkComponent> mcs, final int ti, final MarkComponent jump, final MarkComponent... mark) {

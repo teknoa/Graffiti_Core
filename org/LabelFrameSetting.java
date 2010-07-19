@@ -7,12 +7,12 @@
 package org;
 
 public enum LabelFrameSetting {
-	NO_FRAME, 
-	RECTANGLE, ELLIPSE, 
-	CAPSULE, 
-	RECTANGLE_BOTTOM_ROUND, RECTANGLE_ROUNDED, RECTANGLE_CORNER_CUT, 
+	NO_FRAME,
+	RECTANGLE, ELLIPSE,
+	CAPSULE,
+	RECTANGLE_BOTTOM_ROUND, RECTANGLE_ROUNDED, RECTANGLE_CORNER_CUT,
 	CIRCLE_HALF_FILLED, CIRCLE_FILLED, CIRCLE,
-	PIN, 
+	PIN,
 	SIDE_LINES;
 
 	@Override
@@ -33,7 +33,7 @@ public enum LabelFrameSetting {
 			default 						: return null;
 		}
 	}
-	
+
 	public String toGMLstring() {
 		switch(this) {
 			case NO_FRAME  					: return "";

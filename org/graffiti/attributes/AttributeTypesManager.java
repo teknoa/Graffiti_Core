@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeTypesManager.java,v 1.6 2009/06/29 21:45:10 klukas Exp $
+// $Id: AttributeTypesManager.java,v 1.7 2010/07/19 12:59:22 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -29,209 +29,209 @@ import org.graffiti.plugin.GenericPlugin;
  * can be added and then used in an arbitrary <code>Attribute</code> hierarchy
  * associated with this <code>AttributeTypesManager</code>.
  *
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 @SuppressWarnings("unchecked")
 public class AttributeTypesManager
-    implements PluginManagerListener
+implements PluginManagerListener
 {
-    //~ Static fields/initializers =============================================
+	//~ Static fields/initializers =============================================
 
-    /** The logger for this class */
-    private static final Logger logger = Logger.getLogger(AbstractAttribute.class.getName());
+	/** The logger for this class */
+	private static final Logger logger = Logger.getLogger(AbstractAttribute.class.getName());
 
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** Maps a fully qualified class name to the appropriate class. */
-    private Map attributeTypes;
+	/** Maps a fully qualified class name to the appropriate class. */
+	private Map attributeTypes;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new <code>AttributeTypesManager</code>. Loads the default
-     * <code>Attribute</code> classes from the package
-     * <code>org.graffiti.attributes</code>.
-     */
-    public AttributeTypesManager()
-    {
-    	try {
-    		logger.setLevel(Level.OFF);
-    	} catch(AccessControlException ace) {
-    		// empty
-    	}
-        attributeTypes = new HashMap();
-    }
+	/**
+	 * Constructs a new <code>AttributeTypesManager</code>. Loads the default
+	 * <code>Attribute</code> classes from the package
+	 * <code>org.graffiti.attributes</code>.
+	 */
+	public AttributeTypesManager()
+	{
+		try {
+			logger.setLevel(Level.OFF);
+		} catch(AccessControlException ace) {
+			// empty
+		}
+		attributeTypes = new HashMap();
+	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns an instance of the class that is associated with the name of the
-     * attribute.
-     *
-     * @param attrName the name of the attribute type.
-     * @param id the id that is assigned to the new attribute.
-     *
-     * @return an instance of the class that is associated with the name of the
-     *         attribute.
-     */
+	/**
+	 * Returns an instance of the class that is associated with the name of the
+	 * attribute.
+	 *
+	 * @param attrName the name of the attribute type.
+	 * @param id the id that is assigned to the new attribute.
+	 *
+	 * @return an instance of the class that is associated with the name of the
+	 *         attribute.
+	 */
 	public Object getAttributeInstance(String attrName, String id)
-    {
-        assert (attrName != null) && (id != null);
+	{
+		assert (attrName != null) && (id != null);
 
-        Class c = (Class) (attributeTypes.get(attrName));
-        assert c != null : "Attribute type " + attrName + " not registered";
+		Class c = (Class) (attributeTypes.get(attrName));
+		assert c != null : "Attribute type " + attrName + " not registered";
 
-        try
-        {
-            Class[] argTypes = new Class[] { String.class };
-            Constructor constr = c.getDeclaredConstructor(argTypes);
+		try
+		{
+			Class[] argTypes = new Class[] { String.class };
+			Constructor constr = c.getDeclaredConstructor(argTypes);
 
-            return constr.newInstance(new Object[] { id });
+			return constr.newInstance(new Object[] { id });
 
-            // return ((Class)(attributeTypes.get(attrName))).newInstance();
-            // 	} catch (InstantiationException ie) {
-            // 	    throw new RuntimeException
-            // 		("Class " + attrName + " could not be instantiated: "+ ie);
-            // 	} catch (IllegalAccessException iae) {
-            // 	    throw new RuntimeException
-            // 		("Class " + attrName + " could not be instantiated: "+ iae);
-            // 	} catch (NoSuchMethodException nme) {
-            // 	    throw new RuntimeException("No constructor with one String as "
-            // 				       + "parameter found: " + nme);
-        }
-        catch(Exception e)
-        {
-            assert false : "Exception occurred: " + e;
+			// return ((Class)(attributeTypes.get(attrName))).newInstance();
+			// 	} catch (InstantiationException ie) {
+			// 	    throw new RuntimeException
+			// 		("Class " + attrName + " could not be instantiated: "+ ie);
+			// 	} catch (IllegalAccessException iae) {
+			// 	    throw new RuntimeException
+			// 		("Class " + attrName + " could not be instantiated: "+ iae);
+			// 	} catch (NoSuchMethodException nme) {
+			// 	    throw new RuntimeException("No constructor with one String as "
+			// 				       + "parameter found: " + nme);
+		}
+		catch(Exception e)
+		{
+			assert false : "Exception occurred: " + e;
 
-            return null;
-        }
-    }
+		return null;
+		}
+	}
 
-    /**
-     * Sets the map of known <code>Attribute</code> types.
-     *
-     * @param newAttrTypes the new<code>Attribute</code> types map.
-     *
-     * @throws IllegalArgumentException DOCUMENT ME!
-     */
-    public void setAttributeTypes(Map newAttrTypes)
-    {
-        //	this.attributeTypes = attributeTypes;
-        assert newAttrTypes != null;
-        this.attributeTypes = new HashMap();
+	/**
+	 * Sets the map of known <code>Attribute</code> types.
+	 *
+	 * @param newAttrTypes the new<code>Attribute</code> types map.
+	 *
+	 * @throws IllegalArgumentException DOCUMENT ME!
+	 */
+	public void setAttributeTypes(Map newAttrTypes)
+	{
+		//	this.attributeTypes = attributeTypes;
+		assert newAttrTypes != null;
+		this.attributeTypes = new HashMap();
 
-        Iterator it = newAttrTypes.keySet().iterator();
+		Iterator it = newAttrTypes.keySet().iterator();
 
-        while(it.hasNext())
-        {
-            String id = null;
+		while(it.hasNext())
+		{
+			String id = null;
 
-            try
-            {
-                id = (String) it.next();
-            }
-            catch(ClassCastException cce)
-            {
-                throw new IllegalArgumentException("Map does not contain " +
-                    "(only) keys of type String");
-            }
+			try
+			{
+				id = (String) it.next();
+			}
+			catch(ClassCastException cce)
+			{
+				throw new IllegalArgumentException("Map does not contain " +
+				"(only) keys of type String");
+			}
 
-            try
-            {
-                addAttributeType((Class) newAttrTypes.get(id));
-            }
-            catch(ClassCastException cce)
-            {
-                throw new IllegalArgumentException("Map does not contain " +
-                    "(only) values of type Class");
-            }
-        }
-    }
+			try
+			{
+				addAttributeType((Class) newAttrTypes.get(id));
+			}
+			catch(ClassCastException cce)
+			{
+				throw new IllegalArgumentException("Map does not contain " +
+				"(only) values of type Class");
+			}
+		}
+	}
 
-    /**
-     * Returns a map of all known <code>Attribute</code> types.
-     *
-     * @return a map of all known <code>Attribute</code> types.
-     */
-    public Map getAttributeTypes()
-    {
-        return attributeTypes;
-    }
+	/**
+	 * Returns a map of all known <code>Attribute</code> types.
+	 *
+	 * @return a map of all known <code>Attribute</code> types.
+	 */
+	public Map getAttributeTypes()
+	{
+		return attributeTypes;
+	}
 
-    /**
-     * Adds a given <code>Attribute</code> type class to the list of attribute
-     * types.
-     *
-     * @param c the attribute class to add.
-     *
-     * @throws IllegalArgumentException DOCUMENT ME!
-     */
-    public void addAttributeType(Class c)
-    {
-        //	addAttributeType(c.getName(), c);
-        boolean implementsAttribute = false;
+	/**
+	 * Adds a given <code>Attribute</code> type class to the list of attribute
+	 * types.
+	 *
+	 * @param c the attribute class to add.
+	 *
+	 * @throws IllegalArgumentException DOCUMENT ME!
+	 */
+	public void addAttributeType(Class c)
+	{
+		//	addAttributeType(c.getName(), c);
+		boolean implementsAttribute = false;
 
-        Class superClass = c;
+		Class superClass = c;
 
-        while(!superClass.getName().equals("java.lang.Object"))
-        {
-            Class[] interfaces = superClass.getInterfaces();
+		while(!superClass.getName().equals("java.lang.Object"))
+		{
+			Class[] interfaces = superClass.getInterfaces();
 
-            for(int i = 0; i < interfaces.length; i++)
-            {
-                if(interfaces[i].getName().equals("org.graffiti.attributes.Attribute"))
-                {
-                    implementsAttribute = true;
+			for(int i = 0; i < interfaces.length; i++)
+			{
+				if(interfaces[i].getName().equals("org.graffiti.attributes.Attribute"))
+				{
+					implementsAttribute = true;
 
-                    break;
-                }
-            }
+					break;
+				}
+			}
 
-            superClass = superClass.getSuperclass();
-        }
+			superClass = superClass.getSuperclass();
+		}
 
-        if(implementsAttribute)
-        {
-            attributeTypes.put(c.getName(), c);
-        }
-        else
-        {
-            throw new IllegalArgumentException(
-                "Only classes that implement interface " +
-                "org.graffiti.attributes.Attribute can be added.");
-        }
-    }
+		if(implementsAttribute)
+		{
+			attributeTypes.put(c.getName(), c);
+		}
+		else
+		{
+			throw new IllegalArgumentException(
+					"Only classes that implement interface " +
+			"org.graffiti.attributes.Attribute can be added.");
+		}
+	}
 
-    /**
-     * Called by the plugin manager, iff a plugin has been added.
-     *
-     * @param plugin the added plugin.
-     * @param desc the description of the new plugin.
-     */
-    public void pluginAdded(GenericPlugin plugin, PluginDescription desc)
-    {
-        Class[] newTypes = plugin.getAttributes();
+	/**
+	 * Called by the plugin manager, iff a plugin has been added.
+	 *
+	 * @param plugin the added plugin.
+	 * @param desc the description of the new plugin.
+	 */
+	public void pluginAdded(GenericPlugin plugin, PluginDescription desc)
+	{
+		Class[] newTypes = plugin.getAttributes();
 
-        for(int i = 0; i < newTypes.length; i++)
-        {
-            addAttributeType(newTypes[i]);
-        }
-        
-        if (plugin.getAttributeDescriptions()!=null)
-        for (AttributeDescription ad : plugin.getAttributeDescriptions()) {
-        	String id = ad.getId();
-        	String help = ad.getUser_description();
-        	if (id!=null && help!=null && id.length()>0 && help.length()>0) {
-        		AttributeHelper.setNiceId(id, help);
-        	}
-        	if (id!=null && id.length()>0 && ad.getAttributeClass()!=null) {
-        		if (ad.isNodeAttributeDescription())
-        			AbstractAttribute.addNodeAttributeType(id, ad.getAttributeClass());
-        		if (ad.isNodeAttributeDescription())
-        			AbstractAttribute.addEdgeAttributeType(id, ad.getAttributeClass());
-        	}
-        }
-    }
+		for(int i = 0; i < newTypes.length; i++)
+		{
+			addAttributeType(newTypes[i]);
+		}
+
+		if (plugin.getAttributeDescriptions()!=null)
+			for (AttributeDescription ad : plugin.getAttributeDescriptions()) {
+				String id = ad.getId();
+				String help = ad.getUser_description();
+				if (id!=null && help!=null && id.length()>0 && help.length()>0) {
+					AttributeHelper.setNiceId(id, help);
+				}
+				if (id!=null && id.length()>0 && ad.getAttributeClass()!=null) {
+					if (ad.isNodeAttributeDescription())
+						AbstractAttribute.addNodeAttributeType(id, ad.getAttributeClass());
+					if (ad.isNodeAttributeDescription())
+						AbstractAttribute.addEdgeAttributeType(id, ad.getAttributeClass());
+				}
+			}
+	}
 }
 
 //------------------------------------------------------------------------------

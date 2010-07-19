@@ -13,78 +13,78 @@ import java.util.HashMap;
  *
  */
 public class GravistoPreferences {
-    
-    @SuppressWarnings("unchecked")
+
+	@SuppressWarnings("unchecked")
 	HashMap<String, Comparable> optionsAndValues;
-    String preferencesNodeName;
-    
-    @SuppressWarnings("unchecked")
+	String preferencesNodeName;
+
+	@SuppressWarnings("unchecked")
 	public GravistoPreferences(String preferencesNodeName) {
-        this.preferencesNodeName=preferencesNodeName;
-        optionsAndValues=new HashMap<String, Comparable>();
-    }
+		this.preferencesNodeName=preferencesNodeName;
+		optionsAndValues=new HashMap<String, Comparable>();
+	}
 
-    public double getDouble(String optionName, double defaultValue) {
-        if (optionsAndValues.containsKey(optionName)) {
-            Object value=optionsAndValues.get(optionName);
-        	return ((Double)value).doubleValue();
-        } else return defaultValue;
-    }
+	public double getDouble(String optionName, double defaultValue) {
+		if (optionsAndValues.containsKey(optionName)) {
+			Object value=optionsAndValues.get(optionName);
+			return ((Double)value).doubleValue();
+		} else return defaultValue;
+	}
 
-    public GravistoPreferences node(String subNodeName) {
-        return new GravistoPreferences(preferencesNodeName+"/"+subNodeName);
-    }
+	public GravistoPreferences node(String subNodeName) {
+		return new GravistoPreferences(preferencesNodeName+"/"+subNodeName);
+	}
 
-    public String get(String optionName, String defaultValue) {
-        if (optionsAndValues.containsKey(optionName)) {
-            Object value=optionsAndValues.get(optionName);
-        	return (String)value;
-        } else return defaultValue;
-    }
+	public String get(String optionName, String defaultValue) {
+		if (optionsAndValues.containsKey(optionName)) {
+			Object value=optionsAndValues.get(optionName);
+			return (String)value;
+		} else return defaultValue;
+	}
 
-    public float getFloat(String optionName, float defaultValue) {
-        if (optionsAndValues.containsKey(optionName)) {
-            Object value=optionsAndValues.get(optionName);
-        	return ((Float)value).floatValue();
-        } else return defaultValue;
-    }
+	public float getFloat(String optionName, float defaultValue) {
+		if (optionsAndValues.containsKey(optionName)) {
+			Object value=optionsAndValues.get(optionName);
+			return ((Float)value).floatValue();
+		} else return defaultValue;
+	}
 
-    public void put(String optionName, String value) {
-        optionsAndValues.put(optionName, value);
-    }
+	public void put(String optionName, String value) {
+		optionsAndValues.put(optionName, value);
+	}
 
-    public int getInt(String optionName, int defaultValue) {
-        if (optionsAndValues.containsKey(optionName)) {
-            Object value=optionsAndValues.get(optionName);
-        	return ((Integer)value).intValue();
-        } else return defaultValue;
-    }
+	public int getInt(String optionName, int defaultValue) {
+		if (optionsAndValues.containsKey(optionName)) {
+			Object value=optionsAndValues.get(optionName);
+			return ((Integer)value).intValue();
+		} else return defaultValue;
+	}
 
-    public void clear() {
-        optionsAndValues.clear();
-    }
+	public void clear() {
+		optionsAndValues.clear();
+	}
 
-    public void putInt(String optionName, int value) {
-        optionsAndValues.put(optionName, new Integer(value));
-    }
+	public void putInt(String optionName, int value) {
+		optionsAndValues.put(optionName, new Integer(value));
+	}
 
-    /**
-     * @param class1
-     * @return
-     */
-    public static GravistoPreferences userNodeForPackage(Class<?> classValue) {
-    	try {
-    		return new GravistoPreferences(classValue.getPackage().getName()+"/"+classValue.getName());
-    	} catch(NullPointerException npe) {
-    		return new GravistoPreferences("/"+classValue.getName());
-    	}
-    }
+	/**
+	 * @param class1
+	 * @return
+	 */
+	 public static GravistoPreferences userNodeForPackage(Class<?> classValue) {
+		 try {
+			 return new GravistoPreferences(classValue.getPackage().getName()+"/"+classValue.getName());
+		 } catch(NullPointerException npe) {
+			 return new GravistoPreferences("/"+classValue.getName());
+		 }
+	 }
 
-    /**
-     * @return
-     */
-    public String[] keys() {
-        return (String[]) optionsAndValues.keySet().toArray(new String[]{});
-    }
+	 /**
+	  * @return
+	  */
+	 public String[] keys() {
+		 return (String[]) optionsAndValues.keySet().toArray(new String[]{});
+	 }
 
 }

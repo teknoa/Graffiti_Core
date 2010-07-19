@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: ListenerManager.java,v 1.13 2010/07/17 22:00:18 klukas Exp $
+// $Id: ListenerManager.java,v 1.14 2010/07/19 13:01:43 morla Exp $
 
 package org.graffiti.event;
 
@@ -34,7 +34,7 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  *
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public class ListenerManager {
 	//~ Instance fields ========================================================
@@ -98,7 +98,7 @@ public class ListenerManager {
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
 	public void addAllTimeAttributeListener(AttributeListener l)
-			throws ListenerRegistrationException {
+	throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
@@ -108,7 +108,7 @@ public class ListenerManager {
 			}
 		} else
 			throw new ListenerRegistrationException(
-					"Listener already registered as strict");
+			"Listener already registered as strict");
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class ListenerManager {
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
 	public void addAllTimeEdgeListener(EdgeListener l)
-			throws ListenerRegistrationException {
+	throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
@@ -131,7 +131,7 @@ public class ListenerManager {
 			}
 		} else
 			throw new ListenerRegistrationException(
-					"Listener already registered as strict");
+			"Listener already registered as strict");
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class ListenerManager {
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
 	public void addAllTimeGraphListener(GraphListener l)
-			throws ListenerRegistrationException {
+	throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
@@ -153,7 +153,7 @@ public class ListenerManager {
 			}
 		} else
 			throw new ListenerRegistrationException(
-					"Listener already registered as strict");
+			"Listener already registered as strict");
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class ListenerManager {
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
 	public void addAllTimeNodeListener(NodeListener l)
-			throws ListenerRegistrationException {
+	throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
@@ -176,7 +176,7 @@ public class ListenerManager {
 			}
 		} else
 			throw new ListenerRegistrationException(
-					"Listener already registered as strict");
+			"Listener already registered as strict");
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class ListenerManager {
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
 	public void addDelayedAttributeListener(AttributeListener l)
-			throws ListenerRegistrationException {
+	throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
@@ -199,7 +199,7 @@ public class ListenerManager {
 			}
 		} else
 			throw new ListenerRegistrationException(
-					"Listener already registered as non strict");
+			"Listener already registered as non strict");
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class ListenerManager {
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
 	public void addDelayedEdgeListener(EdgeListener l)
-			throws ListenerRegistrationException {
+	throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
@@ -222,7 +222,7 @@ public class ListenerManager {
 			}
 		} else
 			throw new ListenerRegistrationException(
-					"Listener already registered as non strict");
+			"Listener already registered as non strict");
 	}
 
 	/**
@@ -235,7 +235,7 @@ public class ListenerManager {
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
 	public void addDelayedGraphListener(GraphListener l)
-			throws ListenerRegistrationException {
+	throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
@@ -245,7 +245,7 @@ public class ListenerManager {
 			}
 		} else
 			throw new ListenerRegistrationException(
-					"Listener already registered as non strict");
+			"Listener already registered as non strict");
 	}
 
 	/**
@@ -258,7 +258,7 @@ public class ListenerManager {
 	 * @throws IllegalArgumentException DOCUMENT ME!
 	 */
 	public void addDelayedNodeListener(NodeListener l)
-			throws ListenerRegistrationException {
+	throws ListenerRegistrationException {
 		if (l == null)
 			throw new IllegalArgumentException("The argument " + "may not be null");
 
@@ -268,7 +268,7 @@ public class ListenerManager {
 			}
 		} else
 			throw new ListenerRegistrationException(
-					"Listener already registered as non strict");
+			"Listener already registered as non strict");
 	}
 
 	/**
@@ -559,85 +559,85 @@ public class ListenerManager {
 		}
 	}
 
-//	/**
-//	 * Called just after an incoming edge has been added to the node. (For
-//	 * undirected edges postUndirectedEdgeAdded is called instead.) Calls the
-//	 * same method in all NodeListeners in the strictNodeListenerList
-//	 *
-//	 * @param event the NodeEvent detailing the changes.
-//	 *
-//	 * @throws IllegalArgumentException DOCUMENT ME!
-//	 */
-//	public void postInEdgeAdded(NodeEvent event) {
-//		if (event == null)
-//			throw new IllegalArgumentException("The argument " + "may not be null");
-//
-//		if (transactionsActive == 0) {
-//			Iterator it = delayedNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postInEdgeAdded(event);
-//			}
-//
-//			it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postInEdgeAdded(event);
-//			}
-//		} else {
-//			// log objects that are (probably) affected
-//			changedObjects.put(event.getAttributeable(), event.getSource());
-//
-//			if (event.getEdge() != null)
-//				changedObjects.put(event.getAttributeable(), event.getEdge());
-//
-//			Iterator it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postInEdgeAdded(event);
-//			}
-//		}
-//	}
-//
-//	/**
-//	 * Called after an incoming edge has been removed from the node. (For
-//	 * undirected edges postUndirectedEdgeRemoved is called.) Calls the same
-//	 * method in all NodeListeners in the strictNodeListenerList
-//	 *
-//	 * @param event the NodeEvent detailing the changes.
-//	 *
-//	 * @throws IllegalArgumentException DOCUMENT ME!
-//	 */
-//	public void postInEdgeRemoved(NodeEvent event) {
-//		if (event == null)
-//			throw new IllegalArgumentException("The argument " + "may not be null");
-//
-//		if (transactionsActive == 0) {
-//			Iterator it = delayedNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postInEdgeRemoved(event);
-//			}
-//
-//			it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postInEdgeRemoved(event);
-//			}
-//		} else {
-//			// log objects that are (probably) affected
-//			changedObjects.put(event.getAttributeable(), event.getSource());
-//
-//			if (event.getEdge() != null)
-//				changedObjects.put(event.getAttributeable(), event.getEdge());
-//
-//			Iterator it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postInEdgeRemoved(event);
-//			}
-//		}
-//	}
+	//	/**
+	//	 * Called just after an incoming edge has been added to the node. (For
+	//	 * undirected edges postUndirectedEdgeAdded is called instead.) Calls the
+	//	 * same method in all NodeListeners in the strictNodeListenerList
+	//	 *
+	//	 * @param event the NodeEvent detailing the changes.
+	//	 *
+	//	 * @throws IllegalArgumentException DOCUMENT ME!
+	//	 */
+	//	public void postInEdgeAdded(NodeEvent event) {
+	//		if (event == null)
+	//			throw new IllegalArgumentException("The argument " + "may not be null");
+	//
+	//		if (transactionsActive == 0) {
+	//			Iterator it = delayedNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postInEdgeAdded(event);
+	//			}
+	//
+	//			it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postInEdgeAdded(event);
+	//			}
+	//		} else {
+	//			// log objects that are (probably) affected
+	//			changedObjects.put(event.getAttributeable(), event.getSource());
+	//
+	//			if (event.getEdge() != null)
+	//				changedObjects.put(event.getAttributeable(), event.getEdge());
+	//
+	//			Iterator it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postInEdgeAdded(event);
+	//			}
+	//		}
+	//	}
+	//
+	//	/**
+	//	 * Called after an incoming edge has been removed from the node. (For
+	//	 * undirected edges postUndirectedEdgeRemoved is called.) Calls the same
+	//	 * method in all NodeListeners in the strictNodeListenerList
+	//	 *
+	//	 * @param event the NodeEvent detailing the changes.
+	//	 *
+	//	 * @throws IllegalArgumentException DOCUMENT ME!
+	//	 */
+	//	public void postInEdgeRemoved(NodeEvent event) {
+	//		if (event == null)
+	//			throw new IllegalArgumentException("The argument " + "may not be null");
+	//
+	//		if (transactionsActive == 0) {
+	//			Iterator it = delayedNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postInEdgeRemoved(event);
+	//			}
+	//
+	//			it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postInEdgeRemoved(event);
+	//			}
+	//		} else {
+	//			// log objects that are (probably) affected
+	//			changedObjects.put(event.getAttributeable(), event.getSource());
+	//
+	//			if (event.getEdge() != null)
+	//				changedObjects.put(event.getAttributeable(), event.getEdge());
+	//
+	//			Iterator it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postInEdgeRemoved(event);
+	//			}
+	//		}
+	//	}
 
 	/**
 	 * Called after an edge has been added to the graph. Calls the same method
@@ -731,85 +731,85 @@ public class ListenerManager {
 		}
 	}
 
-//	/**
-//	 * Called after an outgoing edge has been added to the node. (For
-//	 * undirected edges postUndirectedEdgeAdded is called instead.) Calls the
-//	 * same method in all NodeListeners in the strictNodeListenerList
-//	 *
-//	 * @param event the NodeEvent detailing the changes.
-//	 *
-//	 * @throws IllegalArgumentException DOCUMENT ME!
-//	 */
-//	public void postOutEdgeAdded(NodeEvent event) {
-//		if (event == null)
-//			throw new IllegalArgumentException("The argument " + "may not be null");
-//
-//		if (transactionsActive == 0) {
-//			Iterator it = delayedNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postOutEdgeAdded(event);
-//			}
-//
-//			it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postOutEdgeAdded(event);
-//			}
-//		} else {
-//			// log objects that are (probably) affected
-//			changedObjects.put(event.getAttributeable(), event.getSource());
-//
-//			if (event.getEdge() != null)
-//				changedObjects.put(event.getAttributeable(), event.getEdge());
-//
-//			Iterator it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postOutEdgeAdded(event);
-//			}
-//		}
-//	}
-//
-//	/**
-//	 * Called after an outgoing edge has been removed from the node. (For
-//	 * undirected edges postUndirectedEdgeRemoved is called.) Calls the same
-//	 * method in all NodeListeners in the strictNodeListenerList
-//	 *
-//	 * @param event the NodeEvent detailing the changes.
-//	 *
-//	 * @throws IllegalArgumentException DOCUMENT ME!
-//	 */
-//	public void postOutEdgeRemoved(NodeEvent event) {
-//		if (event == null)
-//			throw new IllegalArgumentException("The argument " + "may not be null");
-//
-//		if (transactionsActive == 0) {
-//			Iterator it = delayedNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postOutEdgeRemoved(event);
-//			}
-//
-//			it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postOutEdgeRemoved(event);
-//			}
-//		} else {
-//			// log objects that are (probably) affected
-//			changedObjects.put(event.getAttributeable(), event.getSource());
-//
-//			if (event.getEdge() != null)
-//				changedObjects.put(event.getAttributeable(), event.getEdge());
-//
-//			Iterator it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).postOutEdgeRemoved(event);
-//			}
-//		}
-//	}
+	//	/**
+	//	 * Called after an outgoing edge has been added to the node. (For
+	//	 * undirected edges postUndirectedEdgeAdded is called instead.) Calls the
+	//	 * same method in all NodeListeners in the strictNodeListenerList
+	//	 *
+	//	 * @param event the NodeEvent detailing the changes.
+	//	 *
+	//	 * @throws IllegalArgumentException DOCUMENT ME!
+	//	 */
+	//	public void postOutEdgeAdded(NodeEvent event) {
+	//		if (event == null)
+	//			throw new IllegalArgumentException("The argument " + "may not be null");
+	//
+	//		if (transactionsActive == 0) {
+	//			Iterator it = delayedNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postOutEdgeAdded(event);
+	//			}
+	//
+	//			it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postOutEdgeAdded(event);
+	//			}
+	//		} else {
+	//			// log objects that are (probably) affected
+	//			changedObjects.put(event.getAttributeable(), event.getSource());
+	//
+	//			if (event.getEdge() != null)
+	//				changedObjects.put(event.getAttributeable(), event.getEdge());
+	//
+	//			Iterator it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postOutEdgeAdded(event);
+	//			}
+	//		}
+	//	}
+	//
+	//	/**
+	//	 * Called after an outgoing edge has been removed from the node. (For
+	//	 * undirected edges postUndirectedEdgeRemoved is called.) Calls the same
+	//	 * method in all NodeListeners in the strictNodeListenerList
+	//	 *
+	//	 * @param event the NodeEvent detailing the changes.
+	//	 *
+	//	 * @throws IllegalArgumentException DOCUMENT ME!
+	//	 */
+	//	public void postOutEdgeRemoved(NodeEvent event) {
+	//		if (event == null)
+	//			throw new IllegalArgumentException("The argument " + "may not be null");
+	//
+	//		if (transactionsActive == 0) {
+	//			Iterator it = delayedNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postOutEdgeRemoved(event);
+	//			}
+	//
+	//			it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postOutEdgeRemoved(event);
+	//			}
+	//		} else {
+	//			// log objects that are (probably) affected
+	//			changedObjects.put(event.getAttributeable(), event.getSource());
+	//
+	//			if (event.getEdge() != null)
+	//				changedObjects.put(event.getAttributeable(), event.getEdge());
+	//
+	//			Iterator it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).postOutEdgeRemoved(event);
+	//			}
+	//		}
+	//	}
 
 	/**
 	 * Called after the source node of an edge has changed. Calls the same
@@ -987,7 +987,7 @@ public class ListenerManager {
 
 			ll.clear();
 			ll.addAll(alltimeAttributeListenerList);
-			
+
 			for (AttributeListener l : ll) {
 				l.preAttributeAdded(event);
 			}
@@ -1289,85 +1289,85 @@ public class ListenerManager {
 		}
 	}
 
-//	/**
-//	 * Called just before an incoming edge is added to the node. (For
-//	 * undirected edges preUndirectedEdgeAdded is called instead.) Calls the
-//	 * same method in all NodeListeners in the strictNodeListenerList
-//	 *
-//	 * @param event the NodeEvent detailing the changes.
-//	 *
-//	 * @throws IllegalArgumentException DOCUMENT ME!
-//	 */
-//	public void preInEdgeAdded(NodeEvent event) {
-//		if (event == null)
-//			throw new IllegalArgumentException("The argument " + "may not be null");
-//
-//		if (transactionsActive == 0) {
-//			Iterator it = delayedNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preInEdgeAdded(event);
-//			}
-//
-//			it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preInEdgeAdded(event);
-//			}
-//		} else {
-//			// log objects that are (probably) affected
-//			changedObjects.put(event.getAttributeable(), event.getSource());
-//
-//			if (event.getEdge() != null)
-//				changedObjects.put(event.getAttributeable(), event.getEdge());
-//
-//			Iterator it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preInEdgeAdded(event);
-//			}
-//		}
-//	}
-//
-//	/**
-//	 * Called just before an incoming edge is removed from the node. (For
-//	 * undirected edges preUndirectedEdgeRemoved is called.) Calls the same
-//	 * method in all NodeListeners in the strictNodeListenerList
-//	 *
-//	 * @param event the NodeEvent detailing the changes.
-//	 *
-//	 * @throws IllegalArgumentException DOCUMENT ME!
-//	 */
-//	public void preInEdgeRemoved(NodeEvent event) {
-//		if (event == null)
-//			throw new IllegalArgumentException("The argument " + "may not be null");
-//
-//		if (transactionsActive == 0) {
-//			Iterator it = delayedNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preInEdgeRemoved(event);
-//			}
-//
-//			it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preInEdgeRemoved(event);
-//			}
-//		} else {
-//			// log objects that are (probably) affected
-//			changedObjects.put(event.getAttributeable(), event.getSource());
-//
-//			if (event.getEdge() != null)
-//				changedObjects.put(event.getAttributeable(), event.getEdge());
-//
-//			Iterator it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preInEdgeRemoved(event);
-//			}
-//		}
-//	}
+	//	/**
+	//	 * Called just before an incoming edge is added to the node. (For
+	//	 * undirected edges preUndirectedEdgeAdded is called instead.) Calls the
+	//	 * same method in all NodeListeners in the strictNodeListenerList
+	//	 *
+	//	 * @param event the NodeEvent detailing the changes.
+	//	 *
+	//	 * @throws IllegalArgumentException DOCUMENT ME!
+	//	 */
+	//	public void preInEdgeAdded(NodeEvent event) {
+	//		if (event == null)
+	//			throw new IllegalArgumentException("The argument " + "may not be null");
+	//
+	//		if (transactionsActive == 0) {
+	//			Iterator it = delayedNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preInEdgeAdded(event);
+	//			}
+	//
+	//			it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preInEdgeAdded(event);
+	//			}
+	//		} else {
+	//			// log objects that are (probably) affected
+	//			changedObjects.put(event.getAttributeable(), event.getSource());
+	//
+	//			if (event.getEdge() != null)
+	//				changedObjects.put(event.getAttributeable(), event.getEdge());
+	//
+	//			Iterator it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preInEdgeAdded(event);
+	//			}
+	//		}
+	//	}
+	//
+	//	/**
+	//	 * Called just before an incoming edge is removed from the node. (For
+	//	 * undirected edges preUndirectedEdgeRemoved is called.) Calls the same
+	//	 * method in all NodeListeners in the strictNodeListenerList
+	//	 *
+	//	 * @param event the NodeEvent detailing the changes.
+	//	 *
+	//	 * @throws IllegalArgumentException DOCUMENT ME!
+	//	 */
+	//	public void preInEdgeRemoved(NodeEvent event) {
+	//		if (event == null)
+	//			throw new IllegalArgumentException("The argument " + "may not be null");
+	//
+	//		if (transactionsActive == 0) {
+	//			Iterator it = delayedNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preInEdgeRemoved(event);
+	//			}
+	//
+	//			it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preInEdgeRemoved(event);
+	//			}
+	//		} else {
+	//			// log objects that are (probably) affected
+	//			changedObjects.put(event.getAttributeable(), event.getSource());
+	//
+	//			if (event.getEdge() != null)
+	//				changedObjects.put(event.getAttributeable(), event.getEdge());
+	//
+	//			Iterator it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preInEdgeRemoved(event);
+	//			}
+	//		}
+	//	}
 
 	/**
 	 * Called just before a node is added to the graph. Calls the same method
@@ -1461,85 +1461,85 @@ public class ListenerManager {
 		}
 	}
 
-//	/**
-//	 * Called just before an outgoing edge is added to the node. (For
-//	 * undirected edges preUndirectedEdgeAdded is called instead.) Calls the
-//	 * same method in all NodeListeners in the nodeListenerList
-//	 *
-//	 * @param event the NodeEvent detailing the changes.
-//	 *
-//	 * @throws IllegalArgumentException DOCUMENT ME!
-//	 */
-//	public void preOutEdgeAdded(NodeEvent event) {
-//		if (event == null)
-//			throw new IllegalArgumentException("The argument " + "may not be null");
-//
-//		if (transactionsActive == 0) {
-//			Iterator it = delayedNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preOutEdgeAdded(event);
-//			}
-//
-//			it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preOutEdgeAdded(event);
-//			}
-//		} else {
-//			// log objects that are (probably) affected
-//			changedObjects.put(event.getAttributeable(), event.getSource());
-//
-//			if (event.getEdge() != null)
-//				changedObjects.put(event.getAttributeable(), event.getEdge());
-//
-//			Iterator it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preOutEdgeAdded(event);
-//			}
-//		}
-//	}
-//
-//	/**
-//	 * Called just before an outgoing edge is removed from the node. (For
-//	 * undirected edges preUndirectedEdgeRemoved is called.) Calls the same
-//	 * method in all NodeListeners in the strictNodeListenerList
-//	 *
-//	 * @param event the NodeEvent detailing the changes.
-//	 *
-//	 * @throws IllegalArgumentException DOCUMENT ME!
-//	 */
-//	public void preOutEdgeRemoved(NodeEvent event) {
-//		if (event == null)
-//			throw new IllegalArgumentException("The argument " + "may not be null");
-//
-//		if (transactionsActive == 0) {
-//			Iterator it = delayedNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preOutEdgeRemoved(event);
-//			}
-//
-//			it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preOutEdgeRemoved(event);
-//			}
-//		} else {
-//			// log objects that are (probably) affected
-//			changedObjects.put(event.getAttributeable(), event.getSource());
-//
-//			if (event.getEdge() != null)
-//				changedObjects.put(event.getAttributeable(), event.getEdge());
-//
-//			Iterator it = alltimeNodeListenerList.iterator();
-//
-//			while (it.hasNext()) {
-//				((NodeListener) it.next()).preOutEdgeRemoved(event);
-//			}
-//		}
-//	}
+	//	/**
+	//	 * Called just before an outgoing edge is added to the node. (For
+	//	 * undirected edges preUndirectedEdgeAdded is called instead.) Calls the
+	//	 * same method in all NodeListeners in the nodeListenerList
+	//	 *
+	//	 * @param event the NodeEvent detailing the changes.
+	//	 *
+	//	 * @throws IllegalArgumentException DOCUMENT ME!
+	//	 */
+	//	public void preOutEdgeAdded(NodeEvent event) {
+	//		if (event == null)
+	//			throw new IllegalArgumentException("The argument " + "may not be null");
+	//
+	//		if (transactionsActive == 0) {
+	//			Iterator it = delayedNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preOutEdgeAdded(event);
+	//			}
+	//
+	//			it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preOutEdgeAdded(event);
+	//			}
+	//		} else {
+	//			// log objects that are (probably) affected
+	//			changedObjects.put(event.getAttributeable(), event.getSource());
+	//
+	//			if (event.getEdge() != null)
+	//				changedObjects.put(event.getAttributeable(), event.getEdge());
+	//
+	//			Iterator it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preOutEdgeAdded(event);
+	//			}
+	//		}
+	//	}
+	//
+	//	/**
+	//	 * Called just before an outgoing edge is removed from the node. (For
+	//	 * undirected edges preUndirectedEdgeRemoved is called.) Calls the same
+	//	 * method in all NodeListeners in the strictNodeListenerList
+	//	 *
+	//	 * @param event the NodeEvent detailing the changes.
+	//	 *
+	//	 * @throws IllegalArgumentException DOCUMENT ME!
+	//	 */
+	//	public void preOutEdgeRemoved(NodeEvent event) {
+	//		if (event == null)
+	//			throw new IllegalArgumentException("The argument " + "may not be null");
+	//
+	//		if (transactionsActive == 0) {
+	//			Iterator it = delayedNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preOutEdgeRemoved(event);
+	//			}
+	//
+	//			it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preOutEdgeRemoved(event);
+	//			}
+	//		} else {
+	//			// log objects that are (probably) affected
+	//			changedObjects.put(event.getAttributeable(), event.getSource());
+	//
+	//			if (event.getEdge() != null)
+	//				changedObjects.put(event.getAttributeable(), event.getEdge());
+	//
+	//			Iterator it = alltimeNodeListenerList.iterator();
+	//
+	//			while (it.hasNext()) {
+	//				((NodeListener) it.next()).preOutEdgeRemoved(event);
+	//			}
+	//		}
+	//	}
 
 	/**
 	 * Called before a change of the source node of an edge takes place. Calls
@@ -1705,7 +1705,7 @@ public class ListenerManager {
 	 *            found in the listener list.
 	 */
 	public void removeAttributeListener(AttributeListener l)
-			throws ListenerNotFoundException {
+	throws ListenerNotFoundException {
 		if (!delayedAttributeListenerList.remove(l)
 				&& !alltimeAttributeListenerList.remove(l)) {
 			throw new ListenerNotFoundException("The attr. listener you want "
@@ -1723,7 +1723,7 @@ public class ListenerManager {
 	 *            found in the listener list.
 	 */
 	public void removeEdgeListener(EdgeListener l)
-			throws ListenerNotFoundException {
+	throws ListenerNotFoundException {
 		if (!delayedEdgeListenerList.remove(l)
 				&& !alltimeEdgeListenerList.remove(l)) {
 			throw new ListenerNotFoundException("The edge listener you want "
@@ -1741,7 +1741,7 @@ public class ListenerManager {
 	 *            found in the listener list.
 	 */
 	public void removeGraphListener(GraphListener l)
-			throws ListenerNotFoundException {
+	throws ListenerNotFoundException {
 		if (!delayedGraphListenerList.remove(l)
 				&& !alltimeGraphListenerList.remove(l)) {
 			throw new ListenerNotFoundException("The graph listener you want "
@@ -1759,7 +1759,7 @@ public class ListenerManager {
 	 *            found in the listener list.
 	 */
 	public void removeNodeListener(NodeListener l)
-			throws ListenerNotFoundException {
+	throws ListenerNotFoundException {
 		if (!delayedNodeListenerList.remove(l)
 				&& !alltimeNodeListenerList.remove(l)) {
 			throw new ListenerNotFoundException("The node listener you want "
@@ -1773,20 +1773,20 @@ public class ListenerManager {
 			runningTransactions.add(source);
 		}
 	}
-	
+
 	private static void postDebugTransactionFinished(Object source) {
 		synchronized(runningTransactions) {
 			runningTransactions.remove(source);
 		}
 	}
-	
+
 	public void finishOpenTransactions() {
 		synchronized (runningTransactions) {
 			while (transactionsActive>0)
 				transactionFinished(runningTransactions.get(0));
 		}
 	}
-	
+
 	/**
 	 * Called when a transaction has finished. Changes the event it gets by
 	 * reusing the <code>source</code> but adding the <code>Set</code> of
@@ -1797,11 +1797,11 @@ public class ListenerManager {
 	public void transactionFinished(Object source) {
 		transactionFinished(source, false);
 	}
-	
+
 	public void transactionFinished(Object source, boolean forgetChanges) {
 		transactionFinished(source, forgetChanges, null);
 	}
-	
+
 	public void transactionFinished(Object source, boolean forgetChanges, BackgroundTaskStatusProviderSupportingExternalCall status) {
 		postDebugTransactionFinished(source);
 		this.transactionsActive--;

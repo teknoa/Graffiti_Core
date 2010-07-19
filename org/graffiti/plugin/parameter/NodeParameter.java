@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: NodeParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
+// $Id: NodeParameter.java,v 1.3 2010/07/19 13:01:54 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -15,84 +15,84 @@ import org.graffiti.graph.Node;
 /**
  * This class contains a single <code>Node</code>.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class NodeParameter
-    extends AbstractSingleParameter
+extends AbstractSingleParameter
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** The value of this parameter. */
-    private Node value = null;
-    
-    private Graph graph = null;
+	/** The value of this parameter. */
+	private Node value = null;
 
-    //~ Constructors ===========================================================
+	private Graph graph = null;
 
-//    /**
-//     * Constructs a new node parameter.
-//     *
-//     * @param name the name of the parameter.
-//     * @param description the description of the parameter.
-//     */
-//    public NodeParameter(String name, String description)
-//    {
-//        super(name, description);
-//    }
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new node parameter.
-     *
-     * @param name the name of the parameter.
-     * @param description the description of the parameter.
-     */
-    public NodeParameter(Graph graph, Node initalNode, String name, String description)
-    {
-        super(name, description);
-        if (initalNode==null) initalNode = graph.getNodesIterator().next();
-        value = initalNode;
-        this.graph=graph;
-    }
+	//    /**
+	//     * Constructs a new node parameter.
+	//     *
+	//     * @param name the name of the parameter.
+	//     * @param description the description of the parameter.
+	//     */
+	//    public NodeParameter(String name, String description)
+	//    {
+	//        super(name, description);
+	//    }
 
-    //~ Methods ================================================================
+	/**
+	 * Constructs a new node parameter.
+	 *
+	 * @param name the name of the parameter.
+	 * @param description the description of the parameter.
+	 */
+	public NodeParameter(Graph graph, Node initalNode, String name, String description)
+	{
+		super(name, description);
+		if (initalNode==null) initalNode = graph.getNodesIterator().next();
+		value = initalNode;
+		this.graph=graph;
+	}
 
-    /**
-     * Returns the <code>Node</code> contained in this
-     * <code>NodeParameter</code>.
-     *
-     * @return the <code>Node</code> contained in this
-     *         <code>NodeParameter</code>.
-     */
-    public Node getNode()
-    {
-        return value;
-    }
-    
-    public Node[] getPossibleNodes() {
-        return graph.getNodes().toArray(new Node[] {});
-    }
+	//~ Methods ================================================================
 
-    /**
-     * Sets the value of the <code>AttributeParameter</code>.
-     *
-     * @param val the new value of the <code>AttributeParameter</code>.
-     */
-    @Override
+	/**
+	 * Returns the <code>Node</code> contained in this
+	 * <code>NodeParameter</code>.
+	 *
+	 * @return the <code>Node</code> contained in this
+	 *         <code>NodeParameter</code>.
+	 */
+	public Node getNode()
+	{
+		return value;
+	}
+
+	public Node[] getPossibleNodes() {
+		return graph.getNodes().toArray(new Node[] {});
+	}
+
+	/**
+	 * Sets the value of the <code>AttributeParameter</code>.
+	 *
+	 * @param val the new value of the <code>AttributeParameter</code>.
+	 */
+	@Override
 	public void setValue(Object val)
-    {
-        value = (Node)val;
-    }
+	{
+		value = (Node)val;
+	}
 
-    /**
-     * Returns the value of this parameter.
-     *
-     * @return the value of this parameter.
-     */
-    @Override
+	/**
+	 * Returns the value of this parameter.
+	 *
+	 * @return the value of this parameter.
+	 */
+	@Override
 	public Object getValue()
-    {
-        return value;
-    }
+	{
+		return value;
+	}
 }
 
 //------------------------------------------------------------------------------

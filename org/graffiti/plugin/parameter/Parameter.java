@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Parameter.java,v 1.1 2007/05/31 12:56:08 klukas Exp $
+// $Id: Parameter.java,v 1.2 2010/07/19 13:01:54 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -16,22 +16,22 @@ import org.graffiti.plugin.Displayable;
 /**
  * Interface for a parameter used by an <code>Algorithm</code>.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see org.graffiti.plugin.algorithm.Algorithm
  */
 public interface Parameter
-    extends Displayable
+extends Displayable
 {
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns an image representing the <code>Parameter</code>. May return
-     * <code>null</code> if there is no representing image.
-     *
-     * @return an image representing the <code>Parameter</code>.
-     */
-    public BufferedImage getImage();
+	/**
+	 * Returns an image representing the <code>Parameter</code>. May return
+	 * <code>null</code> if there is no representing image.
+	 *
+	 * @return an image representing the <code>Parameter</code>.
+	 */
+	public BufferedImage getImage();
 }
 
 //------------------------------------------------------------------------------

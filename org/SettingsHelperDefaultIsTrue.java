@@ -25,7 +25,7 @@ public class SettingsHelperDefaultIsTrue implements HelperClass {
 	protected static String encode(String name) {
 		return StringManipulationTools.removeHTMLtags(name).replaceAll(" ", "_").replaceAll("/", "_");
 	}
-	
+
 	@Test
 	public void testEncode() {
 		assertEquals("Setting Encode", "test_test_2", encode("test/test 2"));
@@ -38,9 +38,9 @@ public class SettingsHelperDefaultIsTrue implements HelperClass {
 			} catch (IOException e) {
 				ErrorMsg.addErrorMessage(e);
 			}
-		else {
-			new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_disabled_"+encode(name)).delete();
-		}
+			else {
+				new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_disabled_"+encode(name)).delete();
+			}
 	}
 
 	public JComponent getBooleanSettingsEditor(String description, final String option, final Runnable enable, final Runnable disable) {

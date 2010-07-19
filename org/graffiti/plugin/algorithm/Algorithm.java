@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Algorithm.java,v 1.3 2009/07/30 12:19:23 klukas Exp $
+// $Id: Algorithm.java,v 1.4 2010/07/19 13:00:49 morla Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -23,60 +23,60 @@ import org.graffiti.selection.Selection;
  * possibility to provide the <code>Algorithm</code> with apropriate
  * parameters.
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public interface Algorithm
 {
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns the name (id) of the algorithm.
-     *
-     * @return DOCUMENT ME!
-     */
-    public String getName();
+	/**
+	 * Returns the name (id) of the algorithm.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	public String getName();
 
-    /**
-     * Sets the parameters for this algorithm. Must have the same types and
-     * order as the array returned by <code>getParameter</code>.
-     */
-    public void setParameters(Parameter[] params);
+	/**
+	 * Sets the parameters for this algorithm. Must have the same types and
+	 * order as the array returned by <code>getParameter</code>.
+	 */
+	public void setParameters(Parameter[] params);
 
-    /**
-     * Returns a list of <code>Parameter</code> that are set for this
-     * algorithm.
-     *
-     * @return a collection of <code>Parameter</code> that are needed by the
-     *         <code>Algorithm</code>.
-     */
-    public Parameter[] getParameters();
+	/**
+	 * Returns a list of <code>Parameter</code> that are set for this
+	 * algorithm.
+	 *
+	 * @return a collection of <code>Parameter</code> that are needed by the
+	 *         <code>Algorithm</code>.
+	 */
+	public Parameter[] getParameters();
 
-    /**
-     * Attaches the given graph to this algorithm.
-     *A ttaches the given Selection information to the algorithm.
-     * @param g the graph to attach.
-     * @param selection the selection to attach.
-     */
-    public void attach(Graph g, Selection selection);
+	/**
+	 * Attaches the given graph to this algorithm.
+	 *A ttaches the given Selection information to the algorithm.
+	 * @param g the graph to attach.
+	 * @param selection the selection to attach.
+	 */
+	public void attach(Graph g, Selection selection);
 
-    /**
-     * Checks whether all preconditions of the current graph are satisfied.
-     *
-     * @throws PreconditionException if the preconditions of the current graph
-     *         are not satisfied.
-     */
-    public void check()
-        throws PreconditionException;
+	/**
+	 * Checks whether all preconditions of the current graph are satisfied.
+	 *
+	 * @throws PreconditionException if the preconditions of the current graph
+	 *         are not satisfied.
+	 */
+	public void check()
+	throws PreconditionException;
 
-    /**
-     * Executes the whole algorithm.
-     */
-    public void execute();
+	/**
+	 * Executes the whole algorithm.
+	 */
+	public void execute();
 
-    /**
-     * Resets the internal state of the algorithm.
-     */
-    public void reset();
+	/**
+	 * Resets the internal state of the algorithm.
+	 */
+	public void reset();
 
 	/**
 	 * Returns the category an algorithm should assigned to.
@@ -86,16 +86,16 @@ public interface Algorithm
 	 */
 	public String getCategory();
 
-    /**
-     * A Layoutalgorithm should return true. All other types of algorithms should return false.
-     * @return
-     */
-    public boolean isLayoutAlgorithm();
+	/**
+	 * A Layoutalgorithm should return true. All other types of algorithms should return false.
+	 * @return
+	 */
+	public boolean isLayoutAlgorithm();
 
 	/**
-	 * Override this method to give a different look and feel to the application, 
+	 * Override this method to give a different look and feel to the application,
 	 * and to put the plugin icon next to the menu item in the main menu bar.
-	 * @return True, if the plugin icon should be shown next to the menu item. 
+	 * @return True, if the plugin icon should be shown next to the menu item.
 	 * Return FALSE (default!), if no icon should be shown in the menu.
 	 */
 	public boolean showMenuIcon();
@@ -109,7 +109,7 @@ public interface Algorithm
 	public String getDescription();
 
 	public void setActionEvent(ActionEvent a);
-	
+
 	public ActionEvent getActionEvent();
 
 	public boolean mayWorkOnMultipleGraphs();

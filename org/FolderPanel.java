@@ -56,9 +56,9 @@ public class FolderPanel extends JComponent {
 	private String title;
 	private boolean condensedState;
 	private Color frameColor = new Color(195, 212, 232); // new
-															// Color(120,120,160);//
-															// new Color(140,
-															// 140, 140);
+	// Color(120,120,160);//
+	// new Color(140,
+	// 140, 140);
 	private Color headingColor = Color.BLACK; // Color.WHITE;
 	private Color backgroundColor = Color.WHITE;
 	int frameWidth = 2;
@@ -91,7 +91,7 @@ public class FolderPanel extends JComponent {
 	private int maxRowCount = -1;
 	private int currentPage = 0;
 	private Color rowBackground0; // if <> null, it is used to set the
-									// background color
+	// background color
 	private Color rowBackground1;
 	private String lastSearchText = "";
 	private SearchFilter searchFilter;
@@ -176,7 +176,7 @@ public class FolderPanel extends JComponent {
 		setBorder(BorderFactory.createLineBorder(frameColor, frameWidth));
 		layoutRows();
 	}
-	
+
 	public void setFrameColor(Color frameColor, Color headingColor) {
 		this.frameColor = frameColor;
 		this.headingColor = headingColor;
@@ -197,7 +197,7 @@ public class FolderPanel extends JComponent {
 			guiComponentRows.add(0, new GuiRow(leftComponent, rightComponent));
 		else
 			guiComponentRows.add(0, new GuiRow(
-					getBorderedComponent(leftComponent, sp, sp, sp, sp), 
+					getBorderedComponent(leftComponent, sp, sp, sp, sp),
 					getBorderedComponent(rightComponent, sp, sp, sp, sp)));
 		if (updateLayout)
 			layoutRows();
@@ -282,11 +282,11 @@ public class FolderPanel extends JComponent {
 		synchronized (guiComponentRows) {
 			checkCondensedState();
 			removeAll();
-	
+
 			rowPanel.removeAll();
 			ArrayList<GuiRow> guiComponentRowsForCurrentPage = new ArrayList<GuiRow>();
 			guiComponentRowsForCurrentPage
-					.addAll(getFilteredList(guiComponentRows));
+			.addAll(getFilteredList(guiComponentRows));
 			if (guiComponentRowsForCurrentPage.size() > maxRowCount
 					&& maxRowCount > 0) {
 				ArrayList<GuiRow> remove = new ArrayList<GuiRow>();
@@ -306,22 +306,22 @@ public class FolderPanel extends JComponent {
 			size[0] = new double[maxX];
 			size[1] = new double[maxY];
 			size[0][0] = columnStyle1; // first column //
-										// TableLayoutConstants.PREFERRED
+			// TableLayoutConstants.PREFERRED
 			size[0][1] = columnStyle2; // TableLayoutConstants.FILL;
-	
+
 			rowPanel.setBorder(BorderFactory.createEmptyBorder(
 					maxY > 0 ? emptyBorderWidth : 0, maxY > 0 ? emptyBorderWidth
 							: 0, maxY > 0 ? emptyBorderWidth : 0,
-					maxY > 0 ? emptyBorderWidth : 0));
+									maxY > 0 ? emptyBorderWidth : 0));
 			titleLabel
-					.setForeground(maxY > 0 ? headingColor
-							: (headingColor != null ? headingColor.darker()
-									: headingColor));
+			.setForeground(maxY > 0 ? headingColor
+					: (headingColor != null ? headingColor.darker()
+							: headingColor));
 			boolean hasData = guiComponentRowsForCurrentPage.size() > 0
-					|| guiComponentInvisibleRows.size() > 0;
+			|| guiComponentInvisibleRows.size() > 0;
 			titleLabel.setText(hasData ? title : title); // + " (no data)");
 			titleLabel.validate();
-	
+
 			boolean firstColumn = true;
 			int row = 0;
 			ArrayList<GuiRow> workSet;
@@ -329,18 +329,18 @@ public class FolderPanel extends JComponent {
 				workSet = getSortedRows(guiComponentRowsForCurrentPage);
 			else
 				workSet = guiComponentRowsForCurrentPage;
-	
+
 			for (int y = 0; y < maxY; y++) {
-				if (workSet.get(y)!=null && workSet.get(y).right!=null && 
+				if (workSet.get(y)!=null && workSet.get(y).right!=null &&
 						(workSet.get(y).right instanceof JScrollPane)) {
 					size[1][y] = TableLayoutConstants.FILL;
 					// workSet.get(y).right.setBorder(BorderFactory.createLineBorder(Color.red));
 				} else
 					size[1][y] = TableLayoutConstants.PREFERRED;
 			}
-			
+
 			rowPanel.setLayout(new TableLayout(size));
-	
+
 			for (GuiRow gr : workSet) {
 				if (rowSpacing > 0 || colSpacing > 0) {
 					if (gr.span) {
@@ -355,7 +355,7 @@ public class FolderPanel extends JComponent {
 					}
 				} else {
 					if (gr.span) {
-						rowPanel.add(gr.left, "0," + row + ", 1, " + row); 
+						rowPanel.add(gr.left, "0," + row + ", 1, " + row);
 					} else {
 						rowPanel.add(gr.left, "0," + row + ", l"); // left orientation
 						rowPanel.add(gr.right, "1," + row);
@@ -374,10 +374,10 @@ public class FolderPanel extends JComponent {
 				rowPanel.setOpaque(false);
 			}
 			rowPanel.validate();
-	
+
 			if (!ReleaseInfo.getIsAllowedFeature(FeatureSet.GravistoJavaHelp))
 				showHelpButton = false;
-	
+
 			if (showCondenseButton || showHelpButton || maxRowCount > 0
 					|| searchEnabled) {
 				JComponent button1 = null, button2 = null;
@@ -419,12 +419,12 @@ public class FolderPanel extends JComponent {
 						labelPanel = TableLayout.getSplit(titleComp, TableLayout
 								.getSplit(button2, button1, TableLayoutConstants.PREFERRED,
 										TableLayoutConstants.PREFERRED), TableLayoutConstants.FILL,
-								TableLayoutConstants.PREFERRED);
+										TableLayoutConstants.PREFERRED);
 					else
 						labelPanel = TableLayout.getSplit(button1, TableLayout
 								.getSplit(titleComp, button2, TableLayoutConstants.FILL,
 										TableLayout.PREFERRED),
-								TableLayout.PREFERRED, TableLayout.FILL);
+										TableLayout.PREFERRED, TableLayout.FILL);
 				}
 				setLayout(getVSplitLayout(labelPanel, rowPanel,
 						TableLayout.PREFERRED, TableLayout.FILL));
@@ -435,10 +435,10 @@ public class FolderPanel extends JComponent {
 				add(titleLabel, "1,1");
 			}
 			add(rowPanel, "1,2");
-	
+
 			validate();
 			repaint();
-	
+
 			if (!hideSearch && lastSearchText.length() > 0 && currentSearchInputField != null) {
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
@@ -550,7 +550,7 @@ public class FolderPanel extends JComponent {
 	public void setCondensedState(boolean condensed) {
 		this.condensedState = condensed;
 	}
-	
+
 	private void checkCondensedState() {
 		if (condensedState) {
 			guiComponentInvisibleRows.addAll(guiComponentRows);
@@ -714,7 +714,7 @@ public class FolderPanel extends JComponent {
 	public static ImageIcon getSearchIcon() {
 		ClassLoader cl = FolderPanel.class.getClassLoader();
 		String path = FolderPanel.class.getPackage().getName()
-				.replace('.', '/')+"/images";
+		.replace('.', '/')+"/images";
 		ImageIcon searchIcon = new ImageIcon(cl.getResource(path + "/lupe.png"));
 		return searchIcon;
 	}
@@ -728,8 +728,8 @@ public class FolderPanel extends JComponent {
 		tb.setBackground(frameColor);
 		tb.setLayout(new TableLayout(new double[][] {
 				{ TableLayout.PREFERRED, TableLayout.PREFERRED,
-						TableLayout.PREFERRED, TableLayout.PREFERRED,
-						TableLayout.PREFERRED }, { TableLayout.FILL } }));
+					TableLayout.PREFERRED, TableLayout.PREFERRED,
+					TableLayout.PREFERRED }, { TableLayout.FILL } }));
 
 		final JButton cmdButtonReduceMaximumRowCount = new JButton(); // less rows
 		final JButton cmdButtonIncreaseMaximumRowCount = new JButton(); // more rows
@@ -831,7 +831,7 @@ public class FolderPanel extends JComponent {
 				.getResource(path + "/bw_fold.png"));
 		ImageIcon moreIcon = new ImageIcon(cl.getResource(path
 				+ "/bw_unfold.png"));
-		
+
 		if (bigIcons==Iconsize.LARGE) {
 			leftIcon = new ImageIcon(cl
 					.getResource(path + "/large_left.png"));
@@ -848,7 +848,7 @@ public class FolderPanel extends JComponent {
 			rightIcon = new ImageIcon(cl.getResource(path
 					+ "/bw_right.png"));
 		}
-		
+
 		cmdButton1.setIcon(leftIcon);
 		cmdButton2.setIcon(rightIcon);
 		cmdButtonReduceMaximumRowCount.setIcon(lessIcon);
@@ -859,7 +859,7 @@ public class FolderPanel extends JComponent {
 		cmdButtonReduceMaximumRowCount.setMargin(new Insets(s, s, s, s));
 		cmdButtonIncreaseMaximumRowCount.setMargin(new Insets(s, s, s, s));
 		String pt = "<html><font color='gray'><small>" + (currentPage + 1)
-				+ "/" + (pages);
+		+ "/" + (pages);
 		if (((currentPage + 1) + "/" + (pages)).equals("1/0"))
 			pt = "";
 		JLabel pageLabel = new JLabel(pt);
@@ -875,7 +875,7 @@ public class FolderPanel extends JComponent {
 		tb.validate();
 		return tb;
 	}
-	
+
 	public static ImageIcon getLeftRightIcon(Iconsize bigIcons, boolean left) {
 		ClassLoader cl = FolderPanel.class.getClassLoader();
 		String path = FolderPanel.class.getPackage().getName().replace('.', '/')+"/images";
@@ -921,7 +921,7 @@ public class FolderPanel extends JComponent {
 		result.setOpaque(frameColor != null);
 		ClassLoader cl = FolderPanel.class.getClassLoader();
 		String path = FolderPanel.class.getPackage().getName()
-				.replace('.', '/')+"/images";
+		.replace('.', '/')+"/images";
 
 		result.setIcon(new ImageIcon(cl.getResource(path + "/help2.png")));
 		result.addActionListener(helpActionListener);
@@ -1029,7 +1029,7 @@ public class FolderPanel extends JComponent {
 		};
 		addCollapseListener(resizeListener);
 	}
-	
+
 	public void dialogSizeUpdate() {
 		final FolderPanel fp = this;
 		try {
@@ -1066,7 +1066,7 @@ public class FolderPanel extends JComponent {
 			jf.repaint();
 		}
 	}
-	
+
 	public static void closeParentDialog(Component startComponent) {
 		Component pc = startComponent;
 		while (!((pc instanceof JDialog) || (pc instanceof JFrame))
@@ -1109,13 +1109,13 @@ public class FolderPanel extends JComponent {
 	public void addDefaultTextSearchFilter() {
 		addDefaultTextSearchFilterFixed(null);
 	}
-	
+
 	public void addDefaultTextSearchFilterFixed(final String optFixedSearch) {
 		if (optFixedSearch!=null) {
 			lastSearchText = optFixedSearch;
 			hideSearch = true;
 		}
-		addSearchFilter(getDefaultSearchFilter(optFixedSearch));	
+		addSearchFilter(getDefaultSearchFilter(optFixedSearch));
 	}
 
 	public String getTitle() {
@@ -1142,22 +1142,22 @@ public class FolderPanel extends JComponent {
 				ArrayList<JComponent> grlRight = new ArrayList<JComponent>();
 				for (GuiRow gr : grl)
 					grlRight.add(gr.right);
-//				Collections.sort(grlRight, new Comparator<JComponent>() {
-//					@Override
-//					public int compare(JComponent o1, JComponent o2) {
-//						String a = o1.getToolTipText();
-//						String b = o2.getToolTipText();
-//						if (a==null) a = "";
-//						if (b==null) b = "";
-//						if (a.contains("Width") && b.contains("Height"))
-//							return -1;
-//						if (a.contains("Height") && b.contains("Width"))
-//							return 1;
-//						String numA = ErrorMsg.getNummericChars(a);
-//						String numB = ErrorMsg.getNummericChars(a);
-//						
-//						return a.compareTo(b);
-//					}});
+				//				Collections.sort(grlRight, new Comparator<JComponent>() {
+				//					@Override
+				//					public int compare(JComponent o1, JComponent o2) {
+				//						String a = o1.getToolTipText();
+				//						String b = o2.getToolTipText();
+				//						if (a==null) a = "";
+				//						if (b==null) b = "";
+				//						if (a.contains("Width") && b.contains("Height"))
+				//							return -1;
+				//						if (a.contains("Height") && b.contains("Width"))
+				//							return 1;
+				//						String numA = ErrorMsg.getNummericChars(a);
+				//						String numB = ErrorMsg.getNummericChars(a);
+				//
+				//						return a.compareTo(b);
+				//					}});
 				toBeAdded.add(new GuiRow(grl.iterator().next().left, TableLayout.getMultiSplit(grlRight)));
 			}
 		}
@@ -1166,19 +1166,19 @@ public class FolderPanel extends JComponent {
 		for (GuiRow gr : toBeAdded)
 			addGuiComponentRow(gr, false);
 	}
-	
+
 	public void setPanelContentEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		enableContent(this,enabled);
 	}
 
 	private void enableContent(JComponent comp, boolean enabled) {
-			for(int i=0;i<comp.getComponentCount();i++)
-				if(comp.getComponent(i) instanceof JComponent)
-					enableContent((JComponent) comp.getComponent(i),enabled);
-			comp.setEnabled(enabled);				
+		for(int i=0;i<comp.getComponentCount();i++)
+			if(comp.getComponent(i) instanceof JComponent)
+				enableContent((JComponent) comp.getComponent(i),enabled);
+		comp.setEnabled(enabled);
 	}
-	
+
 	public enum Iconsize {
 		SMALL, MIDDLE, LARGE
 	}
@@ -1207,28 +1207,28 @@ public class FolderPanel extends JComponent {
 					AbstractButton jb = (AbstractButton) left;
 					c1 = jb.getText().toUpperCase();
 				} else
-				if (left != null && left instanceof JLabel) {
-					JLabel jb = (JLabel) left;
-					c1 = jb.getText().toUpperCase();
-				} else
-				if (left != null && left instanceof JComponent) {
-					StringBuilder sb = new StringBuilder();
-					getSubText(left, sb);
-					c1 = sb.toString().toUpperCase();
-				}
+					if (left != null && left instanceof JLabel) {
+						JLabel jb = (JLabel) left;
+						c1 = jb.getText().toUpperCase();
+					} else
+						if (left != null && left instanceof JComponent) {
+							StringBuilder sb = new StringBuilder();
+							getSubText(left, sb);
+							c1 = sb.toString().toUpperCase();
+						}
 				if (right != null && right instanceof AbstractButton) {
 					AbstractButton jb = (AbstractButton) right;
 					c2 = jb.getText().toUpperCase();
 				} else
-				if (right != null && right instanceof JLabel) {
-					JLabel jb = (JLabel) right;
-					c2 = jb.getText().toUpperCase();
-				} else
-				if (right != null && right instanceof JComponent) {
-					StringBuilder sb = new StringBuilder();
-					getSubText(right, sb);
-					c2 = sb.toString().toUpperCase();
-				}
+					if (right != null && right instanceof JLabel) {
+						JLabel jb = (JLabel) right;
+						c2 = jb.getText().toUpperCase();
+					} else
+						if (right != null && right instanceof JComponent) {
+							StringBuilder sb = new StringBuilder();
+							getSubText(right, sb);
+							c2 = sb.toString().toUpperCase();
+						}
 				if (c1.length() <= 0 && c2.length() <= 0)
 					return true;
 				return c2.contains(searchText) || c1.contains(searchText);
@@ -1258,7 +1258,7 @@ public class FolderPanel extends JComponent {
 		};
 	}
 
-	
+
 	public static ImageIcon getLeftOrRightIcon(boolean left) {
 		ClassLoader cl = FolderPanel.class.getClassLoader();
 		String path = FolderPanel.class.getPackage().getName().replace('.', '/')+"/images";
@@ -1267,7 +1267,7 @@ public class FolderPanel extends JComponent {
 		else
 			return new ImageIcon(cl.getResource(path+ "/large_right.png"));
 	}
-	
+
 	public int getMaxRowCount()
 	{
 		return this.maxRowCount;
@@ -1283,18 +1283,18 @@ public class FolderPanel extends JComponent {
 		if(maxPage < page)
 			// page too big
 			page = maxPage;
-		
+
 		if(page < 0 || this.currentPage == page)
 			// invalid or redundant
 			return;
-		
+
 		// set it!
 		this.currentPage = page;
 		this.layoutRows();
-		
+
 		for (ActionListener al : collapse_listeners)
 			al.actionPerformed(new ActionEvent(this, condensedState ? 0 : 1, "collapseevent"));
-		
+
 		// all OK!
 	}
 }

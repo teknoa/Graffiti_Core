@@ -34,7 +34,7 @@ public class OpenFileDialogService implements HelperClass {
 		openDialog.setFileFilter(new FileFilter() {
 			@Override
 			public boolean accept(File f) {
-				return (f.isDirectory()) || 
+				return (f.isDirectory()) ||
 				((f.canRead() && extensionOK(f.getName(), valid_extensions)));
 			}
 
@@ -53,10 +53,10 @@ public class OpenFileDialogService implements HelperClass {
 		int option = openDialog.showOpenDialog(null);
 		if (option == JFileChooser.APPROVE_OPTION) {
 			return openDialog.getSelectedFile();
-		} else 
+		} else
 			return null;
 	}
-	
+
 	public static File getFile(final String[] valid_extensions, final String description, String selectButtonText ) {
 		if (openDialog==null) {
 			openDialog = new JFileChooser();
@@ -66,7 +66,7 @@ public class OpenFileDialogService implements HelperClass {
 		openDialog.setFileFilter(new FileFilter() {
 			@Override
 			public boolean accept(File f) {
-				return (f.isDirectory()) || 
+				return (f.isDirectory()) ||
 				((f.canRead() && extensionOK(f.getName(), valid_extensions)));
 			}
 
@@ -85,10 +85,10 @@ public class OpenFileDialogService implements HelperClass {
 		int option = openDialog.showDialog(null, selectButtonText);
 		if (option == JFileChooser.APPROVE_OPTION) {
 			return openDialog.getSelectedFile();
-		} else 
+		} else
 			return null;
 	}
-	
+
 	public static ArrayList<File> getFiles(final String[] valid_extensions, final String description) {
 		ArrayList<File> result = new ArrayList<File>();
 		if (openDialog==null) {
@@ -99,7 +99,7 @@ public class OpenFileDialogService implements HelperClass {
 		openDialog.setFileFilter(new FileFilter() {
 			@Override
 			public boolean accept(File f) {
-				return (f.isDirectory()) || 
+				return (f.isDirectory()) ||
 				((f.canRead() && extensionOK(f.getName(), valid_extensions)));
 			}
 
@@ -122,10 +122,10 @@ public class OpenFileDialogService implements HelperClass {
 				result.add(f);
 			}
 			return result;
-		} else 
+		} else
 			return null;
 	}
-	
+
 	public static File getSaveFile(final String[] valid_extensions, final String description) {
 		if (openDialog==null) {
 			openDialog = new JFileChooser();
@@ -134,7 +134,7 @@ public class OpenFileDialogService implements HelperClass {
 		openDialog.setFileFilter(new FileFilter() {
 			@Override
 			public boolean accept(File f) {
-				return (f.isDirectory()) || 
+				return (f.isDirectory()) ||
 				((f.canRead() && extensionOK(f.getName(), valid_extensions)));
 			}
 
@@ -150,11 +150,11 @@ public class OpenFileDialogService implements HelperClass {
 			public String getDescription() {
 				return description;
 			}});
-	
+
 		int option = openDialog.showSaveDialog(null);
 		if (option == JFileChooser.APPROVE_OPTION) {
 			return openDialog.getSelectedFile();
-		} else 
+		} else
 			return null;
 	}
 
@@ -183,20 +183,20 @@ public class OpenFileDialogService implements HelperClass {
 		openDialog.setMultiSelectionEnabled(false);
 		openDialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-//		openDialog.resetChoosableFileFilters();
-//		openDialog.setFileFilter(new FileFilter() {
-//			public boolean accept(File f) {
-//				return f.isDirectory();
-//			}
-//
-//			public String getDescription() {
-//				return "Directory";
-//			}
-//		});
+		//		openDialog.resetChoosableFileFilters();
+		//		openDialog.setFileFilter(new FileFilter() {
+		//			public boolean accept(File f) {
+		//				return f.isDirectory();
+		//			}
+		//
+		//			public String getDescription() {
+		//				return "Directory";
+		//			}
+		//		});
 		int option = openDialog.showDialog(null, okButtonText);
 		if (option == JFileChooser.APPROVE_OPTION) {
 			return openDialog.getSelectedFile();
-		} else 
+		} else
 			return null;
 	}
 }

@@ -23,34 +23,34 @@ import javax.swing.JInternalFrame;
  *
  */
 public class Java_1_5_compatibility_impl {
-    public static void setComponentZorder(JDesktopPane jDesktopPane, JInternalFrame jInternalFrame) {
-        jDesktopPane.setComponentZOrder(jInternalFrame, 0);
-        // throw new NoSuchMethodError("ERR");
-    }
+	public static void setComponentZorder(JDesktopPane jDesktopPane, JInternalFrame jInternalFrame) {
+		jDesktopPane.setComponentZOrder(jInternalFrame, 0);
+		// throw new NoSuchMethodError("ERR");
+	}
 
-    /**
-     * @return
-     */
-    public static StackTraceElement[] getStackFrame() {
-        return Thread.currentThread().getStackTrace();
-    }
+	/**
+	 * @return
+	 */
+	public static StackTraceElement[] getStackFrame() {
+		return Thread.currentThread().getStackTrace();
+	}
 
-    /**
-     * @param url
-     * @return
-     */
-    public static URI getURIfromURL(URL url) {
-        try {
-            return url.toURI();
-        } catch (URISyntaxException e) {
-            ErrorMsg.addErrorMessage(e);
-            throw new NoSuchMethodError("ERR");
-        }
-    }
+	/**
+	 * @param url
+	 * @return
+	 */
+	public static URI getURIfromURL(URL url) {
+		try {
+			return url.toURI();
+		} catch (URISyntaxException e) {
+			ErrorMsg.addErrorMessage(e);
+			throw new NoSuchMethodError("ERR");
+		}
+	}
 
-    public static String myStringReplace(String workString, String search, String replace) {
-        return workString.replace(search, replace);
-        // return null;
-        // throw new NoSuchMethodError("ERR");
-    }
+	public static String myStringReplace(String workString, String search, String replace) {
+		return workString.replace(search, replace);
+		// return null;
+		// throw new NoSuchMethodError("ERR");
+	}
 }

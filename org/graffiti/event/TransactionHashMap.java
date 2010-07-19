@@ -12,12 +12,12 @@ public class TransactionHashMap extends HashMap<Object, Object> {
 
 	@Override
 	public Object put(Object key, Object value) {
-		
+
 		if (key==null || value==null)
 			return null;
 		Object oldValue = get(key);
 
-		
+
 		if (oldValue!=null && value!=null)
 			if (oldValue instanceof Node || oldValue instanceof Edge || oldValue instanceof Graph)
 				if (value instanceof Node || value instanceof Edge || value instanceof Graph)
@@ -29,7 +29,7 @@ public class TransactionHashMap extends HashMap<Object, Object> {
 		if (value instanceof Edge && key instanceof Node) {
 			key = value;
 		}
-		
+
 		if (oldValue==null || value instanceof Node || value instanceof Edge || value instanceof Graph) {
 			return super.put(key, value);
 		} else {
@@ -45,14 +45,14 @@ public class TransactionHashMap extends HashMap<Object, Object> {
 					if (pcr==PathComparisonResult.PATH_COMPLETELY_DIFFERENT)
 						return super.put(key, key);
 					else
-					if (pcr==PathComparisonResult.EQUAL_PATH)
-						return super.put(key, currentChange);
-					else {
-						// generate new event with most common attribute path
-//						String path = pcr.getCommonPath();
-//						AttributeEvent ae = new AttributeEvent(path, ((Attributable) key).getAttribute(path));
-					}
-						
+						if (pcr==PathComparisonResult.EQUAL_PATH)
+							return super.put(key, currentChange);
+						else {
+							// generate new event with most common attribute path
+							//						String path = pcr.getCommonPath();
+							//						AttributeEvent ae = new AttributeEvent(path, ((Attributable) key).getAttribute(path));
+						}
+
 				} else {
 					//Here we should handle attribute deletion events (value instanceof attribute)
 					System.err.println("unexpected event type: "+oldValue.getClass().getCanonicalName());

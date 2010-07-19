@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Serializer.java,v 1.1 2007/05/31 12:56:00 klukas Exp $
+// $Id: Serializer.java,v 1.2 2010/07/19 13:01:49 morla Exp $
 
 package org.graffiti.plugin.io;
 
@@ -14,21 +14,21 @@ package org.graffiti.plugin.io;
  */
 public interface Serializer
 {
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * The file extensions the serializer can read or write.
-     *
-     * @return DOCUMENT ME!
-     */
-    public String[] getExtensions();
-    
-    /**
-     * The file type descriptions of the files the serializer can read or write.
-     *
-     * @return DOCUMENT ME!
-     */
-    public String[] getFileTypeDescriptions();
+	/**
+	 * The file extensions the serializer can read or write.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	public String[] getExtensions();
+
+	/**
+	 * The file type descriptions of the files the serializer can read or write.
+	 *
+	 * @return DOCUMENT ME!
+	 */
+	public String[] getFileTypeDescriptions();
 }
 
 //------------------------------------------------------------------------------

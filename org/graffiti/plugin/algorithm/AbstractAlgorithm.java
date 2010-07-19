@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAlgorithm.java,v 1.6 2010/07/17 22:00:19 klukas Exp $
+// $Id: AbstractAlgorithm.java,v 1.7 2010/07/19 13:00:48 morla Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -34,7 +34,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
 
 	/** The parameters this algorithm can use. */
 	protected Parameter[] parameters;
-	
+
 	protected ActionEvent actionEvent = null;
 
 	//~ Methods ================================================================
@@ -56,7 +56,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
 	public String getDescription() {
 		return null;
 	}
-	
+
 	/**
 	 * Default: no icon next to the menu item, which is created for this algorithm.
 	 */
@@ -77,7 +77,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
 		else
 			return selection.getElements();
 	}
-	
+
 	/**
 	 * @see org.graffiti.plugin.algorithm.Algorithm#getParameters()
 	 */
@@ -128,12 +128,12 @@ public abstract class AbstractAlgorithm implements Algorithm {
 	public void setActionEvent(ActionEvent a) {
 		actionEvent = a;
 	}
-	
+
 	public boolean mayWorkOnMultipleGraphs() {
 		return false;
 	}
-	
-	
+
+
 }
 
 //------------------------------------------------------------------------------

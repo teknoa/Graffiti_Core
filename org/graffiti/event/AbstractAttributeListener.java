@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttributeListener.java,v 1.1 2007/05/31 12:56:04 klukas Exp $
+// $Id: AbstractAttributeListener.java,v 1.2 2010/07/19 13:01:43 morla Exp $
 
 package org.graffiti.event;
 
@@ -32,87 +32,87 @@ package org.graffiti.event;
  * it.
  * </p>
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *
  * @see ListenerManager
  * @see AttributeEvent
  */
 public abstract class AbstractAttributeListener
-    implements AttributeListener
+implements AttributeListener
 {
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Called after an attribute has been added.
-     *
-     * @param e the AttributeEvent detailing the changes.
-     */
-    public void postAttributeAdded(AttributeEvent e)
-    {
-    }
+	/**
+	 * Called after an attribute has been added.
+	 *
+	 * @param e the AttributeEvent detailing the changes.
+	 */
+	public void postAttributeAdded(AttributeEvent e)
+	{
+	}
 
-    /**
-     * Called after an attribute has been changed.
-     *
-     * @param e the AttributeEvent detailing the changes.
-     */
-    public void postAttributeChanged(AttributeEvent e)
-    {
-    }
+	/**
+	 * Called after an attribute has been changed.
+	 *
+	 * @param e the AttributeEvent detailing the changes.
+	 */
+	public void postAttributeChanged(AttributeEvent e)
+	{
+	}
 
-    /**
-     * Called after an attribute has been removed.
-     *
-     * @param e the AttributeEvent detailing the changes.
-     */
-    public void postAttributeRemoved(AttributeEvent e)
-    {
-    }
+	/**
+	 * Called after an attribute has been removed.
+	 *
+	 * @param e the AttributeEvent detailing the changes.
+	 */
+	public void postAttributeRemoved(AttributeEvent e)
+	{
+	}
 
-    /**
-     * Called just before an attribute is added.
-     *
-     * @param e the AttributeEvent detailing the changes.
-     */
-    public void preAttributeAdded(AttributeEvent e)
-    {
-    }
+	/**
+	 * Called just before an attribute is added.
+	 *
+	 * @param e the AttributeEvent detailing the changes.
+	 */
+	public void preAttributeAdded(AttributeEvent e)
+	{
+	}
 
-    /**
-     * Called before a change of an attribute takes place.
-     *
-     * @param e the AttributeEvent detailing the changes.
-     */
-    public void preAttributeChanged(AttributeEvent e)
-    {
-    }
+	/**
+	 * Called before a change of an attribute takes place.
+	 *
+	 * @param e the AttributeEvent detailing the changes.
+	 */
+	public void preAttributeChanged(AttributeEvent e)
+	{
+	}
 
-    /**
-     * Called just before an attribute is removed.
-     *
-     * @param e the AttributeEvent detailing the changes.
-     */
-    public void preAttributeRemoved(AttributeEvent e)
-    {
-    }
+	/**
+	 * Called just before an attribute is removed.
+	 *
+	 * @param e the AttributeEvent detailing the changes.
+	 */
+	public void preAttributeRemoved(AttributeEvent e)
+	{
+	}
 
-    /**
-     * Called after a transaction has been finished.
-     *
-     * @param e gives details about the transaction.
-     */
-    public void transactionFinished(TransactionEvent e)
-    {
-    }
+	/**
+	 * Called after a transaction has been finished.
+	 *
+	 * @param e gives details about the transaction.
+	 */
+	public void transactionFinished(TransactionEvent e)
+	{
+	}
 
-    /**
-     * Called after a transaction has been started.
-     *
-     * @param e gives details about the transaction.
-     */
-    public void transactionStarted(TransactionEvent e)
-    {
-    }
+	/**
+	 * Called after a transaction has been started.
+	 *
+	 * @param e gives details about the transaction.
+	 */
+	public void transactionStarted(TransactionEvent e)
+	{
+	}
 }
 
 //------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: EdgeParameter.java,v 1.2 2009/06/23 07:05:19 klukas Exp $
+// $Id: EdgeParameter.java,v 1.3 2010/07/19 13:01:54 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -14,28 +14,28 @@ import org.graffiti.graph.Edge;
 /**
  * This class contains a single <code>Edge</code>.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class EdgeParameter
-    extends AbstractSingleParameter
+extends AbstractSingleParameter
 {
-    //~ Instance fields ========================================================
+	//~ Instance fields ========================================================
 
-    /** The value of this parameter. */
-    private Edge value = null;
+	/** The value of this parameter. */
+	private Edge value = null;
 
-    //~ Constructors ===========================================================
+	//~ Constructors ===========================================================
 
-    /**
-     * Constructs a new edge parameter.
-     *
-     * @param name the name of this parameter.
-     * @param description the description of this parameter.
-     */
-    public EdgeParameter(String name, String description)
-    {
-        super(name, description);
-    }
+	/**
+	 * Constructs a new edge parameter.
+	 *
+	 * @param name the name of this parameter.
+	 * @param description the description of this parameter.
+	 */
+	public EdgeParameter(String name, String description)
+	{
+		super(name, description);
+	}
 
 	/**
 	 * Constructs a new edge parameter.
@@ -50,41 +50,41 @@ public class EdgeParameter
 		value = edge;
 	}
 
-    //~ Methods ================================================================
+	//~ Methods ================================================================
 
-    /**
-     * Returns the <code>Edge</code> contained in this
-     * <code>EdgeParameter</code>.
-     *
-     * @return the <code>Edge</code> contained in this
-     *         <code>EdgeParameter</code>.
-     */
-    public Edge getEdge()
-    {
-        return value;
-    }
+	/**
+	 * Returns the <code>Edge</code> contained in this
+	 * <code>EdgeParameter</code>.
+	 *
+	 * @return the <code>Edge</code> contained in this
+	 *         <code>EdgeParameter</code>.
+	 */
+	public Edge getEdge()
+	{
+		return value;
+	}
 
-    /**
-     * Sets the value of the <code>AttributeParameter</code>.
-     *
-     * @param value the new value of the <code>AttributeParameter</code>.
-     */
-    @Override
+	/**
+	 * Sets the value of the <code>AttributeParameter</code>.
+	 *
+	 * @param value the new value of the <code>AttributeParameter</code>.
+	 */
+	@Override
 	public void setValue(Object value)
-    {
-        // TODO
-    }
+	{
+		// TODO
+	}
 
-    /**
-     * Returns the value of this parameter.
-     *
-     * @return the value of this parameter.
-     */
-    @Override
+	/**
+	 * Returns the value of this parameter.
+	 *
+	 * @return the value of this parameter.
+	 */
+	@Override
 	public Object getValue()
-    {
-        return value;
-    }
+	{
+		return value;
+	}
 }
 
 //------------------------------------------------------------------------------

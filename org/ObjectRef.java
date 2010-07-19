@@ -11,17 +11,17 @@ package org;
 public class ObjectRef implements HelperClass {
 
 	private Object data;
-	private String toStringVal = null; 
-	
+	private String toStringVal = null;
+
 	public ObjectRef() {
 		// empty
 	}
-	
+
 	public ObjectRef(String toStringDef, Object initData) {
 		this.toStringVal = toStringDef;
 		this.data = initData;
 	}
-	
+
 	@Override
 	public String toString() {
 		if (toStringVal==null)
@@ -42,7 +42,7 @@ public class ObjectRef implements HelperClass {
 		if ((Integer)data<v)
 			data = v;
 	}
-	
+
 	public synchronized void setIfLess(int v) {
 		if ((Integer)data>v)
 			data = v;

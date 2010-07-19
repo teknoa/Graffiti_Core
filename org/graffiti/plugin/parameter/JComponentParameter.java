@@ -6,13 +6,13 @@ import javax.swing.JComponent;
 /**
  * @author klukas
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class JComponentParameter
-    extends AbstractSingleParameter
+extends AbstractSingleParameter
 {
 	private JComponent gui;
-	
+
 	public JComponentParameter(JComponent val, String name, String description) {
 		super(null, name, description);
 		this.gui = val;
@@ -22,8 +22,8 @@ public class JComponentParameter
 	public Object getValue() {
 		return gui;
 	}
-	
-	
+
+
 }
 
 //------------------------------------------------------------------------------

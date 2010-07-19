@@ -16,7 +16,7 @@ import java.awt.Color;
  *
  */
 public class ColorXYZ {
-	
+
 	double x,y,z;
 
 	/**
