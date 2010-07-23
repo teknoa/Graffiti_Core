@@ -358,4 +358,11 @@ public class StringManipulationTools implements HelperClass {
 		return uni;
 	}
 
+	public static String getFileSystemName(String name) {
+		String namenew = stringReplace(name, "*", "");
+		namenew = stringReplace(namenew, " ", "_");
+		namenew = stringReplace(namenew, "/", "_");
+		namenew = stringReplace(namenew, "\\", "_");
+		return namenew;
+	}
 }
