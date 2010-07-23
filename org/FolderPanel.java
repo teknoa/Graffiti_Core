@@ -203,12 +203,14 @@ public class FolderPanel extends JComponent {
 			layoutRows();
 	}
 
-	public void addGuiComponentRow(JComponent leftComponent,
+	public GuiRow addGuiComponentRow(JComponent leftComponent,
 			JComponent rightComponent, boolean updateLayout) {
 		synchronized (guiComponentRows) {
-			guiComponentRows.add(new GuiRow(leftComponent, rightComponent));
+			GuiRow gr = new GuiRow(leftComponent, rightComponent);
+			guiComponentRows.add(gr);
 			if (updateLayout)
 				layoutRows();
+			return gr;
 		}
 	}
 
@@ -985,16 +987,18 @@ public class FolderPanel extends JComponent {
 		collapse_listeners.add(listener);
 	}
 
-	public void addGuiComponentRow(JComponent left, JComponent right,
+	public GuiRow addGuiComponentRow(JComponent left, JComponent right,
 			boolean updateLayout, int spaceAroundElements) {
 		int sp = spaceAroundElements;
+		GuiRow gr = null;
 		if (spaceAroundElements == 0)
-			addGuiComponentRow(left, right, updateLayout);
+			gr = addGuiComponentRow(left, right, updateLayout);
 		else
-			addGuiComponentRow(getBorderedComponent(left, sp, sp, sp, sp),
+			gr = addGuiComponentRow(getBorderedComponent(left, sp, sp, sp, sp),
 					getBorderedComponent(right, sp, sp, sp, sp), updateLayout);
 		if (right != null && right instanceof JButton)
 			((JButton) right).setOpaque(false);
+		return gr;
 	}
 
 	public void addComp(JComponent component, int border) {
@@ -1165,18 +1169,6 @@ public class FolderPanel extends JComponent {
 		guiComponentInvisibleRows.removeAll(toBeDeleted);
 		for (GuiRow gr : toBeAdded)
 			addGuiComponentRow(gr, false);
-	}
-
-	public void setPanelContentEnabled(boolean enabled) {
-		super.setEnabled(enabled);
-		enableContent(this,enabled);
-	}
-
-	private void enableContent(JComponent comp, boolean enabled) {
-		for(int i=0;i<comp.getComponentCount();i++)
-			if(comp.getComponent(i) instanceof JComponent)
-				enableContent((JComponent) comp.getComponent(i),enabled);
-		comp.setEnabled(enabled);
 	}
 
 	public enum Iconsize {

@@ -247,4 +247,11 @@ public class ColorUtil {
 	private static double rad2deg(double rad) {
 		return rad/Math.PI*180;
 	}
+
+	public static boolean similarColours(Color c1, Color c2, int allowedDistance) {
+		double a = c2.getRed() - c1.getRed();
+		double b = c2.getGreen() - c1.getGreen();
+		double c = c2.getBlue() - c2.getBlue();
+		return Math.sqrt (a*a + b*b + c*c)<allowedDistance;
+	}
 }
