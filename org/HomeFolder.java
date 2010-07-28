@@ -49,6 +49,9 @@ public class HomeFolder implements HelperClass {
 
 	private static BufferedInputStream in;
 	private static BufferedOutputStream out;
+	public static String WIN_MAC_HOMEFOLDER = "VANTED";
+	public static String LINUX_HOMEFOLDER = ".vanted";
+	public static String WIN_MAC_HOMEFOLDER_OLD = ".vanted";
 
 	public static void copyFile(File oldfile,File newfile) throws IOException {
 		if(oldfile.compareTo(newfile)!=0) {

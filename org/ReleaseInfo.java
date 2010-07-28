@@ -254,12 +254,12 @@ public class ReleaseInfo implements HelperClass {
 			if (getRunningReleaseStatus() == Release.KGML_EDITOR)
 				return home + getFileSeparator() + "KGML_EDITOR";
 			else
-				return home + getFileSeparator() + "VANTED";
+				return home + getFileSeparator() + HomeFolder.WIN_MAC_HOMEFOLDER;
 		} else {
 			if (getRunningReleaseStatus() == Release.KGML_EDITOR)
 				return home + getFileSeparator() + ".kgml_editor";
 			else
-				return home + getFileSeparator() + ".vanted";
+				return home + getFileSeparator() + HomeFolder.LINUX_HOMEFOLDER;
 		}
 	}
 
@@ -268,7 +268,7 @@ public class ReleaseInfo implements HelperClass {
 		if (getRunningReleaseStatus() == Release.KGML_EDITOR)
 			return home + getFileSeparator() + ".kgml_editor";
 		else
-			return home + getFileSeparator() + ".vanted";
+			return home + getFileSeparator() + HomeFolder.WIN_MAC_HOMEFOLDER_OLD;
 	}
 
 	public static String getFileSeparator() {
