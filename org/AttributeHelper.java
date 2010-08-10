@@ -26,6 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -72,7 +73,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.100 $
+ * @version $Revision: 1.101 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -3415,5 +3416,15 @@ public class AttributeHelper implements HelperClass {
 	public static void setColorFromAttribute(Attributable attr, String path, String name, Color value) {
 		setAttribute(attr, path, name, ColorUtil.getHexFromColor(value));
 
+	}
+
+	@SuppressWarnings("deprecation")
+	public static Date getDateFromString(String value) {
+		try {
+			return new Date(value);
+		} catch(Exception e) {
+			System.err.println("Not a valid date: "+value);
+			return new Date();
+		}
 	}
 }
