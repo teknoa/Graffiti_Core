@@ -31,10 +31,13 @@ public class ReleaseInfo implements HelperClass {
 	}
 
 	private static HashSet<FeatureSet> enabledFeatures = new HashSet<FeatureSet>();
+	private static HashSet<FeatureSet> disabledFeatures = new HashSet<FeatureSet>();
 
 	public static void enableFeature(FeatureSet fs) {
-		//		System.out.println("Enable feature " + fs.toString());
 		enabledFeatures.add(fs);
+	}
+	public static void disableFeature(FeatureSet fs) {
+		disabledFeatures.add(fs);
 	}
 
 	public static boolean getIsAllowedFeature(FeatureSet fs) {
@@ -51,6 +54,8 @@ public class ReleaseInfo implements HelperClass {
 			return true;
 		}
 
+		if (disabledFeatures != null && disabledFeatures.contains(fs))
+			return false;
 		if (enabledFeatures != null && enabledFeatures.contains(fs))
 			return true;
 
