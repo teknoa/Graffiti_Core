@@ -18,12 +18,15 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -73,7 +76,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.101 $
+ * @version $Revision: 1.102 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -3422,9 +3425,40 @@ public class AttributeHelper implements HelperClass {
 	public static Date getDateFromString(String value) {
 		try {
 			return new Date(value);
-		} catch(Exception e) {
-			System.err.println("Not a valid date: "+value);
+		} catch (Exception e) {
+			System.err.println("Not a valid date: " + value);
 			return new Date();
 		}
+	}
+
+	public static String getMD5fromFile(String filename) throws Exception {
+		File f = new File(filename);
+		return getMD5fromFile(f);
+	}
+
+	public static String getMD5fromFile(File f) throws Exception {
+		String res = null;
+		MessageDigest digest = MessageDigest.getInstance("MD5");
+		InputStream is = new FileInputStream(f);
+		byte[] buffer = new byte[1024 * 1024];
+		int read = 0;
+		try {
+			while ((read = is.read(buffer)) > 0) {
+				digest.update(buffer, 0, read);
+			}
+			byte[] md5sum = digest.digest();
+			BigInteger bigInt = new BigInteger(1, md5sum);
+			String output = bigInt.toString(16);
+			res = output;
+		} catch (IOException e) {
+			ErrorMsg.addErrorMessage(e);
+		} finally {
+			try {
+				is.close();
+			} catch (IOException e) {
+				ErrorMsg.addErrorMessage(e);
+			}
+		}
+		return res;
 	}
 }
