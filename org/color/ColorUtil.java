@@ -241,9 +241,9 @@ public class ColorUtil {
 	}
 
 	private static double CieLab2Hue(double var_a, double var_b) // Function
-																						// returns
-																						// CIE-H°
-																						// value
+	// returns
+	// CIE-H°
+	// value
 	{
 		double var_bias = 0;
 		if (var_a >= 0 && var_b == 0)
@@ -271,6 +271,13 @@ public class ColorUtil {
 		double a = c2.getRed() - c1.getRed();
 		double b = c2.getGreen() - c1.getGreen();
 		double c = c2.getBlue() - c2.getBlue();
+		return Math.sqrt(a * a + b * b + c * c) < allowedDistance;
+	}
+
+	public static boolean similarColours(int r1, int g1, int b1, Color c2, int allowedDistance) {
+		double a = c2.getRed() - r1;
+		double b = c2.getGreen() - g1;
+		double c = c2.getBlue() - b1;
 		return Math.sqrt(a * a + b * b + c * c) < allowedDistance;
 	}
 }
