@@ -48,15 +48,16 @@ public class TransactionHashMap extends HashMap<Object, Object> {
 						if (pcr==PathComparisonResult.EQUAL_PATH)
 							return super.put(key, currentChange);
 						else {
-							// generate new event with most common attribute path
-							//						String path = pcr.getCommonPath();
-							//						AttributeEvent ae = new AttributeEvent(path, ((Attributable) key).getAttribute(path));
+							//TODO generate new event with most common attribute path
+							//							String path = pcr.getCommonPath();
+							//							AttributeEvent ae = new AttributeEvent(path, ((Attributable) key).getAttribute(path));
+							//							super.put(key, ae);
 						}
 
 				} else {
-					//Here we should handle attribute deletion events (value instanceof attribute)
-					System.err.println("unexpected event type: "+oldValue.getClass().getCanonicalName());
-					return super.put(key, value);
+					//TODO here we should handle attribute deletion events (value instanceof attribute)
+					if(value instanceof Attribute)
+						return super.put(key, value);
 				}
 			}
 		}

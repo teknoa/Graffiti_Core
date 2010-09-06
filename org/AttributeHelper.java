@@ -77,7 +77,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.103 $
+ * @version $Revision: 1.104 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -3426,7 +3426,7 @@ public class AttributeHelper implements HelperClass {
 		try {
 			return new SimpleDateFormat().parse(value);
 		} catch (Exception e) {
-			System.err.println("Not a valid date: " + value);
+			//System.err.println("Not a valid date: " + value);
 			return new Date();
 		}
 	}
