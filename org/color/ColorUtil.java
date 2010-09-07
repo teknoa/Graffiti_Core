@@ -1,6 +1,7 @@
 /*******************************************************************************
  * 
  *    Copyright (c) 2003-2009 Plant Bioinformatics Group, IPK Gatersleben
+ *    Copyright (c) 2010 Image Analysis Group, IPK Gatersleben
  * 
  *******************************************************************************/
 /*
@@ -12,6 +13,7 @@ package org.color;
 import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -49,6 +51,55 @@ public class ColorUtil {
 		assertEquals(240, c1.getRed(), 0.001);
 		assertEquals(120, c1.getGreen(), 0.001);
 		assertEquals(0, c1.getBlue(), 0.001);
+	}
+
+	/**
+	 * @param palette
+	 * @param c
+	 * @return
+	 */
+	public static int findBestColorIndex(ArrayList<Color> palette, Color c) {
+		int nearestColor = 0;
+		int minDiff = Integer.MAX_VALUE;
+		int idx = 0;
+		for (Color check : palette) {
+			int diff = Math.abs(c.getRed() - check.getRed()) + Math.abs(c.getGreen() - check.getGreen())
+					+ Math.abs(c.getBlue() - check.getBlue());
+			if (diff < minDiff) {
+				minDiff = diff;
+				nearestColor = idx;
+			}
+			idx++;
+		}
+		return nearestColor;
+	}
+
+	public static Color getAvgColor(ArrayList<Color> colorsOfGroup) {
+		// double r = 0;
+		// double g = 0;
+		// double b = 0;
+		// float n = colorsOfGroup.size();
+		float h = 0, s = 0, b = 0;
+		float maxS = -1;
+		for (Color c : colorsOfGroup) {
+			float hsb[] = new float[3];
+			Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), hsb);
+			if (s > maxS) {
+				maxS = s;
+				h = hsb[0];
+				s = hsb[1];
+				b = hsb[2];
+			}
+			// h+=hsb[0]/n;
+			// s+=hsb[1]/n;
+			// v+=hsb[2]/n;
+			// r+=c.getRed()/n;
+			// g+=c.getGreen()/n;
+			// b+=c.getBlue()/n;
+		}
+		// Color c = new Color((int)r,(int)g,(int)b);
+		return Color.getHSBColor(h, s, b);
+		// return c;
 	}
 
 	public static Color getColorFromHex(String colorString) {
