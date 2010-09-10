@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class HomeFolder implements HelperClass {
 
@@ -47,26 +49,30 @@ public class HomeFolder implements HelperClass {
 
 	}
 
-	private static BufferedInputStream in;
-	private static BufferedOutputStream out;
+	private static InputStream in;
+	private static OutputStream out;
 	public static String WIN_MAC_HOMEFOLDER = "VANTED";
 	public static String LINUX_HOMEFOLDER = ".vanted";
 	public static String WIN_MAC_HOMEFOLDER_OLD = ".vanted";
 
-	public static void copyFile(File oldfile,File newfile) throws IOException {
+	public static void copyFile(File oldfile, File newfile) throws IOException {
 		if(oldfile.compareTo(newfile)!=0) {
-
 			in = new BufferedInputStream(new FileInputStream(oldfile));
-			out = new BufferedOutputStream(new FileOutputStream(newfile, false));
-
-			byte[] buffer = new byte[ 0xFFFF ];
-			for ( int len; (len = in.read(buffer)) != -1; )
-				out.write( buffer, 0, len );
-
-			in.close();
-			out.close();
-
+			copyFile(in, newfile);
 		}
+	}
+
+	public static void copyFile(InputStream intemp, File newfile) throws IOException {
+		out = new BufferedOutputStream(new FileOutputStream(newfile, false));
+		in = intemp;
+
+		byte[] buffer = new byte[ 0xFFFF ];
+		for ( int len; (len = in.read(buffer)) != -1; )
+			out.write( buffer, 0, len );
+
+		in.close();
+		out.close();
+
 	}
 
 	//	private static boolean deleteTemporaryFolder() {

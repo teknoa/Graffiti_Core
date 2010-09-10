@@ -77,7 +77,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.105 $
+ * @version $Revision: 1.106 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -3115,6 +3115,7 @@ public class AttributeHelper implements HelperClass {
 	/**
 	 * @deprecated Use {@link StringManipulationTools#getStringList(ArrayList,String)} instead
 	 */
+	@Deprecated
 	@SuppressWarnings("unchecked")
 	public static String getStringList(ArrayList elements, String div) {
 		return StringManipulationTools.getStringList(elements, div);

@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DefaultIOManager.java,v 1.15 2010/07/19 13:01:31 morla Exp $
+// $Id: DefaultIOManager.java,v 1.16 2010/09/10 12:56:35 morla Exp $
 
 package org.graffiti.managers;
 
@@ -34,7 +34,7 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  *
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -62,7 +62,7 @@ public class DefaultIOManager implements IOManager {
 					fileExt = fileName.substring(fileName.lastIndexOf("."));
 				}
 				for (Iterator<InputSerializer> itr = inputSerializer.iterator(); itr.hasNext();) {
-					InputSerializer is = (InputSerializer) itr.next();
+					InputSerializer is = itr.next();
 					String[] ext = is.getExtensions();
 					for (int i = 0; i < ext.length; i++)
 						if (ext[i].equalsIgnoreCase(fileExt)) return true;
@@ -150,7 +150,7 @@ public class DefaultIOManager implements IOManager {
 	/*
 	 * @see org.graffiti.managers.IOManager#createInputSerializer(java.lang.String)
 	 */
-	public InputSerializer createInputSerializer(MyInputStreamCreator in, String extSearch) throws FileNotFoundException {
+	public InputSerializer createInputSerializer(InputStream in, String extSearch) throws FileNotFoundException {
 		ArrayList<InputSerializer> ins = new ArrayList<InputSerializer>();
 		for (InputSerializer is : inputSerializer) {
 			String[] ext = is.getExtensions();
@@ -165,13 +165,11 @@ public class DefaultIOManager implements IOManager {
 			return ins.iterator().next();
 		for (InputSerializer is : ins) {
 			try {
-				InputStream inps = in.getNewInputStream();
+				InputStream inps = in;
 				if (is.validFor(inps)) {
 					//					System.out.println(ins.size()+" input serializers for file extension "+extSearch+". Selected "+is.getClass().getCanonicalName());
 					return is;
 				}
-			} catch(FileNotFoundException fne) {
-				throw fne;
 			} catch (Exception e) {
 				ErrorMsg.addErrorMessage(e);
 			}
@@ -183,7 +181,7 @@ public class DefaultIOManager implements IOManager {
 	public Set<String> getGraphFileExtensions() {
 		Set<String> knownExt = new TreeSet<String>();
 		for (Iterator<InputSerializer> itr = inputSerializer.iterator(); itr.hasNext();) {
-			InputSerializer is = (InputSerializer) itr.next();
+			InputSerializer is = itr.next();
 			String[] ext = is.getExtensions();
 			for (int i = 0; i < ext.length; i++) {
 				knownExt.add(ext[i]);
@@ -199,7 +197,7 @@ public class DefaultIOManager implements IOManager {
 		fc.resetChoosableFileFilters();
 		Set<String> knownExt = new TreeSet<String>();
 		for (Iterator<InputSerializer> itr = inputSerializer.iterator(); itr.hasNext();) {
-			InputSerializer is = (InputSerializer) itr.next();
+			InputSerializer is = itr.next();
 			String[] ext = is.getExtensions();
 			String[] desc = is.getFileTypeDescriptions();
 			if (ext.length != desc.length) {
@@ -228,7 +226,7 @@ public class DefaultIOManager implements IOManager {
 	 */
 	public OutputSerializer createOutputSerializer(String extSearch) {
 		for (Iterator<OutputSerializer> itr = outputSerializer.iterator(); itr.hasNext();) {
-			OutputSerializer os = (OutputSerializer) itr.next();
+			OutputSerializer os = itr.next();
 			String[] ext = os.getExtensions();
 			for (int i = 0; i < ext.length; i++)
 				if (ext[i].equalsIgnoreCase(extSearch)) return os;
@@ -248,7 +246,7 @@ public class DefaultIOManager implements IOManager {
 		fc.setAcceptAllFileFilterUsed(false);
 		Set<String> knownExt = new TreeSet<String>();
 		for (Iterator<OutputSerializer> itr = outputSerializer.iterator(); itr.hasNext();) {
-			OutputSerializer os = (OutputSerializer) itr.next();
+			OutputSerializer os = itr.next();
 			String[] ext = os.getExtensions();
 			String[] desc = os.getFileTypeDescriptions();
 			if (ext.length != desc.length) {
@@ -336,7 +334,7 @@ public class DefaultIOManager implements IOManager {
 	 */
 	private void fireInputSerializerAdded(InputSerializer is) {
 		for (Iterator<IOManagerListener> i = listeners.iterator(); i.hasNext();) {
-			IOManager.IOManagerListener l = (IOManager.IOManagerListener) i.next();
+			IOManager.IOManagerListener l = i.next();
 
 			l.inputSerializerAdded(is);
 		}
@@ -350,7 +348,7 @@ public class DefaultIOManager implements IOManager {
 	 */
 	private void fireOutputSerializerAdded(OutputSerializer os) {
 		for (Iterator<IOManagerListener> i = listeners.iterator(); i.hasNext();) {
-			IOManager.IOManagerListener l = (IOManager.IOManagerListener) i.next();
+			IOManager.IOManagerListener l = i.next();
 
 			l.outputSerializerAdded(os);
 		}
