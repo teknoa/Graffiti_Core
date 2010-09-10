@@ -77,7 +77,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.104 $
+ * @version $Revision: 1.105 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -3109,22 +3109,15 @@ public class AttributeHelper implements HelperClass {
 		ArrayList<Object> al = new ArrayList<Object>();
 		for (Object o : elements)
 			al.add(o);
-		return getStringList(al, div);
+		return StringManipulationTools.getStringList(al, div);
 	}
 
+	/**
+	 * @deprecated Use {@link StringManipulationTools#getStringList(ArrayList,String)} instead
+	 */
 	@SuppressWarnings("unchecked")
 	public static String getStringList(ArrayList elements, String div) {
-		if (elements == null || elements.size() <= 0)
-			return "";
-		else {
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < elements.size(); i++) {
-				sb.append(elements.get(i));
-				if (i < elements.size() - 1)
-					sb.append(div);
-			}
-			return sb.toString();
-		}
+		return StringManipulationTools.getStringList(elements, div);
 	}
 
 	public static void setReferenceURL(Attributable ge, String url) {

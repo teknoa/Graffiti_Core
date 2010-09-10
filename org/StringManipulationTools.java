@@ -124,24 +124,20 @@ public class StringManipulationTools implements HelperClass {
 	public static String removeHTMLtags(String textWithHtmlTags) {
 		if (textWithHtmlTags == null)
 			return null;
-		String res = StringManipulationTools.removeTags(textWithHtmlTags, "<",
-		">");
+		String res = StringManipulationTools.removeTags(textWithHtmlTags, "<", ">");
 		res = stringReplace(res, "&nbsp;", " ");
 		res = stringReplace(res, "%20", " ");
 		return res;
 	}
 
-	public static String removeTags(String textWithHtmlTags, String tagA,
-			String tagB) {
+	public static String removeTags(String textWithHtmlTags, String tagA, String tagB) {
 		if (textWithHtmlTags == null)
 			return null;
 		int tagApos = textWithHtmlTags.indexOf(tagA);
 		while (tagApos >= 0) {
-			int tagBpos = textWithHtmlTags.indexOf(tagB, tagApos + tagB.length())
-			+ tagB.length();
+			int tagBpos = textWithHtmlTags.indexOf(tagB, tagApos + tagB.length()) + tagB.length();
 			if (tagB.length() > 0 && tagBpos > 0) {
-				textWithHtmlTags = textWithHtmlTags.substring(0, tagApos)
-				+ textWithHtmlTags.substring(tagBpos);
+				textWithHtmlTags = textWithHtmlTags.substring(0, tagApos) + textWithHtmlTags.substring(tagBpos);
 				tagApos = textWithHtmlTags.indexOf(tagA);
 			} else {
 				textWithHtmlTags = textWithHtmlTags.substring(0, tagApos);
@@ -149,9 +145,7 @@ public class StringManipulationTools implements HelperClass {
 			}
 		}
 		if (tagB.length() > 0 && textWithHtmlTags.indexOf(tagB) >= 0)
-			textWithHtmlTags = textWithHtmlTags.substring(textWithHtmlTags
-					.indexOf(tagB)
-					+ tagB.length());
+			textWithHtmlTags = textWithHtmlTags.substring(textWithHtmlTags.indexOf(tagB) + tagB.length());
 		return textWithHtmlTags;
 	}
 
@@ -168,8 +162,7 @@ public class StringManipulationTools implements HelperClass {
 	 * @return The array list< string>, where get(0) is the striped text and all
 	 *         other are the striped texts
 	 */
-	public static ArrayList<String> removeTagsGetTextAndRemovedTexts(
-			String textWithHtmlTags, String tagA, String tagB) {
+	public static ArrayList<String> removeTagsGetTextAndRemovedTexts(String textWithHtmlTags, String tagA, String tagB) {
 		ArrayList<String> tu = new ArrayList<String>();
 		if (textWithHtmlTags == null)
 			return null;
@@ -177,13 +170,10 @@ public class StringManipulationTools implements HelperClass {
 		tu.add(textWithHtmlTags);
 		int tagApos = tu.get(0).indexOf(tagA);
 		while (tagApos >= 0) {
-			int tagBpos = tu.get(0).indexOf(tagB, tagApos + tagB.length())
-			+ tagB.length();
+			int tagBpos = tu.get(0).indexOf(tagB, tagApos + tagB.length()) + tagB.length();
 			if (tagBpos > 0) {
-				tu.add(tu.get(0).substring(tagApos + tagA.length(),
-						tagBpos - tagB.length()));
-				tu.set(0, tu.get(0).substring(0, tagApos)
-						+ tu.get(0).substring(tagBpos));
+				tu.add(tu.get(0).substring(tagApos + tagA.length(), tagBpos - tagB.length()));
+				tu.set(0, tu.get(0).substring(0, tagApos) + tu.get(0).substring(tagBpos));
 				tagApos = tu.get(0).indexOf(tagA);
 			} else {
 				tu.add(tu.get(0).substring(tagApos + 1));
@@ -192,9 +182,7 @@ public class StringManipulationTools implements HelperClass {
 			}
 		}
 		if (tu.get(0).indexOf(tagB) >= 0)
-			tu
-			.set(0, tu.get(0).substring(
-					tu.get(0).indexOf(tagB) + tagB.length()));
+			tu.set(0, tu.get(0).substring(tu.get(0).indexOf(tagB) + tagB.length()));
 
 		return tu;
 	}
@@ -230,8 +218,7 @@ public class StringManipulationTools implements HelperClass {
 	 * @param mapName
 	 * @return
 	 */
-	final static String[] numbers = new String[] { "0", "1", "2", "3", "4", "5",
-		"6", "7", "8", "9" };
+	final static String[] numbers = new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 	public static String removeNumbersFromString(String s) {
 		for (String r : numbers)
@@ -290,8 +277,7 @@ public class StringManipulationTools implements HelperClass {
 		return result.toString();
 	}
 
-	public static String UnicodeToHtml(String unicodeText,
-			HashSet<Character> badChars) {
+	public static String UnicodeToHtml(String unicodeText, HashSet<Character> badChars) {
 		StringBuffer result = new StringBuffer();
 		char[] characters = unicodeText.toCharArray();
 		for (int i = 0; i < characters.length; i++) {
@@ -364,5 +350,20 @@ public class StringManipulationTools implements HelperClass {
 		namenew = stringReplace(namenew, "/", "_");
 		namenew = stringReplace(namenew, "\\", "_");
 		return namenew;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static String getStringList(ArrayList elements, String div) {
+		if (elements == null || elements.size() <= 0)
+			return "";
+		else {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < elements.size(); i++) {
+				sb.append(elements.get(i));
+				if (i < elements.size() - 1)
+					sb.append(div);
+			}
+			return sb.toString();
+		}
 	}
 }
