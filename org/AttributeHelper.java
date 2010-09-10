@@ -77,7 +77,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.106 $
+ * @version $Revision: 1.107 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -3431,9 +3431,14 @@ public class AttributeHelper implements HelperClass {
 	}
 
 	public static String getMD5fromFile(File f) throws Exception {
+		return getMD5fromInputStream(new FileInputStream(f));
+	}
+
+	public static String getMD5fromInputStream(InputStream is) throws Exception {
+		if(is==null)
+			return null;
 		String res = null;
 		MessageDigest digest = MessageDigest.getInstance("MD5");
-		InputStream is = new FileInputStream(f);
 		byte[] buffer = new byte[1024 * 1024];
 		int read = 0;
 		try {
