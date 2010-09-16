@@ -74,11 +74,7 @@ public class ColorUtil {
 		return nearestColor;
 	}
 
-	public static Color getAvgColor(ArrayList<Color> colorsOfGroup) {
-		// double r = 0;
-		// double g = 0;
-		// double b = 0;
-		// float n = colorsOfGroup.size();
+	public static Color getMaxSaturationColor(ArrayList<Color> colorsOfGroup) {
 		float h = 0, s = 0, b = 0;
 		float maxS = -1;
 		for (Color c : colorsOfGroup) {
@@ -90,16 +86,21 @@ public class ColorUtil {
 				s = hsb[1];
 				b = hsb[2];
 			}
-			// h+=hsb[0]/n;
-			// s+=hsb[1]/n;
-			// v+=hsb[2]/n;
-			// r+=c.getRed()/n;
-			// g+=c.getGreen()/n;
-			// b+=c.getBlue()/n;
 		}
-		// Color c = new Color((int)r,(int)g,(int)b);
 		return Color.getHSBColor(h, s, b);
-		// return c;
+	}
+
+	public static int getAverageColor(ArrayList<Color> colorsOfGroup) {
+		float n = colorsOfGroup.size();
+		float h = 0, s = 0, b = 0;
+		for (Color c : colorsOfGroup) {
+			float hsb[] = new float[3];
+			Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), hsb);
+			h += hsb[0] / n;
+			s += hsb[1] / n;
+			b += hsb[2] / n;
+		}
+		return Color.HSBtoRGB(h, s, b);
 	}
 
 	public static Color getColorFromHex(String colorString) {
@@ -330,5 +331,16 @@ public class ColorUtil {
 		double b = c2.getGreen() - g1;
 		double c = c2.getBlue() - b1;
 		return Math.sqrt(a * a + b * b + c * c) < allowedDistance;
+	}
+
+	/**
+	 * Use {@link #getAverageColor(ArrayList)} instead.
+	 * 
+	 * @param cc
+	 * @return
+	 */
+	@Deprecated
+	public static Color getAvgColor(ArrayList<Color> cc) {
+		return getAvgColor(cc);
 	}
 }
