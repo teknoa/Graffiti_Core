@@ -81,4 +81,8 @@ public class Vector2d {
 	public double distance(double px, double py) {
 		return Math.sqrt((px-x)*(px-x)+(py-y)*(py-y));
 	}
+
+	public Vector2d getOrthogonal() {
+		return new Vector2d(-y,x);
+	}
 }
