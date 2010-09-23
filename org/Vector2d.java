@@ -16,8 +16,6 @@ import java.awt.geom.Point2D;
 /**
  * @author Christian Klukas
  *
- * To change the template for this generated type comment go to
- * Window>Preferences>Java>Code Generation>Code and Comments
  */
 public class Vector2d {
 
@@ -84,5 +82,9 @@ public class Vector2d {
 
 	public Vector2d getOrthogonal() {
 		return new Vector2d(-y,x);
+	}
+
+	public Vector2d scale(double scalingFactor) {
+		return new Vector2d(x*scalingFactor,y*scalingFactor);
 	}
 }
