@@ -49,6 +49,11 @@ public class Vector2d {
 		y = (p1.y+p2.y)/2d;
 	}
 
+	public Vector2d(Point2D p1, Point2D p2) {
+		x = p1.getX()-p2.getX();
+		y = p1.getY()-p2.getY();
+	}
+
 	public Point2D getPoint2D() {
 		return new Point2D.Double(x,y);
 	}
