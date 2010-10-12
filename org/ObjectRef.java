@@ -24,7 +24,7 @@ public class ObjectRef implements HelperClass {
 
 	@Override
 	public String toString() {
-		if (toStringVal==null)
+		if (toStringVal == null)
 			return super.toString();
 		else
 			return toStringVal;
@@ -39,12 +39,23 @@ public class ObjectRef implements HelperClass {
 	}
 
 	public synchronized void setIfGreater(int v) {
-		if ((Integer)data<v)
+		if ((Integer) data < v)
 			data = v;
 	}
 
 	public synchronized void setIfLess(int v) {
-		if ((Integer)data>v)
+		if ((Integer) data > v)
 			data = v;
+	}
+
+	public synchronized void addLong(long v) {
+		if (data == null)
+			data = v;
+		else
+			data = (Long) data + v;
+	}
+
+	public synchronized Long getLong() {
+		return (Long) data;
 	}
 }

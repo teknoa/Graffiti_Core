@@ -67,14 +67,11 @@ public class ErrorMsg implements HelperClass {
 						// constructor
 						// caused the
 						// problem
-						res = res + "     Line: " + stack[i].getLineNumber()
-						+ " Method: " + stack[i].getClassName() + "/"
-						+ methodName + "<br>";
-						if (firstMethod.length() <= 0 && methodName != null
-								&& !methodName.endsWith("addErrorMessage")) {
-							firstMethod = ", Line " + stack[i].getLineNumber()
-							+ " Method " + stack[i].getClassName() + "/"
-							+ methodName;
+						res = res + "     Line: " + stack[i].getLineNumber() + " Method: " + stack[i].getClassName() + "/"
+								+ methodName + "<br>";
+						if (firstMethod.length() <= 0 && methodName != null && !methodName.endsWith("addErrorMessage")) {
+							firstMethod = ", Line " + stack[i].getLineNumber() + " Method " + stack[i].getClassName() + "/"
+									+ methodName;
 						}
 					}
 					if (stack[i].getMethodName().equalsIgnoreCase("addErrorMessage"))
@@ -166,9 +163,7 @@ public class ErrorMsg implements HelperClass {
 		String res = "";
 		if (errmsg != null)
 			for (int i = 0; i < errmsg.length; i++)
-				res += "<" + errorTag + ">"
-				+ StringManipulationTools.UnicodeToHtml(errmsg[i]) + "</"
-				+ errorTag + ">";
+				res += "<" + errorTag + ">" + StringManipulationTools.UnicodeToHtml(errmsg[i]) + "</" + errorTag + ">";
 		return "<errormessages>" + res + "</errormessages>";
 	}
 
@@ -267,8 +262,7 @@ public class ErrorMsg implements HelperClass {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void findChildComponents(Component c, Class searchClass,
-			ArrayList<Object> result) {
+	public static void findChildComponents(Component c, Class searchClass, ArrayList<Object> result) {
 		if (c == null)
 			return;
 		// System.out.println(c.getClass().getCanonicalName());
@@ -307,8 +301,7 @@ public class ErrorMsg implements HelperClass {
 	}
 
 	public static void addErrorMessage(Exception e) {
-		addErrorMessage(e.toString() + "<p><p>"
-				+ e.getLocalizedMessage());
+		addErrorMessage(e.toString() + "<p> <p>" + e.getLocalizedMessage());
 		e.printStackTrace();
 	}
 
