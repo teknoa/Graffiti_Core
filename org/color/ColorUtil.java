@@ -333,6 +333,13 @@ public class ColorUtil {
 		return Math.sqrt(a * a + b * b + c * c) < allowedDistance;
 	}
 
+	public static boolean similarColours(int r1, int g1, int b1, int r2, int g2, int b2, int allowedDistance) {
+		double a = r2 - r1;
+		double b = g2 - g1;
+		double c = b2 - b1;
+		return Math.sqrt(a * a + b * b + c * c) < allowedDistance;
+	}
+
 	/**
 	 * Use {@link #getAverageColor(ArrayList)} instead.
 	 * 
