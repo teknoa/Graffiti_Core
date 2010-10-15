@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractGraph.java,v 1.7 2010/07/19 13:00:55 morla Exp $
+// $Id: AbstractGraph.java,v 1.8 2010/10/15 13:20:35 morla Exp $
 package org.graffiti.graph;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import org.graffiti.event.ListenerManager;
 /**
  * Provides further functionality for graphs.
  *
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *
  * @see Graph
  * @see AdjListGraph
@@ -174,7 +174,7 @@ Graph {
 	public void setDirected(boolean directed) {
 		isDirected = directed;
 		for (Iterator<Edge> it = getEdgesIterator(); it.hasNext();) {
-			Edge edge = (Edge) it.next();
+			Edge edge = it.next();
 			if (directed != edge.isDirected()) {
 				edge.setDirected(directed);
 			}
@@ -199,7 +199,7 @@ Graph {
 		isDirected = directed;
 		if (adjustArrows) {
 			for (Iterator<Edge> it = getEdgesIterator(); it.hasNext();) {
-				Edge edge = (Edge) it.next();
+				Edge edge = it.next();
 				if (directed != edge.isDirected()) {
 					edge.setDirected(directed);
 				}
@@ -233,7 +233,7 @@ Graph {
 		Set<Edge> h = new HashSet<Edge>();
 
 		for (Iterator<Node> nodeIt = getNodesIterator(); nodeIt.hasNext();) {
-			Node n = (Node) (nodeIt.next());
+			Node n = (nodeIt.next());
 
 			h.addAll(n.getEdges());
 		}
@@ -264,7 +264,7 @@ Graph {
 
 		if ((this == n1.getGraph()) && (this == n2.getGraph())) {
 			for (Iterator<Edge> it = n1.getEdgesIterator(); it.hasNext();) {
-				Edge e = (Edge) it.next();
+				Edge e = it.next();
 
 				if ((n2 == e.getSource()) || (n2 == e.getTarget())) {
 					col.add(e);
@@ -343,7 +343,7 @@ Graph {
 		int numberOfDirectedEdges = 0;
 
 		for (Iterator<Edge> edgeIt = getEdgesIterator(); edgeIt.hasNext();) {
-			Edge testedEdge = (Edge) edgeIt.next();
+			Edge testedEdge = edgeIt.next();
 
 			if (testedEdge.isDirected()) {
 				numberOfDirectedEdges++;
@@ -990,7 +990,7 @@ Graph {
 					//                    .equals("org.graffiti.attributes.HashMapAttribute")) {
 					for (Iterator<String> i = c.getCollection().keySet().iterator(); i
 					.hasNext();) {
-						String id = (String) i.next();
+						String id = i.next();
 
 						try {
 							defaultEdgeAttribute.add((Attribute) c.getAttribute(id)
@@ -1006,7 +1006,7 @@ Graph {
 
 					for (Iterator<String> i = defaultEdgeAttribute.getCollection().keySet()
 							.iterator(); i.hasNext();) {
-						String id = (String) i.next();
+						String id = i.next();
 
 						try {
 							tmp.add((Attribute) defaultEdgeAttribute.getAttribute(id)
@@ -1052,7 +1052,7 @@ Graph {
 				{
 					for (Iterator<String> i = c.getCollection().keySet().iterator(); i
 					.hasNext();) {
-						String id = (String) i.next();
+						String id = i.next();
 
 						try {
 							defaultNodeAttribute.add((Attribute) c.getAttribute(id)
@@ -1069,7 +1069,7 @@ Graph {
 
 					for (Iterator<String> i = defaultNodeAttribute.getCollection().keySet()
 							.iterator(); i.hasNext();) {
-						String id = (String) i.next();
+						String id = i.next();
 
 						try {
 							tmp.add((Attribute) defaultNodeAttribute.getAttribute(id)

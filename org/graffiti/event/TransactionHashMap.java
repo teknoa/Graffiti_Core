@@ -48,6 +48,7 @@ public class TransactionHashMap extends HashMap<Object, Object> {
 						if (pcr==PathComparisonResult.EQUAL_PATH)
 							return super.put(key, currentChange);
 						else {
+							super.put(key, key);
 							//TODO generate new event with most common attribute path
 							//							String path = pcr.getCommonPath();
 							//							AttributeEvent ae = new AttributeEvent(path, ((Attributable) key).getAttribute(path));
