@@ -77,7 +77,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.108 $
+ * @version $Revision: 1.109 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -94,7 +94,7 @@ public class AttributeHelper implements HelperClass {
 	private static String chartDiagram = "<html><!--a-->Charting <small><font color=\"gray\">(Coloring of developmental stages)</font></small>";
 	private static String chartHeatMap = "<html><!--a-->Charting <small><font color=\"gray\">(Heatmap Settings)</font></small>";
 
-	private static String getEncodedUrl(String input) {
+	public static String getEncodedUrl(String input) {
 		String url = input;
 		url = url.replaceAll("&amp;", "&");
 		if (url.contains("?") && !url.startsWith("mailto:")) {
@@ -157,11 +157,12 @@ public class AttributeHelper implements HelperClass {
 						String par = url;
 						r.exec(new String[] { cmd, par });
 					} catch (Exception e4) {
-						JOptionPane.showMessageDialog(null, "<html>Error executing command. Error Messages:<p>"
-								+ e.getLocalizedMessage() + " (Windows File Open)<p>" + e2.getLocalizedMessage()
-								+ " (gnome File Open)<p>" + e3.getLocalizedMessage() + " (Mac OS X File Open)<p>"
-								+ e4.getLocalizedMessage() + " (KDE File Open)</html>", "Error opening file",
-								JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(
+								null,
+								"<html>Error executing command. Error Messages:<p>" + e.getLocalizedMessage()
+										+ " (Windows File Open)<p>" + e2.getLocalizedMessage() + " (gnome File Open)<p>"
+										+ e3.getLocalizedMessage() + " (Mac OS X File Open)<p>" + e4.getLocalizedMessage()
+										+ " (KDE File Open)</html>", "Error opening file", JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			}
@@ -1319,8 +1320,8 @@ public class AttributeHelper implements HelperClass {
 		}
 		if (attributeValue instanceof Boolean) {
 			try {
-				attributable.setBoolean(path + attributeSeparator + attributeName, ((Boolean) attributeValue)
-						.booleanValue());
+				attributable.setBoolean(path + attributeSeparator + attributeName,
+						((Boolean) attributeValue).booleanValue());
 				return;
 			} catch (Exception e) {
 
@@ -2886,8 +2887,9 @@ public class AttributeHelper implements HelperClass {
 	public static String getNiceEdgeOrNodeLabel(GraphElement ge, String nodeLabelIfMissing) {
 		if (ge instanceof Edge) {
 			Edge e = (Edge) ge;
-			return AttributeHelper.getLabel(e, AttributeHelper.getLabel(e.getSource(), nodeLabelIfMissing)
-					+ (e.isDirected() ? "->" : "--") + AttributeHelper.getLabel(e.getTarget(), nodeLabelIfMissing));
+			return AttributeHelper.getLabel(e,
+					AttributeHelper.getLabel(e.getSource(), nodeLabelIfMissing) + (e.isDirected() ? "->" : "--")
+							+ AttributeHelper.getLabel(e.getTarget(), nodeLabelIfMissing));
 		} else
 			return getLabel(ge, nodeLabelIfMissing);
 	}
@@ -3409,8 +3411,8 @@ public class AttributeHelper implements HelperClass {
 	}
 
 	public static Color getColorFromAttribute(Attributable attr, String path, String name, Color defaultValue) {
-		return ColorUtil.getColorFromHex((String) getAttributeValue(attr, path, name, ColorUtil
-				.getHexFromColor(defaultValue), "", false));
+		return ColorUtil.getColorFromHex((String) getAttributeValue(attr, path, name,
+				ColorUtil.getHexFromColor(defaultValue), "", false));
 	}
 
 	public static void setColorFromAttribute(Attributable attr, String path, String name, Color value) {
