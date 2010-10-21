@@ -10,7 +10,10 @@ package scenario;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -39,10 +42,22 @@ public class Scenario {
 	}
 
 	public Scenario(File f) {
+		try {
+			load(new FileInputStream(f));
+		} catch (FileNotFoundException e) {
+			ErrorMsg.addErrorMessage(e);
+		}
 		file = f;
+	}
+
+	public Scenario(InputStream is) {
+		load(is);
+	}
+
+	private void load(InputStream is) {
 		readError = true;
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(f));
+			BufferedReader in = new BufferedReader(new InputStreamReader(is));
 			String str;
 			int line = 0;
 			boolean headerRead = false;
@@ -150,6 +165,7 @@ public class Scenario {
 		return header;
 	}
 
+	@Override
 	public synchronized String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (String s : getScenarioCommands())
