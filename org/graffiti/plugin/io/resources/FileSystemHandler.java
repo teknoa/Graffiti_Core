@@ -18,13 +18,13 @@ public class FileSystemHandler extends AbstractResourceIOHandler {
 	@Override
 	public InputStream getInputStream(IOurl url) throws Exception {
 		if (url.isEqualPrefix(getPrefix()))
-			return new BufferedInputStream(new FileInputStream(url.getDetail() + "/" + url.getFileName()));
+			return new BufferedInputStream(new FileInputStream(url.getDetail() + IOurl.SEPERATOR + url.getFileName()));
 		else
 			return null;
 	}
 
 	public static File getFile(IOurl url) {
-		return new File(url.getDetail() + url.getFileName());
+		return new File(url.getDetail() +IOurl.SEPERATOR+ url.getFileName());
 	}
 
 	public static boolean isFileUrl(IOurl url) {
@@ -40,6 +40,6 @@ public class FileSystemHandler extends AbstractResourceIOHandler {
 	}
 
 	public static IOurl getURL(File file) {
-		return new IOurl(PREFIX, file.getParent() + "/", file.getName());
+		return new IOurl(PREFIX, file.getParent(), file.getName());
 	}
 }
