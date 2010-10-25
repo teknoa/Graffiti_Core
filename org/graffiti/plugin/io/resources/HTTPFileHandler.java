@@ -23,7 +23,7 @@ public class HTTPFileHandler extends AbstractResourceIOHandler {
 	}
 
 	@Override
-	public IOurl copyDataAndReplaceURLPrefix(InputStream is, String targetFilename, ReourceIOConfigObject config)
+	public IOurl copyDataAndReplaceURLPrefix(InputStream is, String targetFilename, ResourceIOConfigObject config)
 	throws Exception {
 		IOurl newurl = new IOurl(getPrefix(), ((FileSystemIOConfig) config).getFileDir(), targetFilename);
 		HomeFolder.copyFile(is, new File(targetFilename));
