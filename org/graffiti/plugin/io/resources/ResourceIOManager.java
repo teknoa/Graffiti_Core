@@ -14,7 +14,8 @@ public class ResourceIOManager {
 		if (instance == null) {
 			instance = new ResourceIOManager();
 			registerIOHandler(new FileSystemHandler());
-			registerIOHandler(new HTTPFileHandler());
+			registerIOHandler(new HTTPhandler());
+			registerIOHandler(new FTPhandler());
 		}
 		return instance;
 	}

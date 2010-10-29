@@ -6,9 +6,9 @@ import java.net.URL;
 
 import org.HomeFolder;
 
-public class HTTPFileHandler extends AbstractResourceIOHandler {
+public class FTPhandler extends AbstractResourceIOHandler {
 
-	public static final String PREFIX = "http";
+	public static final String PREFIX = "ftp";
 
 	public String getPrefix() {
 		return PREFIX;
@@ -16,15 +16,21 @@ public class HTTPFileHandler extends AbstractResourceIOHandler {
 
 	@Override
 	public InputStream getInputStream(IOurl url) throws Exception {
-		if (url.isEqualPrefix(getPrefix()))
-			return new URL(url.toString()).openStream();
-		else
+		if (url.isEqualPrefix(getPrefix())) {
+			MyByteArrayOutputStream out = new MyByteArrayOutputStream();
+			HomeFolder.copyContent(new URL(url.toString()).openStream(), out);
+			// ResourceIOManager.copyDataAndReplaceURLPrefix(FileSystemHandler.PREFIX,
+			// url.getFileName(),
+			// new MyByteArrayInputStream(out.getBuff()), new
+			// FileSystemIOConfig("/loesch.txt"));
+			return new MyByteArrayInputStream(out.getBuff());
+		} else
 			return null;
 	}
 
 	@Override
 	public IOurl copyDataAndReplaceURLPrefix(InputStream is, String targetFilename, ResourceIOConfigObject config)
-	throws Exception {
+			throws Exception {
 		IOurl newurl = new IOurl(getPrefix(), ((FileSystemIOConfig) config).getFileDir(), targetFilename);
 		HomeFolder.copyFile(is, new File(targetFilename));
 		return newurl;

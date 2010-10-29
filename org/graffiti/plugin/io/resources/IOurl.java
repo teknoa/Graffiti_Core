@@ -1,5 +1,7 @@
 package org.graffiti.plugin.io.resources;
 
+import java.io.InputStream;
+
 public class IOurl {
 
 	public static final String SEPERATOR = "/";
@@ -75,5 +77,9 @@ public class IOurl {
 
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
+	}
+
+	public InputStream getInputStream() throws Exception {
+		return ResourceIOManager.getInputStream(this);
 	}
 }
