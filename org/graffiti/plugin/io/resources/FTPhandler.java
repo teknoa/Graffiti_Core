@@ -19,10 +19,6 @@ public class FTPhandler extends AbstractResourceIOHandler {
 		if (url.isEqualPrefix(getPrefix())) {
 			MyByteArrayOutputStream out = new MyByteArrayOutputStream();
 			HomeFolder.copyContent(new URL(url.toString()).openStream(), out);
-			// ResourceIOManager.copyDataAndReplaceURLPrefix(FileSystemHandler.PREFIX,
-			// url.getFileName(),
-			// new MyByteArrayInputStream(out.getBuff()), new
-			// FileSystemIOConfig("/loesch.txt"));
 			return new MyByteArrayInputStream(out.getBuff());
 		} else
 			return null;
@@ -30,7 +26,7 @@ public class FTPhandler extends AbstractResourceIOHandler {
 
 	@Override
 	public IOurl copyDataAndReplaceURLPrefix(InputStream is, String targetFilename, ResourceIOConfigObject config)
-			throws Exception {
+	throws Exception {
 		IOurl newurl = new IOurl(getPrefix(), ((FileSystemIOConfig) config).getFileDir(), targetFilename);
 		HomeFolder.copyFile(is, new File(targetFilename));
 		return newurl;
