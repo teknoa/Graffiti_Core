@@ -1,17 +1,12 @@
 package info.clearthought.layout;
 
-
-
 /**
  * Constants used by TableLayout.
- *
- * @author  Daniel E. Barbalace
+ * 
+ * @author Daniel E. Barbalace
  */
 
-public interface TableLayoutConstants
-{
-
-
+public interface TableLayoutConstants {
 
 	/** Indicates that the component is left justified in its cell */
 	public static final int LEFT = 0;
@@ -34,14 +29,18 @@ public interface TableLayoutConstants
 	/** Indicates that the row/column should fill the available space */
 	public static final double FILL = -1.0;
 
-	/** Indicates that the row/column should be allocated just enough space to
-    accomidate the preferred size of all components contained completely within
-    this row/column. */
+	/**
+	 * Indicates that the row/column should be allocated just enough space to
+	 * accommodate the preferred size of all components contained completely
+	 * within this row/column.
+	 */
 	public static final double PREFERRED = -2.0;
 
-	/** Indicates that the row/column should be allocated just enough space to
-    accomidate the minimum size of all components contained completely within
-    this row/column. */
+	/**
+	 * Indicates that the row/column should be allocated just enough space to
+	 * accommodate the minimum size of all components contained completely within
+	 * this row/column.
+	 */
 	public static final double MINIMUM = -3.0;
 
 	/** Minimum value for an alignment */
@@ -49,7 +48,5 @@ public interface TableLayoutConstants
 
 	/** Maximum value for an alignment */
 	public static final int MAX_ALIGN = 3;
-
-
 
 }
