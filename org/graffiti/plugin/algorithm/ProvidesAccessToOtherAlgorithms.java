@@ -6,4 +6,6 @@ public interface ProvidesAccessToOtherAlgorithms {
 
 	public Collection<Algorithm> getAlgorithmList();
 
+	public boolean closeDialogBeforeExecution(Algorithm algorithm);
+
 }
