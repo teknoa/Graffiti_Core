@@ -43,7 +43,7 @@ public class ResourceIOManager {
 	/**
 	 * @return inputstream of file or null, if no handler found
 	 */
-	static InputStream getInputStream(IOurl url) throws Exception {
+	public static InputStream getInputStream(IOurl url) throws Exception {
 		if (url == null)
 			return null;
 		for (ResourceIOHandler mh : getInstance().handlers)
