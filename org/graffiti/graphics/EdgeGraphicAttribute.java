@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: EdgeGraphicAttribute.java,v 1.5 2010/07/19 13:00:57 morla Exp $
+// $Id: EdgeGraphicAttribute.java,v 1.6 2010/11/09 15:11:56 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -26,7 +26,7 @@ import org.graffiti.attributes.StringAttribute;
  * Defines all graphic attributes of an edge
  *
  * @author breu
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class EdgeGraphicAttribute
 extends GraphElementGraphicAttribute
@@ -72,7 +72,7 @@ extends GraphElementGraphicAttribute
 		super(GRAPHICS);
 		add(StringAttribute.getTypedStringAttribute(ARROWHEAD, ah), false);
 		add(StringAttribute.getTypedStringAttribute(ARROWTAIL, at), false);
-		add(new DoubleAttribute(THICKNESS, t), false);
+		add(new ThicknessAttribute(THICKNESS, t), false);
 		add((DockingAttribute) d.copy(), false);
 		add((SortedCollectionAttribute) b.copy(), false);
 		add(StringAttribute.getTypedStringAttribute(LINETYPE, lt), false);
@@ -234,7 +234,7 @@ extends GraphElementGraphicAttribute
 		{
 			for(Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
 			{
-				String attrId = (String) it.next();
+				String attrId = it.next();
 
 				if(attrId.equals(ARROWHEAD))
 				{
@@ -345,7 +345,7 @@ extends GraphElementGraphicAttribute
 	 */
 	public void setThickness(double t)
 	{
-		((DoubleAttribute)attributes.get(THICKNESS)).setDouble(t);
+		((ThicknessAttribute)attributes.get(THICKNESS)).setDouble(t);
 	}
 
 	/**
@@ -355,7 +355,7 @@ extends GraphElementGraphicAttribute
 	 */
 	public double getThickness()
 	{
-		return ((DoubleAttribute)attributes.get(THICKNESS)).getDouble();
+		return ((ThicknessAttribute)attributes.get(THICKNESS)).getDouble();
 	}
 
 	/**

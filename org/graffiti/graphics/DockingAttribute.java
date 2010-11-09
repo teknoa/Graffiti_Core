@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: DockingAttribute.java,v 1.5 2010/07/19 13:01:00 morla Exp $
+// $Id: DockingAttribute.java,v 1.6 2010/11/09 15:11:56 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -23,7 +23,7 @@ import org.graffiti.attributes.StringAttribute;
  * this correctly.
  *
  * @author breu
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class DockingAttribute
 extends HashMapAttribute
@@ -32,10 +32,10 @@ implements GraphicAttributeConstants
 	//~ Instance fields ========================================================
 
 	/** Defines a port at source node */
-	private StringAttribute source;
+	private SourceDockingAttribute source;
 
 	/** Defines a port at target node */
-	private StringAttribute target;
+	private TargetDockingAttribute target;
 
 	//~ Constructors ===========================================================
 
@@ -59,8 +59,8 @@ implements GraphicAttributeConstants
 	public DockingAttribute(String id, String source, String target)
 	{
 		super(id);
-		this.source = (StringAttribute)StringAttribute.getTypedStringAttribute(SOURCE, source);
-		this.target = (StringAttribute)StringAttribute.getTypedStringAttribute(TARGET, target);
+		this.source = new SourceDockingAttribute(SOURCE,source);//(SourceDockingAttribute)StringAttribute.getTypedStringAttribute(SOURCE, source);
+		this.target = new TargetDockingAttribute(TARGET,target);//TargetDockingAttribute)StringAttribute.getTypedStringAttribute(TARGET, target);
 		add(this.source, false);
 		add(this.target, false);
 	}
@@ -84,7 +84,7 @@ implements GraphicAttributeConstants
 		{
 			for(Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
 			{
-				String attrId = (String) it.next();
+				String attrId = it.next();
 
 				if(attrId.equals(SOURCE))
 				{

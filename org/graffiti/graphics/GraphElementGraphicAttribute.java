@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: GraphElementGraphicAttribute.java,v 1.2 2010/07/19 13:01:00 morla Exp $
+// $Id: GraphElementGraphicAttribute.java,v 1.3 2010/11/09 15:11:56 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -17,7 +17,7 @@ import org.graffiti.attributes.StringAttribute;
 /**
  * Defines the common graphic attributes for nodes and edges
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class GraphElementGraphicAttribute
 extends HashMapAttribute
@@ -41,7 +41,7 @@ implements GraphicAttributeConstants
 		add(new ColorAttribute(FILLCOLOR), false);
 		add(new DoubleAttribute(FRAMETHICKNESS, 2), false);
 		add(new DoubleAttribute(ROUNDING, 5), false);
-		add(new DoubleAttribute(GRADIENT, 0), false);
+		add(new GradientFillAttribute(GRADIENT, 0), false);
 		add(new LineModeAttribute(LINEMODE), false);
 	}
 
@@ -71,7 +71,7 @@ implements GraphicAttributeConstants
 		add(new DoubleAttribute(FRAMETHICKNESS, ft.getDouble()), false);
 		add(new DoubleAttribute(FRAMETHICKNESS, 5), false);
 		add(new LineModeAttribute(LINEMODE, (Dash) lm.getValue()), false);
-		add(new DoubleAttribute(GRADIENT, 0), false);
+		add(new GradientFillAttribute(GRADIENT, 0), false);
 	}
 
 	/**
@@ -100,7 +100,7 @@ implements GraphicAttributeConstants
 		add(new DoubleAttribute(FRAMETHICKNESS, ft), false);
 		add(new DoubleAttribute(FRAMETHICKNESS, 5), false);
 		add(new LineModeAttribute(LINEMODE, (Dash) lm.getValue()), false);
-		add(new DoubleAttribute(GRADIENT, 0), false);
+		add(new GradientFillAttribute(GRADIENT, 0), false);
 	}
 
 	//~ Methods ================================================================
@@ -190,7 +190,7 @@ implements GraphicAttributeConstants
 
 	public double getUseGradient()
 	{
-		return ((DoubleAttribute)attributes.get(GRADIENT)).getDouble();
+		return ((GradientFillAttribute)attributes.get(GRADIENT)).getDouble();
 	}
 
 	/**
