@@ -49,22 +49,19 @@ public class HomeFolder implements HelperClass {
 
 	}
 
-	private static InputStream in;
-	private static OutputStream out;
 	public static String WIN_MAC_HOMEFOLDER = "VANTED";
 	public static String LINUX_HOMEFOLDER = ".vanted";
 	public static String WIN_MAC_HOMEFOLDER_OLD = ".vanted";
 
 	public static void copyFile(File oldfile, File newfile) throws IOException {
 		if (oldfile.compareTo(newfile) != 0) {
-			in = new BufferedInputStream(new FileInputStream(oldfile));
+			InputStream in = new BufferedInputStream(new FileInputStream(oldfile));
 			copyFile(in, newfile);
 		}
 	}
 
-	public static void copyFile(InputStream intemp, File newfile) throws IOException {
-		out = new BufferedOutputStream(new FileOutputStream(newfile, false));
-		in = intemp;
+	public static void copyFile(InputStream in, File newfile) throws IOException {
+		OutputStream out = new BufferedOutputStream(new FileOutputStream(newfile, false));
 
 		byte[] buffer = new byte[0xFFFF];
 		for (int len; (len = in.read(buffer)) != -1;)
@@ -75,8 +72,9 @@ public class HomeFolder implements HelperClass {
 
 	}
 
-	public static void copyContent(InputStream intemp, OutputStream out) throws IOException {
-		in = intemp;
+	public static void copyContent(InputStream in, OutputStream out) throws IOException {
+		if (in == null || out == null)
+			return;
 
 		byte[] buffer = new byte[0xFFFF];
 		for (int len; (len = in.read(buffer)) != -1;)
