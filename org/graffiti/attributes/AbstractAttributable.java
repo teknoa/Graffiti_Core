@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttributable.java,v 1.4 2010/07/19 12:59:08 morla Exp $
+// $Id: AbstractAttributable.java,v 1.5 2010/11/15 09:01:09 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -15,7 +15,7 @@ import org.graffiti.event.AttributeEvent;
  * Provides common functionality for <code>Attributable</code> classes. This
  * class also contains additional functionality for dealing with attributes.
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *
  * @see Attributable
  */
@@ -1018,7 +1018,7 @@ public abstract class AbstractAttributable implements Attributable {
 	 *            <code>Attribute</code> at the location specified by
 	 *            <code>path</code>.
 	 */
-	public void removeAttribute(String path)
+	public Attribute removeAttribute(String path)
 	throws AttributeNotFoundException {
 		assert path != null;
 
@@ -1044,6 +1044,7 @@ public abstract class AbstractAttributable implements Attributable {
 					path.substring(path.lastIndexOf(Attribute.SEPARATOR) + 1));
 
 		parentAttr.remove(attr);
+		return attr;
 	}
 
 	/**

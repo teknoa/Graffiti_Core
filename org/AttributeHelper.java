@@ -1,5 +1,6 @@
 /*******************************************************************************
  * 
+
  *    Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
  * 
  *******************************************************************************/
@@ -77,12 +78,13 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.110 $
+ * @version $Revision: 1.111 $
  */
 public class AttributeHelper implements HelperClass {
 
 	private static HashMap<String, String> idToNiceId = new HashMap<String, String>();
-	private static boolean idInit = false;
+	private static HashMap<String, String> idToDeletePath = new HashMap<String, String>();
+	private static boolean idInit = false,deletePathInit = false;
 	public static String attributeSeparator = String.valueOf(Attribute.SEPARATOR);
 
 	public static String id_ttestCircleSize = "ttestCircleSize";
@@ -320,6 +322,58 @@ public class AttributeHelper implements HelperClass {
 		if (div != null && div.length() > 0 && res.indexOf(div) > 0)
 			res = res.substring(0, res.indexOf(div));
 		return res;
+	}
+
+	/**
+	 * Memorizes an attribute, which's editor may be clicked, resulting in the deletion
+	 * of an attribute (not necessarily the clicked one):<p>
+	 * 
+	 * attributePath:
+	 * <ul><li>".mapping.measurementdata" -> this attribute will be clickable</li>
+	 * 	<li>".mapping." -> this attribute and all child attributes will be clickable</li>
+	 * </ul>
+	 * pathToBeDeleted:
+	 * <ul><li>"mapping" -> attribute ".mapping" (and all child attributes) will be deleted</li>
+	 * 	<li>"graphics.component" -> attribute ".graphics.component" (and all child attributes)
+	 * will be deleted, but not any other ".graphics." attributes</li>
+	 * <li>"mapping$charting" -> attributes ".mapping", ".charting" and all child attributes
+	 * will be deleted. "$" may be used more than once</li>
+	 * </ul>
+
+	 * @param attributePath
+	 *           The path of the attribute, which will be clickable
+	 * @param pathToBeDeleted
+	 *          The path(s) of the attribute(s) to be deleted
+	 */
+	public static void setDeleteableAttribute(String attributePath, String pathToBeDeleted) {
+		if (idToDeletePath.containsKey(attributePath))
+			idToDeletePath.remove(attributePath);
+		idToDeletePath.put(attributePath, pathToBeDeleted);
+	}
+
+	public static String getToBeDeletedPathFromAttributePath(String attributePath) {
+		if (!deletePathInit)
+			initDeleteablePaths();
+		for (String dp : idToDeletePath.keySet())
+			if (attributePath.startsWith(dp))
+				return idToDeletePath.get(dp);
+		return null;
+	}
+
+	private static void initDeleteablePaths() {
+		setDeleteableAttribute(".cluster.cluster", "cluster.cluster");
+		setDeleteableAttribute(".mapping.","mapping$charting$graphics.component");
+		setDeleteableAttribute(".charting.","mapping$charting$graphics.component");
+		setDeleteableAttribute(".graphics.component","mapping$charting$graphics.component");
+		setDeleteableAttribute(".labelgraphics.","labelgraphics");
+		setDeleteableAttribute(".image.","image");
+		setDeleteableAttribute(".pathway_ref_url","pathway_ref_url");
+		setDeleteableAttribute(".url","url");
+		for (int i = 1; i<100; i++)
+			setDeleteableAttribute(".labelgraphics"+i+".","labelgraphics"+i);
+		for (int i = 0; i<100; i++)
+			setDeleteableAttribute(".graphics.bends.bend"+i+".","graphics.bends.bend"+i);
+		deletePathInit = true;
 	}
 
 	/**
@@ -2824,18 +2878,14 @@ public class AttributeHelper implements HelperClass {
 		}
 	}
 
-	private static String[] edge_shapes = new String[] { "org.graffiti.plugins.views.defaults.PolyLineEdgeShape",
-		"org.graffiti.plugins.views.defaults.StraightLineEdgeShape",
-		"org.graffiti.plugins.views.defaults.SmoothLineEdgeShape",
-		"org.graffiti.plugins.views.defaults.QuadCurveEdgeShape",
-	"de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.DynamicStraightLineEdgeShape" };
+	private static HashMap<String, String> edge_shapes = initializeEdgeShapes();
 	public static String preFilePath = "filepath|";
 
 	public static void setEdgeBendStyle(Edge edge, String shape) {
 		try {
 			EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute("graphics");
 			boolean found = false;
-			for (String knownShape : edge_shapes) {
+			for (String knownShape : edge_shapes.values()) {
 				if (knownShape.toUpperCase().indexOf(shape.toUpperCase()) >= 0) {
 					ega.setShape(knownShape);
 					found = true;
@@ -2847,6 +2897,28 @@ public class AttributeHelper implements HelperClass {
 		} catch (Exception e) {
 			ErrorMsg.addErrorMessage(e);
 		}
+	}
+
+	public static HashMap<String, String> getEdgeShapes() {
+		return edge_shapes;
+	}
+
+	public static boolean addEdgeShape(String description, String className) {
+		if(edge_shapes.containsKey(description))
+			return false;
+		else {
+			edge_shapes.put(description, className);
+			return true;
+		}
+	}
+
+	private static HashMap<String, String> initializeEdgeShapes() {
+		HashMap<String, String> standardShapes = new HashMap<String, String>();
+		standardShapes.put("Straight Line","org.graffiti.plugins.views.defaults.StraightLineEdgeShape");
+		standardShapes.put("Segmented Line","org.graffiti.plugins.views.defaults.PolyLineEdgeShape");
+		standardShapes.put("Quadratic Spline","org.graffiti.plugins.views.defaults.QuadCurveEdgeShape");
+		standardShapes.put("Smooth Line","org.graffiti.plugins.views.defaults.SmoothLineEdgeShape");
+		return standardShapes;
 	}
 
 	public static String getEdgeBendStyle(Edge edge) {

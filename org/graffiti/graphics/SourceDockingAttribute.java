@@ -17,4 +17,9 @@ public class SourceDockingAttribute extends StringAttribute {
 		super();
 	}
 
+	@Override
+	public Object copy() {
+		return new SourceDockingAttribute(this.getId(), this.value);
+	}
+
 }

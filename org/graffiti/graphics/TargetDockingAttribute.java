@@ -17,4 +17,9 @@ public class TargetDockingAttribute extends StringAttribute {
 		super();
 	}
 
+	@Override
+	public Object copy() {
+		return new TargetDockingAttribute(this.getId(), this.value);
+	}
+
 }

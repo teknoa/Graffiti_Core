@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: Attributable.java,v 1.2 2010/07/19 12:59:28 morla Exp $
+// $Id: Attributable.java,v 1.3 2010/11/15 09:01:09 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -15,7 +15,7 @@ import org.graffiti.event.ListenerManager;
  * Interfaces an object that contains a hierarchy of attributes. This interface
  * defines methods for accessing and modifying this hierarchy.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *
  * @see AttributeTypesManager
  */
@@ -540,12 +540,13 @@ public interface Attributable
 	 * <code>pre-/postAttributeRemoved</code> in the ListenerManager.
 	 *
 	 * @param path the path of the <code>Attribute</code> to be removed.
+	 * @return the removed attribute
 	 *
 	 * @exception AttributeNotFoundException if there is no
 	 *            <code>Attribute</code> at the location specified by
 	 *            <code>path</code>.
 	 */
-	public void removeAttribute(String path)
+	public Attribute removeAttribute(String path)
 	throws AttributeNotFoundException;
 }
 

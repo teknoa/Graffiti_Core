@@ -12,6 +12,7 @@ package org;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * @author klukas
@@ -366,4 +367,35 @@ public class StringManipulationTools implements HelperClass {
 			return sb.toString();
 		}
 	}
+
+	public static String[] splitSafe(String str, String delimiter) {
+		String[] stringPieces;
+		try {
+			Vector<String> v = new Vector<String>();
+			int start = 0;
+			int end   = str.indexOf(delimiter);
+
+			while( -1 != end ) {
+				if( end > start ) {
+					v.addElement(new String(str.substring(start, end)));
+				}
+
+				start = end + delimiter.length();
+				end   = str.indexOf(delimiter, start);
+			}
+			v.addElement(new String(str.substring(start, str.length())));
+
+			stringPieces = new String[v.size()];
+			for( int i = 0; i < v.size(); ++i ) {
+				stringPieces[i] = v.elementAt(i).toString();
+			}
+		}
+		catch( Exception e ) {
+			System.err.println(e.toString());
+			stringPieces = null;
+		}
+
+		return stringPieces;
+	}
+
 }

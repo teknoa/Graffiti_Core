@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AttributeTypesManager.java,v 1.7 2010/07/19 12:59:22 morla Exp $
+// $Id: AttributeTypesManager.java,v 1.8 2010/11/15 09:01:09 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -29,7 +29,7 @@ import org.graffiti.plugin.GenericPlugin;
  * can be added and then used in an arbitrary <code>Attribute</code> hierarchy
  * associated with this <code>AttributeTypesManager</code>.
  *
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 @SuppressWarnings("unchecked")
 public class AttributeTypesManager
@@ -230,6 +230,11 @@ implements PluginManagerListener
 					if (ad.isNodeAttributeDescription())
 						AbstractAttribute.addEdgeAttributeType(id, ad.getAttributeClass());
 				}
+
+				if (id!=null && ad.getDeletePath()!=null && id.length()>0 && ad.getDeletePath().length()>0) {
+					AttributeHelper.setDeleteableAttribute(id, ad.getDeletePath());
+				}
+
 			}
 	}
 }
