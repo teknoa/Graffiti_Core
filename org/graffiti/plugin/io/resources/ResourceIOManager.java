@@ -80,7 +80,7 @@ public class ResourceIOManager {
 
 	public static MyByteArrayInputStream getInputStreamMemoryCached(IOurl url) throws IOException, Exception {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		InputStream is = ResourceIOManager.getInputStream(url);
+		InputStream is = url != null ? url.getInputStream() : null;
 		if (is == null)
 			return null;
 		ResourceIOManager.copyContent(is, bos);
