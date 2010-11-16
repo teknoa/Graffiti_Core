@@ -19,6 +19,10 @@ public class HomeFolder implements HelperClass {
 		return s;
 	}
 
+	public static String getHomeFolder() {
+		return ReleaseInfo.getAppFolder();
+	}
+
 	public static String getTemporaryFolderWithFinalSep() {
 		return getTemporaryFolder() + ReleaseInfo.getFileSeparator();
 	}

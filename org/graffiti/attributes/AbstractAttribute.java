@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: AbstractAttribute.java,v 1.12 2010/11/15 09:01:09 morla Exp $
+// $Id: AbstractAttribute.java,v 1.13 2010/11/16 13:41:22 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -29,7 +29,7 @@ import org.graffiti.plugin.XMLHelper;
  * <code>parent</code> and <code>attributable</code> of the
  * <code>Attribute</code>.
  *
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public abstract class AbstractAttribute
 implements Attribute
@@ -256,7 +256,7 @@ implements Attribute
 		if(parentNotYetSet)
 		{
 			this.parent = parent;
-			//parentNotYetSet = false;
+			parentNotYetSet = false;
 			//            logger.fine("parent of attribute " + getId() + " set to " +
 			//                parent.getId());
 		}

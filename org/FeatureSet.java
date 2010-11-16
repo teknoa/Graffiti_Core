@@ -33,5 +33,5 @@ public enum FeatureSet {
 	SBGN,
 	MacroRecorder,
 	RIMAS_ACCESS,
-	ADDON_LOADING
+	ADDON_LOADING, EXTENDED_FILE_FORMAT
 }

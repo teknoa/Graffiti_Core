@@ -5,12 +5,13 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: XMLHelper.java,v 1.16 2010/07/19 13:01:54 morla Exp $
+// $Id: XMLHelper.java,v 1.17 2010/11/16 13:41:22 morla Exp $
 
 package org.graffiti.plugin;
 
 //Java imports
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -20,6 +21,8 @@ import java.net.URL;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -215,6 +218,18 @@ public class XMLHelper implements HelperClass {
 		Validator validator = schema.newValidator();
 		validator.validate(new DOMSource(doc));
 	}
+
+	public static void writeXMLDataToFile(Document doc, String path_and_filename) {
+		try {
+			Transformer t = TransformerFactory.newInstance().newTransformer();
+			Result result = new StreamResult(new File(path_and_filename));
+			Source source = new DOMSource(doc);
+			t.transform(source, result);
+		} catch(Exception e) {
+			ErrorMsg.addErrorMessage(e);
+		}
+	}
+
 }
 
 // ------------------------------------------------------------------------------
