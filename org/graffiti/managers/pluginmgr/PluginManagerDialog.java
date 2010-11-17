@@ -5,7 +5,7 @@
 //   Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 //==============================================================================
-// $Id: PluginManagerDialog.java,v 1.5 2010/07/19 13:01:31 morla Exp $
+// $Id: PluginManagerDialog.java,v 1.6 2010/11/17 14:04:53 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -51,7 +51,7 @@ import org.graffiti.util.PluginHelper;
 /**
  * DOCUMENT ME!
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class PluginManagerDialog
 extends JDialog
@@ -503,11 +503,11 @@ implements ActionListener, ListSelectionListener, TableModelListener
 
 		version = new JLabel();
 		version.setBorder(BorderFactory.createTitledBorder(sBundle.getString(
-				"dialog.info.version")));
+		"dialog.info.version")));
 
 		author = new JLabel();
 		author.setBorder(BorderFactory.createTitledBorder(sBundle.getString(
-				"dialog.info.author")));
+		"dialog.info.author")));
 
 		available = new JTextArea();
 		available.setBackground(author.getBackground());
@@ -515,7 +515,7 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		available.setLineWrap(true);
 		available.setPreferredSize(new Dimension(200, 100));
 		available.setBorder(BorderFactory.createTitledBorder(sBundle.getString(
-				"dialog.info.available")));
+		"dialog.info.available")));
 
 		description = new JTextArea();
 		description.setBackground(author.getBackground());
@@ -569,7 +569,7 @@ implements ActionListener, ListSelectionListener, TableModelListener
 	/**
 	 * The list model of the dialog's jlist component.
 	 *
-	 * @version $Revision: 1.5 $
+	 * @version $Revision: 1.6 $
 	 */
 	protected class PluginsTableModel
 	extends AbstractTableModel
@@ -699,6 +699,8 @@ implements ActionListener, ListSelectionListener, TableModelListener
 			{
 				if (entry==null || entry.getPlugin()==null) return null;
 				ImageIcon i=entry.getPlugin().getIcon();
+				if(i==null)
+					return null;
 				i.setImage(i.getImage().getScaledInstance(
 						16, 16, Image.SCALE_SMOOTH));
 				return i;
@@ -748,7 +750,7 @@ implements ActionListener, ListSelectionListener, TableModelListener
 
 	/**
 	 * @author $Author: morla $
-	 * @version $Revision: 1.5 $ $Date: 2010/07/19 13:01:31 $
+	 * @version $Revision: 1.6 $ $Date: 2010/11/17 14:04:53 $
 	 */
 	@SuppressWarnings("unchecked")
 	class EntryComparator
