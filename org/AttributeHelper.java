@@ -78,7 +78,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.111 $
+ * @version $Revision: 1.112 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -405,8 +405,8 @@ public class AttributeHelper implements HelperClass {
 		String disabled = "<html><font color='gray'>&nbsp;";
 		idToNiceId.put(id_ttestCircleSize, chartAll + ": T-Test-Marker Size");
 		idToNiceId.put("directed", "Network Attributes: Directed Edges");
-		idToNiceId.put("chart_colors", chartAll + ": Series Colors");
-		idToNiceId.put("chart_color_line_names", chartAll + ": Global Series List");
+		idToNiceId.put("chart_colors", chartAll + ": Condition Colors");
+		idToNiceId.put("chart_color_line_names", chartAll + ": Global Condition List");
 		idToNiceId.put("chartSizeX", chartSelN + ": Diagram Width/Height");
 		idToNiceId.put("chartSizeY", chartSelN + ": Diagram Width/Height");
 		idToNiceId.put("empty_border_width", chartSelN + ": Space (hor./vert.)");
