@@ -41,8 +41,9 @@ public class ResourceIOManager {
 	// }
 
 	/**
-    * Use {@link IOurl}.getInputStream instead.
-	 * @return inputstream of file or null, if no handler found. 
+	 * Use {@link IOurl}.getInputStream instead.
+	 * 
+	 * @return inputstream of file or null, if no handler found.
 	 */
 	static InputStream getInputStream(IOurl url) throws Exception {
 		if (url == null)
@@ -88,10 +89,30 @@ public class ResourceIOManager {
 	}
 
 	public static void copyContent(InputStream intemp, OutputStream out) throws IOException {
-		InputStream in = intemp;
-		byte[] buffer = new byte[0xFFFF];
-		for (int len; (len = in.read(buffer)) != -1;)
-			out.write(buffer, 0, len);
+		copyContent(intemp, out, -1);
+	}
+
+	public static void copyContent(InputStream in, OutputStream out, long maxIO) throws IOException {
+
+		if (maxIO <= 0) {
+			byte[] buffer = new byte[0xFFFF];
+			for (int len; (len = in.read(buffer)) != -1;) {
+				out.write(buffer, 0, len);
+			}
+		} else {
+			long read = 0;
+			byte[] buffer = new byte[0xFFFF];
+			for (int len; (len = in.read(buffer)) != -1;) {
+				read += len;
+				if (read < maxIO)
+					out.write(buffer, 0, len);
+				else {
+					read -= len;
+					out.write(buffer, 0, (int) (maxIO - read));
+					break;
+				}
+			}
+		}
 
 		in.close();
 		out.close();
