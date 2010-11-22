@@ -1,7 +1,5 @@
 package info.clearthought.layout;
 
-
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -21,30 +19,33 @@ import javax.swing.JPanel;
 
 import org.FolderPanel;
 
-
-
 /**
  * TableLayout is a layout manager that arranges components in rows and columns
- * like a spreadsheet.  TableLayout allows each row or column to be a different
- * size.  A row or column can be given an absolute size in pixels, a percentage
+ * like a spreadsheet. TableLayout allows each row or column to be a different
+ * size. A row or column can be given an absolute size in pixels, a percentage
  * of the available space, or it can grow and shrink to fill the remaining space
  * after other rows and columns have been resized.
- *
- * <p>Using spreadsheet terminology, a cell is the intersection of a row and
- * column.  Cells have finite, non-negative sizes measured in pixels.  The
+ * 
+ * <p>
+ * Using spreadsheet terminology, a cell is the intersection of a row and
+ * column. Cells have finite, non-negative sizes measured in pixels. The
  * dimensions of a cell depend solely upon the dimensions of its row and column.
  * </p>
- *
- * <p>A component occupies a rectangular group of one or more cells.  If the
+ * 
+ * <p>
+ * A component occupies a rectangular group of one or more cells. If the
  * component occupies more than one cell, the component is resized to fit
- * perfectly in the rectangular region of cells.  If the component occupies a
- * single cell, it can be aligned in four ways within that cell.</p>
- *
- * <p>A single cell component can be stretched horizontally to fit the cell
- * (full justification), or it can be placed in the center of the cell.  The
- * component could also be left justified or right justified.  Similarly, the
- * component can be full, center, top, or bottom justified in the vertical.</p>
- *
+ * perfectly in the rectangular region of cells. If the component occupies a
+ * single cell, it can be aligned in four ways within that cell.
+ * </p>
+ * 
+ * <p>
+ * A single cell component can be stretched horizontally to fit the cell (full
+ * justification), or it can be placed in the center of the cell. The component
+ * could also be left justified or right justified. Similarly, the component can
+ * be full, center, top, or bottom justified in the vertical.
+ * </p>
+ * 
  * <pre>
  * public static void main (String args[])
  * {
@@ -97,27 +98,17 @@ import org.FolderPanel;
  *     frame.show();
  * }
  * </pre>
- *
- * @author  Daniel E. Barbalace
+ * 
+ * @author Daniel E. Barbalace
  */
 
-@SuppressWarnings("unchecked")
-public class TableLayout implements
-java.awt.LayoutManager2,
-java.io.Serializable,
-TableLayoutConstants
-{
-
-
+@SuppressWarnings("rawtypes")
+public class TableLayout implements java.awt.LayoutManager2, java.io.Serializable, TableLayoutConstants {
 
 	private static final long serialVersionUID = 1L;
 
-
-
 	/** Default row/column size */
-	protected static final double defaultSize[][] = {{}, {}};
-
-
+	protected static final double defaultSize[][] = { {}, {} };
 
 	/** Widths of columns expressed in absolute and relative terms */
 	protected double columnSpec[];
@@ -131,22 +122,29 @@ TableLayoutConstants
 	/** Heights of rows in pixels */
 	protected int rowSize[];
 
-	/** Offsets of columns in pixels.  The left boarder of column n is at
- columnOffset[n] and the right boarder is at columnOffset[n + 1] for all
- columns including the last one.  columnOffset.length = columnSize.length + 1 */
+	/**
+	 * Offsets of columns in pixels. The left boarder of column n is at
+	 * columnOffset[n] and the right boarder is at columnOffset[n + 1] for all
+	 * columns including the last one. columnOffset.length = columnSize.length +
+	 * 1
+	 */
 	protected int columnOffset[];
 
-	/** Offsets of rows in pixels.  The left boarder of row n is at
- rowOffset[n] and the right boarder is at rowOffset[n + 1] for all
- rows including the last one.  rowOffset.length = rowSize.length + 1 */
+	/**
+	 * Offsets of rows in pixels. The left boarder of row n is at rowOffset[n]
+	 * and the right boarder is at rowOffset[n + 1] for all rows including the
+	 * last one. rowOffset.length = rowSize.length + 1
+	 */
 	protected int rowOffset[];
 
 	/** List of components and their sizes */
 	protected LinkedList list;
 
-	/** Indicates whether or not the size of the cells are known for the last known
- size of the container.  If dirty is true or the container has been resized,
- the cell sizes must be recalculated using calculateSize. */
+	/**
+	 * Indicates whether or not the size of the cells are known for the last
+	 * known size of the container. If dirty is true or the container has been
+	 * resized, the cell sizes must be recalculated using calculateSize.
+	 */
 	protected boolean dirty;
 
 	/** Previous known width of the container */
@@ -155,40 +153,32 @@ TableLayoutConstants
 	/** Previous known height of the container */
 	protected int oldHeight;
 
-
-
-	//******************************************************************************
-	//** Constructors                                                            ***
-	//******************************************************************************
-
-
+	// ******************************************************************************
+	// ** Constructors ***
+	// ******************************************************************************
 
 	/**
-	 * Constructs an instance of TableLayout.  This TableLayout will have one row
+	 * Constructs an instance of TableLayout. This TableLayout will have one row
 	 * and one column.
 	 */
 
-	public TableLayout ()
-	{
-		this (defaultSize);
+	public TableLayout() {
+		this(defaultSize);
 	}
-
-
 
 	/**
 	 * Constructs an instance of TableLayout.
-	 *
-	 * @param size    widths of columns and heights of rows in the format,
-	 *                {{col0, col1, col2, ..., colN}, {row0, row1, row2, ..., rowM}}
-	 *                If this parameter is invalid, the TableLayout will have
-	 *                exactly one row and one column.
+	 * 
+	 * @param size
+	 *           widths of columns and heights of rows in the format, {{col0,
+	 *           col1, col2, ..., colN}, {row0, row1, row2, ..., rowM}} If this
+	 *           parameter is invalid, the TableLayout will have exactly one row
+	 *           and one column.
 	 */
 
-	public TableLayout (double size[][])
-	{
+	public TableLayout(double size[][]) {
 		// Make sure rows and columns and nothing else is specified
-		if ((size != null) && (size.length == 2))
-		{
+		if ((size != null) && (size.length == 2)) {
 			// Get the rows and columns
 			double tempCol[] = size[0];
 			double tempRow[] = size[1];
@@ -198,35 +188,27 @@ TableLayoutConstants
 			rowSpec = new double[tempRow.length];
 
 			// Copy rows and columns
-			System.arraycopy (tempCol, 0, columnSpec, 0, columnSpec.length);
-			System.arraycopy (tempRow, 0, rowSpec, 0, rowSpec.length);
+			System.arraycopy(tempCol, 0, columnSpec, 0, columnSpec.length);
+			System.arraycopy(tempRow, 0, rowSpec, 0, rowSpec.length);
 
 			// Make sure rows and columns are valid
 			for (int counter = 0; counter < columnSpec.length; counter++)
-				if ((columnSpec[counter] < 0.0) &&
-						(columnSpec[counter] != FILL) &&
-						(columnSpec[counter] != PREFERRED) &&
-						(columnSpec[counter] != MINIMUM))
-				{
+				if ((columnSpec[counter] < 0.0) && (columnSpec[counter] != FILL) && (columnSpec[counter] != PREFERRED)
+						&& (columnSpec[counter] != MINIMUM)) {
 					columnSpec[counter] = 0.0;
 				}
 
 			for (int counter = 0; counter < rowSpec.length; counter++)
-				if ((rowSpec[counter] < 0.0) &&
-						(rowSpec[counter] != FILL) &&
-						(rowSpec[counter] != PREFERRED) &&
-						(rowSpec[counter] != MINIMUM))
-				{
+				if ((rowSpec[counter] < 0.0) && (rowSpec[counter] != FILL) && (rowSpec[counter] != PREFERRED)
+						&& (rowSpec[counter] != MINIMUM)) {
 					rowSpec[counter] = 0.0;
 				}
-		}
-		else
-		{
-			double tempCol[] = {FILL};
-			double tempRow[] = {FILL};
+		} else {
+			double tempCol[] = { FILL };
+			double tempRow[] = { FILL };
 
-			setColumn (tempCol);
-			setRow (tempRow);
+			setColumn(tempCol);
+			setRow(tempRow);
 		}
 
 		// Create an empty list of components
@@ -236,116 +218,100 @@ TableLayoutConstants
 		dirty = true;
 	}
 
-
-
-	//******************************************************************************
-	//** Get/Set methods                                                         ***
-	//******************************************************************************
-
-
+	// ******************************************************************************
+	// ** Get/Set methods ***
+	// ******************************************************************************
 
 	/**
 	 * Gets the constraints of a given component.
-	 *
-	 * @param component    desired component
-	 *
+	 * 
+	 * @param component
+	 *           desired component
+	 * 
 	 * @return If the given component is found, the constraints associated with
-	 *         that component.  If the given component is null or is not found,
+	 *         that component. If the given component is null or is not found,
 	 *         null is returned.
 	 */
 
-	public TableLayoutConstraints getConstraints (Component component)
-	{
+	public TableLayoutConstraints getConstraints(Component component) {
 		ListIterator iterator = list.listIterator(0);
 
-		while (iterator.hasNext())
-		{
+		while (iterator.hasNext()) {
 			Entry entry = (Entry) iterator.next();
 
 			if (entry.component == component)
-				return new TableLayoutConstraints
-				(entry.col1, entry.row1, entry.col2, entry.row2,
-						entry.hAlign, entry.vAlign);
+				return new TableLayoutConstraints(entry.col1, entry.row1, entry.col2, entry.row2, entry.hAlign,
+						entry.vAlign);
 		}
 
 		return null;
 	}
 
-
-
 	/**
 	 * Sets the constraints of a given component.
-	 *
-	 * @param component     desired component.  This parameter cannot be null.
-	 * @param constraint    new set of constraints.  This parameter cannot be null.
-	 *
+	 * 
+	 * @param component
+	 *           desired component. This parameter cannot be null.
+	 * @param constraint
+	 *           new set of constraints. This parameter cannot be null.
+	 * 
 	 * @return If the given component is found, the constraints associated with
-	 *         that component.  If the given component is null or is not found,
+	 *         that component. If the given component is null or is not found,
 	 *         null is returned.
 	 */
 
-	public void setConstraints
-	(Component component, TableLayoutConstraints constraint)
-	{
+	public void setConstraints(Component component, TableLayoutConstraints constraint) {
 		// Check parameters
 		if (component == null)
-			throw new IllegalArgumentException
-			("Parameter component cannot be null.");
+			throw new IllegalArgumentException("Parameter component cannot be null.");
 		else if (constraint == null)
-			throw new IllegalArgumentException
-			("Parameter constraint cannot be null.");
+			throw new IllegalArgumentException("Parameter constraint cannot be null.");
 
 		// Find and update constraints for the given component
 		ListIterator iterator = list.listIterator(0);
 
-		while (iterator.hasNext())
-		{
+		while (iterator.hasNext()) {
 			Entry entry = (Entry) iterator.next();
 
 			if (entry.component == component)
-				iterator.set (new Entry(component, constraint));
+				iterator.set(new Entry(component, constraint));
 		}
 	}
 
-
-
 	/**
-	 * Adjusts the number and sizes of rows in this layout.  After calling this
+	 * Adjusts the number and sizes of rows in this layout. After calling this
 	 * method, the caller should request this layout manager to perform the
-	 * layout.  This can be done with the following code:
-	 *
+	 * layout. This can be done with the following code:
+	 * 
 	 * <pre>
-	 *     layout.layoutContainer(container);
-	 *     container.repaint();
+	 * layout.layoutContainer(container);
+	 * container.repaint();
 	 * </pre>
-	 *
+	 * 
 	 * or
-	 *
+	 * 
 	 * <pre>
-	 *     window.pack()
+	 * window.pack()
 	 * </pre>
-	 *
+	 * 
 	 * If this is not done, the changes in the layout will not be seen until the
 	 * container is resized.
-	 *
-	 * @param column    heights of each of the columns
-	 *
+	 * 
+	 * @param column
+	 *           heights of each of the columns
+	 * 
 	 * @see getColumn
 	 */
 
-	public void setColumn (double column[])
-	{
+	public void setColumn(double column[]) {
 		// Copy columns
 		columnSpec = new double[column.length];
-		System.arraycopy (column, 0, columnSpec, 0, columnSpec.length);
+		System.arraycopy(column, 0, columnSpec, 0, columnSpec.length);
 
 		// Make sure columns are valid
 		for (int counter = 0; counter < columnSpec.length; counter++)
-			if ((columnSpec[counter] < 0.0) &&
-					(columnSpec[counter] != FILL) &&
-					(columnSpec[counter] != PREFERRED) &&
-					(columnSpec[counter] != MINIMUM))
-			{
+			if ((columnSpec[counter] < 0.0) && (columnSpec[counter] != FILL) && (columnSpec[counter] != PREFERRED)
+					&& (columnSpec[counter] != MINIMUM)) {
 				columnSpec[counter] = 0.0;
 			}
 
@@ -353,45 +319,40 @@ TableLayoutConstants
 		dirty = true;
 	}
 
-
-
 	/**
-	 * Adjusts the number and sizes of rows in this layout.  After calling this
+	 * Adjusts the number and sizes of rows in this layout. After calling this
 	 * method, the caller should request this layout manager to perform the
-	 * layout.  This can be done with the following code:
-	 *
+	 * layout. This can be done with the following code:
+	 * 
 	 * <code>
 	 *     layout.layoutContainer(container);
 	 *     container.repaint();
 	 * </code>
-	 *
+	 * 
 	 * or
-	 *
+	 * 
 	 * <pre>
-	 *     window.pack()
+	 * window.pack()
 	 * </pre>
-	 *
+	 * 
 	 * If this is not done, the changes in the layout will not be seen until the
 	 * container is resized.
-	 *
-	 * @param row    widths of each of the rows.  This parameter cannot be null.
-	 *
+	 * 
+	 * @param row
+	 *           widths of each of the rows. This parameter cannot be null.
+	 * 
 	 * @see getRow
 	 */
 
-	public void setRow (double row[])
-	{
+	public void setRow(double row[]) {
 		// Copy rows
 		rowSpec = new double[row.length];
-		System.arraycopy (row, 0, rowSpec, 0, rowSpec.length);
+		System.arraycopy(row, 0, rowSpec, 0, rowSpec.length);
 
 		// Make sure rows are valid
 		for (int counter = 0; counter < rowSpec.length; counter++)
-			if ((rowSpec[counter] < 0.0) &&
-					(rowSpec[counter] != FILL) &&
-					(rowSpec[counter] != PREFERRED) &&
-					(rowSpec[counter] != MINIMUM))
-			{
+			if ((rowSpec[counter] < 0.0) && (rowSpec[counter] != FILL) && (rowSpec[counter] != PREFERRED)
+					&& (rowSpec[counter] != MINIMUM)) {
 				rowSpec[counter] = 0.0;
 			}
 
@@ -399,42 +360,37 @@ TableLayoutConstants
 		dirty = true;
 	}
 
-
-
 	/**
-	 * Adjusts the width of a single column in this layout.  After calling this
+	 * Adjusts the width of a single column in this layout. After calling this
 	 * method, the caller should request this layout manager to perform the
-	 * layout.  This can be done with the following code:
-	 *
+	 * layout. This can be done with the following code:
+	 * 
 	 * <code>
 	 *     layout.layoutContainer(container);
 	 *     container.repaint();
 	 * </code>
-	 *
+	 * 
 	 * or
-	 *
+	 * 
 	 * <pre>
-	 *     window.pack()
+	 * window.pack()
 	 * </pre>
-	 *
+	 * 
 	 * If this is not done, the changes in the layout will not be seen until the
 	 * container is resized.
-	 *
-	 * @param i       zero-based index of column to set.  If this parameter is not
-	 *                valid, an ArrayOutOfBoundsException will be thrown.
-	 * @param size    width of the column.  This parameter cannot be null.
-	 *
+	 * 
+	 * @param i
+	 *           zero-based index of column to set. If this parameter is not
+	 *           valid, an ArrayOutOfBoundsException will be thrown.
+	 * @param size
+	 *           width of the column. This parameter cannot be null.
+	 * 
 	 * @see getColumn
 	 */
 
-	public void setColumn (int i, double size)
-	{
+	public void setColumn(int i, double size) {
 		// Make sure size is valid
-		if ((size < 0.0) &&
-				(size != FILL) &&
-				(size != PREFERRED) &&
-				(size != MINIMUM))
-		{
+		if ((size < 0.0) && (size != FILL) && (size != PREFERRED) && (size != MINIMUM)) {
 			size = 0.0;
 		}
 
@@ -445,42 +401,37 @@ TableLayoutConstants
 		dirty = true;
 	}
 
-
-
 	/**
-	 * Adjusts the height of a single row in this layout.  After calling this
+	 * Adjusts the height of a single row in this layout. After calling this
 	 * method, the caller should request this layout manager to perform the
-	 * layout.  This can be done with the following code:
-	 *
+	 * layout. This can be done with the following code:
+	 * 
 	 * <code>
 	 *     layout.layoutContainer(container);
 	 *     container.repaint();
 	 * </code>
-	 *
+	 * 
 	 * or
-	 *
+	 * 
 	 * <pre>
-	 *     window.pack()
+	 * window.pack()
 	 * </pre>
-	 *
+	 * 
 	 * If this is not done, the changes in the layout will not be seen until the
 	 * container is resized.
-	 *
-	 * @param i       zero-based index of row to set.  If this parameter is not
-	 *                valid, an ArrayOutOfBoundsException will be thrown.
-	 * @param size    height of the row.  This parameter cannot be null.
-	 *
+	 * 
+	 * @param i
+	 *           zero-based index of row to set. If this parameter is not valid,
+	 *           an ArrayOutOfBoundsException will be thrown.
+	 * @param size
+	 *           height of the row. This parameter cannot be null.
+	 * 
 	 * @see getRow
 	 */
 
-	public void setRow (int i, double size)
-	{
+	public void setRow(int i, double size) {
 		// Make sure size is valid
-		if ((size < 0.0) &&
-				(size != FILL) &&
-				(size != PREFERRED) &&
-				(size != MINIMUM))
-		{
+		if ((size < 0.0) && (size != FILL) && (size != PREFERRED) && (size != MINIMUM)) {
 			size = 0.0;
 		}
 
@@ -491,147 +442,123 @@ TableLayoutConstants
 		dirty = true;
 	}
 
-
-
 	/**
 	 * Gets the sizes of columns in this layout.
-	 *
+	 * 
 	 * @return widths of each of the columns
-	 *
+	 * 
 	 * @see setColumn
 	 */
 
-	public double [] getColumn ()
-	{
+	public double[] getColumn() {
 		// Copy columns
 		double column[] = new double[columnSpec.length];
-		System.arraycopy (columnSpec, 0, column, 0, column.length);
+		System.arraycopy(columnSpec, 0, column, 0, column.length);
 
 		return column;
 	}
 
-
-
 	/**
 	 * Gets the height of a single row in this layout.
-	 *
+	 * 
 	 * @return height of the requested row
-	 *
+	 * 
 	 * @see setRow
 	 */
 
-	public double [] getRow ()
-	{
+	public double[] getRow() {
 		// Copy rows
 		double row[] = new double[rowSpec.length];
-		System.arraycopy (rowSpec, 0, row, 0, row.length);
+		System.arraycopy(rowSpec, 0, row, 0, row.length);
 
 		return row;
 	}
 
-
-
 	/**
 	 * Gets the width of a single column in this layout.
-	 *
-	 * @param i    zero-based index of row to get.  If this parameter is not valid,
-	 *             an ArrayOutOfBoundsException will be thrown.
-	 *
+	 * 
+	 * @param i
+	 *           zero-based index of row to get. If this parameter is not valid,
+	 *           an ArrayOutOfBoundsException will be thrown.
+	 * 
 	 * @return width of the requested column
-	 *
+	 * 
 	 * @see setRow
 	 */
 
-	public double getColumn (int i)
-	{
+	public double getColumn(int i) {
 		return columnSpec[i];
 	}
 
-
-
 	/**
 	 * Gets the sizes of a row in this layout.
-	 *
-	 * @param i    zero-based index of row to get.  If this parameter is not valid,
-	 *             an ArrayOutOfBoundsException will be thrown.
-	 *
+	 * 
+	 * @param i
+	 *           zero-based index of row to get. If this parameter is not valid,
+	 *           an ArrayOutOfBoundsException will be thrown.
+	 * 
 	 * @return height of each of the requested row
-	 *
+	 * 
 	 * @see setRow
 	 */
 
-	public double getRow (int i)
-	{
+	public double getRow(int i) {
 		return rowSpec[i];
 	}
 
-
-
 	/**
 	 * Gets the number of columns in this layout.
-	 *
+	 * 
 	 * @return the number of columns
 	 */
 
-	public int getNumColumn ()
-	{
+	public int getNumColumn() {
 		return columnSpec.length;
 	}
 
-
-
 	/**
 	 * Gets the number of rows in this layout.
-	 *
+	 * 
 	 * @return the number of rows
 	 */
 
-	public int getNumRow ()
-	{
+	public int getNumRow() {
 		return rowSpec.length;
 	}
 
-
-
-	//******************************************************************************
-	//** Insertion/Deletion methods                                              ***
-	//******************************************************************************
-
-
+	// ******************************************************************************
+	// ** Insertion/Deletion methods ***
+	// ******************************************************************************
 
 	/**
-	 * Inserts a column in this layout.  All components to the right of the
-	 * insertion point are moved right one column.  The container will need to
-	 * be laid out after this method returns.  See <code>setColumn</code>.
-	 *
-	 * @param i       zero-based index at which to insert the column.
-	 * @param size    size of the column to be inserted
-	 *
+	 * Inserts a column in this layout. All components to the right of the
+	 * insertion point are moved right one column. The container will need to be
+	 * laid out after this method returns. See <code>setColumn</code>.
+	 * 
+	 * @param i
+	 *           zero-based index at which to insert the column.
+	 * @param size
+	 *           size of the column to be inserted
+	 * 
 	 * @see setColumn
 	 * @see deleteColumn
 	 */
 
-	public void insertColumn (int i, double size)
-	{
+	public void insertColumn(int i, double size) {
 		// Make sure position is valid
 		if ((i < 0) || (i > columnSpec.length))
-			throw new IllegalArgumentException
-			("Parameter i is invalid.  i = " + i + ".  Valid range is [0, " +
-					columnSpec.length + "].");
+			throw new IllegalArgumentException("Parameter i is invalid.  i = " + i + ".  Valid range is [0, "
+					+ columnSpec.length + "].");
 
 		// Make sure column size is valid
-		if ((size < 0.0) &&
-				(size != FILL) &&
-				(size != PREFERRED) &&
-				(size != MINIMUM))
-		{
+		if ((size < 0.0) && (size != FILL) && (size != PREFERRED) && (size != MINIMUM)) {
 			size = 0.0;
 		}
 
 		// Copy columns
 		double column[] = new double[columnSpec.length + 1];
-		System.arraycopy (columnSpec, 0, column, 0, i);
-		System.arraycopy (columnSpec, i, column, i + 1, columnSpec.length - i);
+		System.arraycopy(columnSpec, 0, column, 0, i);
+		System.arraycopy(columnSpec, i, column, i + 1, columnSpec.length - i);
 
 		// Insert column
 		column[i] = size;
@@ -640,8 +567,7 @@ TableLayoutConstants
 		// Move all components that are to the right of new row
 		ListIterator iterator = list.listIterator(0);
 
-		while (iterator.hasNext())
-		{
+		while (iterator.hasNext()) {
 			// Get next entry
 			Entry entry = (Entry) iterator.next();
 
@@ -660,41 +586,35 @@ TableLayoutConstants
 		dirty = true;
 	}
 
-
-
 	/**
-	 * Inserts a row in this layout.  All components below the insertion point
-	 * are moved down one row.  The container will need to be laid out after this
-	 * method returns.  See <code>setRow</code>.
-	 *
-	 * @param i       zero-based index at which to insert the column.
-	 * @param size    size of the row to be inserted
-	 *
+	 * Inserts a row in this layout. All components below the insertion point are
+	 * moved down one row. The container will need to be laid out after this
+	 * method returns. See <code>setRow</code>.
+	 * 
+	 * @param i
+	 *           zero-based index at which to insert the column.
+	 * @param size
+	 *           size of the row to be inserted
+	 * 
 	 * @see setRow
 	 * @see deleteRow
 	 */
 
-	public void insertRow (int i, double size)
-	{
+	public void insertRow(int i, double size) {
 		// Make sure position is valid
 		if ((i < 0) || (i > rowSpec.length))
-			throw new IllegalArgumentException
-			("Parameter i is invalid.  i = " + i + ".  Valid range is [0, " +
-					rowSpec.length + "].");
+			throw new IllegalArgumentException("Parameter i is invalid.  i = " + i + ".  Valid range is [0, "
+					+ rowSpec.length + "].");
 
 		// Make sure row size is valid
-		if ((size < 0.0) &&
-				(size != FILL) &&
-				(size != PREFERRED) &&
-				(size != MINIMUM))
-		{
+		if ((size < 0.0) && (size != FILL) && (size != PREFERRED) && (size != MINIMUM)) {
 			size = 0.0;
 		}
 
 		// Copy rows
 		double row[] = new double[rowSpec.length + 1];
-		System.arraycopy (rowSpec, 0, row, 0, i);
-		System.arraycopy (rowSpec, i, row, i + 1, rowSpec.length - i);
+		System.arraycopy(rowSpec, 0, row, 0, i);
+		System.arraycopy(rowSpec, i, row, i + 1, rowSpec.length - i);
 
 		// Insert row
 		row[i] = size;
@@ -703,8 +623,7 @@ TableLayoutConstants
 		// Move all components that are below the new row
 		ListIterator iterator = list.listIterator(0);
 
-		while (iterator.hasNext())
-		{
+		while (iterator.hasNext()) {
 			// Get next entry
 			Entry entry = (Entry) iterator.next();
 
@@ -723,31 +642,28 @@ TableLayoutConstants
 		dirty = true;
 	}
 
-
-
 	/**
-	 * Deletes a column in this layout.  All components to the right of the
-	 * deletion point are moved left one column.  The container will need to
-	 * be laid out after this method returns.  See <code>setColumn</code>.
-	 *
-	 * @param i    zero-based index of column to delete
-	 *
+	 * Deletes a column in this layout. All components to the right of the
+	 * deletion point are moved left one column. The container will need to be
+	 * laid out after this method returns. See <code>setColumn</code>.
+	 * 
+	 * @param i
+	 *           zero-based index of column to delete
+	 * 
 	 * @see setColumn
 	 * @see deleteColumn
 	 */
 
-	public void deleteColumn (int i)
-	{
+	public void deleteColumn(int i) {
 		// Make sure position is valid
 		if ((i < 0) || (i >= columnSpec.length))
-			throw new IllegalArgumentException
-			("Parameter i is invalid.  i = " + i + ".  Valid range is [0, " +
-					(columnSpec.length - 1) + "].");
+			throw new IllegalArgumentException("Parameter i is invalid.  i = " + i + ".  Valid range is [0, "
+					+ (columnSpec.length - 1) + "].");
 
 		// Copy columns
 		double column[] = new double[columnSpec.length - 1];
-		System.arraycopy (columnSpec, 0, column, 0, i);
-		System.arraycopy (columnSpec, i + 1, column, i, columnSpec.length - i - 1);
+		System.arraycopy(columnSpec, 0, column, 0, i);
+		System.arraycopy(columnSpec, i + 1, column, i, columnSpec.length - i - 1);
 
 		// Delete column
 		columnSpec = column;
@@ -755,8 +671,7 @@ TableLayoutConstants
 		// Move all components that are to the right of row deleted
 		ListIterator iterator = list.listIterator(0);
 
-		while (iterator.hasNext())
-		{
+		while (iterator.hasNext()) {
 			// Get next entry
 			Entry entry = (Entry) iterator.next();
 
@@ -775,32 +690,29 @@ TableLayoutConstants
 		dirty = true;
 	}
 
-
-
 	/**
-	 * Deletes a row in this layout.  All components below the deletion point are
-	 * moved up one row.  The container will need to be laid out after this method
-	 * returns.  See <code>setRow</code>.  There must be at least two rows in order
+	 * Deletes a row in this layout. All components below the deletion point are
+	 * moved up one row. The container will need to be laid out after this method
+	 * returns. See <code>setRow</code>. There must be at least two rows in order
 	 * to delete a row.
-	 *
-	 * @param i    zero-based index of column to delete
-	 *
+	 * 
+	 * @param i
+	 *           zero-based index of column to delete
+	 * 
 	 * @see setRow
 	 * @see deleteRow
 	 */
 
-	public void deleteRow (int i)
-	{
+	public void deleteRow(int i) {
 		// Make sure position is valid
 		if ((i < 0) || (i >= rowSpec.length))
-			throw new IllegalArgumentException
-			("Parameter i is invalid.  i = " + i + ".  Valid range is [0, " +
-					(rowSpec.length - 1) + "].");
+			throw new IllegalArgumentException("Parameter i is invalid.  i = " + i + ".  Valid range is [0, "
+					+ (rowSpec.length - 1) + "].");
 
 		// Copy rows
 		double row[] = new double[rowSpec.length - 1];
-		System.arraycopy (rowSpec, 0, row, 0, i);
-		System.arraycopy (rowSpec, i + 1, row, i, rowSpec.length - i - 1);
+		System.arraycopy(rowSpec, 0, row, 0, i);
+		System.arraycopy(rowSpec, i + 1, row, i, rowSpec.length - i - 1);
 
 		// Delete row
 		rowSpec = row;
@@ -808,8 +720,7 @@ TableLayoutConstants
 		// Move all components that are to below the row deleted
 		ListIterator iterator = list.listIterator(0);
 
-		while (iterator.hasNext())
-		{
+		while (iterator.hasNext()) {
 			// Get next entry
 			Entry entry = (Entry) iterator.next();
 
@@ -828,85 +739,73 @@ TableLayoutConstants
 		dirty = true;
 	}
 
-
-
-	//******************************************************************************
-	//** Misc methods                                                            ***
-	//******************************************************************************
-
-
+	// ******************************************************************************
+	// ** Misc methods ***
+	// ******************************************************************************
 
 	/**
 	 * Converts this TableLayout to a string.
-	 *
+	 * 
 	 * @return a string representing the columns and row sizes in the form
 	 *         "{{col0, col1, col2, ..., colN}, {row0, row1, row2, ..., rowM}}"
 	 */
 
 	@Override
-	public String toString ()
-	{
+	public String toString() {
 		int counter;
 
 		String value = "TableLayout {{";
 
-		if (columnSpec.length > 0)
-		{
+		if (columnSpec.length > 0) {
 			for (counter = 0; counter < columnSpec.length - 1; counter++)
 				value += columnSpec[counter] + ", ";
 
 			value += columnSpec[columnSpec.length - 1] + "}, {";
-		}
-		else
+		} else
 			value += "}, {";
 
-		if (rowSpec.length > 0)
-		{
+		if (rowSpec.length > 0) {
 			for (counter = 0; counter < rowSpec.length - 1; counter++)
 				value += rowSpec[counter] + ", ";
 
 			value += rowSpec[rowSpec.length - 1] + "}}";
-		}
-		else
+		} else
 			value += "}}";
 
 		return value;
 	}
 
-
-
 	/**
-	 * Draws a grid on the given container.  This is useful for seeing where the
-	 * rows and columns go.  In the container's paint method, call this method.
-	 *
-	 * @param container    container using this TableLayout
-	 * @param g            graphics content of container (can be offscreen)
+	 * Draws a grid on the given container. This is useful for seeing where the
+	 * rows and columns go. In the container's paint method, call this method.
+	 * 
+	 * @param container
+	 *           container using this TableLayout
+	 * @param g
+	 *           graphics content of container (can be offscreen)
 	 */
 
-	public void drawGrid (Container container, Graphics g)
-	{
+	public void drawGrid(Container container, Graphics g) {
 		// Calculate the sizes of the rows and columns
 		Dimension d = container.getSize();
 
 		if (dirty || (d.width != oldWidth) || (d.height != oldHeight))
-			calculateSize (container);
+			calculateSize(container);
 
 		// Initialize y
 		int y = 0;
 
-		for (int row = 0; row < rowSize.length; row++)
-		{
+		for (int row = 0; row < rowSize.length; row++) {
 			// Initialize x
 			int x = 0;
 
-			for (int column = 0; column < columnSize.length; column++)
-			{
+			for (int column = 0; column < columnSize.length; column++) {
 				// Use a random color to make things easy to see
 				Color color = new Color((int) (Math.random() * 0xFFFFFFL));
-				g.setColor (color);
+				g.setColor(color);
 
 				// Draw the cell as a solid rectangle
-				g.fillRect (x, y, columnSize[column], rowSize[row]);
+				g.fillRect(x, y, columnSize[column], rowSize[row]);
 
 				// Increment x
 				x += columnSize[column];
@@ -917,38 +816,31 @@ TableLayoutConstants
 		}
 	}
 
-
-
 	/**
-	 * Determines whether or not there are any hidden components.  A hidden
+	 * Determines whether or not there are any hidden components. A hidden
 	 * component is one that will not be shown with this layout's current
-	 * configuration.  Such a component is, at least partly, in an invalid row
-	 * or column.  For example, on a table with five rows, row -1 and row 5 are both
-	 * invalid.  Valid rows are 0 through 4, inclusively.
-	 *
-	 * @return    True, if there are any hidden components.  False, otherwise.
-	 *
+	 * configuration. Such a component is, at least partly, in an invalid row or
+	 * column. For example, on a table with five rows, row -1 and row 5 are both
+	 * invalid. Valid rows are 0 through 4, inclusively.
+	 * 
+	 * @return True, if there are any hidden components. False, otherwise.
+	 * 
 	 * @see overlapping
 	 */
 
-	public boolean hidden ()
-	{
+	public boolean hidden() {
 		// Assume no components are hidden
 		boolean hidden = false;
 
 		// Check all components
 		ListIterator iterator = list.listIterator(0);
 
-		while (iterator.hasNext())
-		{
+		while (iterator.hasNext()) {
 			// Get next entry
 			Entry entry = (Entry) iterator.next();
 
 			// Is this component valid
-			if ((entry.row1 < 0) || (entry.col1 < 0) ||
-					(entry.row2 > rowSpec.length) ||
-					(entry.col2 > columnSpec.length))
-			{
+			if ((entry.row1 < 0) || (entry.col1 < 0) || (entry.row2 > rowSpec.length) || (entry.col2 > columnSpec.length)) {
 				hidden = true;
 				break;
 			}
@@ -957,19 +849,17 @@ TableLayoutConstants
 		return hidden;
 	}
 
-
-
 	/**
-	 * Determines whether or not there are any overlapping components.  Two
+	 * Determines whether or not there are any overlapping components. Two
 	 * components overlap if they cover at least one common cell.
-	 *
-	 * @return    True, if there are any overlapping components.  False, otherwise.
-	 *
+	 * 
+	 * @return True, if there are any overlapping components. False, otherwise.
+	 * 
 	 * @see hidden
 	 */
 
-	public boolean overlapping ()
-	{
+	@SuppressWarnings("unchecked")
+	public boolean overlapping() {
 		// Count contraints
 		int numEntry = list.size();
 
@@ -986,23 +876,11 @@ TableLayoutConstants
 		// Check all components
 		for (int knowUnique = 1; knowUnique < numEntry; knowUnique++)
 			for (int checking = knowUnique - 1; checking >= 0; checking--)
-				if
-				(
-						(
-								(entry[checking].col1 >= entry[knowUnique].col1) &&
-								(entry[checking].col1 <= entry[knowUnique].col2) &&
-								(entry[checking].row1 >= entry[knowUnique].row1) &&
-								(entry[checking].row1 <= entry[knowUnique].row2)
-						)
-						||
-						(
-								(entry[checking].col2 >= entry[knowUnique].col1) &&
-								(entry[checking].col2 <= entry[knowUnique].col2) &&
-								(entry[checking].row2 >= entry[knowUnique].row1) &&
-								(entry[checking].row2 <= entry[knowUnique].row2)
-						)
-				)
-				{
+				if (((entry[checking].col1 >= entry[knowUnique].col1) && (entry[checking].col1 <= entry[knowUnique].col2)
+						&& (entry[checking].row1 >= entry[knowUnique].row1) && (entry[checking].row1 <= entry[knowUnique].row2))
+						|| ((entry[checking].col2 >= entry[knowUnique].col1)
+								&& (entry[checking].col2 <= entry[knowUnique].col2)
+								&& (entry[checking].row2 >= entry[knowUnique].row1) && (entry[checking].row2 <= entry[knowUnique].row2))) {
 					overlapping = true;
 					break;
 				}
@@ -1010,19 +888,17 @@ TableLayoutConstants
 		return overlapping;
 	}
 
-
-
 	/**
 	 * Calculates the sizes of the rows and columns based on the absolute and
-	 * relative sizes specified in <code>rowSpec</code> and <code>columnSpec</code>
-	 * and the size of the container.  The result is stored in <code>rowSize</code>
-	 * and <code>columnSize</code>.
-	 *
-	 * @param container    container using this TableLayout
+	 * relative sizes specified in <code>rowSpec</code> and
+	 * <code>columnSpec</code> and the size of the container. The result is
+	 * stored in <code>rowSize</code> and <code>columnSize</code>.
+	 * 
+	 * @param container
+	 *           container using this TableLayout
 	 */
 
-	protected void calculateSize (Container container)
-	{
+	protected void calculateSize(Container container) {
 		int counter; // Counting variable;
 
 		// Get number of rows and columns
@@ -1048,8 +924,7 @@ TableLayoutConstants
 		// Assign absolute widths; this reduces available width
 		for (counter = 0; counter < numColumn; counter++)
 			// Is the current column an absolue size
-			if ((columnSpec[counter] >= 1.0) || (columnSpec[counter] == 0.0))
-			{
+			if ((columnSpec[counter] >= 1.0) || (columnSpec[counter] == 0.0)) {
 				// Assign absolute width
 				columnSize[counter] = (int) (columnSpec[counter] + 0.5);
 
@@ -1060,8 +935,7 @@ TableLayoutConstants
 		// Assign absolute heights; this reduces available height
 		for (counter = 0; counter < numRow; counter++)
 			// Is the current column an absolue size
-			if ((rowSpec[counter] >= 1.0) || (rowSpec[counter] == 0.0))
-			{
+			if ((rowSpec[counter] >= 1.0) || (rowSpec[counter] == 0.0)) {
 				// Assign absolute width
 				rowSize[counter] = (int) (rowSpec[counter] + 0.5);
 
@@ -1076,9 +950,7 @@ TableLayoutConstants
 		// within the column.
 		for (counter = 0; counter < numColumn; counter++)
 			// Is the current column a preferred size
-			if ((columnSpec[counter] == PREFERRED) ||
-					(columnSpec[counter] == MINIMUM))
-			{
+			if ((columnSpec[counter] == PREFERRED) || (columnSpec[counter] == MINIMUM)) {
 				// Assume a maximum width of zero
 				int maxWidth = 0;
 
@@ -1086,20 +958,17 @@ TableLayoutConstants
 				// contained within this column
 				ListIterator iterator = list.listIterator(0);
 
-				while (iterator.hasNext())
-				{
+				while (iterator.hasNext()) {
 					Entry entry = (Entry) iterator.next();
 
-					if ((entry.col1 == counter) && (entry.col2 == counter))
-					{
-						Dimension p = (columnSpec[counter] == PREFERRED) ?
-								entry.component.getPreferredSize() :
-									entry.component.getMinimumSize();
+					if ((entry.col1 == counter) && (entry.col2 == counter)) {
+						Dimension p = (columnSpec[counter] == PREFERRED) ? entry.component.getPreferredSize()
+								: entry.component.getMinimumSize();
 
-								int width = (p == null) ? 0 : p.width;
+						int width = (p == null) ? 0 : p.width;
 
-								if (maxWidth < width)
-									maxWidth = width;
+						if (maxWidth < width)
+							maxWidth = width;
 					}
 				}
 
@@ -1113,13 +982,12 @@ TableLayoutConstants
 		// Assign preferred and minimum heights; this reduces available height.
 		// Assignment of preferred/minimum with is like assignment of absolute
 		// heights except that each row must determine the maximum
-		// preferred/minimum height of the components that are completely contained
+		// preferred/minimum height of the components that are completely
+		// contained
 		// within the row.
 		for (counter = 0; counter < numRow; counter++)
 			// Is the current row a preferred size
-			if ((rowSpec[counter] == PREFERRED) ||
-					(rowSpec[counter] == MINIMUM))
-			{
+			if ((rowSpec[counter] == PREFERRED) || (rowSpec[counter] == MINIMUM)) {
 				// Assume a maximum height of zero
 				int maxHeight = 0;
 
@@ -1127,20 +995,17 @@ TableLayoutConstants
 				// contained within this row
 				ListIterator iterator = list.listIterator(0);
 
-				while (iterator.hasNext())
-				{
+				while (iterator.hasNext()) {
 					Entry entry = (Entry) iterator.next();
 
-					if ((entry.row1 == counter) && (entry.row2 == counter))
-					{
-						Dimension p = (rowSpec[counter] == PREFERRED) ?
-								entry.component.getPreferredSize() :
-									entry.component.getMinimumSize();
+					if ((entry.row1 == counter) && (entry.row2 == counter)) {
+						Dimension p = (rowSpec[counter] == PREFERRED) ? entry.component.getPreferredSize() : entry.component
+								.getMinimumSize();
 
-								int height = (p == null) ? 0 : p.height;
+						int height = (p == null) ? 0 : p.height;
 
-								if (maxHeight < height)
-									maxHeight = height;
+						if (maxHeight < height)
+							maxHeight = height;
 					}
 				}
 
@@ -1165,11 +1030,9 @@ TableLayoutConstants
 		// Assign relative widths
 		for (counter = 0; counter < numColumn; counter++)
 			// Is the current column an relative size
-			if ((columnSpec[counter] > 0.0) && (columnSpec[counter] < 1.0))
-			{
+			if ((columnSpec[counter] > 0.0) && (columnSpec[counter] < 1.0)) {
 				// Assign relative width
-				columnSize[counter] =
-					(int) (columnSpec[counter] * relativeWidth + 0.5);
+				columnSize[counter] = (int) (columnSpec[counter] * relativeWidth + 0.5);
 
 				// Reduce available width
 				availableWidth -= columnSize[counter];
@@ -1178,8 +1041,7 @@ TableLayoutConstants
 		// Assign relative widths
 		for (counter = 0; counter < numRow; counter++)
 			// Is the current column an relative size
-			if ((rowSpec[counter] > 0.0) && (rowSpec[counter] < 1.0))
-			{
+			if ((rowSpec[counter] > 0.0) && (rowSpec[counter] < 1.0)) {
 				// Assign relative width
 				rowSize[counter] = (int) (rowSpec[counter] * relativeHeight + 0.5);
 
@@ -1206,7 +1068,8 @@ TableLayoutConstants
 			if (rowSpec[counter] == FILL)
 				numFillHeight++;
 
-		// If numFillWidth (numFillHeight) is zero, the cooresponding if statements
+		// If numFillWidth (numFillHeight) is zero, the cooresponding if
+		// statements
 		// will always evaluate to false and the division will not occur.
 
 		// If there are more than one "fill" cell, slack may occur due to rounding
@@ -1216,33 +1079,27 @@ TableLayoutConstants
 
 		// Assign "fill" cells equal amounts of the remaining space
 		for (counter = 0; counter < numColumn; counter++)
-			if (columnSpec[counter] == FILL)
-			{
+			if (columnSpec[counter] == FILL) {
 				columnSize[counter] = availableWidth / numFillWidth;
 				slackWidth -= columnSize[counter];
 			}
 
 		for (counter = 0; counter < numRow; counter++)
-			if (rowSpec[counter] == FILL)
-			{
+			if (rowSpec[counter] == FILL) {
 				rowSize[counter] = availableHeight / numFillHeight;
 				slackHeight -= rowSize[counter];
 			}
 
 		// Add slack to the last "fill" cell
-		for (counter = numColumn - 1; counter >= 0; counter--)
-		{
-			if (columnSpec[counter] == FILL)
-			{
+		for (counter = numColumn - 1; counter >= 0; counter--) {
+			if (columnSpec[counter] == FILL) {
 				// columnSize[counter] += slackWidth;
 				break;
 			}
 		}
 
-		for (counter = numRow - 1; counter >= 0; counter--)
-		{
-			if (rowSpec[counter] == FILL)
-			{
+		for (counter = numRow - 1; counter >= 0; counter--) {
+			if (rowSpec[counter] == FILL) {
 				// rowSize[counter] += slackHeight;
 				break;
 			}
@@ -1253,16 +1110,14 @@ TableLayoutConstants
 		columnOffset[0] = inset.left;
 
 		for (counter = 0; counter < numColumn; counter++)
-			columnOffset[counter + 1] =
-				columnOffset[counter] + columnSize[counter];
+			columnOffset[counter + 1] = columnOffset[counter] + columnSize[counter];
 
 		// Calculate offsets of each row (done for effeciency)
 		rowOffset = new int[numRow + 1];
 		rowOffset[0] = inset.top;
 
 		for (counter = 0; counter < numRow; counter++)
-			rowOffset[counter + 1] =
-				rowOffset[counter] + rowSize[counter];
+			rowOffset[counter + 1] = rowOffset[counter] + rowSize[counter];
 
 		// Indicate that the size of the cells are known for the container's
 		// current size
@@ -1271,26 +1126,24 @@ TableLayoutConstants
 		oldHeight = totalHeight;
 	}
 
-
-
-	//******************************************************************************
-	//** java.awt.event.LayoutManager methods                                    ***
-	//******************************************************************************
-
-
+	// ******************************************************************************
+	// ** java.awt.event.LayoutManager methods ***
+	// ******************************************************************************
 
 	/**
-	 * To lay out the specified container using this layout.  This method reshapes
+	 * To lay out the specified container using this layout. This method reshapes
 	 * the components in the specified target container in order to satisfy the
 	 * constraints of all components.
-	 *
-	 * <p>User code should not have to call this method directly.</p>
-	 *
-	 * @param container    container being served by this layout manager
+	 * 
+	 * <p>
+	 * User code should not have to call this method directly.
+	 * </p>
+	 * 
+	 * @param container
+	 *           container being served by this layout manager
 	 */
 
-	public void layoutContainer (Container container)
-	{
+	public void layoutContainer(Container container) {
 		int x, y; // Coordinates of the currnet component in pixels
 		int w, h; // Width and height of the current component in pixels
 
@@ -1298,22 +1151,19 @@ TableLayoutConstants
 		Dimension d = container.getSize();
 
 		if (dirty || (d.width != oldWidth) || (d.height != oldHeight))
-			calculateSize (container);
+			calculateSize(container);
 
 		// Get components
 		Component component[] = container.getComponents();
 
 		// Layout components
-		for (int counter = 0; counter < component.length; counter++)
-		{
-			try
-			{
+		for (int counter = 0; counter < component.length; counter++) {
+			try {
 				// Get the entry entry for the next component
 				ListIterator iterator = list.listIterator(0);
 				Entry entry = null;
 
-				while (iterator.hasNext())
-				{
+				while (iterator.hasNext()) {
 					entry = (Entry) iterator.next();
 
 					if (entry.component == component[counter])
@@ -1327,11 +1177,10 @@ TableLayoutConstants
 					break;
 
 				// Does the entry occupy a single cell
-				if (entry.singleCell)
-				{
+				if (entry.singleCell) {
 					// The following block of code has been optimized so that the
 					// preferred size of the component is only obtained if it is
-					// needed.  There are components in which the getPreferredSize
+					// needed. There are components in which the getPreferredSize
 					// method is extremely expensive, such as data driven controls
 					// with a large amount of data.
 
@@ -1339,10 +1188,8 @@ TableLayoutConstants
 					int preferredWidth = 0;
 					int preferredHeight = 0;
 
-					if ((entry.hAlign != FULL) || (entry.vAlign != FULL))
-					{
-						Dimension preferredSize =
-							component[counter].getPreferredSize();
+					if ((entry.hAlign != FULL) || (entry.vAlign != FULL)) {
+						Dimension preferredSize = component[counter].getPreferredSize();
 
 						preferredWidth = preferredSize.width;
 						preferredHeight = preferredSize.height;
@@ -1353,8 +1200,7 @@ TableLayoutConstants
 					int cellHeight = rowSize[entry.row1];
 
 					// Determine the width of the component
-					if ((entry.hAlign == FULL) ||
-							(cellWidth < preferredWidth))
+					if ((entry.hAlign == FULL) || (cellWidth < preferredWidth))
 						// Use the width of the cell
 						w = cellWidth;
 					else
@@ -1362,36 +1208,34 @@ TableLayoutConstants
 						w = preferredWidth;
 
 					// Determine left and right boarders
-					switch (entry.hAlign)
-					{
-						case LEFT :
-							// Align left side along left edge of cell
-							x = columnOffset[entry.col1];
-							break;
+					switch (entry.hAlign) {
+					case LEFT:
+						// Align left side along left edge of cell
+						x = columnOffset[entry.col1];
+						break;
 
-						case RIGHT :
-							// Align right side along right edge of cell
-							x = columnOffset[entry.col1 + 1] - w;
-							break;
+					case RIGHT:
+						// Align right side along right edge of cell
+						x = columnOffset[entry.col1 + 1] - w;
+						break;
 
-						case CENTER :
-							// Center justify component
-							x = columnOffset[entry.col1] + ((cellWidth - w) >> 1);
-							break;
+					case CENTER:
+						// Center justify component
+						x = columnOffset[entry.col1] + ((cellWidth - w) >> 1);
+						break;
 
-						case FULL :
-							// Align left side along left edge of cell
-							x = columnOffset[entry.col1];
-							break;
+					case FULL:
+						// Align left side along left edge of cell
+						x = columnOffset[entry.col1];
+						break;
 
-						default :
-							// This is a never should happen case, but just in case
-							x = 0;
+					default:
+						// This is a never should happen case, but just in case
+						x = 0;
 					}
 
 					// Determine the height of the component
-					if ((entry.vAlign == FULL) ||
-							(cellHeight < preferredHeight))
+					if ((entry.vAlign == FULL) || (cellHeight < preferredHeight))
 						// Use the height of the cell
 						h = cellHeight;
 					else
@@ -1399,35 +1243,32 @@ TableLayoutConstants
 						h = preferredHeight;
 
 					// Determine top and bottom boarders
-					switch (entry.vAlign)
-					{
-						case TOP :
-							// Align top side along top edge of cell
-							y = rowOffset[entry.row1];
-							break;
+					switch (entry.vAlign) {
+					case TOP:
+						// Align top side along top edge of cell
+						y = rowOffset[entry.row1];
+						break;
 
-						case BOTTOM :
-							// Align right side along right edge of cell
-							y = rowOffset[entry.row1 + 1] - h;
-							break;
+					case BOTTOM:
+						// Align right side along right edge of cell
+						y = rowOffset[entry.row1 + 1] - h;
+						break;
 
-						case CENTER :
-							// Center justify component
-							y = rowOffset[entry.row1] + ((cellHeight - h) >> 1);
-							break;
+					case CENTER:
+						// Center justify component
+						y = rowOffset[entry.row1] + ((cellHeight - h) >> 1);
+						break;
 
-						case FULL :
-							// Align right side along right edge of cell
-							y = rowOffset[entry.row1];
-							break;
+					case FULL:
+						// Align right side along right edge of cell
+						y = rowOffset[entry.row1];
+						break;
 
-						default :
-							// This is a never should happen case, but just in case
-							y = 0;
+					default:
+						// This is a never should happen case, but just in case
+						y = 0;
 					}
-				}
-				else
-				{
+				} else {
 					// Align left side with left boarder of first column
 					x = columnOffset[entry.col1];
 
@@ -1435,57 +1276,52 @@ TableLayoutConstants
 					y = rowOffset[entry.row1];
 
 					// Align right side with right boarder of second column
-					w = columnOffset[entry.col2 + 1] -
-					columnOffset[entry.col1];
+					w = columnOffset[entry.col2 + 1] - columnOffset[entry.col1];
 
 					// Align bottom side with bottom boarder of second row
 					h = rowOffset[entry.row2 + 1] - rowOffset[entry.row1];
 				}
 
 				// Move and resize component
-				component[counter].setBounds (x, y, w, h);
-			}
-			catch (Exception error)
-			{
+				component[counter].setBounds(x, y, w, h);
+			} catch (Exception error) {
 				// If any error occurs, skip this component
 				continue;
 			}
 		}
 	}
 
-
-
 	/**
 	 * Determines the preferred size of the container argument using this layout.
 	 * The preferred size is the smallest size that, if used for the container's
 	 * size, will ensure that all components are at least as large as their
-	 * preferred size.  This method cannot guarantee that all components will be
-	 * their preferred size.  For example, if component A and component B are each
-	 * allocate half of the container's width and component A wants to be 10 pixels
-	 * wide while component B wants to be 100 pixels wide, they cannot both be
-	 * accommodated.  Since in general components rather be larger than their
-	 * preferred size instead of smaller, component B's request will be fulfilled.
-	 * The preferred size of the container would be 200 pixels.
-	 *
-	 * @param container    container being served by this layout manager
-	 *
+	 * preferred size. This method cannot guarantee that all components will be
+	 * their preferred size. For example, if component A and component B are each
+	 * allocate half of the container's width and component A wants to be 10
+	 * pixels wide while component B wants to be 100 pixels wide, they cannot
+	 * both be accommodated. Since in general components rather be larger than
+	 * their preferred size instead of smaller, component B's request will be
+	 * fulfilled. The preferred size of the container would be 200 pixels.
+	 * 
+	 * @param container
+	 *           container being served by this layout manager
+	 * 
 	 * @return a dimension indicating the container's preferred size
 	 */
 
-	public Dimension preferredLayoutSize (Container container)
-	{
-		Dimension size;       // Preferred size of current component
-		int scaledWidth = 0;  // Preferred width of scalled components
+	public Dimension preferredLayoutSize(Container container) {
+		Dimension size; // Preferred size of current component
+		int scaledWidth = 0; // Preferred width of scalled components
 		int scaledHeight = 0; // Preferred height of scalled components
-		int temp;             // Temporary variable used to compare sizes
-		int counter;          // Counting variable
+		int temp; // Temporary variable used to compare sizes
+		int counter; // Counting variable
 
-		// Determine percentage of space allocated to fill components.  This is
+		// Determine percentage of space allocated to fill components. This is
 		// one minus the sum of all scalable components.
 		double fillWidthRatio = 1.0;
 		double fillHeightRatio = 1.0;
-		int    numFillWidth = 0;
-		int    numFillHeight = 0;
+		int numFillWidth = 0;
+		int numFillHeight = 0;
 
 		for (counter = 0; counter < columnSpec.length; counter++)
 			if ((columnSpec[counter] > 0.0) && (columnSpec[counter] < 1.0))
@@ -1518,9 +1354,7 @@ TableLayoutConstants
 
 		for (counter = 0; counter < columnSpec.length; counter++)
 			// Is the current column a preferred/minimum size
-			if ((columnSpec[counter] == PREFERRED) ||
-					(columnSpec[counter] == MINIMUM))
-			{
+			if ((columnSpec[counter] == PREFERRED) || (columnSpec[counter] == MINIMUM)) {
 				// Assume a maximum width of zero
 				int maxWidth = 0;
 
@@ -1528,20 +1362,17 @@ TableLayoutConstants
 				// contained within this column
 				ListIterator iterator = list.listIterator(0);
 
-				while (iterator.hasNext())
-				{
+				while (iterator.hasNext()) {
 					Entry entry = (Entry) iterator.next();
 
-					if ((entry.col1 == counter) && (entry.col2 == counter))
-					{
-						Dimension p = (columnSpec[counter] == PREFERRED) ?
-								entry.component.getPreferredSize() :
-									entry.component.getMinimumSize();
+					if ((entry.col1 == counter) && (entry.col2 == counter)) {
+						Dimension p = (columnSpec[counter] == PREFERRED) ? entry.component.getPreferredSize()
+								: entry.component.getMinimumSize();
 
-								int width = (p == null) ? 0 : p.width;
+						int width = (p == null) ? 0 : p.width;
 
-								if (maxWidth < width)
-									maxWidth = width;
+						if (maxWidth < width)
+							maxWidth = width;
 					}
 				}
 
@@ -1549,15 +1380,12 @@ TableLayoutConstants
 				columnPrefMin[counter] = maxWidth;
 			}
 
-
 		// Calculate preferred/minimum row heights
 		int rowPrefMin[] = new int[rowSpec.length];
 
 		for (counter = 0; counter < rowSpec.length; counter++)
 			// Is the current row a preferred/minimum size
-			if ((rowSpec[counter] == PREFERRED) ||
-					(rowSpec[counter] == MINIMUM))
-			{
+			if ((rowSpec[counter] == PREFERRED) || (rowSpec[counter] == MINIMUM)) {
 				// Assume a maximum height of zero
 				int maxHeight = 0;
 
@@ -1565,20 +1393,17 @@ TableLayoutConstants
 				// contained within this row
 				ListIterator iterator = list.listIterator(0);
 
-				while (iterator.hasNext())
-				{
+				while (iterator.hasNext()) {
 					Entry entry = (Entry) iterator.next();
 
-					if ((entry.row1 == counter) && (entry.row1 == counter))
-					{
-						Dimension p = (rowSpec[counter] == PREFERRED) ?
-								entry.component.getPreferredSize() :
-									entry.component.getMinimumSize();
+					if ((entry.row1 == counter) && (entry.row1 == counter)) {
+						Dimension p = (rowSpec[counter] == PREFERRED) ? entry.component.getPreferredSize() : entry.component
+								.getMinimumSize();
 
-								int height = (p == null) ? 0 : p.height;
+						int height = (p == null) ? 0 : p.height;
 
-								if (maxHeight < height)
-									maxHeight = height;
+						if (maxHeight < height)
+							maxHeight = height;
 					}
 				}
 
@@ -1589,17 +1414,13 @@ TableLayoutConstants
 		// Find maximum preferred size of all scaled components
 		ListIterator iterator = list.listIterator(0);
 
-		while (iterator.hasNext())
-		{
+		while (iterator.hasNext()) {
 			// Get next entry
 			Entry entry = (Entry) iterator.next();
 
 			// Make sure entry is in valid rows and columns
-			if ((entry.col1 < 0) || (entry.col1 >= columnSpec.length) ||
-					(entry.col2 >= columnSpec.length) ||
-					(entry.row1 < 0) || (entry.row1 >= rowSpec.length)    ||
-					(entry.row2 >= rowSpec.length))
-			{
+			if ((entry.col1 < 0) || (entry.col1 >= columnSpec.length) || (entry.col2 >= columnSpec.length)
+					|| (entry.row1 < 0) || (entry.row1 >= rowSpec.length) || (entry.row2 >= rowSpec.length)) {
 				// Skip the bad component
 				continue;
 			}
@@ -1614,29 +1435,24 @@ TableLayoutConstants
 			for (counter = entry.col1; counter <= entry.col2; counter++)
 				if (columnSpec[counter] >= 1.0)
 					scalableWidth -= columnSpec[counter];
-				else if ((columnSpec[counter] == PREFERRED) ||
-						(columnSpec[counter] == MINIMUM))
-				{
+				else if ((columnSpec[counter] == PREFERRED) || (columnSpec[counter] == MINIMUM)) {
 					scalableWidth -= columnPrefMin[counter];
 				}
 
 			for (counter = entry.row1; counter <= entry.row2; counter++)
 				if (rowSpec[counter] >= 1.0)
 					scalableHeight -= rowSpec[counter];
-				else if ((rowSpec[counter] == PREFERRED) ||
-						(rowSpec[counter] == MINIMUM))
-				{
+				else if ((rowSpec[counter] == PREFERRED) || (rowSpec[counter] == MINIMUM)) {
 					scalableHeight -= rowPrefMin[counter];
 				}
 
-			//----------------------------------------------------------------------
+			// ----------------------------------------------------------------------
 
 			// Determine total percentage of scalable space that the component
 			// occupies by adding the relative columns and the fill columns
 			double relativeWidth = 0.0;
 
-			for (counter = entry.col1; counter <= entry.col2; counter++)
-			{
+			for (counter = entry.col1; counter <= entry.col2; counter++) {
 				// Column is scaled
 				if ((columnSpec[counter] > 0.0) && (columnSpec[counter] < 1.0))
 					// Add scaled size to relativeWidth
@@ -1657,14 +1473,13 @@ TableLayoutConstants
 			if (scaledWidth < temp)
 				scaledWidth = temp;
 
-			//----------------------------------------------------------------------
+			// ----------------------------------------------------------------------
 
 			// Determine total percentage of scalable space that the component
 			// occupies by adding the relative columns and the fill columns
 			double relativeHeight = 0.0;
 
-			for (counter = entry.row1; counter <= entry.row2; counter++)
-			{
+			for (counter = entry.row1; counter <= entry.row2; counter++) {
 				// Row is scaled
 				if ((rowSpec[counter] > 0.0) && (rowSpec[counter] < 1.0))
 					// Add scaled size to relativeHeight
@@ -1686,7 +1501,8 @@ TableLayoutConstants
 				scaledHeight = temp;
 		}
 
-		// totalWidth is the scaledWidth plus the sum of all absolute widths and all
+		// totalWidth is the scaledWidth plus the sum of all absolute widths and
+		// all
 		// preferred widths
 		int totalWidth = scaledWidth;
 
@@ -1694,15 +1510,14 @@ TableLayoutConstants
 			// Is the current column an absolute size
 			if (columnSpec[counter] >= 1.0)
 				totalWidth += (int) (columnSpec[counter] + 0.5);
-		// Is the current column a preferred/minimum size
-			else if ((columnSpec[counter] == PREFERRED) ||
-					(columnSpec[counter] == MINIMUM))
-			{
+			// Is the current column a preferred/minimum size
+			else if ((columnSpec[counter] == PREFERRED) || (columnSpec[counter] == MINIMUM)) {
 				// Add preferred/minimum width
 				totalWidth += columnPrefMin[counter];
 			}
 
-		// totalHeight is the scaledHeight plus the sum of all absolute heights and
+		// totalHeight is the scaledHeight plus the sum of all absolute heights
+		// and
 		// all preferred widths
 		int totalHeight = scaledHeight;
 
@@ -1710,10 +1525,8 @@ TableLayoutConstants
 			// Is the current row an absolute size
 			if (rowSpec[counter] >= 1.0)
 				totalHeight += (int) (rowSpec[counter] + 0.5);
-		// Is the current row a preferred size
-			else if ((rowSpec[counter] == PREFERRED) ||
-					(rowSpec[counter] == MINIMUM))
-			{
+			// Is the current row a preferred size
+			else if ((rowSpec[counter] == PREFERRED) || (rowSpec[counter] == MINIMUM)) {
 				// Add preferred/minimum width
 				totalHeight += rowPrefMin[counter];
 			}
@@ -1726,39 +1539,37 @@ TableLayoutConstants
 		return new Dimension(totalWidth, totalHeight);
 	}
 
-
-
 	/**
 	 * Determines the minimum size of the container argument using this layout.
 	 * The minimum size is the smallest size that, if used for the container's
 	 * size, will ensure that all components are at least as large as their
-	 * minimum size.  This method cannot guarantee that all components will be
-	 * their minimum size.  For example, if component A and component B are each
-	 * allocate half of the container's width and component A wants to be 10 pixels
-	 * wide while component B wants to be 100 pixels wide, they cannot both be
-	 * accommodated.  Since in general components rather be larger than their
-	 * minimum size instead of smaller, component B's request will be fulfilled.
-	 * The minimum size of the container would be 200 pixels.
-	 *
-	 * @param container    container being served by this layout manager
-	 *
+	 * minimum size. This method cannot guarantee that all components will be
+	 * their minimum size. For example, if component A and component B are each
+	 * allocate half of the container's width and component A wants to be 10
+	 * pixels wide while component B wants to be 100 pixels wide, they cannot
+	 * both be accommodated. Since in general components rather be larger than
+	 * their minimum size instead of smaller, component B's request will be
+	 * fulfilled. The minimum size of the container would be 200 pixels.
+	 * 
+	 * @param container
+	 *           container being served by this layout manager
+	 * 
 	 * @return a dimension indicating the container's minimum size
 	 */
 
-	public Dimension minimumLayoutSize (Container container)
-	{
-		Dimension size;       // Minimum size of current component
-		int scaledWidth = 0;  // Minimum width of scalled components
+	public Dimension minimumLayoutSize(Container container) {
+		Dimension size; // Minimum size of current component
+		int scaledWidth = 0; // Minimum width of scalled components
 		int scaledHeight = 0; // Minimum height of scalled components
-		int temp;             // Temporary variable used to compare sizes
-		int counter;          // Counting variable
+		int temp; // Temporary variable used to compare sizes
+		int counter; // Counting variable
 
-		// Determine percentage of space allocated to fill components.  This is
+		// Determine percentage of space allocated to fill components. This is
 		// one minus the sum of all scalable components.
 		double fillWidthRatio = 1.0;
 		double fillHeightRatio = 1.0;
-		int    numFillWidth = 0;
-		int    numFillHeight = 0;
+		int numFillWidth = 0;
+		int numFillHeight = 0;
 
 		for (counter = 0; counter < columnSpec.length; counter++)
 			if ((columnSpec[counter] > 0.0) && (columnSpec[counter] < 1.0))
@@ -1789,17 +1600,13 @@ TableLayoutConstants
 		// Find maximum minimum size of all scaled components
 		ListIterator iterator = list.listIterator(0);
 
-		while (iterator.hasNext())
-		{
+		while (iterator.hasNext()) {
 			// Get next entry
 			Entry entry = (Entry) iterator.next();
 
 			// Make sure entry is in valid rows and columns
-			if ((entry.col1 < 0) || (entry.col1 >= columnSpec.length) ||
-					(entry.col2 >= columnSpec.length) ||
-					(entry.row1 < 0) || (entry.row1 >= rowSpec.length)    ||
-					(entry.row2 >= rowSpec.length))
-			{
+			if ((entry.col1 < 0) || (entry.col1 >= columnSpec.length) || (entry.col2 >= columnSpec.length)
+					|| (entry.row1 < 0) || (entry.row1 >= rowSpec.length) || (entry.row2 >= rowSpec.length)) {
 				// Skip the bad component
 				continue;
 			}
@@ -1819,14 +1626,13 @@ TableLayoutConstants
 				if (rowSpec[counter] >= 1.0)
 					scalableHeight -= rowSpec[counter];
 
-			//----------------------------------------------------------------------
+			// ----------------------------------------------------------------------
 
 			// Determine total percentage of scalable space that the component
 			// occupies by adding the relative columns and the fill columns
 			double relativeWidth = 0.0;
 
-			for (counter = entry.col1; counter <= entry.col2; counter++)
-			{
+			for (counter = entry.col1; counter <= entry.col2; counter++) {
 				// Column is scaled
 				if ((columnSpec[counter] > 0.0) && (columnSpec[counter] < 1.0))
 					// Add scaled size to relativeWidth
@@ -1847,14 +1653,13 @@ TableLayoutConstants
 			if (scaledWidth < temp)
 				scaledWidth = temp;
 
-			//----------------------------------------------------------------------
+			// ----------------------------------------------------------------------
 
 			// Determine total percentage of scalable space that the component
 			// occupies by adding the relative columns and the fill columns
 			double relativeHeight = 0.0;
 
-			for (counter = entry.row1; counter <= entry.row2; counter++)
-			{
+			for (counter = entry.row1; counter <= entry.row2; counter++) {
 				// Row is scaled
 				if ((rowSpec[counter] > 0.0) && (rowSpec[counter] < 1.0))
 					// Add scaled size to relativeHeight
@@ -1876,7 +1681,8 @@ TableLayoutConstants
 				scaledHeight = temp;
 		}
 
-		// totalWidth is the scaledWidth plus the sum of all absolute widths and all
+		// totalWidth is the scaledWidth plus the sum of all absolute widths and
+		// all
 		// preferred widths
 		int totalWidth = scaledWidth;
 
@@ -1884,10 +1690,8 @@ TableLayoutConstants
 			// Is the current column an absolute size
 			if (columnSpec[counter] >= 1.0)
 				totalWidth += (int) (columnSpec[counter] + 0.5);
-		// Is the current column a preferred size
-			else if ((columnSpec[counter] == PREFERRED) ||
-					(columnSpec[counter] == MINIMUM))
-			{
+			// Is the current column a preferred size
+			else if ((columnSpec[counter] == PREFERRED) || (columnSpec[counter] == MINIMUM)) {
 				// Assume a maximum width of zero
 				int maxWidth = 0;
 
@@ -1895,20 +1699,17 @@ TableLayoutConstants
 				// contained within this column
 				iterator = list.listIterator(0);
 
-				while (iterator.hasNext())
-				{
+				while (iterator.hasNext()) {
 					Entry entry = (Entry) iterator.next();
 
-					if ((entry.col1 == counter) && (entry.col2 == counter))
-					{
-						Dimension p = (columnSpec[counter] == PREFERRED) ?
-								entry.component.getPreferredSize() :
-									entry.component.getMinimumSize();
+					if ((entry.col1 == counter) && (entry.col2 == counter)) {
+						Dimension p = (columnSpec[counter] == PREFERRED) ? entry.component.getPreferredSize()
+								: entry.component.getMinimumSize();
 
-								int width = (p == null) ? 0 : p.width;
+						int width = (p == null) ? 0 : p.width;
 
-								if (maxWidth < width)
-									maxWidth = width;
+						if (maxWidth < width)
+							maxWidth = width;
 					}
 				}
 
@@ -1916,7 +1717,8 @@ TableLayoutConstants
 				totalWidth += maxWidth;
 			}
 
-		// totalHeight is the scaledHeight plus the sum of all absolute heights and
+		// totalHeight is the scaledHeight plus the sum of all absolute heights
+		// and
 		// all preferred widths
 		int totalHeight = scaledHeight;
 
@@ -1924,10 +1726,8 @@ TableLayoutConstants
 			// Is the current row an absolute size
 			if (rowSpec[counter] >= 1.0)
 				totalHeight += (int) (rowSpec[counter] + 0.5);
-		// Is the current row a preferred size
-			else if ((rowSpec[counter] == PREFERRED) ||
-					(rowSpec[counter] == MINIMUM))
-			{
+			// Is the current row a preferred size
+			else if ((rowSpec[counter] == PREFERRED) || (rowSpec[counter] == MINIMUM)) {
 				// Assume a maximum height of zero
 				int maxHeight = 0;
 
@@ -1935,20 +1735,17 @@ TableLayoutConstants
 				// contained within this row
 				iterator = list.listIterator(0);
 
-				while (iterator.hasNext())
-				{
+				while (iterator.hasNext()) {
 					Entry entry = (Entry) iterator.next();
 
-					if ((entry.row1 == counter) && (entry.row1 == counter))
-					{
-						Dimension p = (rowSpec[counter] == PREFERRED) ?
-								entry.component.getPreferredSize() :
-									entry.component.getMinimumSize();
+					if ((entry.row1 == counter) && (entry.row1 == counter)) {
+						Dimension p = (rowSpec[counter] == PREFERRED) ? entry.component.getPreferredSize() : entry.component
+								.getMinimumSize();
 
-								int height = (p == null) ? 0 : p.height;
+						int height = (p == null) ? 0 : p.height;
 
-								if (maxHeight < height)
-									maxHeight = height;
+						if (maxHeight < height)
+							maxHeight = height;
 					}
 				}
 
@@ -1964,143 +1761,116 @@ TableLayoutConstants
 		return new Dimension(totalWidth, totalHeight);
 	}
 
-
-
 	/**
 	 * Adds the specified component with the specified name to the layout.
-	 *
-	 * @param name         indicates entry's position and anchor
-	 * @param component    component to add
+	 * 
+	 * @param name
+	 *           indicates entry's position and anchor
+	 * @param component
+	 *           component to add
 	 */
 
-	public void addLayoutComponent (String name, Component component)
-	{
-		addLayoutComponent (component, name);
+	public void addLayoutComponent(String name, Component component) {
+		addLayoutComponent(component, name);
 	}
 
-
-
-	//******************************************************************************
-	//** java.awt.event.LayoutManager2 methods                                   ***
-	//******************************************************************************
-
-
+	// ******************************************************************************
+	// ** java.awt.event.LayoutManager2 methods ***
+	// ******************************************************************************
 
 	/**
 	 * Adds the specified component with the specified name to the layout.
-	 *
-	 * @param component    component to add
-	 * @param constraint   indicates entry's position and alignment
+	 * 
+	 * @param component
+	 *           component to add
+	 * @param constraint
+	 *           indicates entry's position and alignment
 	 */
 
-	public void addLayoutComponent (Component component, Object constraint)
-	{
-		if (constraint instanceof String)
-		{
+	public void addLayoutComponent(Component component, Object constraint) {
+		if (constraint instanceof String) {
 			// Create an entry to associate component with its constraints
 			constraint = new TableLayoutConstraints((String) constraint);
 
 			// Add component and constraints to the list
-			list.add (new Entry(component, (TableLayoutConstraints) constraint));
-		}
-		else if (constraint instanceof TableLayoutConstraints)
-		{
+			list.add(new Entry(component, (TableLayoutConstraints) constraint));
+		} else if (constraint instanceof TableLayoutConstraints) {
 			// Add component and constraints to the list
-			list.add (new Entry(component, (TableLayoutConstraints) constraint));
-		}
-		else if (constraint == null)
+			list.add(new Entry(component, (TableLayoutConstraints) constraint));
+		} else if (constraint == null)
 			throw new IllegalArgumentException("No constraint for the component");
 		else
-			throw new IllegalArgumentException
-			("Cannot accept a constraint of class " + constraint.getClass());
+			throw new IllegalArgumentException("Cannot accept a constraint of class " + constraint.getClass());
 	}
-
-
 
 	/**
 	 * Removes the specified component from the layout.
-	 *
-	 * @param component    component being removed
+	 * 
+	 * @param component
+	 *           component being removed
 	 */
 
-	public void removeLayoutComponent (Component component)
-	{
-		list.remove (component);
+	public void removeLayoutComponent(Component component) {
+		list.remove(component);
 	}
-
-
 
 	/**
 	 * Returns the maximum dimensions for this layout given the components in the
 	 * specified target container.
-	 *
-	 * @param target the component which needs to be laid out
-	 *
+	 * 
+	 * @param target
+	 *           the component which needs to be laid out
+	 * 
 	 * @return unconditionally, a Dimension of Integer.MAX_VALUE by
-	 *         Integer.MAX_VALUE since TableLayout does not limit the
-	 *         maximum size of a container
+	 *         Integer.MAX_VALUE since TableLayout does not limit the maximum
+	 *         size of a container
 	 */
 
-	public Dimension maximumLayoutSize (Container target)
-	{
+	public Dimension maximumLayoutSize(Container target) {
 		return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
 	}
 
-
-
 	/**
-	 * Returns the alignment along the x axis.  This specifies how the component
-	 * would like to be aligned relative to other components.  The value should be
-	 * a number between 0 and 1 where 0 represents alignment along the origin, 1 is
-	 * aligned the furthest away from the origin, 0.5 is centered, etc.
-	 *
+	 * Returns the alignment along the x axis. This specifies how the component
+	 * would like to be aligned relative to other components. The value should be
+	 * a number between 0 and 1 where 0 represents alignment along the origin, 1
+	 * is aligned the furthest away from the origin, 0.5 is centered, etc.
+	 * 
 	 * @return unconditionally, 0.5
 	 */
 
-	public float getLayoutAlignmentX (Container parent)
-	{
+	public float getLayoutAlignmentX(Container parent) {
 		return 0.5f;
 	}
 
-
-
 	/**
-	 * Returns the alignment along the y axis.  This specifies how the component
-	 * would like to be aligned relative to other components.  The value should be
-	 * a number between 0 and 1 where 0 represents alignment along the origin, 1 is
-	 * aligned the furthest away from the origin, 0.5 is centered, etc.
-	 *
+	 * Returns the alignment along the y axis. This specifies how the component
+	 * would like to be aligned relative to other components. The value should be
+	 * a number between 0 and 1 where 0 represents alignment along the origin, 1
+	 * is aligned the farthest away from the origin, 0.5 is centered, etc.
+	 * 
 	 * @return unconditionally, 0.5
 	 */
 
-	public float getLayoutAlignmentY (Container parent)
-	{
+	public float getLayoutAlignmentY(Container parent) {
 		return 0.5f;
 	}
-
-
 
 	/**
 	 * Invalidates the layout, indicating that if the layout manager has cached
 	 * information it should be discarded.
 	 */
 
-	public void invalidateLayout (Container target)
-	{
+	public void invalidateLayout(Container target) {
 		dirty = true;
 	}
 
-
-
-	//******************************************************************************
-	//*** Inner Class                                                            ***
-	//******************************************************************************
-
-
+	// ******************************************************************************
+	// *** Inner Class ***
+	// ******************************************************************************
 
 	// The following inner class is used to bind components to their constraints
-	protected class Entry extends TableLayoutConstraints
-	{
+	protected class Entry extends TableLayoutConstraints {
 		/** Component bound by the constraints */
 		protected Component component;
 
@@ -2109,16 +1879,15 @@ TableLayoutConstants
 
 		/**
 		 * Constructs an Entry that binds a component to a set of constraints.
-		 *
-		 * @param component     component being bound
-		 * @param constranit    constraints being applied
+		 * 
+		 * @param component
+		 *           component being bound
+		 * @param constranit
+		 *           constraints being applied
 		 */
 
-		public Entry (Component component, TableLayoutConstraints constraint)
-		{
-			super (constraint.col1, constraint.row1,
-					constraint.col2, constraint.row2,
-					constraint.hAlign, constraint.vAlign);
+		public Entry(Component component, TableLayoutConstraints constraint) {
+			super(constraint.col1, constraint.row1, constraint.col2, constraint.row2, constraint.hAlign, constraint.vAlign);
 
 			singleCell = ((row1 == row2) && (col1 == col2));
 			this.component = component;
@@ -2126,21 +1895,20 @@ TableLayoutConstants
 
 		/**
 		 * Determines whether or not two entries are equal.
-		 *
-		 * @param object    object being compared to; must be a Component if it
-		 *                  is equal to this TableLayoutConstraints.
-		 *
-		 * @return    True, if the entries refer to the same component object.
-		 *            False, otherwise.
+		 * 
+		 * @param object
+		 *           object being compared to; must be a Component if it is equal
+		 *           to this TableLayoutConstraints.
+		 * 
+		 * @return True, if the entries refer to the same component object. False,
+		 *         otherwise.
 		 */
 
 		@Override
-		public boolean equals (Object object)
-		{
+		public boolean equals(Object object) {
 			boolean equal = false;
 
-			if (object instanceof Component)
-			{
+			if (object instanceof Component) {
 				Component component = (Component) object;
 				equal = (this.component == component);
 			}
@@ -2149,8 +1917,8 @@ TableLayoutConstants
 		}
 	}
 
-
-	public static JComponent getSplit(JComponent leftComponent, JComponent rightComponent, double leftSize, double rightSize) {
+	public static JComponent getSplit(JComponent leftComponent, JComponent rightComponent, double leftSize,
+			double rightSize) {
 
 		if (leftComponent == null)
 			leftComponent = new JLabel("");
@@ -2160,11 +1928,8 @@ TableLayoutConstants
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double border = 0;
-		double[][] size =
-		{
-				{border, leftSize, rightSize, border}, // Columns
-				{border, TableLayoutConstants.FILL, border}
-		}; // Rows
+		double[][] size = { { border, leftSize, rightSize, border }, // Columns
+				{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		result.add(leftComponent, "1,1");
 		result.add(rightComponent, "2,1");
@@ -2172,32 +1937,26 @@ TableLayoutConstants
 		return result;
 	}
 
-	public static JPanel getSplitVertical(Component topComponent, Component bottomComponent, double topSize, double bottomSize) {
+	public static JPanel getSplitVertical(Component topComponent, Component bottomComponent, double topSize,
+			double bottomSize) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double border = 0;
-		double[][] size =
-		{
-				{border, TableLayoutConstants.FILL, border}, // Columns
-				{border, topSize, bottomSize, border}
-		}; // Rows
+		double[][] size = { { border, TableLayoutConstants.FILL, border }, // Columns
+				{ border, topSize, bottomSize, border } }; // Rows
 		result.setLayout(new TableLayout(size));
-		result.add((topComponent==null ? new JLabel() : topComponent), "1,1");
-		result.add((bottomComponent==null ? new JLabel() : bottomComponent), "1,2");
+		result.add((topComponent == null ? new JLabel() : topComponent), "1,1");
+		result.add((bottomComponent == null ? new JLabel() : bottomComponent), "1,2");
 		result.validate();
 		return result;
 	}
-
 
 	public static JComponent getDoubleRow(JComponent label, JComponent row2, Color color) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double border = 0;
-		double[][] size =
-		{
-				{border, TableLayoutConstants.FILL, border}, // Columns
-				{border, TableLayoutConstants.PREFERRED, TableLayoutConstants.PREFERRED, border}
-		}; // Rows
+		double[][] size = { { border, TableLayoutConstants.FILL, border }, // Columns
+				{ border, TableLayoutConstants.PREFERRED, TableLayoutConstants.PREFERRED, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		label.setOpaque(true);
 		label.setBackground(color);
@@ -2208,238 +1967,194 @@ TableLayoutConstants
 		return result;
 	}
 
-
-
-	public static JComponent get3Split(
-			JComponent left, JComponent middle, JComponent right,
-			double sizeLeft, double sizeMiddle, double sizeRight) {
-		return get3Split(left, middle, right,
-				sizeLeft, sizeMiddle, sizeRight, 0, 0);
+	public static JComponent get3Split(JComponent left, JComponent middle, JComponent right, double sizeLeft,
+			double sizeMiddle, double sizeRight) {
+		return get3Split(left, middle, right, sizeLeft, sizeMiddle, sizeRight, 0, 0);
 	}
 
-
-
-	public static JComponent get3Split(
-			JComponent left, JComponent middle, JComponent right,
-			double sizeLeft, double sizeMiddle, double sizeRight, double spaceBetween, double border) {
+	public static JComponent get3Split(JComponent left, JComponent middle, JComponent right, double sizeLeft,
+			double sizeMiddle, double sizeRight, double spaceBetween, double border) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
-		double[][] size =
-		{
-				{border, sizeLeft, spaceBetween, sizeMiddle, spaceBetween, sizeRight, border}, // Columns
-				{border, TableLayoutConstants.FILL, border}
-		}; // Rows
+		double[][] size = { { border, sizeLeft, spaceBetween, sizeMiddle, spaceBetween, sizeRight, border }, // Columns
+				{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
-		if (left!=null)
+		if (left != null)
 			result.add(left, "1,1");
-		if (middle!=null)
+		if (middle != null)
 			result.add(middle, "3,1");
-		if (right!=null)
+		if (right != null)
 			result.add(right, "5,1");
 		result.validate();
 		return result;
 	}
 
-	public static JComponent get4Split(
-			JComponent left, JComponent middle1, JComponent middle2, JComponent right,
+	public static JComponent get4Split(JComponent left, JComponent middle1, JComponent middle2, JComponent right,
 			double width, double spaceBetween, double border) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
-		double[][] size =
-		{
-				{border, width, spaceBetween, width, spaceBetween, width, spaceBetween, width, border}, // Columns
-				{border, TableLayoutConstants.FILL, border}
-		}; // Rows
+		double[][] size = { { border, width, spaceBetween, width, spaceBetween, width, spaceBetween, width, border }, // Columns
+				{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
-		if (left!=null) result.add(left, "1,1");
-		if (middle1!=null) result.add(middle1, "3,1");
-		if (middle2!=null) result.add(middle2, "5,1");
-		if (right!=null) result.add(right, "7,1");
+		if (left != null)
+			result.add(left, "1,1");
+		if (middle1 != null)
+			result.add(middle1, "3,1");
+		if (middle2 != null)
+			result.add(middle2, "5,1");
+		if (right != null)
+			result.add(right, "7,1");
 		result.validate();
 		return result;
 	}
 
-	public static JComponent get4Split(
-			JComponent left, JComponent middle1, JComponent middle2, JComponent right,
+	public static JComponent get4Split(JComponent left, JComponent middle1, JComponent middle2, JComponent right,
 			double w1, double w2, double w3, double w4, double spaceBetween, double border) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
-		double[][] size =
-		{
-				{border, w1, spaceBetween, w2, spaceBetween, w3, spaceBetween, w4, border}, // Columns
-				{border, TableLayoutConstants.FILL, border}
-		}; // Rows
+		double[][] size = { { border, w1, spaceBetween, w2, spaceBetween, w3, spaceBetween, w4, border }, // Columns
+				{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
-		if (left!=null) result.add(left, "1,1");
-		if (middle1!=null) result.add(middle1, "3,1");
-		if (middle2!=null) result.add(middle2, "5,1");
-		if (right!=null) result.add(right, "7,1");
+		if (left != null)
+			result.add(left, "1,1");
+		if (middle1 != null)
+			result.add(middle1, "3,1");
+		if (middle2 != null)
+			result.add(middle2, "5,1");
+		if (right != null)
+			result.add(right, "7,1");
 		result.validate();
 		return result;
 	}
 
-	public static JComponent get3SplitVertical(
-			JComponent top, JComponent middle, JComponent bottom,
-			double sizeTop, double sizeMiddle, double sizeBottom) {
-		return get3SplitVertical(top, middle, bottom,
-				sizeTop, sizeMiddle, sizeBottom, 0, 0);
+	public static JComponent get3SplitVertical(JComponent top, JComponent middle, JComponent bottom, double sizeTop,
+			double sizeMiddle, double sizeBottom) {
+		return get3SplitVertical(top, middle, bottom, sizeTop, sizeMiddle, sizeBottom, 0, 0);
 	}
 
-	public static JComponent get3SplitVertical(
-			JComponent top, JComponent middle, JComponent bottom,
-			double sizeTop, double sizeMiddle, double sizeBottom,
+	public static JComponent get3SplitVertical(JComponent top, JComponent middle, JComponent bottom, double sizeTop,
+			double sizeMiddle, double sizeBottom, double spaceBetween, double border) {
+		JPanel result = new JPanel();
+		result.setOpaque(false);
+		double[][] size = { { border, TableLayoutConstants.FILL, border },
+				{ border, sizeTop, spaceBetween, sizeMiddle, spaceBetween, sizeBottom, border }, // row
+
+		}; // Rows
+		result.setLayout(new TableLayout(size));
+		if (top != null)
+			result.add(top, "1,1");
+		if (middle != null)
+			result.add(middle, "1,3");
+		if (bottom != null)
+			result.add(bottom, "1,5");
+		result.validate();
+		return result;
+	}
+
+	public static JComponent get4SplitVertical(JComponent top, JComponent middle1, JComponent middle2,
+			JComponent bottom, double sizeTop, double sizeMiddle1, double sizeMiddle2, double sizeBottom,
 			double spaceBetween, double border) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
-		double[][] size =
-		{
-				{border, TableLayoutConstants.FILL, border},
-				{border,
-					sizeTop,
-					spaceBetween,
-					sizeMiddle,
-					spaceBetween,
-					sizeBottom,
-					border}, // row
+		double[][] size = {
+				{ border, TableLayoutConstants.FILL, border },
+				{ border, sizeTop, spaceBetween, sizeMiddle1, spaceBetween, sizeMiddle2, spaceBetween, sizeBottom, border }, // row
 
 		}; // Rows
 		result.setLayout(new TableLayout(size));
-		if (top!=null) result.add(top, "1,1");
-		if (middle!=null) result.add(middle, "1,3");
-		if (bottom!=null) result.add(bottom, "1,5");
+		if (top != null)
+			result.add(top, "1,1");
+		if (middle1 != null)
+			result.add(middle1, "1,3");
+		if (middle2 != null)
+			result.add(middle2, "1,5");
+		if (bottom != null)
+			result.add(bottom, "1,7");
 		result.validate();
 		return result;
 	}
-
-	public static JComponent get4SplitVertical(
-			JComponent top, JComponent middle1, JComponent middle2, JComponent bottom,
-			double sizeTop, double sizeMiddle1, double sizeMiddle2, double sizeBottom,
-			double spaceBetween, double border) {
-		JPanel result = new JPanel();
-		result.setOpaque(false);
-		double[][] size =
-		{
-				{border, TableLayoutConstants.FILL, border},
-				{border,
-					sizeTop,
-					spaceBetween,
-					sizeMiddle1,
-					spaceBetween,
-					sizeMiddle2,
-					spaceBetween,
-					sizeBottom,
-					border}, // row
-
-		}; // Rows
-		result.setLayout(new TableLayout(size));
-		if (top!=null) result.add(top, "1,1");
-		if (middle1!=null) result.add(middle1, "1,3");
-		if (middle2!=null) result.add(middle2, "1,5");
-		if (bottom!=null) result.add(bottom, "1,7");
-		result.validate();
-		return result;
-	}
-
 
 	public static LayoutManager getLayout(int width, int height) {
-		double[][] size =
-		{
-				{width},
-				{height}, // row
+		double[][] size = { { width }, { height }, // row
 
 		}; // Rows
 		return new TableLayout(size);
 	}
 
-
-
 	public static LayoutManager getLayout(double width, double height) {
-		double[][] size =
-		{
-				{width},
-				{height}, // row
+		double[][] size = { { width }, { height }, // row
 
 		}; // Rows
 		return new TableLayout(size);
 	}
 
 	public static LayoutManager getLayout(double[] width, double height) {
-		double[][] size =
-		{
-				width,
-				{height}, // row
+		double[][] size = { width, { height }, // row
 
 		}; // Rows
 		return new TableLayout(size);
 	}
 
 	public static LayoutManager getLayout(double width, double[] height) {
-		double[][] size =
-		{
-				{width},
-				height, // row
+		double[][] size = { { width }, height, // row
 
 		}; // Rows
 		return new TableLayout(size);
 	}
 
-
-	public static JComponent getMultiSplit(
-			ArrayList<JComponent> guiElements) {
+	public static JComponent getMultiSplit(ArrayList<JComponent> guiElements) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double[] width = new double[guiElements.size()];
-		for (int i=0; i<width.length; i++)
+		for (int i = 0; i < width.length; i++)
 			width[i] = TableLayoutConstants.FILL;
 		result.setLayout(getLayout(width, TableLayoutConstants.PREFERRED));
 		int idx = 0;
 		for (JComponent jc : guiElements) {
-			if (jc!=null)
-				result.add(jc, idx+",0");
+			if (jc != null)
+				result.add(jc, idx + ",0");
 			idx++;
 		}
 		result.validate();
 		return result;
 	}
 
-	public static JComponent getMultiSplit(
-			ArrayList<JComponent> guiElements, double componentsWidth, int spaceT, int spaceL, int spaceB, int spaceR) {
+	public static JComponent getMultiSplit(ArrayList<JComponent> guiElements, double componentsWidth, int spaceT,
+			int spaceL, int spaceB, int spaceR) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double[] width = new double[guiElements.size()];
-		for (int i=0; i<width.length; i++)
+		for (int i = 0; i < width.length; i++)
 			width[i] = componentsWidth;
 		result.setLayout(getLayout(width, TableLayoutConstants.PREFERRED));
 		int idx = 0;
 		for (JComponent jc : guiElements) {
-			result.add(FolderPanel.getBorderedComponent(jc, spaceT, spaceL, spaceB, spaceR), idx+",0");
+			result.add(FolderPanel.getBorderedComponent(jc, spaceT, spaceL, spaceB, spaceR), idx + ",0");
 			idx++;
 		}
 		result.validate();
 		return result;
 	}
 
-	public static JComponent getMultiSplitVertical(
-			Collection jComponentList) {
+	public static JComponent getMultiSplitVertical(Collection jComponentList) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		result.setBackground(null);
 		double[] height = new double[jComponentList.size()];
-		for (int i=0; i<height.length; i++)
+		for (int i = 0; i < height.length; i++)
 			height[i] = TableLayoutConstants.PREFERRED;
 		result.setLayout(getLayout(TableLayoutConstants.FILL, height));
 		int idx = 0;
 		for (Object o : jComponentList) {
-			JComponent jc = (JComponent)o;
-			result.add(jc, "0,"+idx);
+			JComponent jc = (JComponent) o;
+			result.add(jc, "0," + idx);
 			idx++;
 		}
 		result.validate();
 		return result;
 	}
 
-	public static JPanel getMultiSplitVerticalNonPrefHeight(
-			Collection jComponentList, double h) {
+	public static JPanel getMultiSplitVerticalNonPrefHeight(Collection jComponentList, double h) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		result.setBackground(null);
@@ -2447,72 +2162,78 @@ TableLayoutConstants
 		return result;
 	}
 
-
-
-	public static void setMultiSplitVerticalNonPrefHeight_Contents(
-			Collection jComponentList, double h, JPanel result) {
+	public static void setMultiSplitVerticalNonPrefHeight_Contents(Collection jComponentList, double h, JPanel result) {
 		double[] height = new double[jComponentList.size()];
-		for (int i=0; i<height.length; i++)
+		for (int i = 0; i < height.length; i++)
 			height[i] = h;
 		result.setLayout(getLayout(TableLayoutConstants.FILL, height));
 		int idx = 0;
 		for (Object o : jComponentList) {
-			JComponent jc = (JComponent)o;
-			result.add(jc, "0,"+idx);
+			JComponent jc = (JComponent) o;
+			result.add(jc, "0," + idx);
 			idx++;
 		}
 		result.validate();
 	}
 
-	public static JComponent getMultiSplitVertical(
-			Collection jComponentList, int spaceBetween) {
+	public static JComponent getMultiSplitVertical(Collection jComponentList, int spaceBetween) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		result.setBackground(null);
 		double[] height = new double[jComponentList.size()];
-		for (int i=0; i<height.length; i++)
+		for (int i = 0; i < height.length; i++)
 			height[i] = TableLayoutConstants.PREFERRED;
 		result.setLayout(getLayout(TableLayoutConstants.FILL, height));
 		int idx = 0;
 		int max = jComponentList.size();
 		for (Object o : jComponentList) {
-			JComponent jc = (JComponent)o;
-			if (idx+1<max)
+			JComponent jc = (JComponent) o;
+			if (idx + 1 < max)
 				jc = FolderPanel.getBorderedComponent(jc, 0, 0, spaceBetween, 0);
-			result.add(jc, "0,"+idx);
+			result.add(jc, "0," + idx);
 			idx++;
 		}
 		result.validate();
 		return result;
 	}
 
-	public static JComponent getMultiSplitVertical(
-			Collection jComponentList, double width, int spaceBetween) {
+	public static JComponent getMultiSplitVertical(Collection jComponentList, double width, int spaceBetween) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		result.setBackground(null);
 		double[] height = new double[jComponentList.size()];
-		for (int i=0; i<height.length; i++)
+		for (int i = 0; i < height.length; i++)
 			height[i] = TableLayoutConstants.PREFERRED;
 		result.setLayout(getLayout(width, height));
 		int idx = 0;
 		int max = jComponentList.size();
 		for (Object o : jComponentList) {
-			JComponent jc = (JComponent)o;
-			if (idx+1<max)
+			JComponent jc = (JComponent) o;
+			if (idx + 1 < max)
 				jc = FolderPanel.getBorderedComponent(jc, 0, 0, spaceBetween, 0);
-			result.add(jc, "0,"+idx);
+			result.add(jc, "0," + idx);
 			idx++;
 		}
 		result.validate();
 		return result;
 	}
-
 
 	public static JComponent getLeftDivider(JComponent gui, double layout, Color color, int width) {
 		JLabel divider = new JLabel("");
 		divider.setBackground(color);
 		divider.setOpaque(true);
 		return TableLayout.getSplit(divider, gui, width, layout);
+	}
+
+	public static LayoutManager getLayout(double width, double height, int columns, int rows) {
+		double[] widths = new double[columns];
+		for (int x = 0; x < columns; x++) {
+			widths[x] = width;
+		}
+		double[] heights = new double[rows];
+		for (int y = 0; y < rows; y++) {
+			heights[y] = height;
+		}
+		return new TableLayout(new double[][] { widths, heights });
 	}
 }
