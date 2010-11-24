@@ -102,7 +102,6 @@ import org.FolderPanel;
  * @author Daniel E. Barbalace
  */
 
-@SuppressWarnings("rawtypes")
 public class TableLayout implements java.awt.LayoutManager2, java.io.Serializable, TableLayoutConstants {
 
 	private static final long serialVersionUID = 1L;
@@ -138,7 +137,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	protected int rowOffset[];
 
 	/** List of components and their sizes */
-	protected LinkedList list;
+	protected LinkedList<Entry> list;
 
 	/**
 	 * Indicates whether or not the size of the cells are known for the last
@@ -194,13 +193,13 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 			// Make sure rows and columns are valid
 			for (int counter = 0; counter < columnSpec.length; counter++)
 				if ((columnSpec[counter] < 0.0) && (columnSpec[counter] != FILL) && (columnSpec[counter] != PREFERRED)
-						&& (columnSpec[counter] != MINIMUM)) {
+									&& (columnSpec[counter] != MINIMUM)) {
 					columnSpec[counter] = 0.0;
 				}
 
 			for (int counter = 0; counter < rowSpec.length; counter++)
 				if ((rowSpec[counter] < 0.0) && (rowSpec[counter] != FILL) && (rowSpec[counter] != PREFERRED)
-						&& (rowSpec[counter] != MINIMUM)) {
+									&& (rowSpec[counter] != MINIMUM)) {
 					rowSpec[counter] = 0.0;
 				}
 		} else {
@@ -212,7 +211,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		}
 
 		// Create an empty list of components
-		list = new LinkedList();
+		list = new LinkedList<Entry>();
 
 		// Indicate that the cell sizes are not known
 		dirty = true;
@@ -234,14 +233,14 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 */
 
 	public TableLayoutConstraints getConstraints(Component component) {
-		ListIterator iterator = list.listIterator(0);
+		ListIterator<Entry> iterator = list.listIterator(0);
 
 		while (iterator.hasNext()) {
-			Entry entry = (Entry) iterator.next();
+			Entry entry = iterator.next();
 
 			if (entry.component == component)
 				return new TableLayoutConstraints(entry.col1, entry.row1, entry.col2, entry.row2, entry.hAlign,
-						entry.vAlign);
+									entry.vAlign);
 		}
 
 		return null;
@@ -264,14 +263,15 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		// Check parameters
 		if (component == null)
 			throw new IllegalArgumentException("Parameter component cannot be null.");
-		else if (constraint == null)
-			throw new IllegalArgumentException("Parameter constraint cannot be null.");
+		else
+			if (constraint == null)
+				throw new IllegalArgumentException("Parameter constraint cannot be null.");
 
 		// Find and update constraints for the given component
-		ListIterator iterator = list.listIterator(0);
+		ListIterator<Entry> iterator = list.listIterator(0);
 
 		while (iterator.hasNext()) {
-			Entry entry = (Entry) iterator.next();
+			Entry entry = iterator.next();
 
 			if (entry.component == component)
 				iterator.set(new Entry(component, constraint));
@@ -311,7 +311,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		// Make sure columns are valid
 		for (int counter = 0; counter < columnSpec.length; counter++)
 			if ((columnSpec[counter] < 0.0) && (columnSpec[counter] != FILL) && (columnSpec[counter] != PREFERRED)
-					&& (columnSpec[counter] != MINIMUM)) {
+								&& (columnSpec[counter] != MINIMUM)) {
 				columnSpec[counter] = 0.0;
 			}
 
@@ -352,7 +352,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		// Make sure rows are valid
 		for (int counter = 0; counter < rowSpec.length; counter++)
 			if ((rowSpec[counter] < 0.0) && (rowSpec[counter] != FILL) && (rowSpec[counter] != PREFERRED)
-					&& (rowSpec[counter] != MINIMUM)) {
+								&& (rowSpec[counter] != MINIMUM)) {
 				rowSpec[counter] = 0.0;
 			}
 
@@ -548,7 +548,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		// Make sure position is valid
 		if ((i < 0) || (i > columnSpec.length))
 			throw new IllegalArgumentException("Parameter i is invalid.  i = " + i + ".  Valid range is [0, "
-					+ columnSpec.length + "].");
+								+ columnSpec.length + "].");
 
 		// Make sure column size is valid
 		if ((size < 0.0) && (size != FILL) && (size != PREFERRED) && (size != MINIMUM)) {
@@ -565,11 +565,11 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		columnSpec = column;
 
 		// Move all components that are to the right of new row
-		ListIterator iterator = list.listIterator(0);
+		ListIterator<Entry> iterator = list.listIterator(0);
 
 		while (iterator.hasNext()) {
 			// Get next entry
-			Entry entry = (Entry) iterator.next();
+			Entry entry = iterator.next();
 
 			// Is the first column to the right of the new column
 			if (entry.col1 >= i)
@@ -604,7 +604,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		// Make sure position is valid
 		if ((i < 0) || (i > rowSpec.length))
 			throw new IllegalArgumentException("Parameter i is invalid.  i = " + i + ".  Valid range is [0, "
-					+ rowSpec.length + "].");
+								+ rowSpec.length + "].");
 
 		// Make sure row size is valid
 		if ((size < 0.0) && (size != FILL) && (size != PREFERRED) && (size != MINIMUM)) {
@@ -621,11 +621,11 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		rowSpec = row;
 
 		// Move all components that are below the new row
-		ListIterator iterator = list.listIterator(0);
+		ListIterator<Entry> iterator = list.listIterator(0);
 
 		while (iterator.hasNext()) {
 			// Get next entry
-			Entry entry = (Entry) iterator.next();
+			Entry entry = iterator.next();
 
 			// Is the first row to the right of the new row
 			if (entry.row1 >= i)
@@ -658,7 +658,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		// Make sure position is valid
 		if ((i < 0) || (i >= columnSpec.length))
 			throw new IllegalArgumentException("Parameter i is invalid.  i = " + i + ".  Valid range is [0, "
-					+ (columnSpec.length - 1) + "].");
+								+ (columnSpec.length - 1) + "].");
 
 		// Copy columns
 		double column[] = new double[columnSpec.length - 1];
@@ -669,11 +669,11 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		columnSpec = column;
 
 		// Move all components that are to the right of row deleted
-		ListIterator iterator = list.listIterator(0);
+		ListIterator<Entry> iterator = list.listIterator(0);
 
 		while (iterator.hasNext()) {
 			// Get next entry
-			Entry entry = (Entry) iterator.next();
+			Entry entry = iterator.next();
 
 			// Is the first column to the right of the new column
 			if (entry.col1 >= i)
@@ -707,7 +707,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		// Make sure position is valid
 		if ((i < 0) || (i >= rowSpec.length))
 			throw new IllegalArgumentException("Parameter i is invalid.  i = " + i + ".  Valid range is [0, "
-					+ (rowSpec.length - 1) + "].");
+								+ (rowSpec.length - 1) + "].");
 
 		// Copy rows
 		double row[] = new double[rowSpec.length - 1];
@@ -718,11 +718,11 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		rowSpec = row;
 
 		// Move all components that are to below the row deleted
-		ListIterator iterator = list.listIterator(0);
+		ListIterator<Entry> iterator = list.listIterator(0);
 
 		while (iterator.hasNext()) {
 			// Get next entry
-			Entry entry = (Entry) iterator.next();
+			Entry entry = iterator.next();
 
 			// Is the first row below the new row
 			if (entry.row1 >= i)
@@ -833,11 +833,11 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		boolean hidden = false;
 
 		// Check all components
-		ListIterator iterator = list.listIterator(0);
+		ListIterator<Entry> iterator = list.listIterator(0);
 
 		while (iterator.hasNext()) {
 			// Get next entry
-			Entry entry = (Entry) iterator.next();
+			Entry entry = iterator.next();
 
 			// Is this component valid
 			if ((entry.row1 < 0) || (entry.col1 < 0) || (entry.row2 > rowSpec.length) || (entry.col2 > columnSpec.length)) {
@@ -858,7 +858,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * @see hidden
 	 */
 
-	@SuppressWarnings("unchecked")
 	public boolean overlapping() {
 		// Count contraints
 		int numEntry = list.size();
@@ -871,16 +870,16 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		boolean overlapping = false;
 
 		// Put entries in an array
-		Entry entry[] = (Entry[]) list.toArray(new Entry[numEntry]);
+		Entry entry[] = list.toArray(new Entry[numEntry]);
 
 		// Check all components
 		for (int knowUnique = 1; knowUnique < numEntry; knowUnique++)
 			for (int checking = knowUnique - 1; checking >= 0; checking--)
 				if (((entry[checking].col1 >= entry[knowUnique].col1) && (entry[checking].col1 <= entry[knowUnique].col2)
-						&& (entry[checking].row1 >= entry[knowUnique].row1) && (entry[checking].row1 <= entry[knowUnique].row2))
-						|| ((entry[checking].col2 >= entry[knowUnique].col1)
-								&& (entry[checking].col2 <= entry[knowUnique].col2)
-								&& (entry[checking].row2 >= entry[knowUnique].row1) && (entry[checking].row2 <= entry[knowUnique].row2))) {
+									&& (entry[checking].row1 >= entry[knowUnique].row1) && (entry[checking].row1 <= entry[knowUnique].row2))
+									|| ((entry[checking].col2 >= entry[knowUnique].col1)
+														&& (entry[checking].col2 <= entry[knowUnique].col2)
+														&& (entry[checking].row2 >= entry[knowUnique].row1) && (entry[checking].row2 <= entry[knowUnique].row2))) {
 					overlapping = true;
 					break;
 				}
@@ -956,14 +955,14 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 
 				// Find maximum preferred width of all components completely
 				// contained within this column
-				ListIterator iterator = list.listIterator(0);
+				ListIterator<Entry> iterator = list.listIterator(0);
 
 				while (iterator.hasNext()) {
-					Entry entry = (Entry) iterator.next();
+					Entry entry = iterator.next();
 
 					if ((entry.col1 == counter) && (entry.col2 == counter)) {
 						Dimension p = (columnSpec[counter] == PREFERRED) ? entry.component.getPreferredSize()
-								: entry.component.getMinimumSize();
+											: entry.component.getMinimumSize();
 
 						int width = (p == null) ? 0 : p.width;
 
@@ -993,14 +992,14 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 
 				// Find maximum preferred height of all components completely
 				// contained within this row
-				ListIterator iterator = list.listIterator(0);
+				ListIterator<Entry> iterator = list.listIterator(0);
 
 				while (iterator.hasNext()) {
-					Entry entry = (Entry) iterator.next();
+					Entry entry = iterator.next();
 
 					if ((entry.row1 == counter) && (entry.row2 == counter)) {
 						Dimension p = (rowSpec[counter] == PREFERRED) ? entry.component.getPreferredSize() : entry.component
-								.getMinimumSize();
+											.getMinimumSize();
 
 						int height = (p == null) ? 0 : p.height;
 
@@ -1160,11 +1159,11 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		for (int counter = 0; counter < component.length; counter++) {
 			try {
 				// Get the entry entry for the next component
-				ListIterator iterator = list.listIterator(0);
+				ListIterator<Entry> iterator = list.listIterator(0);
 				Entry entry = null;
 
 				while (iterator.hasNext()) {
-					entry = (Entry) iterator.next();
+					entry = iterator.next();
 
 					if (entry.component == component[counter])
 						break;
@@ -1209,29 +1208,29 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 
 					// Determine left and right boarders
 					switch (entry.hAlign) {
-					case LEFT:
-						// Align left side along left edge of cell
-						x = columnOffset[entry.col1];
-						break;
+						case LEFT:
+							// Align left side along left edge of cell
+							x = columnOffset[entry.col1];
+							break;
 
-					case RIGHT:
-						// Align right side along right edge of cell
-						x = columnOffset[entry.col1 + 1] - w;
-						break;
+						case RIGHT:
+							// Align right side along right edge of cell
+							x = columnOffset[entry.col1 + 1] - w;
+							break;
 
-					case CENTER:
-						// Center justify component
-						x = columnOffset[entry.col1] + ((cellWidth - w) >> 1);
-						break;
+						case CENTER:
+							// Center justify component
+							x = columnOffset[entry.col1] + ((cellWidth - w) >> 1);
+							break;
 
-					case FULL:
-						// Align left side along left edge of cell
-						x = columnOffset[entry.col1];
-						break;
+						case FULL:
+							// Align left side along left edge of cell
+							x = columnOffset[entry.col1];
+							break;
 
-					default:
-						// This is a never should happen case, but just in case
-						x = 0;
+						default:
+							// This is a never should happen case, but just in case
+							x = 0;
 					}
 
 					// Determine the height of the component
@@ -1244,29 +1243,29 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 
 					// Determine top and bottom boarders
 					switch (entry.vAlign) {
-					case TOP:
-						// Align top side along top edge of cell
-						y = rowOffset[entry.row1];
-						break;
+						case TOP:
+							// Align top side along top edge of cell
+							y = rowOffset[entry.row1];
+							break;
 
-					case BOTTOM:
-						// Align right side along right edge of cell
-						y = rowOffset[entry.row1 + 1] - h;
-						break;
+						case BOTTOM:
+							// Align right side along right edge of cell
+							y = rowOffset[entry.row1 + 1] - h;
+							break;
 
-					case CENTER:
-						// Center justify component
-						y = rowOffset[entry.row1] + ((cellHeight - h) >> 1);
-						break;
+						case CENTER:
+							// Center justify component
+							y = rowOffset[entry.row1] + ((cellHeight - h) >> 1);
+							break;
 
-					case FULL:
-						// Align right side along right edge of cell
-						y = rowOffset[entry.row1];
-						break;
+						case FULL:
+							// Align right side along right edge of cell
+							y = rowOffset[entry.row1];
+							break;
 
-					default:
-						// This is a never should happen case, but just in case
-						y = 0;
+						default:
+							// This is a never should happen case, but just in case
+							y = 0;
 					}
 				} else {
 					// Align left side with left boarder of first column
@@ -1326,14 +1325,16 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		for (counter = 0; counter < columnSpec.length; counter++)
 			if ((columnSpec[counter] > 0.0) && (columnSpec[counter] < 1.0))
 				fillWidthRatio -= columnSpec[counter];
-			else if (columnSpec[counter] == FILL)
-				numFillWidth++;
+			else
+				if (columnSpec[counter] == FILL)
+					numFillWidth++;
 
 		for (counter = 0; counter < rowSpec.length; counter++)
 			if ((rowSpec[counter] > 0.0) && (rowSpec[counter] < 1.0))
 				fillHeightRatio -= rowSpec[counter];
-			else if (rowSpec[counter] == FILL)
-				numFillHeight++;
+			else
+				if (rowSpec[counter] == FILL)
+					numFillHeight++;
 
 		// Adjust fill ratios to reflect number of fill rows/columns
 		if (numFillWidth > 1)
@@ -1360,14 +1361,14 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 
 				// Find maximum preferred/minimum width of all components completely
 				// contained within this column
-				ListIterator iterator = list.listIterator(0);
+				ListIterator<Entry> iterator = list.listIterator(0);
 
 				while (iterator.hasNext()) {
-					Entry entry = (Entry) iterator.next();
+					Entry entry = iterator.next();
 
 					if ((entry.col1 == counter) && (entry.col2 == counter)) {
 						Dimension p = (columnSpec[counter] == PREFERRED) ? entry.component.getPreferredSize()
-								: entry.component.getMinimumSize();
+											: entry.component.getMinimumSize();
 
 						int width = (p == null) ? 0 : p.width;
 
@@ -1391,14 +1392,14 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 
 				// Find maximum preferred height of all components completely
 				// contained within this row
-				ListIterator iterator = list.listIterator(0);
+				ListIterator<Entry> iterator = list.listIterator(0);
 
 				while (iterator.hasNext()) {
-					Entry entry = (Entry) iterator.next();
+					Entry entry = iterator.next();
 
 					if ((entry.row1 == counter) && (entry.row1 == counter)) {
 						Dimension p = (rowSpec[counter] == PREFERRED) ? entry.component.getPreferredSize() : entry.component
-								.getMinimumSize();
+											.getMinimumSize();
 
 						int height = (p == null) ? 0 : p.height;
 
@@ -1412,15 +1413,15 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 			}
 
 		// Find maximum preferred size of all scaled components
-		ListIterator iterator = list.listIterator(0);
+		ListIterator<Entry> iterator = list.listIterator(0);
 
 		while (iterator.hasNext()) {
 			// Get next entry
-			Entry entry = (Entry) iterator.next();
+			Entry entry = iterator.next();
 
 			// Make sure entry is in valid rows and columns
 			if ((entry.col1 < 0) || (entry.col1 >= columnSpec.length) || (entry.col2 >= columnSpec.length)
-					|| (entry.row1 < 0) || (entry.row1 >= rowSpec.length) || (entry.row2 >= rowSpec.length)) {
+								|| (entry.row1 < 0) || (entry.row1 >= rowSpec.length) || (entry.row2 >= rowSpec.length)) {
 				// Skip the bad component
 				continue;
 			}
@@ -1435,16 +1436,18 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 			for (counter = entry.col1; counter <= entry.col2; counter++)
 				if (columnSpec[counter] >= 1.0)
 					scalableWidth -= columnSpec[counter];
-				else if ((columnSpec[counter] == PREFERRED) || (columnSpec[counter] == MINIMUM)) {
-					scalableWidth -= columnPrefMin[counter];
-				}
+				else
+					if ((columnSpec[counter] == PREFERRED) || (columnSpec[counter] == MINIMUM)) {
+						scalableWidth -= columnPrefMin[counter];
+					}
 
 			for (counter = entry.row1; counter <= entry.row2; counter++)
 				if (rowSpec[counter] >= 1.0)
 					scalableHeight -= rowSpec[counter];
-				else if ((rowSpec[counter] == PREFERRED) || (rowSpec[counter] == MINIMUM)) {
-					scalableHeight -= rowPrefMin[counter];
-				}
+				else
+					if ((rowSpec[counter] == PREFERRED) || (rowSpec[counter] == MINIMUM)) {
+						scalableHeight -= rowPrefMin[counter];
+					}
 
 			// ----------------------------------------------------------------------
 
@@ -1458,9 +1461,10 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 					// Add scaled size to relativeWidth
 					relativeWidth += columnSpec[counter];
 				// Column is fill
-				else if ((columnSpec[counter] == FILL) && (fillWidthRatio != 0.0))
-					// Add fill size to relativeWidth
-					relativeWidth += fillWidthRatio;
+				else
+					if ((columnSpec[counter] == FILL) && (fillWidthRatio != 0.0))
+						// Add fill size to relativeWidth
+						relativeWidth += fillWidthRatio;
 			}
 
 			// Determine the total scaled width as estimated by this component
@@ -1485,9 +1489,10 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 					// Add scaled size to relativeHeight
 					relativeHeight += rowSpec[counter];
 				// Row is fill
-				else if ((rowSpec[counter] == FILL) && (fillHeightRatio != 0.0))
-					// Add fill size to relativeHeight
-					relativeHeight += fillHeightRatio;
+				else
+					if ((rowSpec[counter] == FILL) && (fillHeightRatio != 0.0))
+						// Add fill size to relativeHeight
+						relativeHeight += fillHeightRatio;
 			}
 
 			// Determine the total scaled width as estimated by this component
@@ -1511,10 +1516,11 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 			if (columnSpec[counter] >= 1.0)
 				totalWidth += (int) (columnSpec[counter] + 0.5);
 			// Is the current column a preferred/minimum size
-			else if ((columnSpec[counter] == PREFERRED) || (columnSpec[counter] == MINIMUM)) {
-				// Add preferred/minimum width
-				totalWidth += columnPrefMin[counter];
-			}
+			else
+				if ((columnSpec[counter] == PREFERRED) || (columnSpec[counter] == MINIMUM)) {
+					// Add preferred/minimum width
+					totalWidth += columnPrefMin[counter];
+				}
 
 		// totalHeight is the scaledHeight plus the sum of all absolute heights
 		// and
@@ -1526,10 +1532,11 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 			if (rowSpec[counter] >= 1.0)
 				totalHeight += (int) (rowSpec[counter] + 0.5);
 			// Is the current row a preferred size
-			else if ((rowSpec[counter] == PREFERRED) || (rowSpec[counter] == MINIMUM)) {
-				// Add preferred/minimum width
-				totalHeight += rowPrefMin[counter];
-			}
+			else
+				if ((rowSpec[counter] == PREFERRED) || (rowSpec[counter] == MINIMUM)) {
+					// Add preferred/minimum width
+					totalHeight += rowPrefMin[counter];
+				}
 
 		// Compensate for container's insets
 		Insets inset = container.getInsets();
@@ -1574,14 +1581,16 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		for (counter = 0; counter < columnSpec.length; counter++)
 			if ((columnSpec[counter] > 0.0) && (columnSpec[counter] < 1.0))
 				fillWidthRatio -= columnSpec[counter];
-			else if (columnSpec[counter] == FILL)
-				numFillWidth++;
+			else
+				if (columnSpec[counter] == FILL)
+					numFillWidth++;
 
 		for (counter = 0; counter < rowSpec.length; counter++)
 			if ((rowSpec[counter] > 0.0) && (rowSpec[counter] < 1.0))
 				fillHeightRatio -= rowSpec[counter];
-			else if (rowSpec[counter] == FILL)
-				numFillHeight++;
+			else
+				if (rowSpec[counter] == FILL)
+					numFillHeight++;
 
 		// Adjust fill ratios to reflect number of fill rows/columns
 		if (numFillWidth > 1)
@@ -1598,15 +1607,15 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 			fillHeightRatio = 0.0;
 
 		// Find maximum minimum size of all scaled components
-		ListIterator iterator = list.listIterator(0);
+		ListIterator<Entry> iterator = list.listIterator(0);
 
 		while (iterator.hasNext()) {
 			// Get next entry
-			Entry entry = (Entry) iterator.next();
+			Entry entry = iterator.next();
 
 			// Make sure entry is in valid rows and columns
 			if ((entry.col1 < 0) || (entry.col1 >= columnSpec.length) || (entry.col2 >= columnSpec.length)
-					|| (entry.row1 < 0) || (entry.row1 >= rowSpec.length) || (entry.row2 >= rowSpec.length)) {
+								|| (entry.row1 < 0) || (entry.row1 >= rowSpec.length) || (entry.row2 >= rowSpec.length)) {
 				// Skip the bad component
 				continue;
 			}
@@ -1638,9 +1647,10 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 					// Add scaled size to relativeWidth
 					relativeWidth += columnSpec[counter];
 				// Column is fill
-				else if ((columnSpec[counter] == FILL) && (fillWidthRatio != 0.0))
-					// Add fill size to relativeWidth
-					relativeWidth += fillWidthRatio;
+				else
+					if ((columnSpec[counter] == FILL) && (fillWidthRatio != 0.0))
+						// Add fill size to relativeWidth
+						relativeWidth += fillWidthRatio;
 			}
 
 			// Determine the total scaled width as estimated by this component
@@ -1665,9 +1675,10 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 					// Add scaled size to relativeHeight
 					relativeHeight += rowSpec[counter];
 				// Row is fill
-				else if ((rowSpec[counter] == FILL) && (fillHeightRatio != 0.0))
-					// Add fill size to relativeHeight
-					relativeHeight += fillHeightRatio;
+				else
+					if ((rowSpec[counter] == FILL) && (fillHeightRatio != 0.0))
+						// Add fill size to relativeHeight
+						relativeHeight += fillHeightRatio;
 			}
 
 			// Determine the total scaled width as estimated by this component
@@ -1691,31 +1702,32 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 			if (columnSpec[counter] >= 1.0)
 				totalWidth += (int) (columnSpec[counter] + 0.5);
 			// Is the current column a preferred size
-			else if ((columnSpec[counter] == PREFERRED) || (columnSpec[counter] == MINIMUM)) {
-				// Assume a maximum width of zero
-				int maxWidth = 0;
+			else
+				if ((columnSpec[counter] == PREFERRED) || (columnSpec[counter] == MINIMUM)) {
+					// Assume a maximum width of zero
+					int maxWidth = 0;
 
-				// Find maximum preferred width of all components completely
-				// contained within this column
-				iterator = list.listIterator(0);
+					// Find maximum preferred width of all components completely
+					// contained within this column
+					iterator = list.listIterator(0);
 
-				while (iterator.hasNext()) {
-					Entry entry = (Entry) iterator.next();
+					while (iterator.hasNext()) {
+						Entry entry = iterator.next();
 
-					if ((entry.col1 == counter) && (entry.col2 == counter)) {
-						Dimension p = (columnSpec[counter] == PREFERRED) ? entry.component.getPreferredSize()
-								: entry.component.getMinimumSize();
+						if ((entry.col1 == counter) && (entry.col2 == counter)) {
+							Dimension p = (columnSpec[counter] == PREFERRED) ? entry.component.getPreferredSize()
+												: entry.component.getMinimumSize();
 
-						int width = (p == null) ? 0 : p.width;
+							int width = (p == null) ? 0 : p.width;
 
-						if (maxWidth < width)
-							maxWidth = width;
+							if (maxWidth < width)
+								maxWidth = width;
+						}
 					}
-				}
 
-				// Add preferred width
-				totalWidth += maxWidth;
-			}
+					// Add preferred width
+					totalWidth += maxWidth;
+				}
 
 		// totalHeight is the scaledHeight plus the sum of all absolute heights
 		// and
@@ -1727,31 +1739,32 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 			if (rowSpec[counter] >= 1.0)
 				totalHeight += (int) (rowSpec[counter] + 0.5);
 			// Is the current row a preferred size
-			else if ((rowSpec[counter] == PREFERRED) || (rowSpec[counter] == MINIMUM)) {
-				// Assume a maximum height of zero
-				int maxHeight = 0;
+			else
+				if ((rowSpec[counter] == PREFERRED) || (rowSpec[counter] == MINIMUM)) {
+					// Assume a maximum height of zero
+					int maxHeight = 0;
 
-				// Find maximum preferred height of all components completely
-				// contained within this row
-				iterator = list.listIterator(0);
+					// Find maximum preferred height of all components completely
+					// contained within this row
+					iterator = list.listIterator(0);
 
-				while (iterator.hasNext()) {
-					Entry entry = (Entry) iterator.next();
+					while (iterator.hasNext()) {
+						Entry entry = iterator.next();
 
-					if ((entry.row1 == counter) && (entry.row1 == counter)) {
-						Dimension p = (rowSpec[counter] == PREFERRED) ? entry.component.getPreferredSize() : entry.component
-								.getMinimumSize();
+						if ((entry.row1 == counter) && (entry.row1 == counter)) {
+							Dimension p = (rowSpec[counter] == PREFERRED) ? entry.component.getPreferredSize() : entry.component
+												.getMinimumSize();
 
-						int height = (p == null) ? 0 : p.height;
+							int height = (p == null) ? 0 : p.height;
 
-						if (maxHeight < height)
-							maxHeight = height;
+							if (maxHeight < height)
+								maxHeight = height;
+						}
 					}
-				}
 
-				// Add preferred height
-				totalHeight += maxHeight;
-			}
+					// Add preferred height
+					totalHeight += maxHeight;
+				}
 
 		// Compensate for container's insets
 		Insets inset = container.getInsets();
@@ -1794,13 +1807,15 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 
 			// Add component and constraints to the list
 			list.add(new Entry(component, (TableLayoutConstraints) constraint));
-		} else if (constraint instanceof TableLayoutConstraints) {
-			// Add component and constraints to the list
-			list.add(new Entry(component, (TableLayoutConstraints) constraint));
-		} else if (constraint == null)
-			throw new IllegalArgumentException("No constraint for the component");
-		else
-			throw new IllegalArgumentException("Cannot accept a constraint of class " + constraint.getClass());
+		} else
+			if (constraint instanceof TableLayoutConstraints) {
+				// Add component and constraints to the list
+				list.add(new Entry(component, (TableLayoutConstraints) constraint));
+			} else
+				if (constraint == null)
+					throw new IllegalArgumentException("No constraint for the component");
+				else
+					throw new IllegalArgumentException("Cannot accept a constraint of class " + constraint.getClass());
 	}
 
 	/**
@@ -1918,7 +1933,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	}
 
 	public static JComponent getSplit(JComponent leftComponent, JComponent rightComponent, double leftSize,
-			double rightSize) {
+						double rightSize) {
 
 		if (leftComponent == null)
 			leftComponent = new JLabel("");
@@ -1929,7 +1944,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		result.setOpaque(false);
 		double border = 0;
 		double[][] size = { { border, leftSize, rightSize, border }, // Columns
-				{ border, TableLayoutConstants.FILL, border } }; // Rows
+							{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		result.add(leftComponent, "1,1");
 		result.add(rightComponent, "2,1");
@@ -1938,12 +1953,12 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	}
 
 	public static JPanel getSplitVertical(Component topComponent, Component bottomComponent, double topSize,
-			double bottomSize) {
+						double bottomSize) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double border = 0;
 		double[][] size = { { border, TableLayoutConstants.FILL, border }, // Columns
-				{ border, topSize, bottomSize, border } }; // Rows
+							{ border, topSize, bottomSize, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		result.add((topComponent == null ? new JLabel() : topComponent), "1,1");
 		result.add((bottomComponent == null ? new JLabel() : bottomComponent), "1,2");
@@ -1956,7 +1971,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		result.setOpaque(false);
 		double border = 0;
 		double[][] size = { { border, TableLayoutConstants.FILL, border }, // Columns
-				{ border, TableLayoutConstants.PREFERRED, TableLayoutConstants.PREFERRED, border } }; // Rows
+							{ border, TableLayoutConstants.PREFERRED, TableLayoutConstants.PREFERRED, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		label.setOpaque(true);
 		label.setBackground(color);
@@ -1968,16 +1983,16 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	}
 
 	public static JComponent get3Split(JComponent left, JComponent middle, JComponent right, double sizeLeft,
-			double sizeMiddle, double sizeRight) {
+						double sizeMiddle, double sizeRight) {
 		return get3Split(left, middle, right, sizeLeft, sizeMiddle, sizeRight, 0, 0);
 	}
 
 	public static JComponent get3Split(JComponent left, JComponent middle, JComponent right, double sizeLeft,
-			double sizeMiddle, double sizeRight, double spaceBetween, double border) {
+						double sizeMiddle, double sizeRight, double spaceBetween, double border) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double[][] size = { { border, sizeLeft, spaceBetween, sizeMiddle, spaceBetween, sizeRight, border }, // Columns
-				{ border, TableLayoutConstants.FILL, border } }; // Rows
+							{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		if (left != null)
 			result.add(left, "1,1");
@@ -1990,11 +2005,11 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	}
 
 	public static JComponent get4Split(JComponent left, JComponent middle1, JComponent middle2, JComponent right,
-			double width, double spaceBetween, double border) {
+						double width, double spaceBetween, double border) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double[][] size = { { border, width, spaceBetween, width, spaceBetween, width, spaceBetween, width, border }, // Columns
-				{ border, TableLayoutConstants.FILL, border } }; // Rows
+							{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		if (left != null)
 			result.add(left, "1,1");
@@ -2009,11 +2024,11 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	}
 
 	public static JComponent get4Split(JComponent left, JComponent middle1, JComponent middle2, JComponent right,
-			double w1, double w2, double w3, double w4, double spaceBetween, double border) {
+						double w1, double w2, double w3, double w4, double spaceBetween, double border) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double[][] size = { { border, w1, spaceBetween, w2, spaceBetween, w3, spaceBetween, w4, border }, // Columns
-				{ border, TableLayoutConstants.FILL, border } }; // Rows
+							{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		if (left != null)
 			result.add(left, "1,1");
@@ -2028,16 +2043,16 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	}
 
 	public static JComponent get3SplitVertical(JComponent top, JComponent middle, JComponent bottom, double sizeTop,
-			double sizeMiddle, double sizeBottom) {
+						double sizeMiddle, double sizeBottom) {
 		return get3SplitVertical(top, middle, bottom, sizeTop, sizeMiddle, sizeBottom, 0, 0);
 	}
 
 	public static JComponent get3SplitVertical(JComponent top, JComponent middle, JComponent bottom, double sizeTop,
-			double sizeMiddle, double sizeBottom, double spaceBetween, double border) {
+						double sizeMiddle, double sizeBottom, double spaceBetween, double border) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double[][] size = { { border, TableLayoutConstants.FILL, border },
-				{ border, sizeTop, spaceBetween, sizeMiddle, spaceBetween, sizeBottom, border }, // row
+							{ border, sizeTop, spaceBetween, sizeMiddle, spaceBetween, sizeBottom, border }, // row
 
 		}; // Rows
 		result.setLayout(new TableLayout(size));
@@ -2052,13 +2067,13 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	}
 
 	public static JComponent get4SplitVertical(JComponent top, JComponent middle1, JComponent middle2,
-			JComponent bottom, double sizeTop, double sizeMiddle1, double sizeMiddle2, double sizeBottom,
-			double spaceBetween, double border) {
+						JComponent bottom, double sizeTop, double sizeMiddle1, double sizeMiddle2, double sizeBottom,
+						double spaceBetween, double border) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double[][] size = {
-				{ border, TableLayoutConstants.FILL, border },
-				{ border, sizeTop, spaceBetween, sizeMiddle1, spaceBetween, sizeMiddle2, spaceBetween, sizeBottom, border }, // row
+							{ border, TableLayoutConstants.FILL, border },
+							{ border, sizeTop, spaceBetween, sizeMiddle1, spaceBetween, sizeMiddle2, spaceBetween, sizeBottom, border }, // row
 
 		}; // Rows
 		result.setLayout(new TableLayout(size));
@@ -2120,7 +2135,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	}
 
 	public static JComponent getMultiSplit(ArrayList<JComponent> guiElements, double componentsWidth, int spaceT,
-			int spaceL, int spaceB, int spaceR) {
+						int spaceL, int spaceB, int spaceR) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double[] width = new double[guiElements.size()];
@@ -2136,7 +2151,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		return result;
 	}
 
-	public static JComponent getMultiSplitVertical(Collection jComponentList) {
+	public static JComponent getMultiSplitVertical(Collection<?> jComponentList) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		result.setBackground(null);
@@ -2154,7 +2169,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		return result;
 	}
 
-	public static JPanel getMultiSplitVerticalNonPrefHeight(Collection jComponentList, double h) {
+	public static JPanel getMultiSplitVerticalNonPrefHeight(Collection<?> jComponentList, double h) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		result.setBackground(null);
@@ -2162,7 +2177,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		return result;
 	}
 
-	public static void setMultiSplitVerticalNonPrefHeight_Contents(Collection jComponentList, double h, JPanel result) {
+	public static void setMultiSplitVerticalNonPrefHeight_Contents(Collection<?> jComponentList, double h, JPanel result) {
 		double[] height = new double[jComponentList.size()];
 		for (int i = 0; i < height.length; i++)
 			height[i] = h;
@@ -2176,7 +2191,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		result.validate();
 	}
 
-	public static JComponent getMultiSplitVertical(Collection jComponentList, int spaceBetween) {
+	public static JComponent getMultiSplitVertical(Collection<?> jComponentList, int spaceBetween) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		result.setBackground(null);
@@ -2197,7 +2212,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		return result;
 	}
 
-	public static JComponent getMultiSplitVertical(Collection jComponentList, double width, int spaceBetween) {
+	public static JComponent getMultiSplitVertical(Collection<?> jComponentList, double width, int spaceBetween) {
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		result.setBackground(null);

@@ -1,7 +1,7 @@
 /*******************************************************************************
  * 
-
- *    Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
+ * 
+ * Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
  * 
  *******************************************************************************/
 
@@ -78,13 +78,13 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.112 $
+ * @version $Revision: 1.113 $
  */
 public class AttributeHelper implements HelperClass {
 
 	private static HashMap<String, String> idToNiceId = new HashMap<String, String>();
 	private static HashMap<String, String> idToDeletePath = new HashMap<String, String>();
-	private static boolean idInit = false,deletePathInit = false;
+	private static boolean idInit = false, deletePathInit = false;
 	public static String attributeSeparator = String.valueOf(Attribute.SEPARATOR);
 
 	public static String id_ttestCircleSize = "ttestCircleSize";
@@ -160,11 +160,11 @@ public class AttributeHelper implements HelperClass {
 						r.exec(new String[] { cmd, par });
 					} catch (Exception e4) {
 						JOptionPane.showMessageDialog(
-								null,
-								"<html>Error executing command. Error Messages:<p>" + e.getLocalizedMessage()
-								+ " (Windows File Open)<p>" + e2.getLocalizedMessage() + " (gnome File Open)<p>"
-								+ e3.getLocalizedMessage() + " (Mac OS X File Open)<p>" + e4.getLocalizedMessage()
-								+ " (KDE File Open)</html>", "Error opening file", JOptionPane.WARNING_MESSAGE);
+											null,
+											"<html>Error executing command. Error Messages:<p>" + e.getLocalizedMessage()
+																+ " (Windows File Open)<p>" + e2.getLocalizedMessage() + " (gnome File Open)<p>"
+																+ e3.getLocalizedMessage() + " (Mac OS X File Open)<p>" + e4.getLocalizedMessage()
+																+ " (KDE File Open)</html>", "Error opening file", JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			}
@@ -251,17 +251,17 @@ public class AttributeHelper implements HelperClass {
 				endS = StringManipulationTools.stringReplace(endS, " ", "&nbsp;");
 				if (ReleaseInfo.getRunningReleaseStatus() == Release.KGML_EDITOR)
 					result = result.substring(0, idx) + " (list):" + "<html><!-- " + endNumber + " -->"
-					+ StringManipulationTools.stringReplace(endS, "<html>", "");
+										+ StringManipulationTools.stringReplace(endS, "<html>", "");
 				else {
 					if (result.substring(0, idx).length() > 0)
 						result = result.substring(0, idx) + ":" + "<html><!-- " + endNumber + " -->"
-						+ StringManipulationTools.stringReplace(endS, "<html>", "");
+											+ StringManipulationTools.stringReplace(endS, "<html>", "");
 					else
 						result = "<html><!-- "
-							+ endNumber
-							+ " -->"
-							+ StringManipulationTools.stringReplace(
-									StringManipulationTools.stringReplace(endS, "&nbsp;", " "), "<html>", "").trim();
+											+ endNumber
+											+ " -->"
+											+ StringManipulationTools.stringReplace(
+																StringManipulationTools.stringReplace(endS, "&nbsp;", " "), "<html>", "").trim();
 				}
 			}
 		}
@@ -325,25 +325,31 @@ public class AttributeHelper implements HelperClass {
 	}
 
 	/**
-	 * Memorizes an attribute, which's editor may be clicked, resulting in the deletion
-	 * of an attribute (not necessarily the clicked one):<p>
+	 * Memorizes an attribute, which's editor may be clicked, resulting in the
+	 * deletion
+	 * of an attribute (not necessarily the clicked one):
+	 * <p>
 	 * 
 	 * attributePath:
-	 * <ul><li>".mapping.measurementdata" -> this attribute will be clickable</li>
-	 * 	<li>".mapping." -> this attribute and all child attributes will be clickable</li>
+	 * <ul>
+	 * <li>".mapping.measurementdata" -> this attribute will be clickable</li>
+	 * <li>".mapping." -> this attribute and all child attributes will be
+	 * clickable</li>
 	 * </ul>
 	 * pathToBeDeleted:
-	 * <ul><li>"mapping" -> attribute ".mapping" (and all child attributes) will be deleted</li>
-	 * 	<li>"graphics.component" -> attribute ".graphics.component" (and all child attributes)
-	 * will be deleted, but not any other ".graphics." attributes</li>
-	 * <li>"mapping$charting" -> attributes ".mapping", ".charting" and all child attributes
-	 * will be deleted. "$" may be used more than once</li>
+	 * <ul>
+	 * <li>"mapping" -> attribute ".mapping" (and all child attributes) will be
+	 * deleted</li>
+	 * <li>"graphics.component" -> attribute ".graphics.component" (and all child
+	 * attributes) will be deleted, but not any other ".graphics." attributes</li>
+	 * <li>"mapping$charting" -> attributes ".mapping", ".charting" and all child
+	 * attributes will be deleted. "$" may be used more than once</li>
 	 * </ul>
-
+	 * 
 	 * @param attributePath
 	 *           The path of the attribute, which will be clickable
 	 * @param pathToBeDeleted
-	 *          The path(s) of the attribute(s) to be deleted
+	 *           The path(s) of the attribute(s) to be deleted
 	 */
 	public static void setDeleteableAttribute(String attributePath, String pathToBeDeleted) {
 		if (idToDeletePath.containsKey(attributePath))
@@ -362,17 +368,17 @@ public class AttributeHelper implements HelperClass {
 
 	private static void initDeleteablePaths() {
 		setDeleteableAttribute(".cluster.cluster", "cluster.cluster");
-		setDeleteableAttribute(".mapping.","mapping$charting$graphics.component");
-		setDeleteableAttribute(".charting.","mapping$charting$graphics.component");
-		setDeleteableAttribute(".graphics.component","mapping$charting$graphics.component");
-		setDeleteableAttribute(".labelgraphics.","labelgraphics");
-		setDeleteableAttribute(".image.","image");
-		setDeleteableAttribute(".pathway_ref_url","pathway_ref_url");
-		setDeleteableAttribute(".url","url");
-		for (int i = 1; i<100; i++)
-			setDeleteableAttribute(".labelgraphics"+i+".","labelgraphics"+i);
-		for (int i = 0; i<100; i++)
-			setDeleteableAttribute(".graphics.bends.bend"+i+".","graphics.bends.bend"+i);
+		setDeleteableAttribute(".mapping.", "mapping$charting$graphics.component");
+		setDeleteableAttribute(".charting.", "mapping$charting$graphics.component");
+		setDeleteableAttribute(".graphics.component", "mapping$charting$graphics.component");
+		setDeleteableAttribute(".labelgraphics.", "labelgraphics");
+		setDeleteableAttribute(".image.", "image");
+		setDeleteableAttribute(".pathway_ref_url", "pathway_ref_url");
+		setDeleteableAttribute(".url", "url");
+		for (int i = 1; i < 100; i++)
+			setDeleteableAttribute(".labelgraphics" + i + ".", "labelgraphics" + i);
+		for (int i = 0; i < 100; i++)
+			setDeleteableAttribute(".graphics.bends.bend" + i + ".", "graphics.bends.bend" + i);
 		deletePathInit = true;
 	}
 
@@ -439,9 +445,9 @@ public class AttributeHelper implements HelperClass {
 
 		idToNiceId.put("useCustomRange", chartSelN + ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Custom Min/Max");
 		idToNiceId.put("useCustomRangeSteps", chartSelN
-				+ ":<html>&nbsp;Range Axis: <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Custom Step Size");
+							+ ":<html>&nbsp;Range Axis: <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Custom Step Size");
 		idToNiceId.put("rangeStepSize", chartSelN
-				+ ":<html>&nbsp;Range Axis:  <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Step Size");
+							+ ":<html>&nbsp;Range Axis:  <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Step Size");
 
 		idToNiceId.put("max_charts_in_column", chartSelN + ": Number of Charts in a Row");
 
@@ -452,7 +458,7 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("Edge:outline", "Color");
 		idToNiceId.put("show_legend", chartSelN + ": Show Legend");
 		idToNiceId.put("background_color", chartSelN
-				+ ":<html>&nbsp;Background-Color<br>&nbsp;<small><font color=\"gray\">(black=translucent)");
+							+ ":<html>&nbsp;Background-Color<br>&nbsp;<small><font color=\"gray\">(black=translucent)");
 		// for (int i = 0; i < 100; i++)
 		// idToNiceId.put("background_color" + i, "Mapping-Background " +
 		// chartSelN
@@ -474,12 +480,12 @@ public class AttributeHelper implements HelperClass {
 
 		idToNiceId.put("node_categoryBackgroundColorA", chartDiagram + ":<html>&nbsp;Background Color left of A");
 		idToNiceId.put("node_categoryBackgroundColorB", chartDiagram
-				+ ":<html>&nbsp;Background Color<br>&nbsp;<small><font color=\"gray\">(black=translucent)");
+							+ ":<html>&nbsp;Background Color<br>&nbsp;<small><font color=\"gray\">(black=translucent)");
 		idToNiceId.put("node_categoryBackgroundColorC", chartDiagram + ":<html>&nbsp;Background Color right of B");
 		idToNiceId.put("node_categoryBackgroundColorIndexA", chartDiagram
-				+ ":<html>&nbsp;Time A<br>&nbsp;<small><font color=\"gray\">(-1 = disabled, 0...x enabled)");
+							+ ":<html>&nbsp;Time A<br>&nbsp;<small><font color=\"gray\">(-1 = disabled, 0...x enabled)");
 		idToNiceId.put("node_categoryBackgroundColorIndexC", chartDiagram
-				+ ":<html>&nbsp;Time B<br>&nbsp;<small><font color=\"gray\">(-1 = disabled, 0...x enabled)");
+							+ ":<html>&nbsp;Time B<br>&nbsp;<small><font color=\"gray\">(-1 = disabled, 0...x enabled)");
 
 		idToNiceId.put(GraphicAttributeConstants.HEATMAP_LOWER_COL, chartHeatMap + ": Lower Color");
 		idToNiceId.put(GraphicAttributeConstants.HEATMAP_UPPER_COL, chartHeatMap + ": Upper Color");
@@ -606,7 +612,8 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("color", "Label (Annotation): Color");
 		idToNiceId.put("anchor", "Label (Annotation): Position");
 
-		idToNiceId.put("image_url", "Image:<html>&nbsp;URL<br><br>&nbsp;View");
+		// idToNiceId.put("image_url", "Image:<html>&nbsp;URL<br><br>&nbsp;View");
+		idToNiceId.put("image_url", "Image:<html>&nbsp;View<br><br>&nbsp;URL");
 		idToNiceId.put("image_position", "Image: Position");
 		if (ReleaseInfo.getRunningReleaseStatus() == Release.KGML_EDITOR) {
 			idToNiceId.put("cluster_colors", "Pathway-Coloring");
@@ -993,7 +1000,7 @@ public class AttributeHelper implements HelperClass {
 				System.err.println("hasAttribute Function called with Null argument for attributeName!");
 			if (n != null && attributeName != null)
 				System.err.println("hasAttribute Function received exception while retreiving attribute! ("
-						+ err2.getMessage() + ")");
+									+ err2.getMessage() + ")");
 			return false;
 		}
 	}
@@ -1373,7 +1380,7 @@ public class AttributeHelper implements HelperClass {
 		if (attributeValue instanceof Boolean) {
 			try {
 				attributable.setBoolean(path + attributeSeparator + attributeName,
-						((Boolean) attributeValue).booleanValue());
+									((Boolean) attributeValue).booleanValue());
 				return;
 			} catch (Exception e) {
 
@@ -1455,7 +1462,7 @@ public class AttributeHelper implements HelperClass {
 	 * @author Christian Klukas
 	 */
 	public static void setAttributeTextField(Attributable attributable, String path, String attributeName,
-			Object attributeValue) {
+						Object attributeValue) {
 		if (!hasAttribute(attributable, path)) {
 			addAttributeFolder(attributable, path);
 		}
@@ -1477,7 +1484,7 @@ public class AttributeHelper implements HelperClass {
 	}
 
 	public static Set<Object> getAttributeValueSet(Collection<Attributable> attributables, String path,
-			String attributeName, Object defaultValue, Object resultType, boolean setDefaultIfMissing) {
+						String attributeName, Object defaultValue, Object resultType, boolean setDefaultIfMissing) {
 		HashSet<Object> values = new HashSet<Object>();
 		for (Attributable a : attributables) {
 			Object o = getAttributeValue(a, path, attributeName, defaultValue, resultType, setDefaultIfMissing);
@@ -1487,7 +1494,7 @@ public class AttributeHelper implements HelperClass {
 	}
 
 	public static Object getAttributeValue(Attributable attributable, String path, String attributeName,
-			Object defaultValue, Object resultType) {
+						Object defaultValue, Object resultType) {
 		return getAttributeValue(attributable, path, attributeName, defaultValue, resultType, true);
 	}
 
@@ -1495,7 +1502,7 @@ public class AttributeHelper implements HelperClass {
 	 * Return a Attribute value, if not present it returns the defaultValue.
 	 */
 	public static Object getAttributeValue(Attributable attributable, String path, String attributeName,
-			Object defaultValue, Object resultType, boolean setDefaultIfMissing) {
+						Object defaultValue, Object resultType, boolean setDefaultIfMissing) {
 
 		try {
 			HashMapAttribute a = (HashMapAttribute) getAttribute(attributable, path);
@@ -1552,7 +1559,7 @@ public class AttributeHelper implements HelperClass {
 						return rr;
 					} else {
 						ErrorMsg.addErrorMessage("Attribute Type Invalid, is not the same as expected: "
-								+ res.getClass().getSimpleName() + " *#* " + resultType.getClass().getSimpleName());
+											+ res.getClass().getSimpleName() + " *#* " + resultType.getClass().getSimpleName());
 						if (defaultValue != null)
 							setAttribute(attributable, path, attributeName, defaultValue);
 					}
@@ -1618,7 +1625,7 @@ public class AttributeHelper implements HelperClass {
 		try {
 			DoubleAttribute dblAtt = null;
 			dblAtt = (DoubleAttribute) ge.getAttribute(GraphicAttributeConstants.GRAPHICS + Attribute.SEPARATOR
-					+ GraphicAttributeConstants.FRAMETHICKNESS);
+								+ GraphicAttributeConstants.FRAMETHICKNESS);
 
 			return dblAtt.getDouble();
 		} catch (Exception ex) {
@@ -1630,7 +1637,7 @@ public class AttributeHelper implements HelperClass {
 		try {
 			DoubleAttribute dblAtt = null;
 			dblAtt = (DoubleAttribute) ge.getAttribute(GraphicAttributeConstants.GRAPHICS + Attribute.SEPARATOR
-					+ GraphicAttributeConstants.FRAMETHICKNESS);
+								+ GraphicAttributeConstants.FRAMETHICKNESS);
 
 			dblAtt.setDouble(frameThinkness);
 		} catch (Exception ex) {
@@ -1643,8 +1650,8 @@ public class AttributeHelper implements HelperClass {
 	 */
 	public static void setDefaultGraphicsAttribute(Node node, double x, double y) {
 		setNodeGraphicsAttribute(x, y, 3, 20, 20, // 120, 120
-				new Color(0, 0, 0, 255), new Color(0, 255, 255, 255), // 100
-				node.getAttributes());
+							new Color(0, 0, 0, 255), new Color(0, 255, 255, 255), // 100
+							node.getAttributes());
 	}
 
 	/**
@@ -1658,7 +1665,7 @@ public class AttributeHelper implements HelperClass {
 	 * @param col
 	 */
 	public static void setNodeGraphicsAttribute(double posx, double posy, double frameThickness_3, double width_25,
-			double height_25, Color frameColor_0_0_0_255, Color fillColor_0_100_250_100, CollectionAttribute col) {
+						double height_25, Color frameColor_0_0_0_255, Color fillColor_0_100_250_100, CollectionAttribute col) {
 		NodeGraphicAttribute graphics = new NodeGraphicAttribute();
 		CoordinateAttribute cooAtt = graphics.getCoordinate();
 		Point2D pos = new Point2D.Double();
@@ -1674,7 +1681,7 @@ public class AttributeHelper implements HelperClass {
 		double height = height_25;
 		double width = width_25;
 		graphics.getDimension().setDimension(
-				new Dimension((int) java.lang.Math.round(width), (int) java.lang.Math.round(height)));
+							new Dimension((int) java.lang.Math.round(width), (int) java.lang.Math.round(height)));
 		// setting the framecolor
 		if (frameColor_0_0_0_255 == null)
 			graphics.getFramecolor().setColor(new Color(0, 0, 0, 255));
@@ -1831,7 +1838,7 @@ public class AttributeHelper implements HelperClass {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null)
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK, Color.BLACK, edge.isDirected()),
-					GraphicAttributeConstants.GRAPHICS);
+								GraphicAttributeConstants.GRAPHICS);
 		ega.setFrameThickness(frameThickness);
 	}
 
@@ -1839,7 +1846,7 @@ public class AttributeHelper implements HelperClass {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null)
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK, Color.BLACK, edge.isDirected()),
-					GraphicAttributeConstants.GRAPHICS);
+								GraphicAttributeConstants.GRAPHICS);
 		ega.setThickness(arrowSize);
 	}
 
@@ -1847,7 +1854,7 @@ public class AttributeHelper implements HelperClass {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null)
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK, Color.BLACK, edge.isDirected()),
-					GraphicAttributeConstants.GRAPHICS);
+								GraphicAttributeConstants.GRAPHICS);
 		return ega.getThickness();
 	}
 
@@ -2004,287 +2011,287 @@ public class AttributeHelper implements HelperClass {
 	// };
 
 	private static final String[] knownColorNames = { "alice blue", // F0F8FF
-		"antique white", // FAEBD7
-		"aqua", // 00FFFF
-		"aquamarine", // 7FFFD4
-		"azure", // F0FFFF
-		"beige", // F5F5DC
-		"bisque", // FFE4C4
-		"black", // 000000
-		"blanchedalmond", // FFEBCD
-		"blue", // 0000FF
-		"blue violet", // 8A2BE2
-		"brown", // A52A2A
-		"burlywood", // DEB887
-		"cadet blue", // 5F9EA0
-		"chartreuse", // 7FFF00
-		"chocolate", // D2691E
-		"coral", // FF7F50
-		"corn flower blue", // 6495ED
-		"cornsilk", // FFF8DC
-		"crimson", // DC143C
-		"cyan", // 00FFFF
-		"dark blue", // 00008B
-		"dark cyan", // 008B8B
-		"dark golden rod", // B8860B
-		"dark gray", // A9A9A9
-		"dark green", // 006400
-		"dark khaki", // BDB76B
-		"dark magenta", // 8B008B
-		"dark olive green", // 556B2F
-		"dark orange", // FF8C00
-		"dark orchid", // 9932CC
-		"dark red", // 8B0000
-		"dark salmon", // E9967A
-		"dark sea green", // 8FBC8F
-		"dark slate blue", // 483D8B
-		"dark slate gray", // 2F4F4F
-		"dark turquoise", // 00CED1
-		"dark violet", // 9400D3
-		"deep pink", // FF1493
-		"deep sky blue", // 00BFFF
-		"dim gray", // 696969
-		"dodger blue", // 1E90FF
-		"firebrick", // B22222
-		"floral white", // FFFAF0 16775920
-		"forest green", // 228B22
-		"fuchsia", // FF00FF
-		"gainsboro", // DCDCDC
-		"ghost white", // F8F8FF
-		"gold", // FFD700
-		"golden rod", // DAA520
-		"gray", // 808080
-		"green", // 008000
-		"green yellow", // ADFF2F
-		"honey dew", // F0FFF0
-		"hot pink", // FF69B4
-		"indian red", // CD5C5C
-		"indigo", // 4B0082
-		"ivory", // FFFFF0
-		"khaki", // F0E68C
-		"lavender", // E6E6FA
-		"lavenderblush", // FFF0F5
-		"lawn green", // 7CFC00
-		"lemon chiffon", // FFFACD
-		"light blue", // ADD8E6
-		"light coral", // F08080
-		"light cyan", // E0FFFF
-		"light golden rod yellow", // FAFAD2
-		"light green", // 90EE90
-		"light grey", // D3D3D3
-		"light pink", // FFB6C1
-		"light salmon", // FFA07A
-		"light sea green", // 20B2AA
-		"light sky blue", // 87CEFA
-		"light slate gray", // 778899
-		"light steel blue", // B0C4DE
-		"light yellow", // FFFFE0
-		"lime", // 00FF00
-		"lime green", // 32CD32
-		"linen", // FAF0E6
-		"magenta", // FF00FF
-		"maroon", // 800000
-		"medium aquamarine", // 66CDAA
-		"medium blue", // 0000CD
-		"medium orchid", // BA55D3
-		"medium purple", // 9370DB
-		"medium sea green", // 3CB371
-		"medium slate blue", // 7B68EE
-		"medium spring green", // 00FA9A
-		"medium turquoise", // 48D1CC
-		"medium violet red", // C71585
-		"midnight blue", // 191970
-		"mint cream", // F5FFFA
-		"misty rose", // FFE4E1
-		"moccasin", // FFE4B5
-		"navajo white", // FFDEAD
-		"navy", // 000080
-		"oldlace", // FDF5E6
-		"olive", // 808000
-		"olivedrab", // 6B8E23
-		"orange", // FFA500
-		"orange red", // FF4500
-		"orchid", // DA70D6
-		"pale golden rod", // EEE8AA
-		"pale green", // 98FB98
-		"paleturquoise", // AFEEEE
-		"paleviolet red", // DB7093
-		"papaya whip", // FFEFD5
-		"peach puff", // FFDAB9
-		"peru", // CD853F
-		"pink", // FFC0CB
-		"plum", // DDA0DD
-		"powder blue", // B0E0E6
-		"purple", // 800080
-		"red", // FF0000
-		"rosy brown", // BC8F8F
-		"royal blue", // 4169E1
-		"saddle brown", // 8B4513
-		"salmon", // FA8072
-		"sandy brown", // F4A460
-		"sea green", // 2E8B57
-		"seashell", // FFF5EE
-		"sienna", // A0522D
-		"silver", // C0C0C0
-		"sky blue", // 87CEEB
-		"slate blue", // 6A5ACD
-		"slate gray", // 708090
-		"snow", // FFFAFA 16775930
-		"spring green", // 00FF7F
-		"steel blue", // 4682B4
-		"tan", // D2B48C
-		"teal", // 008080
-		"thistle", // D8BFD8
-		"tomato", // FF6347
-		"turquoise", // 40E0D0
-		"violet", // EE82EE
-		"wheat", // F5DEB3
-		"white", // FFFFFF 16777215
-		"white smoke", // F5F5F5
-		"yellow", // FFFF00
-		"yellow green" // 9ACD32
+						"antique white", // FAEBD7
+						"aqua", // 00FFFF
+						"aquamarine", // 7FFFD4
+						"azure", // F0FFFF
+						"beige", // F5F5DC
+						"bisque", // FFE4C4
+						"black", // 000000
+						"blanchedalmond", // FFEBCD
+						"blue", // 0000FF
+						"blue violet", // 8A2BE2
+						"brown", // A52A2A
+						"burlywood", // DEB887
+						"cadet blue", // 5F9EA0
+						"chartreuse", // 7FFF00
+						"chocolate", // D2691E
+						"coral", // FF7F50
+						"corn flower blue", // 6495ED
+						"cornsilk", // FFF8DC
+						"crimson", // DC143C
+						"cyan", // 00FFFF
+						"dark blue", // 00008B
+						"dark cyan", // 008B8B
+						"dark golden rod", // B8860B
+						"dark gray", // A9A9A9
+						"dark green", // 006400
+						"dark khaki", // BDB76B
+						"dark magenta", // 8B008B
+						"dark olive green", // 556B2F
+						"dark orange", // FF8C00
+						"dark orchid", // 9932CC
+						"dark red", // 8B0000
+						"dark salmon", // E9967A
+						"dark sea green", // 8FBC8F
+						"dark slate blue", // 483D8B
+						"dark slate gray", // 2F4F4F
+						"dark turquoise", // 00CED1
+						"dark violet", // 9400D3
+						"deep pink", // FF1493
+						"deep sky blue", // 00BFFF
+						"dim gray", // 696969
+						"dodger blue", // 1E90FF
+						"firebrick", // B22222
+						"floral white", // FFFAF0 16775920
+						"forest green", // 228B22
+						"fuchsia", // FF00FF
+						"gainsboro", // DCDCDC
+						"ghost white", // F8F8FF
+						"gold", // FFD700
+						"golden rod", // DAA520
+						"gray", // 808080
+						"green", // 008000
+						"green yellow", // ADFF2F
+						"honey dew", // F0FFF0
+						"hot pink", // FF69B4
+						"indian red", // CD5C5C
+						"indigo", // 4B0082
+						"ivory", // FFFFF0
+						"khaki", // F0E68C
+						"lavender", // E6E6FA
+						"lavenderblush", // FFF0F5
+						"lawn green", // 7CFC00
+						"lemon chiffon", // FFFACD
+						"light blue", // ADD8E6
+						"light coral", // F08080
+						"light cyan", // E0FFFF
+						"light golden rod yellow", // FAFAD2
+						"light green", // 90EE90
+						"light grey", // D3D3D3
+						"light pink", // FFB6C1
+						"light salmon", // FFA07A
+						"light sea green", // 20B2AA
+						"light sky blue", // 87CEFA
+						"light slate gray", // 778899
+						"light steel blue", // B0C4DE
+						"light yellow", // FFFFE0
+						"lime", // 00FF00
+						"lime green", // 32CD32
+						"linen", // FAF0E6
+						"magenta", // FF00FF
+						"maroon", // 800000
+						"medium aquamarine", // 66CDAA
+						"medium blue", // 0000CD
+						"medium orchid", // BA55D3
+						"medium purple", // 9370DB
+						"medium sea green", // 3CB371
+						"medium slate blue", // 7B68EE
+						"medium spring green", // 00FA9A
+						"medium turquoise", // 48D1CC
+						"medium violet red", // C71585
+						"midnight blue", // 191970
+						"mint cream", // F5FFFA
+						"misty rose", // FFE4E1
+						"moccasin", // FFE4B5
+						"navajo white", // FFDEAD
+						"navy", // 000080
+						"oldlace", // FDF5E6
+						"olive", // 808000
+						"olivedrab", // 6B8E23
+						"orange", // FFA500
+						"orange red", // FF4500
+						"orchid", // DA70D6
+						"pale golden rod", // EEE8AA
+						"pale green", // 98FB98
+						"paleturquoise", // AFEEEE
+						"paleviolet red", // DB7093
+						"papaya whip", // FFEFD5
+						"peach puff", // FFDAB9
+						"peru", // CD853F
+						"pink", // FFC0CB
+						"plum", // DDA0DD
+						"powder blue", // B0E0E6
+						"purple", // 800080
+						"red", // FF0000
+						"rosy brown", // BC8F8F
+						"royal blue", // 4169E1
+						"saddle brown", // 8B4513
+						"salmon", // FA8072
+						"sandy brown", // F4A460
+						"sea green", // 2E8B57
+						"seashell", // FFF5EE
+						"sienna", // A0522D
+						"silver", // C0C0C0
+						"sky blue", // 87CEEB
+						"slate blue", // 6A5ACD
+						"slate gray", // 708090
+						"snow", // FFFAFA 16775930
+						"spring green", // 00FF7F
+						"steel blue", // 4682B4
+						"tan", // D2B48C
+						"teal", // 008080
+						"thistle", // D8BFD8
+						"tomato", // FF6347
+						"turquoise", // 40E0D0
+						"violet", // EE82EE
+						"wheat", // F5DEB3
+						"white", // FFFFFF 16777215
+						"white smoke", // F5F5F5
+						"yellow", // FFFF00
+						"yellow green" // 9ACD32
 	};
 
 	public static final Color[] knownColors = { new Color(0xFFF0F8FF), // aliceblue
-		new Color(0xFFFAEBD7), // antiquewhite
-		new Color(0xFF00FFFF), // aqua
-		new Color(0xFF7FFFD4), // aquamarine
-		new Color(0xFFF0FFFF), // azure
-		new Color(0xFFF5F5DC), // beige
-		new Color(0xFFFFE4C4), // bisque
-		new Color(0xFF000000), // black
-		new Color(0xFFFFEBCD), // blanchedalmond
-		new Color(0xFF0000FF), // blue
-		new Color(0xFF8A2BE2), // blueviolet
-		new Color(0xFFA52A2A), // brown
-		new Color(0xFFDEB887), // burlywood
-		new Color(0xFF5F9EA0), // cadetblue
-		new Color(0xFF7FFF00), // chartreuse
-		new Color(0xFFD2691E), // chocolate
-		new Color(0xFFFF7F50), // coral
-		new Color(0xFF6495ED), // cornflowerblue
-		new Color(0xFFFFF8DC), // cornsilk
-		new Color(0xFFDC143C), // crimson
-		new Color(0xFF00FFFF), // cyan
-		new Color(0xFF00008B), // darkblue
-		new Color(0xFF008B8B), // darkcyan
-		new Color(0xFFB8860B), // darkgoldenrod
-		new Color(0xFFA9A9A9), // darkgray
-		new Color(0xFF006400), // darkgreen
-		new Color(0xFFBDB76B), // darkkhaki
-		new Color(0xFF8B008B), // darkmagenta
-		new Color(0xFF556B2F), // darkolivegreen
-		new Color(0xFFFF8C00), // darkorange
-		new Color(0xFF9932CC), // darkorchid
-		new Color(0xFF8B0000), // darkred
-		new Color(0xFFE9967A), // darksalmon
-		new Color(0xFF8FBC8F), // darkseagreen
-		new Color(0xFF483D8B), // darkslateblue
-		new Color(0xFF2F4F4F), // darkslategray
-		new Color(0xFF00CED1), // darkturquoise
-		new Color(0xFF9400D3), // darkviolet
-		new Color(0xFFFF1493), // deeppink
-		new Color(0xFF00BFFF), // deepskyblue
-		new Color(0xFF696969), // dimgray
-		new Color(0xFF1E90FF), // dodgerblue
-		new Color(0xFFB22222), // firebrick
-		new Color(0xFFFFFAF0), // floralwhite
-		new Color(0xFF228B22), // forestgreen
-		new Color(0xFFFF00FF), // fuchsia
-		new Color(0xFFDCDCDC), // gainsboro
-		new Color(0xFFF8F8FF), // ghostwhite
-		new Color(0xFFFFD700), // gold
-		new Color(0xFFDAA520), // goldenrod
-		new Color(0xFF808080), // gray
-		new Color(0xFF008000), // green
-		new Color(0xFFADFF2F), // greenyellow
-		new Color(0xFFF0FFF0), // honeydew
-		new Color(0xFFFF69B4), // hotpink
-		new Color(0xFFCD5C5C), // indianred
-		new Color(0xFF4B0082), // indigo
-		new Color(0xFFFFFFF0), // ivory
-		new Color(0xFFF0E68C), // khaki
-		new Color(0xFFE6E6FA), // lavender
-		new Color(0xFFFFF0F5), // lavenderblush
-		new Color(0xFF7CFC00), // lawngreen
-		new Color(0xFFFFFACD), // lemonchiffon
-		new Color(0xFFADD8E6), // lightblue
-		new Color(0xFFF08080), // lightcoral
-		new Color(0xFFE0FFFF), // lightcyan
-		new Color(0xFFFAFAD2), // lightgoldenrodyellow
-		new Color(0xFF90EE90), // lightgreen
-		new Color(0xFFD3D3D3), // lightgrey
-		new Color(0xFFFFB6C1), // lightpink
-		new Color(0xFFFFA07A), // lightsalmon
-		new Color(0xFF20B2AA), // lightseagreen
-		new Color(0xFF87CEFA), // lightskyblue
-		new Color(0xFF778899), // lightslategray
-		new Color(0xFFB0C4DE), // lightsteelblue
-		new Color(0xFFFFFFE0), // lightyellow
-		new Color(0xFF00FF00), // lime
-		new Color(0xFF32CD32), // limegreen
-		new Color(0xFFFAF0E6), // linen
-		new Color(0xFFFF00FF), // magenta
-		new Color(0xFF800000), // maroon
-		new Color(0xFF66CDAA), // mediumaquamarine
-		new Color(0xFF0000CD), // mediumblue
-		new Color(0xFFBA55D3), // mediumorchid
-		new Color(0xFF9370DB), // mediumpurple
-		new Color(0xFF3CB371), // mediumseagreen
-		new Color(0xFF7B68EE), // mediumslateblue
-		new Color(0xFF00FA9A), // mediumspringgreen
-		new Color(0xFF48D1CC), // mediumturquoise
-		new Color(0xFFC71585), // mediumvioletred
-		new Color(0xFF191970), // midnightblue
-		new Color(0xFFF5FFFA), // mintcream
-		new Color(0xFFFFE4E1), // mistyrose
-		new Color(0xFFFFE4B5), // moccasin
-		new Color(0xFFFFDEAD), // navajowhite
-		new Color(0xFF000080), // navy
-		new Color(0xFFFDF5E6), // oldlace
-		new Color(0xFF808000), // olive
-		new Color(0xFF6B8E23), // olivedrab
-		new Color(0xFFFFA500), // orange
-		new Color(0xFFFF4500), // orangered
-		new Color(0xFFDA70D6), // orchid
-		new Color(0xFFEEE8AA), // palegoldenrod
-		new Color(0xFF98FB98), // palegreen
-		new Color(0xFFAFEEEE), // paleturquoise
-		new Color(0xFFDB7093), // palevioletred
-		new Color(0xFFFFEFD5), // papayawhip
-		new Color(0xFFFFDAB9), // peachpuff
-		new Color(0xFFCD853F), // peru
-		new Color(0xFFFFC0CB), // pink
-		new Color(0xFFDDA0DD), // plum
-		new Color(0xFFB0E0E6), // powderblue
-		new Color(0xFF800080), // purple
-		new Color(0xFFFF0000), // red
-		new Color(0xFFBC8F8F), // rosybrown
-		new Color(0xFF4169E1), // royalblue
-		new Color(0xFF8B4513), // saddlebrown
-		new Color(0xFFFA8072), // salmon
-		new Color(0xFFF4A460), // sandybrown
-		new Color(0xFF2E8B57), // seagreen
-		new Color(0xFFFFF5EE), // seashell
-		new Color(0xFFA0522D), // sienna
-		new Color(0xFFC0C0C0), // silver
-		new Color(0xFF87CEEB), // skyblue
-		new Color(0xFF6A5ACD), // slateblue
-		new Color(0xFF708090), // slategray
-		new Color(0xFFFFFAFA), // snow
-		new Color(0xFF00FF7F), // springgreen
-		new Color(0xFF4682B4), // steelblue
-		new Color(0xFFD2B48C), // tan
-		new Color(0xFF008080), // teal
-		new Color(0xFFD8BFD8), // thistle
-		new Color(0xFFFF6347), // tomato
-		new Color(0xFF40E0D0), // turquoise
-		new Color(0xFFEE82EE), // violet
-		new Color(0xFFF5DEB3), // wheat
-		new Color(0xFFFFFFFF), // white
-		new Color(0xFFF5F5F5), // whitesmoke
-		new Color(0xFFFFFF00), // yellow
-		new Color(0xFF9ACD32), // yellowgreen
+						new Color(0xFFFAEBD7), // antiquewhite
+						new Color(0xFF00FFFF), // aqua
+						new Color(0xFF7FFFD4), // aquamarine
+						new Color(0xFFF0FFFF), // azure
+						new Color(0xFFF5F5DC), // beige
+						new Color(0xFFFFE4C4), // bisque
+						new Color(0xFF000000), // black
+						new Color(0xFFFFEBCD), // blanchedalmond
+						new Color(0xFF0000FF), // blue
+						new Color(0xFF8A2BE2), // blueviolet
+						new Color(0xFFA52A2A), // brown
+						new Color(0xFFDEB887), // burlywood
+						new Color(0xFF5F9EA0), // cadetblue
+						new Color(0xFF7FFF00), // chartreuse
+						new Color(0xFFD2691E), // chocolate
+						new Color(0xFFFF7F50), // coral
+						new Color(0xFF6495ED), // cornflowerblue
+						new Color(0xFFFFF8DC), // cornsilk
+						new Color(0xFFDC143C), // crimson
+						new Color(0xFF00FFFF), // cyan
+						new Color(0xFF00008B), // darkblue
+						new Color(0xFF008B8B), // darkcyan
+						new Color(0xFFB8860B), // darkgoldenrod
+						new Color(0xFFA9A9A9), // darkgray
+						new Color(0xFF006400), // darkgreen
+						new Color(0xFFBDB76B), // darkkhaki
+						new Color(0xFF8B008B), // darkmagenta
+						new Color(0xFF556B2F), // darkolivegreen
+						new Color(0xFFFF8C00), // darkorange
+						new Color(0xFF9932CC), // darkorchid
+						new Color(0xFF8B0000), // darkred
+						new Color(0xFFE9967A), // darksalmon
+						new Color(0xFF8FBC8F), // darkseagreen
+						new Color(0xFF483D8B), // darkslateblue
+						new Color(0xFF2F4F4F), // darkslategray
+						new Color(0xFF00CED1), // darkturquoise
+						new Color(0xFF9400D3), // darkviolet
+						new Color(0xFFFF1493), // deeppink
+						new Color(0xFF00BFFF), // deepskyblue
+						new Color(0xFF696969), // dimgray
+						new Color(0xFF1E90FF), // dodgerblue
+						new Color(0xFFB22222), // firebrick
+						new Color(0xFFFFFAF0), // floralwhite
+						new Color(0xFF228B22), // forestgreen
+						new Color(0xFFFF00FF), // fuchsia
+						new Color(0xFFDCDCDC), // gainsboro
+						new Color(0xFFF8F8FF), // ghostwhite
+						new Color(0xFFFFD700), // gold
+						new Color(0xFFDAA520), // goldenrod
+						new Color(0xFF808080), // gray
+						new Color(0xFF008000), // green
+						new Color(0xFFADFF2F), // greenyellow
+						new Color(0xFFF0FFF0), // honeydew
+						new Color(0xFFFF69B4), // hotpink
+						new Color(0xFFCD5C5C), // indianred
+						new Color(0xFF4B0082), // indigo
+						new Color(0xFFFFFFF0), // ivory
+						new Color(0xFFF0E68C), // khaki
+						new Color(0xFFE6E6FA), // lavender
+						new Color(0xFFFFF0F5), // lavenderblush
+						new Color(0xFF7CFC00), // lawngreen
+						new Color(0xFFFFFACD), // lemonchiffon
+						new Color(0xFFADD8E6), // lightblue
+						new Color(0xFFF08080), // lightcoral
+						new Color(0xFFE0FFFF), // lightcyan
+						new Color(0xFFFAFAD2), // lightgoldenrodyellow
+						new Color(0xFF90EE90), // lightgreen
+						new Color(0xFFD3D3D3), // lightgrey
+						new Color(0xFFFFB6C1), // lightpink
+						new Color(0xFFFFA07A), // lightsalmon
+						new Color(0xFF20B2AA), // lightseagreen
+						new Color(0xFF87CEFA), // lightskyblue
+						new Color(0xFF778899), // lightslategray
+						new Color(0xFFB0C4DE), // lightsteelblue
+						new Color(0xFFFFFFE0), // lightyellow
+						new Color(0xFF00FF00), // lime
+						new Color(0xFF32CD32), // limegreen
+						new Color(0xFFFAF0E6), // linen
+						new Color(0xFFFF00FF), // magenta
+						new Color(0xFF800000), // maroon
+						new Color(0xFF66CDAA), // mediumaquamarine
+						new Color(0xFF0000CD), // mediumblue
+						new Color(0xFFBA55D3), // mediumorchid
+						new Color(0xFF9370DB), // mediumpurple
+						new Color(0xFF3CB371), // mediumseagreen
+						new Color(0xFF7B68EE), // mediumslateblue
+						new Color(0xFF00FA9A), // mediumspringgreen
+						new Color(0xFF48D1CC), // mediumturquoise
+						new Color(0xFFC71585), // mediumvioletred
+						new Color(0xFF191970), // midnightblue
+						new Color(0xFFF5FFFA), // mintcream
+						new Color(0xFFFFE4E1), // mistyrose
+						new Color(0xFFFFE4B5), // moccasin
+						new Color(0xFFFFDEAD), // navajowhite
+						new Color(0xFF000080), // navy
+						new Color(0xFFFDF5E6), // oldlace
+						new Color(0xFF808000), // olive
+						new Color(0xFF6B8E23), // olivedrab
+						new Color(0xFFFFA500), // orange
+						new Color(0xFFFF4500), // orangered
+						new Color(0xFFDA70D6), // orchid
+						new Color(0xFFEEE8AA), // palegoldenrod
+						new Color(0xFF98FB98), // palegreen
+						new Color(0xFFAFEEEE), // paleturquoise
+						new Color(0xFFDB7093), // palevioletred
+						new Color(0xFFFFEFD5), // papayawhip
+						new Color(0xFFFFDAB9), // peachpuff
+						new Color(0xFFCD853F), // peru
+						new Color(0xFFFFC0CB), // pink
+						new Color(0xFFDDA0DD), // plum
+						new Color(0xFFB0E0E6), // powderblue
+						new Color(0xFF800080), // purple
+						new Color(0xFFFF0000), // red
+						new Color(0xFFBC8F8F), // rosybrown
+						new Color(0xFF4169E1), // royalblue
+						new Color(0xFF8B4513), // saddlebrown
+						new Color(0xFFFA8072), // salmon
+						new Color(0xFFF4A460), // sandybrown
+						new Color(0xFF2E8B57), // seagreen
+						new Color(0xFFFFF5EE), // seashell
+						new Color(0xFFA0522D), // sienna
+						new Color(0xFFC0C0C0), // silver
+						new Color(0xFF87CEEB), // skyblue
+						new Color(0xFF6A5ACD), // slateblue
+						new Color(0xFF708090), // slategray
+						new Color(0xFFFFFAFA), // snow
+						new Color(0xFF00FF7F), // springgreen
+						new Color(0xFF4682B4), // steelblue
+						new Color(0xFFD2B48C), // tan
+						new Color(0xFF008080), // teal
+						new Color(0xFFD8BFD8), // thistle
+						new Color(0xFFFF6347), // tomato
+						new Color(0xFF40E0D0), // turquoise
+						new Color(0xFFEE82EE), // violet
+						new Color(0xFFF5DEB3), // wheat
+						new Color(0xFFFFFFFF), // white
+						new Color(0xFFF5F5F5), // whitesmoke
+						new Color(0xFFFFFF00), // yellow
+						new Color(0xFF9ACD32), // yellowgreen
 	};
 
 	public static Color getColorFrom3floatValues0to1(String color, Color ifUnkown) {
@@ -2447,9 +2454,9 @@ public class AttributeHelper implements HelperClass {
 		helpTopics.put("NETWORK: GRAPH", "panel_graph_graph");
 		helpTopics.put("NETWORK: NETWORK ATTRIBUTES", "panel_graph_graph");
 		helpTopics
-		.put("NETWORK: CHARTING <SMALL><FONT COLOR=\"GRAY\">(ALL NODES)</FONT></SMALL>", "panel_graph_charting");
+							.put("NETWORK: CHARTING <SMALL><FONT COLOR=\"GRAY\">(ALL NODES)</FONT></SMALL>", "panel_graph_charting");
 		helpTopics.put("NETWORK: CHARTING <SMALL><FONT COLOR=\"GRAY\">(ALL LINE-CHARTS)</FONT></SMALL>",
-		"panel_graph_chartinglines");
+							"panel_graph_chartinglines");
 		helpTopics.put("NETWORK: SCATTER-PLOT", "panel_graph_scatterplot");
 		helpTopics.put("NETWORK: KEGG", "panel_graph_kegg");
 
@@ -2457,7 +2464,7 @@ public class AttributeHelper implements HelperClass {
 		helpTopics.put("NODE: KEGG", "panel_node_kegg");
 		helpTopics.put("NODE: NODE ATTRIBUTES", "panel_node_node");
 		helpTopics.put("NODE: CHARTING <SMALL><FONT COLOR=\"GRAY\">(SELECTED NODES)</FONT></SMALL>",
-		"panel_node_charting");
+							"panel_node_charting");
 
 		helpTopics.put("EDGE: EDGE ATTRIBUTES", "panel_edge_edge");
 		helpTopics.put("EDGE: KEGG", "panel_edge_kegg");
@@ -2481,7 +2488,7 @@ public class AttributeHelper implements HelperClass {
 	}
 
 	public static void copyReplaceStringAttribute(Attributable a, String path, String name, String copyTo,
-			String searchString, String replaceString) {
+						String searchString, String replaceString) {
 		if (hasAttribute(a, path, name)) {
 			String attVal = (String) getAttributeValue(a, path, name, "", "", false);
 			if (attVal.length() > 0) {
@@ -2494,10 +2501,11 @@ public class AttributeHelper implements HelperClass {
 	public static void setLabel(GraphElement ge, String label) {
 		if (ge instanceof Node)
 			setLabel((Node) ge, label);
-		else if (ge instanceof Edge)
-			setLabel((Edge) ge, label);
 		else
-			ErrorMsg.addErrorMessage("Set Label only works on Node or Edge! (internal error)");
+			if (ge instanceof Edge)
+				setLabel((Edge) ge, label);
+			else
+				ErrorMsg.addErrorMessage("Set Label only works on Node or Edge! (internal error)");
 	}
 
 	public static String getLabelPosition(Attributable attributable) {
@@ -2531,7 +2539,7 @@ public class AttributeHelper implements HelperClass {
 			if (index < 0)
 				idx = "";
 			NodeLabelAttribute labelAttr = (NodeLabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS
-					+ idx);
+								+ idx);
 			return labelAttr;
 		} catch (Exception ex) {
 			return null;
@@ -2553,7 +2561,7 @@ public class AttributeHelper implements HelperClass {
 			if (index < 0)
 				idx = "";
 			EdgeLabelAttribute labelAttr = (EdgeLabelAttribute) edge.getAttribute(GraphicAttributeConstants.LABELGRAPHICS
-					+ idx);
+								+ idx);
 			return labelAttr;
 		} catch (Exception ex) {
 			return null;
@@ -2571,12 +2579,13 @@ public class AttributeHelper implements HelperClass {
 					continue;
 				if (currentStyle.contains(lfs.toGMLstring() + ",")) {
 					currentStyle = StringManipulationTools.stringReplace(currentStyle, lfs.toGMLstring() + ",", "");
-				} else if (currentStyle.contains("," + lfs.toGMLstring())) {
-					currentStyle = StringManipulationTools.stringReplace(currentStyle, "," + lfs.toGMLstring(), "");
-				} else if (currentStyle.equals(lfs.toGMLstring())) {
-					currentStyle = "";
-					;
-				}
+				} else
+					if (currentStyle.contains("," + lfs.toGMLstring())) {
+						currentStyle = StringManipulationTools.stringReplace(currentStyle, "," + lfs.toGMLstring(), "");
+					} else
+						if (currentStyle.equals(lfs.toGMLstring())) {
+							currentStyle = "";;
+						}
 			}
 			if (setting != LabelFrameSetting.NO_FRAME) {
 				if (currentStyle.length() > 0)
@@ -2646,7 +2655,7 @@ public class AttributeHelper implements HelperClass {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK, Color.BLACK, edge.isDirected()),
-					GraphicAttributeConstants.GRAPHICS);
+								GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		if (show)
@@ -2659,7 +2668,7 @@ public class AttributeHelper implements HelperClass {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK, Color.BLACK, edge.isDirected()),
-					GraphicAttributeConstants.GRAPHICS);
+								GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		if (show)
@@ -2672,7 +2681,7 @@ public class AttributeHelper implements HelperClass {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK, Color.BLACK, edge.isDirected()),
-					GraphicAttributeConstants.GRAPHICS);
+								GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		return ega.getArrowhead();
@@ -2682,7 +2691,7 @@ public class AttributeHelper implements HelperClass {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK, Color.BLACK, edge.isDirected()),
-					GraphicAttributeConstants.GRAPHICS);
+								GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		return ega.getArrowtail();
@@ -2692,7 +2701,7 @@ public class AttributeHelper implements HelperClass {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK, Color.BLACK, edge.isDirected()),
-					GraphicAttributeConstants.GRAPHICS);
+								GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		if (ega != null)
@@ -2703,7 +2712,7 @@ public class AttributeHelper implements HelperClass {
 		EdgeGraphicAttribute ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		if (ega == null) {
 			edge.addAttribute(getDefaultGraphicsAttributeForEdge(Color.BLACK, Color.BLACK, edge.isDirected()),
-					GraphicAttributeConstants.GRAPHICS);
+								GraphicAttributeConstants.GRAPHICS);
 			ega = (EdgeGraphicAttribute) edge.getAttribute(GraphicAttributeConstants.GRAPHICS);
 		}
 		if (ega != null)
@@ -2754,13 +2763,13 @@ public class AttributeHelper implements HelperClass {
 			idx = "";
 		try {
 			HashMapAttribute l = (HashMapAttribute) n.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
-					+ NodeLabelAttribute.LABELGRAPHICS + idx);
+								+ NodeLabelAttribute.LABELGRAPHICS + idx);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
 			o.setString(ColorUtil.getHexFromColor(color));
 		} catch (AttributeNotFoundException e) {
 			setLabel(n, getLabel(n, ""));
 			HashMapAttribute l = (HashMapAttribute) n.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
-					+ NodeLabelAttribute.LABELGRAPHICS + idx);
+								+ NodeLabelAttribute.LABELGRAPHICS + idx);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
 			o.setString(ColorUtil.getHexFromColor(color));
 		}
@@ -2769,7 +2778,7 @@ public class AttributeHelper implements HelperClass {
 	public static Color getLabelColor(Node n) {
 		try {
 			HashMapAttribute l = (HashMapAttribute) n.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
-					+ NodeLabelAttribute.LABELGRAPHICS);
+								+ NodeLabelAttribute.LABELGRAPHICS);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
 			return ColorUtil.getColorFromHex(o.getString());
 		} catch (Exception e) {
@@ -2904,7 +2913,7 @@ public class AttributeHelper implements HelperClass {
 	}
 
 	public static boolean addEdgeShape(String description, String className) {
-		if(edge_shapes.containsKey(description))
+		if (edge_shapes.containsKey(description))
 			return false;
 		else {
 			edge_shapes.put(description, className);
@@ -2914,10 +2923,10 @@ public class AttributeHelper implements HelperClass {
 
 	private static HashMap<String, String> initializeEdgeShapes() {
 		HashMap<String, String> standardShapes = new HashMap<String, String>();
-		standardShapes.put("Straight Line","org.graffiti.plugins.views.defaults.StraightLineEdgeShape");
-		standardShapes.put("Segmented Line","org.graffiti.plugins.views.defaults.PolyLineEdgeShape");
-		standardShapes.put("Quadratic Spline","org.graffiti.plugins.views.defaults.QuadCurveEdgeShape");
-		standardShapes.put("Smooth Line","org.graffiti.plugins.views.defaults.SmoothLineEdgeShape");
+		standardShapes.put("Straight Line", "org.graffiti.plugins.views.defaults.StraightLineEdgeShape");
+		standardShapes.put("Segmented Line", "org.graffiti.plugins.views.defaults.PolyLineEdgeShape");
+		standardShapes.put("Quadratic Spline", "org.graffiti.plugins.views.defaults.QuadCurveEdgeShape");
+		standardShapes.put("Smooth Line", "org.graffiti.plugins.views.defaults.SmoothLineEdgeShape");
 		return standardShapes;
 	}
 
@@ -2958,8 +2967,8 @@ public class AttributeHelper implements HelperClass {
 		if (ge instanceof Edge) {
 			Edge e = (Edge) ge;
 			return AttributeHelper.getLabel(e,
-					AttributeHelper.getLabel(e.getSource(), nodeLabelIfMissing) + (e.isDirected() ? "->" : "--")
-					+ AttributeHelper.getLabel(e.getTarget(), nodeLabelIfMissing));
+								AttributeHelper.getLabel(e.getSource(), nodeLabelIfMissing) + (e.isDirected() ? "->" : "--")
+													+ AttributeHelper.getLabel(e.getTarget(), nodeLabelIfMissing));
 		} else
 			return getLabel(ge, nodeLabelIfMissing);
 	}
@@ -3125,7 +3134,7 @@ public class AttributeHelper implements HelperClass {
 	}
 
 	public static void setHidden(boolean doHide, Node n, boolean processOutEdges, boolean processInEdges,
-			boolean processUndirEdges) {
+						boolean processUndirEdges) {
 		setHidden(doHide, n);
 		if (processOutEdges)
 			for (Edge e : n.getAllOutEdges())
@@ -3274,10 +3283,11 @@ public class AttributeHelper implements HelperClass {
 		String os = (String) p.get("os.name");
 		if (os != null && os.toUpperCase().contains("LINUX")) {
 			return true;
-		} else if (os != null && os.toUpperCase().contains("UNIX")) {
-			return true;
 		} else
-			return false;
+			if (os != null && os.toUpperCase().contains("UNIX")) {
+				return true;
+			} else
+				return false;
 	}
 
 	public static boolean windowsRunning() {
@@ -3348,10 +3358,10 @@ public class AttributeHelper implements HelperClass {
 
 	public static String[] getShapeDescritions() {
 		return new String[] { "Rectangle", "Circle", "Ellipse", "Rhombus", "Tag (right)", "Tag (left)", "Tag (up)",
-				"Tag (down)", "Observable", "Pertubation", "Complex", "Skewed Rect (right)", "Skewed Rect (left)",
-				"Receptor (down)", "Receptor (up)", "Receptor (left)", "Receptor (right)", "Nucleic Acid Feature",
-				"Truncated Protein", "Source or Sink", "Transition", "Multi Nucleic Acid Feature", "Multi Rectangle",
-				"Multi Oval", "Double Oval", "Paper" };
+							"Tag (down)", "Observable", "Pertubation", "Complex", "Skewed Rect (right)", "Skewed Rect (left)",
+							"Receptor (down)", "Receptor (up)", "Receptor (left)", "Receptor (right)", "Nucleic Acid Feature",
+							"Truncated Protein", "Source or Sink", "Transition", "Multi Nucleic Acid Feature", "Multi Rectangle",
+							"Multi Oval", "Double Oval", "Paper" };
 	}
 
 	public static String getShapeClassFromDescription(String desc) {
@@ -3366,9 +3376,9 @@ public class AttributeHelper implements HelperClass {
 
 	public static String[] getShapeClasses() {
 		return new String[] { "rectangle", "circle", "oval", "diamond", "tag", "tagl", "tagu", "tagd", "observable",
-				"pertubation", "complex", "skewrectr", "skewrectl", "receptord", "receptoru", "receptorl", "receptorr",
-				"nucleic", "truncprotein", "sourcesink", "transition", "multinucleic", "multirectangle", "mulitoval",
-				"doubleoval", "paper" };
+							"pertubation", "complex", "skewrectr", "skewrectl", "receptord", "receptoru", "receptorl", "receptorr",
+							"nucleic", "truncprotein", "sourcesink", "transition", "multinucleic", "multirectangle", "mulitoval",
+							"doubleoval", "paper" };
 	}
 
 	public static String getLabelConsumption(Edge e, String returnIfNull) {
@@ -3482,7 +3492,7 @@ public class AttributeHelper implements HelperClass {
 
 	public static Color getColorFromAttribute(Attributable attr, String path, String name, Color defaultValue) {
 		return ColorUtil.getColorFromHex((String) getAttributeValue(attr, path, name,
-				ColorUtil.getHexFromColor(defaultValue), "", false));
+							ColorUtil.getHexFromColor(defaultValue), "", false));
 	}
 
 	public static void setColorFromAttribute(Attributable attr, String path, String name, Color value) {

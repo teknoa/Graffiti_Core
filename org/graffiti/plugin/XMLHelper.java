@@ -1,15 +1,15 @@
-//==============================================================================
+// ==============================================================================
 //
-//   XMLHelper.java
+// XMLHelper.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: XMLHelper.java,v 1.17 2010/11/16 13:41:22 morla Exp $
+// ==============================================================================
+// $Id: XMLHelper.java,v 1.18 2010/11/24 13:52:24 morla Exp $
 
 package org.graffiti.plugin;
 
-//Java imports
+// Java imports
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -92,12 +92,12 @@ public class XMLHelper implements HelperClass {
 
 	public static String getOuterXml(Node node) throws TransformerException {
 		DOMSource nodeSource = new DOMSource(node);
-		//System.out.println("ClassTypeNodeDOMsource:"+nodeSource.getClass().getCanonicalName());
+		// System.out.println("ClassTypeNodeDOMsource:"+nodeSource.getClass().getCanonicalName());
 		StringWriter resultStringWriter = new StringWriter();
 		StreamResult streamResult = new StreamResult(resultStringWriter);
 
 		Transformer outerXmlTransformer = TransformerFactory.newInstance()
-		.newTransformer();
+							.newTransformer();
 		// System.out.println("OutTransformer:"+outerXmlTransformer.getClass().getCanonicalName());
 		outerXmlTransformer.setOutputProperty("omit-xml-declaration", "yes");
 		outerXmlTransformer.transform(nodeSource, streamResult);
@@ -136,9 +136,10 @@ public class XMLHelper implements HelperClass {
 			return d;
 	}
 
-	// private static DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	// private static DocumentBuilderFactory dbf =
+	// DocumentBuilderFactory.newInstance();
 	private static DocumentBuilderFactory dbf =
-		new DocumentBuilderFactoryImpl();
+						new DocumentBuilderFactoryImpl();
 
 	/**
 	 * @param res
@@ -157,22 +158,22 @@ public class XMLHelper implements HelperClass {
 			// Step 3: parse the input file
 			InputSource is = new InputSource(new StringReader(res));
 			doc = db.parse(is);
-			// System.err.println("Type of XML Document Builder: " + db.getClass().getCanonicalName());
+			//System.err.println("Type of XML Document Builder: " + db.getClass().getCanonicalName());
 			return doc;
 		} catch (NullPointerException e) {
 			ErrorMsg.addErrorMessage("Null Pointer Exception, data could not be retrieved.<br>"
-					+ e.getLocalizedMessage());
+								+ e.getLocalizedMessage());
 		} catch (SAXException e) {
-			System.out.println("Invalid XML: "+res);
+			System.out.println("Invalid XML: " + res);
 		} catch (IOException e) {
 			ErrorMsg.addErrorMessage("IO Exception while processing experimental data.<br>"
-					+ e.getLocalizedMessage());
+								+ e.getLocalizedMessage());
 		} catch (ParserConfigurationException e) {
 			ErrorMsg.addErrorMessage("Format Parser Configuration Exception while processing experimental data.<br>"
-					+ e.getLocalizedMessage());
+								+ e.getLocalizedMessage());
 		} catch (Exception e) {
 			ErrorMsg.addErrorMessage("Exception, data could not be processed.<br>"
-					+ e.getLocalizedMessage());
+								+ e.getLocalizedMessage());
 		}
 		return null;
 	}
@@ -190,24 +191,25 @@ public class XMLHelper implements HelperClass {
 			// Step 3: parse the input file
 			InputSource is = new InputSource(inpS);
 			doc = db.parse(is);
-			// System.err.println("Type of XML Document Builder: " + db.getClass().getCanonicalName());
+			// System.err.println("Type of XML Document Builder: " +
+			// db.getClass().getCanonicalName());
 			return doc;
 		} catch (NullPointerException e) {
 			ErrorMsg
-			.addErrorMessage("Null Pointer Exception, data could not be retrieved.<br>"
-					+ e.getLocalizedMessage());
+								.addErrorMessage("Null Pointer Exception, data could not be retrieved.<br>"
+													+ e.getLocalizedMessage());
 		} catch (SAXException e) {
 			ErrorMsg
-			.addErrorMessage("Format Parser (SAX) Exception while processing experimental data.<br>"
-					+ e.getLocalizedMessage());
+								.addErrorMessage("Format Parser (SAX) Exception while processing experimental data.<br>"
+													+ e.getLocalizedMessage());
 		} catch (IOException e) {
 			ErrorMsg
-			.addErrorMessage("IO Exception while processing experimental data.<br>"
-					+ e.getLocalizedMessage());
+								.addErrorMessage("IO Exception while processing experimental data.<br>"
+													+ e.getLocalizedMessage());
 		} catch (ParserConfigurationException e) {
 			ErrorMsg
-			.addErrorMessage("Format Parser Configuration Exception while processing experimental data.<br>"
-					+ e.getLocalizedMessage());
+								.addErrorMessage("Format Parser Configuration Exception while processing experimental data.<br>"
+													+ e.getLocalizedMessage());
 		}
 		return null;
 	}
@@ -225,7 +227,7 @@ public class XMLHelper implements HelperClass {
 			Result result = new StreamResult(new File(path_and_filename));
 			Source source = new DOMSource(doc);
 			t.transform(source, result);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			ErrorMsg.addErrorMessage(e);
 		}
 	}

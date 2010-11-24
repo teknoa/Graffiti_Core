@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import org.graffiti.plugin.io.resources.IOurl;
 
 
-public class FileSelectionParameter extends StringParameter {
+public class MultiFileSelectionParameter extends StringParameter {
 
 	private String[] extensions;
 	private String extensionDescription;
 	private boolean multipleFile;
 
-	public FileSelectionParameter(ArrayList<IOurl> value, String name, String description, String[] extensions, String extensionDescription, boolean multipleFiles) {
+	public MultiFileSelectionParameter(ArrayList<IOurl> value, String name, String description, String[] extensions, String extensionDescription, boolean multipleFiles) {
 		super(convertToString(value), name, description);
 		this.extensions = extensions;
 		this.extensionDescription = extensionDescription;
