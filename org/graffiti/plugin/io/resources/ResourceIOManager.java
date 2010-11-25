@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 public class ResourceIOManager {
 
@@ -20,12 +20,12 @@ public class ResourceIOManager {
 		return instance;
 	}
 
-	ArrayList<ResourceIOHandler> handlers;
+	LinkedHashSet<ResourceIOHandler> handlers;
 	public static final String SEPERATOR = "||";
 
 	private ResourceIOManager() {
 		super();
-		handlers = new ArrayList<ResourceIOHandler>();
+		handlers = new LinkedHashSet<ResourceIOHandler>();
 	}
 
 	public static void registerIOHandler(ResourceIOHandler handler) {
@@ -46,11 +46,14 @@ public class ResourceIOManager {
 	 * @return inputstream of file or null, if no handler found.
 	 */
 	static InputStream getInputStream(IOurl url) throws Exception {
-		if (url == null)
+		if (url == null) {
+			System.err.println("Could not create inputstream from NULL url!");
 			return null;
+		}
 		for (ResourceIOHandler mh : getInstance().handlers)
 			if (url.isEqualPrefix(mh.getPrefix()))
 				return mh.getInputStream(url);
+		System.err.println("Could not create inputstream from URL " + url.toString() + "!");
 		return null;
 	}
 
@@ -58,7 +61,7 @@ public class ResourceIOManager {
 	 * @return new url or null, if not copied
 	 */
 	public static IOurl copyDataAndReplaceURLPrefix(String targetHandlerPrefix, IOurl sourceURL,
-			ResourceIOConfigObject config) throws Exception {
+						ResourceIOConfigObject config) throws Exception {
 		if (sourceURL == null)
 			return null;
 
@@ -69,7 +72,7 @@ public class ResourceIOManager {
 	}
 
 	public static IOurl copyDataAndReplaceURLPrefix(String targetHandlerPrefix, String srcFileName, InputStream is,
-			ResourceIOConfigObject config) throws Exception {
+						ResourceIOConfigObject config) throws Exception {
 		if (is == null || srcFileName == null)
 			return null;
 
