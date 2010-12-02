@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   GraphicAttributeConstants.java
+// GraphicAttributeConstants.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: GraphicAttributeConstants.java,v 1.8 2010/07/19 13:00:57 morla Exp $
+// ==============================================================================
+// $Id: GraphicAttributeConstants.java,v 1.9 2010/12/02 15:07:06 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -16,9 +16,8 @@ import org.graffiti.attributes.Attribute;
 /**
  * Defines constants used when accessing graphics attributes.
  */
-public interface GraphicAttributeConstants
-{
-	//~ Static fields/initializers =============================================
+public interface GraphicAttributeConstants {
+	// ~ Static fields/initializers =============================================
 
 	// the names of the graphic attributes
 	public static final String GRAPHICS = "graphics";
@@ -27,12 +26,18 @@ public interface GraphicAttributeConstants
 	public static final String FILLCOLOR = "fill";
 	public static final String ARROWHEAD = "arrowhead";
 	public static final String ARROWTAIL = "arrowtail";
+	/**
+	 * Thickness of the Arrow Head (may be "1" for "auto-size")
+	 */
 	public static final String THICKNESS = "thickness";
 	public static final String DOCKING = "docking";
 	public static final String LINETYPE = "linetype";
 	public static final String BENDS = "bends";
 	public static final String LABEL = "text";
 	public static final String LABELGRAPHICS = "labelgraphics";
+	/**
+	 * Thickness of the edge!!!
+	 */
 	public static final String FRAMETHICKNESS = "frameThickness";
 	public static final String ROUNDING = "rounding";
 	public static final String GRADIENT = "gradient";
@@ -157,10 +162,8 @@ public interface GraphicAttributeConstants
 	public static final String BORDER_RIGHT_CENTER = "brc";
 	public static final String BORDER_RIGHT_BOTTOM = "brb";
 
-
-
 	/**
-	 * Distance between a label and the surrounding rectangle of the  according
+	 * Distance between a label and the surrounding rectangle of the according
 	 * node.
 	 */
 	public static final double LABEL_DISTANCE = 2.0d;
@@ -176,58 +179,58 @@ public interface GraphicAttributeConstants
 
 	/** Path to x-coordinate attribute */
 	public static final String COORDX_PATH = COORD_PATH + Attribute.SEPARATOR +
-	X;
+						X;
 
 	/** Path to y-coordinate attribute */
 	public static final String COORDY_PATH = COORD_PATH + Attribute.SEPARATOR +
-	Y;
+						Y;
 
 	/** Path to dimension attribute */
 	public static final String DIM_PATH = GRAPHICS + Attribute.SEPARATOR + DIMENSION;
 
 	/** Path to width attribute */
 	public static final String DIMW_PATH = DIM_PATH + Attribute.SEPARATOR +
-	WIDTH;
+						WIDTH;
 
 	/** Path to height attribute */
 	public static final String DIMH_PATH = DIM_PATH + Attribute.SEPARATOR +
-	HEIGHT;
+						HEIGHT;
 
 	/** Path to fill color attribute */
 	public static final String FILLCOLOR_PATH = GRAPHICS + Attribute.SEPARATOR +
-	FILLCOLOR;
+						FILLCOLOR;
 
 	/** Path to outline color attribute */
 	public static final String OUTLINE_PATH = GRAPHICS + Attribute.SEPARATOR +
-	FRAMECOLOR;
+						FRAMECOLOR;
 
 	/** Path to line width attribute */
 	public static final String LINEWIDTH_PATH = GRAPHICS + Attribute.SEPARATOR +
-	FRAMETHICKNESS;
+						FRAMETHICKNESS;
 
 	/** Path to shape attribute */
 	public static final String SHAPE_PATH = GRAPHICS + Attribute.SEPARATOR +
-	SHAPE;
+						SHAPE;
 
 	/** Path to shape description attribute */
 	public static final String SHAPE_DESC_PATH = GRAPHICS +
-	Attribute.SEPARATOR + SHAPEDESCRIPTION;
+						Attribute.SEPARATOR + SHAPEDESCRIPTION;
 
 	/** Path to bends attribute */
 	public static final String BENDS_PATH = GRAPHICS + Attribute.SEPARATOR +
-	BENDS;
+						BENDS;
 
 	/** Path to ports attribute */
 	public static final String PORTS_PATH = GRAPHICS + Attribute.SEPARATOR +
-	PORTS;
+						PORTS;
 
 	/** Path to docking attribute */
 	public static final String DOCKING_PATH = GRAPHICS + Attribute.SEPARATOR +
-	DOCKING;
+						DOCKING;
 
 	/** Path to frame thickness attribute */
 	public static final String FRAMETHICKNESS_PATH = GRAPHICS +
-	Attribute.SEPARATOR + FRAMETHICKNESS;
+						Attribute.SEPARATOR + FRAMETHICKNESS;
 
 	/** rectangle node shape class name */
 	public static final String RECTANGLE_CLASSNAME = "org.graffiti.plugins.views.defaults.RectangleNodeShape";
@@ -262,7 +265,7 @@ public interface GraphicAttributeConstants
 
 	/**
 	 * The cap used by default.
-	 *
+	 * 
 	 * @see java.awt.BasicStroke
 	 */
 	public static int DEFAULT_CAP_R = BasicStroke.CAP_ROUND;
@@ -270,19 +273,19 @@ public interface GraphicAttributeConstants
 
 	/**
 	 * The join used by default.
-	 *
+	 * 
 	 * @see java.awt.BasicStroke
 	 */
 	public static int DEFAULT_JOIN = BasicStroke.JOIN_ROUND;
 
 	/**
 	 * The miter limit used by default.
-	 *
+	 * 
 	 * @see java.awt.BasicStroke
 	 */
 	public static float DEFAULT_MITER = 10.0f;
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------
