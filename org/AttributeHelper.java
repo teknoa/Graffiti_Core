@@ -78,7 +78,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.113 $
+ * @version $Revision: 1.114 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -3352,6 +3352,8 @@ public class AttributeHelper implements HelperClass {
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.DoubleEllipseShape";
 		if (s.equals("paper"))
 			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.PaperShape";
+		if (s.equals("multicomplex"))
+			return "de.ipk_gatersleben.ag_nw.graffiti.plugins.shapes.MultiComplexShape";
 
 		return s;
 	}
@@ -3361,7 +3363,7 @@ public class AttributeHelper implements HelperClass {
 							"Tag (down)", "Observable", "Pertubation", "Complex", "Skewed Rect (right)", "Skewed Rect (left)",
 							"Receptor (down)", "Receptor (up)", "Receptor (left)", "Receptor (right)", "Nucleic Acid Feature",
 							"Truncated Protein", "Source or Sink", "Transition", "Multi Nucleic Acid Feature", "Multi Rectangle",
-							"Multi Oval", "Double Oval", "Paper" };
+							"Multi Oval", "Double Oval", "Paper", "Multi Complex" };
 	}
 
 	public static String getShapeClassFromDescription(String desc) {
@@ -3378,7 +3380,7 @@ public class AttributeHelper implements HelperClass {
 		return new String[] { "rectangle", "circle", "oval", "diamond", "tag", "tagl", "tagu", "tagd", "observable",
 							"pertubation", "complex", "skewrectr", "skewrectl", "receptord", "receptoru", "receptorl", "receptorr",
 							"nucleic", "truncprotein", "sourcesink", "transition", "multinucleic", "multirectangle", "mulitoval",
-							"doubleoval", "paper" };
+							"doubleoval", "paper", "multicomplex" };
 	}
 
 	public static String getLabelConsumption(Edge e, String returnIfNull) {
