@@ -1,6 +1,9 @@
 package org.graffiti.plugin.io.resources;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+
+import org.ErrorMsg;
 
 public class IOurl {
 
@@ -81,5 +84,15 @@ public class IOurl {
 
 	public InputStream getInputStream() throws Exception {
 		return ResourceIOManager.getInputStream(this);
+	}
+
+	public String getFileNameDecoded() {
+		try {
+			String res = java.net.URLDecoder.decode(getFileName(), "UTF-8");
+			return res;
+		} catch (Exception e) {
+			ErrorMsg.addErrorMessage(e);
+			return getFileName();
+		}
 	}
 }

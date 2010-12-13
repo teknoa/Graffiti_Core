@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2009 Plant Bioinformatics Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2009 Plant Bioinformatics Group, IPK Gatersleben
  *******************************************************************************/
 /*
  * Created on Jul 16, 2010 by Christian Klukas
@@ -16,17 +14,14 @@ import java.util.Vector;
 
 /**
  * @author klukas
- * 
  */
 public class StringManipulationTools implements HelperClass {
 
 	public static final String Unicode = "UTF-8";
 
 	/**
-	 * 
 	 * Replace occurrences of a substring.
 	 * http://ostermiller.org/utils/StringHelper.html
-	 * 
 	 * StringHelper.replace("1-2-3", "-", "|");<br>
 	 * result: "1|2|3"<br>
 	 * StringHelper.replace("-1--2-", "-", "|");<br>
@@ -47,7 +42,6 @@ public class StringManipulationTools implements HelperClass {
 	 * @return a string with all the occurrences of the string to find replaced.
 	 * @throws NullPointerException
 	 *            if s is null.
-	 * 
 	 */
 	public static String stringReplace(String s, String find, String replace) {
 		int findLength;
@@ -159,7 +153,6 @@ public class StringManipulationTools implements HelperClass {
 	 *           The left tag (e.g. <a>)
 	 * @param tagB
 	 *           The right tag (e.g. </a>)
-	 * 
 	 * @return The array list< string>, where get(0) is the striped text and all
 	 *         other are the striped texts
 	 */
@@ -196,13 +189,14 @@ public class StringManipulationTools implements HelperClass {
 			if (i > 0 && column + words[i].length() > width) {
 				result = result + "<br>" + words[i];
 				column = words[i].length();
-			} else if (i > 0) {
-				result = result + " " + words[i];
-				column += words[i].length();
-			} else {
-				result = words[0];
-				column = words[0].length();
-			}
+			} else
+				if (i > 0) {
+					result = result + " " + words[i];
+					column += words[i].length();
+				} else {
+					result = words[0];
+					column = words[0].length();
+				}
 		}
 		return result;
 	}
@@ -255,10 +249,11 @@ public class StringManipulationTools implements HelperClass {
 
 			if (Character.isDigit(c))
 				strBuff.append(c);
-			else if (strBuff.length() > 0) {
-				ints.add(new Integer(strBuff.toString()));
-				strBuff = new StringBuffer();
-			}
+			else
+				if (strBuff.length() > 0) {
+					ints.add(new Integer(strBuff.toString()));
+					strBuff = new StringBuffer();
+				}
 		}
 		return ints;
 	}
@@ -373,24 +368,23 @@ public class StringManipulationTools implements HelperClass {
 		try {
 			Vector<String> v = new Vector<String>();
 			int start = 0;
-			int end   = str.indexOf(delimiter);
+			int end = str.indexOf(delimiter);
 
-			while( -1 != end ) {
-				if( end > start ) {
+			while (-1 != end) {
+				if (end > start) {
 					v.addElement(new String(str.substring(start, end)));
 				}
 
 				start = end + delimiter.length();
-				end   = str.indexOf(delimiter, start);
+				end = str.indexOf(delimiter, start);
 			}
 			v.addElement(new String(str.substring(start, str.length())));
 
 			stringPieces = new String[v.size()];
-			for( int i = 0; i < v.size(); ++i ) {
+			for (int i = 0; i < v.size(); ++i) {
 				stringPieces[i] = v.elementAt(i).toString();
 			}
-		}
-		catch( Exception e ) {
+		} catch (Exception e) {
 			System.err.println(e.toString());
 			stringPieces = null;
 		}
@@ -398,4 +392,11 @@ public class StringManipulationTools implements HelperClass {
 		return stringPieces;
 	}
 
+	public static String reverse(String in) {
+		StringBuilder out = new StringBuilder(in.length());
+		int len = in.length();
+		for (int i = (len - 1); i >= 0; i--)
+			out.append(in.charAt(i));
+		return out.toString();
+	}
 }
