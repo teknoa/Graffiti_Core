@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
  *******************************************************************************/
 
 package org;
@@ -20,9 +18,7 @@ import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
 /**
- * 
  * @author klukas
- * 
  */
 public class ErrorMsg implements HelperClass {
 	private static LinkedList<String> errorMessages = new LinkedList<String>();
@@ -39,8 +35,7 @@ public class ErrorMsg implements HelperClass {
 
 	/**
 	 * Adds a errorMessage to a global list. The error messages can be retrieved
-	 * with <code>getErrorMessages</code> and cleared with
-	 * <code>clearErrorMessages</code>.
+	 * with <code>getErrorMessages</code> and cleared with <code>clearErrorMessages</code>.
 	 * 
 	 * @param errorMsg
 	 */
@@ -68,10 +63,10 @@ public class ErrorMsg implements HelperClass {
 						// caused the
 						// problem
 						res = res + "     Line: " + stack[i].getLineNumber() + " Method: " + stack[i].getClassName() + "/"
-								+ methodName + "<br>";
+											+ methodName + "<br>";
 						if (firstMethod.length() <= 0 && methodName != null && !methodName.endsWith("addErrorMessage")) {
 							firstMethod = ", Line " + stack[i].getLineNumber() + " Method " + stack[i].getClassName() + "/"
-									+ methodName;
+												+ methodName;
 						}
 					}
 					if (stack[i].getMethodName().equalsIgnoreCase("addErrorMessage"))
@@ -201,8 +196,8 @@ public class ErrorMsg implements HelperClass {
 			});
 		}
 		if (apploadingCompleted == ApplicationStatus.ADDONS_LOADED
-				|| (apploadingCompleted == ApplicationStatus.PROGRAM_LOADING_FINISHED && ReleaseInfo
-						.getIsAllowedFeature(FeatureSet.ADDON_LOADING))) {
+							|| (apploadingCompleted == ApplicationStatus.PROGRAM_LOADING_FINISHED && ReleaseInfo
+												.getIsAllowedFeature(FeatureSet.ADDON_LOADING))) {
 			Collection<Runnable> fl;
 			synchronized (finishedAddonLoadingListeners) {
 				fl = new ArrayList<Runnable>(finishedAddonLoadingListeners);
@@ -301,7 +296,7 @@ public class ErrorMsg implements HelperClass {
 	}
 
 	public static void addErrorMessage(Exception e) {
-		addErrorMessage(e.toString() + "<p> <p>" + e.getLocalizedMessage());
+		addErrorMessage(e.getLocalizedMessage());
 		e.printStackTrace();
 	}
 
