@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractNode.java,v 1.10 2010/12/14 07:02:25 morla Exp $
+// $Id: AbstractNode.java,v 1.11 2010/12/14 22:30:59 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -22,7 +22,7 @@ import org.graffiti.util.MultipleIterator;
 /**
  * Abstract class <code>AbstractNode</code> common functionality for <code>Node</code> implementations.
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @see AdjListNode
  */
 public abstract class AbstractNode
@@ -307,19 +307,19 @@ public abstract class AbstractNode
 		return s;
 	}
 	// public Iterator getDirectedInEdgesIterator() {
-	// // TODO Auto-generated method stub
+	// // 
 	// return null;
 	// }
 	// public Iterator getDirectedOutEdgesIterator() {
-	// // TODO Auto-generated method stub
+	// // 
 	// return null;
 	// }
 	// public Iterator getEdgesIterator() {
-	// // TODO Auto-generated method stub
+	// // 
 	// return null;
 	// }
 	// public Iterator getUndirectedEdgesIterator() {
-	// // TODO Auto-generated method stub
+	// // 
 	// return null;
 	// }
 }

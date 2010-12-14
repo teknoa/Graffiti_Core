@@ -488,12 +488,12 @@ public class FolderPanel extends JComponent {
 			}
 
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
+				// 
 
 			}
 
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
+				// 
 
 			}
 

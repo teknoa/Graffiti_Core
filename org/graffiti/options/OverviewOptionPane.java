@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: OverviewOptionPane.java,v 1.5 2010/12/14 07:02:27 morla Exp $
+// $Id: OverviewOptionPane.java,v 1.6 2010/12/14 22:30:58 klukas Exp $
 
 package org.graffiti.options;
 
@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 /**
  * The overview pane for the options dialog.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class OverviewOptionPane
 					extends AbstractOptionPane {
@@ -93,7 +93,7 @@ public class OverviewOptionPane
 	 * @see org.graffiti.options.OptionPane#init(javax.swing.JComponent)
 	 */
 	public void init(JComponent options) {
-		// TODO Auto-generated method stub
+		// 
 
 	}
 
@@ -102,7 +102,7 @@ public class OverviewOptionPane
 	 * @see org.graffiti.options.OptionPane#save(javax.swing.JComponent)
 	 */
 	public void save(JComponent options) {
-		// TODO Auto-generated method stub
+		// 
 
 	}
 }

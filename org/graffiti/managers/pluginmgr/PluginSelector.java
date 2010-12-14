@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: PluginSelector.java,v 1.6 2010/12/14 07:02:25 morla Exp $
+// $Id: PluginSelector.java,v 1.7 2010/12/14 22:30:58 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -44,7 +44,7 @@ import org.graffiti.core.StringBundle;
  * Represents a plugin selector. A simple dialog to pick the name of a plugin.
  * The dialog filters already loaded plugins from the list of plugins.
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class PluginSelector
 					extends JDialog
@@ -175,7 +175,6 @@ public class PluginSelector
 			return null;
 		}
 
-		// FIXME is there a better way of implementing this?
 		PluginEntry[] e = new PluginEntry[selectedItems.length];
 
 		for (int i = 0; i < selectedItems.length; i++) {
@@ -464,8 +463,8 @@ public class PluginSelector
 	/**
 	 * DOCUMENT ME!
 	 * 
-	 * @author $Author: morla $
-	 * @version $Revision: 1.6 $ $Date: 2010/12/14 07:02:25 $
+	 * @author $Author: klukas $
+	 * @version $Revision: 1.7 $ $Date: 2010/12/14 22:30:58 $
 	 */
 	class EntryComparator
 						implements Comparator<Object> {

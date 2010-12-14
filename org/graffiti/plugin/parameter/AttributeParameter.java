@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AttributeParameter.java,v 1.4 2010/12/14 07:02:27 morla Exp $
+// $Id: AttributeParameter.java,v 1.5 2010/12/14 22:30:59 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -14,7 +14,7 @@ import org.graffiti.attributes.Attribute;
 /**
  * This class is used for <code>Parameters</code> that satisfy the <code>org.graffiti.attributes.Attribte</code> interface.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @see Attribute
  */
 public class AttributeParameter
@@ -81,7 +81,7 @@ public class AttributeParameter
 	 */
 	@Override
 	public void setValue(Object value) {
-		// TODO
+		// 
 	}
 
 	/**
