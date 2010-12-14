@@ -1,8 +1,6 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2009 Plant Bioinformatics Group, IPK Gatersleben
- *    Copyright (c) 2010 Image Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2009 Plant Bioinformatics Group, IPK Gatersleben
+ * Copyright (c) 2010 Image Analysis Group, IPK Gatersleben
  *******************************************************************************/
 /*
  * Created on Feb 24, 2010 by Christian Klukas
@@ -19,7 +17,6 @@ import org.junit.Test;
 
 /**
  * @author klukas
- * 
  */
 public class ColorUtil {
 
@@ -64,7 +61,7 @@ public class ColorUtil {
 		int idx = 0;
 		for (Color check : palette) {
 			int diff = Math.abs(c.getRed() - check.getRed()) + Math.abs(c.getGreen() - check.getGreen())
-					+ Math.abs(c.getBlue() - check.getBlue());
+								+ Math.abs(c.getBlue() - check.getBlue());
 			if (diff < minDiff) {
 				minDiff = diff;
 				nearestColor = idx;
@@ -266,7 +263,7 @@ public class ColorUtil {
 			xHX /= 2;
 		}
 		double xTX = 1 - 0.17 * Math.cos(dtor(xHX - 30)) + 0.24 * Math.cos(deg2rad(2 * xHX)) + 0.32
-				* Math.cos(deg2rad(3 * xHX + 6)) - 0.20 * Math.cos(dtor(4 * xHX - 63));
+							* Math.cos(deg2rad(3 * xHX + 6)) - 0.20 * Math.cos(dtor(4 * xHX - 63));
 		double xPH = 30 * Math.exp(-((xHX - 275) / 25) * ((xHX - 275) / 25));
 		double xRC = 2 * Math.sqrt((Math.pow(xCY, 7)) / ((Math.pow(xCY, 7)) + (Math.pow(25, 7))));
 		double xSL = 1 + ((0.015 * ((xLX - 50) * (xLX - 50))) / Math.sqrt(20 + ((xLX - 50) * (xLX - 50))));

@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   PluginManagerException.java
+// PluginManagerException.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: PluginManagerException.java,v 1.4 2010/07/19 13:01:27 morla Exp $
+// ==============================================================================
+// $Id: PluginManagerException.java,v 1.5 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -14,13 +14,12 @@ import org.graffiti.core.StringBundle;
 /**
  * <code>PluginManagerException</code> is thrown, iff an error occured during
  * the loading of a plugin.
- *
- * @version $Revision: 1.4 $
+ * 
+ * @version $Revision: 1.5 $
  */
 public class PluginManagerException
-extends Exception
-{
-	//~ Static fields/initializers =============================================
+					extends Exception {
+	// ~ Static fields/initializers =============================================
 
 	/**
 	 * 
@@ -30,57 +29,57 @@ extends Exception
 	/** The <code>StringBundle</code> of the exception. */
 	protected static StringBundle sBundle = StringBundle.getInstance();
 
-	//~ Instance fields ========================================================
+	// ~ Instance fields ========================================================
 
 	/** DOCUMENT ME! */
 	private Dependency dependency;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructor for PluginManagerException.
-	 *
-	 * @param key the error message of this exception.
+	 * 
+	 * @param key
+	 *           the error message of this exception.
 	 */
-	public PluginManagerException(String key)
-	{
-		super(sBundle.getString(key)!=null ? sBundle.getString(key) : key);
+	public PluginManagerException(String key) {
+		super(sBundle.getString(key) != null ? sBundle.getString(key) : key);
 	}
 
 	/**
 	 * Constructs a plugin manager exception from the given parameters.
-	 *
-	 * @param key the property key in the plugin manager's resource bundle.
-	 * @param message the additional message of the exception.
+	 * 
+	 * @param key
+	 *           the property key in the plugin manager's resource bundle.
+	 * @param message
+	 *           the additional message of the exception.
 	 */
-	public PluginManagerException(String key, String message)
-	{
-		super((sBundle.getString(key)!=null ? sBundle.getString(key) : key )+ message);
+	public PluginManagerException(String key, String message) {
+		super((sBundle.getString(key) != null ? sBundle.getString(key) : key) + message);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets the dependency.
-	 *
-	 * @param dependency The dependency to set
+	 * 
+	 * @param dependency
+	 *           The dependency to set
 	 */
-	public void setDependency(Dependency dependency)
-	{
+	public void setDependency(Dependency dependency) {
 		this.dependency = dependency;
 	}
 
 	/**
 	 * Returns the dependency.
-	 *
+	 * 
 	 * @return Dependency
 	 */
-	public Dependency getDependency()
-	{
+	public Dependency getDependency() {
 		return dependency;
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

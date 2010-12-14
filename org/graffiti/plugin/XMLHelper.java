@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: XMLHelper.java,v 1.18 2010/11/24 13:52:24 morla Exp $
+// $Id: XMLHelper.java,v 1.19 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.plugin;
 
@@ -73,7 +73,6 @@ public class XMLHelper implements HelperClass {
 	 * 
 	 * @param n
 	 *           number of spaces
-	 * 
 	 * @return DOCUMENT ME!
 	 */
 	public static String spc(int n) {
@@ -158,7 +157,7 @@ public class XMLHelper implements HelperClass {
 			// Step 3: parse the input file
 			InputSource is = new InputSource(new StringReader(res));
 			doc = db.parse(is);
-			//System.err.println("Type of XML Document Builder: " + db.getClass().getCanonicalName());
+			// System.err.println("Type of XML Document Builder: " + db.getClass().getCanonicalName());
 			return doc;
 		} catch (NullPointerException e) {
 			ErrorMsg.addErrorMessage("Null Pointer Exception, data could not be retrieved.<br>"

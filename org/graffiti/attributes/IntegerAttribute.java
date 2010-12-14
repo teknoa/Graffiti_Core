@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   IntegerAttribute.java
+// IntegerAttribute.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: IntegerAttribute.java,v 1.3 2010/07/19 12:59:22 morla Exp $
+// ==============================================================================
+// $Id: IntegerAttribute.java,v 1.4 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -13,22 +13,23 @@ import org.graffiti.event.AttributeEvent;
 
 /**
  * Contains an integer.
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public class IntegerAttribute
-extends AbstractAttribute {
-	//~ Instance fields ========================================================
+					extends AbstractAttribute {
+	// ~ Instance fields ========================================================
 
 	/** The value of this attribute. */
 	private int value;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new instance of an <code>IntegerAttribute</code>.
-	 *
-	 * @param id the id of the attribute
+	 * 
+	 * @param id
+	 *           the id of the attribute
 	 */
 	public IntegerAttribute(String id) {
 		super(id);
@@ -37,9 +38,11 @@ extends AbstractAttribute {
 	/**
 	 * Constructs a new instance of an <code>IntegerAttribute</code> with the
 	 * given value.
-	 *
-	 * @param id the id of the attribute
-	 * @param value the value of the attribute
+	 * 
+	 * @param id
+	 *           the id of the attribute
+	 * @param value
+	 *           the value of the attribute
 	 */
 	public IntegerAttribute(String id, int value) {
 		super(id);
@@ -49,16 +52,18 @@ extends AbstractAttribute {
 	/**
 	 * Constructs a new instance of a <code>IntegerAttribute</code> with the
 	 * given value.
-	 *
-	 * @param id the id of the attribute.
-	 * @param value the value of the attribute.
+	 * 
+	 * @param id
+	 *           the id of the attribute.
+	 * @param value
+	 *           the value of the attribute.
 	 */
 	public IntegerAttribute(String id, Integer value) {
 		super(id);
 		this.value = value.intValue();
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
@@ -70,8 +75,9 @@ extends AbstractAttribute {
 	/**
 	 * Sets the value of this object. The <code>ListenerManager</code> is
 	 * informed by the method <code>setValue()</code>.
-	 *
-	 * @param value The new value of this object.
+	 * 
+	 * @param value
+	 *           The new value of this object.
 	 */
 	public void setInteger(int value) {
 		AttributeEvent ae = new AttributeEvent(this);
@@ -82,7 +88,7 @@ extends AbstractAttribute {
 
 	/**
 	 * Returns the value of this object.
-	 *
+	 * 
 	 * @return The value of this object.
 	 */
 	public int getInteger() {
@@ -90,11 +96,9 @@ extends AbstractAttribute {
 	}
 
 	/**
-	 * Returns the value of the attribute wrapped in an <code>Integer</code>
-	 * object.
-	 *
-	 * @return The value of the attribute wrapped in an <code>Integer</code>
-	 *         object.
+	 * Returns the value of the attribute wrapped in an <code>Integer</code> object.
+	 * 
+	 * @return The value of the attribute wrapped in an <code>Integer</code> object.
 	 */
 	public Object getValue() {
 		return new Integer(value);
@@ -102,7 +106,7 @@ extends AbstractAttribute {
 
 	/**
 	 * Returns a deep copy of this instance.
-	 *
+	 * 
 	 * @return a deep copy of this instance.
 	 */
 	public Object copy() {
@@ -112,20 +116,21 @@ extends AbstractAttribute {
 	/**
 	 * Sets the value of the attribute. The <code>ListenerManager</code> is
 	 * informed by the method <code>setValue()</code>.
-	 *
-	 * @param o The new value of the attribute.
-	 *
-	 * @exception IllegalArgumentException if the parameter has not the
-	 *            appropriate class for this attribute.
+	 * 
+	 * @param o
+	 *           The new value of the attribute.
+	 * @exception IllegalArgumentException
+	 *               if the parameter has not the
+	 *               appropriate class for this attribute.
 	 */
 	@Override
 	protected void doSetValue(Object o)
-	throws IllegalArgumentException {
+						throws IllegalArgumentException {
 		assert o != null;
 
 		try {
 			value = ((Integer) o).intValue();
-		} catch(ClassCastException cce) {
+		} catch (ClassCastException cce) {
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
@@ -139,6 +144,6 @@ extends AbstractAttribute {
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

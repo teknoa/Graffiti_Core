@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   ShortAttribute.java
+// ShortAttribute.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: ShortAttribute.java,v 1.3 2010/07/19 12:59:22 morla Exp $
+// ==============================================================================
+// $Id: ShortAttribute.java,v 1.4 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -13,22 +13,23 @@ import org.graffiti.event.AttributeEvent;
 
 /**
  * Contains a short
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public class ShortAttribute
-extends AbstractAttribute {
-	//~ Instance fields ========================================================
+					extends AbstractAttribute {
+	// ~ Instance fields ========================================================
 
 	/** The value of this attribute */
 	private short value;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new instance of a <code>ShortAttribute</code>.
-	 *
-	 * @param id the id of the attribute
+	 * 
+	 * @param id
+	 *           the id of the attribute
 	 */
 	public ShortAttribute(String id) {
 		super(id);
@@ -37,9 +38,11 @@ extends AbstractAttribute {
 	/**
 	 * Constructs a new instance of a <code>ShortAttribute</code> with the
 	 * given value.
-	 *
-	 * @param id the id of the attribute.
-	 * @param value the value of the attribute.
+	 * 
+	 * @param id
+	 *           the id of the attribute.
+	 * @param value
+	 *           the value of the attribute.
 	 */
 	public ShortAttribute(String id, short value) {
 		super(id);
@@ -49,16 +52,18 @@ extends AbstractAttribute {
 	/**
 	 * Constructs a new instance of a <code>ShortAttribute</code> with the
 	 * given value.
-	 *
-	 * @param id the id of the attribute.
-	 * @param value the value of the attribute.
+	 * 
+	 * @param id
+	 *           the id of the attribute.
+	 * @param value
+	 *           the value of the attribute.
 	 */
 	public ShortAttribute(String id, Short value) {
 		super(id);
 		this.value = value.shortValue();
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
@@ -69,8 +74,9 @@ extends AbstractAttribute {
 
 	/**
 	 * Set the value of this Object.
-	 *
-	 * @param value the new value for this object.
+	 * 
+	 * @param value
+	 *           the new value for this object.
 	 */
 	public void setShort(short value) {
 		AttributeEvent ae = new AttributeEvent(this);
@@ -81,7 +87,7 @@ extends AbstractAttribute {
 
 	/**
 	 * Returns the value of this object.
-	 *
+	 * 
 	 * @return the value of this object.
 	 */
 	public short getShort() {
@@ -89,11 +95,9 @@ extends AbstractAttribute {
 	}
 
 	/**
-	 * Returns the value of the attribute wrapped in an <code>Short</code>
-	 * object.
-	 *
-	 * @return the value of the attribute wrapped in an <code>Short</code>
-	 *         object.
+	 * Returns the value of the attribute wrapped in an <code>Short</code> object.
+	 * 
+	 * @return the value of the attribute wrapped in an <code>Short</code> object.
 	 */
 	public Object getValue() {
 		return new Short(value);
@@ -101,7 +105,7 @@ extends AbstractAttribute {
 
 	/**
 	 * Returns a deep copy of this instance.
-	 *
+	 * 
 	 * @return a deep copy of this instance.
 	 */
 	public Object copy() {
@@ -111,20 +115,21 @@ extends AbstractAttribute {
 	/**
 	 * Sets the value of the attribute. The <code>ListenerManager</code> is
 	 * informed by the method <code>setValue()</code>.
-	 *
-	 * @param o the new value of the attribute.
-	 *
-	 * @exception IllegalArgumentException if the parameter has not the
-	 *            appropriate class for this attribute.
+	 * 
+	 * @param o
+	 *           the new value of the attribute.
+	 * @exception IllegalArgumentException
+	 *               if the parameter has not the
+	 *               appropriate class for this attribute.
 	 */
 	@Override
 	protected void doSetValue(Object o)
-	throws IllegalArgumentException {
+						throws IllegalArgumentException {
 		assert o != null;
 
 		try {
 			value = ((Short) o).shortValue();
-		} catch(ClassCastException cce) {
+		} catch (ClassCastException cce) {
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
@@ -138,6 +143,6 @@ extends AbstractAttribute {
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

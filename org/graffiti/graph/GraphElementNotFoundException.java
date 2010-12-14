@@ -1,40 +1,38 @@
-//==============================================================================
+// ==============================================================================
 //
-//   GraphElementNotFoundException.java
+// GraphElementNotFoundException.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: GraphElementNotFoundException.java,v 1.2 2010/07/19 13:00:53 morla Exp $
+// ==============================================================================
+// $Id: GraphElementNotFoundException.java,v 1.3 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.graph;
 
 /**
  * The <code>GraphElementNotFoundException</code> will be thrown if a method
- * tries to deal with a <code>GraphElement</code> which cannot be found in the
- * <code>Graph</code>.
- *
- * @version $Revision: 1.2 $
+ * tries to deal with a <code>GraphElement</code> which cannot be found in the <code>Graph</code>.
+ * 
+ * @version $Revision: 1.3 $
  */
 public class GraphElementNotFoundException
-extends RuntimeException
-{
-	//~ Constructors ===========================================================
+					extends RuntimeException {
+	// ~ Constructors ===========================================================
 
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new <code>GraphElementNotFoundException</code> with the
 	 * specified detail message.
-	 *
-	 * @param msg the error message.
+	 * 
+	 * @param msg
+	 *           the error message.
 	 */
-	public GraphElementNotFoundException(String msg)
-	{
+	public GraphElementNotFoundException(String msg) {
 		super(msg);
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

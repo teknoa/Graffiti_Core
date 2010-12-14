@@ -1,9 +1,7 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2008 Network Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2008 Network Analysis Group, IPK Gatersleben
  *******************************************************************************/
-// $Id: ProvidesEdgeContextMenu.java,v 1.3 2010/07/19 13:00:48 morla Exp $
+// $Id: ProvidesEdgeContextMenu.java,v 1.4 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -15,13 +13,12 @@ import org.graffiti.graph.Edge;
 
 /**
  * DOCUMENT ME!
- *
+ * 
  * @author $Author: morla $
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
-public interface ProvidesEdgeContextMenu
-{
-	//~ Methods ================================================================
+public interface ProvidesEdgeContextMenu {
+	// ~ Methods ================================================================
 
 	/**
 	 * This method should be implemented, as that it returns the desired
@@ -30,12 +27,12 @@ public interface ProvidesEdgeContextMenu
 	 * plugin should implement the Interface <code>SelectionListener</code> if
 	 * the menu item should be variable to the current selection. You could
 	 * also return a MenuItem that contains a subMenu.
-	 *
+	 * 
 	 * @return <code>MenuItem</code> the menu item for the context menu
 	 */
 	public JMenuItem[] getCurrentEdgeContextMenuItem(Collection<Edge> selectedEdges);
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

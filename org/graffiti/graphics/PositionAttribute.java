@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   PositionAttribute.java
+// PositionAttribute.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: PositionAttribute.java,v 1.3 2010/07/19 13:01:00 morla Exp $
+// ==============================================================================
+// $Id: PositionAttribute.java,v 1.4 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -16,45 +16,41 @@ import org.graffiti.attributes.HashMapAttribute;
 
 /**
  * Contains properties of the attribute position for a label
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public abstract class PositionAttribute
-extends HashMapAttribute
-implements GraphicAttributeConstants
-{
-	//~ Constructors ===========================================================
+					extends HashMapAttribute
+					implements GraphicAttributeConstants {
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructor for NodeLabelPositionAttribute.
-	 *
+	 * 
 	 * @param id
 	 */
-	public PositionAttribute(String id)
-	{
+	public PositionAttribute(String id) {
 		super(id);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
-	 * Sets the collection of attributes contained within this
-	 * <tt>CollectionAttribute</tt>
-	 *
-	 * @param attrs the map that contains all attributes.
-	 *
-	 * @throws IllegalArgumentException DOCUMENT ME!
+	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
+	 * 
+	 * @param attrs
+	 *           the map that contains all attributes.
+	 * @throws IllegalArgumentException
+	 *            DOCUMENT ME!
 	 */
 	@Override
-	public void setCollection(Map<String, Attribute> attrs)
-	{
-		if(!attrs.keySet().isEmpty())
-		{
+	public void setCollection(Map<String, Attribute> attrs) {
+		if (!attrs.keySet().isEmpty()) {
 			throw new IllegalArgumentException("Invalid map.");
 		}
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   StringAttribute.java
+// StringAttribute.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: StringAttribute.java,v 1.6 2010/07/19 12:59:28 morla Exp $
+// ==============================================================================
+// $Id: StringAttribute.java,v 1.7 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -16,23 +16,23 @@ import org.graffiti.event.AttributeEvent;
 
 /**
  * Contains a String.
- *
- * @version $Revision: 1.6 $
+ * 
+ * @version $Revision: 1.7 $
  */
 public class StringAttribute
-extends AbstractAttribute {
-	//~ Instance fields ========================================================
+					extends AbstractAttribute {
+	// ~ Instance fields ========================================================
 
 	/** The value of this <code>StringAttribute</code>. */
 	protected String value;
 
-
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new instance of a <code>StringAttribute</code>.
-	 *
-	 * @param id the id of the <code>Attribute</code>.
+	 * 
+	 * @param id
+	 *           the id of the <code>Attribute</code>.
 	 */
 	protected StringAttribute(String id) {
 		super(id);
@@ -41,9 +41,11 @@ extends AbstractAttribute {
 	/**
 	 * Constructs a new instance of a <code>StringAttribute</code> with the
 	 * given value.
-	 *
-	 * @param id the id of the attribute.
-	 * @param value the value of the <code>Attribute</code>.
+	 * 
+	 * @param id
+	 *           the id of the attribute.
+	 * @param value
+	 *           the value of the <code>Attribute</code>.
 	 */
 	public StringAttribute(String id, String value) {
 		super(id);
@@ -56,9 +58,9 @@ extends AbstractAttribute {
 
 	@SuppressWarnings("unchecked")
 	public static Attribute getTypedStringAttribute(String id) {
-		Attribute newInstance=null;
+		Attribute newInstance = null;
 		Class ct = typedAttributesID2TypeForNodes.get(id);
-		if (ct!=null) {
+		if (ct != null) {
 			try {
 				newInstance = (Attribute) ct.newInstance();
 				newInstance.setId(id);
@@ -68,16 +70,16 @@ extends AbstractAttribute {
 				ErrorMsg.addErrorMessage(e.getLocalizedMessage());
 			}
 		} else
-			newInstance  = new StringAttribute(id);
-		assert newInstance!=null;
+			newInstance = new StringAttribute(id);
+		assert newInstance != null;
 		return newInstance;
 	}
 
 	@SuppressWarnings("unchecked")
 	public static Attribute getTypedStringAttribute(String id, String value) {
-		Attribute newInstance=null;
+		Attribute newInstance = null;
 		Class ct = typedAttributesID2TypeForNodes.get(id);
-		if (ct!=null) {
+		if (ct != null) {
 			try {
 				Object res = ct.newInstance();
 				newInstance = (Attribute) res;
@@ -89,12 +91,12 @@ extends AbstractAttribute {
 				ErrorMsg.addErrorMessage(e);
 			}
 		} else
-			newInstance  = new StringAttribute(id, value);
-		assert newInstance!=null;
+			newInstance = new StringAttribute(id, value);
+		assert newInstance != null;
 		return newInstance;
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
@@ -106,8 +108,9 @@ extends AbstractAttribute {
 	/**
 	 * Sets the value of this object. The <code>ListenerManager</code> is
 	 * informed by the method <code>setValue()</code>.
-	 *
-	 * @param value the new value of this object.
+	 * 
+	 * @param value
+	 *           the new value of this object.
 	 */
 	public void setString(String value) {
 		// assert value != null;
@@ -120,7 +123,7 @@ extends AbstractAttribute {
 
 	/**
 	 * Returns the value of this object.
-	 *
+	 * 
 	 * @return the value of this object.
 	 */
 	public String getString() {
@@ -129,7 +132,7 @@ extends AbstractAttribute {
 
 	/**
 	 * Returns the value of this attribute, i.e. contained Sting object.
-	 *
+	 * 
 	 * @return the value of the attribute, i.e. contained String object.
 	 */
 	public Object getValue() {
@@ -166,23 +169,22 @@ extends AbstractAttribute {
 	}
 
 	/**
-	 * Sets the value of the <code>Attribute</code>. The
-	 * <code>ListenerManager</code> is informed by the method
-	 * <code>setValue()</code>.
-	 *
-	 * @param o the new value of the attribute.
-	 *
-	 * @exception IllegalArgumentException if the parameter has not the
-	 *            appropriate class for this <code>Attribute</code>.
+	 * Sets the value of the <code>Attribute</code>. The <code>ListenerManager</code> is informed by the method <code>setValue()</code>.
+	 * 
+	 * @param o
+	 *           the new value of the attribute.
+	 * @exception IllegalArgumentException
+	 *               if the parameter has not the
+	 *               appropriate class for this <code>Attribute</code>.
 	 */
 	@Override
 	protected void doSetValue(Object o)
-	throws IllegalArgumentException {
+						throws IllegalArgumentException {
 		assert o != null;
 
 		try {
 			value = (String) o;
-		} catch(ClassCastException cce) {
+		} catch (ClassCastException cce) {
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
@@ -210,6 +212,6 @@ extends AbstractAttribute {
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

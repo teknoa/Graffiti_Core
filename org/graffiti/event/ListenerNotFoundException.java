@@ -1,24 +1,23 @@
-//==============================================================================
+// ==============================================================================
 //
-//   ListenerNotFoundException.java
+// ListenerNotFoundException.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: ListenerNotFoundException.java,v 1.3 2010/07/19 13:01:43 morla Exp $
+// ==============================================================================
+// $Id: ListenerNotFoundException.java,v 1.4 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.event;
 
 /**
  * Will be thrown, if a method tries to deal with a listener that cannot be
  * found in the listener list.
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public class ListenerNotFoundException
-extends Exception
-{
-	//~ Constructors ===========================================================
+					extends Exception {
+	// ~ Constructors ===========================================================
 
 	/**
 	 * 
@@ -26,17 +25,17 @@ extends Exception
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constructs a <code>ListenerNotFoundException</code>  with the specified
+	 * Constructs a <code>ListenerNotFoundException</code> with the specified
 	 * detail message.
-	 *
-	 * @param msg the detail message for the exception.
+	 * 
+	 * @param msg
+	 *           the detail message for the exception.
 	 */
-	public ListenerNotFoundException(String msg)
-	{
+	public ListenerNotFoundException(String msg) {
 		super(msg);
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

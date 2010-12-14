@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
  *******************************************************************************/
 
 /*
@@ -18,9 +16,7 @@ import javax.swing.JInternalFrame;
 
 /**
  * @author Christian Klukas
- * 
- * (c) 2004 IPK-Gatersleben
- *
+ *         (c) 2004 IPK-Gatersleben
  */
 public class Java_1_5_compatibility_impl {
 	public static void setComponentZorder(JDesktopPane jDesktopPane, JInternalFrame jInternalFrame) {

@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AbstractSingleParameter.java
+// AbstractSingleParameter.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AbstractSingleParameter.java,v 1.4 2010/07/19 13:01:54 morla Exp $
+// ==============================================================================
+// $Id: AbstractSingleParameter.java,v 1.5 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -17,13 +17,12 @@ import org.graffiti.plugin.XMLHelper;
 
 /**
  * Implements functions that are common in all SingleParameters.
- *
- * @version $Revision: 1.4 $
+ * 
+ * @version $Revision: 1.5 $
  */
 public abstract class AbstractSingleParameter
-implements SingleParameter
-{
-	//~ Instance fields ========================================================
+					implements SingleParameter {
+	// ~ Instance fields ========================================================
 
 	/** The image representing the parameter. */
 	private BufferedImage image = null;
@@ -39,19 +38,19 @@ implements SingleParameter
 
 	private boolean left_aligned;
 
-	//~ Constructors ===========================================================
-
-
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new abstract single parameter class.
-	 *
-	 * @param val DOCUMENT ME!
-	 * @param name the name of the parameter.
-	 * @param description the description of the parameter.
+	 * 
+	 * @param val
+	 *           DOCUMENT ME!
+	 * @param name
+	 *           the name of the parameter.
+	 * @param description
+	 *           the description of the parameter.
 	 */
-	public AbstractSingleParameter(Object val, String name, String description)
-	{
+	public AbstractSingleParameter(Object val, String name, String description) {
 		this.name = name;
 		this.description = description;
 		value = val;
@@ -59,55 +58,52 @@ implements SingleParameter
 
 	/**
 	 * Constructs a new abstract single parameter class.
-	 *
-	 * @param name the name of the parameter.
-	 * @param description the description of the parameter.
+	 * 
+	 * @param name
+	 *           the name of the parameter.
+	 * @param description
+	 *           the description of the parameter.
 	 */
-	public AbstractSingleParameter(String name, String description)
-	{
+	public AbstractSingleParameter(String name, String description) {
 		this.name = name;
 		this.description = description;
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets the description.
-	 *
+	 * 
 	 * @param description
 	 */
-	public void setDescription(String description)
-	{
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
 	 * Returns the description of the parameter.
-	 *
+	 * 
 	 * @return the description of the parameter.
 	 */
-	public String getDescription()
-	{
+	public String getDescription() {
 		return description;
 	}
 
 	/**
 	 * Returns the image representing the parameter.
-	 *
+	 * 
 	 * @return the image representing the parameter.
 	 */
-	public BufferedImage getImage()
-	{
+	public BufferedImage getImage() {
 		return image;
 	}
 
 	/**
 	 * Returns the name of the parameter.
-	 *
+	 * 
 	 * @return the name of the parameter.
 	 */
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
@@ -115,16 +111,14 @@ implements SingleParameter
 	 * @see org.graffiti.plugin.Displayable#setValue(java.lang.Object)
 	 */
 	public void setValue(Object val)
-	throws IllegalArgumentException
-	{
+						throws IllegalArgumentException {
 		value = val;
 	}
 
 	/**
 	 * @see org.graffiti.plugin.Displayable#getValue()
 	 */
-	public Object getValue()
-	{
+	public Object getValue() {
 		return value;
 	}
 
@@ -132,14 +126,10 @@ implements SingleParameter
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString()
-	{
-		if(getValue() == null)
-		{
+	public String toString() {
+		if (getValue() == null) {
 			return "Parameter (" + name + "), value: null";
-		}
-		else
-		{
+		} else {
 			return "Parameter (" + name + "), value: " + getValue().toString();
 		}
 	}
@@ -147,34 +137,30 @@ implements SingleParameter
 	/**
 	 * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
 	 */
-	public String toXMLString()
-	{
+	public String toXMLString() {
 		String valStr = (value == null) ? "null" : value.toString();
 
 		return "<parameter classname=\\\"" + getClass().getName() + "\\\">" +
-		XMLHelper.getDelimiter() + XMLHelper.spc(2) + "<value><![CDATA[" +
-		valStr + "]]>" + XMLHelper.getDelimiter() + XMLHelper.spc(2) +
-		"</value>" + XMLHelper.getDelimiter() + "</parameter>";
+							XMLHelper.getDelimiter() + XMLHelper.spc(2) + "<value><![CDATA[" +
+							valStr + "]]>" + XMLHelper.getDelimiter() + XMLHelper.spc(2) +
+							"</value>" + XMLHelper.getDelimiter() + "</parameter>";
 	}
 
 	/**
 	 * Embeds the given String into an XML String. It includes the classname of
-	 * the parameter and a "value" element that gets the given String
-	 * <code>valueString</code> as content.
-	 *
+	 * the parameter and a "value" element that gets the given String <code>valueString</code> as content.
+	 * 
 	 * @param valueString
-	 *
 	 * @return DOCUMENT ME!
 	 */
-	protected String getStandardXML(String valueString)
-	{
+	protected String getStandardXML(String valueString) {
 		return "<parameter classname=\\\"" + getClass().getName() +
-		"\\\" name=\\\"" + getName() + "\\\" description=\\\"" +
-		getDescription() + "\\\">" + XMLHelper.getDelimiter() +
-		XMLHelper.spc(2) + "<value>" + XMLHelper.getDelimiter() +
-		XMLHelper.spc(4) + valueString + XMLHelper.getDelimiter() +
-		XMLHelper.spc(2) + "</value>" + XMLHelper.getDelimiter() +
-		"</parameter>";
+							"\\\" name=\\\"" + getName() + "\\\" description=\\\"" +
+							getDescription() + "\\\">" + XMLHelper.getDelimiter() +
+							XMLHelper.spc(2) + "<value>" + XMLHelper.getDelimiter() +
+							XMLHelper.spc(4) + valueString + XMLHelper.getDelimiter() +
+							XMLHelper.spc(2) + "</value>" + XMLHelper.getDelimiter() +
+							"</parameter>";
 	}
 
 	public JComponent getIcon() {
@@ -191,6 +177,6 @@ implements SingleParameter
 
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

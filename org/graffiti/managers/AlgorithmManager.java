@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AlgorithmManager.java
+// AlgorithmManager.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AlgorithmManager.java,v 1.4 2010/07/19 13:01:34 morla Exp $
+// ==============================================================================
+// $Id: AlgorithmManager.java,v 1.5 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.managers;
 
@@ -16,45 +16,42 @@ import org.graffiti.plugin.algorithm.Algorithm;
 
 /**
  * Provides a generic interface for a component managing a set of algorithms.
- *
- * @version $Revision: 1.4 $
- *
+ * 
+ * @version $Revision: 1.5 $
  * @see org.graffiti.managers.pluginmgr.PluginManagerListener
  */
 public interface AlgorithmManager
-extends PluginManagerListener
-{
-	//~ Methods ================================================================
+					extends PluginManagerListener {
+	// ~ Methods ================================================================
 
 	/**
-	 * Returns a <code>java.util.List</code> containing all the
-	 * <code>Algorithm</code> instances the manager contains.
-	 *
-	 * @return a <code>java.util.List</code> containing all the
-	 *         <code>Algorithm</code> instances the manager contains.
+	 * Returns a <code>java.util.List</code> containing all the <code>Algorithm</code> instances the manager contains.
+	 * 
+	 * @return a <code>java.util.List</code> containing all the <code>Algorithm</code> instances the manager contains.
 	 */
 	List<?> getAlgorithms();
 
-	//    /**
-	//     * Returns the class name of the specified algorithm. Using the
-	//     * <code>InstanceLoader</code> an instance of this <code>Algorithm</code>
-	//     * can be created.
-	//     *
-	//     * @param algorithm the <code>Algorithm</code> of which to get the class
-	//     *        name.
-	//     *
-	//     * @return the class name of the specified algorithm.
-	//     */
-	//    String getClassName(Algorithm algorithm);
+	// /**
+	// * Returns the class name of the specified algorithm. Using the
+	// * <code>InstanceLoader</code> an instance of this <code>Algorithm</code>
+	// * can be created.
+	// *
+	// * @param algorithm the <code>Algorithm</code> of which to get the class
+	// * name.
+	// *
+	// * @return the class name of the specified algorithm.
+	// */
+	// String getClassName(Algorithm algorithm);
 
 	/**
 	 * Adds the given algorithm to the list of algorithms.
-	 *
-	 * @param algorithm the algorithm to add to the list.
+	 * 
+	 * @param algorithm
+	 *           the algorithm to add to the list.
 	 */
 	void addAlgorithm(Algorithm algorithm);
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

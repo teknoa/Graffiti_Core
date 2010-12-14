@@ -28,15 +28,15 @@ public class MyInputStreamCreator {
 	}
 
 	public InputStream getNewInputStream() throws IOException {
-		if (absolutePath!=null) {
+		if (absolutePath != null) {
 			if (gzip)
 				return new GZIPInputStream(new FileInputStream(absolutePath));
 			else
 				return new FileInputStream(absolutePath);
 		}
-		if (file!=null)
+		if (file != null)
 			return new FileInputStream(file);
-		if (url!=null)
+		if (url != null)
 			return url.openStream();
 		return null;
 	}

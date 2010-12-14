@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2008 Network Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2008 Network Analysis Group, IPK Gatersleben
  *******************************************************************************/
 package org.graffiti.plugin.algorithm;
 

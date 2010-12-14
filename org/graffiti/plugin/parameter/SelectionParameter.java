@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   SelectionParameter.java
+// SelectionParameter.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: SelectionParameter.java,v 1.3 2010/07/19 13:01:54 morla Exp $
+// ==============================================================================
+// $Id: SelectionParameter.java,v 1.4 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -13,101 +13,97 @@ import org.graffiti.selection.Selection;
 
 /**
  * This class contains a single <code>Node</code>.
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public class SelectionParameter
-extends AbstractSingleParameter
-{
-	//~ Instance fields ========================================================
+					extends AbstractSingleParameter {
+	// ~ Instance fields ========================================================
 
 	/** The value of this parameter. */
 	private Selection value = null;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new selection parameter.
-	 *
-	 * @param name the name of the parameter.
-	 * @param description the description of the parameter.
+	 * 
+	 * @param name
+	 *           the name of the parameter.
+	 * @param description
+	 *           the description of the parameter.
 	 */
-	public SelectionParameter(String name, String description)
-	{
+	public SelectionParameter(String name, String description) {
 		super(name, description);
 	}
 
 	/**
 	 * Constructs a new selection parameter.
-	 *
+	 * 
 	 * @param name
 	 * @param description
 	 * @param sel
 	 */
-	public SelectionParameter(String name, String description, Selection sel)
-	{
+	public SelectionParameter(String name, String description, Selection sel) {
 		super(name, description);
 		setSelection(sel);
 	}
 
 	/**
 	 * Constructs a new selection parameter.
-	 *
+	 * 
 	 * @param sel
 	 * @param name
 	 * @param description
 	 */
-	public SelectionParameter(Selection sel, String name, String description)
-	{
+	public SelectionParameter(Selection sel, String name, String description) {
 		super(name, description);
 		setSelection(sel);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets the selection.
-	 *
-	 * @param selection DOCUMENT ME!
+	 * 
+	 * @param selection
+	 *           DOCUMENT ME!
 	 */
-	public void setSelection(Selection selection)
-	{
+	public void setSelection(Selection selection) {
 		this.value = selection;
 	}
 
 	/**
 	 * Returns the selection encapsulated in this parameter.
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
-	public Selection getSelection()
-	{
+	public Selection getSelection() {
 		return this.value;
 	}
 
 	/**
 	 * Sets the value of the <code>AttributeParameter</code>.
-	 *
-	 * @param value the new value of the <code>AttributeParameter</code>.
+	 * 
+	 * @param value
+	 *           the new value of the <code>AttributeParameter</code>.
 	 */
 	@Override
-	public void setValue(Object value)
-	{
+	public void setValue(Object value) {
 		this.value = (Selection) value;
 	}
 
 	/**
 	 * Returns the value of this parameter.
-	 *
+	 * 
 	 * @return the value of this parameter.
 	 */
 	@Override
-	public Object getValue()
-	{
+	public Object getValue() {
 		return value;
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

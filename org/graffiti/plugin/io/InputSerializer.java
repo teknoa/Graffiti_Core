@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   InputSerializer.java
+// InputSerializer.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: InputSerializer.java,v 1.4 2010/11/22 11:52:12 klukas Exp $
+// ==============================================================================
+// $Id: InputSerializer.java,v 1.5 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.plugin.io;
 
@@ -20,7 +20,7 @@ import org.graffiti.graph.Graph;
  * Interfaces a serializer, which is able to reconstruct a graph from a given
  * input.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public interface InputSerializer extends Serializer {
 	// ~ Methods ================================================================
@@ -32,7 +32,6 @@ public interface InputSerializer extends Serializer {
 	 *           The name of the file to read the graph from.
 	 * @param g
 	 *           The graph to add the newly read graph to.
-	 * 
 	 * @exception IOException
 	 *               If an IO error occurs.
 	 */
@@ -53,7 +52,6 @@ public interface InputSerializer extends Serializer {
 	 *           The URL to read the graph from.
 	 * @param g
 	 *           The graph to add the newly read graph to.
-	 * 
 	 * @exception IOException
 	 *               If an IO error occurs.
 	 */
@@ -66,7 +64,6 @@ public interface InputSerializer extends Serializer {
 	 *           The input stream to read the graph from.
 	 * @param g
 	 *           The graph to add the newly read graph to.
-	 * 
 	 * @exception IOException
 	 *               If an IO error occurs.
 	 */
@@ -78,7 +75,6 @@ public interface InputSerializer extends Serializer {
 	 * @param in
 	 *           The input stream to read the graph from.
 	 * @return The newly read graph.
-	 * 
 	 * @exception IOException
 	 *               If an IO error occurs.
 	 */

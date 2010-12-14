@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AbstractGraph.java
+// AbstractGraph.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AbstractGraph.java,v 1.8 2010/10/15 13:20:35 morla Exp $
+// ==============================================================================
+// $Id: AbstractGraph.java,v 1.9 2010/12/14 07:02:25 morla Exp $
 package org.graffiti.graph;
 
 import java.util.ArrayList;
@@ -35,21 +35,20 @@ import org.graffiti.event.ListenerManager;
 
 /**
  * Provides further functionality for graphs.
- *
- * @version $Revision: 1.8 $
- *
+ * 
+ * @version $Revision: 1.9 $
  * @see Graph
  * @see AdjListGraph
  */
 public abstract class AbstractGraph extends AbstractAttributable implements
-Graph {
-	//~ Static fields/initializers =============================================
+					Graph {
+	// ~ Static fields/initializers =============================================
 
 	/** The logger for the current class. */
 	private static final Logger logger = Logger.getLogger(AbstractGraph.class
-			.getName());
+						.getName());
 
-	//~ Instance fields ========================================================
+	// ~ Instance fields ========================================================
 
 	/** The <code> AttributeTypesManager</code> for handling attribute types. */
 	protected AttributeTypesManager attTypesManager;
@@ -64,45 +63,42 @@ Graph {
 
 	/**
 	 * The attribute, which will be (deep-)copied and added to every new edge.
-	 * This attribute is extended by the <code>addAttributeConsumer</code>
-	 * method.
+	 * This attribute is extended by the <code>addAttributeConsumer</code> method.
 	 */
 	private CollectionAttribute defaultEdgeAttribute;
 
 	/**
 	 * The attribute, which will be (deep-)copied and added to every new node.
-	 * This attribute is extended by the <code>addAttributeConsumer</code>
-	 * method.
+	 * This attribute is extended by the <code>addAttributeConsumer</code> method.
 	 */
 	private CollectionAttribute defaultNodeAttribute;
 
 	/** Contains a set of attribute consumers. */
 	private Set<AttributeConsumer> attributeConsumers;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
-	 * Constructs a new instance of an <code>AbstractGraph</code>. Sets the
-	 * <code>ListenerManager</code> of the new instance to the default
+	 * Constructs a new instance of an <code>AbstractGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the default
 	 * <code>ListenerManager</code>.
 	 */
 	public AbstractGraph() {
 		this.listenerManager = new ListenerManager();
 		this.attributeConsumers = new HashSet<AttributeConsumer>();
-		BooleanAttribute a  = (BooleanAttribute) getAttributes().getCollection().get("direced");
-		if (a==null)
+		BooleanAttribute a = (BooleanAttribute) getAttributes().getCollection().get("direced");
+		if (a == null)
 			setBoolean("directed", true);
 		else
 			a.setBoolean(true);
 	}
 
 	/**
-	 * Constructs a new instance of an <code>AbstractGraph</code>. Sets the
-	 * <code>ListenerManager</code> of the new instance to the default
+	 * Constructs a new instance of an <code>AbstractGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the default
 	 * <code>ListenerManager</code>.
-	 *
-	 * @param coll the <code>CollectionAttribute</code> of the currently
-	 *        created <code>AbstractGraph</code> instance.
+	 * 
+	 * @param coll
+	 *           the <code>CollectionAttribute</code> of the currently
+	 *           created <code>AbstractGraph</code> instance.
 	 */
 	public AbstractGraph(CollectionAttribute coll) {
 		super(coll);
@@ -112,10 +108,10 @@ Graph {
 	}
 
 	/**
-	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the
-	 * <code>ListenerManager</code> of the new instance to the specified one.
-	 *
-	 * @param listenerManager listener manager for the graph.
+	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the specified one.
+	 * 
+	 * @param listenerManager
+	 *           listener manager for the graph.
 	 */
 	public AbstractGraph(ListenerManager listenerManager) {
 		this.listenerManager = listenerManager;
@@ -124,25 +120,26 @@ Graph {
 	}
 
 	/**
-	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the
-	 * <code>ListenerManager</code> of the new instance to the specified one.
-	 *
-	 * @param listenerManager listener manager for the graph.
-	 * @param coll the <code>CollectionAttribute</code> of the currently
-	 *        created <code>AbstractGraph</code> instance.
+	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the specified one.
+	 * 
+	 * @param listenerManager
+	 *           listener manager for the graph.
+	 * @param coll
+	 *           the <code>CollectionAttribute</code> of the currently
+	 *           created <code>AbstractGraph</code> instance.
 	 */
 	public AbstractGraph(ListenerManager listenerManager,
-			CollectionAttribute coll) {
+						CollectionAttribute coll) {
 		super(coll);
 		this.listenerManager = listenerManager;
 		this.attributeConsumers = new HashSet<AttributeConsumer>();
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the <code>AttributeTypesManager</code> of the graph.
-	 *
+	 * 
 	 * @return the <code>AttributeTypesManager</code> of the graph.
 	 */
 	public AttributeTypesManager getAttTypesManager() {
@@ -152,22 +149,23 @@ Graph {
 	/**
 	 * Indicates whether the graph is directed.
 	 * A graph is directed if the graph setting states this.
-	 *
+	 * 
 	 * @return a boolean indicating whether the graph is directed.
 	 */
 	public boolean isDirected() {
 		return isDirected;
 		/*
-		if (getEdges().size() == 0)
-			return isDirected;
-		else
-			return getEdges().size() == getNumberOfDirectedEdges();*/
+		 * if (getEdges().size() == 0)
+		 * return isDirected;
+		 * else
+		 * return getEdges().size() == getNumberOfDirectedEdges();
+		 */
 	}
 
 	/**
-	 * Sets all edges to be <code>directed</code>.<p>
-	 * If <code>directed</code> is <code>true</code>, standard arrows are set,
-	 * if it is <code>false</code>, all arrows of all edges are removed.
+	 * Sets all edges to be <code>directed</code>.
+	 * <p>
+	 * If <code>directed</code> is <code>true</code>, standard arrows are set, if it is <code>false</code>, all arrows of all edges are removed.
 	 * 
 	 * @see org.graffiti.graph.Graph#setDirected(boolean)
 	 */
@@ -207,7 +205,7 @@ Graph {
 				if (directed) {
 					edge.setString("graphics.arrowtail", "");
 					edge.setString("graphics.arrowhead",
-					"org.graffiti.plugins.views.defaults.StandardArrowShape");
+										"org.graffiti.plugins.views.defaults.StandardArrowShape");
 				} else {
 					edge.setString("graphics.arrowtail", "");
 					edge.setString("graphics.arrowhead", "");
@@ -225,7 +223,7 @@ Graph {
 	/**
 	 * Returns a <code>java.util.Collection</code> containing all the edges of
 	 * the current graph.
-	 *
+	 * 
 	 * @return a <code>java.util.Collection</code> containing all the edges of
 	 *         the current graph.
 	 */
@@ -245,19 +243,20 @@ Graph {
 	 * Returns a collection containing all the edges between n1 and n2. There
 	 * can be more than one edge between two nodes. The edges returned by this
 	 * method can go from n1 to n2 or vice versa, be directed or not.
-	 *
-	 * @param n1 the first node.
-	 * @param n2 the second node.
-	 *
+	 * 
+	 * @param n1
+	 *           the first node.
+	 * @param n2
+	 *           the second node.
 	 * @return a <code>Collection</code> containing all edges between n1 and
 	 *         n2, an empty collection if there is no edge between the two
 	 *         nodes.
-	 *
-	 * @exception GraphElementNotFoundException if one of the nodes is not
-	 *            contained in the graph.
+	 * @exception GraphElementNotFoundException
+	 *               if one of the nodes is not
+	 *               contained in the graph.
 	 */
 	public Collection<Edge> getEdges(Node n1, Node n2)
-	throws GraphElementNotFoundException {
+						throws GraphElementNotFoundException {
 		assert (n1 != null) && (n2 != null);
 
 		Collection<Edge> col = new LinkedList<Edge>();
@@ -272,7 +271,7 @@ Graph {
 			}
 		} else {
 			throw new GraphElementNotFoundException(
-			"one of the nodes is not in the graph");
+								"one of the nodes is not in the graph");
 		}
 
 		return col;
@@ -280,7 +279,7 @@ Graph {
 
 	/**
 	 * Returns an iterator over the edges of the graph.
-	 *
+	 * 
 	 * @return an iterator over the edges of the graph.
 	 */
 	public Iterator<Edge> getEdgesIterator() {
@@ -290,9 +289,8 @@ Graph {
 	/**
 	 * Returns <code>true</code> if the graph is empty. The graph is equal to a
 	 * graph which has been cleared.
-	 *
-	 * @return <code>true</code> if the graph is empty, <code>false</code>
-	 *         otherwise.
+	 * 
+	 * @return <code>true</code> if the graph is empty, <code>false</code> otherwise.
 	 */
 	public boolean isEmpty() {
 		return getNumberOfNodes() == 0;
@@ -300,7 +298,7 @@ Graph {
 
 	/**
 	 * Returns all nodes and all edges contained in this graph.
-	 *
+	 * 
 	 * @return Collection
 	 */
 	public Collection<GraphElement> getGraphElements() {
@@ -315,7 +313,7 @@ Graph {
 
 	/**
 	 * Returns the ListenerManager of the current graph.
-	 *
+	 * 
 	 * @return the ListenerManager of the current graph.
 	 */
 	public ListenerManager getListenerManager() {
@@ -326,9 +324,9 @@ Graph {
 	 * Returns a list containing a copy of the node list of the graph.
 	 * Removing elements from this collection will have no effect on the graph
 	 * whereas nodes can be modified.
-	 *
+	 * 
 	 * @return a new <code>java.util.List</code> containing all the nodes
-	 * of the graph.
+	 *         of the graph.
 	 */
 	public List<Node> getNodes() {
 		return new LinkedList<Node>(getNodes());
@@ -336,7 +334,7 @@ Graph {
 
 	/**
 	 * Returns the number of directed edges of the graph.
-	 *
+	 * 
 	 * @return the number of directed edges of the graph.
 	 */
 	public int getNumberOfDirectedEdges() {
@@ -351,14 +349,14 @@ Graph {
 		}
 
 		logger.fine("this graph contains " + numberOfDirectedEdges
-				+ " directed edge(s)");
+							+ " directed edge(s)");
 
 		return numberOfDirectedEdges;
 	}
 
 	/**
 	 * Returns the number of edges of the graph.
-	 *
+	 * 
 	 * @return the number of edges of the graph.
 	 */
 	public int getNumberOfEdges() {
@@ -367,7 +365,7 @@ Graph {
 
 	/**
 	 * Returns the number of nodes in the graph.
-	 *
+	 * 
 	 * @return the number of nodes of the graph.
 	 */
 	public int getNumberOfNodes() {
@@ -376,15 +374,15 @@ Graph {
 
 	/**
 	 * Returns the number of undirected edges in the graph.
-	 *
+	 * 
 	 * @return the number of undirected edges in the graph.
 	 */
 	public int getNumberOfUndirectedEdges() {
 		int numberOfUndirectedEdges = getEdges().size()
-		- getNumberOfDirectedEdges();
+							- getNumberOfDirectedEdges();
 
 		logger.fine("this graph contains " + numberOfUndirectedEdges
-				+ " undirected edge(s)");
+							+ " undirected edge(s)");
 
 		return numberOfUndirectedEdges;
 	}
@@ -392,7 +390,7 @@ Graph {
 	/**
 	 * Indicates whether the graph is undirected. A graph is undirected if all
 	 * the edges are undirected.
-	 *
+	 * 
 	 * @return A boolean indicating whether the graph is undirected.
 	 */
 	public boolean isUndirected() {
@@ -404,13 +402,14 @@ Graph {
 
 	/**
 	 * Adds the given attribute consumer to the list of attribute consumers.
-	 *
-	 * @param attConsumer the attribute consumer to add.
-	 *
-	 * @throws UnificationException in the context of unification failures.
+	 * 
+	 * @param attConsumer
+	 *           the attribute consumer to add.
+	 * @throws UnificationException
+	 *            in the context of unification failures.
 	 */
 	public void addAttributeConsumer(AttributeConsumer attConsumer)
-	throws UnificationException {
+						throws UnificationException {
 		unifyWithNodeAttribute(attConsumer.getNodeAttribute());
 		unifyWithEdgeAttribute(attConsumer.getEdgeAttribute());
 		addAttributeToExistingNodes(attConsumer.getNodeAttribute());
@@ -420,22 +419,22 @@ Graph {
 
 	/**
 	 * Adds a new edge to the current graph. Informs the ListenerManager about
-	 * the new node.  This method adds a copy of the
-	 * <code>defaultEdgeAttributes</code> after the <code>preEdgeAdded</code>
-	 * and before the <code>postEdgeAdded</code> event.
-	 *
-	 * @param source the source of the edge to add.
-	 * @param target the target of the edge to add.
-	 * @param directed <code>true</code> if the edge shall be directed,
-	 *        <code>false</code> otherwise.
-	 *
+	 * the new node. This method adds a copy of the <code>defaultEdgeAttributes</code> after the <code>preEdgeAdded</code> and before the
+	 * <code>postEdgeAdded</code> event.
+	 * 
+	 * @param source
+	 *           the source of the edge to add.
+	 * @param target
+	 *           the target of the edge to add.
+	 * @param directed
+	 *           <code>true</code> if the edge shall be directed, <code>false</code> otherwise.
 	 * @return the new edge.
-	 *
-	 * @exception GraphElementNotFoundException if any of the nodes cannot be
-	 *            found in the graph.
+	 * @exception GraphElementNotFoundException
+	 *               if any of the nodes cannot be
+	 *               found in the graph.
 	 */
 	public Edge addEdge(Node source, Node target, boolean directed)
-	throws GraphElementNotFoundException {
+						throws GraphElementNotFoundException {
 		assert (source != null) && (target != null);
 		// logger.info("adding a new edge to the graph");
 
@@ -443,19 +442,19 @@ Graph {
 
 		if (this != source.getGraph()) {
 			logger.severe("throwing GENFException, because the given source "
-					+ "was not in the same graph");
+								+ "was not in the same graph");
 			throw new GraphElementNotFoundException(
-			"source is not in the same graph as the edge");
+								"source is not in the same graph as the edge");
 		}
 
 		if (this != target.getGraph()) {
 			logger.severe("throwing GENFException, because the given target "
-					+ "was not in the same graph");
+								+ "was not in the same graph");
 			throw new GraphElementNotFoundException(
-			"target is not in the same graph as the edge");
+								"target is not in the same graph as the edge");
 		}
 
-		if (listMan!=null)
+		if (listMan != null)
 			listMan.preEdgeAdded(new GraphEvent(source, target));
 
 		Edge edge = doAddEdge(source, target, directed);
@@ -465,7 +464,7 @@ Graph {
 			edge.addAttribute((Attribute) defaultEdgeAttribute.copy(), "");
 		}
 
-		if (listMan!=null)
+		if (listMan != null)
 			listMan.postEdgeAdded(new GraphEvent(edge));
 
 		return edge;
@@ -473,23 +472,24 @@ Graph {
 
 	/**
 	 * Adds a new edge to the current graph. Informs the ListenerManager about
-	 * the new node.  This method does not add any
-	 * <code>defaultEdgeAttributes</code>.
-	 *
-	 * @param source the source of the edge to add.
-	 * @param target the target of the edge to add.
-	 * @param directed <code>true</code> if the edge shall be directed,
-	 *        <code>false</code> otherwise.
-	 * @param col the <code>CollectionAttribute</code> with which the edge is
-	 *        initialized.
-	 *
+	 * the new node. This method does not add any <code>defaultEdgeAttributes</code>.
+	 * 
+	 * @param source
+	 *           the source of the edge to add.
+	 * @param target
+	 *           the target of the edge to add.
+	 * @param directed
+	 *           <code>true</code> if the edge shall be directed, <code>false</code> otherwise.
+	 * @param col
+	 *           the <code>CollectionAttribute</code> with which the edge is
+	 *           initialized.
 	 * @return the new edge.
-	 *
-	 * @exception GraphElementNotFoundException if any of the nodes cannot be
-	 *            found in the graph.
+	 * @exception GraphElementNotFoundException
+	 *               if any of the nodes cannot be
+	 *               found in the graph.
 	 */
 	public Edge addEdge(Node source, Node target, boolean directed,
-			CollectionAttribute col) throws GraphElementNotFoundException {
+						CollectionAttribute col) throws GraphElementNotFoundException {
 		assert (source != null) && (target != null) && (col != null);
 		// logger.info("adding a new edge with collection attributes to the graph");
 
@@ -500,25 +500,25 @@ Graph {
 
 		if (this != source.getGraph()) {
 			logger.severe("throwing GENFException, because the given source "
-					+ "was not in the same graph");
+								+ "was not in the same graph");
 			throw new GraphElementNotFoundException(
-			"source is not in the same graph as the edge");
+								"source is not in the same graph as the edge");
 		}
 
 		if (this != target.getGraph()) {
 			logger.severe("throwing GENFException, because the given target "
-					+ "was not in the same graph");
+								+ "was not in the same graph");
 			throw new GraphElementNotFoundException(
-			"target is not in the same graph as the edge");
+								"target is not in the same graph as the edge");
 		}
 
-		//logger.info("adding a new edge to the graph");
+		// logger.info("adding a new edge to the graph");
 		ListenerManager listMan = this.getListenerManager();
-		if (listMan!=null)
+		if (listMan != null)
 			listMan.preEdgeAdded(new GraphEvent(source, target));
 
 		Edge edge = doAddEdge(source, target, directed, col);
-		if (listMan!=null)
+		if (listMan != null)
 			listMan.postEdgeAdded(new GraphEvent(edge));
 
 		return edge;
@@ -527,22 +527,23 @@ Graph {
 	/**
 	 * Adds a copy of the specified edge to the graph as a new edge between the
 	 * specified source and target node. Informs the ListenerManager about the
-	 * newly added edge through the call to <code>addEdge()</code>.  Also
+	 * newly added edge through the call to <code>addEdge()</code>. Also
 	 * informs the ListenerManager about the copy of the attributes added to
-	 * the edge by adding them separatly throug
-	 * <code>CollectionAttribute.add(Attribute)</code>.
-	 *
-	 * @param edge the <code>Egde</code> which to copy and add.
-	 * @param source the source <code>Node</code> of the copied and added edge.
-	 * @param target the target <code>Node</code> of the copied and added edge.
-	 *
+	 * the edge by adding them separatly throug <code>CollectionAttribute.add(Attribute)</code>.
+	 * 
+	 * @param edge
+	 *           the <code>Egde</code> which to copy and add.
+	 * @param source
+	 *           the source <code>Node</code> of the copied and added edge.
+	 * @param target
+	 *           the target <code>Node</code> of the copied and added edge.
 	 * @return DOCUMENT ME!
 	 */
 	public Edge addEdgeCopy(Edge edge, Node source, Node target) {
 		assert (edge != null) && (source != null) && (target != null);
 
 		CollectionAttribute col = (CollectionAttribute) edge.getAttributes()
-		.copy();
+							.copy();
 		Edge newEdge = addEdge(source, target, edge.isDirected(), col);
 		newEdge.setID(edge.getID()); // copied edges share the same edge id
 		newEdge.setViewID(edge.getViewID());
@@ -554,8 +555,9 @@ Graph {
 	 * Adds a Graph g to the current graph. Graph g will be copied and then all
 	 * its nodes and edges will be added to the current graph. Like this g
 	 * will not be destroyed.
-	 *
-	 * @param g the Graph to be added.
+	 * 
+	 * @param g
+	 *           the Graph to be added.
 	 */
 	public Collection<GraphElement> addGraph(Graph g) {
 		assert g != null;
@@ -566,20 +568,21 @@ Graph {
 				// try {
 				addAttribute((Attribute) a.copy(), "");
 				/*
-				} catch(AttributeNotFoundException e) {
-					attributes.getAttribute(a.getId()).setValue(a.getValue());
-				}*/
+				 * } catch(AttributeNotFoundException e) {
+				 * attributes.getAttribute(a.getId()).setValue(a.getValue());
+				 * }
+				 */
 			} catch (AttributeExistsException aee) {
 				Attribute b = getAttribute(a.getPath()); // +Attribute.SEPARATOR+a.getId()
 				b.setValue(a.getValue());
 			}
 		}
 
-		Map<Node,Node> hm = new HashMap<Node,Node>();
+		Map<Node, Node> hm = new HashMap<Node, Node>();
 
 		for (Node oldNode : g.getNodes()) {
 			Node newNode = addNodeCopy(oldNode);
-			if (newNode==null) {
+			if (newNode == null) {
 				ErrorMsg.addErrorMessage("Node is NULL");
 			}
 			hm.put(oldNode, newNode);
@@ -591,14 +594,14 @@ Graph {
 
 			Node source = hm.get(oldEdge.getSource());
 			Node target = hm.get(oldEdge.getTarget());
-			if (source==null || target==null) {
+			if (source == null || target == null) {
 				ErrorMsg.addErrorMessage("Src or Tgt node is NULL");
 			} else {
 				try {
 					Edge newEdge = this.addEdge(source, target, oldEdge.isDirected(), col);
 					newEdge.setViewID(oldEdge.getViewID());
 					newElements.add(newEdge);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					ErrorMsg.addErrorMessage(e);
 				}
 			}
@@ -608,14 +611,13 @@ Graph {
 
 	/**
 	 * Adds a new node to the graph. Informs the ListenerManager about the new
-	 * node.  This method adds a copy of the <code>defaultNodeAttribute</code>
-	 * to the newly created node (after the <code>preNodeAdded</code> event
+	 * node. This method adds a copy of the <code>defaultNodeAttribute</code> to the newly created node (after the <code>preNodeAdded</code> event
 	 * and before the <code>postNodeAdded</code> event).
-	 *
+	 * 
 	 * @return the new node.
 	 */
 	public Node addNode() {
-		//logger.info("adding a new node to the graph");
+		// logger.info("adding a new node to the graph");
 
 		Node node = createNode();
 		GraphEvent ga = new GraphEvent(node);
@@ -630,7 +632,7 @@ Graph {
 
 		listenerManager.postNodeAdded(ga);
 
-		//logger.fine("returning the created node and exiting addNode()");
+		// logger.fine("returning the created node and exiting addNode()");
 
 		return node;
 	}
@@ -639,29 +641,29 @@ Graph {
 	 * Adds a new node to the graph. Informs the ListenerManager about the new
 	 * node. Default node attributes (<code>defaultNodeAttribute</code>) are
 	 * not added by this method.
-	 *
-	 * @param col the <code>CollectionAttribute</code> the node is initialized
-	 *        with.
-	 *
+	 * 
+	 * @param col
+	 *           the <code>CollectionAttribute</code> the node is initialized
+	 *           with.
 	 * @return the new node.
 	 */
 	public Node addNode(CollectionAttribute col) {
 		// assert col != null;
-		if (col==null)
+		if (col == null)
 			col = AttributeHelper.getDefaultGraphicsAttributeForNode(100, 100);
-		//logger.info("adding a new node to the graph");
+		// logger.info("adding a new node to the graph");
 
 		Node node = createNode(col);
 
 		GraphEvent ga = new GraphEvent(node);
 
-		if (listenerManager!=null)
+		if (listenerManager != null)
 			listenerManager.preNodeAdded(ga);
 		doAddNode(node);
-		if (listenerManager!=null)
+		if (listenerManager != null)
 			listenerManager.postNodeAdded(ga);
 
-		//logger.fine("returning the created node and exiting addNode()");
+		// logger.fine("returning the created node and exiting addNode()");
 
 		return node;
 	}
@@ -670,18 +672,17 @@ Graph {
 	 * Adds a copy of the specified node to the graph and returns the copy.
 	 * Informs the ListenerManager about the newly added node in the same way
 	 * as if a completely new node was added. Also informs the ListenerManager
-	 * about the addition of attributes by using the
-	 * <code>add(Attribute)</code> method of <code>CollectionAttribute</code>.
-	 *
-	 * @param node the <code>Node</code> which to copy and to add.
-	 *
+	 * about the addition of attributes by using the <code>add(Attribute)</code> method of <code>CollectionAttribute</code>.
+	 * 
+	 * @param node
+	 *           the <code>Node</code> which to copy and to add.
 	 * @return the newly created node.
 	 */
 	public Node addNodeCopy(Node node) {
 		assert node != null;
 
 		CollectionAttribute col = (CollectionAttribute) node.getAttributes()
-		.copy();
+							.copy();
 		Node newNode = this.addNode(col);
 		newNode.setID(node.getID()); // copied nodes share the same ID
 		newNode.setViewID(node.getViewID());
@@ -692,18 +693,19 @@ Graph {
 	/**
 	 * Returns <code>true</code>, if the graph contains an edge between the
 	 * nodes n1 and n2, <code>false</code> otherwise.
-	 *
-	 * @param n1 first node of the edge to search for.
-	 * @param n2 second node of the edge to search for.
-	 *
+	 * 
+	 * @param n1
+	 *           first node of the edge to search for.
+	 * @param n2
+	 *           second node of the edge to search for.
 	 * @return <code>true</code>, if the graph contains an edge between the
 	 *         nodes n1 and n2 <code>false</code> otherwise.
-	 *
-	 * @exception GraphElementNotFoundException if any of the nodes cannot be
-	 *            found in the graph.
+	 * @exception GraphElementNotFoundException
+	 *               if any of the nodes cannot be
+	 *               found in the graph.
 	 */
 	public boolean areConnected(Node n1, Node n2)
-	throws GraphElementNotFoundException {
+						throws GraphElementNotFoundException {
 		assert (n1 != null) && (n2 != null);
 
 		return getEdges(n1, n2).size() > 0;
@@ -717,21 +719,19 @@ Graph {
 	 */
 	public void clear() {
 		ListenerManager listMan = getListenerManager();
-		if (listMan!=null)
+		if (listMan != null)
 			listMan.preGraphCleared(new GraphEvent(this));
 		doClear();
-		if (listMan!=null)
+		if (listMan != null)
 			listMan.postGraphCleared(new GraphEvent(this));
 	}
 
 	/**
-	 * Returns <code>true</code>, if the graph contains the specified edge,
-	 * <code>false</code> otherwise.
-	 *
-	 * @param e the edge to search for.
-	 *
-	 * @return <code>true</code>, if the graph contains the edge e,
-	 *         <code>false</code> otherwise.
+	 * Returns <code>true</code>, if the graph contains the specified edge, <code>false</code> otherwise.
+	 * 
+	 * @param e
+	 *           the edge to search for.
+	 * @return <code>true</code>, if the graph contains the edge e, <code>false</code> otherwise.
 	 */
 	public boolean containsEdge(Edge e) {
 		assert e != null;
@@ -740,13 +740,11 @@ Graph {
 	}
 
 	/**
-	 * Returns <code>true</code>, if the graph contains the specified node,
-	 * <code>false</code> otherwise.
-	 *
-	 * @param n the node to search for.
-	 *
-	 * @return <code>true</code>, if the graph contains the node n,
-	 *         <code>false</code> otherwise.
+	 * Returns <code>true</code>, if the graph contains the specified node, <code>false</code> otherwise.
+	 * 
+	 * @param n
+	 *           the node to search for.
+	 * @return <code>true</code>, if the graph contains the node n, <code>false</code> otherwise.
 	 */
 	public boolean containsNode(Node n) {
 		assert n != null;
@@ -757,15 +755,16 @@ Graph {
 	/**
 	 * Deletes the given edge from the current graph. Informs the
 	 * ListenerManager about the deletion.
-	 *
-	 * @param e the edge to delete.
-	 *
-	 * @exception GraphElementNotFoundException if the edge to delete cannot be
-	 *            found in the graph.
+	 * 
+	 * @param e
+	 *           the edge to delete.
+	 * @exception GraphElementNotFoundException
+	 *               if the edge to delete cannot be
+	 *               found in the graph.
 	 */
 	public void deleteEdge(Edge e) throws GraphElementNotFoundException {
 		assert e != null;
-		//if (e.getGraph()==null) return;
+		// if (e.getGraph()==null) return;
 
 		if (!getEdges().contains(e)) {
 			return;
@@ -776,10 +775,10 @@ Graph {
 		ListenerManager listMan = this.getListenerManager();
 		GraphEvent ga = new GraphEvent(e);
 
-		if (listMan!=null)
+		if (listMan != null)
 			listMan.preEdgeRemoved(ga);
 		doDeleteEdge(e);
-		if (listMan!=null)
+		if (listMan != null)
 			listMan.postEdgeRemoved(ga);
 	}
 
@@ -788,31 +787,34 @@ Graph {
 	 * deleted using <code>deleteEdge()</code> and thereby informs the
 	 * ListenerManager implicitly. Then deletes the node and informs the
 	 * ListenerManager about the deletion.
-	 *
-	 * @param n the node to delete.
-	 *
-	 * @exception GraphElementNotFoundException if the node to delete cannot be
-	 *            found in the graph.
+	 * 
+	 * @param n
+	 *           the node to delete.
+	 * @exception GraphElementNotFoundException
+	 *               if the node to delete cannot be
+	 *               found in the graph.
 	 */
 	public void deleteNode(Node n) throws GraphElementNotFoundException {
 		assert n != null;
 		assert n.getGraph() != null;
 		if (n.getGraph() != this) {
 			ErrorMsg.addErrorMessage("the node was not found in this graph");
-			/*throw new GraphElementNotFoundException(
-			 "the node was not found in this graph");*/
+			/*
+			 * throw new GraphElementNotFoundException(
+			 * "the node was not found in this graph");
+			 */
 			return;
 		}
 
-		//logger.info("deleting a node from the graph");
+		// logger.info("deleting a node from the graph");
 
 		ListenerManager listMan = this.getListenerManager();
 		GraphEvent ga = new GraphEvent(n);
 
-		if (listMan!=null)
+		if (listMan != null)
 			listMan.preNodeRemoved(ga);
 		doDeleteNode(n);
-		if (listMan!=null)
+		if (listMan != null)
 			listMan.postNodeRemoved(ga);
 		n = null;
 	}
@@ -820,9 +822,9 @@ Graph {
 	/**
 	 * Returns <code>true</code>, if the given attribute consumer was in the
 	 * list of attribute consumers and could be removed.
-	 *
-	 * @param attConsumer DOCUMENT ME!
-	 *
+	 * 
+	 * @param attConsumer
+	 *           DOCUMENT ME!
 	 * @return <code>true</code>, if the given attribute consumer was in the
 	 *         list of attribute consumers and could be removed.
 	 */
@@ -832,44 +834,48 @@ Graph {
 
 	/**
 	 * Adds a new edge to the current graph.
-	 *
-	 * @param source the source of the edge to add.
-	 * @param target the target of the edge to add.
-	 * @param directed <code>true</code> if the edge shall be directed,
-	 *        <code>false</code> otherwise.
-	 *
+	 * 
+	 * @param source
+	 *           the source of the edge to add.
+	 * @param target
+	 *           the target of the edge to add.
+	 * @param directed
+	 *           <code>true</code> if the edge shall be directed, <code>false</code> otherwise.
 	 * @return the new edge.
-	 *
-	 * @exception GraphElementNotFoundException if any of the nodes cannot be
-	 *            found in the graph.
+	 * @exception GraphElementNotFoundException
+	 *               if any of the nodes cannot be
+	 *               found in the graph.
 	 */
 	protected abstract Edge doAddEdge(Node source, Node target, boolean directed)
-	throws GraphElementNotFoundException;
+						throws GraphElementNotFoundException;
 
 	/**
 	 * Adds a new edge to the current graph. Informs the ListenerManager about
 	 * the new node.
-	 *
-	 * @param source the source of the edge to add.
-	 * @param target the target of the edge to add.
-	 * @param directed <code>true</code> if the edge shall be directed,
-	 *        <code>false</code> otherwise.
-	 * @param col the <code>CollectionAttribute</code> with which the edge is
-	 *        initialized.
-	 *
+	 * 
+	 * @param source
+	 *           the source of the edge to add.
+	 * @param target
+	 *           the target of the edge to add.
+	 * @param directed
+	 *           <code>true</code> if the edge shall be directed, <code>false</code> otherwise.
+	 * @param col
+	 *           the <code>CollectionAttribute</code> with which the edge is
+	 *           initialized.
 	 * @return the new edge.
-	 *
-	 * @exception GraphElementNotFoundException if any of the nodes cannot be
-	 *            found in the graph.
+	 * @exception GraphElementNotFoundException
+	 *               if any of the nodes cannot be
+	 *               found in the graph.
 	 */
 	protected abstract Edge doAddEdge(Node source, Node target,
-			boolean directed, CollectionAttribute col)
-	throws GraphElementNotFoundException;
+						boolean directed, CollectionAttribute col)
+						throws GraphElementNotFoundException;
 
 	/**
 	 * Adds the node to the graph.
-	 *
-	 * @param node the node to add
+	 * 
+	 * @param node
+	 *           the node to add
 	 */
 	protected abstract void doAddNode(Node node);
 
@@ -882,47 +888,49 @@ Graph {
 
 	/**
 	 * Deletes the given edge from the current graph.
-	 *
-	 * @param e the edge to delete.
-	 *
-	 * @exception GraphElementNotFoundException if the edge to delete cannot be
-	 *            found in the graph.
+	 * 
+	 * @param e
+	 *           the edge to delete.
+	 * @exception GraphElementNotFoundException
+	 *               if the edge to delete cannot be
+	 *               found in the graph.
 	 */
 	protected abstract void doDeleteEdge(Edge e)
-	throws GraphElementNotFoundException;
+						throws GraphElementNotFoundException;
 
 	/**
 	 * Deletes the given node. First all in- and out-going edges will be
 	 * deleted using <code>deleteEdge()</code> and thereby informs the
 	 * ListenerManager implicitly.
-	 *
-	 * @param n the node to delete.
-	 *
-	 * @exception GraphElementNotFoundException if the node to delete cannot be
-	 *            found in the graph.
+	 * 
+	 * @param n
+	 *           the node to delete.
+	 * @exception GraphElementNotFoundException
+	 *               if the node to delete cannot be
+	 *               found in the graph.
 	 */
 	protected abstract void doDeleteNode(Node n)
-	throws GraphElementNotFoundException;
+						throws GraphElementNotFoundException;
 
 	/**
 	 * Creates a new <code>Node</code>.
-	 *
+	 * 
 	 * @return the newly created node.
 	 */
 	abstract Node createNode();
 
 	/**
-	 * Creates a new <code>Node</code> that is initialize with the given
-	 * <code>CollectionAttribute</code>.
-	 *
+	 * Creates a new <code>Node</code> that is initialize with the given <code>CollectionAttribute</code>.
+	 * 
 	 * @return the newly created node.
 	 */
 	abstract Node createNode(CollectionAttribute col);
 
 	/**
 	 * Tries to add the given attribute to every edge in this graph.
-	 *
-	 * @param att the attribute to add to every edge.
+	 * 
+	 * @param att
+	 *           the attribute to add to every edge.
 	 */
 	private void addAttributeToExistingEdges(CollectionAttribute att) {
 		if (att == null) {
@@ -942,8 +950,9 @@ Graph {
 
 	/**
 	 * Tries to add the given attribute to every node in this graph.
-	 *
-	 * @param att the attribute to add to every node.
+	 * 
+	 * @param att
+	 *           the attribute to add to every node.
 	 */
 	private void addAttributeToExistingNodes(CollectionAttribute att) {
 		if (att == null) {
@@ -963,13 +972,14 @@ Graph {
 
 	/**
 	 * Unifies a given collection attribute with the default edge attribute.
-	 *
-	 * @param c the new collection attribute to add.
-	 *
-	 * @throws UnificationException DOCUMENT ME!
+	 * 
+	 * @param c
+	 *           the new collection attribute to add.
+	 * @throws UnificationException
+	 *            DOCUMENT ME!
 	 */
 	private void unifyWithEdgeAttribute(CollectionAttribute c)
-	throws UnificationException {
+						throws UnificationException {
 		if (c == null) { // base case
 
 			return;
@@ -986,49 +996,51 @@ Graph {
 				String attClazName = defaultEdgeAttribute.getClass().getName();
 
 				if (defaultEdgeAttribute instanceof HashMapAttribute) {
-					//                if (attClazName
-					//                    .equals("org.graffiti.attributes.HashMapAttribute")) {
+					// if (attClazName
+					// .equals("org.graffiti.attributes.HashMapAttribute")) {
 					for (Iterator<String> i = c.getCollection().keySet().iterator(); i
-					.hasNext();) {
+										.hasNext();) {
 						String id = i.next();
 
 						try {
 							defaultEdgeAttribute.add((Attribute) c.getAttribute(id)
-									.copy());
+												.copy());
 						} catch (AttributeExistsException aee) {
 							// ErrorMsg.addErrorMessage(aee.getLocalizedMessage());
 						}
 					}
-				} else if (defaultEdgeAttribute instanceof HashMapAttribute) {
-					//                    c.getClass().getName().equals(
-					//                        "org.graffiti.attributes.HashMapAttribute")) {
-					CollectionAttribute tmp = (CollectionAttribute) c.copy();
+				} else
+					if (defaultEdgeAttribute instanceof HashMapAttribute) {
+						// c.getClass().getName().equals(
+						// "org.graffiti.attributes.HashMapAttribute")) {
+						CollectionAttribute tmp = (CollectionAttribute) c.copy();
 
-					for (Iterator<String> i = defaultEdgeAttribute.getCollection().keySet()
-							.iterator(); i.hasNext();) {
-						String id = i.next();
+						for (Iterator<String> i = defaultEdgeAttribute.getCollection().keySet()
+											.iterator(); i.hasNext();) {
+							String id = i.next();
 
-						try {
-							tmp.add((Attribute) defaultEdgeAttribute.getAttribute(id)
-									.copy());
-						} catch (AttributeExistsException aee) {
-							// ErrorMsg.addErrorMessage(aee.getLocalizedMessage());
+							try {
+								tmp.add((Attribute) defaultEdgeAttribute.getAttribute(id)
+													.copy());
+							} catch (AttributeExistsException aee) {
+								// ErrorMsg.addErrorMessage(aee.getLocalizedMessage());
+							}
 						}
-					}
 
-					defaultEdgeAttribute = tmp;
-				} else {
-					throw new UnificationException("Cannot unify " + attClazName
-							+ " and " + c.getClass().getName());
-				}
+						defaultEdgeAttribute = tmp;
+					} else {
+						throw new UnificationException("Cannot unify " + attClazName
+											+ " and " + c.getClass().getName());
+					}
 			}
 		}
 	}
 
 	/**
 	 * Unifies a given collection attribute with the default node attribute.
-	 *
-	 * @param c the new collection attribute to add.
+	 * 
+	 * @param c
+	 *           the new collection attribute to add.
 	 */
 	private void unifyWithNodeAttribute(CollectionAttribute c) {
 		if (c == null) { // base case
@@ -1044,54 +1056,55 @@ Graph {
 				// current attribute hierarchy
 				// and add the given collection attributes sub attributes to the
 				// default attribute
-				//                String attClazName = defaultNodeAttribute.getClass().getName();
+				// String attClazName = defaultNodeAttribute.getClass().getName();
 				//
-				//                if(attClazName.equals(
-				//                        "org.graffiti.attributes.HashMapAttribute"))
-				//                if(defaultNodeAttribute instanceof CollectionAttribute)
+				// if(attClazName.equals(
+				// "org.graffiti.attributes.HashMapAttribute"))
+				// if(defaultNodeAttribute instanceof CollectionAttribute)
 				{
 					for (Iterator<String> i = c.getCollection().keySet().iterator(); i
-					.hasNext();) {
+										.hasNext();) {
 						String id = i.next();
 
 						try {
 							defaultNodeAttribute.add((Attribute) c.getAttribute(id)
-									.copy());
+												.copy());
 						} catch (AttributeExistsException aee) {
 						}
 					}
 				}
 
-				//                //                else if(c.getClass().getName().equals("org.graffiti.attributes.HashMapAttribute"))
-				//                else if(c instanceof CollectionAttribute)
+				// // else if(c.getClass().getName().equals("org.graffiti.attributes.HashMapAttribute"))
+				// else if(c instanceof CollectionAttribute)
 				{
 					CollectionAttribute tmp = (CollectionAttribute) c.copy();
 
 					for (Iterator<String> i = defaultNodeAttribute.getCollection().keySet()
-							.iterator(); i.hasNext();) {
+										.iterator(); i.hasNext();) {
 						String id = i.next();
 
 						try {
 							tmp.add((Attribute) defaultNodeAttribute.getAttribute(id)
-									.copy());
+												.copy());
 						} catch (AttributeExistsException aee) {
 						}
 					}
 
 					defaultNodeAttribute = tmp;
 				}
-				/*                else
-				 {
-				 throw new UnificationException("Cannot unify " +
-				 defaultNodeAttribute.getClass().getName() + " and " +
-				 c.getClass().getName());
-				 }
+				/*
+				 * else
+				 * {
+				 * throw new UnificationException("Cannot unify " +
+				 * defaultNodeAttribute.getClass().getName() + " and " +
+				 * c.getClass().getName());
+				 * }
 				 */
 			}
 		}
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

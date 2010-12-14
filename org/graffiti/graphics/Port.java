@@ -1,20 +1,19 @@
-//==============================================================================
+// ==============================================================================
 //
-//   Port.java
+// Port.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: Port.java,v 1.4 2010/07/19 13:00:57 morla Exp $
+// ==============================================================================
+// $Id: Port.java,v 1.5 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.graphics;
 
 /**
  * A port comprises a name and a coordinate.
  */
-public class Port
-{
-	//~ Instance fields ========================================================
+public class Port {
+	// ~ Instance fields ========================================================
 
 	/** DOCUMENT ME! */
 	private String name;
@@ -25,81 +24,78 @@ public class Port
 	/** DOCUMENT ME! */
 	private double y;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructor for Port.
-	 *
-	 * @param name DOCUMENT ME!
-	 * @param x DOCUMENT ME!
-	 * @param y DOCUMENT ME!
+	 * 
+	 * @param name
+	 *           DOCUMENT ME!
+	 * @param x
+	 *           DOCUMENT ME!
+	 * @param y
+	 *           DOCUMENT ME!
 	 */
-	public Port(String name, double x, double y)
-	{
+	public Port(String name, double x, double y) {
 		this.name = name;
 		this.x = x;
 		this.y = y;
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets the name.
-	 *
-	 * @param name The name to set
+	 * 
+	 * @param name
+	 *           The name to set
 	 */
-	public void setName(String name)
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
 	 * Returns the name.
-	 *
+	 * 
 	 * @return String
 	 */
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
 	/**
 	 * Sets the x coordinate of this port.
-	 *
+	 * 
 	 * @param x
 	 */
-	public void setX(double x)
-	{
+	public void setX(double x) {
 		this.x = x;
 	}
 
 	/**
 	 * Returns the x ccordinate of this port.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getX()
-	{
+	public double getX() {
 		return x;
 	}
 
 	/**
 	 * Sets the y ccordinate of this port.
-	 *
+	 * 
 	 * @param y
 	 */
-	public void setY(double y)
-	{
+	public void setY(double y) {
 		this.y = y;
 	}
 
 	/**
 	 * Returns the y ccordinate of this port.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getY()
-	{
+	public double getY() {
 		return y;
 	}
 
@@ -107,15 +103,12 @@ public class Port
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj)
-	{
-		if(this == obj)
-		{
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
 		}
 
-		if(!(obj instanceof Port))
-		{
+		if (!(obj instanceof Port)) {
 			return false;
 		}
 
@@ -125,6 +118,6 @@ public class Port
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

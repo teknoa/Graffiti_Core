@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2010 Image Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2010 Image Analysis Group, IPK Gatersleben
  *******************************************************************************/
 /*
  * Created on Sep 6, 2010 by Christian Klukas
@@ -12,7 +10,6 @@ import java.io.ByteArrayInputStream;
 
 /**
  * @author klukas
- * 
  */
 public class MyByteArrayInputStream extends ByteArrayInputStream {
 

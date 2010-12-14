@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   PluginSelector.java
+// PluginSelector.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: PluginSelector.java,v 1.5 2010/07/19 13:01:31 morla Exp $
+// ==============================================================================
+// $Id: PluginSelector.java,v 1.6 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -43,15 +43,14 @@ import org.graffiti.core.StringBundle;
 /**
  * Represents a plugin selector. A simple dialog to pick the name of a plugin.
  * The dialog filters already loaded plugins from the list of plugins.
- *
- * @version $Revision: 1.5 $
+ * 
+ * @version $Revision: 1.6 $
  */
 public class PluginSelector
-extends JDialog
-implements ActionListener, MouseListener, ListSelectionListener,
-WindowListener
-{
-	//~ Static fields/initializers =============================================
+					extends JDialog
+					implements ActionListener, MouseListener, ListSelectionListener,
+					WindowListener {
+	// ~ Static fields/initializers =============================================
 
 	/**
 	 * 
@@ -60,7 +59,7 @@ WindowListener
 
 	/** The logger for the current class. */
 
-	//~ Instance fields ========================================================
+	// ~ Instance fields ========================================================
 
 	/** The <code>ImageBundle</code> of the plugin selector. */
 	protected ImageBundle iBundle = ImageBundle.getInstance();
@@ -86,49 +85,45 @@ WindowListener
 	/** The plugin description of the selected item. */
 	private Object[] selectedItems;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new plugin selector from the given plugin description
 	 * collector.
-	 *
-	 * @param parent the parent dialog.
-	 * @param pluginDescriptionCollector the collector of plugin descriptions.
+	 * 
+	 * @param parent
+	 *           the parent dialog.
+	 * @param pluginDescriptionCollector
+	 *           the collector of plugin descriptions.
 	 */
 	@SuppressWarnings("unchecked")
 	public PluginSelector(PluginManagerDialog parent,
-			PluginDescriptionCollector pluginDescriptionCollector)
-	{
+						PluginDescriptionCollector pluginDescriptionCollector) {
 		super(parent, true);
 
-		//		setSize(420, 320);
+		// setSize(420, 320);
 		setResizable(true);
 
 		setTitle(sBundle.getString("selector.title"));
 
 		List plugins = null;
 
-		try
-		{
+		try {
 			parent.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			plugins = createPluginDescriptionList(pluginDescriptionCollector);
-		}
-		finally
-		{
+		} finally {
 			parent.setCursor(Cursor.getDefaultCursor());
 		}
 
 		// display only plugins, which are not loaded yet
 		List filteredPlugins = new LinkedList();
 
-		for(Iterator i = plugins.iterator(); i.hasNext();)
-		{
+		for (Iterator i = plugins.iterator(); i.hasNext();) {
 			PluginEntry e = (PluginEntry) i.next();
 
 			String name = e.getDescription().getName();
 
-			if(!parent.getPluginManager().isInstalled(name))
-			{
+			if (!parent.getPluginManager().isInstalled(name)) {
 				filteredPlugins.add(e);
 			}
 		}
@@ -159,35 +154,31 @@ WindowListener
 		setLocationRelativeTo(parent);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns true, if the list is empty.
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
-	public boolean isEmpty()
-	{
+	public boolean isEmpty() {
 		return list.getModel().getSize() == 0;
 	}
 
 	/**
 	 * Returns the selected plugin entries.
-	 *
+	 * 
 	 * @see PluginEntry
 	 */
-	public PluginEntry[] getSelectedItems()
-	{
-		if((selectedItems == null) || (selectedItems.length == 0))
-		{
+	public PluginEntry[] getSelectedItems() {
+		if ((selectedItems == null) || (selectedItems.length == 0)) {
 			return null;
 		}
 
 		// FIXME is there a better way of implementing this?
 		PluginEntry[] e = new PluginEntry[selectedItems.length];
 
-		for(int i = 0; i < selectedItems.length; i++)
-		{
+		for (int i = 0; i < selectedItems.length; i++) {
 			e[i] = (PluginEntry) selectedItems[i];
 		}
 
@@ -197,37 +188,32 @@ WindowListener
 	/**
 	 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
 	 */
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 
-		if(src == cancel)
-		{
+		if (src == cancel) {
 			dispose();
-		}
-		else if(src == ok)
-		{
-			okSelected();
-		}
+		} else
+			if (src == ok) {
+				okSelected();
+			}
 	}
 
 	/**
 	 * Updates the ok button.
-	 *
-	 * @param e DOCUMENT ME!
+	 * 
+	 * @param e
+	 *           DOCUMENT ME!
 	 */
-	public void checkEnableOK(ListSelectionEvent e)
-	{
+	public void checkEnableOK(ListSelectionEvent e) {
 		ok.setEnabled(list.getSelectedIndex() != -1);
 	}
 
 	/**
 	 * @see java.awt.event.MouseListener#mouseClicked(MouseEvent)
 	 */
-	public void mouseClicked(MouseEvent e)
-	{
-		if(e.getClickCount() == 2)
-		{
+	public void mouseClicked(MouseEvent e) {
+		if (e.getClickCount() == 2) {
 			okSelected();
 		}
 	}
@@ -235,40 +221,35 @@ WindowListener
 	/**
 	 * @see java.awt.event.MouseListener#mouseEntered(MouseEvent)
 	 */
-	public void mouseEntered(MouseEvent e)
-	{
+	public void mouseEntered(MouseEvent e) {
 		// do nothing
 	}
 
 	/**
 	 * @see java.awt.event.MouseListener#mouseExited(MouseEvent)
 	 */
-	public void mouseExited(MouseEvent e)
-	{
+	public void mouseExited(MouseEvent e) {
 		// do nothing
 	}
 
 	/**
 	 * @see java.awt.event.MouseListener#mousePressed(MouseEvent)
 	 */
-	public void mousePressed(MouseEvent e)
-	{
+	public void mousePressed(MouseEvent e) {
 		// do nothing
 	}
 
 	/**
 	 * @see java.awt.event.MouseListener#mouseReleased(MouseEvent)
 	 */
-	public void mouseReleased(MouseEvent e)
-	{
+	public void mouseReleased(MouseEvent e) {
 		// do nothing
 	}
 
 	/**
 	 * Called, if ok is selected.
 	 */
-	public void okSelected()
-	{
+	public void okSelected() {
 		selectedItems = list.getSelectedValues();
 
 		dispose();
@@ -277,72 +258,63 @@ WindowListener
 	/**
 	 * @see javax.swing.event.ListSelectionListener#valueChanged(ListSelectionEvent)
 	 */
-	public void valueChanged(ListSelectionEvent e)
-	{
+	public void valueChanged(ListSelectionEvent e) {
 		checkEnableOK(e);
 	}
 
 	/**
 	 * @see java.awt.event.WindowListener#windowActivated(WindowEvent)
 	 */
-	public void windowActivated(WindowEvent arg0)
-	{
+	public void windowActivated(WindowEvent arg0) {
 		// do nothing
 	}
 
 	/**
 	 * @see java.awt.event.WindowListener#windowClosed(WindowEvent)
 	 */
-	public void windowClosed(WindowEvent arg0)
-	{
+	public void windowClosed(WindowEvent arg0) {
 		// do nothing
 	}
 
 	/**
 	 * @see java.awt.event.WindowListener#windowClosing(WindowEvent)
 	 */
-	public void windowClosing(WindowEvent arg0)
-	{
+	public void windowClosing(WindowEvent arg0) {
 		dispose();
 	}
 
 	/**
 	 * @see java.awt.event.WindowListener#windowDeactivated(WindowEvent)
 	 */
-	public void windowDeactivated(WindowEvent arg0)
-	{
+	public void windowDeactivated(WindowEvent arg0) {
 		// do nothing
 	}
 
 	/**
 	 * @see java.awt.event.WindowListener#windowDeiconified(WindowEvent)
 	 */
-	public void windowDeiconified(WindowEvent arg0)
-	{
+	public void windowDeiconified(WindowEvent arg0) {
 		// do nothing
 	}
 
 	/**
 	 * @see java.awt.event.WindowListener#windowIconified(WindowEvent)
 	 */
-	public void windowIconified(WindowEvent arg0)
-	{
+	public void windowIconified(WindowEvent arg0) {
 		// do nothing
 	}
 
 	/**
 	 * @see java.awt.event.WindowListener#windowOpened(WindowEvent)
 	 */
-	public void windowOpened(WindowEvent arg0)
-	{
+	public void windowOpened(WindowEvent arg0) {
 		// do nothing
 	}
 
 	/**
 	 * Adds the listeners to the dialog.
 	 */
-	private void addListeners()
-	{
+	private void addListeners() {
 		cancel.addActionListener(this);
 		ok.addActionListener(this);
 		list.addMouseListener(this);
@@ -352,20 +324,18 @@ WindowListener
 
 	/**
 	 * Generates and returns the plugin description list.
-	 *
+	 * 
 	 * @see PluginEntry
 	 */
 	private List<?> createPluginDescriptionList(
-			PluginDescriptionCollector collector)
-			{
+						PluginDescriptionCollector collector) {
 		return collector.collectPluginDescriptions();
-			}
+	}
 
 	/**
 	 * Defines the layout of this dialog.
 	 */
-	private void defineLayout()
-	{
+	private void defineLayout() {
 		getContentPane().setLayout(new GridBagLayout());
 
 		GridBagConstraints labelConstraints = new GridBagConstraints();
@@ -411,14 +381,13 @@ WindowListener
 		getContentPane().add(cancel, cancelConstraints);
 	}
 
-	//~ Inner Classes ==========================================================
+	// ~ Inner Classes ==========================================================
 
 	/**
 	 * Renders the plugin description in a <code>JList</code>.
 	 */
 	static class PluginDescriptionCellRenderer
-	extends DefaultListCellRenderer
-	{
+						extends DefaultListCellRenderer {
 		/**
 		 * 
 		 */
@@ -427,27 +396,29 @@ WindowListener
 		/**
 		 * Constructs a new plugin description cell renderer.
 		 */
-		public PluginDescriptionCellRenderer()
-		{
+		public PluginDescriptionCellRenderer() {
 		}
 
 		/**
 		 * Returns the component at the given index in the list.
-		 *
-		 * @param list DOCUMENT ME!
-		 * @param value DOCUMENT ME!
-		 * @param modelIndex DOCUMENT ME!
-		 * @param isSelected DOCUMENT ME!
-		 * @param cellHasFocus DOCUMENT ME!
-		 *
+		 * 
+		 * @param list
+		 *           DOCUMENT ME!
+		 * @param value
+		 *           DOCUMENT ME!
+		 * @param modelIndex
+		 *           DOCUMENT ME!
+		 * @param isSelected
+		 *           DOCUMENT ME!
+		 * @param cellHasFocus
+		 *           DOCUMENT ME!
 		 * @return DOCUMENT ME!
 		 */
 		@Override
 		public Component getListCellRendererComponent(JList list, Object value,
-				int modelIndex, boolean isSelected, boolean cellHasFocus)
-		{
+							int modelIndex, boolean isSelected, boolean cellHasFocus) {
 			Component c = super.getListCellRendererComponent(list, value,
-					modelIndex, isSelected, cellHasFocus);
+								modelIndex, isSelected, cellHasFocus);
 
 			PluginEntry e = (PluginEntry) value;
 
@@ -461,84 +432,73 @@ WindowListener
 
 		/**
 		 * DOCUMENT ME!
-		 *
-		 * @param d DOCUMENT ME!
-		 *
+		 * 
+		 * @param d
+		 *           DOCUMENT ME!
 		 * @return DOCUMENT ME!
 		 */
-		public static String displayString(PluginDescription d)
-		{
+		public static String displayString(PluginDescription d) {
 			return d.getName(); // + " - " + d.getMain();
 
-			//			return d.getName() + "  (" + d.getVersion() + ")";
+			// return d.getName() + "  (" + d.getVersion() + ")";
 		}
 
 		/**
 		 * DOCUMENT ME!
-		 *
-		 * @param e DOCUMENT ME!
-		 *
+		 * 
+		 * @param e
+		 *           DOCUMENT ME!
 		 * @return DOCUMENT ME!
 		 */
-		public static String displayToolTip(PluginEntry e)
-		{
+		public static String displayToolTip(PluginEntry e) {
 			PluginDescription d = e.getDescription();
 
 			return "<html>Version:     " + d.getVersion() +
-			"<br>Description: " + d.getDescription() + "<br>Available:   " +
-			d.getAvailable() + "<br>Main class:  " + d.getMain() +
-			"<br>Author:      " + d.getAuthor() + "<br><br>" + "Loaded from: " +
-			e.getFileName() + "</html>";
+								"<br>Description: " + d.getDescription() + "<br>Available:   " +
+								d.getAvailable() + "<br>Main class:  " + d.getMain() +
+								"<br>Author:      " + d.getAuthor() + "<br><br>" + "Loaded from: " +
+								e.getFileName() + "</html>";
 		}
 	}
 
 	/**
 	 * DOCUMENT ME!
-	 *
+	 * 
 	 * @author $Author: morla $
-	 * @version $Revision: 1.5 $ $Date: 2010/07/19 13:01:31 $
+	 * @version $Revision: 1.6 $ $Date: 2010/12/14 07:02:25 $
 	 */
 	class EntryComparator
-	implements Comparator<Object>
-	{
+						implements Comparator<Object> {
 		/**
 		 * Compares to entries via <code>getDescription().getName()</code>. A
 		 * String starting with an underscore ("_") precedes all other
 		 * strings.
-		 *
+		 * 
 		 * @see java.util.Comparator#compare(Object, Object)
 		 */
-		public int compare(Object o1, Object o2)
-		{
+		public int compare(Object o1, Object o2) {
 			String s1 = ((PluginEntry) o1).getDescription().getName();
 			String s2 = ((PluginEntry) o2).getDescription().getName();
 
-			if(s1.startsWith("_"))
-			{
-				if(s2.startsWith("_"))
-				{
+			if (s1.startsWith("_")) {
+				if (s2.startsWith("_")) {
 					return s1.substring(1).compareTo(s2.substring(1));
-				}
-				else
-				{
+				} else {
 					return -1;
 				}
-			}
-			else if(s2.startsWith("_"))
-			{
-				return +1;
-			}
-			else
-			{
-				return s1.compareTo(s2);
-			}
+			} else
+				if (s2.startsWith("_")) {
+					return +1;
+				} else {
+					return s1.compareTo(s2);
+				}
 
-			//            return ((Entry)o1).getDescription().getName().compareTo(
-			//				((Entry)o2).getDescription().getName());
+			// return ((Entry)o1).getDescription().getName().compareTo(
+			// ((Entry)o2).getDescription().getName());
 		}
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

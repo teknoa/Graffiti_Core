@@ -1,8 +1,5 @@
 /*******************************************************************************
- * 
- * 
  * Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
- * 
  *******************************************************************************/
 
 package org;
@@ -78,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.114 $
+ * @version $Revision: 1.115 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -329,21 +326,16 @@ public class AttributeHelper implements HelperClass {
 	 * deletion
 	 * of an attribute (not necessarily the clicked one):
 	 * <p>
-	 * 
 	 * attributePath:
 	 * <ul>
 	 * <li>".mapping.measurementdata" -> this attribute will be clickable</li>
-	 * <li>".mapping." -> this attribute and all child attributes will be
-	 * clickable</li>
+	 * <li>".mapping." -> this attribute and all child attributes will be clickable</li>
 	 * </ul>
 	 * pathToBeDeleted:
 	 * <ul>
-	 * <li>"mapping" -> attribute ".mapping" (and all child attributes) will be
-	 * deleted</li>
-	 * <li>"graphics.component" -> attribute ".graphics.component" (and all child
-	 * attributes) will be deleted, but not any other ".graphics." attributes</li>
-	 * <li>"mapping$charting" -> attributes ".mapping", ".charting" and all child
-	 * attributes will be deleted. "$" may be used more than once</li>
+	 * <li>"mapping" -> attribute ".mapping" (and all child attributes) will be deleted</li>
+	 * <li>"graphics.component" -> attribute ".graphics.component" (and all child attributes) will be deleted, but not any other ".graphics." attributes</li>
+	 * <li>"mapping$charting" -> attributes ".mapping", ".charting" and all child attributes will be deleted. "$" may be used more than once</li>
 	 * </ul>
 	 * 
 	 * @param attributePath
@@ -911,7 +903,6 @@ public class AttributeHelper implements HelperClass {
 	 *           The node to work with
 	 * @param defaultReturn
 	 *           The standard return value if no label is set
-	 * 
 	 * @return The actual label or the <code>labelDefaul</code> value, if the
 	 *         label-attribute is not set.
 	 */
@@ -983,7 +974,6 @@ public class AttributeHelper implements HelperClass {
 	 *           The node to work with
 	 * @param attributeName
 	 *           The name of the attribute to be checked
-	 * 
 	 * @return True, if the attribute is available for the node <code>n</code>.
 	 *         False, if the attribute is not available.
 	 */
@@ -1078,7 +1068,6 @@ public class AttributeHelper implements HelperClass {
 	 * 
 	 * @param a
 	 *           Node to be analyzed.
-	 * 
 	 * @return X position of node.
 	 */
 	public static double getPositionX(Node a) {
@@ -1092,7 +1081,6 @@ public class AttributeHelper implements HelperClass {
 	 * 
 	 * @param a
 	 *           The node to be analyzed.
-	 * 
 	 * @return The position of the Node (a<code>Point2D</code> structure)
 	 */
 	public static Point2D getPosition(Node a) {
@@ -1110,7 +1098,6 @@ public class AttributeHelper implements HelperClass {
 	 * 
 	 * @param a
 	 *           The node to be analyzed.
-	 * 
 	 * @return The position of the Node (a<code>Vector2d</code> structure)
 	 */
 	public static Vector2d getPositionVec2d(Node a) {
@@ -1128,7 +1115,6 @@ public class AttributeHelper implements HelperClass {
 	 * 
 	 * @param a
 	 *           The node to be analyzed.
-	 * 
 	 * @return The position of the Node (a<code>Vector2df</code> structure)
 	 */
 	public static Vector2df getPositionVec2df(Node a) {
@@ -1146,7 +1132,6 @@ public class AttributeHelper implements HelperClass {
 	 * 
 	 * @param a
 	 *           Node to be analysed.
-	 * 
 	 * @return Y position of node.
 	 */
 	public static double getPositionY(Node a) {
@@ -1159,7 +1144,6 @@ public class AttributeHelper implements HelperClass {
 	 * Gets the size of the Node.
 	 * 
 	 * @param myNode
-	 * 
 	 * @return Tehe size as a <code>Vector2d</code> structure.
 	 */
 	public static Vector2d getSize(Node myNode) {
@@ -1258,7 +1242,6 @@ public class AttributeHelper implements HelperClass {
 	 *           - the Attributable (Node, Edge, ...) to set the color
 	 * @param color
 	 *           - the color to set
-	 * 
 	 * @see #getFillColor(Attributable)
 	 * @see #setOutlineColor(Attributable, Color)
 	 * @see #getOutlineColor(Attributable)
@@ -1279,7 +1262,6 @@ public class AttributeHelper implements HelperClass {
 	 * 
 	 * @param attributable
 	 *           - the Attributable (Node, Edge, ...) to get the color from
-	 * 
 	 * @see #setFillColor(Attributable, Color)
 	 * @see #setOutlineColor(Attributable, Color)
 	 * @see #getOutlineColor(Attributable)
@@ -1302,7 +1284,6 @@ public class AttributeHelper implements HelperClass {
 	 *           - the Attributable (Node, Edge, ...) to set the color
 	 * @param color
 	 *           - the color to set
-	 * 
 	 * @see #getOutlineColor(Attributable)
 	 * @see #setFillColor(Attributable, Color)
 	 * @see #getFillColor(Attributable)
@@ -1330,7 +1311,6 @@ public class AttributeHelper implements HelperClass {
 	 * 
 	 * @param attributable
 	 *           - the Attributable (Node, Edge, ...) to get the color from
-	 * 
 	 * @see #setOutlineColor(Attributable, Color)
 	 * @see #setFillColor(Attributable, Color)
 	 * @see #getFillColor(Attributable)
@@ -1353,8 +1333,7 @@ public class AttributeHelper implements HelperClass {
 	}
 
 	/**
-	 * SetAttribute, sets or adds a attribute to the given
-	 * <code>Attributeable</code>. If the <code>attributeValue</code> is from a
+	 * SetAttribute, sets or adds a attribute to the given <code>Attributeable</code>. If the <code>attributeValue</code> is from a
 	 * known type (Boolean, Byte, Double, Float, Integer, Long, Short or String)
 	 * the attribute values are set with "standard attributes". If it has a
 	 * unknown type a <code>ObjectAttribute</code> is added or set. These
@@ -1742,7 +1721,6 @@ public class AttributeHelper implements HelperClass {
 	 * Gets the size of the Node.
 	 * 
 	 * @param myNode
-	 * 
 	 * @return Tehe size as a <code>Vector2d</code> structure.
 	 */
 	public static Dimension getSizeD(Node myNode) {
@@ -3194,9 +3172,7 @@ public class AttributeHelper implements HelperClass {
 	}
 
 	/**
-	 * @deprecated Use
-	 *             {@link StringManipulationTools#getStringList(ArrayList,String)}
-	 *             instead
+	 * @deprecated Use {@link StringManipulationTools#getStringList(ArrayList,String)} instead
 	 */
 	@Deprecated
 	@SuppressWarnings("unchecked")

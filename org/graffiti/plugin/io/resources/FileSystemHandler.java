@@ -24,7 +24,7 @@ public class FileSystemHandler extends AbstractResourceIOHandler {
 	}
 
 	public static File getFile(IOurl url) {
-		return new File(url.getDetail() +IOurl.SEPERATOR+ url.getFileName());
+		return new File(url.getDetail() + IOurl.SEPERATOR + url.getFileName());
 	}
 
 	public static boolean isFileUrl(IOurl url) {
@@ -33,7 +33,7 @@ public class FileSystemHandler extends AbstractResourceIOHandler {
 
 	@Override
 	public IOurl copyDataAndReplaceURLPrefix(InputStream is, String targetFilename, ResourceIOConfigObject config)
-	throws Exception {
+						throws Exception {
 		IOurl newurl = new IOurl(getPrefix(), ((FileSystemIOConfig) config).getFileDir(), targetFilename);
 		HomeFolder.copyFile(is, new File(targetFilename));
 		return newurl;

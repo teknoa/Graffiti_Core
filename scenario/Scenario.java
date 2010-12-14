@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
  *******************************************************************************/
 /*
  * Created on 16.03.2007 by Christian Klukas
@@ -35,7 +33,7 @@ public class Scenario {
 	 */
 	public Scenario(String menuTitle, String scenarioName) {
 		this.scenarioName = scenarioName;
-		if (menuTitle==null)
+		if (menuTitle == null)
 			this.menuGroup = "";
 		else
 			this.menuGroup = menuTitle;
@@ -67,9 +65,9 @@ public class Scenario {
 				if (!headerRead && str.startsWith("//@")) {
 					headerRead = true;
 					String name = str.substring("//@".length());
-					if (name.indexOf(":")>=0) {
+					if (name.indexOf(":") >= 0) {
 						menuGroup = name.substring(0, name.indexOf(":"));
-						scenarioName = name.substring(name.indexOf(":")+":".length());
+						scenarioName = name.substring(name.indexOf(":") + ":".length());
 					} else {
 						scenarioName = name;
 						menuGroup = "";
@@ -77,7 +75,7 @@ public class Scenario {
 				}
 				if (headerRead) {
 					if (str.startsWith("import ")) {
-						if (importsRead<1)
+						if (importsRead < 1)
 							importsRead = 1;
 						imports.add(str);
 					} else {
@@ -93,7 +91,7 @@ public class Scenario {
 	}
 
 	public synchronized void addImport(String bshScriptCommand) {
-		if (bshScriptCommand==null || bshScriptCommand.length()==0)
+		if (bshScriptCommand == null || bshScriptCommand.length() == 0)
 			return;
 		ArrayList<String> cmdl = new ArrayList<String>();
 		cmdl.add(bshScriptCommand);
@@ -101,7 +99,7 @@ public class Scenario {
 	}
 
 	public synchronized void addImports(String[] bshScriptCommands) {
-		if (bshScriptCommands==null || bshScriptCommands.length==0)
+		if (bshScriptCommands == null || bshScriptCommands.length == 0)
 			return;
 		ArrayList<String> cmdl = new ArrayList<String>();
 		for (String s : bshScriptCommands)
@@ -128,7 +126,7 @@ public class Scenario {
 	}
 
 	public synchronized void addCommands(String[] bshScriptCommands) {
-		if (bshScriptCommands==null || bshScriptCommands.length==0)
+		if (bshScriptCommands == null || bshScriptCommands.length == 0)
 			return;
 		ArrayList<String> cmdl = new ArrayList<String>();
 		for (String s : bshScriptCommands)
@@ -159,8 +157,8 @@ public class Scenario {
 
 	private synchronized Collection<String> getHeader() {
 		ArrayList<String> header = new ArrayList<String>();
-		String menu = menuGroup.length() > 0 ? menuGroup+":" : "";
-		header.add("//@"+menu+scenarioName);
+		String menu = menuGroup.length() > 0 ? menuGroup + ":" : "";
+		header.add("//@" + menu + scenarioName);
 		header.add("//");
 		return header;
 	}
@@ -169,7 +167,7 @@ public class Scenario {
 	public synchronized String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (String s : getScenarioCommands())
-			sb.append(s+"\r\n");
+			sb.append(s + "\r\n");
 		return sb.toString();
 	}
 
@@ -177,9 +175,9 @@ public class Scenario {
 		if (readError)
 			return false;
 
-		boolean nameOk = scenarioName!=null && scenarioName.length()>0;
-		boolean importsOk = imports!=null;
-		boolean sourceOk = commands!=null;
+		boolean nameOk = scenarioName != null && scenarioName.length() > 0;
+		boolean importsOk = imports != null;
+		boolean sourceOk = commands != null;
 		return nameOk && importsOk && sourceOk;
 	}
 
@@ -188,11 +186,11 @@ public class Scenario {
 	}
 
 	public String getFileName() {
-		if (file!=null)
+		if (file != null)
 			return file.getAbsolutePath();
-		String menu = menuGroup.length() > 0 ? menuGroup+"_" : "";
+		String menu = menuGroup.length() > 0 ? menuGroup + "_" : "";
 		String path = ReleaseInfo.getAppFolderWithFinalSep();
-		return path+menu+scenarioName+".bsh";
+		return path + menu + scenarioName + ".bsh";
 	}
 
 	public void setName(String name) {

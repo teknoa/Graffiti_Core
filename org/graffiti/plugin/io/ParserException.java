@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   ParserException.java
+// ParserException.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: ParserException.java,v 1.3 2010/07/19 13:01:49 morla Exp $
+// ==============================================================================
+// $Id: ParserException.java,v 1.4 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.plugin.io;
 
@@ -14,13 +14,12 @@ import java.io.IOException;
 /**
  * ParserException will be thrown whenever an error occurs while reading in a
  * graph.
- *
+ * 
  * @see java.io.IoException
  */
 public class ParserException
-extends IOException
-{
-	//~ Constructors ===========================================================
+					extends IOException {
+	// ~ Constructors ===========================================================
 
 	/**
 	 * 
@@ -29,15 +28,15 @@ extends IOException
 
 	/**
 	 * Constructs a new <code>ParserException</code>.
-	 *
-	 * @param message the message for this exception.
+	 * 
+	 * @param message
+	 *           the message for this exception.
 	 */
-	public ParserException(String message)
-	{
+	public ParserException(String message) {
 		super(message);
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

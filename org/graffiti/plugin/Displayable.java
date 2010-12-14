@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   Displayable.java
+// Displayable.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: Displayable.java,v 1.3 2010/07/19 13:02:00 morla Exp $
+// ==============================================================================
+// $Id: Displayable.java,v 1.4 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.plugin;
 
@@ -13,48 +13,47 @@ import javax.swing.JComponent;
 
 /**
  * DOCUMENT ME!
- *
+ * 
  * @author ph
  */
-public interface Displayable
-{
-	//~ Methods ================================================================
+public interface Displayable {
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets a short description of this object.
-	 *
+	 * 
 	 * @param desc
 	 */
 	public void setDescription(String desc);
 
 	/**
 	 * Returns a short description of this object.
-	 *
+	 * 
 	 * @return String
 	 */
 	public String getDescription();
 
 	/**
 	 * Returns the name of this object.
-	 *
+	 * 
 	 * @return String
 	 */
 	public String getName();
 
 	/**
 	 * Sets the encapsulated object.
-	 *
+	 * 
 	 * @param val
-	 *
-	 * @exception IllegalArgumentException thrown if val is not of the
-	 *            apropriate type.
+	 * @exception IllegalArgumentException
+	 *               thrown if val is not of the
+	 *               apropriate type.
 	 */
 	public void setValue(Object val)
-	throws IllegalArgumentException;
+						throws IllegalArgumentException;
 
 	/**
 	 * Returns the encapsulated object.
-	 *
+	 * 
 	 * @return Object
 	 */
 	public Object getValue();
@@ -64,7 +63,6 @@ public interface Displayable
 	 * Displayable should be reconstructable via this representation.
 	 * Therefore it must at least include the type of Displayable (classname)
 	 * and a representation of its value.
-	 * 
 	 * <i>PROBABLE FUTURE DESIGN</i>:
 	 * The Displayables themselves will provide a method to reconstruct their
 	 * value from the XML representation they provided.
@@ -73,10 +71,9 @@ public interface Displayable
 	 */
 	public String toXMLString();
 
-
 	public JComponent getIcon();
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

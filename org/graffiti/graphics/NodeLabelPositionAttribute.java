@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   NodeLabelPositionAttribute.java
+// NodeLabelPositionAttribute.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: NodeLabelPositionAttribute.java,v 1.4 2010/07/19 13:00:57 morla Exp $
+// ==============================================================================
+// $Id: NodeLabelPositionAttribute.java,v 1.5 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -17,14 +17,13 @@ import org.graffiti.attributes.DoubleAttribute;
 
 /**
  * DOCUMENT ME!
- *
+ * 
  * @author holleis
- * @version $Revision: 1.4 $ Specifies position of a node label providing several parameters.
+ * @version $Revision: 1.5 $ Specifies position of a node label providing several parameters.
  */
 public class NodeLabelPositionAttribute
-extends PositionAttribute
-{
-	//~ Instance fields ========================================================
+					extends PositionAttribute {
+	// ~ Instance fields ========================================================
 
 	/**
 	 * Specifies alignment of the label at the point given by relHor and
@@ -44,45 +43,43 @@ extends PositionAttribute
 	 */
 	private DoubleAttribute relVert;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructor for NodeLabelPositionAttribute.
-	 *
+	 * 
 	 * @param id
 	 */
-	public NodeLabelPositionAttribute(String id)
-	{
+	public NodeLabelPositionAttribute(String id) {
 		this(id, 0d, 0d, 0d);
 	}
 
 	/**
 	 * Constructor for NodeLabelPositionAttribute.
-	 *
-	 * @param id DOCUMENT ME!
+	 * 
+	 * @param id
+	 *           DOCUMENT ME!
 	 * @param relHor
 	 * @param relVert
 	 * @param localAlign
 	 */
 	public NodeLabelPositionAttribute(String id, double relHor, double relVert,
-			double localAlign)
-	{
+						double localAlign) {
 		this(id, new DoubleAttribute(RELHOR, relHor),
-				new DoubleAttribute(RELVERT, relVert),
-				new DoubleAttribute(LOCALALIGN, localAlign));
+							new DoubleAttribute(RELVERT, relVert),
+							new DoubleAttribute(LOCALALIGN, localAlign));
 	}
 
 	/**
 	 * Constructor for NodeLabelPositionAttribute.
-	 *
+	 * 
 	 * @param id
 	 * @param relHor
 	 * @param relVert
 	 * @param localAlign
 	 */
 	public NodeLabelPositionAttribute(String id, DoubleAttribute relHor,
-			DoubleAttribute relVert, DoubleAttribute localAlign)
-	{
+						DoubleAttribute relVert, DoubleAttribute localAlign) {
 		super(id);
 		this.relHor = relHor;
 		this.relVert = relVert;
@@ -92,118 +89,104 @@ extends PositionAttribute
 		add(this.localAlign, false);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
-	 * Sets the collection of attributes contained within this
-	 * <tt>CollectionAttribute</tt>
-	 *
-	 * @param attrs the map that contains all attributes.
-	 *
-	 * @throws IllegalArgumentException DOCUMENT ME!
+	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
+	 * 
+	 * @param attrs
+	 *           the map that contains all attributes.
+	 * @throws IllegalArgumentException
+	 *            DOCUMENT ME!
 	 */
 	@Override
-	public void setCollection(Map<String, Attribute> attrs)
-	{
-		if(attrs.keySet().contains(RELHOR) && attrs.keySet().contains(RELVERT) &&
-				attrs.keySet().contains(LOCALALIGN))
-		{
-			for(Iterator<String> it = attrs.keySet().iterator(); it.hasNext();)
-			{
+	public void setCollection(Map<String, Attribute> attrs) {
+		if (attrs.keySet().contains(RELHOR) && attrs.keySet().contains(RELVERT) &&
+							attrs.keySet().contains(LOCALALIGN)) {
+			for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
 				String attrId = (String) it.next();
 
-				if(attrId.equals(RELHOR))
-				{
+				if (attrId.equals(RELHOR)) {
 					setRelHor(((DoubleAttribute) attrs.get(RELHOR)).getDouble());
-				}
-				else if(attrId.equals(RELVERT))
-				{
-					setRelVert(((DoubleAttribute) attrs.get(RELVERT)).getDouble());
-				}
-				else if(attrId.equals(LOCALALIGN))
-				{
-					setLocalAlign(((DoubleAttribute) attrs.get(LOCALALIGN)).getDouble());
-				}
-				else
-				{
-					this.add(attrs.get(it.next()));
-				}
+				} else
+					if (attrId.equals(RELVERT)) {
+						setRelVert(((DoubleAttribute) attrs.get(RELVERT)).getDouble());
+					} else
+						if (attrId.equals(LOCALALIGN)) {
+							setLocalAlign(((DoubleAttribute) attrs.get(LOCALALIGN)).getDouble());
+						} else {
+							this.add(attrs.get(it.next()));
+						}
 			}
-		}
-		else
-		{
+		} else {
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
 
 	/**
 	 * Sets the localAlign.
-	 *
-	 * @param localAlign The localAlign to set
+	 * 
+	 * @param localAlign
+	 *           The localAlign to set
 	 */
-	public void setLocalAlign(double localAlign)
-	{
+	public void setLocalAlign(double localAlign) {
 		this.localAlign.setDouble(localAlign);
 	}
 
 	/**
 	 * Returns the localAlign.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getLocalAlign()
-	{
+	public double getLocalAlign() {
 		return this.localAlign.getDouble();
 	}
 
 	/**
 	 * Sets the relHor.
-	 *
-	 * @param relHor The relHor to set
+	 * 
+	 * @param relHor
+	 *           The relHor to set
 	 */
-	public void setRelHor(double relHor)
-	{
+	public void setRelHor(double relHor) {
 		this.relHor.setDouble(relHor);
 	}
 
 	/**
 	 * Returns the relHor.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getRelHor()
-	{
+	public double getRelHor() {
 		return this.relHor.getDouble();
 	}
 
 	/**
 	 * Sets the relVert.
-	 *
-	 * @param relVert The relVert to set
+	 * 
+	 * @param relVert
+	 *           The relVert to set
 	 */
-	public void setRelVert(double relVert)
-	{
+	public void setRelVert(double relVert) {
 		this.relVert.setDouble(relVert);
 	}
 
 	/**
 	 * Returns the relVert.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getRelVert()
-	{
+	public double getRelVert() {
 		return this.relVert.getDouble();
 	}
 
 	/**
 	 * Returns a deep copy of this object.
-	 *
+	 * 
 	 * @return A deep copy of this object.
 	 */
 	@Override
-	public Object copy()
-	{
+	public Object copy() {
 		NodeLabelPositionAttribute copied = new NodeLabelPositionAttribute(this.getId());
 		copied.setRelHor(this.getRelHor());
 		copied.setRelVert(this.getRelVert());
@@ -212,35 +195,35 @@ extends PositionAttribute
 		return copied;
 	}
 
-	//    /**
-	//     * Sets the value of this <code>Attribute</code> to the given value without
-	//     * informing the <code>ListenerManager</code>.
-	//     *
-	//     * @param v the new value.
-	//     *
-	//     * @exception IllegalArgumentException if <code>v</code> is not of the
-	//     *            apropriate type.
-	//     */
-	//    protected void doSetValue(Object v)
-	//        throws IllegalArgumentException
-	//    {
-	//        NodeLabelPositionAttribute tmp;
+	// /**
+	// * Sets the value of this <code>Attribute</code> to the given value without
+	// * informing the <code>ListenerManager</code>.
+	// *
+	// * @param v the new value.
+	// *
+	// * @exception IllegalArgumentException if <code>v</code> is not of the
+	// * apropriate type.
+	// */
+	// protected void doSetValue(Object v)
+	// throws IllegalArgumentException
+	// {
+	// NodeLabelPositionAttribute tmp;
 	//
-	//        try
-	//        {
-	//            tmp = (NodeLabelPositionAttribute) v;
-	//        }
-	//        catch(ClassCastException cce)
-	//        {
-	//            throw new IllegalArgumentException("Invalid value type.");
-	//        }
+	// try
+	// {
+	// tmp = (NodeLabelPositionAttribute) v;
+	// }
+	// catch(ClassCastException cce)
+	// {
+	// throw new IllegalArgumentException("Invalid value type.");
+	// }
 	//
-	//        this.setRelHor(tmp.getRelHor());
-	//        this.setRelVert(tmp.getRelVert());
-	//        this.setLocalAlign(tmp.getLocalAlign());
-	//    }
+	// this.setRelHor(tmp.getRelHor());
+	// this.setRelVert(tmp.getRelVert());
+	// this.setLocalAlign(tmp.getLocalAlign());
+	// }
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

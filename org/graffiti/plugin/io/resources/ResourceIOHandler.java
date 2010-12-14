@@ -10,8 +10,9 @@ public interface ResourceIOHandler {
 
 	/**
 	 * @return new url, or null, if not copied
-	 * @throws Exception if something went wrong during copying
+	 * @throws Exception
+	 *            if something went wrong during copying
 	 */
-	public IOurl copyDataAndReplaceURLPrefix(InputStream is, String targetFilename, ResourceIOConfigObject config) throws Exception ;
+	public IOurl copyDataAndReplaceURLPrefix(InputStream is, String targetFilename, ResourceIOConfigObject config) throws Exception;
 
 }

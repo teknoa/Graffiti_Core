@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AbstractNode.java
+// AbstractNode.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AbstractNode.java,v 1.9 2010/07/19 13:00:53 morla Exp $
+// ==============================================================================
+// $Id: AbstractNode.java,v 1.10 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.graph;
 
@@ -20,59 +20,51 @@ import org.graffiti.attributes.CollectionAttribute;
 import org.graffiti.util.MultipleIterator;
 
 /**
- * Abstract class <code>AbstractNode</code> common functionality for
- * <code>Node</code> implementations.
- *
- * @version $Revision: 1.9 $
- *
+ * Abstract class <code>AbstractNode</code> common functionality for <code>Node</code> implementations.
+ * 
+ * @version $Revision: 1.10 $
  * @see AdjListNode
  */
 public abstract class AbstractNode
-extends AbstractGraphElement
-implements Node
-{
-	//~ Static fields/initializers =============================================
+					extends AbstractGraphElement
+					implements Node {
+	// ~ Static fields/initializers =============================================
 
 	/** The logger for the current class. */
 	// private static final Logger logger = Logger.getLogger(AbstractNode.class.getName());
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
-	 * Constructs a new <code>AbstractNode</code>. Sets the graph of the new
-	 * <code>AbstractNode</code>.
-	 *
-	 * @param graph the <code>Graph</code> the new <code>AbstractNode</code>
-	 *        instance shall belong to.
+	 * Constructs a new <code>AbstractNode</code>. Sets the graph of the new <code>AbstractNode</code>.
+	 * 
+	 * @param graph
+	 *           the <code>Graph</code> the new <code>AbstractNode</code> instance shall belong to.
 	 */
-	public AbstractNode(Graph graph)
-	{
+	public AbstractNode(Graph graph) {
 		super(graph);
 		setViewID(-1); // nodes default = -1, edges default = 0 => nodes are painted before edges
 	}
 
 	/**
-	 * Constructs a new <code>AbstractNode</code>. Sets the graph of the new
-	 * <code>AbstractNode</code>.
-	 *
-	 * @param graph the <code>Graph</code> the new <code>AbstractNode</code>
-	 *        instance shall belong to.
-	 * @param coll the <code>CollectionAttribute</code> of the newly created
-	 *        <code>AbstractNode</code> instance.
+	 * Constructs a new <code>AbstractNode</code>. Sets the graph of the new <code>AbstractNode</code>.
+	 * 
+	 * @param graph
+	 *           the <code>Graph</code> the new <code>AbstractNode</code> instance shall belong to.
+	 * @param coll
+	 *           the <code>CollectionAttribute</code> of the newly created <code>AbstractNode</code> instance.
 	 */
-	public AbstractNode(Graph graph, CollectionAttribute coll)
-	{
+	public AbstractNode(Graph graph, CollectionAttribute coll) {
 		super(graph, coll);
 		setViewID(-1); // nodes default = -1, edges default = 0 => nodes are painted before edges
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * @see org.graffiti.graph.Node#getAllInEdges()
 	 */
-	public Collection<Edge> getAllInEdges()
-	{
+	public Collection<Edge> getAllInEdges() {
 		Collection<Edge> col = getDirectedInEdges();
 		col.addAll(getUndirectedEdges());
 
@@ -82,8 +74,7 @@ implements Node
 	/**
 	 * @see org.graffiti.graph.Node#getAllInNeighbors()
 	 */
-	public Collection<Node> getAllInNeighbors()
-	{
+	public Collection<Node> getAllInNeighbors() {
 		Collection<Node> col = getInNeighbors();
 		col.addAll(getUndirectedNeighbors());
 
@@ -93,8 +84,7 @@ implements Node
 	/**
 	 * @see org.graffiti.graph.Node#getAllOutEdges()
 	 */
-	public Collection<Edge> getAllOutEdges()
-	{
+	public Collection<Edge> getAllOutEdges() {
 		Collection<Edge> col = getDirectedOutEdges();
 		col.addAll(getUndirectedEdges());
 
@@ -104,8 +94,7 @@ implements Node
 	/**
 	 * @see org.graffiti.graph.Node#getAllOutNeighbors()
 	 */
-	public Collection<Node> getAllOutNeighbors()
-	{
+	public Collection<Node> getAllOutNeighbors() {
 		Collection<Node> col = getOutNeighbors();
 		col.addAll(getUndirectedNeighbors());
 
@@ -113,18 +102,14 @@ implements Node
 	}
 
 	/**
-	 * Returns a collection containing the directed, ingoing edges of the
-	 * <code>Node</code>.
-	 *
-	 * @return a collection containing the directed, ingoing edges of the
-	 *         <code>Node</code>.
+	 * Returns a collection containing the directed, ingoing edges of the <code>Node</code>.
+	 * 
+	 * @return a collection containing the directed, ingoing edges of the <code>Node</code>.
 	 */
-	public Collection<Edge> getDirectedInEdges()
-	{
+	public Collection<Edge> getDirectedInEdges() {
 		ArrayList<Edge> l = new ArrayList<Edge>();
 
-		for(Iterator<Edge> it = getDirectedInEdgesIterator(); it.hasNext();)
-		{
+		for (Iterator<Edge> it = getDirectedInEdgesIterator(); it.hasNext();) {
 			l.add(it.next());
 		}
 
@@ -132,18 +117,14 @@ implements Node
 	}
 
 	/**
-	 * Returns a collection containing the directed outgoing edges of the
-	 * <code>Node</code>.
-	 *
-	 * @return a collection containing the directed outgoing edges of the
-	 *         <code>Node</code>.
+	 * Returns a collection containing the directed outgoing edges of the <code>Node</code>.
+	 * 
+	 * @return a collection containing the directed outgoing edges of the <code>Node</code>.
 	 */
-	public Collection<Edge> getDirectedOutEdges()
-	{
+	public Collection<Edge> getDirectedOutEdges() {
 		List<Edge> l = new ArrayList<Edge>();
 
-		for(Iterator<Edge> it = getDirectedOutEdgesIterator(); it.hasNext();)
-		{
+		for (Iterator<Edge> it = getDirectedOutEdgesIterator(); it.hasNext();) {
 			l.add((it.next()));
 		}
 
@@ -155,21 +136,20 @@ implements Node
 	 * and undirected edges of the current <code>Node</code>. Ingoing and
 	 * outgoing edges will not be separated and there will be no ordering on
 	 * the collection.
-	 *
+	 * 
 	 * @return a collection containing all ingoing and outgoing directed and
 	 *         undirected edges of the current <code>Node</code>.
 	 */
-	public Collection<Edge> getEdges()
-	{
+	public Collection<Edge> getEdges() {
 		Set<Edge> c = new LinkedHashSet<Edge>();
 		c.addAll(getDirectedInEdges());
 		c.addAll(getDirectedOutEdges());
 		c.addAll(getUndirectedEdges());
 		/*
-        for(Iterator<Edge> itr = getEdgesIterator(); itr.hasNext();)
-        {
-            c.add(itr.next());
-        }
+		 * for(Iterator<Edge> itr = getEdgesIterator(); itr.hasNext();)
+		 * {
+		 * c.add(itr.next());
+		 * }
 		 */
 		return c;
 	}
@@ -178,11 +158,10 @@ implements Node
 	 * Returns the in-degree of the current <code>Node</code>. The in-degree is
 	 * defined as the number of ingoing, directed edges plus the number of
 	 * undirected edges.
-	 *
+	 * 
 	 * @return the in-degree of the current <code>Node</code>.
 	 */
-	public int getInDegree()
-	{
+	public int getInDegree() {
 		return getDirectedInEdges().size() + getUndirectedEdges().size();
 	}
 
@@ -192,16 +171,14 @@ implements Node
 	 * than the number returned by <code>getInDegree()</code>, due to the fact
 	 * that multiple edges between the same two nodes are possible but the
 	 * corresponding <code>Node</code> is only inserted once.
-	 *
+	 * 
 	 * @return a collection containing the neighbor nodes belonging to incoming
 	 *         edges.
 	 */
-	public Set<Node> getInNeighbors()
-	{
+	public Set<Node> getInNeighbors() {
 		Set<Node> s = new LinkedHashSet<Node>(getUndirectedNeighbors());
 
-		for(Iterator<Edge> it = getDirectedInEdgesIterator(); it.hasNext();)
-		{
+		for (Iterator<Edge> it = getDirectedInEdgesIterator(); it.hasNext();) {
 			s.add((it.next()).getSource());
 		}
 
@@ -210,36 +187,29 @@ implements Node
 
 	/**
 	 * Returns an iterator over the neighbor nodes belonging to incoming edges.
-	 *
+	 * 
 	 * @return an iterator over the neighbor nodes belonging to incoming edges.
 	 */
 	@SuppressWarnings("unchecked")
-	public Iterator<Node> getInNeighborsIterator()
-	{
+	public Iterator<Node> getInNeighborsIterator() {
 		return new MultipleIterator(getInNeighbors().iterator());
 	}
 
 	@SuppressWarnings("unchecked")
-	public Iterator<Node> getUndirectedNeighborsIterator()
-	{
+	public Iterator<Node> getUndirectedNeighborsIterator() {
 		return new MultipleIterator(getUndirectedNeighbors().iterator());
 	}
 
 	/**
-	 * Returns a collection containing all the neighbor nodes of the current
-	 * <code>Node</code>. A neighbor <code>Node</code> is either the source or
-	 * the target of either an ingoing, outgoing or an undirected
-	 * <code>Edge</code> of this <code>Node</code>.
-	 *
-	 * @return a collection containing all the neighbor nodes of the current
-	 *         <code>Node</code>.
+	 * Returns a collection containing all the neighbor nodes of the current <code>Node</code>. A neighbor <code>Node</code> is either the source or
+	 * the target of either an ingoing, outgoing or an undirected <code>Edge</code> of this <code>Node</code>.
+	 * 
+	 * @return a collection containing all the neighbor nodes of the current <code>Node</code>.
 	 */
-	public Set<Node> getNeighbors()
-	{
+	public Set<Node> getNeighbors() {
 		Set<Node> s = new LinkedHashSet<Node>();
-		for(Edge e : getEdges())
-		{
-			if(this == e.getSource())
+		for (Edge e : getEdges()) {
+			if (this == e.getSource())
 				s.add(e.getTarget());
 			else
 				s.add(e.getSource());
@@ -248,15 +218,12 @@ implements Node
 	}
 
 	/**
-	 * Returns an interator over the neighbor nodes of the current
-	 * <code>Node</code>. A neighbor nodes is either the source or the target
+	 * Returns an interator over the neighbor nodes of the current <code>Node</code>. A neighbor nodes is either the source or the target
 	 * of either an ingoing or outgoing or undirected <code>Edge</code>.
-	 *
-	 * @return an iterator over the neighbor nodes of the current
-	 *         <code>Node</code>.
+	 * 
+	 * @return an iterator over the neighbor nodes of the current <code>Node</code>.
 	 */
-	public Iterator<Node> getNeighborsIterator()
-	{
+	public Iterator<Node> getNeighborsIterator() {
 		// return new MultipleIterator(getNeighbors().iterator());
 		return getNeighbors().iterator();
 	}
@@ -265,31 +232,26 @@ implements Node
 	 * Returns the out-degree of the current <code>Node</code>. The out-degree
 	 * is defined as the number of outgoing, directed edges plus the number of
 	 * undirected edges.
-	 *
+	 * 
 	 * @return the out-degree of the current <code>Node</code>.
 	 */
-	public int getOutDegree()
-	{
+	public int getOutDegree() {
 		return getDirectedOutEdges().size() + getUndirectedEdges().size();
 	}
 
 	/**
-	 * Returns a collection containing all the neighbors of the current
-	 * <code>Node</code> which are connected by an outgoing <code>Edge</code>.
+	 * Returns a collection containing all the neighbors of the current <code>Node</code> which are connected by an outgoing <code>Edge</code>.
 	 * The number of Elements returned by this function might be less than the
 	 * number returned by <code>getOutDegree()</code>, due to the fact that
 	 * multiple edges between the same two nodes are possible but the
 	 * corresponding <code>Node</code> is only inserted once.
-	 *
-	 * @return a collection containing all the neighbor nodes of the current
-	 *         <code>Node</code> connected by an outgoing <code>Edge</code>.
+	 * 
+	 * @return a collection containing all the neighbor nodes of the current <code>Node</code> connected by an outgoing <code>Edge</code>.
 	 */
-	public Set<Node> getOutNeighbors()
-	{
+	public Set<Node> getOutNeighbors() {
 		Set<Node> s = new LinkedHashSet<Node>(getUndirectedNeighbors());
 
-		for(Iterator<?> it = getDirectedOutEdgesIterator(); it.hasNext();)
-		{
+		for (Iterator<?> it = getDirectedOutEdgesIterator(); it.hasNext();) {
 			s.add(((Edge) (it.next())).getTarget());
 		}
 
@@ -297,31 +259,24 @@ implements Node
 	}
 
 	/**
-	 * Returns an iterator containing all the neighbors of the current
-	 * <code>Node</code> which are connected by an outgoing <code>Edge</code>.
-	 *
-	 * @return a Iterator containing all the neighbor nodes of the current
-	 *         <code>Node</code> connected by an outgoing <code>Edge</code>.
+	 * Returns an iterator containing all the neighbors of the current <code>Node</code> which are connected by an outgoing <code>Edge</code>.
+	 * 
+	 * @return a Iterator containing all the neighbor nodes of the current <code>Node</code> connected by an outgoing <code>Edge</code>.
 	 */
 	@SuppressWarnings("unchecked")
-	public Iterator<Node> getOutNeighborsIterator()
-	{
+	public Iterator<Node> getOutNeighborsIterator() {
 		return new MultipleIterator(getOutNeighbors().iterator());
 	}
 
 	/**
-	 * Returns a collection containing the undirected edges of the
-	 * <code>Node</code>.
-	 *
-	 * @return a collection containing the undirected edges of the
-	 *         <code>Node</code>.
+	 * Returns a collection containing the undirected edges of the <code>Node</code>.
+	 * 
+	 * @return a collection containing the undirected edges of the <code>Node</code>.
 	 */
-	public Collection<Edge> getUndirectedEdges()
-	{
+	public Collection<Edge> getUndirectedEdges() {
 		List<Edge> l = new ArrayList<Edge>();
 
-		for(Iterator<Edge> it = getUndirectedEdgesIterator(); it.hasNext();)
-		{
+		for (Iterator<Edge> it = getUndirectedEdgesIterator(); it.hasNext();) {
 			l.add((it.next()));
 		}
 
@@ -331,50 +286,44 @@ implements Node
 	/**
 	 * Returns a collection containing all the neighbors which are connected to
 	 * the current <code>Node</code> by an undirected <code>Edge</code>.
-	 *
+	 * 
 	 * @return a collection containing all the neighbors which are connected to
-	 *         the current <code>Node</code> by an undirected
-	 *         <code>Edge</code>.
+	 *         the current <code>Node</code> by an undirected <code>Edge</code>.
 	 */
-	public Collection<Node> getUndirectedNeighbors()
-	{
+	public Collection<Node> getUndirectedNeighbors() {
 		Set<Node> s = new LinkedHashSet<Node>();
 		Edge e;
 
-		for(Iterator<?> it = getUndirectedEdgesIterator(); it.hasNext();)
-		{
+		for (Iterator<?> it = getUndirectedEdgesIterator(); it.hasNext();) {
 			e = (Edge) (it.next());
 
-			if(this == e.getSource())
-			{
+			if (this == e.getSource()) {
 				s.add(e.getTarget());
-			}
-			else
-			{
+			} else {
 				s.add(e.getSource());
 			}
 		}
 
 		return s;
 	}
-	//    public Iterator getDirectedInEdgesIterator() {
-	//        // TODO Auto-generated method stub
-	//        return null;
-	//    }
-	//    public Iterator getDirectedOutEdgesIterator() {
-	//        // TODO Auto-generated method stub
-	//        return null;
-	//    }
-	//    public Iterator getEdgesIterator() {
-	//        // TODO Auto-generated method stub
-	//        return null;
-	//    }
-	//    public Iterator getUndirectedEdgesIterator() {
-	//        // TODO Auto-generated method stub
-	//        return null;
-	//    }
+	// public Iterator getDirectedInEdgesIterator() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	// public Iterator getDirectedOutEdgesIterator() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	// public Iterator getEdgesIterator() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	// public Iterator getUndirectedEdgesIterator() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

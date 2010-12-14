@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
  *******************************************************************************/
 /*
  * Created on 08.06.2005 by Christian Klukas
@@ -23,13 +21,19 @@ public enum Release {
 
 	@Override
 	public String toString() {
-		switch(this) {
-			case DEBUG : return "IPK DEBUG VERSION";
-			case RELEASE_CLUSTERVIS : return "IPK Cluster Visualization Tool";
-			case RELEASE_PUBLIC : return "VANTED";
-			case KGML_EDITOR : return "KGML-ED";
-			case RELEASE_IPK : return "DBE-Gravisto";
-			default: return name();
+		switch (this) {
+			case DEBUG:
+				return "IPK DEBUG VERSION";
+			case RELEASE_CLUSTERVIS:
+				return "IPK Cluster Visualization Tool";
+			case RELEASE_PUBLIC:
+				return "VANTED";
+			case KGML_EDITOR:
+				return "KGML-ED";
+			case RELEASE_IPK:
+				return "DBE-Gravisto";
+			default:
+				return name();
 		}
 	}
 }

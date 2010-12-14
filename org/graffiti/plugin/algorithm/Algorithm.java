@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   Algorithm.java
+// Algorithm.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: Algorithm.java,v 1.4 2010/07/19 13:00:49 morla Exp $
+// ==============================================================================
+// $Id: Algorithm.java,v 1.5 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -18,20 +18,18 @@ import org.graffiti.plugin.parameter.Parameter;
 import org.graffiti.selection.Selection;
 
 /**
- * An <code>Algorithm</code> has to provide a function that returns an array of
- * <code>Parameters</code> it needs, in order to give user interfaces the
+ * An <code>Algorithm</code> has to provide a function that returns an array of <code>Parameters</code> it needs, in order to give user interfaces the
  * possibility to provide the <code>Algorithm</code> with apropriate
  * parameters.
- *
- * @version $Revision: 1.4 $
+ * 
+ * @version $Revision: 1.5 $
  */
-public interface Algorithm
-{
-	//~ Methods ================================================================
+public interface Algorithm {
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the name (id) of the algorithm.
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
 	public String getName();
@@ -45,28 +43,31 @@ public interface Algorithm
 	/**
 	 * Returns a list of <code>Parameter</code> that are set for this
 	 * algorithm.
-	 *
-	 * @return a collection of <code>Parameter</code> that are needed by the
-	 *         <code>Algorithm</code>.
+	 * 
+	 * @return a collection of <code>Parameter</code> that are needed by the <code>Algorithm</code>.
 	 */
 	public Parameter[] getParameters();
 
 	/**
 	 * Attaches the given graph to this algorithm.
 	 *A ttaches the given Selection information to the algorithm.
-	 * @param g the graph to attach.
-	 * @param selection the selection to attach.
+	 * 
+	 * @param g
+	 *           the graph to attach.
+	 * @param selection
+	 *           the selection to attach.
 	 */
 	public void attach(Graph g, Selection selection);
 
 	/**
 	 * Checks whether all preconditions of the current graph are satisfied.
-	 *
-	 * @throws PreconditionException if the preconditions of the current graph
-	 *         are not satisfied.
+	 * 
+	 * @throws PreconditionException
+	 *            if the preconditions of the current graph
+	 *            are not satisfied.
 	 */
 	public void check()
-	throws PreconditionException;
+						throws PreconditionException;
 
 	/**
 	 * Executes the whole algorithm.
@@ -82,12 +83,14 @@ public interface Algorithm
 	 * Returns the category an algorithm should assigned to.
 	 * Return NULL if the algorithm should be sorted directly
 	 * in the plugin menu.
+	 * 
 	 * @return The category an algorithm should assigned to.
 	 */
 	public String getCategory();
 
 	/**
 	 * A Layoutalgorithm should return true. All other types of algorithms should return false.
+	 * 
 	 * @return
 	 */
 	public boolean isLayoutAlgorithm();
@@ -95,13 +98,15 @@ public interface Algorithm
 	/**
 	 * Override this method to give a different look and feel to the application,
 	 * and to put the plugin icon next to the menu item in the main menu bar.
+	 * 
 	 * @return True, if the plugin icon should be shown next to the menu item.
-	 * Return FALSE (default!), if no icon should be shown in the menu.
+	 *         Return FALSE (default!), if no icon should be shown in the menu.
 	 */
 	public boolean showMenuIcon();
 
 	/**
 	 * Override this method to provide a accelerator hot key for the algorithm.
+	 * 
 	 * @return NULL (default) if no accelerator should be assigned for this algorithm.
 	 */
 	public KeyStroke getAcceleratorKeyStroke();
@@ -115,6 +120,6 @@ public interface Algorithm
 	public boolean mayWorkOnMultipleGraphs();
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

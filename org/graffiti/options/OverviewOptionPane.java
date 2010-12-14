@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   OverviewOptionPane.java
+// OverviewOptionPane.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: OverviewOptionPane.java,v 1.4 2010/07/19 13:02:05 morla Exp $
+// ==============================================================================
+// $Id: OverviewOptionPane.java,v 1.5 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.options;
 
@@ -19,13 +19,12 @@ import javax.swing.JScrollPane;
 
 /**
  * The overview pane for the options dialog.
- *
- * @version $Revision: 1.4 $
+ * 
+ * @version $Revision: 1.5 $
  */
 public class OverviewOptionPane
-extends AbstractOptionPane
-{
-	//~ Constructors ===========================================================
+					extends AbstractOptionPane {
+	// ~ Constructors ===========================================================
 
 	/**
 	 * 
@@ -35,30 +34,25 @@ extends AbstractOptionPane
 	/**
 	 * Constructor for OverviewOptionPane.
 	 */
-	public OverviewOptionPane()
-	{
+	public OverviewOptionPane() {
 		super(sBundle.getString("options.overview.title"));
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/*
 	 * @see org.graffiti.options.AbstractOptionPane#initDefault()
 	 */
 	@Override
-	protected void initDefault()
-	{
+	protected void initDefault() {
 		setLayout(new BorderLayout());
 
 		// add a JEditorPane, which contains an overview html page.
 		JEditorPane ep = new JEditorPane();
 
-		try
-		{
+		try {
 			ep.setPage(sBundle.getRes("options.overview.html"));
-		}
-		catch(IOException ioe)
-		{
+		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 
@@ -74,26 +68,28 @@ extends AbstractOptionPane
 	 * @see org.graffiti.options.AbstractOptionPane#saveDefault()
 	 */
 	@Override
-	protected void saveDefault()
-	{
+	protected void saveDefault() {
 		/* do nothing */
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see org.graffiti.options.OptionPane#getCategory()
 	 */
 	public String getCategory() {
 		return "Gravisto Passau";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see org.graffiti.options.OptionPane#getOptionName()
 	 */
 	public String getOptionName() {
 		return "Default Option";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see org.graffiti.options.OptionPane#init(javax.swing.JComponent)
 	 */
 	public void init(JComponent options) {
@@ -101,7 +97,8 @@ extends AbstractOptionPane
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see org.graffiti.options.OptionPane#save(javax.swing.JComponent)
 	 */
 	public void save(JComponent options) {
@@ -110,6 +107,6 @@ extends AbstractOptionPane
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

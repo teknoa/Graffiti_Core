@@ -1,35 +1,34 @@
-//==============================================================================
+// ==============================================================================
 //
-//   LimitableParameter.java
+// LimitableParameter.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: LimitableParameter.java,v 1.3 2010/07/19 13:01:54 morla Exp $
+// ==============================================================================
+// $Id: LimitableParameter.java,v 1.4 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
 /**
  * The value of a <code>LimitableParameter</code> can be limited by giving
  * maximum and minimum values.
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public interface LimitableParameter
-extends SingleParameter
-{
-	//~ Methods ================================================================
+					extends SingleParameter {
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the maximum value for this <code>LimitableParameter</code>.
-	 *
+	 * 
 	 * @return the maximum value for this <code>LimitableParameter</code>.
 	 */
 	public Comparable<?> getMax();
 
 	/**
 	 * Returns the minimum value for this <code>LimitableParameter</code>.
-	 *
+	 * 
 	 * @return the minimum value for this <code>LimitableParameter</code>.
 	 */
 	public Comparable<?> getMin();
@@ -37,13 +36,13 @@ extends SingleParameter
 	/**
 	 * Returns <code>true</code> if the value is between the minimum and the
 	 * maximum, <code>false</code> otherwise.
-	 *
+	 * 
 	 * @return <code>true</code> if the value is between the minimum and the
 	 *         maximum, <code>false</code> otherwise.
 	 */
 	public boolean isValid();
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

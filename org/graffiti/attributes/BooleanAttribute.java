@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   BooleanAttribute.java
+// BooleanAttribute.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: BooleanAttribute.java,v 1.3 2010/07/19 12:59:19 morla Exp $
+// ==============================================================================
+// $Id: BooleanAttribute.java,v 1.4 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -15,18 +15,19 @@ import org.graffiti.event.AttributeEvent;
  * Contains a boolean value.
  */
 public class BooleanAttribute
-extends AbstractAttribute {
-	//~ Instance fields ========================================================
+					extends AbstractAttribute {
+	// ~ Instance fields ========================================================
 
 	/** The value of this Attribute */
 	private boolean value;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new instance of a <code>BooleanAttribute</code>.
-	 *
-	 * @param id the id of the attribute.
+	 * 
+	 * @param id
+	 *           the id of the attribute.
 	 */
 	public BooleanAttribute(String id) {
 		super(id);
@@ -35,9 +36,11 @@ extends AbstractAttribute {
 	/**
 	 * Constructs a new instance of a <code>BooleanAttribute</code> with the
 	 * given value.
-	 *
-	 * @param id the id of the attribute.
-	 * @param value the value of the attribute.
+	 * 
+	 * @param id
+	 *           the id of the attribute.
+	 * @param value
+	 *           the value of the attribute.
 	 */
 	public BooleanAttribute(String id, boolean value) {
 		super(id);
@@ -47,9 +50,11 @@ extends AbstractAttribute {
 	/**
 	 * Constructs a new instance of a <code>BooleanAttribute</code> with the
 	 * given value.
-	 *
-	 * @param id the id of the attribute.
-	 * @param value the value of the attribute.
+	 * 
+	 * @param id
+	 *           the id of the attribute.
+	 * @param value
+	 *           the value of the attribute.
 	 */
 	public BooleanAttribute(String id, Boolean value) {
 		super(id);
@@ -68,17 +73,20 @@ extends AbstractAttribute {
 	public static boolean getValueFromString(String val) {
 		if (val.equals("0"))
 			return false;
-		else if (val.equals("1"))
-			return true;
-		else return Boolean.parseBoolean(val);
+		else
+			if (val.equals("1"))
+				return true;
+			else
+				return Boolean.parseBoolean(val);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets the value of this object.
-	 *
-	 * @param value the new value of this object.
+	 * 
+	 * @param value
+	 *           the new value of this object.
 	 */
 	public void setBoolean(boolean value) {
 		AttributeEvent ae = new AttributeEvent(this);
@@ -89,7 +97,7 @@ extends AbstractAttribute {
 
 	/**
 	 * Returns the value of this object.
-	 *
+	 * 
 	 * @return the value of this object.
 	 */
 	public boolean getBoolean() {
@@ -104,20 +112,18 @@ extends AbstractAttribute {
 	}
 
 	/**
-	 * Returns the value of the attribute wrapped in an <code>Boolean</code>
-	 * object.
-	 *
-	 * @return the value of the attribute wrapped in an <code>Boolean</code>
-	 *         object.
+	 * Returns the value of the attribute wrapped in an <code>Boolean</code> object.
+	 * 
+	 * @return the value of the attribute wrapped in an <code>Boolean</code> object.
 	 */
 	public Object getValue() {
 		return new Boolean(value);
 	}
 
 	/**
-	 * Returns a deep copy of this instance. Parent won't be set  because the
+	 * Returns a deep copy of this instance. Parent won't be set because the
 	 * context may be different.
-	 *
+	 * 
 	 * @return a deep copy of this instance.
 	 */
 	public Object copy() {
@@ -127,26 +133,27 @@ extends AbstractAttribute {
 	/**
 	 * Sets the value of the attribute. The <code>ListenerManager</code> is
 	 * informed implicitly by the method <code>setValue()</code>.
-	 *
-	 * @param o the new value of the attribute.
-	 *
-	 * @exception IllegalArgumentException if the parameter has not the
-	 *            appropriate class for this attribute.
+	 * 
+	 * @param o
+	 *           the new value of the attribute.
+	 * @exception IllegalArgumentException
+	 *               if the parameter has not the
+	 *               appropriate class for this attribute.
 	 */
 	@Override
 	protected void doSetValue(Object o)
-	throws IllegalArgumentException {
+						throws IllegalArgumentException {
 		assert o != null;
 
 		if (o instanceof String)
-			value = getValueFromString((String)o);
+			value = getValueFromString((String) o);
 		else {
 			if (o instanceof Integer) {
-				value = ((Integer)o)!=0;
+				value = ((Integer) o) != 0;
 			} else {
 				try {
 					value = ((Boolean) o).booleanValue();
-				} catch(ClassCastException cce) {
+				} catch (ClassCastException cce) {
 					throw new IllegalArgumentException("Invalid value type.");
 				}
 			}
@@ -163,6 +170,6 @@ extends AbstractAttribute {
 
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

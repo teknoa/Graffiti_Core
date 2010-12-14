@@ -25,25 +25,17 @@ import org.FolderPanel;
  * size. A row or column can be given an absolute size in pixels, a percentage
  * of the available space, or it can grow and shrink to fill the remaining space
  * after other rows and columns have been resized.
- * 
  * <p>
- * Using spreadsheet terminology, a cell is the intersection of a row and
- * column. Cells have finite, non-negative sizes measured in pixels. The
- * dimensions of a cell depend solely upon the dimensions of its row and column.
+ * Using spreadsheet terminology, a cell is the intersection of a row and column. Cells have finite, non-negative sizes measured in pixels. The dimensions of a
+ * cell depend solely upon the dimensions of its row and column.
  * </p>
- * 
  * <p>
- * A component occupies a rectangular group of one or more cells. If the
- * component occupies more than one cell, the component is resized to fit
- * perfectly in the rectangular region of cells. If the component occupies a
- * single cell, it can be aligned in four ways within that cell.
+ * A component occupies a rectangular group of one or more cells. If the component occupies more than one cell, the component is resized to fit perfectly in the
+ * rectangular region of cells. If the component occupies a single cell, it can be aligned in four ways within that cell.
  * </p>
- * 
  * <p>
- * A single cell component can be stretched horizontally to fit the cell (full
- * justification), or it can be placed in the center of the cell. The component
- * could also be left justified or right justified. Similarly, the component can
- * be full, center, top, or bottom justified in the vertical.
+ * A single cell component can be stretched horizontally to fit the cell (full justification), or it can be placed in the center of the cell. The component
+ * could also be left justified or right justified. Similarly, the component can be full, center, top, or bottom justified in the vertical.
  * </p>
  * 
  * <pre>
@@ -226,7 +218,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * 
 	 * @param component
 	 *           desired component
-	 * 
 	 * @return If the given component is found, the constraints associated with
 	 *         that component. If the given component is null or is not found,
 	 *         null is returned.
@@ -253,7 +244,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 *           desired component. This parameter cannot be null.
 	 * @param constraint
 	 *           new set of constraints. This parameter cannot be null.
-	 * 
 	 * @return If the given component is found, the constraints associated with
 	 *         that component. If the given component is null or is not found,
 	 *         null is returned.
@@ -299,7 +289,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * 
 	 * @param column
 	 *           heights of each of the columns
-	 * 
 	 * @see getColumn
 	 */
 
@@ -322,14 +311,10 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	/**
 	 * Adjusts the number and sizes of rows in this layout. After calling this
 	 * method, the caller should request this layout manager to perform the
-	 * layout. This can be done with the following code:
-	 * 
-	 * <code>
+	 * layout. This can be done with the following code: <code>
 	 *     layout.layoutContainer(container);
 	 *     container.repaint();
-	 * </code>
-	 * 
-	 * or
+	 * </code> or
 	 * 
 	 * <pre>
 	 * window.pack()
@@ -340,7 +325,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * 
 	 * @param row
 	 *           widths of each of the rows. This parameter cannot be null.
-	 * 
 	 * @see getRow
 	 */
 
@@ -363,14 +347,10 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	/**
 	 * Adjusts the width of a single column in this layout. After calling this
 	 * method, the caller should request this layout manager to perform the
-	 * layout. This can be done with the following code:
-	 * 
-	 * <code>
+	 * layout. This can be done with the following code: <code>
 	 *     layout.layoutContainer(container);
 	 *     container.repaint();
-	 * </code>
-	 * 
-	 * or
+	 * </code> or
 	 * 
 	 * <pre>
 	 * window.pack()
@@ -384,7 +364,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 *           valid, an ArrayOutOfBoundsException will be thrown.
 	 * @param size
 	 *           width of the column. This parameter cannot be null.
-	 * 
 	 * @see getColumn
 	 */
 
@@ -404,14 +383,10 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	/**
 	 * Adjusts the height of a single row in this layout. After calling this
 	 * method, the caller should request this layout manager to perform the
-	 * layout. This can be done with the following code:
-	 * 
-	 * <code>
+	 * layout. This can be done with the following code: <code>
 	 *     layout.layoutContainer(container);
 	 *     container.repaint();
-	 * </code>
-	 * 
-	 * or
+	 * </code> or
 	 * 
 	 * <pre>
 	 * window.pack()
@@ -425,7 +400,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 *           an ArrayOutOfBoundsException will be thrown.
 	 * @param size
 	 *           height of the row. This parameter cannot be null.
-	 * 
 	 * @see getRow
 	 */
 
@@ -446,7 +420,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * Gets the sizes of columns in this layout.
 	 * 
 	 * @return widths of each of the columns
-	 * 
 	 * @see setColumn
 	 */
 
@@ -462,7 +435,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * Gets the height of a single row in this layout.
 	 * 
 	 * @return height of the requested row
-	 * 
 	 * @see setRow
 	 */
 
@@ -480,9 +452,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * @param i
 	 *           zero-based index of row to get. If this parameter is not valid,
 	 *           an ArrayOutOfBoundsException will be thrown.
-	 * 
 	 * @return width of the requested column
-	 * 
 	 * @see setRow
 	 */
 
@@ -496,9 +466,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * @param i
 	 *           zero-based index of row to get. If this parameter is not valid,
 	 *           an ArrayOutOfBoundsException will be thrown.
-	 * 
 	 * @return height of each of the requested row
-	 * 
 	 * @see setRow
 	 */
 
@@ -539,7 +507,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 *           zero-based index at which to insert the column.
 	 * @param size
 	 *           size of the column to be inserted
-	 * 
 	 * @see setColumn
 	 * @see deleteColumn
 	 */
@@ -595,7 +562,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 *           zero-based index at which to insert the column.
 	 * @param size
 	 *           size of the row to be inserted
-	 * 
 	 * @see setRow
 	 * @see deleteRow
 	 */
@@ -649,7 +615,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * 
 	 * @param i
 	 *           zero-based index of column to delete
-	 * 
 	 * @see setColumn
 	 * @see deleteColumn
 	 */
@@ -698,7 +663,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * 
 	 * @param i
 	 *           zero-based index of column to delete
-	 * 
 	 * @see setRow
 	 * @see deleteRow
 	 */
@@ -824,7 +788,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * invalid. Valid rows are 0 through 4, inclusively.
 	 * 
 	 * @return True, if there are any hidden components. False, otherwise.
-	 * 
 	 * @see overlapping
 	 */
 
@@ -854,7 +817,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * components overlap if they cover at least one common cell.
 	 * 
 	 * @return True, if there are any overlapping components. False, otherwise.
-	 * 
 	 * @see hidden
 	 */
 
@@ -889,8 +851,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 
 	/**
 	 * Calculates the sizes of the rows and columns based on the absolute and
-	 * relative sizes specified in <code>rowSpec</code> and
-	 * <code>columnSpec</code> and the size of the container. The result is
+	 * relative sizes specified in <code>rowSpec</code> and <code>columnSpec</code> and the size of the container. The result is
 	 * stored in <code>rowSize</code> and <code>columnSize</code>.
 	 * 
 	 * @param container
@@ -1133,7 +1094,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * To lay out the specified container using this layout. This method reshapes
 	 * the components in the specified target container in order to satisfy the
 	 * constraints of all components.
-	 * 
 	 * <p>
 	 * User code should not have to call this method directly.
 	 * </p>
@@ -1304,7 +1264,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * 
 	 * @param container
 	 *           container being served by this layout manager
-	 * 
 	 * @return a dimension indicating the container's preferred size
 	 */
 
@@ -1560,7 +1519,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * 
 	 * @param container
 	 *           container being served by this layout manager
-	 * 
 	 * @return a dimension indicating the container's minimum size
 	 */
 
@@ -1835,7 +1793,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 	 * 
 	 * @param target
 	 *           the component which needs to be laid out
-	 * 
 	 * @return unconditionally, a Dimension of Integer.MAX_VALUE by
 	 *         Integer.MAX_VALUE since TableLayout does not limit the maximum
 	 *         size of a container
@@ -1914,7 +1871,6 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		 * @param object
 		 *           object being compared to; must be a Component if it is equal
 		 *           to this TableLayoutConstraints.
-		 * 
 		 * @return True, if the entries refer to the same component object. False,
 		 *         otherwise.
 		 */

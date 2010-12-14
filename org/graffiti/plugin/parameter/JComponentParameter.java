@@ -2,15 +2,12 @@ package org.graffiti.plugin.parameter;
 
 import javax.swing.JComponent;
 
-
 /**
  * @author klukas
- *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class JComponentParameter
-extends AbstractSingleParameter
-{
+					extends AbstractSingleParameter {
 	private JComponent gui;
 
 	public JComponentParameter(JComponent val, String name, String description) {
@@ -23,9 +20,8 @@ extends AbstractSingleParameter
 		return gui;
 	}
 
-
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   BooleanParameter.java
+// BooleanParameter.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: BooleanParameter.java,v 1.7 2010/07/19 13:01:54 morla Exp $
+// ==============================================================================
+// $Id: BooleanParameter.java,v 1.8 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -16,68 +16,68 @@ import scenario.ProvidesScenarioSupportCommand;
 
 /**
  * Parameter that contains a <code>Boolean</code> value.
- *
- * @version $Revision: 1.7 $
+ * 
+ * @version $Revision: 1.8 $
  */
 public class BooleanParameter
-extends AbstractSingleParameter
-implements ProvidesScenarioSupportCommand
-{
-	//~ Instance fields ========================================================
+					extends AbstractSingleParameter
+					implements ProvidesScenarioSupportCommand {
+	// ~ Instance fields ========================================================
 
 	/** The value of this parameter. */
 	private Boolean value = null;
 	private BooleanParameter[] dependentParameters;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new boolean parameter.
-	 *
-	 * @param value the new Boolean value. May be null.
-	 * @param name the name of the parameter.
-	 * @param description the description of the parameter.
+	 * 
+	 * @param value
+	 *           the new Boolean value. May be null.
+	 * @param name
+	 *           the name of the parameter.
+	 * @param description
+	 *           the description of the parameter.
 	 */
-	public BooleanParameter(Boolean value, String name, String description)
-	{
+	public BooleanParameter(Boolean value, String name, String description) {
 		super(name, description);
 		this.value = value;
 	}
 
 	/**
 	 * Constructs a new boolean parameter.
-	 *
-	 * @param value the new boolean value..
-	 * @param name the name of the parameter.
-	 * @param description the description of the parameter.
+	 * 
+	 * @param value
+	 *           the new boolean value..
+	 * @param name
+	 *           the name of the parameter.
+	 * @param description
+	 *           the description of the parameter.
 	 */
-	public BooleanParameter(boolean value, String name, String description)
-	{
+	public BooleanParameter(boolean value, String name, String description) {
 		super(name, description);
 		this.value = new Boolean(value);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the value of this parameter as a <code>Boolean</code>.
-	 *
+	 * 
 	 * @return the value of this parameter as a <code>Boolean</code>.
 	 */
-	public Boolean getBoolean()
-	{
+	public Boolean getBoolean() {
 		return value;
 	}
 
 	/**
 	 * Returns <code>true</code>, if the current value is valid.
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
-	public boolean isValid()
-	{
-		if(value == null)
-		{
+	public boolean isValid() {
+		if (value == null) {
 			return false;
 		}
 
@@ -86,33 +86,29 @@ implements ProvidesScenarioSupportCommand
 
 	/**
 	 * Sets the value of the <code>AttributeParameter</code>.
-	 *
-	 * @param value the new value of the <code>AttributeParameter</code>.
-	 *
-	 * @exception IllegalArgumentException thrown if <code>value</code> is not
-	 *            of the correct type.
+	 * 
+	 * @param value
+	 *           the new value of the <code>AttributeParameter</code>.
+	 * @exception IllegalArgumentException
+	 *               thrown if <code>value</code> is not
+	 *               of the correct type.
 	 */
 	@Override
-	public void setValue(Object value)
-	{
-		try
-		{
+	public void setValue(Object value) {
+		try {
 			this.value = (Boolean) value;
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
 
 	/**
 	 * Returns the value of this parameter.
-	 *
+	 * 
 	 * @return the value of this parameter.
 	 */
 	@Override
-	public Object getValue()
-	{
+	public Object getValue() {
 		return value;
 	}
 
@@ -124,11 +120,9 @@ implements ProvidesScenarioSupportCommand
 		return getStandardXML(value.booleanValue() ? "true" : "false");
 	}
 
-
-
 	public String getScenarioCommand() {
-		return "new BooleanParameter("+
-		(getBoolean() ? "true" : "false")+", \""+getName()+"\", \""+getDescription()+"\")";
+		return "new BooleanParameter(" +
+							(getBoolean() ? "true" : "false") + ", \"" + getName() + "\", \"" + getDescription() + "\")";
 	}
 
 	public Collection<String> getScenarioImports() {
@@ -149,6 +143,6 @@ implements ProvidesScenarioSupportCommand
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

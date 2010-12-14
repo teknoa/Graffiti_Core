@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   ChangeAttributesEdit.java
+// ChangeAttributesEdit.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: ChangeAttributesEdit.java,v 1.5 2010/07/19 13:02:05 morla Exp $
+// ==============================================================================
+// $Id: ChangeAttributesEdit.java,v 1.6 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.undo;
 
@@ -22,34 +22,34 @@ import org.graffiti.graph.GraphElement;
 
 /**
  * ChangeAttributesEdit
- *
+ * 
  * @author wirch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class ChangeAttributesEdit
-extends GraffitiAbstractUndoableEdit
-{
+					extends GraffitiAbstractUndoableEdit {
 	private static final long serialVersionUID = 1L;
 
-	//~ Instance fields ========================================================
+	// ~ Instance fields ========================================================
 
 	/** map from an attribute to its old value */
 	private Map<Attribute, Object> attributeToOldValueMap;
 
 	private Graph g = null;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Creates a new <code>AttributeChangeEdit</code> object.
-	 *
-	 * @param attributeToOldValueMap map between an attribute and its old
-	 *        value.
-	 * @param geMap map between the old graph elements and the new ones.
+	 * 
+	 * @param attributeToOldValueMap
+	 *           map between an attribute and its old
+	 *           value.
+	 * @param geMap
+	 *           map between the old graph elements and the new ones.
 	 */
 	@SuppressWarnings("unchecked")
-	public ChangeAttributesEdit(Graph graph, Map attributeToOldValueMap, Map geMap)
-	{
+	public ChangeAttributesEdit(Graph graph, Map attributeToOldValueMap, Map geMap) {
 		super(geMap);
 		this.attributeToOldValueMap = attributeToOldValueMap;
 		this.g = graph;
@@ -58,39 +58,37 @@ extends GraffitiAbstractUndoableEdit
 	/**
 	 * Creates a new <code>AttributeChangeEdit</code> object. It is usefull if
 	 * only one attribute such as coordinate of a bend has been changed.
-	 *
-	 * @param attribute the changed attribute.
-	 * @param geMap map between the old graph elements and the new ones.
+	 * 
+	 * @param attribute
+	 *           the changed attribute.
+	 * @param geMap
+	 *           map between the old graph elements and the new ones.
 	 */
 	@SuppressWarnings("unchecked")
-	public ChangeAttributesEdit(Graph graph, Attribute attribute, Map geMap)
-	{
+	public ChangeAttributesEdit(Graph graph, Attribute attribute, Map geMap) {
 		super(geMap);
 		this.attributeToOldValueMap = new HashMap();
 		this.attributeToOldValueMap.put(attribute,
-				((Attribute) attribute.copy()).getValue());
+							((Attribute) attribute.copy()).getValue());
 		this.g = graph;
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * @see javax.swing.undo.UndoableEdit#getPresentationName()
 	 */
 	@Override
-	public String getPresentationName()
-	{
+	public String getPresentationName() {
 		String name = "";
 
-		if(attributeToOldValueMap.size() == 1)
-		{
+		if (attributeToOldValueMap.size() == 1) {
 			name = sBundle.getString("undo.changeAttribute") + " " +
-			((Attribute) attributeToOldValueMap.keySet().iterator().next()).getName();
-		}
-		else if(attributeToOldValueMap.size() > 1)
-		{
-			name = sBundle.getString("undo.changeAttributes");
-		}
+								((Attribute) attributeToOldValueMap.keySet().iterator().next()).getName();
+		} else
+			if (attributeToOldValueMap.size() > 1) {
+				name = sBundle.getString("undo.changeAttributes");
+			}
 
 		return name;
 	}
@@ -99,17 +97,15 @@ extends GraffitiAbstractUndoableEdit
 	 * @see org.graffiti.undo.GraffitiAbstractUndoableEdit#execute()
 	 */
 	@Override
-	public void execute()
-	{
-		//do nothing
+	public void execute() {
+		// do nothing
 	}
 
 	/**
 	 * @see javax.swing.undo.UndoableEdit#redo()
 	 */
 	@Override
-	public void redo()
-	{
+	public void redo() {
 		super.redo();
 		changeValues();
 	}
@@ -118,8 +114,7 @@ extends GraffitiAbstractUndoableEdit
 	 * @see javax.swing.undo.UndoableEdit#undo()
 	 */
 	@Override
-	public void undo()
-	{
+	public void undo() {
 		super.undo();
 		changeValues();
 	}
@@ -127,62 +122,51 @@ extends GraffitiAbstractUndoableEdit
 	/**
 	 * Changes attribute value to the old ones during undo or redo operations.
 	 */
-	private void changeValues()
-	{
+	private void changeValues() {
 		try {
 			g.getListenerManager().transactionStarted(this);
 			Object newValue = null;
 			Object oldValue = null;
 
-			/* maps from an old attribute: attribute belonged to
+			/*
+			 * maps from an old attribute: attribute belonged to
 			 * a deleted graph element - to a new possibly created attribute
 			 * at a new graph element
 			 */
 			HashMap<Attribute, Attribute> attributesMap = new LinkedHashMap<Attribute, Attribute>();
 
-			for(Iterator<Attribute> iter = attributeToOldValueMap.keySet().iterator();
-			iter.hasNext();)
-			{
+			for (Iterator<Attribute> iter = attributeToOldValueMap.keySet().iterator(); iter.hasNext();) {
 				Attribute attribute = (Attribute) iter.next();
 				GraphElement newGraphElement = getNewGraphElement((GraphElement) attribute.getAttributable());
 
 				Attribute newAttribute;
 
-				try
-				{
+				try {
 					// DEBUG:
-						newAttribute = newGraphElement.getAttribute(attribute.getPath());
-						if(attribute == newAttribute)
-						{
-							newValue = attributeToOldValueMap.get(attribute);
+					newAttribute = newGraphElement.getAttribute(attribute.getPath());
+					if (attribute == newAttribute) {
+						newValue = attributeToOldValueMap.get(attribute);
 
-							// TODO:fix finally the access to the attribute values
-							// over the getValue().
-							// It is currently only a temporary solution for nonfixed
-							// access.
-							oldValue = ((Attribute) attribute.copy()).getValue();
+						// TODO:fix finally the access to the attribute values
+						// over the getValue().
+						// It is currently only a temporary solution for nonfixed
+						// access.
+						oldValue = ((Attribute) attribute.copy()).getValue();
 
-							//oldValue = attribute.getValue().;
-							attribute.setValue(newValue);
+						// oldValue = attribute.getValue().;
+						attribute.setValue(newValue);
 
-							attributeToOldValueMap.put(attribute, oldValue);
-						}
-						else
-						{
-							attributesMap.put(attribute, newAttribute);
-						}
-				}
-				catch(AttributeNotFoundException e)
-				{
+						attributeToOldValueMap.put(attribute, oldValue);
+					} else {
+						attributesMap.put(attribute, newAttribute);
+					}
+				} catch (AttributeNotFoundException e) {
 					ErrorMsg.addErrorMessage(e);
 				}
 			}
 
-			if(!attributesMap.isEmpty())
-			{
-				for(Iterator<Attribute> iterator = attributesMap.keySet().iterator();
-				iterator.hasNext();)
-				{
+			if (!attributesMap.isEmpty()) {
+				for (Iterator<Attribute> iterator = attributesMap.keySet().iterator(); iterator.hasNext();) {
 					Attribute attribute = (Attribute) iterator.next();
 					newValue = attributeToOldValueMap.get(attribute);
 
@@ -194,14 +178,14 @@ extends GraffitiAbstractUndoableEdit
 					// access.
 					oldValue = ((Attribute) newAttribute.copy()).getValue();
 
-					//oldValue = newAttribute.getValue();
+					// oldValue = newAttribute.getValue();
 					newAttribute.setValue(newValue);
 
 					attributeToOldValueMap.remove(attribute);
 					attributeToOldValueMap.put(newAttribute, oldValue);
 				}
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			ErrorMsg.addErrorMessage(e);
 		} finally {
 			g.getListenerManager().transactionFinished(this);
@@ -209,6 +193,6 @@ extends GraffitiAbstractUndoableEdit
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   ListenerRegistrationException.java
+// ListenerRegistrationException.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: ListenerRegistrationException.java,v 1.3 2010/07/19 13:01:43 morla Exp $
+// ==============================================================================
+// $Id: ListenerRegistrationException.java,v 1.4 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.event;
 
@@ -13,13 +13,12 @@ package org.graffiti.event;
  * In general, the exception is used to indicate that a listener could not be
  * registered. Will be thrown, if someone tries to add a strict listener while
  * the same listener is already registered as non strict or vice versa.
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public class ListenerRegistrationException
-extends RuntimeException
-{
-	//~ Constructors ===========================================================
+					extends RuntimeException {
+	// ~ Constructors ===========================================================
 
 	/**
 	 * 
@@ -27,17 +26,17 @@ extends RuntimeException
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constructs a <code>ListenerRegistrationException</code>  with the
+	 * Constructs a <code>ListenerRegistrationException</code> with the
 	 * specified detail message.
-	 *
-	 * @param msg the detail message for the exception.
+	 * 
+	 * @param msg
+	 *           the detail message for the exception.
 	 */
-	public ListenerRegistrationException(String msg)
-	{
+	public ListenerRegistrationException(String msg) {
 		super(msg);
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

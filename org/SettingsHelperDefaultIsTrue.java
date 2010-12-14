@@ -19,7 +19,7 @@ import org.junit.Test;
 public class SettingsHelperDefaultIsTrue implements HelperClass {
 
 	public boolean isEnabled(String name) {
-		return !new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_disabled_"+encode(name)).exists();
+		return !new File(ReleaseInfo.getAppFolderWithFinalSep() + "feature_disabled_" + encode(name)).exists();
 	}
 
 	protected static String encode(String name) {
@@ -34,13 +34,13 @@ public class SettingsHelperDefaultIsTrue implements HelperClass {
 	public void setEnabled(String name, boolean b) {
 		if (!b)
 			try {
-				new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_disabled_"+encode(name)).createNewFile();
+				new File(ReleaseInfo.getAppFolderWithFinalSep() + "feature_disabled_" + encode(name)).createNewFile();
 			} catch (IOException e) {
 				ErrorMsg.addErrorMessage(e);
 			}
-			else {
-				new File(ReleaseInfo.getAppFolderWithFinalSep()+"feature_disabled_"+encode(name)).delete();
-			}
+		else {
+			new File(ReleaseInfo.getAppFolderWithFinalSep() + "feature_disabled_" + encode(name)).delete();
+		}
 	}
 
 	public JComponent getBooleanSettingsEditor(String description, final String option, final Runnable enable, final Runnable disable) {
@@ -52,19 +52,21 @@ public class SettingsHelperDefaultIsTrue implements HelperClass {
 				enabled = !enabled;
 				setEnabled(option, enabled);
 				if (enabled) {
-					if (enable!=null)
+					if (enable != null)
 						enable.run();
 				} else {
-					if (disable!=null)
+					if (disable != null)
 						disable.run();
 				}
-			}});
+			}
+		});
 		Timer t = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean active = isEnabled(option);
 				boolean b = active;
 				result.setSelected(b);
-			}});
+			}
+		});
 		t.start();
 		return result;
 	}

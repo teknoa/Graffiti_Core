@@ -1,69 +1,73 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AttributeListener.java
+// AttributeListener.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AttributeListener.java,v 1.2 2010/07/19 13:01:43 morla Exp $
+// ==============================================================================
+// $Id: AttributeListener.java,v 1.3 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.event;
 
 /**
  * Interfaces an attribute events listener.
- *
- * @version $Revision: 1.2 $
- *
+ * 
+ * @version $Revision: 1.3 $
  * @see AttributeEvent
  */
 public interface AttributeListener
-extends TransactionListener
-{
-	//~ Methods ================================================================
+					extends TransactionListener {
+	// ~ Methods ================================================================
 
 	/**
 	 * Called after an attribute has been added.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
 	void postAttributeAdded(AttributeEvent e);
 
 	/**
 	 * Called after an attribute has been changed.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
 	void postAttributeChanged(AttributeEvent e);
 
 	/**
 	 * Called after an attribute has been removed.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
 	void postAttributeRemoved(AttributeEvent e);
 
 	/**
 	 * Called just before an attribute is added.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
 	void preAttributeAdded(AttributeEvent e);
 
 	/**
 	 * Called before a change of an attribute takes place.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
 	void preAttributeChanged(AttributeEvent e);
 
 	/**
 	 * Called just before an attribute is removed.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
 	void preAttributeRemoved(AttributeEvent e);
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

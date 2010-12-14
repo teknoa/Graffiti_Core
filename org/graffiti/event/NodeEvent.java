@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   NodeEvent.java
+// NodeEvent.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: NodeEvent.java,v 1.4 2010/07/19 13:01:43 morla Exp $
+// ==============================================================================
+// $Id: NodeEvent.java,v 1.5 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.event;
 
@@ -14,23 +14,19 @@ import org.graffiti.graph.Edge;
 import org.graffiti.graph.Node;
 
 /**
- * Contains a node event. A <code>NodeEvent</code> object is passed to every
- * <code>NodeListener</code> or <code>AbstractNodeListener</code> object which
+ * Contains a node event. A <code>NodeEvent</code> object is passed to every <code>NodeListener</code> or <code>AbstractNodeListener</code> object which
  * is registered to receive the "interesting" node events using the
  * component's <code>addNodeListener</code> method.
- * (<code>AbstractNodeListener</code> objects implement the
- * <code>NodeListener</code> interface.) Each such listener object gets a
- * <code>NodeEvent</code> containing the node event.
- *
- * @version $Revision: 1.4 $
- *
+ * (<code>AbstractNodeListener</code> objects implement the <code>NodeListener</code> interface.) Each such listener object gets a <code>NodeEvent</code>
+ * containing the node event.
+ * 
+ * @version $Revision: 1.5 $
  * @see NodeListener
  * @see AbstractNodeListener
  */
 public class NodeEvent
-extends AbstractEvent
-{
-	//~ Instance fields ========================================================
+					extends AbstractEvent {
+	// ~ Instance fields ========================================================
 
 	/**
 	 * 
@@ -39,53 +35,51 @@ extends AbstractEvent
 	/** The edge that might have been responsible for the NodeEvent. */
 	private Edge edge;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a graph event object with the specified source components.
-	 *
-	 * @param node the node that originated the event.
-	 * @param edge the edge that originated the event.
+	 * 
+	 * @param node
+	 *           the node that originated the event.
+	 * @param edge
+	 *           the edge that originated the event.
 	 */
-	public NodeEvent(Node node, Edge edge)
-	{
+	public NodeEvent(Node node, Edge edge) {
 		super(node);
 		this.edge = edge;
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the edge that originated this event. E.g.: the edge that has
-	 * been added to the incoming egdes list of the node. Might return
-	 * <tt>null</tt>.
-	 *
+	 * been added to the incoming egdes list of the node. Might return <tt>null</tt>.
+	 * 
 	 * @return The edge that originated the event.
 	 */
-	public Edge getEdge()
-	{
+	public Edge getEdge() {
 		return edge;
 	}
 
 	/**
 	 * Returns the node that has been changed by this event.
-	 *
+	 * 
 	 * @return The node that has been changed by this event.
 	 */
-	public Node getNode()
-	{
+	public Node getNode() {
 		return (Node) getSource();
 	}
 
 	public Attributable getAttributeable() {
-		if (getNode()!=null)
+		if (getNode() != null)
 			return getNode();
-		if (edge!=null)
+		if (edge != null)
 			return edge;
 		return null;
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

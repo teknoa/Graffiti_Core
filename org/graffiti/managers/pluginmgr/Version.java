@@ -1,24 +1,23 @@
-//==============================================================================
+// ==============================================================================
 //
-//   Version.java
+// Version.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: Version.java,v 1.3 2010/07/19 13:01:31 morla Exp $
+// ==============================================================================
+// $Id: Version.java,v 1.4 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
 /**
  * Represents an object, which contains a version number.
- *
+ * 
  * @author flierl
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class Version
-implements Comparable<Object>
-{
-	//~ Instance fields ========================================================
+					implements Comparable<Object> {
+	// ~ Instance fields ========================================================
 
 	/** The major version of the plugin. */
 	String versionMajor;
@@ -29,17 +28,16 @@ implements Comparable<Object>
 	/** The release version of the plugin. */
 	String versionRelease;
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * @see java.lang.Comparable#compareTo(Object)
 	 */
-	public int compareTo(Object o)
-	{
+	public int compareTo(Object o) {
 		return 0;
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AbstractIOSerializer.java
+// AbstractIOSerializer.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AbstractIOSerializer.java,v 1.2 2010/07/19 13:01:49 morla Exp $
+// ==============================================================================
+// $Id: AbstractIOSerializer.java,v 1.3 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.plugin.io;
 
@@ -21,64 +21,67 @@ import org.graffiti.graph.Graph;
 /**
  * Provides additional methods to read and write from/to different kinds of
  * targets.
- *
- * @version $Revision: 1.2 $
+ * 
+ * @version $Revision: 1.3 $
  */
 public abstract class AbstractIOSerializer
-implements InputSerializer, OutputSerializer
-{
-	//~ Methods ================================================================
+					implements InputSerializer, OutputSerializer {
+	// ~ Methods ================================================================
 
 	/**
 	 * Reads in a graph from the given filename.
-	 *
-	 * @param filename The name of the file to read the graph from.
-	 * @param g The graph to add the newly read graph to.
-	 *
-	 * @exception IOException If an IO error occurs.
+	 * 
+	 * @param filename
+	 *           The name of the file to read the graph from.
+	 * @param g
+	 *           The graph to add the newly read graph to.
+	 * @exception IOException
+	 *               If an IO error occurs.
 	 */
 	public void read(String filename, Graph g)
-	throws IOException
-	{
+						throws IOException {
 		read(new FileInputStream(filename), g);
 	}
 
 	/**
 	 * Reads in the graph from the given url.
-	 *
-	 * @param url The URL to read the graph from.
-	 * @param g The graph to add the newly read graph to.
-	 *
-	 * @exception IOException If an IO error occurs.
+	 * 
+	 * @param url
+	 *           The URL to read the graph from.
+	 * @param g
+	 *           The graph to add the newly read graph to.
+	 * @exception IOException
+	 *               If an IO error occurs.
 	 */
 	public void read(URL url, Graph g)
-	throws IOException
-	{
+						throws IOException {
 		read(url.openStream(), g);
 	}
 
 	/**
 	 * Reads in a graph from the given input stream.
-	 *
-	 * @param in The input stream to read the graph from.
-	 * @param g The graph to add the newly read graph to.
-	 *
-	 * @exception IOException If an IO error occurs.
+	 * 
+	 * @param in
+	 *           The input stream to read the graph from.
+	 * @param g
+	 *           The graph to add the newly read graph to.
+	 * @exception IOException
+	 *               If an IO error occurs.
 	 */
 	public abstract void read(InputStream in, Graph g)
-	throws IOException;
+						throws IOException;
 
 	/**
 	 * Reads in a graph from the given input stream.
-	 *
-	 * @param in The input stream to read the graph from.
+	 * 
+	 * @param in
+	 *           The input stream to read the graph from.
 	 * @return The newly read graph.
-	 *
-	 * @exception IOException If an IO error occurs.
+	 * @exception IOException
+	 *               If an IO error occurs.
 	 */
 	public Graph read(InputStream in)
-	throws IOException
-	{
+						throws IOException {
 		Graph g = new AdjListGraph();
 		read(in, g);
 		return g;
@@ -86,19 +89,20 @@ implements InputSerializer, OutputSerializer
 
 	/**
 	 * Writes the contents of the given graph to a file.
-	 *
-	 * @param filename The name of the file to save the graph to.
-	 * @param g The graph to save.
-	 *
-	 * @exception IOException If an IO error occurs.
+	 * 
+	 * @param filename
+	 *           The name of the file to save the graph to.
+	 * @param g
+	 *           The graph to save.
+	 * @exception IOException
+	 *               If an IO error occurs.
 	 */
 	public void write(String filename, Graph g)
-	throws IOException
-	{
+						throws IOException {
 		write(new FileOutputStream(filename), g);
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

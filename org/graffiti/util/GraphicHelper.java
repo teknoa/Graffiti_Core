@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   GraphicHelper.java
+// GraphicHelper.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: GraphicHelper.java,v 1.3 2010/07/19 13:01:39 morla Exp $
+// ==============================================================================
+// $Id: GraphicHelper.java,v 1.4 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.util;
 
@@ -17,20 +17,19 @@ import org.HelperClass;
 /**
  *
  */
-public class GraphicHelper implements HelperClass
-{
-	//~ Methods ================================================================
+public class GraphicHelper implements HelperClass {
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the point where both lines intersect.
-	 *
-	 * @param line1 line to compute the intersection with l2
-	 * @param line2 line to compute the intersection with l1
-	 *
+	 * 
+	 * @param line1
+	 *           line to compute the intersection with l2
+	 * @param line2
+	 *           line to compute the intersection with l1
 	 * @return the intersection point of the given lines.
 	 */
-	public static Point2D getIntersection(Line2D line1, Line2D line2)
-	{
+	public static Point2D getIntersection(Line2D line1, Line2D line2) {
 		// that would not be a line but a point
 		// and this would crash the computing (division by zero)
 		assert (!line1.getP1().equals(line1.getP2()));
@@ -53,37 +52,28 @@ public class GraphicHelper implements HelperClass
 		double l2Direction_x = line2.getP2().getX() - line2.getP1().getX();
 		double l2Direction_y = line2.getP2().getY() - line2.getP1().getY();
 
-		if(l2Direction_x != 0.0)
-		{
+		if (l2Direction_x != 0.0) {
 			factor = p2.getY() - p1.getY() +
-			((l2Direction_y / l2Direction_x) * (p1.getX() - p2.getX()));
+								((l2Direction_y / l2Direction_x) * (p1.getX() - p2.getX()));
 
 			double div = (l1Direction_y -
-					((l2Direction_y / l2Direction_x) * l1Direction_x));
+								((l2Direction_y / l2Direction_x) * l1Direction_x));
 
-			if(div != 0.0)
-			{
+			if (div != 0.0) {
 				factor /= div;
-			}
-			else
-			{
+			} else {
 				factor = 0.0;
 			}
-		}
-		else
-		{ // then l2Direction_y has to be != 0.0
+		} else { // then l2Direction_y has to be != 0.0
 			factor = p2.getX() - p1.getX() +
-			((l2Direction_x / l2Direction_y) * (p1.getY() - p2.getY()));
+								((l2Direction_x / l2Direction_y) * (p1.getY() - p2.getY()));
 
 			double div = (l1Direction_x -
-					((l2Direction_x / l2Direction_y) * l1Direction_y));
+								((l2Direction_x / l2Direction_y) * l1Direction_y));
 
-			if(div != 0.0)
-			{
+			if (div != 0.0) {
 				factor /= div;
-			}
-			else
-			{
+			} else {
 				factor = 0.0;
 			}
 		}
@@ -91,12 +81,12 @@ public class GraphicHelper implements HelperClass
 		// constructing the intersection point:
 		// startpoint_line1 + factor * direction_line1
 		Point2D intersectionPoint = new Point2D.Double(p1.getX() +
-				(factor * l1Direction_x), p1.getY() + (factor * l1Direction_y));
+							(factor * l1Direction_x), p1.getY() + (factor * l1Direction_y));
 
 		return intersectionPoint;
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

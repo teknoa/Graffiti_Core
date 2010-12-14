@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   RedundantMultipleIterator.java
+// RedundantMultipleIterator.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: RedundantMultipleIterator.java,v 1.3 2010/07/19 13:01:43 morla Exp $
+// ==============================================================================
+// $Id: RedundantMultipleIterator.java,v 1.4 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.util;
 
@@ -16,13 +16,12 @@ import java.util.NoSuchElementException;
  * Class <code>MultipleIterator</code> encapsulates a number of instances
  * implementing the <code>java.util.Iterator</code> interface. It is possible
  * to iterate over all the iterators one after the other.
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public class RedundantMultipleIterator
-implements Iterator<Object>
-{
-	//~ Instance fields ========================================================
+					implements Iterator<Object> {
+	// ~ Instance fields ========================================================
 
 	/** The iterators to iterate over. */
 	@SuppressWarnings("unchecked")
@@ -31,39 +30,40 @@ implements Iterator<Object>
 	/** Points to the current iterator. */
 	private int current;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new <code>MultipleIterator</code> instance.
-	 *
-	 * @param iters the iterators over which to iterate.
+	 * 
+	 * @param iters
+	 *           the iterators over which to iterate.
 	 */
 	@SuppressWarnings("unchecked")
-	public RedundantMultipleIterator(Iterator[] iters)
-	{
+	public RedundantMultipleIterator(Iterator[] iters) {
 		current = 0;
 		this.iters = iters;
 	}
 
 	/**
 	 * Constructs a new <code>MultipleIterator</code> instance.
-	 *
-	 * @param itr the iterator over which to iterate.
+	 * 
+	 * @param itr
+	 *           the iterator over which to iterate.
 	 */
-	public RedundantMultipleIterator(Iterator<?> itr)
-	{
+	public RedundantMultipleIterator(Iterator<?> itr) {
 		iters = new Iterator[1];
 		iters[0] = itr;
 	}
 
 	/**
 	 * Constructs a new <code>MultipleIterator</code> instance.
-	 *
-	 * @param itr1 the first iterator over which to iterate.
-	 * @param itr2 the second iterator over which to iterate.
+	 * 
+	 * @param itr1
+	 *           the first iterator over which to iterate.
+	 * @param itr2
+	 *           the second iterator over which to iterate.
 	 */
-	public RedundantMultipleIterator(Iterator<?> itr1, Iterator<?> itr2)
-	{
+	public RedundantMultipleIterator(Iterator<?> itr1, Iterator<?> itr2) {
 		iters = new Iterator[2];
 		iters[0] = itr1;
 		iters[1] = itr2;
@@ -71,42 +71,38 @@ implements Iterator<Object>
 
 	/**
 	 * Constructs a new <code>MultipleIterator</code> instance.
-	 *
-	 * @param itr1 the first iterator over which to iterate.
-	 * @param itr2 the second iterator over which to iterate.
-	 * @param itr3 the third iterator over which to iterate.
+	 * 
+	 * @param itr1
+	 *           the first iterator over which to iterate.
+	 * @param itr2
+	 *           the second iterator over which to iterate.
+	 * @param itr3
+	 *           the third iterator over which to iterate.
 	 */
-	public RedundantMultipleIterator(Iterator<?> itr1, Iterator<?> itr2, Iterator<?> itr3)
-	{
+	public RedundantMultipleIterator(Iterator<?> itr1, Iterator<?> itr2, Iterator<?> itr3) {
 		iters = new Iterator[3];
 		iters[0] = itr1;
 		iters[1] = itr2;
 		iters[2] = itr3;
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns <code>true</code> if the iteration has not yet passed each of
 	 * the iterators, <code>false</code> otherwise.
-	 *
+	 * 
 	 * @return <code>true</code> if the iteration has not yet passed each of
 	 *         the iterators, <code>false</code> otherwise.
 	 */
-	public boolean hasNext()
-	{
-		if(iters[current].hasNext())
-		{
+	public boolean hasNext() {
+		if (iters[current].hasNext()) {
 			return true;
-		}
-		else
-		{
-			while(current < (iters.length - 1))
-			{
+		} else {
+			while (current < (iters.length - 1)) {
 				current++;
 
-				if(iters[current].hasNext())
-				{
+				if (iters[current].hasNext()) {
 					return true;
 				}
 			}
@@ -118,25 +114,19 @@ implements Iterator<Object>
 	/**
 	 * Returns the next element of the iteration. If the end of one iterator
 	 * has been reached, the iteration will be continued on the next one.
-	 *
+	 * 
 	 * @return the next element of the iteration.
-	 *
-	 * @throws NoSuchElementException DOCUMENT ME!
+	 * @throws NoSuchElementException
+	 *            DOCUMENT ME!
 	 */
-	public Object next()
-	{
-		if(iters[current].hasNext())
-		{
+	public Object next() {
+		if (iters[current].hasNext()) {
 			return iters[current].next();
-		}
-		else
-		{
-			while(current < (iters.length - 1))
-			{
+		} else {
+			while (current < (iters.length - 1)) {
 				current++;
 
-				if(iters[current].hasNext())
-				{
+				if (iters[current].hasNext()) {
 					return iters[current].next();
 				}
 			}
@@ -146,20 +136,19 @@ implements Iterator<Object>
 	}
 
 	/**
-	 * The method <code>remove()</code> of the interface
-	 * <code>java.util.Iterator</code> will not be supported in this
+	 * The method <code>remove()</code> of the interface <code>java.util.Iterator</code> will not be supported in this
 	 * implementation.
-	 *
-	 * @exception UnsupportedOperationException if the method is called.
+	 * 
+	 * @exception UnsupportedOperationException
+	 *               if the method is called.
 	 */
 	public void remove()
-	throws UnsupportedOperationException
-	{
+						throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Removing is not supported " +
-		"on MultipleIterators.");
+							"on MultipleIterators.");
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

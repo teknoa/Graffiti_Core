@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   DefaultPluginEntry.java
+// DefaultPluginEntry.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: DefaultPluginEntry.java,v 1.4 2010/07/19 13:01:27 morla Exp $
+// ==============================================================================
+// $Id: DefaultPluginEntry.java,v 1.5 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -18,13 +18,11 @@ import org.graffiti.plugin.GenericPlugin;
  * Represents a plugin entry in the plugin manager.
  */
 public class DefaultPluginEntry
-implements PluginEntry
-{
-	//~ Instance fields ========================================================
+					implements PluginEntry {
+	// ~ Instance fields ========================================================
 
 	/**
-	 * <code>true</code> if the plugin should be loaded on startup,
-	 * <code>false</code> otherwise.
+	 * <code>true</code> if the plugin should be loaded on startup, <code>false</code> otherwise.
 	 */
 	private Boolean loadOnStartup;
 
@@ -40,20 +38,23 @@ implements PluginEntry
 	/** The location of the plugin. */
 	private URL pluginLocation;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new plugin entry.
-	 *
-	 * @param description the description of this plugin
-	 * @param plugin the plugin.
-	 * @param loadOnStartup <code>true</code> if the plugin should be loaded at
-	 *        the startup of the plugin manager.
-	 * @param pluginLocation the location of the plugin.
+	 * 
+	 * @param description
+	 *           the description of this plugin
+	 * @param plugin
+	 *           the plugin.
+	 * @param loadOnStartup
+	 *           <code>true</code> if the plugin should be loaded at
+	 *           the startup of the plugin manager.
+	 * @param pluginLocation
+	 *           the location of the plugin.
 	 */
 	public DefaultPluginEntry(PluginDescription description,
-			GenericPlugin plugin, Boolean loadOnStartup, URL pluginLocation)
-	{
+						GenericPlugin plugin, Boolean loadOnStartup, URL pluginLocation) {
 		this.description = description;
 		this.plugin = plugin;
 		this.pluginLocation = pluginLocation;
@@ -62,109 +63,105 @@ implements PluginEntry
 
 	/**
 	 * Constructs a new plugin entry.
-	 *
-	 * @param fileName the file name of the plugin
-	 * @param description the description of this plugin
+	 * 
+	 * @param fileName
+	 *           the file name of the plugin
+	 * @param description
+	 *           the description of this plugin
 	 */
-	public DefaultPluginEntry(String fileName, PluginDescription description)
-	{
+	public DefaultPluginEntry(String fileName, PluginDescription description) {
 		this.fileName = fileName;
 		this.description = description;
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets the description.
-	 *
-	 * @param description the description to be set.
+	 * 
+	 * @param description
+	 *           the description to be set.
 	 */
-	public void setDescription(PluginDescription description)
-	{
+	public void setDescription(PluginDescription description) {
 		this.description = description;
 	}
 
 	/**
 	 * Returns the description of the plugin.
-	 *
+	 * 
 	 * @return the description of the plugin.
 	 */
-	public PluginDescription getDescription()
-	{
+	public PluginDescription getDescription() {
 		return description;
 	}
 
 	/**
 	 * Returns the file name of the plugin.
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
-	public String getFileName()
-	{
+	public String getFileName() {
 		return fileName;
 	}
 
 	/**
 	 * Sets the flag indicating whether a plugin should be loaded on the
 	 * startup of the editor.
-	 *
-	 * @param loadOnStartup flag indicating whether a plugin should be loaded
-	 *        on the startup of the editor.
+	 * 
+	 * @param loadOnStartup
+	 *           flag indicating whether a plugin should be loaded
+	 *           on the startup of the editor.
 	 */
-	public void setLoadOnStartup(Boolean loadOnStartup)
-	{
+	public void setLoadOnStartup(Boolean loadOnStartup) {
 		this.loadOnStartup = loadOnStartup;
 	}
 
 	/**
 	 * Returns <code>true</code> if the plugin shall be loaded on the startup
 	 * of the editor, <code>false</code> otherwise.
-	 *
+	 * 
 	 * @return <code>true</code> if the plugin shall be loaded on the startup
 	 *         of the editor, <code>false</code> otherwise.
 	 */
-	public Boolean getLoadOnStartup()
-	{
+	public Boolean getLoadOnStartup() {
 		return loadOnStartup;
 	}
 
 	/**
 	 * Sets the plugin.
-	 *
-	 * @param plugin the plugin to be set.
+	 * 
+	 * @param plugin
+	 *           the plugin to be set.
 	 */
-	public void setPlugin(GenericPlugin plugin)
-	{
+	public void setPlugin(GenericPlugin plugin) {
 		this.plugin = plugin;
 	}
 
 	/**
 	 * Returns the plugin.
-	 *
+	 * 
 	 * @return the plugin.
 	 */
-	public GenericPlugin getPlugin()
-	{
+	public GenericPlugin getPlugin() {
 		return plugin;
 	}
 
 	/**
 	 * Sets the plugin location.
-	 *
-	 * @param pluginLocation plugin location to be set.
+	 * 
+	 * @param pluginLocation
+	 *           plugin location to be set.
 	 */
-	public void setPluginLocation(URL pluginLocation)
-	{
+	public void setPluginLocation(URL pluginLocation) {
 		this.pluginLocation = pluginLocation;
 	}
 
 	/**
 	 * Returns the plugin location.
-	 *
+	 * 
 	 * @return the plugin location.
 	 */
-	public URL getPluginLocation()
-	{
+	public URL getPluginLocation() {
 		return pluginLocation;
 	}
 
@@ -173,6 +170,6 @@ implements PluginEntry
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

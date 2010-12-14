@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   CollectionAttribute.java
+// CollectionAttribute.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: CollectionAttribute.java,v 1.3 2010/07/19 12:59:22 morla Exp $
+// ==============================================================================
+// $Id: CollectionAttribute.java,v 1.4 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -18,13 +18,10 @@ import org.graffiti.core.DeepCopy;
  * to a directory which contains files and subdirectories. All methods
  * modifying the <code>CollectionAttribute</code> (no <code>get</code>-Methods
  * or anything similar) have to inform the <code>ListenerManager</code> about
- * the modification. The <code>ListenerManager</code> is accessible via
- * <code>getAttributable().getListenerManager()</code>.
- * 
+ * the modification. The <code>ListenerManager</code> is accessible via <code>getAttributable().getListenerManager()</code>.
  * <p>
- * <b>Implementation note:</b> The information of the
- * <code>ListenerManager</code> could look as follows:
- * <blockquote>
+ * <b>Implementation note:</b> The information of the <code>ListenerManager</code> could look as follows: <blockquote>
+ * 
  * <pre>
  * public whatever modify() {
  *     AttributeEvent attr = new AttributeEvent(...);
@@ -37,64 +34,62 @@ import org.graffiti.core.DeepCopy;
  *     return anything;
  * }
  * </pre>
+ * 
  * </blockquote>
  * </p>
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public interface CollectionAttribute
-extends DeepCopy, Attribute
-{
-	//~ Methods ================================================================
+					extends DeepCopy, Attribute {
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets the attributable the <code>Attribute</code> belongs to.
-	 * <b>Implementation Note:</b> This function should only work if the
-	 * <code>Attribute</code>'s attributable is null before. Normaly only
+	 * <b>Implementation Note:</b> This function should only work if the <code>Attribute</code>'s attributable is null before. Normaly only
 	 * <code>addAttribute()</code> methods should call it.
-	 *
-	 * @param att the <code>Attribute</code>'s attributable.
-	 *
-	 * @exception FieldAlreadySetException if the attributable was already set
-	 *            before.
+	 * 
+	 * @param att
+	 *           the <code>Attribute</code>'s attributable.
+	 * @exception FieldAlreadySetException
+	 *               if the attributable was already set
+	 *               before.
 	 */
 	public void setAttributable(Attributable att)
-	throws FieldAlreadySetException;
+						throws FieldAlreadySetException;
 
 	/**
 	 * Returns the <code>Attribute</code> located at <code>path</code>.
-	 *
-	 * @param path the relative path to the attribute from <code>this</code>.
-	 *
+	 * 
+	 * @param path
+	 *           the relative path to the attribute from <code>this</code>.
 	 * @return DOCUMENT ME!
-	 *
-	 * @exception AttributeNotFoundException if there is no attribute at the
-	 *            given location.
+	 * @exception AttributeNotFoundException
+	 *               if there is no attribute at the
+	 *               given location.
 	 */
 	public Attribute getAttribute(String path)
-	throws AttributeNotFoundException, NoCollectionAttributeException;
+						throws AttributeNotFoundException, NoCollectionAttributeException;
 
 	/**
-	 * Sets the collection of attributes contained within this
-	 * <tt>CollectionAttribute</tt>
-	 *
-	 * @param attrs the map that contains all attributes.
+	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
+	 * 
+	 * @param attrs
+	 *           the map that contains all attributes.
 	 */
 	public void setCollection(Map<String, Attribute> attrs);
 
 	/**
-	 * Returns the map of ids to attributes in the
-	 * <code>CollectionAttribute</code>.
-	 *
-	 * @return the map of ids to attributes in the
-	 *         <code>CollectionAttribute</code>.
+	 * Returns the map of ids to attributes in the <code>CollectionAttribute</code>.
+	 * 
+	 * @return the map of ids to attributes in the <code>CollectionAttribute</code>.
 	 */
-	public Map<String,Attribute> getCollection();
+	public Map<String, Attribute> getCollection();
 
 	/**
 	 * Returns <code>true</code> if the <code>CollectionAttribute</code> is
 	 * empty.
-	 *
+	 * 
 	 * @return <code>true</code> if this CollectionAttribute is empty.
 	 */
 	public boolean isEmpty();
@@ -102,58 +97,62 @@ extends DeepCopy, Attribute
 	/**
 	 * Adds a given <code>Attribute</code> to the list. The id of given
 	 * attribute may not be already in the list.
-	 *
-	 * @param att the new attribute to add to the list.
-	 *
-	 * @exception AttributeExistsException if there is already an attribute
-	 *            with the same id as the given attribute.
+	 * 
+	 * @param att
+	 *           the new attribute to add to the list.
+	 * @exception AttributeExistsException
+	 *               if there is already an attribute
+	 *               with the same id as the given attribute.
 	 */
 	public void add(Attribute att)
-	throws AttributeExistsException, FieldAlreadySetException;
+						throws AttributeExistsException, FieldAlreadySetException;
 
 	/**
-	 * Adds a given attribute to the collection. Only informs the
-	 * <code>ListenerManager</code> about the addition when
-	 * <code>inform</code> is set to true.
-	 *
-	 * @param a the new attribute to add to the list.
-	 * @param inform when true, <code>ListenerManager</code> gets informed
-	 *        otherwise not
-	 *
-	 * @exception AttributeExistsException if there is already an attribute
-	 *            with the id of a.
-	 * @exception FieldAlreadySetException thrown if Attribute a already has a
-	 *            parent or attributable associated with it.
+	 * Adds a given attribute to the collection. Only informs the <code>ListenerManager</code> about the addition when <code>inform</code> is set to true.
+	 * 
+	 * @param a
+	 *           the new attribute to add to the list.
+	 * @param inform
+	 *           when true, <code>ListenerManager</code> gets informed
+	 *           otherwise not
+	 * @exception AttributeExistsException
+	 *               if there is already an attribute
+	 *               with the id of a.
+	 * @exception FieldAlreadySetException
+	 *               thrown if Attribute a already has a
+	 *               parent or attributable associated with it.
 	 */
 	public void add(Attribute a, boolean inform)
-	throws AttributeExistsException, FieldAlreadySetException;
+						throws AttributeExistsException, FieldAlreadySetException;
 
 	/**
 	 * Removes the <code>Attribute</code> with the given <code>id</code> from
 	 * the list.
-	 *
-	 * @param id the id of the attribute.
-	 *
-	 * @exception AttributeNotFoundException if there is no attribute with the
-	 *            given id.
+	 * 
+	 * @param id
+	 *           the id of the attribute.
+	 * @exception AttributeNotFoundException
+	 *               if there is no attribute with the
+	 *               given id.
 	 */
 	public void remove(String id)
-	throws AttributeNotFoundException;
+						throws AttributeNotFoundException;
 
 	/**
 	 * Removes the given <code>Attribute</code> from the list.
-	 *
-	 * @param att the attribute to be removed.
-	 *
-	 * @exception AttributeNotFoundException if the given attribute is not part
-	 *            of this <code>CollectionAttribute</code>.
+	 * 
+	 * @param att
+	 *           the attribute to be removed.
+	 * @exception AttributeNotFoundException
+	 *               if the given attribute is not part
+	 *               of this <code>CollectionAttribute</code>.
 	 */
 	public void remove(Attribute att)
-	throws AttributeNotFoundException;
+						throws AttributeNotFoundException;
 
 	public int size();
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

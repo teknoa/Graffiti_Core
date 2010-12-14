@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2008 Network Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2008 Network Analysis Group, IPK Gatersleben
  *******************************************************************************/
 /*
  * Created on 08.06.2005 by Christian Klukas

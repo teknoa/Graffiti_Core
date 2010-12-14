@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   Queue.java
+// Queue.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: Queue.java,v 1.3 2010/07/19 13:01:43 morla Exp $
+// ==============================================================================
+// $Id: Queue.java,v 1.4 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.util;
 
@@ -13,67 +13,62 @@ import java.util.LinkedList;
 
 /**
  * A simple queue.
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
-public class Queue
-{
-	//~ Instance fields ========================================================
+public class Queue {
+	// ~ Instance fields ========================================================
 
 	/** The queue's data structure. */
 	private LinkedList<Object> list;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new queue.
 	 */
-	public Queue()
-	{
+	public Queue() {
 		list = new LinkedList<Object>();
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns <code>true</code>, if the queue is empty.
-	 *
+	 * 
 	 * @return <code>true</code>, if the queue is empty.
 	 */
-	public boolean isEmpty()
-	{
+	public boolean isEmpty() {
 		return list.isEmpty();
 	}
 
 	/**
 	 * Adds the given object to the end of the queue.
-	 *
-	 * @param o the object to add to the end of the queue.
+	 * 
+	 * @param o
+	 *           the object to add to the end of the queue.
 	 */
-	public void addLast(Object o)
-	{
+	public void addLast(Object o) {
 		list.addLast(o);
 	}
 
 	/**
 	 * @see java.util.Collection#clear()
 	 */
-	public void clear()
-	{
+	public void clear() {
 		list.clear();
 	}
 
 	/**
 	 * Returns and removes the first element in the queue.
-	 *
+	 * 
 	 * @see java.util.LinkedList#removeFirst()
 	 */
-	public Object removeFirst()
-	{
+	public Object removeFirst() {
 		return list.removeFirst();
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

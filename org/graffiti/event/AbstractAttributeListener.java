@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AbstractAttributeListener.java
+// AbstractAttributeListener.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AbstractAttributeListener.java,v 1.2 2010/07/19 13:01:43 morla Exp $
+// ==============================================================================
+// $Id: AbstractAttributeListener.java,v 1.3 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.event;
 
@@ -13,108 +13,98 @@ package org.graffiti.event;
  * An abstract adapter class for receiving attribute events. The methods in
  * this class are empty. This class exists as convenience for creating
  * listener objects.
- * 
  * <p>
- * Extend this class to create a <code>AttributeEvent</code> listener  and
- * override the methods for the events of interest. (If you implement the
- * <code>AttributeListener</code> interface, you have to define all of the
- * methods in it. This abstract class defines <code>null</code> methods for
- * them all, so you can only have to define methods for events you care
- * about.)
+ * Extend this class to create a <code>AttributeEvent</code> listener and override the methods for the events of interest. (If you implement the
+ * <code>AttributeListener</code> interface, you have to define all of the methods in it. This abstract class defines <code>null</code> methods for them all, so
+ * you can only have to define methods for events you care about.)
+ * </p>
+ * <p>
+ * Create a listener object using the extended class and then register it with a component using the component's <code>addAttributeEventListener</code> method.
+ * When an attribute is added, removed or changed or a transaction of attribute changes is started or finished, the relevant method in the listener object is
+ * invoked and the <code>AttributeEvent</code> is passed to it.
  * </p>
  * 
- * <p>
- * Create a listener object using the extended class and then register it with
- * a component using the component's <code>addAttributeEventListener</code>
- * method. When an attribute is added, removed or changed or a transaction of
- * attribute changes is started or finished, the relevant method in the
- * listener object is invoked and the <code>AttributeEvent</code> is passed to
- * it.
- * </p>
- *
- * @version $Revision: 1.2 $
- *
+ * @version $Revision: 1.3 $
  * @see ListenerManager
  * @see AttributeEvent
  */
 public abstract class AbstractAttributeListener
-implements AttributeListener
-{
-	//~ Methods ================================================================
+					implements AttributeListener {
+	// ~ Methods ================================================================
 
 	/**
 	 * Called after an attribute has been added.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
-	public void postAttributeAdded(AttributeEvent e)
-	{
+	public void postAttributeAdded(AttributeEvent e) {
 	}
 
 	/**
 	 * Called after an attribute has been changed.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
-	public void postAttributeChanged(AttributeEvent e)
-	{
+	public void postAttributeChanged(AttributeEvent e) {
 	}
 
 	/**
 	 * Called after an attribute has been removed.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
-	public void postAttributeRemoved(AttributeEvent e)
-	{
+	public void postAttributeRemoved(AttributeEvent e) {
 	}
 
 	/**
 	 * Called just before an attribute is added.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
-	public void preAttributeAdded(AttributeEvent e)
-	{
+	public void preAttributeAdded(AttributeEvent e) {
 	}
 
 	/**
 	 * Called before a change of an attribute takes place.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
-	public void preAttributeChanged(AttributeEvent e)
-	{
+	public void preAttributeChanged(AttributeEvent e) {
 	}
 
 	/**
 	 * Called just before an attribute is removed.
-	 *
-	 * @param e the AttributeEvent detailing the changes.
+	 * 
+	 * @param e
+	 *           the AttributeEvent detailing the changes.
 	 */
-	public void preAttributeRemoved(AttributeEvent e)
-	{
+	public void preAttributeRemoved(AttributeEvent e) {
 	}
 
 	/**
 	 * Called after a transaction has been finished.
-	 *
-	 * @param e gives details about the transaction.
+	 * 
+	 * @param e
+	 *           gives details about the transaction.
 	 */
-	public void transactionFinished(TransactionEvent e)
-	{
+	public void transactionFinished(TransactionEvent e) {
 	}
 
 	/**
 	 * Called after a transaction has been started.
-	 *
-	 * @param e gives details about the transaction.
+	 * 
+	 * @param e
+	 *           gives details about the transaction.
 	 */
-	public void transactionStarted(TransactionEvent e)
-	{
+	public void transactionStarted(TransactionEvent e) {
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

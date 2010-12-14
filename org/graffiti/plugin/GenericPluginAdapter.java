@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   GenericPluginAdapter.java
+// GenericPluginAdapter.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: GenericPluginAdapter.java,v 1.8 2010/07/19 13:01:54 morla Exp $
+// ==============================================================================
+// $Id: GenericPluginAdapter.java,v 1.9 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.plugin;
 
@@ -24,13 +24,12 @@ import org.graffiti.plugin.io.OutputSerializer;
 
 /**
  * An adapter class for the generic plugin interface.
- *
- * @version $Revision: 1.8 $
+ * 
+ * @version $Revision: 1.9 $
  */
 public abstract class GenericPluginAdapter
-implements GenericPlugin
-{
-	//~ Static fields/initializers =============================================
+					implements GenericPlugin {
+	// ~ Static fields/initializers =============================================
 
 	/**
 	 * The default plugin icon for plugin implementations, which do not
@@ -38,7 +37,7 @@ implements GenericPlugin
 	 */
 	private static final ImageIcon DEFAULT_ICON = ImageBundle.getInstance().getIcon("icon.plugin.default");
 
-	//~ Instance fields ========================================================
+	// ~ Instance fields ========================================================
 
 	/** The <code>ImageBundle</code> of the plugin adapter. */
 	protected ImageBundle iBundle = ImageBundle.getInstance();
@@ -77,13 +76,12 @@ implements GenericPlugin
 	/** The views the plugin provides (class names of the views). */
 	protected String[] views;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new <code>GenericPluginAdapter</code>.
 	 */
-	protected GenericPluginAdapter()
-	{
+	protected GenericPluginAdapter() {
 		this.algorithms = new Algorithm[0];
 		this.attributes = new Class[0];
 		this.dependencies = new String[0];
@@ -93,53 +91,48 @@ implements GenericPlugin
 		this.graphPostProcessors = new GraphPostProcessor[0];
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the array of <code>org.graffiti.algorithm.Algorithm</code>s the
 	 * plugin contains.
-	 *
+	 * 
 	 * @return the array of <code>org.graffiti.algorithm.Algorithm</code>s the
 	 *         plugin contains.
 	 */
-	public Algorithm[] getAlgorithms()
-	{
+	public Algorithm[] getAlgorithms() {
 		return this.algorithms;
 	}
 
-	public AttributeDescription[] getAttributeDescriptions()
-	{
+	public AttributeDescription[] getAttributeDescriptions() {
 		return this.attributeDescriptions;
 	}
 
 	/**
 	 * Returns the attribute types provided by this plugin.
-	 *
+	 * 
 	 * @return the attribute types provided by this plugin.
 	 */
 	@SuppressWarnings("unchecked")
-	public Class[] getAttributes()
-	{
+	public Class[] getAttributes() {
 		return this.attributes;
 	}
 
 	/**
 	 * Returns the array containing the names of the plugin classes the current
 	 * plugin depends on.
-	 *
+	 * 
 	 * @return the array containing the names of the plugin classes the current
 	 *         plugin depends on.
 	 */
-	public String[] getDependencies()
-	{
+	public String[] getDependencies() {
 		return this.dependencies;
 	}
 
 	/**
 	 * Returns an Array of Extensions the plugin provides.
 	 */
-	public Extension[] getExtensions()
-	{
+	public Extension[] getExtensions() {
 		return this.extensions;
 	}
 
@@ -152,12 +145,11 @@ implements GenericPlugin
 	/**
 	 * Returns the default icon for a plugin, which does not overwrite this
 	 * method.
-	 *
-	 * @return the default plugin icon for a plugin implementation, which  does
+	 * 
+	 * @return the default plugin icon for a plugin implementation, which does
 	 *         not overwrite this method.
 	 */
-	public ImageIcon getIcon()
-	{
+	public ImageIcon getIcon() {
 		if (isAddon)
 			return getAddonIcon();
 		else
@@ -167,119 +159,105 @@ implements GenericPlugin
 	public static ImageIcon getAddonIcon() {
 		ClassLoader cl = GenericPlugin.class.getClassLoader();
 		String path = GenericPlugin.class.getPackage().getName().replace('.', '/');
-		ImageIcon i = new ImageIcon(cl.getResource(path+"/addon-icon.png"));
+		ImageIcon i = new ImageIcon(cl.getResource(path + "/addon-icon.png"));
 		return i;
 	}
 
-
 	/**
 	 * Returns the input serializers the plugin provides.
-	 *
+	 * 
 	 * @return the input serializers the plugin provides.
 	 */
-	public InputSerializer[] getInputSerializers()
-	{
+	public InputSerializer[] getInputSerializers() {
 		return this.inputSerializers;
 	}
 
 	/**
 	 * Returns the output serializers the plugin provides.
-	 *
+	 * 
 	 * @return the output serializers the plugin provides.
 	 */
-	public OutputSerializer[] getOutputSerializers()
-	{
+	public OutputSerializer[] getOutputSerializers() {
 		return outputSerializers;
 	}
 
-	public GraphPostProcessor[] getGraphPostProcessors()
-	{
+	public GraphPostProcessor[] getGraphPostProcessors() {
 		return graphPostProcessors;
 	}
 
 	/**
-	 * States whether this class wants to be registered as a
-	 * <code>SelectionListener</code>.
-	 *
+	 * States whether this class wants to be registered as a <code>SelectionListener</code>.
+	 * 
 	 * @return DOCUMENT ME!
 	 */
-	public boolean isSelectionListener()
-	{
+	public boolean isSelectionListener() {
 		return false;
 	}
 
 	/**
-	 * States whether this class wants to be registered as a
-	 * <code>SessionListener</code>.
-	 *
+	 * States whether this class wants to be registered as a <code>SessionListener</code>.
+	 * 
 	 * @return DOCUMENT ME!
 	 */
-	public boolean isSessionListener()
-	{
+	public boolean isSessionListener() {
 		return false;
 	}
 
 	/**
 	 * @see org.graffiti.plugin.GenericPlugin#isViewListener()
 	 */
-	public boolean isViewListener()
-	{
+	public boolean isViewListener() {
 		return false;
 	}
 
 	/**
 	 * Returns the array of <code>org.graffiti.plugin.view.View</code>s the
 	 * plugin contains.
-	 *
+	 * 
 	 * @return the array of <code>org.graffiti.plugin.view.View</code>s the
 	 *         plugin contains.
 	 */
-	public String[] getViews()
-	{
+	public String[] getViews() {
 		return this.views;
 	}
 
 	/**
 	 * Runs configuration routines for the plugin, e.g. load preferences etc.
-	 *
-	 * @param p DOCUMENT ME!
+	 * 
+	 * @param p
+	 *           DOCUMENT ME!
 	 */
-	public void configure(GravistoPreferences p)
-	{
+	public void configure(GravistoPreferences p) {
 		prefs = p;
 	}
 
 	/**
 	 * The routines to perform before the editor will exit.
 	 */
-	public void doBeforeExit()
-	{
+	public void doBeforeExit() {
 	}
 
 	/**
 	 * Interrupts the running plugin.
 	 */
-	public void interrupt()
-	{
+	public void interrupt() {
 	}
 
 	/**
 	 * States whether this class needs up-to-date information about the current
 	 * editcomponents. If this method returns <code>true</code>, it must
 	 * implement interface <code>NeedEditComponents</code>.
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
-	public boolean needsEditComponents()
-	{
+	public boolean needsEditComponents() {
 		return false;
 	}
 
 	/**
 	 * Stops a running plugin. Performs exit routines.
 	 */
-	public void stop()
-	{
+	public void stop() {
 	}
 
 	public String getDefaultView() {
@@ -291,6 +269,6 @@ implements GenericPlugin
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

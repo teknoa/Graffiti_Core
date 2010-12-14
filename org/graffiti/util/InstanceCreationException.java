@@ -1,23 +1,22 @@
-//==============================================================================
+// ==============================================================================
 //
-//   InstanceCreationException.java
+// InstanceCreationException.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: InstanceCreationException.java,v 1.3 2010/07/19 13:01:43 morla Exp $
+// ==============================================================================
+// $Id: InstanceCreationException.java,v 1.4 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.util;
 
 /**
  * An exception, which is thrown, iff the instanciation of a given class fails.
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public class InstanceCreationException
-extends Exception
-{
-	//~ Constructors ===========================================================
+					extends Exception {
+	// ~ Constructors ===========================================================
 
 	/**
 	 * 
@@ -26,25 +25,25 @@ extends Exception
 
 	/**
 	 * Creates a new InstanceCreationException object.
-	 *
-	 * @param msg DOCUMENT ME!
+	 * 
+	 * @param msg
+	 *           DOCUMENT ME!
 	 */
-	public InstanceCreationException(String msg)
-	{
+	public InstanceCreationException(String msg) {
 		super(msg);
 	}
 
 	/**
 	 * Creates a new InstanceCreationException object.
-	 *
-	 * @param ex DOCUMENT ME!
+	 * 
+	 * @param ex
+	 *           DOCUMENT ME!
 	 */
-	public InstanceCreationException(Exception ex)
-	{
+	public InstanceCreationException(Exception ex) {
 		super(ex);
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

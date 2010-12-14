@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   GeneralUtils.java
+// GeneralUtils.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: GeneralUtils.java,v 1.4 2010/07/19 13:01:43 morla Exp $
+// ==============================================================================
+// $Id: GeneralUtils.java,v 1.5 2010/12/14 07:02:26 morla Exp $
 package org.graffiti.util;
 
 import java.util.ArrayList;
@@ -21,36 +21,27 @@ import org.graffiti.attributes.CompositeAttribute;
 import org.graffiti.graph.Edge;
 import org.graffiti.graph.Node;
 
-
 /**
  *
  */
-public class GeneralUtils implements HelperClass
-{
+public class GeneralUtils implements HelperClass {
 	/**
-	 * Returns a <code>Collection</code> of edges between <code>n1</code>
-	 * (source) and <code>n2</code> (target).
-	 *
+	 * Returns a <code>Collection</code> of edges between <code>n1</code> (source) and <code>n2</code> (target).
 	 * <p>
-	 * If no edge exists, returns an empty instance of <code>Collection</code>.
-	 * <code>n1==n2</code> allowed.
+	 * If no edge exists, returns an empty instance of <code>Collection</code>. <code>n1==n2</code> allowed.
 	 * </p>
-	 *
+	 * 
 	 * @param n1
 	 * @param n2
-	 *
 	 * @return Collection
 	 */
-	public static final Collection<Edge> getEdges(Node n1, Node n2)
-	{
+	public static final Collection<Edge> getEdges(Node n1, Node n2) {
 		Collection<Edge> col = new LinkedList<Edge>();
 
-		for (Iterator<Edge> iter = n1.getEdgesIterator(); iter.hasNext();)
-		{
+		for (Iterator<Edge> iter = n1.getEdgesIterator(); iter.hasNext();) {
 			Edge edge = (Edge) iter.next();
 
-			if (n2.equals(edge.getSource()) || n2.equals(edge.getTarget()))
-			{
+			if (n2.equals(edge.getSource()) || n2.equals(edge.getTarget())) {
 				col.add(edge);
 			}
 		}
@@ -60,30 +51,26 @@ public class GeneralUtils implements HelperClass
 
 	/**
 	 * DOCUMENT ME!
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
-	public static final String getNewLineString()
-	{
+	public static final String getNewLineString() {
 		return System.getProperty("line.separator");
 	}
 
 	/**
 	 * DOCUMENT ME!
-	 *
-	 * @param s DOCUMENT ME!
-	 *
+	 * 
+	 * @param s
+	 *           DOCUMENT ME!
 	 * @return DOCUMENT ME!
 	 */
-	public static final int[] getPositionOfOnes(String s)
-	{
+	public static final int[] getPositionOfOnes(String s) {
 		int len = s.length();
 		ArrayList<Integer> pos = new ArrayList<Integer>(len / 2);
 
-		for (int i = 0; i < len; i++)
-		{
-			if ("1".equals(String.valueOf(s.charAt(i))))
-			{
+		for (int i = 0; i < len; i++) {
+			if ("1".equals(String.valueOf(s.charAt(i)))) {
 				pos.add(new Integer(len - i - 1));
 			}
 		}
@@ -92,8 +79,7 @@ public class GeneralUtils implements HelperClass
 
 		int cnt = 0;
 
-		for (Iterator<Integer> it = pos.iterator(); it.hasNext();)
-		{
+		for (Iterator<Integer> it = pos.iterator(); it.hasNext();) {
 			intarray[cnt++] = ((Integer) it.next()).intValue();
 		}
 
@@ -103,14 +89,13 @@ public class GeneralUtils implements HelperClass
 	/**
 	 * Returns <code>true</code> iff first parameter is a power of second, i.e.
 	 * returns true iff <code>base^a</code> is a natural number.
-	 *
-	 * @param a number to check
+	 * 
+	 * @param a
+	 *           number to check
 	 * @param base
-	 *
 	 * @return DOCUMENT ME!
 	 */
-	public static final boolean isPowerOf(int a, int base)
-	{
+	public static final boolean isPowerOf(int a, int base) {
 		double log = log(a, base);
 
 		return ((int) log == log);
@@ -118,13 +103,12 @@ public class GeneralUtils implements HelperClass
 
 	/**
 	 * DOCUMENT ME!
-	 *
-	 * @param inStr DOCUMENT ME!
-	 *
+	 * 
+	 * @param inStr
+	 *           DOCUMENT ME!
 	 * @return DOCUMENT ME!
 	 */
-	public static final String XMLify(String inStr)
-	{
+	public static final String XMLify(String inStr) {
 		inStr = inStr.replaceAll("&", "&amp;");
 		inStr = inStr.replaceAll("<", "&lt;");
 		inStr = inStr.replaceAll(">", "&gt;");
@@ -135,26 +119,20 @@ public class GeneralUtils implements HelperClass
 	}
 
 	/**
-	 * True iff any edge between <code>n1</code> (source) and <code>n2</code>
-	 * (target) exists.
-	 *
+	 * True iff any edge between <code>n1</code> (source) and <code>n2</code> (target) exists.
 	 * <p>
 	 * <code>n1==n2</code> allowed.
 	 * </p>
-	 *
+	 * 
 	 * @param n1
 	 * @param n2
-	 *
 	 * @return boolean
 	 */
-	public boolean existsEdge(Node n1, Node n2)
-	{
-		for (Iterator<Edge> iter = n1.getEdgesIterator(); iter.hasNext();)
-		{
+	public boolean existsEdge(Node n1, Node n2) {
+		for (Iterator<Edge> iter = n1.getEdgesIterator(); iter.hasNext();) {
 			Edge edge = (Edge) iter.next();
 
-			if (n2.equals(edge.getSource()) || n2.equals(edge.getTarget()))
-			{
+			if (n2.equals(edge.getSource()) || n2.equals(edge.getTarget())) {
 				return true;
 			}
 		}
@@ -163,46 +141,41 @@ public class GeneralUtils implements HelperClass
 	}
 
 	/**
-	 * Returns the logarithm of <code>a</code> with respect to base
-	 * <code>base</code>.
-	 *
-	 * @param a DOCUMENT ME!
-	 * @param base DOCUMENT ME!
-	 *
+	 * Returns the logarithm of <code>a</code> with respect to base <code>base</code>.
+	 * 
+	 * @param a
+	 *           DOCUMENT ME!
+	 * @param base
+	 *           DOCUMENT ME!
 	 * @return DOCUMENT ME!
 	 */
-	public static final double log(double a, double base)
-	{
+	public static final double log(double a, double base) {
 		return Math.log(a) / Math.log(base);
 	}
 
 	/**
 	 * DOCUMENT ME!
-	 *
-	 * @param d DOCUMENT ME!
-	 *
+	 * 
+	 * @param d
+	 *           DOCUMENT ME!
 	 * @return DOCUMENT ME!
 	 */
-	public static final boolean nan(double d)
-	{
+	public static final boolean nan(double d) {
 		return Double.doubleToRawLongBits(d) == Double.doubleToRawLongBits(Double.NaN);
 	}
 
 	/**
 	 * Returns the number of "1"s within the string s.
-	 *
-	 * @param s DOCUMENT ME!
-	 *
+	 * 
+	 * @param s
+	 *           DOCUMENT ME!
 	 * @return DOCUMENT ME!
 	 */
-	public static final int numberOfOnes(String s)
-	{
+	public static final int numberOfOnes(String s) {
 		int cnt = 0;
 
-		for (int i = 0; i < s.length(); i++)
-		{
-			if ("1".equals(String.valueOf(s.charAt(i))))
-			{
+		for (int i = 0; i < s.length(); i++) {
+			if ("1".equals(String.valueOf(s.charAt(i)))) {
 				cnt++;
 			}
 		}
@@ -214,47 +187,39 @@ public class GeneralUtils implements HelperClass
 	 * Returns the first attribute it finds that has the given class type.
 	 * Warning: this method delivers only one contained attribute of the given
 	 * type. If there are more than one attibute of that type and you expect
-	 * all that attributes you should better use either
-	 * {@link #searchForAttributes(Attribute, Class, List)}.
-	 *
-	 * @param attr the root attribute for the search
-	 * @param attributeType class to match
-	 *
+	 * all that attributes you should better use either {@link #searchForAttributes(Attribute, Class, List)}.
+	 * 
+	 * @param attr
+	 *           the root attribute for the search
+	 * @param attributeType
+	 *           class to match
 	 * @return first child (depth first) of attr that matches class type
 	 *         attributeType.
 	 */
 	@SuppressWarnings("unchecked")
 	public static final Attribute searchForAttribute(Attribute attr,
-			Class attributeType)
-	{
-		if (attributeType.isInstance(attr))
-		{
+						Class attributeType) {
+		if (attributeType.isInstance(attr)) {
 			return attr;
-		}
-		else
-		{
-			if (attr instanceof CollectionAttribute)
-			{
+		} else {
+			if (attr instanceof CollectionAttribute) {
 				Iterator<Attribute> it = ((CollectionAttribute) attr).getCollection()
-				.values().iterator();
+									.values().iterator();
 
-				while (it.hasNext())
-				{
+				while (it.hasNext()) {
 					Attribute newAttr = searchForAttribute((Attribute) it.next(),
-							attributeType);
+										attributeType);
 
-					if (newAttr != null)
-					{
+					if (newAttr != null) {
 						return newAttr;
 					}
 				}
-			}
-			else if (attr instanceof CompositeAttribute)
-			{
-				// TODO: treat those correctly; some of those have not yet
-				// been correctly implemented
-				return null;
-			}
+			} else
+				if (attr instanceof CompositeAttribute) {
+					// TODO: treat those correctly; some of those have not yet
+					// been correctly implemented
+					return null;
+				}
 		}
 
 		return null;
@@ -262,40 +227,37 @@ public class GeneralUtils implements HelperClass
 
 	/**
 	 * Searches for all attributes that have the given class type.
-	 *
-	 * @param attr the root attribute for the search
-	 * @param attributeType class to match
-	 * @param attributesList list which will be filled with found attributes.
+	 * 
+	 * @param attr
+	 *           the root attribute for the search
+	 * @param attributeType
+	 *           class to match
+	 * @param attributesList
+	 *           list which will be filled with found attributes.
 	 */
 	@SuppressWarnings("unchecked")
 	public static void searchForAttributes(Attribute attr, Class attributeType,
-			List attributesList)
-	{
-		if (attributeType.isInstance(attr))
-		{
+						List attributesList) {
+		if (attributeType.isInstance(attr)) {
 			attributesList.add(attr);
 		}
 
-		if (attr instanceof CollectionAttribute)
-		{
+		if (attr instanceof CollectionAttribute) {
 			Iterator it = ((CollectionAttribute) attr).getCollection().values()
-			.iterator();
+								.iterator();
 
-			while (it.hasNext())
-			{
+			while (it.hasNext()) {
 				searchForAttributes((Attribute) it.next(), attributeType,
-						attributesList);
+									attributesList);
 			}
-		}
-		else if (attr instanceof CompositeAttribute)
-		{
-			// TODO: treat those correctly; some of those have not yet
-			// been correctly implemented
-		}
+		} else
+			if (attr instanceof CompositeAttribute) {
+				// TODO: treat those correctly; some of those have not yet
+				// been correctly implemented
+			}
 	}
 }
 
-
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   PluginDescription.java
+// PluginDescription.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: PluginDescription.java,v 1.14 2010/07/19 13:01:31 morla Exp $
+// ==============================================================================
+// $Id: PluginDescription.java,v 1.15 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -17,14 +17,13 @@ import java.util.List;
 
 /**
  * Contains a meta data of a plugin.
- *
- * @version $Revision: 1.14 $
+ * 
+ * @version $Revision: 1.15 $
  */
-public class PluginDescription
-{
-	//~ Static fields/initializers =============================================
+public class PluginDescription {
+	// ~ Static fields/initializers =============================================
 
-	//~ Instance fields ========================================================
+	// ~ Instance fields ========================================================
 
 	/** The list of <code>Dependency</code> objects of this plugin. */
 	private List<PluginDependency> dependencies;
@@ -42,9 +41,8 @@ public class PluginDescription
 	private String description;
 
 	/**
-	 * The name of the plugin class, which implements the
-	 * <code>GenericPlugin</code> interface.
-	 *
+	 * The name of the plugin class, which implements the <code>GenericPlugin</code> interface.
+	 * 
 	 * @see org.graffiti.plugin.GenericPlugin
 	 */
 	private String main;
@@ -57,220 +55,208 @@ public class PluginDescription
 
 	private String compatibleVersion;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs an empty plugin description,
 	 */
-	public PluginDescription()
-	{
+	public PluginDescription() {
 		dependencies = new LinkedList<PluginDependency>();
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets the author.
-	 *
-	 * @param author The author to set
+	 * 
+	 * @param author
+	 *           The author to set
 	 */
-	public void setAuthor(String author)
-	{
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 
 	/**
 	 * Returns the author.
-	 *
+	 * 
 	 * @return String
 	 */
-	public String getAuthor()
-	{
+	public String getAuthor() {
 		return author;
 	}
 
 	/**
 	 * Sets the available.
-	 *
-	 * @param available The available to set
+	 * 
+	 * @param available
+	 *           The available to set
 	 */
-	public void setAvailable(String available)
-	{
+	public void setAvailable(String available) {
 		this.available = available;
 	}
 
 	/**
 	 * Returns the available.
-	 *
+	 * 
 	 * @return String
 	 */
-	public String getAvailable()
-	{
+	public String getAvailable() {
 		return available;
 	}
 
 	/**
 	 * Sets the dependencies.
-	 *
-	 * @param dependencies The dependencies to set
+	 * 
+	 * @param dependencies
+	 *           The dependencies to set
 	 */
-	public void setDependencies(List<PluginDependency> dependencies)
-	{
+	public void setDependencies(List<PluginDependency> dependencies) {
 		this.dependencies = dependencies;
 	}
 
 	/**
 	 * Returns the dependencies.
-	 *
+	 * 
 	 * @return List
 	 */
-	public List<PluginDependency> getDependencies()
-	{
+	public List<PluginDependency> getDependencies() {
 		return dependencies;
 	}
 
 	/**
 	 * Sets the description.
-	 *
-	 * @param description The description to set
+	 * 
+	 * @param description
+	 *           The description to set
 	 */
-	public void setDescription(String description)
-	{
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
 	 * Returns the description.
-	 *
+	 * 
 	 * @return String
 	 */
-	public String getDescription()
-	{
+	public String getDescription() {
 		return description;
 	}
 
 	/**
 	 * Sets the main.
-	 *
-	 * @param main The main to set
+	 * 
+	 * @param main
+	 *           The main to set
 	 */
-	public void setMain(String main)
-	{
+	public void setMain(String main) {
 		this.main = main;
 	}
 
 	/**
 	 * Returns the main.
-	 *
+	 * 
 	 * @return String
 	 */
-	public String getMain()
-	{
+	public String getMain() {
 		return main;
 	}
 
 	/**
 	 * Sets the name.
-	 *
-	 * @param name The name to set
+	 * 
+	 * @param name
+	 *           The name to set
 	 */
-	public void setName(String name)
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
 	 * Returns the name.
-	 *
+	 * 
 	 * @return String
 	 */
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
 	/**
 	 * Returns an iterator over the plugin dependency list.
-	 *
+	 * 
 	 * @return an iterator over the plugin dependency list.
 	 */
-	public Iterator<PluginDependency> getPluginDependenciesIterator()
-	{
+	public Iterator<PluginDependency> getPluginDependenciesIterator() {
 		return dependencies.iterator();
 	}
 
 	/**
 	 * Sets the version.
-	 *
-	 * @param version The version to set
+	 * 
+	 * @param version
+	 *           The version to set
 	 */
-	public void setVersion(String version)
-	{
+	public void setVersion(String version) {
 		this.version = version;
 	}
 
 	/**
 	 * Returns the version.
-	 *
+	 * 
 	 * @return Version
 	 */
-	public String getVersion()
-	{
+	public String getVersion() {
 		return version;
 	}
 
 	/**
 	 * Sets the version for compatibility.
-	 *
-	 * @param version The version to set
+	 * 
+	 * @param version
+	 *           The version to set
 	 */
-	public void setCompatibleVersion(String v)
-	{
+	public void setCompatibleVersion(String v) {
 		this.compatibleVersion = v;
 	}
 
 	/**
 	 * Returns the version for compatibility.
-	 *
+	 * 
 	 * @return Version
 	 */
-	public String getCompatibleVersion()
-	{
+	public String getCompatibleVersion() {
 		return compatibleVersion;
 	}
 
-
 	/**
 	 * Adds the given dependency to the list of dependencies.
-	 *
-	 * @param dep the dependency to add to the list of dependent plugins.
+	 * 
+	 * @param dep
+	 *           the dependency to add to the list of dependent plugins.
 	 */
-	public void addDependency(PluginDependency dep)
-	{
+	public void addDependency(PluginDependency dep) {
 		dependencies.add(dep);
 	}
 
 	/**
 	 * Adds the given plugin dependency to the list of dependencies.
-	 *
-	 * @param dep the dependency to add to the list.
+	 * 
+	 * @param dep
+	 *           the dependency to add to the list.
 	 */
-	public void addPluginDependency(PluginDependency dep)
-	{
+	public void addPluginDependency(PluginDependency dep) {
 		dependencies.add(dep);
 	}
 
 	/**
 	 * Returns a human readable string representation of this object.
-	 *
+	 * 
 	 * @return a human readable string representation of this object.
 	 */
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "[name = " + name + ", version = " + version + ", " +
-		" main = " + main + ", number of dependencies = " +
-		dependencies.size() + "]";
+							" main = " + main + ", number of dependencies = " +
+							dependencies.size() + "]";
 	}
 
 	private Collection<PluginEntry> childPlugins = new ArrayList<PluginEntry>();
@@ -286,13 +272,13 @@ public class PluginDescription
 	}
 
 	public void addChild(PluginEntry plugin) {
-		synchronized(childPlugins) {
+		synchronized (childPlugins) {
 			childPlugins.add(plugin);
 		}
 	}
 
 	public Collection<PluginEntry> getChildPlugins() {
-		synchronized(childPlugins) {
+		synchronized (childPlugins) {
 			return childPlugins;
 		}
 	}
@@ -302,7 +288,7 @@ public class PluginDescription
 	private boolean isOptionalDefaultTrue = true;
 
 	public void setIsOptional(String optional) {
-		if (optional!=null && optional.equalsIgnoreCase("true"))
+		if (optional != null && optional.equalsIgnoreCase("true"))
 			isOptional = true;
 		else
 			isOptional = false;
@@ -313,7 +299,7 @@ public class PluginDescription
 	}
 
 	public void setIsOptionalDefaultTrue(String optionalDefaultValue) {
-		if (optionalDefaultValue!=null && optionalDefaultValue.equalsIgnoreCase("false"))
+		if (optionalDefaultValue != null && optionalDefaultValue.equalsIgnoreCase("false"))
 			isOptionalDefaultTrue = false;
 		else
 			isOptionalDefaultTrue = true;
@@ -334,14 +320,14 @@ public class PluginDescription
 	}
 
 	public void setIsPriorityPlugin(String priority) {
-		if (priority!=null && priority.equalsIgnoreCase("true"))
+		if (priority != null && priority.equalsIgnoreCase("true"))
 			isPriorityPlugin = true;
 		else
 			isPriorityPlugin = false;
 	}
 
 	public boolean hasRSSfeedDefined() {
-		return rssFeedURL!=null && rssFeedName!=null;
+		return rssFeedURL != null && rssFeedName != null;
 	}
 
 	/**
@@ -363,6 +349,6 @@ public class PluginDescription
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

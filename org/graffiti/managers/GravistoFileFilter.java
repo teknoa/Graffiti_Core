@@ -7,9 +7,7 @@ import org.graffiti.core.GenericFileFilter;
 
 /**
  * @author Christian Klukas
- * 
- * (c) 2004 IPK-Gatersleben
- *
+ *         (c) 2004 IPK-Gatersleben
  */
 public class GravistoFileFilter extends GenericFileFilter {
 
@@ -20,11 +18,11 @@ public class GravistoFileFilter extends GenericFileFilter {
 	 */
 	public GravistoFileFilter(String extension, String description) {
 		super(extension);
-		this.description=description;
+		this.description = description;
 	}
 
 	@Override
 	public String getDescription() {
-		return description+" (*"+getExtension()+")";
+		return description + " (*" + getExtension() + ")";
 	}
 }

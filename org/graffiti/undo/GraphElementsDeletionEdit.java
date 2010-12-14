@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: GraphElementsDeletionEdit.java,v 1.7 2010/11/25 12:59:42 morla Exp $
+// $Id: GraphElementsDeletionEdit.java,v 1.8 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.undo;
 
@@ -28,7 +28,7 @@ import org.graffiti.graph.Node;
  * undoable.
  * 
  * @author $Author $
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 @SuppressWarnings("unchecked")
 public class GraphElementsDeletionEdit
@@ -75,7 +75,6 @@ public class GraphElementsDeletionEdit
 	 * Used to display the name for this edit.
 	 * 
 	 * @return the name of this edit.
-	 * 
 	 * @see javax.swing.undo.UndoableEdit
 	 */
 	@Override

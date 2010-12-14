@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
  *******************************************************************************/
 /*
  * Created on 03.08.2004 by Christian Klukas
@@ -16,15 +14,13 @@ import javax.swing.JInternalFrame;
 
 /**
  * @author Christian Klukas
- * 
- * (c) 2004 IPK-Gatersleben
- *
+ *         (c) 2004 IPK-Gatersleben
  */
 public class Java_1_5_compatibility {
 	public static void setComponentZorder(JDesktopPane jDesktopPane, JInternalFrame jInternalFrame) {
 		try {
 			Java_1_5_compatibility_impl.setComponentZorder(jDesktopPane, jInternalFrame);
-		} catch(NoSuchMethodError nsme) {
+		} catch (NoSuchMethodError nsme) {
 			//
 		}
 	}
@@ -35,7 +31,7 @@ public class Java_1_5_compatibility {
 	public static StackTraceElement[] getStackFrame() {
 		try {
 			return Java_1_5_compatibility_impl.getStackFrame();
-		} catch(NoSuchMethodError nsme) {
+		} catch (NoSuchMethodError nsme) {
 			return null;
 		}
 	}
@@ -47,18 +43,19 @@ public class Java_1_5_compatibility {
 	public static URI getURIfromURL(URL url) {
 		try {
 			return Java_1_5_compatibility_impl.getURIfromURL(url);
-		} catch(NoSuchMethodError nsme) {
+		} catch (NoSuchMethodError nsme) {
 			return null;
 		}
 	}
 
 	public static String getJavaVersion() {
-		return "Java "+System.getProperty("java.version");
+		return "Java " + System.getProperty("java.version");
 		/*
-        try {
-            return Java_1_5_compatibility_impl.myStringReplace("x", "x", "Java 1.5 or higher");
-        } catch(NoSuchMethodError nsme) {
-            return "Java 1.4 or lower";
-        }*/
+		 * try {
+		 * return Java_1_5_compatibility_impl.myStringReplace("x", "x", "Java 1.5 or higher");
+		 * } catch(NoSuchMethodError nsme) {
+		 * return "Java 1.4 or lower";
+		 * }
+		 */
 	}
 }

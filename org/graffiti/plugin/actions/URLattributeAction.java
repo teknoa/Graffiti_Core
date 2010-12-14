@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2008 Plant Bioinformatics Group, IPK Gatersleben
- * 
+ * Copyright (c) 2008 Plant Bioinformatics Group, IPK Gatersleben
  *******************************************************************************/
 /**
  * @author Christian Klukas
@@ -16,7 +14,10 @@ import org.graffiti.graph.GraphElement;
 
 public interface URLattributeAction {
 	public String getPreIdentifyer();
+
 	public String getCommandDescription(boolean shortDesc, boolean altDesc);
+
 	public ActionListener getActionListener(Attribute displayable, Graph graph, GraphElement ge, boolean performAltCommand);
+
 	public boolean supportsModifyCommand();
 }

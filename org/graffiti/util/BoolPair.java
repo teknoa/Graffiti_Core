@@ -1,23 +1,22 @@
-//==============================================================================
+// ==============================================================================
 //
-//   BoolPair.java
+// BoolPair.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: BoolPair.java,v 1.2 2010/07/19 13:01:39 morla Exp $
+// ==============================================================================
+// $Id: BoolPair.java,v 1.3 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.util;
 
 /**
  * Encapsulates two boolean values.
- *
+ * 
  * @author Paul
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
-public class BoolPair
-{
-	//~ Instance fields ========================================================
+public class BoolPair {
+	// ~ Instance fields ========================================================
 
 	/** DOCUMENT ME! */
 	private boolean bool1;
@@ -25,43 +24,42 @@ public class BoolPair
 	/** DOCUMENT ME! */
 	private boolean bool2;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Creates a new BoolPair object.
-	 *
-	 * @param bool1 DOCUMENT ME!
-	 * @param bool2 DOCUMENT ME!
+	 * 
+	 * @param bool1
+	 *           DOCUMENT ME!
+	 * @param bool2
+	 *           DOCUMENT ME!
 	 */
-	public BoolPair(boolean bool1, boolean bool2)
-	{
+	public BoolPair(boolean bool1, boolean bool2) {
 		this.bool1 = bool1;
 		this.bool2 = bool2;
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * DOCUMENT ME!
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
-	public boolean getFst()
-	{
+	public boolean getFst() {
 		return bool1;
 	}
 
 	/**
 	 * DOCUMENT ME!
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
-	public boolean getSnd()
-	{
+	public boolean getSnd() {
 		return bool2;
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

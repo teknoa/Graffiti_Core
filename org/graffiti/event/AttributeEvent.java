@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AttributeEvent.java
+// AttributeEvent.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AttributeEvent.java,v 1.5 2010/07/19 13:01:43 morla Exp $
+// ==============================================================================
+// $Id: AttributeEvent.java,v 1.6 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.event;
 
@@ -14,13 +14,12 @@ import org.graffiti.attributes.Attribute;
 
 /**
  * Contains an attribute event.
- *
- * @version $Revision: 1.5 $
+ * 
+ * @version $Revision: 1.6 $
  */
 public class AttributeEvent
-extends AbstractEvent
-{
-	//~ Instance fields ========================================================
+					extends AbstractEvent {
+	// ~ Instance fields ========================================================
 
 	/**
 	 * 
@@ -29,50 +28,49 @@ extends AbstractEvent
 	/** The path that has been assigned to the attribute by the event. */
 	private String path;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Contructor that is called when one attribute is concerned.
-	 *
-	 * @param attribute the attribute, which was altered.
+	 * 
+	 * @param attribute
+	 *           the attribute, which was altered.
 	 */
-	public AttributeEvent(Attribute attribute)
-	{
+	public AttributeEvent(Attribute attribute) {
 		super(attribute);
 	}
 
 	/**
 	 * Contructor that is called when one composite attribute is concerned,
 	 * where it is comfortable to pass the path of attribute, too.
-	 *
-	 * @param path the path to the attribute that was altered.
-	 * @param attribute the attribute, which was altered.
+	 * 
+	 * @param path
+	 *           the path to the attribute that was altered.
+	 * @param attribute
+	 *           the attribute, which was altered.
 	 */
-	public AttributeEvent(String path, Attribute attribute)
-	{
+	public AttributeEvent(String path, Attribute attribute) {
 		super(attribute);
 		this.path = path;
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the attribute that has been changed by this event.
-	 *
+	 * 
 	 * @return the attribute that has been changed by this event.
 	 */
-	public Attribute getAttribute()
-	{
+	public Attribute getAttribute() {
 		return (Attribute) getSource();
 	}
 
 	/**
 	 * Returns the path to the attribute that has been changed by this event.
-	 *
+	 * 
 	 * @return the path to the attribute that has been changed by this event.
 	 */
-	public String getPath()
-	{
+	public String getPath() {
 		return path;
 	}
 
@@ -81,6 +79,6 @@ extends AbstractEvent
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

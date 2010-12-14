@@ -1,6 +1,5 @@
 package org.graffiti.graphics;
 
-
 import org.graffiti.attributes.StringAttribute;
 
 public class SourceDockingAttribute extends StringAttribute {
@@ -10,7 +9,7 @@ public class SourceDockingAttribute extends StringAttribute {
 	}
 
 	public SourceDockingAttribute(String id, String value) {
-		super(id,value);
+		super(id, value);
 	}
 
 	public SourceDockingAttribute() {

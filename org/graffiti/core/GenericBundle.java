@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   GenericBundle.java
+// GenericBundle.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: GenericBundle.java,v 1.3 2010/07/19 13:00:57 morla Exp $
+// ==============================================================================
+// $Id: GenericBundle.java,v 1.4 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.core;
 
@@ -17,52 +17,44 @@ import java.util.ResourceBundle;
 /**
  * A generalized localized resource bundle.
  */
-public abstract class GenericBundle
-{
-	//~ Instance fields ========================================================
+public abstract class GenericBundle {
+	// ~ Instance fields ========================================================
 
 	/** Resource bundle. */
 	protected ResourceBundle resources;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs new <code>GenericBundle</code>.
 	 */
-	protected GenericBundle()
-	{
-		try
-		{
+	protected GenericBundle() {
+		try {
 			resources = ResourceBundle.getBundle(getBundleLocation(),
-					Locale.getDefault());
-		}
-		catch(MissingResourceException mre)
-		{
+								Locale.getDefault());
+		} catch (MissingResourceException mre) {
 			System.err.println(getBundleLocation() + ".properties not found.");
 			mre.printStackTrace(System.err);
 		}
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the relative location of the specified resource.
-	 *
-	 * @param s the name of the resource.
-	 *
+	 * 
+	 * @param s
+	 *           the name of the resource.
 	 * @return the relative location of the specified resource.
 	 */
-	public URL getRes(String s)
-	{
-		if(s == null)
-		{
+	public URL getRes(String s) {
+		if (s == null) {
 			return null;
 		}
 
 		String res = getString(s);
 
-		if(res == null)
-		{
+		if (res == null) {
 			return null;
 		}
 
@@ -70,34 +62,29 @@ public abstract class GenericBundle
 	}
 
 	/**
-	 * Returns the specified String from the properties, <code>null</code>  if
+	 * Returns the specified String from the properties, <code>null</code> if
 	 * there is no such key.
-	 *
-	 * @param id the key of the String to look up.
-	 *
+	 * 
+	 * @param id
+	 *           the key of the String to look up.
 	 * @return the value of the looked up key.
 	 */
-	public String getString(String id)
-	{
-		try
-		{
+	public String getString(String id) {
+		try {
 			return resources.getString(id);
-		}
-		catch(MissingResourceException mre)
-		{
+		} catch (MissingResourceException mre) {
 			return null;
 		}
 	}
 
 	/**
-	 * Returns the location of the bundle. This is a String like
-	 * <code>package/subpackage/classname</code>.
-	 *
+	 * Returns the location of the bundle. This is a String like <code>package/subpackage/classname</code>.
+	 * 
 	 * @return the location of the bundle.
 	 */
 	protected abstract String getBundleLocation();
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

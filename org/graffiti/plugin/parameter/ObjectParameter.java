@@ -1,38 +1,39 @@
-//==============================================================================
+// ==============================================================================
 //
-//   ObjectParameter.java
+// ObjectParameter.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: ObjectParameter.java,v 1.3 2010/07/19 13:01:54 morla Exp $
+// ==============================================================================
+// $Id: ObjectParameter.java,v 1.4 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
 /**
  * Parameter that contains an <code>Object</code> value.
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public class ObjectParameter
-extends AbstractSingleParameter
-{
-	//~ Instance fields ========================================================
+					extends AbstractSingleParameter {
+	// ~ Instance fields ========================================================
 
 	/** DOCUMENT ME! */
 	private Object object;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new integer parameter.
-	 *
-	 * @param value DOCUMENT ME!
-	 * @param name DOCUMENT ME!
-	 * @param description DOCUMENT ME!
+	 * 
+	 * @param value
+	 *           DOCUMENT ME!
+	 * @param name
+	 *           DOCUMENT ME!
+	 * @param description
+	 *           DOCUMENT ME!
 	 */
-	public ObjectParameter(Object value, String name, String description)
-	{
+	public ObjectParameter(Object value, String name, String description) {
 		super(name, description);
 
 		this.object = value;
@@ -40,37 +41,37 @@ extends AbstractSingleParameter
 
 	/**
 	 * Constructs a new integer parameter.
-	 *
-	 * @param name DOCUMENT ME!
-	 * @param description DOCUMENT ME!
+	 * 
+	 * @param name
+	 *           DOCUMENT ME!
+	 * @param description
+	 *           DOCUMENT ME!
 	 */
-	public ObjectParameter(String name, String description)
-	{
+	public ObjectParameter(String name, String description) {
 		super(name, description);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * @see org.graffiti.plugin.Displayable#setValue(java.lang.Object)
 	 */
 	@Override
 	public void setValue(Object val)
-	throws IllegalArgumentException
-	{
+						throws IllegalArgumentException {
 		object = val;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see org.graffiti.plugin.Displayable#getValue()
 	 */
 	@Override
-	public Object getValue()
-	{
+	public Object getValue() {
 		return object;
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

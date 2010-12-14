@@ -9,7 +9,7 @@ public class AttributeManager {
 	private static AttributeManager instance;
 
 	public static AttributeManager getInstance() {
-		if(instance==null)
+		if (instance == null)
 			instance = new AttributeManager();
 		return instance;
 	}

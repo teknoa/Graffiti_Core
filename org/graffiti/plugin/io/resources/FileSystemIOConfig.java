@@ -1,6 +1,5 @@
 package org.graffiti.plugin.io.resources;
 
-
 public class FileSystemIOConfig implements ResourceIOConfigObject {
 
 	private String filedir;

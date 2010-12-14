@@ -1,14 +1,10 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
  *******************************************************************************/
 package org;
 
 /**
- * 
  * @author klukas
- * 
  */
 public interface BackgroundTaskStatusProvider {
 	/**
@@ -32,8 +28,7 @@ public interface BackgroundTaskStatusProvider {
 
 	/**
 	 * Same as <code>getCurrentStatusValue()</code>, but this method should
-	 * return a finer granted progress value. If this is not needed, the code for
-	 * <code>getCurrentStatusValue()</code> could be reused by the client.
+	 * return a finer granted progress value. If this is not needed, the code for <code>getCurrentStatusValue()</code> could be reused by the client.
 	 * 
 	 * @return The current progress value (fine).
 	 */
@@ -48,8 +43,7 @@ public interface BackgroundTaskStatusProvider {
 	public abstract String getCurrentStatusMessage1();
 
 	/**
-	 * Returns a status message on what is going on. Is used the same like
-	 * <code>getCurrentStatusMessage1</code>. This second message adds
+	 * Returns a status message on what is going on. Is used the same like <code>getCurrentStatusMessage1</code>. This second message adds
 	 * flexibility. If not needed, the first message should be used and this
 	 * should return null if not needed. WARNING: This method must be
 	 * Thread-Safe!
@@ -61,14 +55,12 @@ public interface BackgroundTaskStatusProvider {
 	/**
 	 * If this method is called on the status provider, the linked work task
 	 * should stop its execution as soon as possible.
-	 * 
 	 */
 	public void pleaseStop();
 
 	/**
 	 * @return Let this method return true in order to show a "Continue" button
-	 *         in the GUI. When this buttons is clicked, the method
-	 *         <code>pleaseContinueRun</code> is called. Use these two methods to
+	 *         in the GUI. When this buttons is clicked, the method <code>pleaseContinueRun</code> is called. Use these two methods to
 	 *         let the user interact with the GUI while the algorithm is waiting
 	 *         for the user to be ready for the continued work of the algorithm.
 	 */

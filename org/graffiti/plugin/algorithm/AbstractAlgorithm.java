@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AbstractAlgorithm.java
+// AbstractAlgorithm.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AbstractAlgorithm.java,v 1.7 2010/07/19 13:00:48 morla Exp $
+// ==============================================================================
+// $Id: AbstractAlgorithm.java,v 1.8 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -24,7 +24,7 @@ import org.graffiti.selection.Selection;
  * Implements some empty versions of non-obligatory methods.
  */
 public abstract class AbstractAlgorithm implements Algorithm {
-	//~ Instance fields ========================================================
+	// ~ Instance fields ========================================================
 
 	/** The graph on which the algorithm will work. */
 	protected Graph graph;
@@ -37,7 +37,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
 
 	protected ActionEvent actionEvent = null;
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/*
 	 * @see org.graffiti.plugin.algorithm.Algorithm#setParameters(org.graffiti.plugin.parameter.Parameter[])
@@ -133,9 +133,8 @@ public abstract class AbstractAlgorithm implements Algorithm {
 		return false;
 	}
 
-
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

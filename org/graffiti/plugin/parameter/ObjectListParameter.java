@@ -7,12 +7,10 @@ import javax.swing.ListCellRenderer;
 
 /**
  * @author klukas
- *
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class ObjectListParameter
-extends AbstractSingleParameter
-{
+					extends AbstractSingleParameter {
 	@SuppressWarnings("unchecked")
 	private Collection possibleValues;
 	private ListCellRenderer renderer;
@@ -45,6 +43,6 @@ extends AbstractSingleParameter
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

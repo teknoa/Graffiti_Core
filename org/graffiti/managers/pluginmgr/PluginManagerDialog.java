@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   PluginManagerDialog.java
+// PluginManagerDialog.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: PluginManagerDialog.java,v 1.6 2010/11/17 14:04:53 morla Exp $
+// ==============================================================================
+// $Id: PluginManagerDialog.java,v 1.7 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -50,18 +50,17 @@ import org.graffiti.util.PluginHelper;
 
 /**
  * DOCUMENT ME!
- *
- * @version $Revision: 1.6 $
+ * 
+ * @version $Revision: 1.7 $
  */
 public class PluginManagerDialog
-extends JDialog
-implements ActionListener, ListSelectionListener, TableModelListener
-{
-	//~ Static fields/initializers =============================================
+					extends JDialog
+					implements ActionListener, ListSelectionListener, TableModelListener {
+	// ~ Static fields/initializers =============================================
 
 	private static final long serialVersionUID = 1L;
 
-	//~ Instance fields ========================================================
+	// ~ Instance fields ========================================================
 
 	/** The <code>ImageBundle</code> of this plugin manager dialog. */
 	protected ImageBundle iBundle = ImageBundle.getInstance();
@@ -122,16 +121,17 @@ implements ActionListener, ListSelectionListener, TableModelListener
 	/** <code>true</code>, iff the user has modified the plugin list. */
 	private boolean modifiedPluginList;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new plugin manager dialog.
-	 *
-	 * @param parent a reference to the parent frame.
-	 * @param pluginManager the plugin manager to edit the preferences from.
+	 * 
+	 * @param parent
+	 *           a reference to the parent frame.
+	 * @param pluginManager
+	 *           the plugin manager to edit the preferences from.
 	 */
-	public PluginManagerDialog(Frame parent, PluginManager pluginManager)
-	{
+	public PluginManagerDialog(Frame parent, PluginManager pluginManager) {
 		super(parent, true);
 
 		this.pluginManager = pluginManager;
@@ -149,8 +149,8 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		dialogPane.add(createListAndInfoView(), BorderLayout.CENTER);
 		dialogPane.add(createButtonBar(), BorderLayout.SOUTH);
 		dialogPane.setBorder(BorderFactory.createCompoundBorder(
-				BorderFactory.createEmptyBorder(5, 5, 5, 5),
-				dialogPane.getBorder()));
+							BorderFactory.createEmptyBorder(5, 5, 5, 5),
+							dialogPane.getBorder()));
 
 		getContentPane().add(dialogPane, BorderLayout.CENTER);
 
@@ -162,61 +162,51 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		setLocationRelativeTo(parent);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the plugin manager of this dialog.
-	 *
+	 * 
 	 * @return the plugin manager of this dialog.
 	 */
-	public PluginManager getPluginManager()
-	{
+	public PluginManager getPluginManager() {
 		return pluginManager;
 	}
 
 	/**
 	 * DOCUMENT ME!
-	 *
-	 * @param e DOCUMENT ME!
+	 * 
+	 * @param e
+	 *           DOCUMENT ME!
 	 */
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 
-		if(src == search)
-		{
+		if (src == search) {
 			searchPlugins();
-		}
-		else if(src == add)
-		{
-			addPlugin();
-		}
-		else if(src == close)
-		{
-			close();
-		}
-		else if(src == invertSelection)
-		{
-			invertCheckboxes();
-		}
+		} else
+			if (src == add) {
+				addPlugin();
+			} else
+				if (src == close) {
+					close();
+				} else
+					if (src == invertSelection) {
+						invertCheckboxes();
+					}
 	}
 
 	/**
 	 * Called, iff the user presses the &quot;close&quot; button.
 	 */
-	public void close()
-	{
-		try
-		{
+	public void close() {
+		try {
 			pluginManager.savePrefs();
-		}
-		catch(PluginManagerException pme)
-		{
+		} catch (PluginManagerException pme) {
 			showWarningMessage(pme.getMessage());
 		}
 
-		if(modifiedPluginList)
-		{
+		if (modifiedPluginList) {
 			showWarningMessage(sBundle.getString("message.restart.editor"));
 		}
 
@@ -225,19 +215,18 @@ implements ActionListener, ListSelectionListener, TableModelListener
 
 	/**
 	 * Called, if the selection in the list changes.
-	 *
-	 * @param e DOCUMENT ME!
+	 * 
+	 * @param e
+	 *           DOCUMENT ME!
 	 */
-	public void selectionChanged(ListSelectionEvent e)
-	{
+	public void selectionChanged(ListSelectionEvent e) {
 		updateGUI();
 	}
 
 	private void invertCheckboxes() {
-		if(!pluginsTableModel.isEmpty())
-		{
-			for (int i=0; i<pluginsTableModel.getRowCount(); i++) {
-				Boolean current=(Boolean) pluginsTableModel.getValueAt(i, 2);
+		if (!pluginsTableModel.isEmpty()) {
+			for (int i = 0; i < pluginsTableModel.getRowCount(); i++) {
+				Boolean current = (Boolean) pluginsTableModel.getValueAt(i, 2);
 				pluginsTableModel.setValueAt(new Boolean(!current.booleanValue()), i, 2);
 			}
 		}
@@ -247,14 +236,12 @@ implements ActionListener, ListSelectionListener, TableModelListener
 	 * Displays this dialog.
 	 */
 	@Override
-	public void setVisible(boolean show)
-	{
+	public void setVisible(boolean show) {
 		if (show) {
 			pluginsTableModel.updateModel();
 			updateGUI();
 
-			if(!pluginsTableModel.isEmpty())
-			{
+			if (!pluginsTableModel.isEmpty()) {
 				pluginsSelectionModel.setLeadSelectionIndex(0);
 			}
 		}
@@ -263,11 +250,11 @@ implements ActionListener, ListSelectionListener, TableModelListener
 
 	/**
 	 * Called if the contents of the pluginsTable changed.
-	 *
-	 * @param e DOCUMENT ME!
+	 * 
+	 * @param e
+	 *           DOCUMENT ME!
 	 */
-	public void tableChanged(TableModelEvent e)
-	{
+	public void tableChanged(TableModelEvent e) {
 		updateGUI();
 	}
 
@@ -275,17 +262,13 @@ implements ActionListener, ListSelectionListener, TableModelListener
 	 * Called, if the selection changed and/or the ui elements have to be
 	 * updated.
 	 */
-	public void updateGUI()
-	{
-		if(pluginsSelectionModel.isSelectionEmpty())
-		{
+	public void updateGUI() {
+		if (pluginsSelectionModel.isSelectionEmpty()) {
 			version.setText(" ");
 			author.setText(" ");
 			description.setText(" ");
 			available.setText(" ");
-		}
-		else
-		{
+		} else {
 			PluginDescription desc = pluginsTableModel.getPluginDescription(pluginsSelectionModel.getMinSelectionIndex());
 
 			version.setText(desc.getVersion());
@@ -297,14 +280,13 @@ implements ActionListener, ListSelectionListener, TableModelListener
 
 	/**
 	 * Called, if a value in the list changes.
-	 *
-	 * @param e DOCUMENT ME!
+	 * 
+	 * @param e
+	 *           DOCUMENT ME!
 	 */
-	public void valueChanged(ListSelectionEvent e)
-	{
+	public void valueChanged(ListSelectionEvent e) {
 		// ignore extra events
-		if(e.getValueIsAdjusting())
-		{
+		if (e.getValueIsAdjusting()) {
 			return;
 		}
 
@@ -313,48 +295,43 @@ implements ActionListener, ListSelectionListener, TableModelListener
 
 	/**
 	 * Displays a dialog with the given error message.
-	 *
-	 * @param msg the message to display in the error dialog.
+	 * 
+	 * @param msg
+	 *           the message to display in the error dialog.
 	 */
-	protected void showErrorMessage(String msg)
-	{
+	protected void showErrorMessage(String msg) {
 		JOptionPane.showMessageDialog(this, msg,
-				sBundle.getString("message.error.title"), JOptionPane.ERROR_MESSAGE);
+							sBundle.getString("message.error.title"), JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
 	 * Displays a dialog with the given warning message.
-	 *
-	 * @param msg the warning message to display in the dialog.
+	 * 
+	 * @param msg
+	 *           the warning message to display in the dialog.
 	 */
-	protected void showWarningMessage(String msg)
-	{
+	protected void showWarningMessage(String msg) {
 		JOptionPane.showMessageDialog(this, msg,
-				sBundle.getString("message.warning.title"),
-				JOptionPane.WARNING_MESSAGE);
+							sBundle.getString("message.warning.title"),
+							JOptionPane.WARNING_MESSAGE);
 	}
 
 	/**
 	 * DOCUMENT ME!
-	 *
-	 * @param pluginLocation DOCUMENT ME!
+	 * 
+	 * @param pluginLocation
+	 *           DOCUMENT ME!
 	 */
-	private void addPlugin(String pluginLocation)
-	{
-		try
-		{
+	private void addPlugin(String pluginLocation) {
+		try {
 			URL pluginUrl = new URL(pluginLocation);
 			PluginDescription desc = PluginHelper.readPluginDescription(pluginUrl);
 			pluginManager.loadPlugin(desc, pluginUrl, Boolean.TRUE);
 			pluginsTableModel.updateModel();
-		}
-		catch(PluginManagerException pem)
-		{
+		} catch (PluginManagerException pem) {
 			// pem.printStackTrace();
 			showErrorMessage(pem.getMessage());
-		}
-		catch(MalformedURLException mue)
-		{
+		} catch (MalformedURLException mue) {
 			showErrorMessage(mue.getMessage());
 		}
 	}
@@ -363,20 +340,18 @@ implements ActionListener, ListSelectionListener, TableModelListener
 	 * Opens a file selector dialog and tries to add the specified plugin file
 	 * to the plugin list.
 	 */
-	private void addPlugin()
-	{
+	private void addPlugin() {
 		JFileChooser chooser = new JFileChooser(lastFile);
 		chooser.addChoosableFileFilter(new PluginFileFilter("jar"));
 		chooser.addChoosableFileFilter(new PluginFileFilter("zip"));
 		chooser.addChoosableFileFilter(new PluginFileFilter("xml"));
 		chooser.addChoosableFileFilter(new PluginFileFilter(
-				new String[] { "xml", "jar", "zip" }));
+							new String[] { "xml", "jar", "zip" }));
 
 		int retVal = chooser.showDialog(this,
-				sBundle.getString("dialog.button.ok"));
+							sBundle.getString("dialog.button.ok"));
 
-		if(retVal == JFileChooser.APPROVE_OPTION)
-		{
+		if (retVal == JFileChooser.APPROVE_OPTION) {
 			File f = chooser.getSelectedFile();
 			lastFile = f.getAbsolutePath();
 
@@ -388,22 +363,18 @@ implements ActionListener, ListSelectionListener, TableModelListener
 
 	/**
 	 * DOCUMENT ME!
-	 *
-	 * @param plugins DOCUMENT ME!
+	 * 
+	 * @param plugins
+	 *           DOCUMENT ME!
 	 */
-	private void addPlugins(PluginEntry[] plugins)
-	{
-		if(plugins != null)
-		{
-			//			for (int i = 0; i < plugins.length; i++) {
-			//				addPlugin(plugins[i].getFileName());
-			//			}
-			try
-			{
+	private void addPlugins(PluginEntry[] plugins) {
+		if (plugins != null) {
+			// for (int i = 0; i < plugins.length; i++) {
+			// addPlugin(plugins[i].getFileName());
+			// }
+			try {
 				pluginManager.loadPlugins(plugins);
-			}
-			catch(PluginManagerException e)
-			{
+			} catch (PluginManagerException e) {
 				showErrorMessage(e.getMessage());
 			}
 
@@ -413,11 +384,10 @@ implements ActionListener, ListSelectionListener, TableModelListener
 
 	/**
 	 * Creates and returns the button bar of this dialog.
-	 *
+	 * 
 	 * @return the button bar of this dialog.
 	 */
-	private JPanel createButtonBar()
-	{
+	private JPanel createButtonBar() {
 		JPanel buttonBar = new JPanel(true);
 
 		search = new JButton(sBundle.getString("dialog.button.search"));
@@ -450,12 +420,11 @@ implements ActionListener, ListSelectionListener, TableModelListener
 
 	/**
 	 * Creates and returns the plugin list and the plugin information view.
-	 *
+	 * 
 	 * @return a panel, which contains the plugin list and the plugin
 	 *         information view.
 	 */
-	private JPanel createListAndInfoView()
-	{
+	private JPanel createListAndInfoView() {
 		JPanel view = new JPanel(new BorderLayout());
 
 		pluginsTable = new JTable(pluginsTableModel);
@@ -463,22 +432,19 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		// set the preferred width of the table's columns
 		TableColumn column = null;
 
-		for(int i = 0; i < pluginsTable.getColumnCount(); i++)
-		{
+		for (int i = 0; i < pluginsTable.getColumnCount(); i++) {
 			column = pluginsTable.getColumnModel().getColumn(i);
 
-			if(i == 0)
-			{
+			if (i == 0) {
 				column.setPreferredWidth(18);
 				column.setMaxWidth(18);
 				column.setMinWidth(18);
-			}
-			else if(i == 2)
-			{
-				column.setPreferredWidth(100);
-				column.setMaxWidth(100);
-				column.setMinWidth(50);
-			}
+			} else
+				if (i == 2) {
+					column.setPreferredWidth(100);
+					column.setMaxWidth(100);
+					column.setMinWidth(50);
+				}
 		}
 
 		pluginsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -489,13 +455,13 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		JScrollPane listScroller = new JScrollPane(pluginsTable);
 		listScroller.setPreferredSize(new Dimension(320, 200));
 		listScroller.setBorder(BorderFactory.createBevelBorder(
-				BevelBorder.LOWERED));
+							BevelBorder.LOWERED));
 
 		JPanel listLowered = new JPanel(new GridLayout(1, 1));
 		listLowered.add(listScroller);
 
 		listLowered.setBorder(BorderFactory.createTitledBorder(
-				sBundle.getString("dialog.list.title")));
+							sBundle.getString("dialog.list.title")));
 
 		view.add(listLowered, BorderLayout.CENTER);
 
@@ -503,11 +469,11 @@ implements ActionListener, ListSelectionListener, TableModelListener
 
 		version = new JLabel();
 		version.setBorder(BorderFactory.createTitledBorder(sBundle.getString(
-		"dialog.info.version")));
+							"dialog.info.version")));
 
 		author = new JLabel();
 		author.setBorder(BorderFactory.createTitledBorder(sBundle.getString(
-		"dialog.info.author")));
+							"dialog.info.author")));
 
 		available = new JTextArea();
 		available.setBackground(author.getBackground());
@@ -515,7 +481,7 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		available.setLineWrap(true);
 		available.setPreferredSize(new Dimension(200, 100));
 		available.setBorder(BorderFactory.createTitledBorder(sBundle.getString(
-		"dialog.info.available")));
+							"dialog.info.available")));
 
 		description = new JTextArea();
 		description.setBackground(author.getBackground());
@@ -523,7 +489,7 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		description.setLineWrap(true);
 		description.setPreferredSize(new Dimension(200, 100));
 		description.setBorder(BorderFactory.createTitledBorder(
-				sBundle.getString("dialog.info.description")));
+							sBundle.getString("dialog.info.description")));
 
 		infoVA.add(version, BorderLayout.NORTH);
 		infoVA.add(author, BorderLayout.SOUTH);
@@ -545,16 +511,14 @@ implements ActionListener, ListSelectionListener, TableModelListener
 	/**
 	 * Called, if the search button has been pressed.
 	 */
-	private void searchPlugins()
-	{
+	private void searchPlugins() {
 		PluginDescriptionCollector collector = new ClassPathPluginDescriptionCollector();
 
 		PluginSelector selector = new PluginSelector(this, collector);
 
-		if(selector.isEmpty())
-		{
+		if (selector.isEmpty()) {
 			JOptionPane.showMessageDialog(this,
-					sBundle.getString("selector.noPluginsFound"));
+								sBundle.getString("selector.noPluginsFound"));
 
 			return;
 		}
@@ -564,16 +528,15 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		addPlugins(selector.getSelectedItems());
 	}
 
-	//~ Inner Classes ==========================================================
+	// ~ Inner Classes ==========================================================
 
 	/**
 	 * The list model of the dialog's jlist component.
-	 *
-	 * @version $Revision: 1.6 $
+	 * 
+	 * @version $Revision: 1.7 $
 	 */
 	protected class PluginsTableModel
-	extends AbstractTableModel
-	{
+						extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
 
 		@SuppressWarnings("unchecked")
@@ -583,8 +546,7 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		 * Constructs a new table model from the plugin managers plugin list.
 		 */
 		@SuppressWarnings("unchecked")
-		public PluginsTableModel()
-		{
+		public PluginsTableModel() {
 			pluginEntries = new ArrayList();
 			updateModel();
 		}
@@ -593,30 +555,27 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		 * @see javax.swing.table.TableModel#isCellEditable(int, int)
 		 */
 		@Override
-		public boolean isCellEditable(int rowIndex, int columnIndex)
-		{
+		public boolean isCellEditable(int rowIndex, int columnIndex) {
 			return columnIndex == 2;
 		}
 
 		/**
 		 * Returns the class at the given column.
-		 *
-		 * @param columnIndex DOCUMENT ME!
-		 *
+		 * 
+		 * @param columnIndex
+		 *           DOCUMENT ME!
 		 * @return the class at the given column.
 		 */
 		@SuppressWarnings("unchecked")
 		@Override
-		public Class getColumnClass(int columnIndex)
-		{
+		public Class getColumnClass(int columnIndex) {
 			return getValueAt(0, columnIndex).getClass();
 		}
 
 		/**
 		 * @see javax.swing.table.TableModel#getColumnCount()
 		 */
-		public int getColumnCount()
-		{
+		public int getColumnCount() {
 			return 3;
 		}
 
@@ -624,61 +583,50 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		 * @see javax.swing.table.TableModel#getColumnName(int)
 		 */
 		@Override
-		public String getColumnName(int columnIndex)
-		{
-			if(columnIndex == 0)
-			{
+		public String getColumnName(int columnIndex) {
+			if (columnIndex == 0) {
 				return sBundle.getString("table.column.icon");
-			}
-			else if(columnIndex == 1)
-			{
-				return sBundle.getString("table.column.pluginName");
-			}
-			else if(columnIndex == 2)
-			{
-				return sBundle.getString("table.column.loadOnStartup");
-			}
-			else
-			{
-				return super.getColumnName(columnIndex);
-			}
+			} else
+				if (columnIndex == 1) {
+					return sBundle.getString("table.column.pluginName");
+				} else
+					if (columnIndex == 2) {
+						return sBundle.getString("table.column.loadOnStartup");
+					} else {
+						return super.getColumnName(columnIndex);
+					}
 		}
 
 		/**
 		 * Returns true if the plugin list is empty.
-		 *
+		 * 
 		 * @return DOCUMENT ME!
 		 */
-		public boolean isEmpty()
-		{
+		public boolean isEmpty() {
 			return pluginEntries.size() == 0;
 		}
 
 		/**
 		 * Returns the plugin description at the given index in the table.
-		 *
-		 * @param index DOCUMENT ME!
-		 *
+		 * 
+		 * @param index
+		 *           DOCUMENT ME!
 		 * @return the plugin description at the given index in the table.
 		 */
-		public PluginDescription getPluginDescription(int index)
-		{
+		public PluginDescription getPluginDescription(int index) {
 			return ((PluginEntry) pluginEntries.get(index)).getDescription();
 		}
 
 		/**
 		 * @see javax.swing.table.TableModel#getRowCount()
 		 */
-		public int getRowCount()
-		{
+		public int getRowCount() {
 			return pluginEntries.size();
 		}
 
 		@Override
-		public void setValueAt(Object value, int rowIndex, int columnIndex)
-		{
-			if(columnIndex == 2)
-			{
+		public void setValueAt(Object value, int rowIndex, int columnIndex) {
+			if (columnIndex == 2) {
 				// pluginsSelectionModel.getMinSelectionIndex()
 				String pluginName = (pluginsTableModel.getPluginDescription(rowIndex)).getName();
 
@@ -691,56 +639,48 @@ implements ActionListener, ListSelectionListener, TableModelListener
 		/**
 		 * @see javax.swing.table.TableModel#getValueAt(int, int)
 		 */
-		public Object getValueAt(int rowIndex, int columnIndex)
-		{
+		public Object getValueAt(int rowIndex, int columnIndex) {
 			PluginEntry entry = (PluginEntry) pluginEntries.get(rowIndex);
 
-			if(columnIndex == 0)
-			{
-				if (entry==null || entry.getPlugin()==null) return null;
-				ImageIcon i=entry.getPlugin().getIcon();
-				if(i==null)
+			if (columnIndex == 0) {
+				if (entry == null || entry.getPlugin() == null)
+					return null;
+				ImageIcon i = entry.getPlugin().getIcon();
+				if (i == null)
 					return null;
 				i.setImage(i.getImage().getScaledInstance(
-						16, 16, Image.SCALE_SMOOTH));
+									16, 16, Image.SCALE_SMOOTH));
 				return i;
-			}
-			else if(columnIndex == 1)
-			{
-				return entry.getDescription().getName();
-			}
-			else if(columnIndex == 2)
-			{
-				return entry.getLoadOnStartup();
-			}
-			else
-			{
-				return "wrong column: " + columnIndex;
-			}
+			} else
+				if (columnIndex == 1) {
+					return entry.getDescription().getName();
+				} else
+					if (columnIndex == 2) {
+						return entry.getLoadOnStartup();
+					} else {
+						return "wrong column: " + columnIndex;
+					}
 		}
 
 		/**
 		 * Returns a human readable string of this model.
-		 *
+		 * 
 		 * @return DOCUMENT ME!
 		 */
 		@Override
-		public String toString()
-		{
+		public String toString() {
 			return pluginEntries.toString();
 		}
 
 		@SuppressWarnings("unchecked")
-		public void updateModel()
-		{
+		public void updateModel() {
 			pluginEntries.clear();
 
-			//			pluginEntries.addAll(pluginManager.getPluginEntries());
+			// pluginEntries.addAll(pluginManager.getPluginEntries());
 			Object[] plugs = pluginManager.getPluginEntries().toArray();
 			Arrays.sort(plugs, new EntryComparator());
 
-			for(int i = 0; i < plugs.length; i++)
-			{
+			for (int i = 0; i < plugs.length; i++) {
 				pluginEntries.add(plugs[i]);
 			}
 
@@ -750,23 +690,21 @@ implements ActionListener, ListSelectionListener, TableModelListener
 
 	/**
 	 * @author $Author: morla $
-	 * @version $Revision: 1.6 $ $Date: 2010/11/17 14:04:53 $
+	 * @version $Revision: 1.7 $ $Date: 2010/12/14 07:02:25 $
 	 */
 	@SuppressWarnings("unchecked")
 	class EntryComparator
-	implements Comparator
-	{
+						implements Comparator {
 		/**
 		 * @see java.util.Comparator#compare(Object, Object)
 		 */
-		public int compare(Object o1, Object o2)
-		{
+		public int compare(Object o1, Object o2) {
 			return ((PluginEntry) o1).getDescription().getName().compareTo(((PluginEntry) o2).getDescription()
-					.getName());
+								.getName());
 		}
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

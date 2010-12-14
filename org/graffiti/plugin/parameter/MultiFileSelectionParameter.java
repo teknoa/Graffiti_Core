@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 import org.graffiti.plugin.io.resources.IOurl;
 
-
 public class MultiFileSelectionParameter extends StringParameter {
 
 	private String[] extensions;
 	private String extensionDescription;
 	private boolean multipleFile;
 
-	public MultiFileSelectionParameter(ArrayList<IOurl> value, String name, String description, String[] extensions, String extensionDescription, boolean multipleFiles) {
+	public MultiFileSelectionParameter(ArrayList<IOurl> value, String name, String description, String[] extensions, String extensionDescription,
+						boolean multipleFiles) {
 		super(convertToString(value), name, description);
 		this.extensions = extensions;
 		this.extensionDescription = extensionDescription;
@@ -32,18 +32,18 @@ public class MultiFileSelectionParameter extends StringParameter {
 
 	public ArrayList<IOurl> getFileList() {
 		ArrayList<IOurl> urls = new ArrayList<IOurl>();
-		for(String u : ((String) getValue()).split(";"))
-			if(u.length()>0)
+		for (String u : ((String) getValue()).split(";"))
+			if (u.length() > 0)
 				urls.add(new IOurl(u));
 		return urls;
 	}
 
 	public static String convertToString(ArrayList<IOurl> urls) {
 		String s = "";
-		for(IOurl u : urls)
-			s+=u.toString()+";";
-		if(s.length()>0)
-			s = s.substring(0, s.length()-";".length());
+		for (IOurl u : urls)
+			s += u.toString() + ";";
+		if (s.length() > 0)
+			s = s.substring(0, s.length() - ";".length());
 
 		return s;
 	}

@@ -1,69 +1,69 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AttributeConsumer.java
+// AttributeConsumer.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AttributeConsumer.java,v 1.2 2010/07/19 12:59:28 morla Exp $
+// ==============================================================================
+// $Id: AttributeConsumer.java,v 1.3 2010/12/14 07:02:25 morla Exp $
 
 /*
- * $Id: AttributeConsumer.java,v 1.2 2010/07/19 12:59:28 morla Exp $
+ * $Id: AttributeConsumer.java,v 1.3 2010/12/14 07:02:25 morla Exp $
  */
 package org.graffiti.attributes;
 
 /**
  * Interfaces an object, which depends on the presence of a set of attributes.
  * An attribute consumer specifies, which attributes should be available in a
- * node, edge and graph object.  Each time, a node or an edge is created, the
- * specified attributes will be created by the graph instance.  E.g.: a 2D
+ * node, edge and graph object. Each time, a node or an edge is created, the
+ * specified attributes will be created by the graph instance. E.g.: a 2D
  * view depends on some graphics attributes (&quot;graphics&quot;) in every
- * node and edge object. It implements this interface and returns a
- * <code>CollectionAttribute</code> of these attributes and their default
+ * node and edge object. It implements this interface and returns a <code>CollectionAttribute</code> of these attributes and their default
  * values:
+ * 
  * <pre>
  * public CollectionAttribute getNodeAttribute() {
- *     return new NodeGraphicAttribute();
+ * 	return new NodeGraphicAttribute();
  * }
  * 
  * public CollectionAttribute getEdgeAttribute() {
- *     return new EdgeGraphicAttribute();
+ * 	return new EdgeGraphicAttribute();
  * }
  * </pre>
+ * 
  * Every time, a new node- or edge-object is created, it will contain
  * (deep-)copies of these collection attributes.
- *
- * @version $Revision: 1.2 $
+ * 
+ * @version $Revision: 1.3 $
  */
-public interface AttributeConsumer
-{
-	//~ Methods ================================================================
+public interface AttributeConsumer {
+	// ~ Methods ================================================================
 
 	/**
-	 * Returns the attribute, which should be available in a edge object.  May
+	 * Returns the attribute, which should be available in a edge object. May
 	 * return <code>null</code>.
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
 	CollectionAttribute getEdgeAttribute();
 
 	/**
-	 * Returns the attribute, which should be available in a graph object.  May
+	 * Returns the attribute, which should be available in a graph object. May
 	 * return <code>null</code>.
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
 	CollectionAttribute getGraphAttribute();
 
 	/**
-	 * Returns the attribute, which should be available in a node object.  May
+	 * Returns the attribute, which should be available in a node object. May
 	 * return <code>null</code>.
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
 	CollectionAttribute getNodeAttribute();
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   ParameterList.java
+// ParameterList.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: ParameterList.java,v 1.2 2010/07/19 13:01:54 morla Exp $
+// ==============================================================================
+// $Id: ParameterList.java,v 1.3 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -13,39 +13,39 @@ package org.graffiti.plugin.parameter;
  * A <code>ParameterList</code> can be used to create enumeration type
  * parameters, by grouping them into a list. The list can contain any number
  * of <code>SingleParameters</code>.
- *
- * @version $Revision: 1.2 $
- *
+ * 
+ * @version $Revision: 1.3 $
  * @see SingleParameter
  */
 public interface ParameterList
-extends Parameter
-{
-	//~ Methods ================================================================
+					extends Parameter {
+	// ~ Methods ================================================================
 
 	/**
 	 * DOCUMENT ME!
-	 *
+	 * 
 	 * @link aggregation
 	 */
 
-	/*#SingleParameter lnkSingleParameter;*/
+	/* #SingleParameter lnkSingleParameter; */
 
 	/**
 	 * Adds a <code>SingleParameter</code> to the list.
-	 *
-	 * @param sp the <code>SingleParameter</code> to add to the list.
+	 * 
+	 * @param sp
+	 *           the <code>SingleParameter</code> to add to the list.
 	 */
 	void addParameter(SingleParameter sp);
 
 	/**
 	 * Removes a <code>SingleParameter</code> from the list.
-	 *
-	 * @param sp the <code>SingleParameter</code> to remove from the list.
+	 * 
+	 * @param sp
+	 *           the <code>SingleParameter</code> to remove from the list.
 	 */
 	void removeParameter(SingleParameter sp);
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

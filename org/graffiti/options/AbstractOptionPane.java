@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AbstractOptionPane.java
+// AbstractOptionPane.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AbstractOptionPane.java,v 1.4 2010/07/19 13:02:05 morla Exp $
+// ==============================================================================
+// $Id: AbstractOptionPane.java,v 1.5 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.options;
 
@@ -28,14 +28,13 @@ import org.graffiti.core.StringBundle;
 /**
  * The default implementation of the option pane interface. It lays out
  * components in a vertical fashion.
- *
- * @version $Revision: 1.4 $
+ * 
+ * @version $Revision: 1.5 $
  */
 public abstract class AbstractOptionPane
-extends JPanel
-implements OptionPane
-{
-	//~ Static fields/initializers =============================================
+					extends JPanel
+					implements OptionPane {
+	// ~ Static fields/initializers =============================================
 
 	/**
 	 * 
@@ -45,7 +44,7 @@ implements OptionPane
 	/** The <code>StringBundle</code> of this option pane. */
 	protected static StringBundle sBundle = StringBundle.getInstance();
 
-	//~ Instance fields ========================================================
+	// ~ Instance fields ========================================================
 
 	/** The layout of this panel. */
 	protected GridBagLayout gridBag;
@@ -59,43 +58,39 @@ implements OptionPane
 	/** The internal name of this option pane. */
 	private String name;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Creates a new option pane.
-	 *
-	 * @param name the internal name. The option pane's label is set to the
-	 *        value of the property named
-	 *        <code>options.<i>name</i>.label</code>.
+	 * 
+	 * @param name
+	 *           the internal name. The option pane's label is set to the
+	 *           value of the property named <code>options.<i>name</i>.label</code>.
 	 */
-	protected AbstractOptionPane(String name)
-	{
+	protected AbstractOptionPane(String name) {
 		this.name = name;
 		setLayout(gridBag = new GridBagLayout());
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the component that should be displayed for this option pane.
-	 * Because this class implements component, it simply returns
-	 * <code>this</code>.
-	 *
+	 * Because this class implements component, it simply returns <code>this</code>.
+	 * 
 	 * @return DOCUMENT ME!
 	 */
-	public JComponent getOptionDialogComponent()
-	{
+	public JComponent getOptionDialogComponent() {
 		return this;
 	}
 
 	/**
 	 * Returns the internal name of the option pane.
-	 *
+	 * 
 	 * @return the internal name of the option pane.
 	 */
 	@Override
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
@@ -103,12 +98,13 @@ implements OptionPane
 	 * Adds the given label and component to the option pane. Components are
 	 * added in vertical fashion, one per row. The label is displayed to the
 	 * left of the component.
-	 *
-	 * @param label the label.
-	 * @param component the component.
+	 * 
+	 * @param label
+	 *           the label.
+	 * @param component
+	 *           the component.
 	 */
-	public void addComponent(String label, Component component)
-	{
+	public void addComponent(String label, Component component) {
 		GridBagConstraints constraint = new GridBagConstraints();
 		constraint.gridy = y++;
 		constraint.gridheight = 1;
@@ -131,11 +127,11 @@ implements OptionPane
 	/**
 	 * Adds the given component to the option pane. Components are added in
 	 * vertical fashion., one per row.
-	 *
-	 * @param component the component.
+	 * 
+	 * @param component
+	 *           the component.
 	 */
-	public void addComponent(Component component)
-	{
+	public void addComponent(Component component) {
 		GridBagConstraints constraint = new GridBagConstraints();
 		constraint.gridy = y++;
 		constraint.gridheight = 1;
@@ -151,11 +147,11 @@ implements OptionPane
 
 	/**
 	 * Adds a separator to the option pane.
-	 *
-	 * @param label the separator label.
+	 * 
+	 * @param label
+	 *           the separator label.
 	 */
-	public void addSeparator(String label)
-	{
+	public void addSeparator(String label) {
 		Box box = new Box(BoxLayout.X_AXIS);
 		Box box2 = new Box(BoxLayout.Y_AXIS);
 		box2.add(Box.createGlue());
@@ -187,14 +183,11 @@ implements OptionPane
 	}
 
 	/**
-	 * This method is called every time this option pane is displayed. The
-	 * <code>AbstractOptionPane</code> class uses this to create the option
+	 * This method is called every time this option pane is displayed. The <code>AbstractOptionPane</code> class uses this to create the option
 	 * pane's GUI only when needed.
 	 */
-	public void init()
-	{
-		if(!initialized)
-		{
+	public void init() {
+		if (!initialized) {
 			initialized = true;
 			initDefault();
 		}
@@ -204,27 +197,25 @@ implements OptionPane
 	 * Called when the options dialog's "ok" button is clicked. This should
 	 * save any properties being edited in this option pane.
 	 */
-	public void save()
-	{
-		if(initialized)
-		{
+	public void save() {
+		if (initialized) {
 			saveDefault();
 		}
 	}
 
 	/**
-	 * Creates this option pane's dialog.  Implement this method, to create
+	 * Creates this option pane's dialog. Implement this method, to create
 	 * your option pane's dialog.
 	 */
 	protected abstract void initDefault();
 
 	/**
-	 * Should save the properties being edited in this option panel.  Implement
+	 * Should save the properties being edited in this option panel. Implement
 	 * this method, to save your option pane's preferences.
 	 */
 	protected abstract void saveDefault();
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AdjListGraph.java
+// AdjListGraph.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AdjListGraph.java,v 1.10 2010/07/19 13:00:50 morla Exp $
+// ==============================================================================
+// $Id: AdjListGraph.java,v 1.11 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.graph;
 
@@ -19,17 +19,14 @@ import java.util.List;
 import org.graffiti.attributes.CollectionAttribute;
 import org.graffiti.event.ListenerManager;
 
-//import org.graffiti.util.MultipleIterator;
+// import org.graffiti.util.MultipleIterator;
 
 /**
  * Implements the <code>Graph</code> -interface using an adjacency list
- * representation of the graph. Requires <code>AdjListNode</code> and
- * <code>AdjListEdge</code> as implementations for nodes and edges. Every
- * method modifying the graph will inform the <code>ListenerManager</code>
- * about the modification according to the description in <code>Graph</code>.
+ * representation of the graph. Requires <code>AdjListNode</code> and <code>AdjListEdge</code> as implementations for nodes and edges. Every
+ * method modifying the graph will inform the <code>ListenerManager</code> about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.10 $
- * 
+ * @version $Revision: 1.11 $
  * @see Graph
  * @see AbstractGraph
  * @see AdjListNode
@@ -40,9 +37,9 @@ import org.graffiti.event.ListenerManager;
 public class AdjListGraph extends AbstractGraph implements Graph {
 	// ~ Static fields/initializers =============================================
 
-	//	/** The logger for the current class. */
-	//	private static final Logger logger = Logger.getLogger(AdjListGraph.class
-	//			.getName());
+	// /** The logger for the current class. */
+	// private static final Logger logger = Logger.getLogger(AdjListGraph.class
+	// .getName());
 
 	private int id;
 
@@ -54,7 +51,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	@Override
 	public String toString() {
-		return "Graph ID=" + id + " / "+getName();
+		return "Graph ID=" + id + " / " + getName();
 	}
 
 	// ~ Instance fields ========================================================
@@ -71,8 +68,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	// ~ Constructors ===========================================================
 
 	/**
-	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the
-	 * <code>ListenerManager</code> of the new instance to the default
+	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the default
 	 * <code>ListenerManager</code>.
 	 */
 	public AdjListGraph() {
@@ -87,7 +83,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#getNumberOfNodes()
 	 */
 	@Override
@@ -97,7 +92,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#getNodes()
 	 */
 	@Override
@@ -106,13 +100,11 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	}
 
 	/**
-	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the
-	 * <code>ListenerManager</code> of the new instance to the default
+	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the default
 	 * <code>ListenerManager</code>.
 	 * 
 	 * @param coll
-	 *           the <code>CollectionAttribute</code> of the currently created
-	 *           <code>AdjListGraph</code> instance.
+	 *           the <code>CollectionAttribute</code> of the currently created <code>AdjListGraph</code> instance.
 	 */
 	public AdjListGraph(CollectionAttribute coll) {
 		super(coll);
@@ -121,8 +113,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	}
 
 	/**
-	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the
-	 * <code>ListenerManager</code> of the new instance to the specified one.
+	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the specified one.
 	 * 
 	 * @param listenerManager
 	 *           listener manager for the graph.
@@ -132,14 +123,12 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	}
 
 	/**
-	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the
-	 * <code>ListenerManager</code> of the new instance to the specified one.
+	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the specified one.
 	 * 
 	 * @param listenerManager
 	 *           listener manager for the graph.
 	 * @param coll
-	 *           the <code>CollectionAttribute</code> of the currently created
-	 *           <code>AdjListGraph</code> instance.
+	 *           the <code>CollectionAttribute</code> of the currently created <code>AdjListGraph</code> instance.
 	 */
 	public AdjListGraph(ListenerManager listenerManager, CollectionAttribute coll) {
 		super(listenerManager, coll);
@@ -151,8 +140,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * edges from g into the new graph.
 	 * 
 	 * @param g
-	 *           any <code>Graph</code> implementation out of which an
-	 *           <code>AdjListGraph</code> shall be generated.
+	 *           any <code>Graph</code> implementation out of which an <code>AdjListGraph</code> shall be generated.
 	 * @param listenerManager
 	 *           listener manager for the graph.
 	 */
@@ -160,22 +148,21 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		super(listenerManager);
 		this.addGraph(g);
 	}
+
 	/**
 	 * Constructs a new instance of an <code>AdjListGraph</code> from an
 	 * instance of any <code>Graph</code> implementation. Copies all nodes and
 	 * edges from g into the new graph.
 	 * 
 	 * @param g
-	 *           any <code>Graph</code> implementation out of which an
-	 *           <code>AdjListGraph</code> shall be generated.
+	 *           any <code>Graph</code> implementation out of which an <code>AdjListGraph</code> shall be generated.
 	 * @param listenerManager
 	 *           listener manager for the graph.
 	 * @param coll
-	 *           the <code>CollectionAttribute</code> of the currently created
-	 *           <code>AdjListGraph</code> instance.
+	 *           the <code>CollectionAttribute</code> of the currently created <code>AdjListGraph</code> instance.
 	 */
 	public AdjListGraph(Graph g, ListenerManager listenerManager,
-			CollectionAttribute coll) {
+						CollectionAttribute coll) {
 		super(listenerManager, coll);
 		this.addGraph(g);
 	}
@@ -222,7 +209,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 */
 	public Object copy() {
 		AdjListGraph newGraph = new AdjListGraph((CollectionAttribute) this
-				.getAttributes().copy());
+							.getAttributes().copy());
 		newGraph.addGraph(this);
 
 		return newGraph;
@@ -237,9 +224,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * @param target
 	 *           the target of the edge to add.
 	 * @param directed
-	 *           <code>true</code> if the edge shall be directed,
-	 *           <code>false</code> otherwise.
-	 * 
+	 *           <code>true</code> if the edge shall be directed, <code>false</code> otherwise.
 	 * @return the new edge.
 	 */
 	@Override
@@ -264,16 +249,14 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * @param target
 	 *           the target of the edge to add.
 	 * @param directed
-	 *           <code>true</code> if the edge shall be directed,
-	 *           <code>false</code> otherwise.
+	 *           <code>true</code> if the edge shall be directed, <code>false</code> otherwise.
 	 * @param col
 	 *           CollectionAttribute that will be added to the new Edge
-	 * 
 	 * @return the new edge.
 	 */
 	@Override
 	protected Edge doAddEdge(Node source, Node target, boolean directed,
-			CollectionAttribute col) {
+						CollectionAttribute col) {
 		assert (source != null) && (target != null) && (col != null);
 
 		AdjListEdge edge = (AdjListEdge) createEdge(source, target, directed, col);
@@ -329,7 +312,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		if (((AdjListNode) (e.getTarget())).getAllInEdges().contains(e))
 			((AdjListNode) (e.getTarget())).removeInEdge(e);
 
-
 		if (((AdjListNode) (e.getSource())).getAllOutEdges().contains(e))
 			((AdjListNode) (e.getSource())).removeOutEdge(e);
 		if (((AdjListNode) (e.getTarget())).getAllOutEdges().contains(e))
@@ -347,7 +329,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * 
 	 * @param n
 	 *           the node to delete.
-	 * 
 	 * @throws GraphElementNotFoundException
 	 *            DOCUMENT ME!
 	 */
@@ -383,7 +364,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * 
 	 * @param col
 	 *           DOCUMENT ME!
-	 * 
 	 * @return the newly created node.
 	 */
 	@Override
@@ -402,10 +382,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * @param target
 	 *           the target of the edge to add.
 	 * @param directed
-	 *           <code>true</code> if the edge shall be directed,
-	 *           <code>false</code> otherwise.
-	 * 
-	 * 
+	 *           <code>true</code> if the edge shall be directed, <code>false</code> otherwise.
 	 * @return the newly created edge.
 	 */
 	protected Edge createEdge(Node source, Node target, boolean directed) {
@@ -422,15 +399,13 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * @param target
 	 *           the target of the edge to add.
 	 * @param directed
-	 *           <code>true</code> if the edge shall be directed,
-	 *           <code>false</code> otherwise.
+	 *           <code>true</code> if the edge shall be directed, <code>false</code> otherwise.
 	 * @param col
 	 *           CollectionAttribute that will be added to the new Edge
-	 * 
 	 * @return the new edge.
 	 */
 	protected Edge createEdge(Node source, Node target, boolean directed,
-			CollectionAttribute col) {
+						CollectionAttribute col) {
 		assert col != null;
 
 		setModified(true);
@@ -439,7 +414,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#isModified()
 	 */
 	public boolean isModified() {
@@ -448,7 +422,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#setModified(boolean)
 	 */
 	public void setModified(boolean modified) {
@@ -457,7 +430,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#getEdges()
 	 */
 	@Override
@@ -467,7 +439,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#getNumberOfEdges()
 	 */
 	@Override
@@ -477,9 +448,8 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#getEdges(org.graffiti.graph.Node,
-	 *      org.graffiti.graph.Node)
+	 * org.graffiti.graph.Node)
 	 */
 	@Override
 	public Collection<Edge> getEdges(Node n1, Node n2) {
@@ -492,7 +462,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#deleteAll(java.util.List)
 	 */
 	public void deleteAll(Collection<GraphElement> graphelements) {
@@ -508,7 +477,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#setName(java.lang.String)
 	 */
 	public void setName(String name) {
@@ -517,7 +485,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#getName()
 	 */
 	public String getName() {
@@ -526,26 +493,26 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	public String getName(boolean fullName) {
 		if (idName == null)
-			return "[not saved "+id+"]";
+			return "[not saved " + id + "]";
 		if (fullName)
 			return idName;
 		else {
 			String res;
 			if (idName.lastIndexOf(File.separator) > 0)
 				res = idName.substring(idName.lastIndexOf(File.separator)
-						+ File.separator.length());
-			else if (idName.lastIndexOf("/") > 0)
-				res = idName.substring(idName.lastIndexOf("/")
-						+ "/".length());
+									+ File.separator.length());
 			else
-				res = idName;
+				if (idName.lastIndexOf("/") > 0)
+					res = idName.substring(idName.lastIndexOf("/")
+										+ "/".length());
+				else
+					res = idName;
 			return res;
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#numberNodes()
 	 */
 	public void numberGraphElements() {
@@ -558,7 +525,6 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.graffiti.graph.Graph#setMaxId(long)
 	 */
 	public void checkMaxGraphElementId(long id) {

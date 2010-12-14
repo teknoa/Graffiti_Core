@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AlgorithmWithContextMenu.java
+// AlgorithmWithContextMenu.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: ProvidesNodeContextMenu.java,v 1.2 2010/07/19 13:00:48 morla Exp $
+// ==============================================================================
+// $Id: ProvidesNodeContextMenu.java,v 1.3 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -17,13 +17,12 @@ import org.graffiti.graph.Node;
 
 /**
  * DOCUMENT ME!
- *
+ * 
  * @author $Author: morla $
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
-public interface ProvidesNodeContextMenu
-{
-	//~ Methods ================================================================
+public interface ProvidesNodeContextMenu {
+	// ~ Methods ================================================================
 
 	/**
 	 * This method should be implemented, as that it returns the desired
@@ -32,12 +31,12 @@ public interface ProvidesNodeContextMenu
 	 * plugin should implement the Interface <code>SelectionListener</code> if
 	 * the menu item should be variable to the current selection. You could
 	 * also return a MenuItem that contains a subMenu.
-	 *
+	 * 
 	 * @return <code>MenuItem</code> the menu item for the context menu
 	 */
 	public JMenuItem[] getCurrentNodeContextMenuItem(Collection<Node> selectedNodes);
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

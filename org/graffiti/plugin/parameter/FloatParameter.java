@@ -1,108 +1,103 @@
-//==============================================================================
+// ==============================================================================
 //
-//   FloatParameter.java
+// FloatParameter.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: FloatParameter.java,v 1.4 2010/07/19 13:01:54 morla Exp $
+// ==============================================================================
+// $Id: FloatParameter.java,v 1.5 2010/12/14 07:02:27 morla Exp $
 
 package org.graffiti.plugin.parameter;
 
 /**
  * Parameter that contains a float value.
- *
- * @version $Revision: 1.4 $
+ * 
+ * @version $Revision: 1.5 $
  */
 public class FloatParameter
-extends AbstractLimitableParameter
-{
-	//~ Instance fields ========================================================
+					extends AbstractLimitableParameter {
+	// ~ Instance fields ========================================================
 
 	/** The value of this parameter. */
 	private Float value = null;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new float parameter.
-	 *
-	 * @param name the name of the parameter.
-	 * @param description the description of the parameter.
+	 * 
+	 * @param name
+	 *           the name of the parameter.
+	 * @param description
+	 *           the description of the parameter.
 	 */
-	public FloatParameter(String name, String description)
-	{
+	public FloatParameter(String name, String description) {
 		super(name, description);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Returns the value of this parameter as a <code>Float</code>.
-	 *
+	 * 
 	 * @return the value of this parameter as a <code>Float</code>.
 	 */
-	public Float getFloat()
-	{
+	public Float getFloat() {
 		return value;
 	}
 
 	/**
 	 * DOCUMENT ME!
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
 	@Override
-	public Comparable<?> getMax()
-	{
+	public Comparable<?> getMax() {
 		return null; // TODO
 	}
 
 	/**
 	 * DOCUMENT ME!
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
 	@Override
-	public Comparable<?> getMin()
-	{
+	public Comparable<?> getMin() {
 		return null; // TODO
 	}
 
 	/**
 	 * DOCUMENT ME!
-	 *
+	 * 
 	 * @return DOCUMENT ME!
 	 */
 	@Override
-	public boolean isValid()
-	{
+	public boolean isValid() {
 		return false; // TODO
 	}
 
 	/**
 	 * Sets the value of the <code>AttributeParameter</code>.
-	 *
-	 * @param value the new value of the <code>AttributeParameter</code>.
+	 * 
+	 * @param value
+	 *           the new value of the <code>AttributeParameter</code>.
 	 */
 	@Override
-	public void setValue(Object value)
-	{
+	public void setValue(Object value) {
 		// TODO
 	}
 
 	/**
 	 * Returns the value of this parameter.
-	 *
+	 * 
 	 * @return the value of this parameter.
 	 */
 	@Override
-	public Object getValue()
-	{
+	public Object getValue() {
 		return value;
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

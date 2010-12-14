@@ -9,11 +9,11 @@ public class ThicknessAttribute extends DoubleAttribute {
 	}
 
 	public ThicknessAttribute(String id, double value) {
-		super(id,value);
+		super(id, value);
 	}
 
 	public ThicknessAttribute(String id, Double value) {
-		super(id,value);
+		super(id, value);
 	}
 
 	@Override
@@ -22,4 +22,3 @@ public class ThicknessAttribute extends DoubleAttribute {
 	}
 
 }
-

@@ -1,23 +1,22 @@
-//==============================================================================
+// ==============================================================================
 //
-//   Dash.java
+// Dash.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: Dash.java,v 1.2 2010/07/19 13:00:57 morla Exp $
+// ==============================================================================
+// $Id: Dash.java,v 1.3 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.graphics;
 
 /**
  * Class that encapsulates the information needed to specify stroke properties.
- *
+ * 
  * @author schoeffl
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
-public class Dash
-{
-	//~ Instance fields ========================================================
+public class Dash {
+	// ~ Instance fields ========================================================
 
 	/**
 	 * @see java.awt.BasicStroke
@@ -29,14 +28,12 @@ public class Dash
 	 */
 	private float dashPhase;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
-	 * Constructs a new Dash. Initializes the dashArray with <code>null</code>
-	 * and the dashPhase with 0.0.
+	 * Constructs a new Dash. Initializes the dashArray with <code>null</code> and the dashPhase with 0.0.
 	 */
-	public Dash()
-	{
+	public Dash() {
 		this.dashArray = null;
 		this.dashPhase = 0f;
 	}
@@ -44,59 +41,58 @@ public class Dash
 	/**
 	 * Constructs a new Dash. Sets the dashArray and the dashPhase to the given
 	 * values.
-	 *
-	 * @param da the array to set the dashArray to.
-	 * @param dp the value to set the dashPhase to.
+	 * 
+	 * @param da
+	 *           the array to set the dashArray to.
+	 * @param dp
+	 *           the value to set the dashPhase to.
 	 */
-	public Dash(float[] da, float dp)
-	{
+	public Dash(float[] da, float dp) {
 		this.dashArray = da;
 		this.dashPhase = dp;
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets the dashArray to the given array.
-	 *
-	 * @param da the array to set the dashArray to.
+	 * 
+	 * @param da
+	 *           the array to set the dashArray to.
 	 */
-	public void setDashArray(float[] da)
-	{
+	public void setDashArray(float[] da) {
 		this.dashArray = da;
 	}
 
 	/**
 	 * Returns the dashArray.
-	 *
+	 * 
 	 * @return the dashArray.
 	 */
-	public float[] getDashArray()
-	{
+	public float[] getDashArray() {
 		return dashArray;
 	}
 
 	/**
 	 * Sets the dashPhase to the given value.
-	 *
-	 * @param dp the new value for the dashPhase.
+	 * 
+	 * @param dp
+	 *           the new value for the dashPhase.
 	 */
-	public void setDashPhase(float dp)
-	{
+	public void setDashPhase(float dp) {
 		this.dashPhase = dp;
 	}
 
 	/**
 	 * Returns the dashPhase.
-	 *
+	 * 
 	 * @return the dashPhase.
 	 */
-	public float getDashPhase()
-	{
+	public float getDashPhase() {
 		return dashPhase;
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

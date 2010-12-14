@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   OutputSerializer.java
+// OutputSerializer.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: OutputSerializer.java,v 1.4 2010/07/19 13:01:49 morla Exp $
+// ==============================================================================
+// $Id: OutputSerializer.java,v 1.5 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.plugin.io;
 
@@ -17,24 +17,25 @@ import org.graffiti.graph.Graph;
 /**
  * Interfaces a serializer, which is able to write a given graph in a special
  * format to a given output stream.
- *
- * @version $Revision: 1.4 $
+ * 
+ * @version $Revision: 1.5 $
  */
 public interface OutputSerializer
-extends Serializer
-{
-	//~ Methods ================================================================
+					extends Serializer {
+	// ~ Methods ================================================================
 
 	/**
 	 * Writes the contents of the given graph to a stream.
-	 *
-	 * @param stream The output stream to save the graph to.
-	 * @param g The graph to save.
+	 * 
+	 * @param stream
+	 *           The output stream to save the graph to.
+	 * @param g
+	 *           The graph to save.
 	 */
 	public void write(OutputStream stream, Graph g)
-	throws IOException;
+						throws IOException;
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

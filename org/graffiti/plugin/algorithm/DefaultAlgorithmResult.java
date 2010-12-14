@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   DefaultAlgorithmResult.java
+// DefaultAlgorithmResult.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: DefaultAlgorithmResult.java,v 1.3 2010/07/19 13:00:48 morla Exp $
+// ==============================================================================
+// $Id: DefaultAlgorithmResult.java,v 1.4 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -14,57 +14,53 @@ import java.util.Map;
 
 /**
  * DOCUMENT ME!
- *
+ * 
  * @author Paul
  */
 public class DefaultAlgorithmResult
-implements AlgorithmResult
-{
-	//~ Instance fields ========================================================
+					implements AlgorithmResult {
+	// ~ Instance fields ========================================================
 
 	/** DOCUMENT ME! */
 	protected Map<String, Object> resultMap = new HashMap<String, Object>();
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructor for DefaultAlgorithmResult.
 	 */
-	public DefaultAlgorithmResult()
-	{
+	public DefaultAlgorithmResult() {
 		super();
 	}
 
 	/**
 	 * Constructor for DefaultAlgorithmResult.
-	 *
-	 * @param resultMap DOCUMENT ME!
+	 * 
+	 * @param resultMap
+	 *           DOCUMENT ME!
 	 */
-	public DefaultAlgorithmResult(Map<String, Object> resultMap)
-	{
+	public DefaultAlgorithmResult(Map<String, Object> resultMap) {
 		super();
 		this.resultMap = resultMap;
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * @see org.graffiti.plugin.algorithm.AlgorithmResult#getResult()
 	 */
-	public Map<String, Object> getResult()
-	{
+	public Map<String, Object> getResult() {
 		return this.resultMap;
 	}
 
 	/*
 	 * @see org.graffiti.plugin.algorithm.AlgorithmResult#addToResult(java.lang.String, java.lang.Object)
 	 */
-	public void addToResult(String key, Object value)
-	{
+	public void addToResult(String key, Object value) {
 		this.resultMap.put(key, value);
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

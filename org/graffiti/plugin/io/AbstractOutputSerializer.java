@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AbstractOutputSerializer.java
+// AbstractOutputSerializer.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AbstractOutputSerializer.java,v 1.2 2010/07/19 13:01:49 morla Exp $
+// ==============================================================================
+// $Id: AbstractOutputSerializer.java,v 1.3 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.plugin.io;
 
@@ -16,29 +16,29 @@ import org.graffiti.graph.Graph;
 
 /**
  * Provides additional methods to write a graph object.
- *
- * @version $Revision: 1.2 $
+ * 
+ * @version $Revision: 1.3 $
  */
 public abstract class AbstractOutputSerializer
-implements OutputSerializer
-{
-	//~ Methods ================================================================
+					implements OutputSerializer {
+	// ~ Methods ================================================================
 
 	/**
 	 * Writes the contents of the given graph to a file.
-	 *
-	 * @param g The graph to save.
-	 * @param filename The name of the file to save the graph to.
-	 *
-	 * @exception IOException If an IO error occurs.
+	 * 
+	 * @param g
+	 *           The graph to save.
+	 * @param filename
+	 *           The name of the file to save the graph to.
+	 * @exception IOException
+	 *               If an IO error occurs.
 	 */
 	public void write(Graph g, String filename)
-	throws IOException
-	{
+						throws IOException {
 		write(new FileOutputStream(filename), g);
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

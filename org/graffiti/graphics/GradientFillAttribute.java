@@ -9,11 +9,11 @@ public class GradientFillAttribute extends DoubleAttribute {
 	}
 
 	public GradientFillAttribute(String id, double value) {
-		super(id,value);
+		super(id, value);
 	}
 
 	public GradientFillAttribute(String id, Double value) {
-		super(id,value);
+		super(id, value);
 	}
 
 	@Override
@@ -22,4 +22,3 @@ public class GradientFillAttribute extends DoubleAttribute {
 	}
 
 }
-

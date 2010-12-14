@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   LabelAttribute.java
+// LabelAttribute.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: LabelAttribute.java,v 1.13 2010/07/19 13:01:00 morla Exp $
+// ==============================================================================
+// $Id: LabelAttribute.java,v 1.14 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -35,10 +35,10 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  * 
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public abstract class LabelAttribute extends HashMapAttribute implements
-GraphicAttributeConstants {
+					GraphicAttributeConstants {
 	// ~ Instance fields
 	// ========================================================
 
@@ -68,14 +68,14 @@ GraphicAttributeConstants {
 			return (new JLabel(getLabel())).getPreferredSize().width;
 	}
 
-	//	private JLabel lastLabel = null;
+	// private JLabel lastLabel = null;
 
 	private static final int defaultSize = 12; // new
 	// JLabel().getFont().getSize();
 	private static final String defaultFont = getDefaultFont();
 
 	public void setLastLabel(JLabel lastLabel) {
-		//		this.lastLabel = lastLabel;
+		// this.lastLabel = lastLabel;
 	}
 
 	private static final String defaultFontName = "Arial";
@@ -91,14 +91,14 @@ GraphicAttributeConstants {
 	public LabelAttribute() {
 		this(LABELGRAPHICS);
 		ErrorMsg
-		.addErrorMessage("INTERNAL ERROR, Label Attribute Created, with no ID!");
+							.addErrorMessage("INTERNAL ERROR, Label Attribute Created, with no ID!");
 	}
 
 	/**
 	 * Constructor for Label.
 	 * 
 	 * @param id
-	 *            the id of the attribute.
+	 *           the id of the attribute.
 	 */
 	public LabelAttribute(String id) {
 		this(id, "");
@@ -108,35 +108,36 @@ GraphicAttributeConstants {
 	 * Constructor for Label.
 	 * 
 	 * @param id
-	 *            the id of the attribute.
+	 *           the id of the attribute.
 	 * @param l
-	 *            the label-value of the attribute.
+	 *           the label-value of the attribute.
 	 */
 	public LabelAttribute(String id, String l) {
 		super(id);
 		StringAttribute alignment = (StringAttribute) StringAttribute
-		.getTypedStringAttribute(ANCHOR, "c");
+							.getTypedStringAttribute(ANCHOR, "c");
 		alignment.setDescription("A string constant describing "
-				+ "predefined positions of the label.");
+							+ "predefined positions of the label.");
 		add(alignment, false);
 		add(StringAttribute.getTypedStringAttribute(LABEL, l), false);
 		add(StringAttribute.getTypedStringAttribute(FONTNAME, defaultFont),
-				false);
-		add(StringAttribute.getTypedStringAttribute(ALIGNMENT, "center"/* "left"
-		 * right,center
-		 */), false);
+							false);
+		add(StringAttribute.getTypedStringAttribute(ALIGNMENT, "center"/*
+																							 * "left"
+																							 * right,center
+																							 */), false);
 		add(new IntegerAttribute(FONTSIZE, defaultSize), false);
 		add(StringAttribute.getTypedStringAttribute(FONTSTYLE, "plain"/*
-		 * italic,bold
-		 */), false);
+																							 * italic,bold
+																							 */), false);
 		add(StringAttribute.getTypedStringAttribute(TEXTCOLOR, ColorUtil
-				.getHexFromColor(java.awt.Color.BLACK)), false);
+							.getHexFromColor(java.awt.Color.BLACK)), false);
 		add(new StringAttribute("type", "text"), false);
 	}
 
 	@Override
 	public void add(Attribute a, boolean inform)
-	throws AttributeExistsException, FieldAlreadySetException {
+						throws AttributeExistsException, FieldAlreadySetException {
 		if (attributes.containsKey(a.getId())) {
 			cacheSet(attributes.get(a.getId()), a.getValue());
 		} else
@@ -146,13 +147,13 @@ GraphicAttributeConstants {
 	HashMap<String, String> knownAttributeValues = new HashMap<String, String>();
 
 	private void cacheSet(Attribute attribute, Object value) {
-		if (value==null)
+		if (value == null)
 			attribute.setValue(value);
 		else {
 			if (value instanceof String) {
-				String sv = (String)value;
+				String sv = (String) value;
 				String val = knownAttributeValues.get(sv);
-				if (val==null) {
+				if (val == null) {
 					knownAttributeValues.put(sv, sv);
 					val = knownAttributeValues.get(sv);
 				}
@@ -163,11 +164,11 @@ GraphicAttributeConstants {
 	}
 
 	private void cacheSetS(StringAttribute stringAttribute, String sv) {
-		if (sv==null)
+		if (sv == null)
 			stringAttribute.setValue(sv);
 		else {
 			String val = knownAttributeValues.get(sv);
-			if (val==null) {
+			if (val == null) {
 				knownAttributeValues.put(sv, sv);
 				val = knownAttributeValues.get(sv);
 			}
@@ -177,7 +178,7 @@ GraphicAttributeConstants {
 
 	@Override
 	public void add(Attribute a) throws AttributeExistsException,
-	FieldAlreadySetException {
+						FieldAlreadySetException {
 		if (attributes.containsKey(a.getId())) {
 			cacheSet(attributes.get(a.getId()), a.getValue());
 		} else
@@ -190,8 +191,6 @@ GraphicAttributeConstants {
 	public void setAlignment(String a) {
 		cacheSetS((StringAttribute) attributes.get(ANCHOR), a);
 	}
-
-
 
 	public String getAlignment() {
 		return ((StringAttribute) attributes.get(ANCHOR)).getString();
@@ -251,7 +250,7 @@ GraphicAttributeConstants {
 	 * Sets the 'label'-value.
 	 * 
 	 * @param l
-	 *            the 'label'-value to be set.
+	 *           the 'label'-value to be set.
 	 */
 	public void setLabel(String l) {
 		if (attributes.get(LABEL) == null)
@@ -277,7 +276,7 @@ GraphicAttributeConstants {
 	 * Set the 'textcolor'-value.
 	 * 
 	 * @param tc
-	 *            the 'textcolor'-value to be set.
+	 *           the 'textcolor'-value to be set.
 	 */
 	public void setTextcolor(String tc) {
 		cacheSetS((StringAttribute) attributes.get(TEXTCOLOR), tc);
@@ -295,60 +294,60 @@ GraphicAttributeConstants {
 	public Color getTextcolor() {
 		try {
 			return ColorUtil.getColorFromHex((((StringAttribute) attributes
-					.get(TEXTCOLOR)).getString()));
+								.get(TEXTCOLOR)).getString()));
 		} catch (Exception err) {
 			return Color.black;
 		}
 	}
 
-	//	public void wordWrap() {
-	//		if (!(getAttributable() instanceof Node))
-	//			return;
-	//		if (lastLabel == null)
-	//			lastLabel = new JLabel(getLabel());
-	//		String fontName = getFontName();
-	//		int fontStyleInt = getFontStyleJava();
-	//		;
-	//		int fontSize = getFontSize();
-	//		lastLabel.setFont(new Font(fontName, fontStyleInt, fontSize));
+	// public void wordWrap() {
+	// if (!(getAttributable() instanceof Node))
+	// return;
+	// if (lastLabel == null)
+	// lastLabel = new JLabel(getLabel());
+	// String fontName = getFontName();
+	// int fontStyleInt = getFontStyleJava();
+	// ;
+	// int fontSize = getFontSize();
+	// lastLabel.setFont(new Font(fontName, fontStyleInt, fontSize));
 	//
-	//		FontMetrics fm = lastLabel.getFontMetrics(lastLabel.getFont());
-	//		int containerWidth = (int) AttributeHelper
-	//				.getSize((Node) getAttributable()).x;
+	// FontMetrics fm = lastLabel.getFontMetrics(lastLabel.getFont());
+	// int containerWidth = (int) AttributeHelper
+	// .getSize((Node) getAttributable()).x;
 	//
-	//		BreakIterator boundary = BreakIterator.getWordInstance();
+	// BreakIterator boundary = BreakIterator.getWordInstance();
 	//
-	//		boundary.setText(getLabel(true));
+	// boundary.setText(getLabel(true));
 	//
-	//		StringBuffer trial = new StringBuffer();
-	//		StringBuffer real = new StringBuffer("<html>");
+	// StringBuffer trial = new StringBuffer();
+	// StringBuffer real = new StringBuffer("<html>");
 	//
-	//		int start = boundary.first();
-	//		for (int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary
-	//				.next()) {
-	//			String word = getLabel(true).substring(start, end);
-	//			trial.append(word);
-	//			int trialWidth = SwingUtilities.computeStringWidth(fm, trial
-	//					.toString());
-	//			if (trialWidth > containerWidth) {
-	//				trial = new StringBuffer(word);
-	//				if (word.length() > 2 && !real.toString().endsWith("-")
-	//						&& !real.toString().endsWith("("))
-	//					real.append("<br>");
-	//			}
-	//			real.append(word);
-	//		}
+	// int start = boundary.first();
+	// for (int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary
+	// .next()) {
+	// String word = getLabel(true).substring(start, end);
+	// trial.append(word);
+	// int trialWidth = SwingUtilities.computeStringWidth(fm, trial
+	// .toString());
+	// if (trialWidth > containerWidth) {
+	// trial = new StringBuffer(word);
+	// if (word.length() > 2 && !real.toString().endsWith("-")
+	// && !real.toString().endsWith("("))
+	// real.append("<br>");
+	// }
+	// real.append(word);
+	// }
 	//
-	//		String result = real.toString();
-	//		result = ErrorMsg.stringReplace(result, "<html><br>", "<html>");
-	//		result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
-	//		result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
-	//		if (result.indexOf("<br>") <= 0) {
-	//			result = ErrorMsg.stringReplace(result, "<html>", "");
-	//			result = ErrorMsg.stringReplace(result, "</html>", "");
-	//		}
-	//		setLabel(result);
-	//	}
+	// String result = real.toString();
+	// result = ErrorMsg.stringReplace(result, "<html><br>", "<html>");
+	// result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
+	// result = ErrorMsg.stringReplace(result, "<br> <br>", " <br>");
+	// if (result.indexOf("<br>") <= 0) {
+	// result = ErrorMsg.stringReplace(result, "<html>", "");
+	// result = ErrorMsg.stringReplace(result, "</html>", "");
+	// }
+	// setLabel(result);
+	// }
 
 	private String getLabel(boolean stripHTML) {
 		String result = getLabel();
@@ -366,7 +365,7 @@ GraphicAttributeConstants {
 	public LabelFrameSetting getLabelFrameSetting() {
 		String s = getFontStyle();
 		for (LabelFrameSetting lfs : LabelFrameSetting.values())
-			if (lfs!=LabelFrameSetting.NO_FRAME && s.contains(lfs.toGMLstring()))
+			if (lfs != LabelFrameSetting.NO_FRAME && s.contains(lfs.toGMLstring()))
 				return lfs;
 		return LabelFrameSetting.NO_FRAME;
 	}
@@ -375,26 +374,26 @@ GraphicAttributeConstants {
 		if (!attributes.containsKey(GraphicAttributeConstants.SHADOWOFFSET))
 			add(new IntegerAttribute(GraphicAttributeConstants.SHADOWOFFSET, 1));
 		return ((IntegerAttribute) attributes
-				.get(GraphicAttributeConstants.SHADOWOFFSET)).getInteger();
+							.get(GraphicAttributeConstants.SHADOWOFFSET)).getInteger();
 	}
 
 	public int getShadowOffY() {
 		if (!attributes.containsKey(GraphicAttributeConstants.SHADOWOFFSET))
 			add(new IntegerAttribute(GraphicAttributeConstants.SHADOWOFFSET, 1));
 		return ((IntegerAttribute) attributes
-				.get(GraphicAttributeConstants.SHADOWOFFSET)).getInteger();
+							.get(GraphicAttributeConstants.SHADOWOFFSET)).getInteger();
 	}
 
 	public Color getShadowTextColor() {
 		if (!attributes.containsKey(GraphicAttributeConstants.SHADOWCOLOR)) {
 			Attribute newAtt = StringAttribute.getTypedStringAttribute(
-					GraphicAttributeConstants.SHADOWCOLOR, ColorUtil
-					.getHexFromColor(Color.LIGHT_GRAY));
+								GraphicAttributeConstants.SHADOWCOLOR, ColorUtil
+													.getHexFromColor(Color.LIGHT_GRAY));
 			newAtt.setParent(this);
 			attributes.put(GraphicAttributeConstants.SHADOWCOLOR, newAtt);
 		}
 		ColorSetAndGetSupport colorAtt = (ColorSetAndGetSupport) attributes
-		.get(GraphicAttributeConstants.SHADOWCOLOR);
+							.get(GraphicAttributeConstants.SHADOWCOLOR);
 		Color resultCol = colorAtt.getColor();
 		return resultCol;
 	}
@@ -404,14 +403,13 @@ GraphicAttributeConstants {
 			return;
 		JLabel lastLabel = new JLabel(getLabel());
 		String fontName = getFontName();
-		int fontStyleInt = getFontStyleJava();
-		;
+		int fontStyleInt = getFontStyleJava();;
 		int fontSize = getFontSize();
 		lastLabel.setFont(new Font(fontName, fontStyleInt, fontSize));
 
 		FontMetrics fm = lastLabel.getFontMetrics(lastLabel.getFont());
 		int containerWidth = (int) AttributeHelper
-		.getSize((Node) getAttributable()).x;
+							.getSize((Node) getAttributable()).x;
 
 		BreakIterator boundary = BreakIterator.getWordInstance();
 
@@ -422,15 +420,15 @@ GraphicAttributeConstants {
 
 		int start = boundary.first();
 		for (int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary
-		.next()) {
+							.next()) {
 			String word = getLabel(true).substring(start, end);
 			trial.append(word);
 			int trialWidth = SwingUtilities.computeStringWidth(fm, trial
-					.toString());
+								.toString());
 			if (trialWidth > containerWidth) {
 				trial = new StringBuffer(word);
 				if (word.length() > 2 && !real.toString().endsWith("-")
-						&& !real.toString().endsWith("("))
+									&& !real.toString().endsWith("("))
 					real.append("<br>");
 			}
 			real.append(word);

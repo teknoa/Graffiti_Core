@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   PluginHelper.java
+// PluginHelper.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: PluginHelper.java,v 1.7 2010/07/19 13:01:39 morla Exp $
+// ==============================================================================
+// $Id: PluginHelper.java,v 1.8 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.util;
 
@@ -37,122 +37,91 @@ import org.graffiti.managers.pluginmgr.PluginXMLParser;
  *
  */
 @SuppressWarnings("unchecked")
-public class PluginHelper implements HelperClass
-{
-	//~ Methods ================================================================
+public class PluginHelper implements HelperClass {
+	// ~ Methods ================================================================
 
 	/**
 	 * Reads and returns the plugin description of the plugin from the given
 	 * URL.
-	 *
-	 * @param pluginLocation the URL to the plugin.
-	 *
+	 * 
+	 * @param pluginLocation
+	 *           the URL to the plugin.
 	 * @return DOCUMENT ME!
-	 *
-	 * @exception PluginManagerException if an error occurrs while loading the
-	 *            plugin description.
+	 * @exception PluginManagerException
+	 *               if an error occurrs while loading the
+	 *               plugin description.
 	 */
 	public static PluginDescription readPluginDescription(URL pluginLocation)
-	throws PluginManagerException
-	{
-		if(pluginLocation == null)
-		{
+						throws PluginManagerException {
+		if (pluginLocation == null) {
 			throw new PluginManagerException("exception.MalformedURL", "null");
 		}
 
 		String fileName = pluginLocation.toString();
 		InputStream input;
 
-		if(fileName.toLowerCase().endsWith(".xml"))
-		{
-			try
-			{
-				if(fileName.startsWith("jar:"))
-				{
+		if (fileName.toLowerCase().endsWith(".xml")) {
+			try {
+				if (fileName.startsWith("jar:")) {
 					JarURLConnection juc = (JarURLConnection) pluginLocation.openConnection();
 					input = juc.getInputStream();
-				}
-				else
-				{
+				} else {
 					URLConnection uc;
 					uc = pluginLocation.openConnection();
 					// %5c
 					try {
-						fileName=fileName.replaceAll("%5c","/");
-						fileName=fileName.replaceAll("file://", "file:///");
+						fileName = fileName.replaceAll("%5c", "/");
+						fileName = fileName.replaceAll("file://", "file:///");
 						URLConnection uc2 = new URL(fileName).openConnection();
 						input = uc2.getInputStream();
-					} catch(IOException ioe) {
+					} catch (IOException ioe) {
 						input = uc.getInputStream();
 					}
 				}
-			}
-			catch(IOException ioe)
-			{
+			} catch (IOException ioe) {
 				throw new PluginManagerException("exception.IO");
 			}
 
 			// directly read from the jar or zip file
-		}
-		else if(fileName.toLowerCase().endsWith(".jar") ||
-				fileName.toLowerCase().endsWith(".zip"))
-		{
-			try
-			{
-				JarFile file = new JarFile(new File(
-						new URI(pluginLocation.toString())));
-				StringBundle sBundle = StringBundle.getInstance();
-				ZipEntry entry = file.getEntry(sBundle.getString(
-						"plugin.xml.filename"));
+		} else
+			if (fileName.toLowerCase().endsWith(".jar") ||
+								fileName.toLowerCase().endsWith(".zip")) {
+				try {
+					JarFile file = new JarFile(new File(
+										new URI(pluginLocation.toString())));
+					StringBundle sBundle = StringBundle.getInstance();
+					ZipEntry entry = file.getEntry(sBundle.getString(
+										"plugin.xml.filename"));
 
-				if(entry != null)
-				{
-					// create an input stream from this entry.
-					input = file.getInputStream(entry);
-				}
-				else
-				{
+					if (entry != null) {
+						// create an input stream from this entry.
+						input = file.getInputStream(entry);
+					} else {
+						throw new PluginManagerException("exception.IO");
+					}
+				} catch (MalformedURLException mue) {
+					throw new PluginManagerException("exception.MalformedURL");
+				} catch (URISyntaxException use) {
+					throw new PluginManagerException("exception.URISyntax");
+				} catch (IOException ioe) {
 					throw new PluginManagerException("exception.IO");
 				}
+			} else {
+				throw new PluginManagerException("exception.unknownFileType",
+									fileName);
 			}
-			catch(MalformedURLException mue)
-			{
-				throw new PluginManagerException("exception.MalformedURL");
-			}
-			catch(URISyntaxException use)
-			{
-				throw new PluginManagerException("exception.URISyntax");
-			}
-			catch(IOException ioe)
-			{
-				throw new PluginManagerException("exception.IO");
-			}
-		}
-		else
-		{
-			throw new PluginManagerException("exception.unknownFileType",
-					fileName);
-		}
 
 		PluginDescription description = null;
 
-		try
-		{
+		try {
 			PluginXMLParser parser = new PluginXMLParser();
 			description = parser.parse(input);
-		}
-		catch(IOException ioe)
-		{
+		} catch (IOException ioe) {
 			throw new PluginManagerException("exception.IO", ioe.getMessage());
-		}
-		finally
-		{
-			try
-			{
+		} finally {
+			try {
 				input.close();
-			}
-			catch(IOException ioe)
-			{
+			} catch (IOException ioe) {
 				ioe.printStackTrace();
 			}
 		}
@@ -169,8 +138,8 @@ public class PluginHelper implements HelperClass
 		for (Iterator it = plugins.iterator(); it.hasNext();) {
 			PluginEntry e = (PluginEntry) it.next();
 			Class[] at = e.getPlugin().getAttributes();
-			if (at!=null && at.length>0) {
-				for (int i=0; i<at.length; i++)
+			if (at != null && at.length > 0) {
+				for (int i = 0; i < at.length; i++)
 					result.add(at[i]);
 			}
 		}
@@ -178,6 +147,6 @@ public class PluginHelper implements HelperClass
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

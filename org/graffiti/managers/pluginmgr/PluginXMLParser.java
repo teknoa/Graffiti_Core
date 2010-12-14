@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   PluginXMLParser.java
+// PluginXMLParser.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: PluginXMLParser.java,v 1.9 2010/07/19 13:01:27 morla Exp $
+// ==============================================================================
+// $Id: PluginXMLParser.java,v 1.10 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -18,29 +18,27 @@ import org.apache.commons.logging.impl.NoOpLog;
 import org.graffiti.core.StringBundle;
 import org.xml.sax.SAXException;
 
-
 /**
- * The XML parser for the plugin descriptions.  The plugin description
+ * The XML parser for the plugin descriptions. The plugin description
  * (<tt>plugin.xml</tt>) file is validated by the <tt>plugin.dtd</tt>.
- *
- * @version $Revision: 1.9 $
+ * 
+ * @version $Revision: 1.10 $
  */
-public class PluginXMLParser
-{
-	//~ Static fields/initializers =============================================
+public class PluginXMLParser {
+	// ~ Static fields/initializers =============================================
 
 	/** The <code>StringBundle</code> for the xml parser. */
 	protected static StringBundle sBundle = StringBundle.getInstance();
 
 	/** The public identifier of the plugin dtd. */
 	public static String PUBLIC_DTD_IDENTIFIER = sBundle.getString(
-	"plugin.dtd.identifier");
+						"plugin.dtd.identifier");
 
 	/** The local plugin dtd. */
 	public static String PLUGIN_DTD_LOCAL = sBundle.getRes("plugin.dtd.local")
-	.toString();
+						.toString();
 
-	//~ Instance fields ========================================================
+	// ~ Instance fields ========================================================
 
 	/** The parser instance. */
 	private Digester parser;
@@ -48,13 +46,12 @@ public class PluginXMLParser
 	/** A temporary plugin description, which is used by the xml parser. */
 	private PluginDescription description;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new plugin xml parser instance.
 	 */
-	public PluginXMLParser()
-	{
+	public PluginXMLParser() {
 		parser = new Digester();
 
 		parser.setValidating(true);
@@ -66,7 +63,7 @@ public class PluginXMLParser
 		parser.register(PUBLIC_DTD_IDENTIFIER, PLUGIN_DTD_LOCAL);
 
 		parser.addObjectCreate("plugin",
-		"org.graffiti.managers.pluginmgr.PluginDescription");
+							"org.graffiti.managers.pluginmgr.PluginDescription");
 
 		parser.addCallMethod("plugin/author", "setAuthor", 0);
 		parser.addCallMethod("plugin/description", "setDescription", 0);
@@ -84,7 +81,7 @@ public class PluginXMLParser
 
 		// the rules for the plugin's dependencies
 		parser.addObjectCreate("plugin/deps/plugindesc",
-		"org.graffiti.managers.pluginmgr.PluginDependency");
+							"org.graffiti.managers.pluginmgr.PluginDependency");
 
 		parser.addCallMethod("plugin/deps/plugindesc/name", "setName", 0);
 		parser.addCallMethod("plugin/deps/plugindesc/main", "setMain", 0);
@@ -94,57 +91,50 @@ public class PluginXMLParser
 
 		// add the parsed plugin dependency to the list of dependencies
 		parser.addSetNext("plugin/deps/plugindesc", "addPluginDependency",
-		"org.graffiti.managers.pluginmgr.PluginDependency");
+							"org.graffiti.managers.pluginmgr.PluginDependency");
 
 		// create a rule for saving the parsed plugin description object
 		parser.addSetNext("plugin", "setPluginDescription",
-		"org.graffiti.managers.pluginmgr.PluginDescription");
+							"org.graffiti.managers.pluginmgr.PluginDescription");
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
-	 * Sets the internal temporary plugin description to the given value.  This
+	 * Sets the internal temporary plugin description to the given value. This
 	 * method is used by the xml parser only.
-	 *
-	 * @param description the new value.
+	 * 
+	 * @param description
+	 *           the new value.
 	 */
-	public void setPluginDescription(PluginDescription description)
-	{
+	public void setPluginDescription(PluginDescription description) {
 		this.description = description;
 	}
 
 	/**
 	 * Parses the given <code>plugin.xml</code> file.
-	 *
-	 * @param is input stream of the<code>plugin.xml</code> file.
-	 *
+	 * 
+	 * @param is
+	 *           input stream of the<code>plugin.xml</code> file.
 	 * @return an instance of plugin description, which contains the parsed
 	 *         information.
-	 *
-	 * @throws IOException DOCUMENT ME!
+	 * @throws IOException
+	 *            DOCUMENT ME!
 	 */
 	public PluginDescription parse(InputStream is)
-	throws IOException
-	{
+						throws IOException {
 		parser.clear();
 		parser.push(this);
-		try
-		{
+		try {
 			parser.parse(is);
-		}
-		catch(SAXException saxe)
-		{
+		} catch (SAXException saxe) {
 			ErrorMsg.addErrorMessage(saxe);
 			return null;
 		}
 
-		try
-		{
+		try {
 			validateDescription(description);
-		}
-		catch(SAXException saxe)
-		{
+		} catch (SAXException saxe) {
 			ErrorMsg.addErrorMessage(saxe);
 			return null;
 		}
@@ -154,34 +144,31 @@ public class PluginXMLParser
 
 	/**
 	 * Validates the given current plugin description.
-	 *
-	 * @param description the description to validate.
-	 *
-	 * @throws SAXException DOCUMENT ME!
+	 * 
+	 * @param description
+	 *           the description to validate.
+	 * @throws SAXException
+	 *            DOCUMENT ME!
 	 */
 	public void validateDescription(PluginDescription description)
-	throws SAXException
-	{
-		if(description == null)
-		{
+						throws SAXException {
+		if (description == null) {
 			throw new SAXException(new PluginManagerException(
-					"exception.PluginDescriptionNull"));
+								"exception.PluginDescriptionNull"));
 		}
 
-		if((description.getName() == null) || "".equals(description.getName()))
-		{
+		if ((description.getName() == null) || "".equals(description.getName())) {
 			throw new SAXException(new PluginManagerException(
-					"exception.IllegalPluginName", description.getName()).getMessage());
+								"exception.IllegalPluginName", description.getName()).getMessage());
 		}
 
-		if((description.getMain() == null) || "".equals(description.getMain()))
-		{
+		if ((description.getMain() == null) || "".equals(description.getMain())) {
 			throw new SAXException(new PluginManagerException(
-					"exception.IllegalPluginMain", description.getMain()).getMessage());
+								"exception.IllegalPluginMain", description.getMain()).getMessage());
 		}
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

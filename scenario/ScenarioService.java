@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2007 Network Analysis Group, IPK Gatersleben
  *******************************************************************************/
 /*
  * Created on 16.03.2007 by Christian Klukas
@@ -41,7 +39,7 @@ public class ScenarioService implements HelperClass {
 	}
 
 	public static boolean isRecording() {
-		return recordingActive ;
+		return recordingActive;
 	}
 
 	public static void recordStop() {
@@ -50,7 +48,7 @@ public class ScenarioService implements HelperClass {
 
 	@SuppressWarnings("deprecation")
 	public static void recordStart() {
-		currentScenario = new Scenario("Workflow", "Recorded at "+new Date().toLocaleString());
+		currentScenario = new Scenario("Workflow", "Recorded at " + new Date().toLocaleString());
 		recordingActive = true;
 	}
 
@@ -62,7 +60,7 @@ public class ScenarioService implements HelperClass {
 		if (isRecording()) {
 			if (algorithm instanceof ScenarioServiceIgnoreAlgorithm)
 				return;
-			if (gui!=null)
+			if (gui != null)
 				gui.postWorkflowStep(algorithm, params);
 			currentScenario.addImports(getImportsForAlgorithm(algorithm, params));
 			currentScenario.addCommands(getStartCommandsForAlgorithm(algorithm, params));
@@ -71,7 +69,7 @@ public class ScenarioService implements HelperClass {
 
 	public static void postWorkflowStep(Action action) {
 		if (isRecording()) {
-			if (gui!=null)
+			if (gui != null)
 				gui.postWorkflowStep(action);
 			currentScenario.addImports(getImportsForAction(action));
 			currentScenario.addCommands(getCommandsForAction(action));
@@ -81,8 +79,8 @@ public class ScenarioService implements HelperClass {
 	private static Collection<String> getCommandsForAction(Action action) {
 		ArrayList<String> res = new ArrayList<String>();
 
-		String name = (String)action.getValue("name");
-		res.add("GraffitiAction.performAction(\""+name+"\");");
+		String name = (String) action.getValue("name");
+		res.add("GraffitiAction.performAction(\"" + name + "\");");
 
 		return res;
 	}
@@ -96,14 +94,14 @@ public class ScenarioService implements HelperClass {
 	}
 
 	private static Collection<String> getImportsForAlgorithm(
-			Algorithm algorithm, Parameter[] params) {
+						Algorithm algorithm, Parameter[] params) {
 		ArrayList<String> res = new ArrayList<String>();
 
 		res.add("import org.graffiti.editor.GravistoService;");
 		res.add("import org.graffiti.editor.MainFrame;");
 
 		Package p = algorithm.getClass().getPackage();
-		res.add("import "+p.getName()+".*;");
+		res.add("import " + p.getName() + ".*;");
 
 		boolean canStoreParams = getCanStoreParams(params);
 		if (canStoreParams) {
@@ -114,21 +112,21 @@ public class ScenarioService implements HelperClass {
 	}
 
 	private static Collection<String> getStartCommandsForAlgorithm(
-			Algorithm algorithm, Parameter[] params) {
+						Algorithm algorithm, Parameter[] params) {
 		ArrayList<String> res = new ArrayList<String>();
 
 		boolean canStoreParams = getCanStoreParams(params);
 		boolean processesStoredParamsByItself = (algorithm instanceof ScenarioServiceHandlesStoredParametersOption);
-		res.add("// Starting Algorithm "+algorithm.getName());
+		res.add("// Starting Algorithm " + algorithm.getName());
 		res.add("{");
 		if (processesStoredParamsByItself) {
 			res.add("   if (!useStoredParameters) {");
-			res.add("      GravistoService.run(\""+algorithm.getName()+"\");");
+			res.add("      GravistoService.run(\"" + algorithm.getName() + "\");");
 			res.add("   }");
 		} else
 			if (canStoreParams) {
 				res.add("   if (useStoredParameters) {");
-				res.add("      "+algorithm.getClass().getSimpleName()+" algo = new "+algorithm.getClass().getSimpleName()+"();");
+				res.add("      " + algorithm.getClass().getSimpleName() + " algo = new " + algorithm.getClass().getSimpleName() + "();");
 				res.add("      GravistoService.attachData(algo);");
 				for (String c : getParameterInstanciationCommands(params, "      "))
 					res.add(c);
@@ -137,11 +135,11 @@ public class ScenarioService implements HelperClass {
 				res.add("      algo.execute();");
 				res.add("      algo.reset();");
 				res.add("   } else {");
-				res.add("      GravistoService.run(\""+algorithm.getName()+"\");");
+				res.add("      GravistoService.run(\"" + algorithm.getName() + "\");");
 				res.add("   }");
 			} else {
 				res.add("   // complex parameters could not be stored as script commands, using user-provided parameters instead");
-				res.add("   GravistoService.run(\""+algorithm.getName()+"\");");
+				res.add("   GravistoService.run(\"" + algorithm.getName() + "\");");
 			}
 		res.add("}");
 		return res;
@@ -149,12 +147,12 @@ public class ScenarioService implements HelperClass {
 
 	private static Collection<String> getParameterInstanciationImports(Parameter[] params) {
 		ArrayList<String> res = new ArrayList<String>();
-		if (params == null || params.length==0)
+		if (params == null || params.length == 0)
 			return res;
 		else {
 			res.add("import org.graffiti.plugin.parameter.Parameter;");
 			for (Parameter p : params) {
-				ProvidesScenarioSupportCommand sp = (ProvidesScenarioSupportCommand)p;
+				ProvidesScenarioSupportCommand sp = (ProvidesScenarioSupportCommand) p;
 				for (String i : sp.getScenarioImports())
 					res.add(i);
 			}
@@ -163,30 +161,30 @@ public class ScenarioService implements HelperClass {
 	}
 
 	private static Collection<String> getParameterInstanciationCommands(
-			Parameter[] params, String frontSpace) {
+						Parameter[] params, String frontSpace) {
 		ArrayList<String> res = new ArrayList<String>();
 		if (params == null)
-			res.add(frontSpace+"Parameter[] params = null;");
+			res.add(frontSpace + "Parameter[] params = null;");
 		else {
-			if (params.length==0)
-				res.add(frontSpace+"Parameter[] params = new Parameter[] {};");
+			if (params.length == 0)
+				res.add(frontSpace + "Parameter[] params = new Parameter[] {};");
 			else {
-				res.add(frontSpace+"Parameter[] params = new Parameter[] {");
+				res.add(frontSpace + "Parameter[] params = new Parameter[] {");
 				int idx = 0;
-				int max = params.length-1;
+				int max = params.length - 1;
 				for (Parameter p : params) {
-					ProvidesScenarioSupportCommand sp = (ProvidesScenarioSupportCommand)p;
-					res.add(frontSpace+frontSpace+sp.getScenarioCommand() + (idx<max ? "," : ""));
+					ProvidesScenarioSupportCommand sp = (ProvidesScenarioSupportCommand) p;
+					res.add(frontSpace + frontSpace + sp.getScenarioCommand() + (idx < max ? "," : ""));
 					idx++;
 				}
-				res.add(frontSpace+"};");
+				res.add(frontSpace + "};");
 			}
 		}
 		return res;
 	}
 
 	private static boolean getCanStoreParams(Parameter[] params) {
-		if (params==null || params.length==0)
+		if (params == null || params.length == 0)
 			return true;
 		else {
 			boolean allOK = true;
@@ -207,7 +205,8 @@ public class ScenarioService implements HelperClass {
 		for (File f : dir.listFiles(new FileFilter() {
 			public boolean accept(File pathname) {
 				return pathname.canRead() && pathname.getAbsolutePath().toLowerCase().endsWith(".bsh");
-			}})) {
+			}
+		})) {
 
 			Scenario s = new Scenario(f);
 			if (s.isValid())
@@ -218,15 +217,15 @@ public class ScenarioService implements HelperClass {
 
 	public static void postWorkflowStep(String title, String[] imports, String[] commands) {
 		if (isRecording()) {
-			if (gui!=null)
+			if (gui != null)
 				gui.postWorkflowStep(title, imports, commands);
 			currentScenario.addImports(imports);
 			ArrayList<String> comments = new ArrayList<String>();
-			comments.add("// "+title);
+			comments.add("// " + title);
 			comments.add("{");
 			currentScenario.addCommands(comments);
-			for (int i=0; i<commands.length; i++)
-				commands[i] = "   "+commands[i];
+			for (int i = 0; i < commands.length; i++)
+				commands[i] = "   " + commands[i];
 			currentScenario.addCommands(commands);
 			comments.clear();
 			comments.add("}");

@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   SelectionEvent.java
+// SelectionEvent.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: SelectionEvent.java,v 1.3 2010/07/19 13:01:51 morla Exp $
+// ==============================================================================
+// $Id: SelectionEvent.java,v 1.4 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.selection;
 
@@ -13,13 +13,12 @@ import org.graffiti.event.AbstractEvent;
 
 /**
  * DOCUMENT ME!
- *
- * @version $Revision: 1.3 $
+ * 
+ * @version $Revision: 1.4 $
  */
 public class SelectionEvent
-extends AbstractEvent
-{
-	//~ Instance fields ========================================================
+					extends AbstractEvent {
+	// ~ Instance fields ========================================================
 
 	/**
 	 * 
@@ -28,51 +27,49 @@ extends AbstractEvent
 	/** DOCUMENT ME! */
 	private boolean added;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
 	 * Constructs a new <code>SelectionEvent</code>.
-	 *
-	 * @param selection the (new / updated) selection.
+	 * 
+	 * @param selection
+	 *           the (new / updated) selection.
 	 */
-	public SelectionEvent(Selection selection)
-	{
+	public SelectionEvent(Selection selection) {
 		super(selection);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets the added.
-	 *
-	 * @param added The added to set
+	 * 
+	 * @param added
+	 *           The added to set
 	 */
-	public void setAdded(boolean added)
-	{
+	public void setAdded(boolean added) {
 		this.added = added;
 	}
 
 	/**
 	 * Returns the selection contained in the event.
-	 *
+	 * 
 	 * @return the selection contained in the event.
 	 */
-	public Selection getSelection()
-	{
+	public Selection getSelection() {
 		return (Selection) getSource();
 	}
 
 	/**
 	 * Returns the added.
-	 *
+	 * 
 	 * @return boolean
 	 */
-	public boolean toBeAdded()
-	{
+	public boolean toBeAdded() {
 		return added;
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

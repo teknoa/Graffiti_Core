@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2009 Plant Bioinformatics Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2009 Plant Bioinformatics Group, IPK Gatersleben
  *******************************************************************************/
 /*
  * Created on Feb 24, 2010 by Christian Klukas
@@ -11,7 +9,6 @@ package org.color;
 
 /**
  * @author klukas
- * 
  */
 public class Color_CIE_Lab {
 	private double l;

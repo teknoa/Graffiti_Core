@@ -1,7 +1,5 @@
 /*******************************************************************************
- * 
- *    Copyright (c) 2003-2009 Plant Bioinformatics Group, IPK Gatersleben
- * 
+ * Copyright (c) 2003-2009 Plant Bioinformatics Group, IPK Gatersleben
  *******************************************************************************/
 /*
  * Created on Dec 3, 2009 by Christian Klukas
@@ -15,13 +13,11 @@ import java.util.Stack;
 
 /**
  * @author klukas
- *
  */
 public class NamedColorSet {
 
-
-	private static HashMap<String,Color> name2colorLight   = new HashMap<String, Color>();
-	private static HashMap<String,Color> name2colorIntense = new HashMap<String, Color>();
+	private static HashMap<String, Color> name2colorLight = new HashMap<String, Color>();
+	private static HashMap<String, Color> name2colorIntense = new HashMap<String, Color>();
 
 	private static Stack<Color> unusedColorsLight = new Stack<Color>();
 	private static Stack<Color> unusedColorsIntense = new Stack<Color>();
@@ -33,14 +29,14 @@ public class NamedColorSet {
 		ArrayList<Color> lightColors = new ArrayList<Color>();
 		ArrayList<Color> intenseColors = new ArrayList<Color>();
 
-		//		boolean generate = false;
+		// boolean generate = false;
 
 		for (String group : groups) {
 			if (unusedColorsLight.isEmpty() || unusedColorsIntense.isEmpty()) {
-				System.out.println("Generate named colors (round "+generationRound+")");
-				for (Color c : org.Colors.get(7*generationRound, 0.4f))
+				System.out.println("Generate named colors (round " + generationRound + ")");
+				for (Color c : org.Colors.get(7 * generationRound, 0.4f))
 					unusedColorsLight.push(c);
-				for (Color c : org.Colors.get(7*generationRound, 0.7f))
+				for (Color c : org.Colors.get(7 * generationRound, 0.7f))
 					unusedColorsIntense.push(c);
 				generationRound++;
 

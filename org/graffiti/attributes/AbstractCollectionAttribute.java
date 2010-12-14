@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   AbstractCollectionAttribute.java
+// AbstractCollectionAttribute.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.13 2010/07/19 12:59:19 morla Exp $
+// ==============================================================================
+// $Id: AbstractCollectionAttribute.java,v 1.14 2010/12/14 07:02:25 morla Exp $
 
 package org.graffiti.attributes;
 
@@ -16,23 +16,21 @@ import org.graffiti.event.AttributeEvent;
 import org.graffiti.plugin.XMLHelper;
 
 /**
- * Provides common functionality for <code>CollectionAttribute</code>
- * instances. Calls the <code>ListenerManager</code> and delegates the
+ * Provides common functionality for <code>CollectionAttribute</code> instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
- *
- * @version $Revision: 1.13 $
+ * 
+ * @version $Revision: 1.14 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
-implements CollectionAttribute {
-	//~ Static fields/initializers =============================================
+					implements CollectionAttribute {
+	// ~ Static fields/initializers =============================================
 
-	//~ Instance fields ========================================================
+	// ~ Instance fields ========================================================
 
 	/**
-	 * The internal map which maps the ids to the Attributes which are in this
-	 * <code>CollectionAttribute</code>.
+	 * The internal map which maps the ids to the Attributes which are in this <code>CollectionAttribute</code>.
 	 */
-	protected Map<String,Attribute> attributes;
+	protected Map<String, Attribute> attributes;
 
 	/**
 	 * The <code>Attributable</code> of this <code>Attribute</code>. This
@@ -40,45 +38,41 @@ implements CollectionAttribute {
 	 */
 	private Attributable attributable;
 
-	//~ Constructors ===========================================================
+	// ~ Constructors ===========================================================
 
 	/**
-	 * Constructor for setting the id of an
-	 * <code>AbstractCollectionAttribute</code>.
-	 *
-	 * @param id the id of the <code>Attribute</code>.
-	 *
-	 * @exception IllegalIdException if the given id contains a seperator. This
-	 *            is checked for in the constructor of the superclass
-	 *            <code>AbstractAttribute</code>.
+	 * Constructor for setting the id of an <code>AbstractCollectionAttribute</code>.
+	 * 
+	 * @param id
+	 *           the id of the <code>Attribute</code>.
+	 * @exception IllegalIdException
+	 *               if the given id contains a seperator. This
+	 *               is checked for in the constructor of the superclass <code>AbstractAttribute</code>.
 	 */
 	public AbstractCollectionAttribute(String id) throws IllegalIdException {
 		super(id);
 	}
 
-	//~ Methods ================================================================
+	// ~ Methods ================================================================
 
 	/**
 	 * Sets the <code>Attribute</code>'s <code>Attributable</code>.
-	 * 
 	 * <p>
-	 * <b>Implementation Notes:</b> This method should only be called once and
-	 * only by an  <code>addAttribute()</code> method call! The attributable
-	 * property may only be set on the root <code>Attribute</code> of a
-	 * hierarchy
+	 * <b>Implementation Notes:</b> This method should only be called once and only by an <code>addAttribute()</code> method call! The attributable property may
+	 * only be set on the root <code>Attribute</code> of a hierarchy
 	 * </p>
-	 *
-	 * @param att the new <code>Attributable</code> of the
-	 *        <code>Attribute</code>.
-	 *
-	 * @throws FieldAlreadySetException DOCUMENT ME!
+	 * 
+	 * @param att
+	 *           the new <code>Attributable</code> of the <code>Attribute</code>.
+	 * @throws FieldAlreadySetException
+	 *            DOCUMENT ME!
 	 */
 	public void setAttributable(Attributable att)
-	throws FieldAlreadySetException {
+						throws FieldAlreadySetException {
 		assert att != null : "must not set attributable to null";
 		assert this.getParent() == null : "Only the root attribute has a reference to the attributable "
-			+ " the hierarchy belongs to. Only call setAttributable on "
-			+ "attributes where parent == null.";
+							+ " the hierarchy belongs to. Only call setAttributable on "
+							+ "attributes where parent == null.";
 
 		// different from setParent, attributable is only null when
 		// not set before
@@ -91,7 +85,7 @@ implements CollectionAttribute {
 
 	/**
 	 * Returns the <code>Attribute</code>'s <code>Attributable</code>.
-	 *
+	 * 
 	 * @return the <code>Attribute</code>'s <code>Attributable</code>.
 	 */
 	@Override
@@ -109,28 +103,28 @@ implements CollectionAttribute {
 
 	/**
 	 * Returns the attribute located at <code>path</code>.
-	 *
-	 * @param path the relative path to the attribute from <code>this</code>.
-	 *
+	 * 
+	 * @param path
+	 *           the relative path to the attribute from <code>this</code>.
 	 * @return the attribute found at <code>path</code>.
-	 *
-	 * @exception AttributeNotFoundException if there is no attribute located
-	 *            at path.
+	 * @exception AttributeNotFoundException
+	 *               if there is no attribute located
+	 *               at path.
 	 */
 	public Attribute getAttribute(String path) throws AttributeNotFoundException {
 		assert path != null;
-		if (path==null || path.length()<=0) {
+		if (path == null || path.length() <= 0) {
 			return this;
 		} else {
 			int sepPos = path.indexOf(Attribute.SEPARATOR);
-			if (sepPos<0) {
+			if (sepPos < 0) {
 				Attribute attr = attributes.get(path);
 				if (attr == null)
 					throw new AttributeNotFoundException(null); // "Did not find sub attribute with ID " + path);
 				return attr;
 			} else {
 				String s0 = path.substring(0, sepPos);
-				String s1 = path.substring(sepPos+sepLen);
+				String s1 = path.substring(sepPos + sepLen);
 				Attribute attr = attributes.get(s0);
 				if (attr == null) {
 					throw new AttributeNotFoundException(null); // "Did not find sub attribute with ID " + path);
@@ -138,10 +132,12 @@ implements CollectionAttribute {
 					try {
 						return ((CollectionAttribute) attr).getAttribute(s1);
 					} catch (ClassCastException cce) {
-						throw new AttributeNotFoundException(null); /*"Attribute with ID "
-									+ s0 + " is no "
-									+ "CollectionAttribute and therefore can't "
-									+ "contain subattribute with ID " + s1); */
+						throw new AttributeNotFoundException(null); /*
+																					 * "Attribute with ID "
+																					 * + s0 + " is no "
+																					 * + "CollectionAttribute and therefore can't "
+																					 * + "contain subattribute with ID " + s1);
+																					 */
 					}
 				}
 			}
@@ -149,10 +145,9 @@ implements CollectionAttribute {
 	}
 
 	/**
-	 * Returns <code>true</code> if the HashMapAttribute is empty. The same as
-	 * <code>getCollection().isEmpty()</code> would yield, but this method
+	 * Returns <code>true</code> if the HashMapAttribute is empty. The same as <code>getCollection().isEmpty()</code> would yield, but this method
 	 * should be faster since the map is not copied.
-	 *
+	 * 
 	 * @return <code>true</code> if the HashMapAttribute is empty.
 	 */
 	public boolean isEmpty() {
@@ -162,10 +157,10 @@ implements CollectionAttribute {
 	/**
 	 * Returns the value of this attribute, i.e. map between contained
 	 * attributes' ids and these attributes. The behaviour of this method
-	 * depends on implementation of method <code>getCollection()</code>  in
+	 * depends on implementation of method <code>getCollection()</code> in
 	 * concret classes which inherit this one. See documentation of concret
 	 * classes for more information.
-	 *
+	 * 
 	 * @return the value of this attribute.
 	 */
 	public Object getValue() {
@@ -173,18 +168,19 @@ implements CollectionAttribute {
 	}
 
 	/**
-	 * Adds a given attribute to the collection. Informs the
-	 * <code>ListenerManager</code> about the addition.
-	 *
-	 * @param a the new attribute to add to the list.
-	 *
-	 * @exception AttributeExistsException if there is already an attribute
-	 *            with the id of a.
-	 * @exception FieldAlreadySetException thrown if Attribute a already has a
-	 *            parent or attributable associated with it.
+	 * Adds a given attribute to the collection. Informs the <code>ListenerManager</code> about the addition.
+	 * 
+	 * @param a
+	 *           the new attribute to add to the list.
+	 * @exception AttributeExistsException
+	 *               if there is already an attribute
+	 *               with the id of a.
+	 * @exception FieldAlreadySetException
+	 *               thrown if Attribute a already has a
+	 *               parent or attributable associated with it.
 	 */
 	public void add(Attribute a) throws AttributeExistsException,
-	FieldAlreadySetException {
+						FieldAlreadySetException {
 		if (a == null)
 			return;
 		if (a.getId() == null)
@@ -197,7 +193,7 @@ implements CollectionAttribute {
 		if (attributes.containsKey(attrId)) {
 			try {
 				attributes.get(attrId).setValue(a.getValue());
-			} catch(Exception e) {
+			} catch (Exception e) {
 				try {
 					attributes.remove(attrId);
 					AttributeEvent attrEvent = new AttributeEvent(a);
@@ -205,9 +201,9 @@ implements CollectionAttribute {
 					a.setParent(this);
 					attributes.put(attrId, a);
 					callPostAttributeAdded(attrEvent);
-				} catch(Exception e2) {
+				} catch (Exception e2) {
 					throw new AttributeExistsException("Attribute with ID " + attrId
-							+ " already exists in " + "this HashMapAttribute!");
+										+ " already exists in " + "this HashMapAttribute!");
 				}
 			}
 		} else {
@@ -220,39 +216,40 @@ implements CollectionAttribute {
 	}
 
 	/**
-	 * Adds a given attribute to the collection. Only informs the
-	 * <code>ListenerManager</code> about the addition when
-	 * <code>inform</code> is set to true.
-	 *
-	 * @param a the new attribute to add to the list.
-	 * @param inform when true, <code>ListenerManager</code> gets informed
-	 *        otherwise not
-	 *
-	 * @exception AttributeExistsException if there is already an attribute
-	 *            with the id of a.
-	 * @exception FieldAlreadySetException thrown if Attribute a already has a
-	 *            parent or attributable associated with it.
+	 * Adds a given attribute to the collection. Only informs the <code>ListenerManager</code> about the addition when <code>inform</code> is set to true.
+	 * 
+	 * @param a
+	 *           the new attribute to add to the list.
+	 * @param inform
+	 *           when true, <code>ListenerManager</code> gets informed
+	 *           otherwise not
+	 * @exception AttributeExistsException
+	 *               if there is already an attribute
+	 *               with the id of a.
+	 * @exception FieldAlreadySetException
+	 *               thrown if Attribute a already has a
+	 *               parent or attributable associated with it.
 	 */
 	public void add(Attribute a, boolean inform)
-	throws AttributeExistsException, FieldAlreadySetException {
+						throws AttributeExistsException, FieldAlreadySetException {
 		assert a != null;
 
 		if (inform)
 			add(a);
 		else {
-			//            logger.warning("Adding Attribute with id " + id + " without " +
-			//                "informing the ListenerManager.");
+			// logger.warning("Adding Attribute with id " + id + " without " +
+			// "informing the ListenerManager.");
 
-			if (a==null)
+			if (a == null)
 				System.err.println("internal error: try to add null attribute...");
 			String attrId = a.getId();
-			//			if (attributes.containsKey(attrId)) {
-			//				attributes.remove(attrId);
-			//			}
+			// if (attributes.containsKey(attrId)) {
+			// attributes.remove(attrId);
+			// }
 			if (attributes.containsKey(attrId)) {
-				//System.out.println("Attribute with id " + attrId + " already exists.");
+				// System.out.println("Attribute with id " + attrId + " already exists.");
 				throw new AttributeExistsException("Attribute with ID " + attrId
-						+ "already exists in " + "this HashMapAttribute!");
+									+ "already exists in " + "this HashMapAttribute!");
 			} else {
 				a.setParent(this);
 				attributes.put(attrId, a);
@@ -261,27 +258,28 @@ implements CollectionAttribute {
 	}
 
 	/**
-	 * Removes the attribute with the given id from the collection. Notifies
-	 * <code>ListenerManager</code> with an AttributeRemoved event  when the
+	 * Removes the attribute with the given id from the collection. Notifies <code>ListenerManager</code> with an AttributeRemoved event when the
 	 * attribute hierarchy is attached to an <code>Attributable</code>.
-	 *
-	 * @param attrId the id of the attribute.
-	 *
-	 * @exception AttributeNotFoundException if there is no attribute with the
-	 *            given id.
-	 * @throws IllegalIdException DOCUMENT ME!
+	 * 
+	 * @param attrId
+	 *           the id of the attribute.
+	 * @exception AttributeNotFoundException
+	 *               if there is no attribute with the
+	 *               given id.
+	 * @throws IllegalIdException
+	 *            DOCUMENT ME!
 	 */
 	public void remove(String attrId) throws AttributeNotFoundException {
 		assert attrId != null;
 		if (attrId.indexOf(Attribute.SEPARATOR) != -1) {
 			throw new IllegalIdException(
-			"An id must not contain the SEPARATOR chararcter.");
+								"An id must not contain the SEPARATOR chararcter.");
 		} else {
 			Attribute attr = attributes.get(attrId);
 
 			if (attr == null) {
 				throw new AttributeNotFoundException("Attribute with ID " + attrId
-						+ "does not exist in " + "this HashMapAttribute");
+									+ "does not exist in " + "this HashMapAttribute");
 			} else {
 				// notify ListenerManager
 				AttributeEvent attrEvent = new AttributeEvent(attr);
@@ -293,16 +291,15 @@ implements CollectionAttribute {
 	}
 
 	/**
-	 * Removes the given attribute from the collection by calling
-	 * <code>remove(String id)</code> with the attribute's id as parameter.
+	 * Removes the given attribute from the collection by calling <code>remove(String id)</code> with the attribute's id as parameter.
 	 * Notifies <code>ListenerManager</code> with an AttributeRemoved event
-	 * when the attribute hierarchy is attached to an
-	 * <code>Attributable</code>.
-	 *
-	 * @param attr the attribute to be removed.
-	 *
-	 * @exception AttributeNotFoundException if the given attribute is not in
-	 *            the HashMap.
+	 * when the attribute hierarchy is attached to an <code>Attributable</code>.
+	 * 
+	 * @param attr
+	 *           the attribute to be removed.
+	 * @exception AttributeNotFoundException
+	 *               if the given attribute is not in
+	 *               the HashMap.
 	 */
 	public void remove(Attribute attr) throws AttributeNotFoundException {
 		assert attr != null;
@@ -352,22 +349,22 @@ implements CollectionAttribute {
 	public String toXMLString() {
 		StringBuffer valString = new StringBuffer();
 		valString.append(XMLHelper.spc(4) + "<subAttributes>"
-				+ XMLHelper.getDelimiter());
+							+ XMLHelper.getDelimiter());
 
 		for (Iterator<Attribute> it = attributes.values().iterator(); it.hasNext();) {
 			Attribute attr = (Attribute) it.next();
 			valString.append(XMLHelper.spc(6) + "<subattr>" + attr.toXMLString()
-					+ "</subattr>" + XMLHelper.getDelimiter());
+								+ "</subattr>" + XMLHelper.getDelimiter());
 		}
 
 		valString.append(XMLHelper.spc(4) + "</subAttributes>"
-				+ XMLHelper.getDelimiter() + XMLHelper.spc(4)
-				+ "<sorted>false</sorted>");
+							+ XMLHelper.getDelimiter() + XMLHelper.spc(4)
+							+ "<sorted>false</sorted>");
 
 		return getStandardXML(valString.toString());
 	}
 }
 
-//------------------------------------------------------------------------------
-//   end of file
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// end of file
+// ------------------------------------------------------------------------------

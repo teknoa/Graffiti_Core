@@ -1,11 +1,11 @@
-//==============================================================================
+// ==============================================================================
 //
-//   DefaultIOManager.java
+// DefaultIOManager.java
 //
-//   Copyright (c) 2001-2004 Gravisto Team, University of Passau
+// Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
-//==============================================================================
-// $Id: DefaultIOManager.java,v 1.18 2010/11/22 13:18:55 morla Exp $
+// ==============================================================================
+// $Id: DefaultIOManager.java,v 1.19 2010/12/14 07:02:26 morla Exp $
 
 package org.graffiti.managers;
 
@@ -38,7 +38,7 @@ import org.graffiti.plugin.io.resources.ResourceIOManager;
 /**
  * Handles the editor's IO serializers.
  * 
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  */
 public class DefaultIOManager implements IOManager {
 
@@ -53,7 +53,6 @@ public class DefaultIOManager implements IOManager {
 
 		/*
 		 * (non-Javadoc)
-		 * 
 		 * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
 		 */
 		@Override
@@ -80,7 +79,6 @@ public class DefaultIOManager implements IOManager {
 
 		/*
 		 * (non-Javadoc)
-		 * 
 		 * @see javax.swing.filechooser.FileFilter#getDescription()
 		 */
 		@Override
@@ -185,8 +183,8 @@ public class DefaultIOManager implements IOManager {
 				try {
 					InputStream inps = new MyByteArrayInputStream(out.getBuff());
 					if (is.validFor(inps)) {
-						//						System.out.println(ins.size() + " input serializers for file extension " + extSearch + ". Selected "
-						//								+ is.getClass().getCanonicalName());
+						// System.out.println(ins.size() + " input serializers for file extension " + extSearch + ". Selected "
+						// + is.getClass().getCanonicalName());
 						return is;
 					}
 				} catch (Exception e) {
@@ -279,7 +277,7 @@ public class DefaultIOManager implements IOManager {
 			for (int i = 0; i < ext.length; i++) {
 				if (knownExt.contains(ext[i]))
 					ErrorMsg.addErrorMessage("Error: Duplicate Output File Type Extension - " + ext[i] + " Class: "
-							+ os.toString());
+										+ os.toString());
 				knownExt.add(ext[i]);
 				GravistoFileFilter gff = new GravistoFileFilter(ext[i], desc[i]);
 
