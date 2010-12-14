@@ -1900,7 +1900,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		result.setOpaque(false);
 		double border = 0;
 		double[][] size = { { border, leftSize, rightSize, border }, // Columns
-							{ border, TableLayoutConstants.FILL, border } }; // Rows
+				{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		result.add(leftComponent, "1,1");
 		result.add(rightComponent, "2,1");
@@ -1914,7 +1914,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		result.setOpaque(false);
 		double border = 0;
 		double[][] size = { { border, TableLayoutConstants.FILL, border }, // Columns
-							{ border, topSize, bottomSize, border } }; // Rows
+				{ border, topSize, bottomSize, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		result.add((topComponent == null ? new JLabel() : topComponent), "1,1");
 		result.add((bottomComponent == null ? new JLabel() : bottomComponent), "1,2");
@@ -1927,7 +1927,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		result.setOpaque(false);
 		double border = 0;
 		double[][] size = { { border, TableLayoutConstants.FILL, border }, // Columns
-							{ border, TableLayoutConstants.PREFERRED, TableLayoutConstants.PREFERRED, border } }; // Rows
+				{ border, TableLayoutConstants.PREFERRED, TableLayoutConstants.PREFERRED, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		label.setOpaque(true);
 		label.setBackground(color);
@@ -1948,7 +1948,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double[][] size = { { border, sizeLeft, spaceBetween, sizeMiddle, spaceBetween, sizeRight, border }, // Columns
-							{ border, TableLayoutConstants.FILL, border } }; // Rows
+				{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		if (left != null)
 			result.add(left, "1,1");
@@ -1965,7 +1965,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double[][] size = { { border, width, spaceBetween, width, spaceBetween, width, spaceBetween, width, border }, // Columns
-							{ border, TableLayoutConstants.FILL, border } }; // Rows
+				{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		if (left != null)
 			result.add(left, "1,1");
@@ -1984,7 +1984,7 @@ public class TableLayout implements java.awt.LayoutManager2, java.io.Serializabl
 		JPanel result = new JPanel();
 		result.setOpaque(false);
 		double[][] size = { { border, w1, spaceBetween, w2, spaceBetween, w3, spaceBetween, w4, border }, // Columns
-							{ border, TableLayoutConstants.FILL, border } }; // Rows
+				{ border, TableLayoutConstants.FILL, border } }; // Rows
 		result.setLayout(new TableLayout(size));
 		if (left != null)
 			result.add(left, "1,1");

@@ -254,7 +254,7 @@ public class FolderPanel extends JComponent {
 						JComponent bottomComp, double topSize, double bottomSize) {
 		double border = 0;
 		double[][] size = { { border, TableLayoutConstants.FILL, border }, // Columns
-							{ border, topSize, bottomSize, border } }; // Rows
+				{ border, topSize, bottomSize, border } }; // Rows
 		return new TableLayout(size);
 	}
 
@@ -262,7 +262,7 @@ public class FolderPanel extends JComponent {
 						JComponent rightComponent, double leftSize, double rightSize) {
 		double border = 0;
 		double[][] size = { { border, leftSize, rightSize, border }, // Columns
-							{ border, TableLayoutConstants.PREFERRED, border } // ROWS
+				{ border, TableLayoutConstants.PREFERRED, border } // ROWS
 		}; // Rows
 		return new TableLayout(size);
 	}
