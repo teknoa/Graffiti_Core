@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Selection.java,v 1.9 2010/12/14 07:02:26 morla Exp $
+// $Id: Selection.java,v 1.10 2010/12/16 14:37:20 morla Exp $
 
 package org.graffiti.selection;
 
@@ -45,7 +45,7 @@ import org.graffiti.graph.Node;
  * selectionChanged()</code>
  * </p>
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class Selection {
 	// ~ Instance fields ========================================================
@@ -402,6 +402,10 @@ public class Selection {
 			return res;
 		}
 		return null;
+	}
+
+	public int getNumberOfEdges() {
+		return edges.size();
 	}
 }
 
