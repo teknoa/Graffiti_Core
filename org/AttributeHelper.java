@@ -75,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.116 $
+ * @version $Revision: 1.117 $
  */
 public class AttributeHelper implements HelperClass {
 
@@ -441,7 +441,7 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("rangeStepSize", chartSelN
 							+ ":<html>&nbsp;Range Axis:  <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Step Size");
 
-		idToNiceId.put("max_charts_in_column", chartSelN + ": Number of Charts in a Row");
+		idToNiceId.put("max_charts_in_column", chartSelN + ": Chart Alignment");
 
 		idToNiceId.put("minRange", chartSelN + ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Minimum");
 		idToNiceId.put("maxRange", chartSelN + ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Maximum");
