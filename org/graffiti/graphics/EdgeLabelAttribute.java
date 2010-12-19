@@ -5,21 +5,16 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: EdgeLabelAttribute.java,v 1.6 2010/12/14 07:02:26 morla Exp $
+// $Id: EdgeLabelAttribute.java,v 1.7 2010/12/19 03:12:36 klukas Exp $
 package org.graffiti.graphics;
 
-import java.util.Iterator;
-import java.util.Map;
-
-import org.graffiti.attributes.Attribute;
 import org.graffiti.attributes.HashMapAttribute;
-import org.graffiti.attributes.StringAttribute;
 
 /**
  * DOCUMENT ME!
  * 
  * @author holleis
- * @version $Revision: 1.6 $ Extends LabelAttribute by a PositionAttribute specific for edges.
+ * @version $Revision: 1.7 $ Extends LabelAttribute by a PositionAttribute specific for edges.
  */
 public class EdgeLabelAttribute extends LabelAttribute {
 	/** Position of a label within this node. */
@@ -101,56 +96,56 @@ public class EdgeLabelAttribute extends LabelAttribute {
 	// this.add(this.position, false);
 	// }
 
-	/**
-	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
-	 * 
-	 * @param attrs
-	 *           the map that contains all attributes.
-	 * @throws IllegalArgumentException
-	 *            DOCUMENT ME!
-	 */
-	@Override
-	public void setCollection(Map<String, Attribute> attrs) {
-		if (true// attrs.keySet().contains(LABEL) // &&
-		// attrs.keySet().contains(POSITION) &&
-		// attrs.keySet().contains(ALIGNMENT) &&
-		// attrs.keySet().contains(FONT) &&
-		// attrs.keySet().contains(TEXTCOLOR)
-		) {
-			for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
-				String attrId = (String) it.next();
-
-				if (attrId.equals(LABEL)) {
-					setLabel(((StringAttribute) attrs.get(LABEL)).getString());
-				} else
-					if (attrId.equals(POSITION)) {
-						if (!(attrs.get(POSITION) instanceof EdgeLabelPositionAttribute)) {
-							setPosition(new EdgeLabelPositionAttribute(attrs.get(POSITION).getId(), 0, 0, 0, 0));
-						} else {
-							EdgeLabelPositionAttribute elpa = (EdgeLabelPositionAttribute) attrs.get(POSITION);
-							setPosition(elpa);
-						}
-					} else
-						if (attrId.equals(ANCHOR)) {
-							setAlignment(((StringAttribute) attrs.get(ANCHOR)).getString());
-						} else
-							if (attrId.equals(FONTNAME)) {
-								setFontName(((StringAttribute) attrs.get(FONTNAME)).getString());
-							} else
-								if (attrId.equals(TEXTCOLOR)) {
-									setTextcolor(((StringAttribute) attrs.get(TEXTCOLOR)).getString());
-								} else {
-									// empty
-								}
-			}
-
-			this.attributes = attrs;
-		}
-		// else
-		// {
-		// throw new IllegalArgumentException("Invalid value type.");
-		// }
-	}
+	// /**
+	// * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
+	// *
+	// * @param attrs
+	// * the map that contains all attributes.
+	// * @throws IllegalArgumentException
+	// * DOCUMENT ME!
+	// */
+	// @Override
+	// public void setCollection(Map<String, Attribute> attrs) {
+	// if (true// attrs.keySet().contains(LABEL) // &&
+	// // attrs.keySet().contains(POSITION) &&
+	// // attrs.keySet().contains(ALIGNMENT) &&
+	// // attrs.keySet().contains(FONT) &&
+	// // attrs.keySet().contains(TEXTCOLOR)
+	// ) {
+	// for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
+	// String attrId = (String) it.next();
+	//
+	// if (attrId.equals(LABEL)) {
+	// setLabel(((StringAttribute) attrs.get(LABEL)).getString());
+	// } else
+	// if (attrId.equals(POSITION)) {
+	// if (!(attrs.get(POSITION) instanceof EdgeLabelPositionAttribute)) {
+	// setPosition(new EdgeLabelPositionAttribute(attrs.get(POSITION).getId(), 0, 0, 0, 0));
+	// } else {
+	// EdgeLabelPositionAttribute elpa = (EdgeLabelPositionAttribute) attrs.get(POSITION);
+	// setPosition(elpa);
+	// }
+	// } else
+	// if (attrId.equals(ANCHOR)) {
+	// setAlignment(((StringAttribute) attrs.get(ANCHOR)).getString());
+	// } else
+	// if (attrId.equals(FONTNAME)) {
+	// setFontName(((StringAttribute) attrs.get(FONTNAME)).getString());
+	// } else
+	// if (attrId.equals(TEXTCOLOR)) {
+	// setTextcolor(((StringAttribute) attrs.get(TEXTCOLOR)).getString());
+	// } else {
+	// // empty
+	// }
+	// }
+	//
+	// this.attributes = attrs;
+	// }
+	// // else
+	// // {
+	// // throw new IllegalArgumentException("Invalid value type.");
+	// // }
+	// }
 
 	/**
 	 * Sets the 'position'-value.
