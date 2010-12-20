@@ -34,9 +34,9 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -75,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.118 $
+ * @version $Revision: 1.119 $
  */
 public class AttributeHelper implements HelperClass {
 
