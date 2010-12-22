@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: PluginManagerException.java,v 1.5 2010/12/14 07:02:25 morla Exp $
+// $Id: PluginManagerException.java,v 1.6 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -15,27 +15,27 @@ import org.graffiti.core.StringBundle;
  * <code>PluginManagerException</code> is thrown, iff an error occured during
  * the loading of a plugin.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class PluginManagerException
 					extends Exception {
 	// ~ Static fields/initializers =============================================
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	/** The <code>StringBundle</code> of the exception. */
 	protected static StringBundle sBundle = StringBundle.getInstance();
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/** DOCUMENT ME! */
 	private Dependency dependency;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for PluginManagerException.
 	 * 
@@ -45,7 +45,7 @@ public class PluginManagerException
 	public PluginManagerException(String key) {
 		super(sBundle.getString(key) != null ? sBundle.getString(key) : key);
 	}
-
+	
 	/**
 	 * Constructs a plugin manager exception from the given parameters.
 	 * 
@@ -57,9 +57,9 @@ public class PluginManagerException
 	public PluginManagerException(String key, String message) {
 		super((sBundle.getString(key) != null ? sBundle.getString(key) : key) + message);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the dependency.
 	 * 
@@ -69,7 +69,7 @@ public class PluginManagerException
 	public void setDependency(Dependency dependency) {
 		this.dependency = dependency;
 	}
-
+	
 	/**
 	 * Returns the dependency.
 	 * 

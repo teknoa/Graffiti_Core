@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ColorAttribute.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: ColorAttribute.java,v 1.6 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -23,27 +23,27 @@ import org.graffiti.attributes.IntegerAttribute;
  * when applied to the outline of a node since that would lead to problems
  * with overlapping filling and outline.)
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class ColorAttribute
 					extends HashMapAttribute
 					implements GraphicAttributeConstants, ColorSetAndGetSupport {
 	// ~ Instance fields ========================================================
-
+	
 	/** Contains value for blue color. */
 	private IntegerAttribute blue;
-
+	
 	/** Contains value for green color. */
 	private IntegerAttribute green;
-
+	
 	/** Contains value for opacity. */
 	private IntegerAttribute opacity;
-
+	
 	/** Contains value for red color. */
 	private IntegerAttribute red;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new <code>ColorAttribute</code>.
 	 * 
@@ -55,7 +55,7 @@ public class ColorAttribute
 	public ColorAttribute(String id, Color c) {
 		this(id, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
 	}
-
+	
 	/**
 	 * Constructs a new <code>ColorAttribute</code>.
 	 * 
@@ -67,7 +67,7 @@ public class ColorAttribute
 	public ColorAttribute(String id, ColorAttribute c) {
 		this(id, c.getRed(), c.getGreen(), c.getBlue(), c.getOpacity());
 	}
-
+	
 	/**
 	 * Constructs a new <code>ColorAttribute</code>.
 	 * 
@@ -77,7 +77,7 @@ public class ColorAttribute
 	public ColorAttribute(String id) {
 		this(id, 255, 255, 255, 255);
 	}
-
+	
 	/**
 	 * Constructs a new <code>ColorAttribute</code> and initialises with the
 	 * given values.
@@ -104,9 +104,9 @@ public class ColorAttribute
 		add(this.blue, false);
 		add(this.opacity, false);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the 'blue'-value.
 	 * 
@@ -116,7 +116,7 @@ public class ColorAttribute
 	public void setBlue(int b) {
 		this.blue.setInteger(b);
 	}
-
+	
 	/**
 	 * Returns the 'blue'-value of the encapsulated color.
 	 * 
@@ -125,7 +125,7 @@ public class ColorAttribute
 	public int getBlue() {
 		return this.blue.getInteger();
 	}
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>. The color values are set, additional
 	 * values are simply added (that means that if there exists already a
@@ -154,7 +154,7 @@ public class ColorAttribute
 						}
 		}
 	}
-
+	
 	/**
 	 * Comfort function to set a java.awt.Color.
 	 * 
@@ -167,7 +167,7 @@ public class ColorAttribute
 		this.blue.setInteger(c.getBlue());
 		this.opacity.setInteger(c.getAlpha());
 	}
-
+	
 	/**
 	 * Comfort function to get a java.awt.Color.
 	 * 
@@ -177,7 +177,7 @@ public class ColorAttribute
 		return new Color(this.getRed(), this.getGreen(), this.getBlue(),
 							this.getOpacity());
 	}
-
+	
 	/**
 	 * Sets the 'green'-value.
 	 * 
@@ -187,7 +187,7 @@ public class ColorAttribute
 	public void setGreen(int g) {
 		this.green.setInteger(g);
 	}
-
+	
 	/**
 	 * Returns the 'green'-value of the encapsulated color.
 	 * 
@@ -196,7 +196,7 @@ public class ColorAttribute
 	public int getGreen() {
 		return this.green.getInteger();
 	}
-
+	
 	/**
 	 * Sets the 'opacity'-value.
 	 * 
@@ -206,7 +206,7 @@ public class ColorAttribute
 	public void setOpacity(int t) {
 		this.opacity.setInteger(t);
 	}
-
+	
 	/**
 	 * Returns the 'opacity'-value of the encapsulated color.
 	 * 
@@ -215,7 +215,7 @@ public class ColorAttribute
 	public int getOpacity() {
 		return this.opacity.getInteger();
 	}
-
+	
 	/**
 	 * Sets the 'red'-value.
 	 * 
@@ -225,7 +225,7 @@ public class ColorAttribute
 	public void setRed(int r) {
 		this.red.setInteger(r);
 	}
-
+	
 	/**
 	 * Returns the 'red'-value of the encapsulated color.
 	 * 
@@ -234,7 +234,7 @@ public class ColorAttribute
 	public int getRed() {
 		return this.red.getInteger();
 	}
-
+	
 	// /**
 	// * Returns a java.awt.Color object with the same values.
 	// *
@@ -245,7 +245,7 @@ public class ColorAttribute
 	// return new Color(red.getInteger(), green.getInteger(),
 	// blue.getInteger(), opacity.getInteger());
 	// }
-
+	
 	/**
 	 * Returns a deep copy of this object.
 	 * 
@@ -256,7 +256,7 @@ public class ColorAttribute
 		ColorAttribute copied = new ColorAttribute(this.getId(), getRed(), getGreen(), getBlue(), getOpacity());
 		return copied;
 	}
-
+	
 	// /**
 	// * Sets the value of this <code>Attribute</code> to the given value without
 	// * informing the <code>ListenerManager</code>.

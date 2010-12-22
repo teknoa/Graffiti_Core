@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Attributable.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: Attributable.java,v 1.5 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -15,12 +15,12 @@ import org.graffiti.event.ListenerManager;
  * Interfaces an object that contains a hierarchy of attributes. This interface
  * defines methods for accessing and modifying this hierarchy.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @see AttributeTypesManager
  */
 public interface Attributable {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the <code>Attribute</code> located at the given path.
 	 * 
@@ -32,14 +32,14 @@ public interface Attributable {
 	 */
 	public Attribute getAttribute(String path)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Returns the attributes of the current object in the base hierarchie in a <code>CollectionAttribute</code>.
 	 * 
 	 * @return the attributes of the current object.
 	 */
 	public CollectionAttribute getAttributes();
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -51,7 +51,7 @@ public interface Attributable {
 	 *           the value to set to the <code>Attribute</code> to.
 	 */
 	public void setBoolean(String path, boolean value);
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -63,7 +63,7 @@ public interface Attributable {
 	 */
 	public boolean getBoolean(String path)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -75,7 +75,7 @@ public interface Attributable {
 	 *           the value to set to the <code>Attribute</code> to.
 	 */
 	public void setByte(String path, byte value);
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -87,7 +87,7 @@ public interface Attributable {
 	 */
 	public byte getByte(String path)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The attribute is created at the given location, if it does not yet
@@ -99,7 +99,7 @@ public interface Attributable {
 	 *           the value to set to the <code>Attribute</code> to.
 	 */
 	public void setDouble(String path, double value);
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -111,7 +111,7 @@ public interface Attributable {
 	 */
 	public double getDouble(String path)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The attribute is created at the given location, if it does not yet
@@ -123,7 +123,7 @@ public interface Attributable {
 	 *           the value to set to the <code>Attribute</code> to.
 	 */
 	public void setFloat(String path, float value);
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -135,7 +135,7 @@ public interface Attributable {
 	 */
 	public float getFloat(String path)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -147,7 +147,7 @@ public interface Attributable {
 	 *           the value to set to the <code>Attribute</code> to.
 	 */
 	public void setInteger(String path, int value);
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -159,14 +159,14 @@ public interface Attributable {
 	 */
 	public int getInteger(String path)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Returns the <code>ListenerManager</code> asscociated to this <code>Attributable</code>.
 	 * 
 	 * @return the <code>ListenerManager</code> asscociated to this <code>Attributable</code>.
 	 */
 	public ListenerManager getListenerManager();
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -178,7 +178,7 @@ public interface Attributable {
 	 *           the value to set to the <code>Attribute</code> to.
 	 */
 	public void setLong(String path, long value);
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -190,7 +190,7 @@ public interface Attributable {
 	 */
 	public long getLong(String path)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -202,7 +202,7 @@ public interface Attributable {
 	 *           the value to set to the <code>Attribute</code> to.
 	 */
 	public void setShort(String path, short value);
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -214,7 +214,7 @@ public interface Attributable {
 	 */
 	public short getShort(String path)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -226,7 +226,7 @@ public interface Attributable {
 	 *           the value to set to the <code>Attribute</code> to.
 	 */
 	public void setString(String path, String value);
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -238,7 +238,7 @@ public interface Attributable {
 	 */
 	public String getString(String path)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Adds <code>attr</code> to the attributes at position indicated by path.
 	 * Informs the ListenerManager about the change: calls <code>preAttributeAdded</code> and <code>postAttributeAdded</code> in
@@ -270,7 +270,7 @@ public interface Attributable {
 	public void addAttribute(Attribute attr, String path)
 						throws AttributeExistsException, NoCollectionAttributeException,
 						FieldAlreadySetException;
-
+	
 	/**
 	 * Adds a <code>BooleanAttribute</code> with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>.
 	 * 
@@ -290,7 +290,7 @@ public interface Attributable {
 	public void addBoolean(String path, String id, boolean value)
 						throws NoCollectionAttributeException, AttributeExistsException,
 						FieldAlreadySetException;
-
+	
 	/**
 	 * Adds an ByteAttribute with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>.
 	 * 
@@ -310,7 +310,7 @@ public interface Attributable {
 	public void addByte(String path, String id, byte value)
 						throws NoCollectionAttributeException, AttributeExistsException,
 						FieldAlreadySetException;
-
+	
 	/**
 	 * Adds a <code>DoubleAttribute</code> with the given value and <code>id</code> to a <code>CollectionAttribute</code> at <code>path</code>.
 	 * 
@@ -329,7 +329,7 @@ public interface Attributable {
 	public void addDouble(String path, String id, double value)
 						throws NoCollectionAttributeException, AttributeExistsException,
 						FieldAlreadySetException;
-
+	
 	/**
 	 * Adds a <code>FloatAttribute</code> with the given value and <code>id</code> to a <code>CollectionAttribute</code> at <code>path</code>.
 	 * 
@@ -349,7 +349,7 @@ public interface Attributable {
 	public void addFloat(String path, String id, float value)
 						throws NoCollectionAttributeException, AttributeExistsException,
 						FieldAlreadySetException;
-
+	
 	/**
 	 * Adds an IntegerAttribute with the given value and <code>id</code> to a <code>CollectionAttribute</code> at <code>path</code>.
 	 * 
@@ -369,7 +369,7 @@ public interface Attributable {
 	public void addInteger(String path, String id, int value)
 						throws NoCollectionAttributeException, AttributeExistsException,
 						FieldAlreadySetException;
-
+	
 	/**
 	 * Adds an LongAttribute with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>.
 	 * 
@@ -389,7 +389,7 @@ public interface Attributable {
 	public void addLong(String path, String id, long value)
 						throws NoCollectionAttributeException, AttributeExistsException,
 						FieldAlreadySetException;
-
+	
 	/**
 	 * Adds an ShortAttribute with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>.
 	 * 
@@ -409,7 +409,7 @@ public interface Attributable {
 	public void addShort(String path, String id, short value)
 						throws NoCollectionAttributeException, AttributeExistsException,
 						FieldAlreadySetException;
-
+	
 	/**
 	 * Adds an StringAttribute with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>.
 	 * 
@@ -429,7 +429,7 @@ public interface Attributable {
 	public void addString(String path, String id, String value)
 						throws NoCollectionAttributeException, AttributeExistsException,
 						FieldAlreadySetException;
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * 
@@ -442,7 +442,7 @@ public interface Attributable {
 	 */
 	public void changeBoolean(String path, boolean value)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * 
@@ -455,7 +455,7 @@ public interface Attributable {
 	 */
 	public void changeByte(String path, byte value)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * 
@@ -468,7 +468,7 @@ public interface Attributable {
 	 */
 	public void changeDouble(String path, double value)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * 
@@ -481,7 +481,7 @@ public interface Attributable {
 	 */
 	public void changeFloat(String path, float value)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * 
@@ -494,7 +494,7 @@ public interface Attributable {
 	 */
 	public void changeInteger(String path, int value)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * 
@@ -507,7 +507,7 @@ public interface Attributable {
 	 */
 	public void changeLong(String path, long value)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * 
@@ -520,7 +520,7 @@ public interface Attributable {
 	 */
 	public void changeShort(String path, short value)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * 
@@ -533,7 +533,7 @@ public interface Attributable {
 	 */
 	public void changeString(String path, String value)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Deletes the <code>Attribute</code> located at the given path from the
 	 * attributes. Informs the ListenerManager about the change: calls <code>pre-/postAttributeRemoved</code> in the ListenerManager.

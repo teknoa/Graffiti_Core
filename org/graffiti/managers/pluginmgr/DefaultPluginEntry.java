@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: DefaultPluginEntry.java,v 1.5 2010/12/14 07:02:25 morla Exp $
+// $Id: DefaultPluginEntry.java,v 1.6 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -20,26 +20,26 @@ import org.graffiti.plugin.GenericPlugin;
 public class DefaultPluginEntry
 					implements PluginEntry {
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * <code>true</code> if the plugin should be loaded on startup, <code>false</code> otherwise.
 	 */
 	private Boolean loadOnStartup;
-
+	
 	/** The plugin itself. */
 	private GenericPlugin plugin;
-
+	
 	/** The description of the plugin */
 	private PluginDescription description;
-
+	
 	/** The file name of the plugin. */
 	private String fileName;
-
+	
 	/** The location of the plugin. */
 	private URL pluginLocation;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new plugin entry.
 	 * 
@@ -60,7 +60,7 @@ public class DefaultPluginEntry
 		this.pluginLocation = pluginLocation;
 		this.loadOnStartup = loadOnStartup;
 	}
-
+	
 	/**
 	 * Constructs a new plugin entry.
 	 * 
@@ -73,9 +73,9 @@ public class DefaultPluginEntry
 		this.fileName = fileName;
 		this.description = description;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the description.
 	 * 
@@ -85,7 +85,7 @@ public class DefaultPluginEntry
 	public void setDescription(PluginDescription description) {
 		this.description = description;
 	}
-
+	
 	/**
 	 * Returns the description of the plugin.
 	 * 
@@ -94,7 +94,7 @@ public class DefaultPluginEntry
 	public PluginDescription getDescription() {
 		return description;
 	}
-
+	
 	/**
 	 * Returns the file name of the plugin.
 	 * 
@@ -103,7 +103,7 @@ public class DefaultPluginEntry
 	public String getFileName() {
 		return fileName;
 	}
-
+	
 	/**
 	 * Sets the flag indicating whether a plugin should be loaded on the
 	 * startup of the editor.
@@ -115,7 +115,7 @@ public class DefaultPluginEntry
 	public void setLoadOnStartup(Boolean loadOnStartup) {
 		this.loadOnStartup = loadOnStartup;
 	}
-
+	
 	/**
 	 * Returns <code>true</code> if the plugin shall be loaded on the startup
 	 * of the editor, <code>false</code> otherwise.
@@ -126,7 +126,7 @@ public class DefaultPluginEntry
 	public Boolean getLoadOnStartup() {
 		return loadOnStartup;
 	}
-
+	
 	/**
 	 * Sets the plugin.
 	 * 
@@ -136,7 +136,7 @@ public class DefaultPluginEntry
 	public void setPlugin(GenericPlugin plugin) {
 		this.plugin = plugin;
 	}
-
+	
 	/**
 	 * Returns the plugin.
 	 * 
@@ -145,7 +145,7 @@ public class DefaultPluginEntry
 	public GenericPlugin getPlugin() {
 		return plugin;
 	}
-
+	
 	/**
 	 * Sets the plugin location.
 	 * 
@@ -155,7 +155,7 @@ public class DefaultPluginEntry
 	public void setPluginLocation(URL pluginLocation) {
 		this.pluginLocation = pluginLocation;
 	}
-
+	
 	/**
 	 * Returns the plugin location.
 	 * 
@@ -164,7 +164,7 @@ public class DefaultPluginEntry
 	public URL getPluginLocation() {
 		return pluginLocation;
 	}
-
+	
 	public URL getPluginUrl() throws MalformedURLException {
 		return new URL(getFileName());
 	}

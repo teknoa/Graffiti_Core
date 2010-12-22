@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: IntegerAttribute.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: IntegerAttribute.java,v 1.5 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -14,17 +14,17 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains an integer.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class IntegerAttribute
 					extends AbstractAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this attribute. */
 	private int value;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new instance of an <code>IntegerAttribute</code>.
 	 * 
@@ -34,7 +34,7 @@ public class IntegerAttribute
 	public IntegerAttribute(String id) {
 		super(id);
 	}
-
+	
 	/**
 	 * Constructs a new instance of an <code>IntegerAttribute</code> with the
 	 * given value.
@@ -48,7 +48,7 @@ public class IntegerAttribute
 		super(id);
 		this.value = value;
 	}
-
+	
 	/**
 	 * Constructs a new instance of a <code>IntegerAttribute</code> with the
 	 * given value.
@@ -62,16 +62,16 @@ public class IntegerAttribute
 		super(id);
 		this.value = value.intValue();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
 	 */
 	public void setDefaultValue() {
 		value = 0;
 	}
-
+	
 	/**
 	 * Sets the value of this object. The <code>ListenerManager</code> is
 	 * informed by the method <code>setValue()</code>.
@@ -85,7 +85,7 @@ public class IntegerAttribute
 		this.value = value;
 		callPostAttributeChanged(ae);
 	}
-
+	
 	/**
 	 * Returns the value of this object.
 	 * 
@@ -94,7 +94,7 @@ public class IntegerAttribute
 	public int getInteger() {
 		return value;
 	}
-
+	
 	/**
 	 * Returns the value of the attribute wrapped in an <code>Integer</code> object.
 	 * 
@@ -103,7 +103,7 @@ public class IntegerAttribute
 	public Object getValue() {
 		return new Integer(value);
 	}
-
+	
 	/**
 	 * Returns a deep copy of this instance.
 	 * 
@@ -112,7 +112,7 @@ public class IntegerAttribute
 	public Object copy() {
 		return new IntegerAttribute(this.getId(), this.value);
 	}
-
+	
 	/**
 	 * Sets the value of the attribute. The <code>ListenerManager</code> is
 	 * informed by the method <code>setValue()</code>.
@@ -127,14 +127,14 @@ public class IntegerAttribute
 	protected void doSetValue(Object o)
 						throws IllegalArgumentException {
 		assert o != null;
-
+		
 		try {
 			value = ((Integer) o).intValue();
 		} catch (ClassCastException cce) {
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.Displayable#toXMLString()
 	 */

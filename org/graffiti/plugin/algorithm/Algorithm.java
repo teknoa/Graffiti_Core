@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Algorithm.java,v 1.5 2010/12/14 07:02:25 morla Exp $
+// $Id: Algorithm.java,v 1.6 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -22,24 +22,24 @@ import org.graffiti.selection.Selection;
  * possibility to provide the <code>Algorithm</code> with apropriate
  * parameters.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public interface Algorithm {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the name (id) of the algorithm.
 	 * 
 	 * @return DOCUMENT ME!
 	 */
 	public String getName();
-
+	
 	/**
 	 * Sets the parameters for this algorithm. Must have the same types and
 	 * order as the array returned by <code>getParameter</code>.
 	 */
 	public void setParameters(Parameter[] params);
-
+	
 	/**
 	 * Returns a list of <code>Parameter</code> that are set for this
 	 * algorithm.
@@ -47,10 +47,10 @@ public interface Algorithm {
 	 * @return a collection of <code>Parameter</code> that are needed by the <code>Algorithm</code>.
 	 */
 	public Parameter[] getParameters();
-
+	
 	/**
 	 * Attaches the given graph to this algorithm.
-	 *A ttaches the given Selection information to the algorithm.
+	 * A ttaches the given Selection information to the algorithm.
 	 * 
 	 * @param g
 	 *           the graph to attach.
@@ -58,7 +58,7 @@ public interface Algorithm {
 	 *           the selection to attach.
 	 */
 	public void attach(Graph g, Selection selection);
-
+	
 	/**
 	 * Checks whether all preconditions of the current graph are satisfied.
 	 * 
@@ -68,17 +68,17 @@ public interface Algorithm {
 	 */
 	public void check()
 						throws PreconditionException;
-
+	
 	/**
 	 * Executes the whole algorithm.
 	 */
 	public void execute();
-
+	
 	/**
 	 * Resets the internal state of the algorithm.
 	 */
 	public void reset();
-
+	
 	/**
 	 * Returns the category an algorithm should assigned to.
 	 * Return NULL if the algorithm should be sorted directly
@@ -87,14 +87,14 @@ public interface Algorithm {
 	 * @return The category an algorithm should assigned to.
 	 */
 	public String getCategory();
-
+	
 	/**
 	 * A Layoutalgorithm should return true. All other types of algorithms should return false.
 	 * 
 	 * @return
 	 */
 	public boolean isLayoutAlgorithm();
-
+	
 	/**
 	 * Override this method to give a different look and feel to the application,
 	 * and to put the plugin icon next to the menu item in the main menu bar.
@@ -103,20 +103,20 @@ public interface Algorithm {
 	 *         Return FALSE (default!), if no icon should be shown in the menu.
 	 */
 	public boolean showMenuIcon();
-
+	
 	/**
 	 * Override this method to provide a accelerator hot key for the algorithm.
 	 * 
 	 * @return NULL (default) if no accelerator should be assigned for this algorithm.
 	 */
 	public KeyStroke getAcceleratorKeyStroke();
-
+	
 	public String getDescription();
-
+	
 	public void setActionEvent(ActionEvent a);
-
+	
 	public ActionEvent getActionEvent();
-
+	
 	public boolean mayWorkOnMultipleGraphs();
 }
 

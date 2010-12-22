@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: EdgeEvent.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: EdgeEvent.java,v 1.6 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.event;
 
@@ -19,19 +19,19 @@ import org.graffiti.graph.Edge;
  * (<code>AbstractEdgeListener</code> objects implement the <code>EdgeListener</code> interface.) Each such listener object gets an <code>EdgeEvent</code>
  * containing the edge event.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @see EdgeListener
  * @see AbstractEdgeListener
  */
 public class EdgeEvent
 					extends AbstractEvent {
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs an edge event object with the specified source component.
 	 * 
@@ -41,9 +41,9 @@ public class EdgeEvent
 	public EdgeEvent(Edge edge) {
 		super(edge);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the originator of the event.
 	 * 
@@ -52,7 +52,7 @@ public class EdgeEvent
 	public Edge getEdge() {
 		return (Edge) getSource();
 	}
-
+	
 	public Attributable getAttributeable() {
 		if (getEdge() != null)
 			return getEdge();

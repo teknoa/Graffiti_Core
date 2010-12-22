@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: CoordinateAttribute.java,v 1.8 2010/12/14 07:02:26 morla Exp $
+// $Id: CoordinateAttribute.java,v 1.9 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -22,21 +22,21 @@ import org.graffiti.event.AttributeEvent;
  * Contains the coordinate graphic attribute.
  * 
  * @author breu
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class CoordinateAttribute
 					extends HashMapAttribute
 					implements GraphicAttributeConstants {
 	// ~ Instance fields ========================================================
-
+	
 	/** Contains horizontal coordinate */
 	private DoubleAttribute x;
-
+	
 	/** Contains vertical coordinate */
 	private DoubleAttribute y;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for Coordinate that sets the coordinates to a random number.
 	 * 
@@ -46,7 +46,7 @@ public class CoordinateAttribute
 	public CoordinateAttribute(String id) {
 		this(id, 100d, 100d /* Math.random() * 400, Math.random() * 400 */);
 	}
-
+	
 	/**
 	 * Constructor for Coordinate.
 	 * 
@@ -58,7 +58,7 @@ public class CoordinateAttribute
 	public CoordinateAttribute(String id, Point2D c) {
 		this(id, c.getX(), c.getY());
 	}
-
+	
 	/**
 	 * Constructor for Coordinate.
 	 * 
@@ -76,9 +76,9 @@ public class CoordinateAttribute
 		this.add(this.x, false);
 		this.add(this.y, false);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>. The coordinate values are set, additional
 	 * values are simply added (that means that if there exists already a
@@ -94,7 +94,7 @@ public class CoordinateAttribute
 		if (attrs.keySet().contains(X) && attrs.keySet().contains(Y)) {
 			for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
 				String attrId = (String) it.next();
-
+				
 				if (attrId.equals(X)) {
 					setX(((DoubleAttribute) attrs.get(X)).getDouble());
 				} else
@@ -108,7 +108,7 @@ public class CoordinateAttribute
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * Sets the x and y values of this coordinate to the given points' values.
 	 * 
@@ -122,7 +122,7 @@ public class CoordinateAttribute
 		this.y.value = p.getY();
 		callPostAttributeChanged(ae);
 	}
-
+	
 	public void setCoordinate(double x, double y) {
 		AttributeEvent ae = new AttributeEvent(this);
 		callPreAttributeChanged(ae);
@@ -130,7 +130,7 @@ public class CoordinateAttribute
 		this.y.value = y;
 		callPostAttributeChanged(ae);
 	}
-
+	
 	/**
 	 * Returns the encapsulated coordinate.
 	 * 
@@ -139,7 +139,7 @@ public class CoordinateAttribute
 	public Point2D getCoordinate() {
 		return new Point2D.Double(this.getX(), this.getY());
 	}
-
+	
 	/**
 	 * Sets the 'x1'-value.
 	 * 
@@ -149,7 +149,7 @@ public class CoordinateAttribute
 	public void setX(double x) {
 		this.x.setDouble(x);
 	}
-
+	
 	/**
 	 * Returns the 'x'-value of the encapsulated coordinate.
 	 * 
@@ -158,7 +158,7 @@ public class CoordinateAttribute
 	public double getX() {
 		return this.x.getDouble();
 	}
-
+	
 	/**
 	 * Sets the 'x2'-value.
 	 * 
@@ -168,7 +168,7 @@ public class CoordinateAttribute
 	public void setY(double y) {
 		this.y.setDouble(y);
 	}
-
+	
 	/**
 	 * Returns the 'y'-value of the encapsulated coordinate.
 	 * 
@@ -177,7 +177,7 @@ public class CoordinateAttribute
 	public double getY() {
 		return this.y.getDouble();
 	}
-
+	
 	/**
 	 * Returns a deep copy of this object.
 	 * 
@@ -188,7 +188,7 @@ public class CoordinateAttribute
 		CoordinateAttribute copied = new CoordinateAttribute(this.getId(), getX(), getY());
 		return copied;
 	}
-
+	
 	// /**
 	// * Sets the value of this <code>Attribute</code> to the given value without
 	// * informing the <code>ListenerManager</code>.

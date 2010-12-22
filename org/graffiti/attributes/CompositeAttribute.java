@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: CompositeAttribute.java,v 1.3 2010/12/14 07:02:25 morla Exp $
+// $Id: CompositeAttribute.java,v 1.4 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -13,13 +13,13 @@ package org.graffiti.attributes;
  * Interfaces a composite attribute. All user-defined attributes should extend
  * CompositeAttribute.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @see Attribute
  */
 public abstract class CompositeAttribute
 					extends AbstractAttribute {
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Creates a new <code>CompositeAttribute</code> with the given id.
 	 * 
@@ -29,9 +29,9 @@ public abstract class CompositeAttribute
 	public CompositeAttribute(String id) {
 		super(id);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the given attribute to the given value. The attribute that is
 	 * already location <code>path</code> is overwritten!
@@ -50,7 +50,7 @@ public abstract class CompositeAttribute
 	 */
 	public abstract void setAttribute(String id, Attribute att)
 						throws AttributeNotFoundException, IllegalArgumentException;
-
+	
 	/**
 	 * Transforms the <code>CompositeAttribute</code> into the basehierarchy.
 	 * Maps relative paths to the apropriate 'standard attributes' (e.g.
@@ -61,7 +61,7 @@ public abstract class CompositeAttribute
 	 * @return the values of the composite attribute in a CollectionAttribute.
 	 */
 	public abstract CollectionAttribute getAttributes();
-
+	
 	/**
 	 * Returns the attribute with the given id. Proper ids can be obtained by
 	 * calling <code>getAttributes()</code> and then traversing the contained <code>Attributes</code> and calling <code>getId()</code> on them. The

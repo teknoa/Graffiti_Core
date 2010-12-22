@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ChangeAttributesEdit.java,v 1.6 2010/12/14 07:02:27 morla Exp $
+// $Id: ChangeAttributesEdit.java,v 1.7 2010/12/22 13:05:35 klukas Exp $
 
 package org.graffiti.undo;
 
@@ -24,21 +24,21 @@ import org.graffiti.graph.GraphElement;
  * ChangeAttributesEdit
  * 
  * @author wirch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class ChangeAttributesEdit
 					extends GraffitiAbstractUndoableEdit {
 	private static final long serialVersionUID = 1L;
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/** map from an attribute to its old value */
 	private Map<Attribute, Object> attributeToOldValueMap;
-
+	
 	private Graph g = null;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Creates a new <code>AttributeChangeEdit</code> object.
 	 * 
@@ -54,7 +54,7 @@ public class ChangeAttributesEdit
 		this.attributeToOldValueMap = attributeToOldValueMap;
 		this.g = graph;
 	}
-
+	
 	/**
 	 * Creates a new <code>AttributeChangeEdit</code> object. It is usefull if
 	 * only one attribute such as coordinate of a bend has been changed.
@@ -72,16 +72,16 @@ public class ChangeAttributesEdit
 							((Attribute) attribute.copy()).getValue());
 		this.g = graph;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * @see javax.swing.undo.UndoableEdit#getPresentationName()
 	 */
 	@Override
 	public String getPresentationName() {
 		String name = "";
-
+		
 		if (attributeToOldValueMap.size() == 1) {
 			name = sBundle.getString("undo.changeAttribute") + " " +
 								((Attribute) attributeToOldValueMap.keySet().iterator().next()).getName();
@@ -89,10 +89,10 @@ public class ChangeAttributesEdit
 			if (attributeToOldValueMap.size() > 1) {
 				name = sBundle.getString("undo.changeAttributes");
 			}
-
+		
 		return name;
 	}
-
+	
 	/*
 	 * @see org.graffiti.undo.GraffitiAbstractUndoableEdit#execute()
 	 */
@@ -100,7 +100,7 @@ public class ChangeAttributesEdit
 	public void execute() {
 		// do nothing
 	}
-
+	
 	/**
 	 * @see javax.swing.undo.UndoableEdit#redo()
 	 */
@@ -109,7 +109,7 @@ public class ChangeAttributesEdit
 		super.redo();
 		changeValues();
 	}
-
+	
 	/**
 	 * @see javax.swing.undo.UndoableEdit#undo()
 	 */
@@ -118,7 +118,7 @@ public class ChangeAttributesEdit
 		super.undo();
 		changeValues();
 	}
-
+	
 	/**
 	 * Changes attribute value to the old ones during undo or redo operations.
 	 */
@@ -127,35 +127,35 @@ public class ChangeAttributesEdit
 			g.getListenerManager().transactionStarted(this);
 			Object newValue = null;
 			Object oldValue = null;
-
+			
 			/*
 			 * maps from an old attribute: attribute belonged to
 			 * a deleted graph element - to a new possibly created attribute
 			 * at a new graph element
 			 */
 			HashMap<Attribute, Attribute> attributesMap = new LinkedHashMap<Attribute, Attribute>();
-
+			
 			for (Iterator<Attribute> iter = attributeToOldValueMap.keySet().iterator(); iter.hasNext();) {
 				Attribute attribute = (Attribute) iter.next();
 				GraphElement newGraphElement = getNewGraphElement((GraphElement) attribute.getAttributable());
-
+				
 				Attribute newAttribute;
-
+				
 				try {
 					// DEBUG:
 					newAttribute = newGraphElement.getAttribute(attribute.getPath());
 					if (attribute == newAttribute) {
 						newValue = attributeToOldValueMap.get(attribute);
-
+						
 						// TODO:fix finally the access to the attribute values
 						// over the getValue().
 						// It is currently only a temporary solution for nonfixed
 						// access.
 						oldValue = ((Attribute) attribute.copy()).getValue();
-
+						
 						// oldValue = attribute.getValue().;
 						attribute.setValue(newValue);
-
+						
 						attributeToOldValueMap.put(attribute, oldValue);
 					} else {
 						attributesMap.put(attribute, newAttribute);
@@ -164,23 +164,23 @@ public class ChangeAttributesEdit
 					ErrorMsg.addErrorMessage(e);
 				}
 			}
-
+			
 			if (!attributesMap.isEmpty()) {
 				for (Iterator<Attribute> iterator = attributesMap.keySet().iterator(); iterator.hasNext();) {
 					Attribute attribute = (Attribute) iterator.next();
 					newValue = attributeToOldValueMap.get(attribute);
-
+					
 					Attribute newAttribute = (Attribute) attributesMap.get(attribute);
-
+					
 					// TODO:fix finally the access to the attribute values
 					// over the getValue().
 					// It is currently only a temporary solution for nonfixed
 					// access.
 					oldValue = ((Attribute) newAttribute.copy()).getValue();
-
+					
 					// oldValue = newAttribute.getValue();
 					newAttribute.setValue(newValue);
-
+					
 					attributeToOldValueMap.remove(attribute);
 					attributeToOldValueMap.put(newAttribute, oldValue);
 				}

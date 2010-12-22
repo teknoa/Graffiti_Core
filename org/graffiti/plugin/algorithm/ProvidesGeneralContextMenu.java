@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2003-2008 Network Analysis Group, IPK Gatersleben
  *******************************************************************************/
-// $Id: ProvidesGeneralContextMenu.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: ProvidesGeneralContextMenu.java,v 1.5 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -10,12 +10,12 @@ import javax.swing.JMenuItem;
 /**
  * DOCUMENT ME!
  * 
- * @author $Author: morla $
- * @version $Revision: 1.4 $
+ * @author $Author: klukas $
+ * @version $Revision: 1.5 $
  */
 public interface ProvidesGeneralContextMenu {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * This method should be implemented, as that it returns the desired
 	 * Context-MenuItem for the Plugin. It will be added on the fly to a newly

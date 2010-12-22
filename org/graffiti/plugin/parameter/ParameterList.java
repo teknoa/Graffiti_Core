@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ParameterList.java,v 1.3 2010/12/14 07:02:27 morla Exp $
+// $Id: ParameterList.java,v 1.4 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -14,19 +14,19 @@ package org.graffiti.plugin.parameter;
  * parameters, by grouping them into a list. The list can contain any number
  * of <code>SingleParameters</code>.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @see SingleParameter
  */
 public interface ParameterList
 					extends Parameter {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
 	 * @link aggregation
 	 */
-
+	
 	/* #SingleParameter lnkSingleParameter; */
 
 	/**
@@ -36,7 +36,7 @@ public interface ParameterList
 	 *           the <code>SingleParameter</code> to add to the list.
 	 */
 	void addParameter(SingleParameter sp);
-
+	
 	/**
 	 * Removes a <code>SingleParameter</code> from the list.
 	 * 

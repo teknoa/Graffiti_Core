@@ -13,14 +13,14 @@ import java.awt.geom.Point2D;
  *         (c) 2004 IPK-Gatersleben
  */
 public class PositionGridGenerator {
-
+	
 	double curX = 0;
 	double curY = 0;
-
+	
 	double xSpace;
 	double ySpace;
 	double maxX;
-
+	
 	/**
 	 * Create a new PositionGridGenerator.
 	 * 
@@ -38,28 +38,28 @@ public class PositionGridGenerator {
 		this.curX = xSpace;
 		this.curY = ySpace;
 	}
-
+	
 	public Point2D getNextPosition() {
 		curX += xSpace;
 		Point2D result = new Point2D.Double(curX, curY);
-
+		
 		if (curX > maxX + xSpace) {
 			curX = xSpace;
 			curY += ySpace;
 		}
-
+		
 		return result;
 	}
-
+	
 	public Vector2d getNextPositionVec2d() {
 		curX += xSpace;
 		Vector2d result = new Vector2d(curX, curY);
-
+		
 		if (curX > maxX + xSpace) {
 			curX = xSpace;
 			curY += ySpace;
 		}
-
+		
 		return result;
 	}
 }

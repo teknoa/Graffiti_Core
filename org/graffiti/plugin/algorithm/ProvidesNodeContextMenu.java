@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ProvidesNodeContextMenu.java,v 1.3 2010/12/14 07:02:25 morla Exp $
+// $Id: ProvidesNodeContextMenu.java,v 1.4 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -18,12 +18,12 @@ import org.graffiti.graph.Node;
 /**
  * DOCUMENT ME!
  * 
- * @author $Author: morla $
- * @version $Revision: 1.3 $
+ * @author $Author: klukas $
+ * @version $Revision: 1.4 $
  */
 public interface ProvidesNodeContextMenu {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * This method should be implemented, as that it returns the desired
 	 * Context-MenuItem for the Plugin. It will be added on the fly to a newly

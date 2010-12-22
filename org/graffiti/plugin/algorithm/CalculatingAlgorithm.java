@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: CalculatingAlgorithm.java,v 1.3 2010/12/14 07:02:25 morla Exp $
+// $Id: CalculatingAlgorithm.java,v 1.4 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -13,14 +13,14 @@ package org.graffiti.plugin.algorithm;
  * After its execution a <code>CalculatingAlgorithm</code> has computed an <code>AlgorithmResult</code>, that can be obtained through the
  * <code>getResult()</code> method.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @see AlgorithmResult
  * @see Algorithm
  */
 public interface CalculatingAlgorithm
 					extends Algorithm {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the <code>AlgorithmResult</code> that was computed by the <code>Algorithm</code> during the last execution. If there was no
 	 * previous execution it returns <code>null</code>.
@@ -29,13 +29,13 @@ public interface CalculatingAlgorithm
 	 *         execution of the <code>Algorithm</code>.
 	 */
 	public AlgorithmResult getResult();
-
+	
 	/**
 	 * @link aggregation
 	 * @clientCardinality 1
 	 * @clientCardinality 1
 	 */
-
+	
 	/* #AlgorithmResult lnkAlgorithmResult; */
 }
 

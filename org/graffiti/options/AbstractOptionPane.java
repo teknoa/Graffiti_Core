@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractOptionPane.java,v 1.5 2010/12/14 07:02:27 morla Exp $
+// $Id: AbstractOptionPane.java,v 1.6 2010/12/22 13:05:35 klukas Exp $
 
 package org.graffiti.options;
 
@@ -29,37 +29,37 @@ import org.graffiti.core.StringBundle;
  * The default implementation of the option pane interface. It lays out
  * components in a vertical fashion.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public abstract class AbstractOptionPane
 					extends JPanel
 					implements OptionPane {
 	// ~ Static fields/initializers =============================================
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	/** The <code>StringBundle</code> of this option pane. */
 	protected static StringBundle sBundle = StringBundle.getInstance();
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/** The layout of this panel. */
 	protected GridBagLayout gridBag;
-
+	
 	/** <code>true</code>, if this option pane has been initialized. */
 	protected boolean initialized;
-
+	
 	/** The number of components already added to the layout manager. */
 	protected int y;
-
+	
 	/** The internal name of this option pane. */
 	private String name;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Creates a new option pane.
 	 * 
@@ -71,9 +71,9 @@ public abstract class AbstractOptionPane
 		this.name = name;
 		setLayout(gridBag = new GridBagLayout());
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the component that should be displayed for this option pane.
 	 * Because this class implements component, it simply returns <code>this</code>.
@@ -83,7 +83,7 @@ public abstract class AbstractOptionPane
 	public JComponent getOptionDialogComponent() {
 		return this;
 	}
-
+	
 	/**
 	 * Returns the internal name of the option pane.
 	 * 
@@ -93,7 +93,7 @@ public abstract class AbstractOptionPane
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * Adds the given label and component to the option pane. Components are
 	 * added in vertical fashion, one per row. The label is displayed to the
@@ -112,18 +112,18 @@ public abstract class AbstractOptionPane
 		constraint.weightx = 0.0f;
 		constraint.insets = new Insets(1, 0, 1, 0);
 		constraint.fill = GridBagConstraints.BOTH;
-
+		
 		JLabel l = new JLabel(label, SwingConstants.RIGHT);
 		l.setBorder(new EmptyBorder(0, 0, 0, 12));
 		gridBag.setConstraints(l, constraint);
 		add(l);
-
+		
 		constraint.gridx = 1;
 		constraint.weightx = 1.0f;
 		gridBag.setConstraints(component, constraint);
 		add(component);
 	}
-
+	
 	/**
 	 * Adds the given component to the option pane. Components are added in
 	 * vertical fashion., one per row.
@@ -140,11 +140,11 @@ public abstract class AbstractOptionPane
 		constraint.anchor = GridBagConstraints.WEST;
 		constraint.weightx = 1.0f;
 		constraint.insets = new Insets(1, 0, 1, 0);
-
+		
 		gridBag.setConstraints(component, constraint);
 		add(component);
 	}
-
+	
 	/**
 	 * Adds a separator to the option pane.
 	 * 
@@ -158,17 +158,17 @@ public abstract class AbstractOptionPane
 		box2.add(new JSeparator(SwingConstants.HORIZONTAL));
 		box2.add(Box.createGlue());
 		box.add(box2);
-
+		
 		JLabel l = new JLabel(label);
 		l.setMaximumSize(l.getPreferredSize());
 		box.add(l);
-
+		
 		Box box3 = new Box(BoxLayout.Y_AXIS);
 		box3.add(Box.createGlue());
 		box3.add(new JSeparator(SwingConstants.HORIZONTAL));
 		box3.add(Box.createGlue());
 		box.add(box3);
-
+		
 		GridBagConstraints cons = new GridBagConstraints();
 		cons.gridy = y++;
 		cons.gridheight = 1;
@@ -177,11 +177,11 @@ public abstract class AbstractOptionPane
 		cons.anchor = GridBagConstraints.WEST;
 		cons.weightx = 1.0f;
 		cons.insets = new Insets(1, 0, 1, 0);
-
+		
 		gridBag.setConstraints(box, cons);
 		add(box);
 	}
-
+	
 	/**
 	 * This method is called every time this option pane is displayed. The <code>AbstractOptionPane</code> class uses this to create the option
 	 * pane's GUI only when needed.
@@ -192,7 +192,7 @@ public abstract class AbstractOptionPane
 			initDefault();
 		}
 	}
-
+	
 	/**
 	 * Called when the options dialog's "ok" button is clicked. This should
 	 * save any properties being edited in this option pane.
@@ -202,13 +202,13 @@ public abstract class AbstractOptionPane
 			saveDefault();
 		}
 	}
-
+	
 	/**
 	 * Creates this option pane's dialog. Implement this method, to create
 	 * your option pane's dialog.
 	 */
 	protected abstract void initDefault();
-
+	
 	/**
 	 * Should save the properties being edited in this option panel. Implement
 	 * this method, to save your option pane's preferences.

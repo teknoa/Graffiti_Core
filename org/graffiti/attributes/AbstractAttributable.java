@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractAttributable.java,v 1.6 2010/12/14 07:02:25 morla Exp $
+// $Id: AbstractAttributable.java,v 1.7 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -15,43 +15,43 @@ import org.graffiti.event.AttributeEvent;
  * Provides common functionality for <code>Attributable</code> classes. This
  * class also contains additional functionality for dealing with attributes.
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @see Attributable
  */
 public abstract class AbstractAttributable implements Attributable {
 	// ~ Static fields/initializers =============================================
-
+	
 	/** Constant indicating a <code>BooleanAttribute</code>. */
 	private static final int BOOLEAN_ATTRIBUTE = 0;
-
+	
 	/** Constant indicating a <code>DoubleAttribute</code>. */
 	private static final int DOUBLE_ATTRIBUTE = 1;
-
+	
 	/** Constant indicating a <code>FloatAttribute</code>. */
 	private static final int FLOAT_ATTRIBUTE = 2;
-
+	
 	/** Constant indicating a <code>IntegerAttribute</code>. */
 	private static final int INTEGER_ATTRIBUTE = 3;
-
+	
 	/** Constant indicating a <code>StringAttribute</code>. */
 	private static final int STRING_ATTRIBUTE = 4;
-
+	
 	/** Constant indicating a <code>ByteAttribute</code>. */
 	private static final int BYTE_ATTRIBUTE = 5;
-
+	
 	/** Constant indicating a <code>ShortAttribute</code>. */
 	private static final int SHORT_ATTRIBUTE = 6;
-
+	
 	/** Constant indicating a <code>LongAttribute</code>. */
 	private static final int LONG_ATTRIBUTE = 7;
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/** Contains the hierarchy of attributes the GraphElement contains. */
 	protected CollectionAttribute attributes;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new <code>AbstractAttribute</code> instance. Instantiates
 	 * its <code>CollectionAttribute</code>.
@@ -60,7 +60,7 @@ public abstract class AbstractAttributable implements Attributable {
 		attributes = new HashMapAttribute("");
 		attributes.setAttributable(this);
 	}
-
+	
 	/**
 	 * Constructs a new <code>AbstractAttribute</code> instance.
 	 * 
@@ -72,9 +72,9 @@ public abstract class AbstractAttributable implements Attributable {
 		attributes = coll;
 		attributes.setAttributable(this);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the <code>Attribute</code> of the given path.
 	 * 
@@ -87,14 +87,14 @@ public abstract class AbstractAttributable implements Attributable {
 	public Attribute getAttribute(String path)
 						throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		/* if the path contains "." as first character then remove it. */
 		if (path.startsWith(Attribute.SEPARATOR))
 			return attributes.getAttribute(path.substring(1));
 		else
 			return attributes.getAttribute(path);
 	}
-
+	
 	/**
 	 * Returns the root CollectionAttribute which contains the attributes of
 	 * the current object.
@@ -104,7 +104,7 @@ public abstract class AbstractAttributable implements Attributable {
 	public CollectionAttribute getAttributes() {
 		return attributes;
 	}
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -124,7 +124,7 @@ public abstract class AbstractAttributable implements Attributable {
 		assert path != null;
 		doSet(path, new Boolean(value), BOOLEAN_ATTRIBUTE);
 	}
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -136,18 +136,18 @@ public abstract class AbstractAttributable implements Attributable {
 	 */
 	public boolean getBoolean(String path) throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		try {
 			BooleanAttribute attr =
 								(BooleanAttribute) attributes.getAttribute(path);
-
+			
 			return attr.getBoolean();
 		} catch (ClassCastException cce) {
 			throw new AttributeNotFoundException(
 								"No BooleanAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -167,7 +167,7 @@ public abstract class AbstractAttributable implements Attributable {
 		assert path != null;
 		doSet(path, new Byte(value), BYTE_ATTRIBUTE);
 	}
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -179,17 +179,17 @@ public abstract class AbstractAttributable implements Attributable {
 	 */
 	public byte getByte(String path) throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		try {
 			ByteAttribute attr = (ByteAttribute) attributes.getAttribute(path);
-
+			
 			return attr.getByte();
 		} catch (ClassCastException cce) {
 			throw new AttributeNotFoundException(
 								"No ByteAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -210,7 +210,7 @@ public abstract class AbstractAttributable implements Attributable {
 		assert path != null;
 		doSet(path, new Double(value), DOUBLE_ATTRIBUTE);
 	}
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -222,18 +222,18 @@ public abstract class AbstractAttributable implements Attributable {
 	 */
 	public double getDouble(String path) throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		try {
 			DoubleAttribute attr =
 								(DoubleAttribute) attributes.getAttribute(path);
-
+			
 			return attr.getDouble();
 		} catch (ClassCastException cce) {
 			throw new AttributeNotFoundException(
 								"No DoubleAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -253,7 +253,7 @@ public abstract class AbstractAttributable implements Attributable {
 		assert path != null;
 		doSet(path, new Float(value), FLOAT_ATTRIBUTE);
 	}
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -265,18 +265,18 @@ public abstract class AbstractAttributable implements Attributable {
 	 */
 	public float getFloat(String path) throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		try {
 			FloatAttribute attr =
 								(FloatAttribute) attributes.getAttribute(path);
-
+			
 			return attr.getFloat();
 		} catch (ClassCastException cce) {
 			throw new AttributeNotFoundException(
 								"No FloatAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -296,7 +296,7 @@ public abstract class AbstractAttributable implements Attributable {
 		assert path != null;
 		doSet(path, new Integer(value), INTEGER_ATTRIBUTE);
 	}
-
+	
 	/**
 	 * Returns the value of the<code>Attribute</code>at the given path.
 	 * 
@@ -308,18 +308,18 @@ public abstract class AbstractAttributable implements Attributable {
 	 */
 	public int getInteger(String path) throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		try {
 			IntegerAttribute attr =
 								(IntegerAttribute) attributes.getAttribute(path);
-
+			
 			return attr.getInteger();
 		} catch (ClassCastException cce) {
 			throw new AttributeNotFoundException(
 								"No IntegerAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -339,7 +339,7 @@ public abstract class AbstractAttributable implements Attributable {
 		assert path != null;
 		doSet(path, new Long(value), LONG_ATTRIBUTE);
 	}
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -351,17 +351,17 @@ public abstract class AbstractAttributable implements Attributable {
 	 */
 	public long getLong(String path) throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		try {
 			LongAttribute attr = (LongAttribute) attributes.getAttribute(path);
-
+			
 			return attr.getLong();
 		} catch (ClassCastException cce) {
 			throw new AttributeNotFoundException(
 								"No LongAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The <code>Attribute</code> is created at the given location, if it does
@@ -381,7 +381,7 @@ public abstract class AbstractAttributable implements Attributable {
 		assert path != null;
 		doSet(path, new Short(value), SHORT_ATTRIBUTE);
 	}
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -393,18 +393,18 @@ public abstract class AbstractAttributable implements Attributable {
 	 */
 	public short getShort(String path) throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		try {
 			ShortAttribute attr =
 								(ShortAttribute) attributes.getAttribute(path);
-
+			
 			return attr.getShort();
 		} catch (ClassCastException cce) {
 			throw new AttributeNotFoundException(
 								"No ShortAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * The<code>Attribute</code>is created at the given location, if it does
@@ -424,7 +424,7 @@ public abstract class AbstractAttributable implements Attributable {
 		assert (path != null) && (value != null);
 		doSet(path, value, STRING_ATTRIBUTE);
 	}
-
+	
 	/**
 	 * Returns the value of the <code>Attribute</code> at the given path.
 	 * 
@@ -436,18 +436,18 @@ public abstract class AbstractAttributable implements Attributable {
 	 */
 	public String getString(String path) throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		try {
 			StringAttribute attr =
 								(StringAttribute) attributes.getAttribute(path);
-
+			
 			return attr.getString();
 		} catch (ClassCastException cce) {
 			throw new AttributeNotFoundException(
 								"No StringAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Adds <code>attr</code> to the attributes at position indicated by path.
 	 * Informs the <code>ListenerManager</code> about the change by using the <code>add(Attribute a)</code> method from <code>CollectionAttribute</code>.
@@ -486,11 +486,11 @@ public abstract class AbstractAttributable implements Attributable {
 						FieldAlreadySetException {
 		assert attr != null : "must not try to add a null attribute";
 		assert path != null;
-
+		
 		// if path points to a CollectionAttribute, add attr
 		Attribute maybeCollAttr = getAttribute(path);
 		CollectionAttribute collAttr = null;
-
+		
 		try {
 			collAttr = (CollectionAttribute) maybeCollAttr;
 		} catch (ClassCastException cce) {
@@ -498,10 +498,10 @@ public abstract class AbstractAttributable implements Attributable {
 								"The Attribute where you wanted to add another Attribute "
 													+ "is not a CollectionAttribute");
 		}
-
+		
 		collAttr.add(attr);
 	}
-
+	
 	/**
 	 * Adds an <code>BooleanAttribute</code> with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>. Events are
 	 * generated by using the <code>add(Attribute a) </code> method from <code>CollectionAttribute</code>.
@@ -526,10 +526,10 @@ public abstract class AbstractAttributable implements Attributable {
 						AttributeExistsException,
 						FieldAlreadySetException {
 		assert (path != null) && (id != null);
-
+		
 		BooleanAttribute ia = new BooleanAttribute(id, value);
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((CollectionAttribute) attr).add(ia);
 		} catch (ClassCastException cce) {
@@ -537,7 +537,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No CollectionAttribute at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Adds an <code>ByteAttribute</code> with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>. Events are
 	 * generated by using the <code>add(Attribute a) </code> method from <code>CollectionAttribute</code>.
@@ -562,10 +562,10 @@ public abstract class AbstractAttributable implements Attributable {
 						AttributeExistsException,
 						FieldAlreadySetException {
 		assert (path != null) && (id != null);
-
+		
 		ByteAttribute ia = new ByteAttribute(id, value);
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((CollectionAttribute) attr).add(ia);
 		} catch (ClassCastException cce) {
@@ -573,7 +573,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No CollectionAttribute at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Adds a <code>DoubleAttribute</code> with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>. Events are
 	 * generated by using the <code>add(Attribute a) </code> method from <code>CollectionAttribute</code>.
@@ -598,10 +598,10 @@ public abstract class AbstractAttributable implements Attributable {
 						AttributeExistsException,
 						FieldAlreadySetException {
 		assert (path != null) && (id != null);
-
+		
 		DoubleAttribute ia = new DoubleAttribute(id, value);
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((CollectionAttribute) attr).add(ia);
 		} catch (ClassCastException cce) {
@@ -609,7 +609,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No CollectionAttribute at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Adds a <code>FloatAttribute</code> with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>. Events are
 	 * generated by using the <code>add(Attribute a) </code> method from <code>CollectionAttribute</code>.
@@ -634,10 +634,10 @@ public abstract class AbstractAttributable implements Attributable {
 						AttributeExistsException,
 						FieldAlreadySetException {
 		assert (path != null) && (id != null);
-
+		
 		FloatAttribute ia = new FloatAttribute(id, value);
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((CollectionAttribute) attr).add(ia);
 		} catch (ClassCastException cce) {
@@ -645,7 +645,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No CollectionAttribute at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Adds an <code>IntegerAttribute</code> with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>. Events are
 	 * generated by using the <code>add(Attribute a) </code> method from <code>CollectionAttribute</code>.
@@ -670,10 +670,10 @@ public abstract class AbstractAttributable implements Attributable {
 						AttributeExistsException,
 						FieldAlreadySetException {
 		assert (path != null) && (id != null);
-
+		
 		IntegerAttribute ia = new IntegerAttribute(id, value);
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((CollectionAttribute) attr).add(ia);
 		} catch (ClassCastException cce) {
@@ -681,7 +681,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No CollectionAttribute at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Adds an <code>LongAttribute</code> with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>. Events are
 	 * generated by using the <code>add(Attribute a) </code> method from <code>CollectionAttribute</code>.
@@ -706,10 +706,10 @@ public abstract class AbstractAttributable implements Attributable {
 						AttributeExistsException,
 						FieldAlreadySetException {
 		assert (path != null) && (id != null);
-
+		
 		LongAttribute ia = new LongAttribute(id, value);
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((CollectionAttribute) attr).add(ia);
 		} catch (ClassCastException cce) {
@@ -717,7 +717,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No CollectionAttribute at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Adds an <code>ShortAttribute</code> with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>. Events are
 	 * generated by using the <code>add(Attribute a) </code> method from <code>CollectionAttribute</code>.
@@ -742,10 +742,10 @@ public abstract class AbstractAttributable implements Attributable {
 						AttributeExistsException,
 						FieldAlreadySetException {
 		assert (path != null) && (id != null);
-
+		
 		ShortAttribute ia = new ShortAttribute(id, value);
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((CollectionAttribute) attr).add(ia);
 		} catch (ClassCastException cce) {
@@ -753,7 +753,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No CollectionAttribute at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Adds a <code>StringAttribute</code> with the given value and id to a <code>CollectionAttribute</code> at <code>path</code>. Events are
 	 * generated by using the <code>add(Attribute a) </code> method from <code>CollectionAttribute</code>.
@@ -778,10 +778,10 @@ public abstract class AbstractAttributable implements Attributable {
 						AttributeExistsException,
 						FieldAlreadySetException {
 		assert ((path != null) & (id != null)) && (value != null);
-
+		
 		StringAttribute ia = (StringAttribute) StringAttribute.getTypedStringAttribute(id, value);
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((CollectionAttribute) attr).add(ia);
 		} catch (ClassCastException cce) {
@@ -789,7 +789,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No CollectionAttribute at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * Events are generated by using the <code>setInteger(int value) </code> method from <code>BooleanAttribute</code>.
@@ -804,9 +804,9 @@ public abstract class AbstractAttributable implements Attributable {
 	public void changeBoolean(String path, boolean value)
 						throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((BooleanAttribute) attr).setBoolean(value);
 		} catch (ClassCastException cce) {
@@ -814,7 +814,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No BooleanAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * Events are generated by using the <code>setInteger(int value) </code> method from <code>ByteAttribute</code>.
@@ -829,9 +829,9 @@ public abstract class AbstractAttributable implements Attributable {
 	public void changeByte(String path, byte value)
 						throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((ByteAttribute) attr).setByte(value);
 		} catch (ClassCastException cce) {
@@ -839,7 +839,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No ByteAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * Events are generated by using the <code>setDouble(double value) </code> method from <code>DoubleAttribute</code>.
@@ -854,9 +854,9 @@ public abstract class AbstractAttributable implements Attributable {
 	public void changeDouble(String path, double value)
 						throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((DoubleAttribute) attr).setDouble(value);
 		} catch (ClassCastException cce) {
@@ -864,7 +864,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No DoubleAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Sets the <code>Attribute</code> at the given path to the given value.
 	 * Events are generated by using the <code>setInteger(int value) </code> method from <code>FloatAttribute</code>.
@@ -879,9 +879,9 @@ public abstract class AbstractAttributable implements Attributable {
 	public void changeFloat(String path, float value)
 						throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((FloatAttribute) attr).setFloat(value);
 		} catch (ClassCastException cce) {
@@ -889,7 +889,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No FloatAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * Events are generated by using the <code>setInteger(int value) </code> method from <code>IntegerAttribute</code>.
@@ -904,11 +904,11 @@ public abstract class AbstractAttributable implements Attributable {
 	public void changeInteger(String path, int value)
 						throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		Attribute attr = attributes.getAttribute(path);
 		AttributeEvent attrEvent = new AttributeEvent(attr);
 		getListenerManager().preAttributeChanged(attrEvent);
-
+		
 		try {
 			((IntegerAttribute) attr).setInteger(value);
 			getListenerManager().postAttributeChanged(attrEvent);
@@ -917,7 +917,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No IntegerAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * Events are generated by using the <code>setInteger(int value) </code> method from <code>LongAttribute</code>.
@@ -932,9 +932,9 @@ public abstract class AbstractAttributable implements Attributable {
 	public void changeLong(String path, long value)
 						throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((LongAttribute) attr).setLong(value);
 		} catch (ClassCastException cce) {
@@ -942,7 +942,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No LongAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * Events are generated by using the <code>setInteger(int value) </code> method from <code>ShortAttribute</code>.
@@ -957,9 +957,9 @@ public abstract class AbstractAttributable implements Attributable {
 	public void changeShort(String path, short value)
 						throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((ShortAttribute) attr).setShort(value);
 		} catch (ClassCastException cce) {
@@ -967,7 +967,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No ShortAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Changes the <code>Attribute</code> at the given path to the given value.
 	 * Events are generated by using the <code>setInteger(int value) </code> method from <code>StringAttribute</code>.
@@ -982,9 +982,9 @@ public abstract class AbstractAttributable implements Attributable {
 	public void changeString(String path, String value)
 						throws AttributeNotFoundException {
 		assert (path != null) && (value != null);
-
+		
 		Attribute attr = attributes.getAttribute(path);
-
+		
 		try {
 			((StringAttribute) attr).setString(value);
 		} catch (ClassCastException cce) {
@@ -992,7 +992,7 @@ public abstract class AbstractAttributable implements Attributable {
 								"No StringAttribute found at path " + path + ".");
 		}
 	}
-
+	
 	/**
 	 * Deletes the <code>Attribute</code> attr from the attributes. Informs the <code>ListenerManager</code> about the change by using the
 	 * <code>remove(Attribute a)</code> method from <code>CollectionAttribute</code>.
@@ -1005,16 +1005,16 @@ public abstract class AbstractAttributable implements Attributable {
 	public Attribute removeAttribute(String path)
 						throws AttributeNotFoundException {
 		assert path != null;
-
+		
 		CollectionAttribute parentAttr = null;
-
+		
 		if (path.indexOf(Attribute.SEPARATOR) == -1) {
 			parentAttr = attributes;
 		} else {
 			String parentPath =
 								path.substring(0, path.lastIndexOf(Attribute.SEPARATOR));
 			// had a "-1" here, did nobody test that?
-
+			
 			try {
 				parentAttr =
 									(CollectionAttribute) (attributes.getAttribute(parentPath));
@@ -1022,15 +1022,15 @@ public abstract class AbstractAttributable implements Attributable {
 				throw new AttributeNotFoundException("Parent of attribute is not a CollectionAttribute");
 			}
 		}
-
+		
 		Attribute attr =
 							parentAttr.getAttribute(
 												path.substring(path.lastIndexOf(Attribute.SEPARATOR) + 1));
-
+		
 		parentAttr.remove(attr);
 		return attr;
 	}
-
+	
 	/**
 	 * Sets the<code>Attribute</code>depending on its type. Generates (add and
 	 * change) events by calling method <code>add(Attribute a)</code> in <code>CollectionAttribute</code> and method <code>setValue(Object
@@ -1052,12 +1052,12 @@ public abstract class AbstractAttributable implements Attributable {
 	 */
 	private void doSet(String path, Object o, int attributeType) {
 		assert !path.equals("") : "illegal path (empty path)";
-
+		
 		boolean furtherInformLM = true;
 		String[] subPaths =
 							path.split("\\" + Attribute.SEPARATOR);
 		CollectionAttribute parent = attributes;
-
+		
 		for (int i = 0; i < (subPaths.length - 1); i++) {
 			try {
 				Attribute attr = parent.getAttribute(subPaths[i]);
@@ -1069,7 +1069,7 @@ public abstract class AbstractAttributable implements Attributable {
 				parent = ca;
 				i++;
 				furtherInformLM = false;
-
+				
 				while (i < (subPaths.length - 1)) {
 					ca = new HashMapAttribute(subPaths[i]);
 					parent.add(ca, furtherInformLM);
@@ -1084,7 +1084,7 @@ public abstract class AbstractAttributable implements Attributable {
 														+ " CollectionAttribute.");
 			}
 		}
-
+		
 		try {
 			Attribute toSet = parent.getAttribute(subPaths[subPaths.length - 1]);
 			toSet.setValue(o);
@@ -1093,7 +1093,7 @@ public abstract class AbstractAttributable implements Attributable {
 			parent.add(a, furtherInformLM);
 		}
 	}
-
+	
 	private Attribute getDefaultAttribute(Object o, int attributeType,
 						String[] subPaths) {
 		Attribute a = null;
@@ -1103,65 +1103,65 @@ public abstract class AbstractAttributable implements Attributable {
 									new BooleanAttribute(
 														subPaths[subPaths.length - 1],
 														((Boolean) o).booleanValue());
-
+				
 				break;
-
+			
 			case DOUBLE_ATTRIBUTE:
 				a =
 									new DoubleAttribute(
 														subPaths[subPaths.length - 1],
 														((Double) o).doubleValue());
-
+				
 				break;
-
+			
 			case FLOAT_ATTRIBUTE:
 				a =
 									new FloatAttribute(
 														subPaths[subPaths.length - 1],
 														((Float) o).floatValue());
-
+				
 				break;
-
+			
 			case INTEGER_ATTRIBUTE:
 				a =
 									new IntegerAttribute(
 														subPaths[subPaths.length - 1],
 														((Integer) o).intValue());
-
+				
 				break;
-
+			
 			case STRING_ATTRIBUTE:
 				a =
 									StringAttribute.getTypedStringAttribute(
 														subPaths[subPaths.length - 1],
 														(String) o);
-
+				
 				break;
-
+			
 			case LONG_ATTRIBUTE:
 				a =
 									new LongAttribute(
 														subPaths[subPaths.length - 1],
 														(Long) o);
-
+				
 				break;
-
+			
 			case BYTE_ATTRIBUTE:
 				a =
 									new ByteAttribute(
 														subPaths[subPaths.length - 1],
 														(Byte) o);
-
+				
 				break;
-
+			
 			case SHORT_ATTRIBUTE:
 				a =
 									new ShortAttribute(
 														subPaths[subPaths.length - 1],
 														(Short) o);
-
+				
 				break;
-
+			
 			default:
 				assert false : "Encountered an unknown attribute type ...";
 		}

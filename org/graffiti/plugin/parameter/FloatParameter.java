@@ -5,24 +5,24 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: FloatParameter.java,v 1.5 2010/12/14 07:02:27 morla Exp $
+// $Id: FloatParameter.java,v 1.6 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
 /**
  * Parameter that contains a float value.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class FloatParameter
 					extends AbstractLimitableParameter {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this parameter. */
 	private Float value = null;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new float parameter.
 	 * 
@@ -34,9 +34,9 @@ public class FloatParameter
 	public FloatParameter(String name, String description) {
 		super(name, description);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the value of this parameter as a <code>Float</code>.
 	 * 
@@ -45,7 +45,7 @@ public class FloatParameter
 	public Float getFloat() {
 		return value;
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -55,7 +55,7 @@ public class FloatParameter
 	public Comparable<?> getMax() {
 		return null; // TODO
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -65,7 +65,7 @@ public class FloatParameter
 	public Comparable<?> getMin() {
 		return null; // TODO
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -75,7 +75,7 @@ public class FloatParameter
 	public boolean isValid() {
 		return false; // TODO
 	}
-
+	
 	/**
 	 * Sets the value of the <code>AttributeParameter</code>.
 	 * 
@@ -86,7 +86,7 @@ public class FloatParameter
 	public void setValue(Object value) {
 		// TODO
 	}
-
+	
 	/**
 	 * Returns the value of this parameter.
 	 * 

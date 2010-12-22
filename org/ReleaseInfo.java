@@ -19,28 +19,28 @@ import javax.swing.JOptionPane;
 
 public class ReleaseInfo implements HelperClass {
 	private static Release currentRelease = Release.DEBUG;
-
+	
 	public static Release getRunningReleaseStatus() {
 		return currentRelease;
 	}
-
+	
 	public static void setRunningReleaseStatus(Release currentReleaseStatus) {
 		currentRelease = currentReleaseStatus;
 	}
-
+	
 	private static HashSet<FeatureSet> enabledFeatures = new HashSet<FeatureSet>();
 	private static HashSet<FeatureSet> disabledFeatures = new HashSet<FeatureSet>();
-
+	
 	public static void enableFeature(FeatureSet fs) {
 		enabledFeatures.add(fs);
 	}
-
+	
 	public static void disableFeature(FeatureSet fs) {
 		disabledFeatures.add(fs);
 	}
-
+	
 	public static boolean getIsAllowedFeature(FeatureSet fs) {
-
+		
 		try {
 			// String s = getAppFolder();
 		} catch (Exception e) {
@@ -52,12 +52,12 @@ public class ReleaseInfo implements HelperClass {
 				return false;
 			return true;
 		}
-
+		
 		if (disabledFeatures != null && disabledFeatures.contains(fs))
 			return false;
 		if (enabledFeatures != null && enabledFeatures.contains(fs))
 			return true;
-
+		
 		switch (fs) {
 			case ADDON_LOADING:
 				if (ReleaseInfo.isRunningAsApplet())
@@ -99,7 +99,7 @@ public class ReleaseInfo implements HelperClass {
 			case MetaCrop_ACCESS:
 			case RIMAS_ACCESS:
 				return false; // enabled by add-on
-
+				
 			case DBE_ACCESS:
 				return false;
 			case DATA_CARD_ACCESS:
@@ -179,7 +179,7 @@ public class ReleaseInfo implements HelperClass {
 				return false;
 		}
 	}
-
+	
 	public static String getAppFolder() {
 		String appFolder = getAppFolderName();
 		try {
@@ -197,16 +197,16 @@ public class ReleaseInfo implements HelperClass {
 		}
 		return appFolder;
 	}
-
+	
 	private static String getAppFolderName() {
 		String newStyle = getAppFolderNameNewStyle();
-
+		
 		try {
-
+			
 			String oldStyle = getAppFolderNameOldStyle();
 			if (!oldStyle.equals(newStyle)) {
 				if (new File(oldStyle).isDirectory()) {
-
+					
 					File src = new File(oldStyle);
 					File tgt = new File(newStyle);
 					boolean success = src.renameTo(tgt);
@@ -219,18 +219,18 @@ public class ReleaseInfo implements HelperClass {
 											+ "<ul>" + "<li>Old: " + oldStyle + ""
 											+ "<li>New: " + newStyle + "</ul>",
 											"Information", JOptionPane.INFORMATION_MESSAGE);
-
+						
 					}
 				}
 			}
-
+			
 		} catch (Exception e) {
 			ErrorMsg.addErrorMessage(e);
 		}
-
+		
 		return newStyle;
 	}
-
+	
 	private static String getAppFolderNameNewStyle() {
 		String home = System.getProperty("user.home");
 		boolean windows = false;
@@ -253,7 +253,7 @@ public class ReleaseInfo implements HelperClass {
 				}
 			}
 		}
-
+		
 		if (SystemInfo.isMac() || windows) {
 			if (getRunningReleaseStatus() == Release.KGML_EDITOR)
 				return home + getFileSeparator() + "KGML_EDITOR";
@@ -266,7 +266,7 @@ public class ReleaseInfo implements HelperClass {
 				return home + getFileSeparator() + HomeFolder.LINUX_HOMEFOLDER;
 		}
 	}
-
+	
 	private static String getAppFolderNameOldStyle() {
 		String home = System.getProperty("user.home");
 		if (getRunningReleaseStatus() == Release.KGML_EDITOR)
@@ -274,57 +274,57 @@ public class ReleaseInfo implements HelperClass {
 		else
 			return home + getFileSeparator() + HomeFolder.WIN_MAC_HOMEFOLDER_OLD;
 	}
-
+	
 	public static String getFileSeparator() {
 		return System.getProperty("file.separator");
 	}
-
+	
 	public static String getAppFolderWithFinalSep() {
 		return getAppFolder() + getFileSeparator();
 	}
-
+	
 	public static String getAppWebURL() {
 		if (getRunningReleaseStatus() == Release.KGML_EDITOR)
 			return "http://kgml-ed.ipk-gatersleben.de";
 		else
 			return "http://vanted.ipk-gatersleben.de";
 	}
-
+	
 	private static String helpIntro = "";
-
+	
 	public static void setHelpIntroductionText(String statusMessage) {
 		helpIntro = statusMessage;
 	}
-
+	
 	public static String getHelpIntroductionText() {
 		return helpIntro;
 	}
-
+	
 	private static boolean applet = false;
 	private static JApplet appletContext = null;
-
+	
 	public static void setRunningAsApplet(JApplet appletContext) {
 		applet = true;
 		ReleaseInfo.appletContext = appletContext;
 	}
-
+	
 	public static boolean isRunningAsApplet() {
 		return applet;
 	}
-
+	
 	private static boolean firstRun = false;
-
+	
 	public static void setIsFirstRun(boolean b) {
 		firstRun = b;
 	}
-
+	
 	public static boolean isFirstRun() {
 		return firstRun;
 	}
-
+	
 	private static boolean updateCheckRun = false;
 	private static String lastVersion = null;
-
+	
 	public static UpdateInfoResult isUpdated() {
 		if (!updateCheckRun)
 			return UpdateInfoResult.UNKNOWN;
@@ -333,7 +333,7 @@ public class ReleaseInfo implements HelperClass {
 		else
 			return UpdateInfoResult.NOT_UPDATED;
 	}
-
+	
 	/**
 	 * @param currentVersion
 	 * @return null, if not updated / "", if updated but old version is unknown
@@ -370,7 +370,7 @@ public class ReleaseInfo implements HelperClass {
 			return lastVersion;
 		}
 	}
-
+	
 	public static String getTextFileContent(File aFile) throws Exception {
 		StringBuilder res = new StringBuilder();
 		BufferedReader input = new BufferedReader(new FileReader(aFile));
@@ -386,7 +386,7 @@ public class ReleaseInfo implements HelperClass {
 		}
 		return res.toString();
 	}
-
+	
 	public static String getAppSubdirFolder(String folderName) {
 		String folder = getAppFolderWithFinalSep() + folderName;
 		File dir = new File(folder);
@@ -394,7 +394,7 @@ public class ReleaseInfo implements HelperClass {
 			dir.mkdir();
 		return folder;
 	}
-
+	
 	public static String getAppSubdirFolder(String subDir1, String subDir2) {
 		String folder1 = getAppFolderWithFinalSep() + subDir1;
 		String folder2 = folder1 + getFileSeparator() + subDir2;
@@ -406,16 +406,16 @@ public class ReleaseInfo implements HelperClass {
 			dir2.mkdir();
 		return folder2;
 	}
-
+	
 	public static String getAppSubdirFolderWithFinalSep(String folderName) {
 		return getAppSubdirFolder(folderName) + getFileSeparator();
 	}
-
+	
 	public static String getAppSubdirFolderWithFinalSep(String folderName,
 						String folderName2) {
 		return getAppSubdirFolder(folderName, folderName2) + getFileSeparator();
 	}
-
+	
 	/**
 	 * @return
 	 */

@@ -10,24 +10,24 @@ import org.color.ColorUtil;
 public class ColorParameter
 					extends AbstractSingleParameter {
 	private Color value = null;
-
+	
 	public ColorParameter(Color value, String name, String description) {
 		super(name, description);
 		this.value = value;
 	}
-
+	
 	public Color getColor() {
 		return value;
 	}
-
+	
 	public boolean isValid() {
 		if (value == null) {
 			return false;
 		}
-
+		
 		return true;
 	}
-
+	
 	@Override
 	public void setValue(Object value) {
 		try {
@@ -36,7 +36,7 @@ public class ColorParameter
 			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
-
+	
 	/**
 	 * Returns the value of this parameter.
 	 * 
@@ -46,7 +46,7 @@ public class ColorParameter
 	public Object getValue() {
 		return value;
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
 	 */
@@ -54,5 +54,5 @@ public class ColorParameter
 	public String toXMLString() {
 		return getStandardXML(ColorUtil.getHexFromColor(value));
 	}
-
+	
 }

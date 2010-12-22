@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: InputSerializer.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: InputSerializer.java,v 1.6 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.io;
 
@@ -20,11 +20,11 @@ import org.graffiti.graph.Graph;
  * Interfaces a serializer, which is able to reconstruct a graph from a given
  * input.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public interface InputSerializer extends Serializer {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Reads in a graph from the given filename.
 	 * 
@@ -36,7 +36,7 @@ public interface InputSerializer extends Serializer {
 	 *               If an IO error occurs.
 	 */
 	public void read(String filename, Graph g) throws IOException;
-
+	
 	/**
 	 * @param reader
 	 *           Warning: The Inputstream-Length may be limited in size, e.g. may
@@ -44,7 +44,7 @@ public interface InputSerializer extends Serializer {
 	 * @return
 	 */
 	public boolean validFor(InputStream reader);
-
+	
 	/**
 	 * Reads in the graph from the given url.
 	 * 
@@ -56,7 +56,7 @@ public interface InputSerializer extends Serializer {
 	 *               If an IO error occurs.
 	 */
 	public void read(URL url, Graph g) throws IOException;
-
+	
 	/**
 	 * Reads in a graph from the given input stream.
 	 * 
@@ -68,7 +68,7 @@ public interface InputSerializer extends Serializer {
 	 *               If an IO error occurs.
 	 */
 	public void read(InputStream in, Graph g) throws IOException;
-
+	
 	/**
 	 * Reads in a graph from the given input stream.
 	 * 
@@ -79,7 +79,7 @@ public interface InputSerializer extends Serializer {
 	 *               If an IO error occurs.
 	 */
 	public Graph read(InputStream in) throws IOException;
-
+	
 	public void read(Reader reader, Graph newGraph) throws Exception;
 }
 

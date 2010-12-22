@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: GenericBundle.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: GenericBundle.java,v 1.5 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.core;
 
@@ -19,12 +19,12 @@ import java.util.ResourceBundle;
  */
 public abstract class GenericBundle {
 	// ~ Instance fields ========================================================
-
+	
 	/** Resource bundle. */
 	protected ResourceBundle resources;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs new <code>GenericBundle</code>.
 	 */
@@ -37,9 +37,9 @@ public abstract class GenericBundle {
 			mre.printStackTrace(System.err);
 		}
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the relative location of the specified resource.
 	 * 
@@ -51,16 +51,16 @@ public abstract class GenericBundle {
 		if (s == null) {
 			return null;
 		}
-
+		
 		String res = getString(s);
-
+		
 		if (res == null) {
 			return null;
 		}
-
+		
 		return GenericBundle.class.getClassLoader().getResource(res);
 	}
-
+	
 	/**
 	 * Returns the specified String from the properties, <code>null</code> if
 	 * there is no such key.
@@ -76,7 +76,7 @@ public abstract class GenericBundle {
 			return null;
 		}
 	}
-
+	
 	/**
 	 * Returns the location of the bundle. This is a String like <code>package/subpackage/classname</code>.
 	 * 

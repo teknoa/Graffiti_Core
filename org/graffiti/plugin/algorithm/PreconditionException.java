@@ -5,10 +5,10 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: PreconditionException.java,v 1.5 2010/12/14 07:02:25 morla Exp $
+// $Id: PreconditionException.java,v 1.6 2010/12/22 13:05:32 klukas Exp $
 
 /*
- * $Id: PreconditionException.java,v 1.5 2010/12/14 07:02:25 morla Exp $
+ * $Id: PreconditionException.java,v 1.6 2010/12/22 13:05:32 klukas Exp $
  */
 package org.graffiti.plugin.algorithm;
 
@@ -22,16 +22,16 @@ import java.util.List;
 public class PreconditionException
 					extends Exception {
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	/** DOCUMENT ME! */
 	private List<Entry> errors;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Creates a new PreconditionException object.
 	 * 
@@ -42,16 +42,16 @@ public class PreconditionException
 		this();
 		add(msg);
 	}
-
+	
 	/**
 	 * Creates a new PreconditionException object.
 	 */
 	public PreconditionException() {
 		this.errors = new LinkedList<Entry>();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -60,7 +60,7 @@ public class PreconditionException
 	public boolean isEmpty() {
 		return errors.isEmpty();
 	}
-
+	
 	/**
 	 * @see java.lang.Throwable#getMessage()
 	 */
@@ -68,17 +68,17 @@ public class PreconditionException
 	public String getMessage() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("The following preconditions are not satisfied:<br><ul>");
-
+		
 		for (Iterator<Entry> i = errors.iterator(); i.hasNext();) {
 			Entry error = (Entry) i.next();
 			sb.append("<li>");
 			sb.append(error.cause);
 			sb.append("");
 		}
-
+		
 		return sb.toString();
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -90,7 +90,7 @@ public class PreconditionException
 	public void add(String cause, Object source) {
 		errors.add(new Entry(cause, source));
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -100,7 +100,7 @@ public class PreconditionException
 	public void add(String cause) {
 		errors.add(new Entry(cause, null));
 	}
-
+	
 	/**
 	 * Returns an iterator over all <code>Error</code>s.
 	 * 
@@ -109,21 +109,21 @@ public class PreconditionException
 	public Iterator<Entry> iterator() {
 		return errors.iterator();
 	}
-
+	
 	// ~ Inner Classes ==========================================================
-
+	
 	/**
 	 * Contains a cause and the source object (ie.: a Graph, Node or Edge).
 	 * 
-	 * @version $Revision: 1.5 $
+	 * @version $Revision: 1.6 $
 	 */
 	class Entry {
 		/** DOCUMENT ME! */
 		public Object source;
-
+		
 		/** DOCUMENT ME! */
 		public String cause;
-
+		
 		/**
 		 * Creates a new Entry object.
 		 * 

@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractOutputSerializer.java,v 1.3 2010/12/14 07:02:26 morla Exp $
+// $Id: AbstractOutputSerializer.java,v 1.4 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.io;
 
@@ -17,12 +17,12 @@ import org.graffiti.graph.Graph;
 /**
  * Provides additional methods to write a graph object.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public abstract class AbstractOutputSerializer
 					implements OutputSerializer {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Writes the contents of the given graph to a file.
 	 * 

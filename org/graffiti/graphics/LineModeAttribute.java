@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: LineModeAttribute.java,v 1.6 2010/12/14 07:02:26 morla Exp $
+// $Id: LineModeAttribute.java,v 1.7 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -21,17 +21,17 @@ import org.graffiti.attributes.HashMapAttribute;
  * to specify stroke properties.
  * 
  * @author schoeffl
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class LineModeAttribute
 					extends CompositeAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	/** The encapsulated object. */
 	private Dash dash;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for LineModeAttribute.
 	 * 
@@ -41,7 +41,7 @@ public class LineModeAttribute
 	public LineModeAttribute(String id) {
 		this(id, new Dash());
 	}
-
+	
 	/**
 	 * Constructor for LineModeAttribute.
 	 * 
@@ -54,9 +54,9 @@ public class LineModeAttribute
 		super(id);
 		this.dash = d;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * @see org.graffiti.attributes.CompositeAttribute#setAttribute(String, Attribute)
 	 */
@@ -65,7 +65,7 @@ public class LineModeAttribute
 						throws AttributeNotFoundException, IllegalArgumentException {
 		throw new UnsupportedOperationException("TODO!");
 	}
-
+	
 	/**
 	 * @see org.graffiti.attributes.CompositeAttribute#getAttributes()
 	 */
@@ -74,20 +74,20 @@ public class LineModeAttribute
 		HashMapAttribute ret = new HashMapAttribute(getId());
 		HashMapAttribute da = new HashMapAttribute("dasharray");
 		float[] dashArray = this.dash.getDashArray();
-
+		
 		for (int i = dashArray.length - 1; i >= 0; i--) {
 			da.add(new FloatAttribute("dash" + i, dashArray[i]));
 		}
-
+		
 		FloatAttribute dp =
 							new FloatAttribute("dashphase", this.dash.getDashPhase());
-
+		
 		ret.add(da);
 		ret.add(dp);
-
+		
 		return ret;
 	}
-
+	
 	/**
 	 * Sets the dashArray of the encapsulated Dash to the given array.
 	 * 
@@ -111,7 +111,7 @@ public class LineModeAttribute
 				setDefaultValue();
 		}
 	}
-
+	
 	/**
 	 * Returns the dashArray of the encapsulated Dash.
 	 * 
@@ -120,7 +120,7 @@ public class LineModeAttribute
 	public float[] getDashArray() {
 		return dash.getDashArray();
 	}
-
+	
 	/**
 	 * Sets the dashPhase of the encapsulated Dash to the given value.
 	 * 
@@ -130,7 +130,7 @@ public class LineModeAttribute
 	public void setDashPhase(float dp) {
 		this.dash.setDashPhase(dp);
 	}
-
+	
 	/**
 	 * Returns the dashPhase of the encapsulated Dash.
 	 * 
@@ -139,7 +139,7 @@ public class LineModeAttribute
 	public float getDashPhase() {
 		return dash.getDashPhase();
 	}
-
+	
 	/**
 	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
 	 */
@@ -148,7 +148,7 @@ public class LineModeAttribute
 			dash = new Dash();
 		}
 	}
-
+	
 	/**
 	 * Returns a dash object contained in this attribute.
 	 * 
@@ -157,7 +157,7 @@ public class LineModeAttribute
 	public Object getValue() {
 		return dash;
 	}
-
+	
 	/**
 	 * Returns a deep copy of this <code>Attribute</code>.
 	 * 
@@ -166,21 +166,21 @@ public class LineModeAttribute
 	 */
 	public Object copy() {
 		float[] oldDA = dash.getDashArray();
-
+		
 		if (oldDA == null) {
 			return new LineModeAttribute(idd, new Dash(null, dash.getDashPhase()));
 		} else {
 			float[] newDA = new float[oldDA.length];
-
+			
 			for (int i = oldDA.length - 1; i >= 0; i--) {
 				newDA[i] = oldDA[i];
 			}
-
+			
 			return new LineModeAttribute(idd,
 								new Dash(newDA, dash.getDashPhase()));
 		}
 	}
-
+	
 	/**
 	 * @see org.graffiti.attributes.AbstractAttribute#doSetValue(Object)
 	 */

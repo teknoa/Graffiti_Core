@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: GenericFileFilter.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: GenericFileFilter.java,v 1.5 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.core;
 
@@ -17,17 +17,17 @@ import javax.swing.filechooser.FileFilter;
  * Contains a generic file filter for filtering file extensions in the file
  * chooser dialog.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class GenericFileFilter
 					extends FileFilter {
 	// ~ Instance fields ========================================================
-
+	
 	/** The extension for filtering */
 	private String extension;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for GenericFileFilter.
 	 * 
@@ -37,9 +37,9 @@ public class GenericFileFilter
 	public GenericFileFilter(String extension) {
 		this.extension = extension;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * The description of this filter. For example: ".gml"
 	 * 
@@ -49,7 +49,7 @@ public class GenericFileFilter
 	public String getDescription() {
 		return "*" + extension;
 	}
-
+	
 	/**
 	 * Return the extension string for files that this filter allows.
 	 * 
@@ -58,7 +58,7 @@ public class GenericFileFilter
 	public String getExtension() {
 		return extension;
 	}
-
+	
 	/**
 	 * Whether the given file is accepted by this filter.
 	 * 
@@ -69,17 +69,17 @@ public class GenericFileFilter
 	@Override
 	public boolean accept(File f) {
 		boolean accept = f.isDirectory();
-
+		
 		if (!accept) {
 			String suffix = getExtension(f);
-
+			
 			if (suffix != null)
 				accept = suffix.equals(extension);
 		}
-
+		
 		return accept;
 	}
-
+	
 	/**
 	 * Get the extension of a file.
 	 * 
@@ -91,11 +91,11 @@ public class GenericFileFilter
 		String ext = null;
 		String s = f.getPath();
 		int i = s.lastIndexOf('.');
-
+		
 		if ((i > 0) && (i < (s.length() - 1))) {
 			ext = s.substring(i).toLowerCase();
 		}
-
+		
 		return ext;
 	}
 }

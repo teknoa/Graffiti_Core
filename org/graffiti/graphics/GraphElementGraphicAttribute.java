@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: GraphElementGraphicAttribute.java,v 1.4 2010/12/14 07:02:26 morla Exp $
+// $Id: GraphElementGraphicAttribute.java,v 1.5 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -17,13 +17,13 @@ import org.graffiti.attributes.StringAttribute;
 /**
  * Defines the common graphic attributes for nodes and edges
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public abstract class GraphElementGraphicAttribute
 					extends HashMapAttribute
 					implements GraphicAttributeConstants {
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for GraphElementGraphicAttribute.
 	 * 
@@ -41,7 +41,7 @@ public abstract class GraphElementGraphicAttribute
 		add(new GradientFillAttribute(GRADIENT, 0), false);
 		add(new LineModeAttribute(LINEMODE), false);
 	}
-
+	
 	/**
 	 * Constructor for GraphElementGraphicAttribute.
 	 * 
@@ -76,7 +76,7 @@ public abstract class GraphElementGraphicAttribute
 		add(new LineModeAttribute(LINEMODE, (Dash) lm.getValue()), false);
 		add(new GradientFillAttribute(GRADIENT, 0), false);
 	}
-
+	
 	/**
 	 * Constructor for GraphElementGraphicAttribute.
 	 * 
@@ -111,9 +111,9 @@ public abstract class GraphElementGraphicAttribute
 		add(new LineModeAttribute(LINEMODE, (Dash) lm.getValue()), false);
 		add(new GradientFillAttribute(GRADIENT, 0), false);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the 'backgroundimage'-value.
 	 * 
@@ -124,7 +124,7 @@ public abstract class GraphElementGraphicAttribute
 		remove(IMAGE);
 		add(bgi, false);
 	}
-
+	
 	/**
 	 * Returns the 'backgroundimage'-value of the encapsulated edge.
 	 * 
@@ -133,7 +133,7 @@ public abstract class GraphElementGraphicAttribute
 	public ImageAttribute getBackgroundImage() {
 		return (ImageAttribute) attributes.get(IMAGE);
 	}
-
+	
 	/**
 	 * Sets the 'fillcolor'-value.
 	 * 
@@ -144,7 +144,7 @@ public abstract class GraphElementGraphicAttribute
 		remove(FILLCOLOR);
 		add(fic, false);
 	}
-
+	
 	/**
 	 * Returns the 'fillcolor'-value of the encapsulated edge.
 	 * 
@@ -153,7 +153,7 @@ public abstract class GraphElementGraphicAttribute
 	public ColorAttribute getFillcolor() {
 		return (ColorAttribute) attributes.get(FILLCOLOR);
 	}
-
+	
 	/**
 	 * Sets the 'frameThickness'-value.
 	 * 
@@ -163,15 +163,15 @@ public abstract class GraphElementGraphicAttribute
 	public void setFrameThickness(double ft) {
 		((DoubleAttribute) attributes.get(FRAMETHICKNESS)).setDouble(ft);
 	}
-
+	
 	public void setRoundedEdges(double rd) {
 		((DoubleAttribute) attributes.get(ROUNDING)).setDouble(rd);
 	}
-
+	
 	public void setUseGradient(double rd) {
 		((DoubleAttribute) attributes.get(GRADIENT)).setDouble(rd);
 	}
-
+	
 	/**
 	 * Returns the 'frameThickness'-value of the encapsulated edge.
 	 * 
@@ -180,7 +180,7 @@ public abstract class GraphElementGraphicAttribute
 	public double getFrameThickness() {
 		return ((DoubleAttribute) attributes.get(FRAMETHICKNESS)).getDouble();
 	}
-
+	
 	/**
 	 * Returns the rounding of the edges.
 	 * 
@@ -190,11 +190,11 @@ public abstract class GraphElementGraphicAttribute
 	public double getRoundedEdges() {
 		return ((DoubleAttribute) attributes.get(ROUNDING)).getDouble();
 	}
-
+	
 	public double getUseGradient() {
 		return ((GradientFillAttribute) attributes.get(GRADIENT)).getDouble();
 	}
-
+	
 	/**
 	 * Sets the 'framecolor'-value.
 	 * 
@@ -205,7 +205,7 @@ public abstract class GraphElementGraphicAttribute
 		remove(FRAMECOLOR);
 		add(frc, false);
 	}
-
+	
 	/**
 	 * Returns the 'framecolor'-value of the encapsulated edge.
 	 * 
@@ -214,7 +214,7 @@ public abstract class GraphElementGraphicAttribute
 	public ColorAttribute getFramecolor() {
 		return (ColorAttribute) attributes.get(FRAMECOLOR);
 	}
-
+	
 	/**
 	 * Sets the 'lineMode'-value.
 	 * 
@@ -227,7 +227,7 @@ public abstract class GraphElementGraphicAttribute
 		attributes.put(LINEMODE, lma);
 		lma.setParent(this);
 	}
-
+	
 	/**
 	 * Returns the 'lineMode'-value of the encapsulated edge.
 	 * 
@@ -236,7 +236,7 @@ public abstract class GraphElementGraphicAttribute
 	public LineModeAttribute getLineMode() {
 		return (LineModeAttribute) attributes.get(LINEMODE);
 	}
-
+	
 	/**
 	 * Sets the 'shape'-value.
 	 * 
@@ -246,7 +246,7 @@ public abstract class GraphElementGraphicAttribute
 	public void setShape(String sn) {
 		((StringAttribute) attributes.get(SHAPE)).setString(sn);
 	}
-
+	
 	/**
 	 * Returns the 'shape'-value of the encapsulated edge.
 	 * 

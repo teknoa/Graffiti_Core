@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: NodeLabelPositionAttribute.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: NodeLabelPositionAttribute.java,v 1.6 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -19,32 +19,32 @@ import org.graffiti.attributes.DoubleAttribute;
  * DOCUMENT ME!
  * 
  * @author holleis
- * @version $Revision: 1.5 $ Specifies position of a node label providing several parameters.
+ * @version $Revision: 1.6 $ Specifies position of a node label providing several parameters.
  */
 public class NodeLabelPositionAttribute
 					extends PositionAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * Specifies alignment of the label at the point given by relHor and
 	 * relVert.
 	 */
 	private DoubleAttribute localAlign;
-
+	
 	/**
 	 * Specifies relative horizontal position (relative to center of node) of
 	 * center of label.
 	 */
 	private DoubleAttribute relHor;
-
+	
 	/**
 	 * Specifies relative vertical position (relative to center of node) of
 	 * center of label.
 	 */
 	private DoubleAttribute relVert;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for NodeLabelPositionAttribute.
 	 * 
@@ -53,7 +53,7 @@ public class NodeLabelPositionAttribute
 	public NodeLabelPositionAttribute(String id) {
 		this(id, 0d, 0d, 0d);
 	}
-
+	
 	/**
 	 * Constructor for NodeLabelPositionAttribute.
 	 * 
@@ -69,7 +69,7 @@ public class NodeLabelPositionAttribute
 							new DoubleAttribute(RELVERT, relVert),
 							new DoubleAttribute(LOCALALIGN, localAlign));
 	}
-
+	
 	/**
 	 * Constructor for NodeLabelPositionAttribute.
 	 * 
@@ -88,9 +88,9 @@ public class NodeLabelPositionAttribute
 		add(this.relVert, false);
 		add(this.localAlign, false);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
 	 * 
@@ -105,7 +105,7 @@ public class NodeLabelPositionAttribute
 							attrs.keySet().contains(LOCALALIGN)) {
 			for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
 				String attrId = (String) it.next();
-
+				
 				if (attrId.equals(RELHOR)) {
 					setRelHor(((DoubleAttribute) attrs.get(RELHOR)).getDouble());
 				} else
@@ -122,7 +122,7 @@ public class NodeLabelPositionAttribute
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * Sets the localAlign.
 	 * 
@@ -132,7 +132,7 @@ public class NodeLabelPositionAttribute
 	public void setLocalAlign(double localAlign) {
 		this.localAlign.setDouble(localAlign);
 	}
-
+	
 	/**
 	 * Returns the localAlign.
 	 * 
@@ -141,7 +141,7 @@ public class NodeLabelPositionAttribute
 	public double getLocalAlign() {
 		return this.localAlign.getDouble();
 	}
-
+	
 	/**
 	 * Sets the relHor.
 	 * 
@@ -151,7 +151,7 @@ public class NodeLabelPositionAttribute
 	public void setRelHor(double relHor) {
 		this.relHor.setDouble(relHor);
 	}
-
+	
 	/**
 	 * Returns the relHor.
 	 * 
@@ -160,7 +160,7 @@ public class NodeLabelPositionAttribute
 	public double getRelHor() {
 		return this.relHor.getDouble();
 	}
-
+	
 	/**
 	 * Sets the relVert.
 	 * 
@@ -170,7 +170,7 @@ public class NodeLabelPositionAttribute
 	public void setRelVert(double relVert) {
 		this.relVert.setDouble(relVert);
 	}
-
+	
 	/**
 	 * Returns the relVert.
 	 * 
@@ -179,7 +179,7 @@ public class NodeLabelPositionAttribute
 	public double getRelVert() {
 		return this.relVert.getDouble();
 	}
-
+	
 	/**
 	 * Returns a deep copy of this object.
 	 * 
@@ -191,10 +191,10 @@ public class NodeLabelPositionAttribute
 		copied.setRelHor(this.getRelHor());
 		copied.setRelVert(this.getRelVert());
 		copied.setLocalAlign(this.getLocalAlign());
-
+		
 		return copied;
 	}
-
+	
 	// /**
 	// * Sets the value of this <code>Attribute</code> to the given value without
 	// * informing the <code>ListenerManager</code>.

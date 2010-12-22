@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: PluginManagerListener.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: PluginManagerListener.java,v 1.5 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -15,11 +15,11 @@ import org.graffiti.plugin.GenericPlugin;
  * Represents a listener, which is called, if a plugin has been added to the
  * plugin manager.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public interface PluginManagerListener {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Called by the plugin manager, iff a plugin has been added.
 	 * 

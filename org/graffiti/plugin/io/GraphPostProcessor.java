@@ -10,12 +10,12 @@ import org.graffiti.graph.Graph;
  * file.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public interface GraphPostProcessor
 					extends Serializer {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Call back for processing newly created graphs and newly loaded graphs.
 	 * After loading of a file this method will be called. Also

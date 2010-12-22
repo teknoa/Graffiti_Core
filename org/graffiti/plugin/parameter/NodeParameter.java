@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: NodeParameter.java,v 1.4 2010/12/14 07:02:27 morla Exp $
+// $Id: NodeParameter.java,v 1.5 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -15,19 +15,19 @@ import org.graffiti.graph.Node;
 /**
  * This class contains a single <code>Node</code>.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class NodeParameter
 					extends AbstractSingleParameter {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this parameter. */
 	private Node value = null;
-
+	
 	private Graph graph = null;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	// /**
 	// * Constructs a new node parameter.
 	// *
@@ -38,7 +38,7 @@ public class NodeParameter
 	// {
 	// super(name, description);
 	// }
-
+	
 	/**
 	 * Constructs a new node parameter.
 	 * 
@@ -54,9 +54,9 @@ public class NodeParameter
 		value = initalNode;
 		this.graph = graph;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the <code>Node</code> contained in this <code>NodeParameter</code>.
 	 * 
@@ -65,11 +65,11 @@ public class NodeParameter
 	public Node getNode() {
 		return value;
 	}
-
+	
 	public Node[] getPossibleNodes() {
 		return graph.getNodes().toArray(new Node[] {});
 	}
-
+	
 	/**
 	 * Sets the value of the <code>AttributeParameter</code>.
 	 * 
@@ -80,7 +80,7 @@ public class NodeParameter
 	public void setValue(Object val) {
 		value = (Node) val;
 	}
-
+	
 	/**
 	 * Returns the value of this parameter.
 	 * 

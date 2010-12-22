@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: LabelAttribute.java,v 1.14 2010/12/14 07:02:26 morla Exp $
+// $Id: LabelAttribute.java,v 1.15 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -35,57 +35,57 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  * 
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 public abstract class LabelAttribute extends HashMapAttribute implements
 					GraphicAttributeConstants {
 	// ~ Instance fields
 	// ========================================================
-
+	
 	private int lastComponentHeight = -1;
-
+	
 	public void setLastComponentHeight(int height) {
 		lastComponentHeight = height;
 	}
-
+	
 	public int getLastComponentHeight() {
 		if (lastComponentHeight >= 0)
 			return lastComponentHeight;
 		else
 			return (new JLabel(getLabel())).getPreferredSize().height;
 	}
-
+	
 	private int lastComponentWidth = -1;
-
+	
 	public void setLastComponentWidth(int width) {
 		lastComponentWidth = width;
 	}
-
+	
 	public int getLastComponentWidth() {
 		if (lastComponentWidth >= 0)
 			return lastComponentWidth;
 		else
 			return (new JLabel(getLabel())).getPreferredSize().width;
 	}
-
+	
 	// private JLabel lastLabel = null;
-
+	
 	private static final int defaultSize = 12; // new
 	// JLabel().getFont().getSize();
 	private static final String defaultFont = getDefaultFont();
-
+	
 	public void setLastLabel(JLabel lastLabel) {
 		// this.lastLabel = lastLabel;
 	}
-
+	
 	private static final String defaultFontName = "Arial";
-
+	
 	private static String getDefaultFont() {
 		return defaultFontName;
 		// String name = "Arial"; // new JLabel().getFont().getFamily();
 		// return name;
 	}
-
+	
 	// ~ Constructors
 	// ===========================================================
 	public LabelAttribute() {
@@ -93,7 +93,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		ErrorMsg
 							.addErrorMessage("INTERNAL ERROR, Label Attribute Created, with no ID!");
 	}
-
+	
 	/**
 	 * Constructor for Label.
 	 * 
@@ -103,7 +103,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 	public LabelAttribute(String id) {
 		this(id, "");
 	}
-
+	
 	/**
 	 * Constructor for Label.
 	 * 
@@ -134,7 +134,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 							.getHexFromColor(java.awt.Color.BLACK)), false);
 		add(new StringAttribute("type", "text"), false);
 	}
-
+	
 	@Override
 	public void add(Attribute a, boolean inform)
 						throws AttributeExistsException, FieldAlreadySetException {
@@ -143,9 +143,9 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		} else
 			super.add(a, inform);
 	}
-
+	
 	HashMap<String, String> knownAttributeValues = new HashMap<String, String>();
-
+	
 	private void cacheSet(Attribute attribute, Object value) {
 		if (value == null)
 			attribute.setValue(value);
@@ -162,7 +162,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 				attribute.setValue(value);
 		}
 	}
-
+	
 	private void cacheSetS(StringAttribute stringAttribute, String sv) {
 		if (sv == null)
 			stringAttribute.setValue(sv);
@@ -175,7 +175,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 			stringAttribute.setValue(val);
 		}
 	}
-
+	
 	@Override
 	public void add(Attribute a) throws AttributeExistsException,
 						FieldAlreadySetException {
@@ -184,26 +184,26 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		} else
 			super.add(a);
 	}
-
+	
 	// ~ Methods
 	// ================================================================
-
+	
 	public void setAlignment(String a) {
 		cacheSetS((StringAttribute) attributes.get(ANCHOR), a);
 	}
-
+	
 	public String getAlignment() {
 		return ((StringAttribute) attributes.get(ANCHOR)).getString();
 	}
-
+	
 	public String getAlignmentText() {
 		return ((StringAttribute) attributes.get(ALIGNMENT)).getString();
 	}
-
+	
 	public void setFontName(String f) {
 		cacheSetS((StringAttribute) attributes.get(FONTNAME), f);
 	}
-
+	
 	public String getFontName() {
 		try {
 			return ((StringAttribute) attributes.get(FONTNAME)).getString();
@@ -211,11 +211,11 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 			return defaultFont;
 		}
 	}
-
+	
 	public void setFontStyle(String fs) {
 		cacheSetS((StringAttribute) attributes.get(FONTSTYLE), fs);
 	}
-
+	
 	public String getFontStyle() {
 		try {
 			return ((StringAttribute) attributes.get(FONTSTYLE)).getString();
@@ -223,7 +223,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 			return "plain";
 		}
 	}
-
+	
 	public int getFontStyleJava() {
 		int fontStyleInt = 0;
 		String fontStyle = getFontStyle();
@@ -233,11 +233,11 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 			fontStyleInt += Font.ITALIC;
 		return fontStyleInt;
 	}
-
+	
 	public void setFontSize(int fs) {
 		((IntegerAttribute) attributes.get(FONTSIZE)).setInteger(fs);
 	}
-
+	
 	public int getFontSize() {
 		try {
 			return ((IntegerAttribute) attributes.get(FONTSIZE)).getInteger();
@@ -245,7 +245,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 			return defaultSize;
 		}
 	}
-
+	
 	/**
 	 * Sets the 'label'-value.
 	 * 
@@ -258,7 +258,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		else
 			((StringAttribute) attributes.get(LABEL)).setString(l);
 	}
-
+	
 	/**
 	 * Returns the 'label'-value of the encapsulated label.
 	 * 
@@ -271,7 +271,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 			return null;
 		}
 	}
-
+	
 	/**
 	 * Set the 'textcolor'-value.
 	 * 
@@ -281,11 +281,11 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 	public void setTextcolor(String tc) {
 		cacheSetS((StringAttribute) attributes.get(TEXTCOLOR), tc);
 	}
-
+	
 	public void setTextcolor(Color c) {
 		cacheSetS((StringAttribute) attributes.get(TEXTCOLOR), ColorUtil.getHexFromColor(c));
 	}
-
+	
 	/**
 	 * Returns the 'textcolor'-value of the encapsulated label.
 	 * 
@@ -299,7 +299,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 			return Color.black;
 		}
 	}
-
+	
 	// public void wordWrap() {
 	// if (!(getAttributable() instanceof Node))
 	// return;
@@ -348,7 +348,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 	// }
 	// setLabel(result);
 	// }
-
+	
 	private String getLabel(boolean stripHTML) {
 		String result = getLabel();
 		if (stripHTML) {
@@ -356,12 +356,12 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		}
 		return result;
 	}
-
+	
 	public boolean getUseDropShadow() {
 		String s = getFontStyle().toUpperCase();
 		return s.contains("SHADOW");
 	}
-
+	
 	public LabelFrameSetting getLabelFrameSetting() {
 		String s = getFontStyle();
 		for (LabelFrameSetting lfs : LabelFrameSetting.values())
@@ -369,21 +369,21 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 				return lfs;
 		return LabelFrameSetting.NO_FRAME;
 	}
-
+	
 	public int getShadowOffX() {
 		if (!attributes.containsKey(GraphicAttributeConstants.SHADOWOFFSET))
 			add(new IntegerAttribute(GraphicAttributeConstants.SHADOWOFFSET, 1));
 		return ((IntegerAttribute) attributes
 							.get(GraphicAttributeConstants.SHADOWOFFSET)).getInteger();
 	}
-
+	
 	public int getShadowOffY() {
 		if (!attributes.containsKey(GraphicAttributeConstants.SHADOWOFFSET))
 			add(new IntegerAttribute(GraphicAttributeConstants.SHADOWOFFSET, 1));
 		return ((IntegerAttribute) attributes
 							.get(GraphicAttributeConstants.SHADOWOFFSET)).getInteger();
 	}
-
+	
 	public Color getShadowTextColor() {
 		if (!attributes.containsKey(GraphicAttributeConstants.SHADOWCOLOR)) {
 			Attribute newAtt = StringAttribute.getTypedStringAttribute(
@@ -397,7 +397,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		Color resultCol = colorAtt.getColor();
 		return resultCol;
 	}
-
+	
 	public void wordWrap() {
 		if (!(getAttributable() instanceof Node))
 			return;
@@ -406,18 +406,18 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 		int fontStyleInt = getFontStyleJava();;
 		int fontSize = getFontSize();
 		lastLabel.setFont(new Font(fontName, fontStyleInt, fontSize));
-
+		
 		FontMetrics fm = lastLabel.getFontMetrics(lastLabel.getFont());
 		int containerWidth = (int) AttributeHelper
 							.getSize((Node) getAttributable()).x;
-
+		
 		BreakIterator boundary = BreakIterator.getWordInstance();
-
+		
 		boundary.setText(getLabel(true));
-
+		
 		StringBuffer trial = new StringBuffer();
 		StringBuffer real = new StringBuffer("<html>");
-
+		
 		int start = boundary.first();
 		for (int end = boundary.next(); end != BreakIterator.DONE; start = end, end = boundary
 							.next()) {
@@ -433,7 +433,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 			}
 			real.append(word);
 		}
-
+		
 		String result = real.toString();
 		result = StringManipulationTools.stringReplace(result, "<html><br>", "<html>");
 		result = StringManipulationTools.stringReplace(result, "<br> <br>", " <br>");

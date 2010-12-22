@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: HelpContext.java,v 1.5 2010/12/14 07:02:27 morla Exp $
+// $Id: HelpContext.java,v 1.6 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.help;
 
@@ -17,25 +17,25 @@ import javax.swing.JComponent;
  * Represents the help context of an algorithm or a gui element in the editor.
  * 
  * @author flierl
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class HelpContext {
 	// ~ Static fields/initializers =============================================
-
+	
 	/** A reference to the default help context, of no help is available. */
 	// private static final HelpContext DEFAULT_HELP = new HelpContext(HelpContext.class.getName() +
 	// "DEFAULT_HELP");
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/** The java help ID of this help context. */
 	private String helpID;
-
+	
 	/** The URL of this help context. */
 	private URL helpURL;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new help context from the given URL.
 	 * 
@@ -44,7 +44,7 @@ public class HelpContext {
 	 */
 	public HelpContext(URL helpURL) {
 	}
-
+	
 	/**
 	 * Constructs a new help context from the given helpID.
 	 * 
@@ -54,7 +54,7 @@ public class HelpContext {
 	public HelpContext(String helpID) {
 		this.helpID = helpID;
 	}
-
+	
 	/**
 	 * Constructs a new help context from the given class.
 	 * 
@@ -63,9 +63,9 @@ public class HelpContext {
 	 */
 	public HelpContext(Class<?> clazz) {
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the java help id of this help context.
 	 * 
@@ -74,7 +74,7 @@ public class HelpContext {
 	public String getHelpID() {
 		return helpID;
 	}
-
+	
 	/**
 	 * Returns the url of this help context.
 	 * 
@@ -83,7 +83,7 @@ public class HelpContext {
 	public java.net.URL getHelpURL() {
 		return helpURL;
 	}
-
+	
 	/**
 	 * Returns a help context for the given gui component.
 	 * 
@@ -94,7 +94,7 @@ public class HelpContext {
 	public HelpContext findHelp(JComponent comp) {
 		return null; // TODO
 	}
-
+	
 	/**
 	 * Returns a human readable string of this help context. This method is for
 	 * debugging purposes only.

@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ByteAttribute.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: ByteAttribute.java,v 1.5 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -14,17 +14,17 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a byte
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class ByteAttribute
 					extends AbstractAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this attribute */
 	private byte value;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new instance of a <code>ByteAttribute</code>.
 	 * 
@@ -34,7 +34,7 @@ public class ByteAttribute
 	public ByteAttribute(String id) {
 		super(id);
 	}
-
+	
 	/**
 	 * Constructs a new instance of a <code>ByteAttribute</code> with the given
 	 * value.
@@ -48,7 +48,7 @@ public class ByteAttribute
 		super(id);
 		this.value = value;
 	}
-
+	
 	/**
 	 * Constructs a new instance of a <code>ByteAttribute</code> with the given
 	 * value.
@@ -62,9 +62,9 @@ public class ByteAttribute
 		super(id);
 		this.value = value.byteValue();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Set the value of this Object.
 	 * 
@@ -77,7 +77,7 @@ public class ByteAttribute
 		this.value = value;
 		callPostAttributeChanged(ae);
 	}
-
+	
 	/**
 	 * Returns the value of this object.
 	 * 
@@ -86,14 +86,14 @@ public class ByteAttribute
 	public byte getByte() {
 		return value;
 	}
-
+	
 	/**
 	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
 	 */
 	public void setDefaultValue() {
 		value = 0;
 	}
-
+	
 	/**
 	 * Returns the value of the attribute wrapped in an <code>Byte</code> object..
 	 * 
@@ -102,7 +102,7 @@ public class ByteAttribute
 	public Object getValue() {
 		return new Byte(value);
 	}
-
+	
 	/**
 	 * Returns a deep copy of this instance.
 	 * 
@@ -111,7 +111,7 @@ public class ByteAttribute
 	public Object copy() {
 		return new ByteAttribute(this.getId(), this.value);
 	}
-
+	
 	/**
 	 * Sets the value of the attribute. The <code>ListenerManager</code> is
 	 * informed by the method <code>setValue()</code>.
@@ -126,14 +126,14 @@ public class ByteAttribute
 	protected void doSetValue(Object o)
 						throws IllegalArgumentException {
 		assert o != null;
-
+		
 		try {
 			value = ((Byte) o).byteValue();
 		} catch (ClassCastException cce) {
 			throw new IllegalArgumentException("Invalid value type.", cce);
 		}
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.Displayable#toXMLString()
 	 */

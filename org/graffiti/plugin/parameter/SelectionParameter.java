@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: SelectionParameter.java,v 1.4 2010/12/14 07:02:27 morla Exp $
+// $Id: SelectionParameter.java,v 1.5 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -14,17 +14,17 @@ import org.graffiti.selection.Selection;
 /**
  * This class contains a single <code>Node</code>.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class SelectionParameter
 					extends AbstractSingleParameter {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this parameter. */
 	private Selection value = null;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new selection parameter.
 	 * 
@@ -36,7 +36,7 @@ public class SelectionParameter
 	public SelectionParameter(String name, String description) {
 		super(name, description);
 	}
-
+	
 	/**
 	 * Constructs a new selection parameter.
 	 * 
@@ -48,7 +48,7 @@ public class SelectionParameter
 		super(name, description);
 		setSelection(sel);
 	}
-
+	
 	/**
 	 * Constructs a new selection parameter.
 	 * 
@@ -60,9 +60,9 @@ public class SelectionParameter
 		super(name, description);
 		setSelection(sel);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the selection.
 	 * 
@@ -72,7 +72,7 @@ public class SelectionParameter
 	public void setSelection(Selection selection) {
 		this.value = selection;
 	}
-
+	
 	/**
 	 * Returns the selection encapsulated in this parameter.
 	 * 
@@ -81,7 +81,7 @@ public class SelectionParameter
 	public Selection getSelection() {
 		return this.value;
 	}
-
+	
 	/**
 	 * Sets the value of the <code>AttributeParameter</code>.
 	 * 
@@ -92,7 +92,7 @@ public class SelectionParameter
 	public void setValue(Object value) {
 		this.value = (Selection) value;
 	}
-
+	
 	/**
 	 * Returns the value of this parameter.
 	 * 

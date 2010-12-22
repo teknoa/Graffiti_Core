@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Graph.java,v 1.6 2010/12/14 07:02:25 morla Exp $
+// $Id: Graph.java,v 1.7 2010/12/22 13:05:33 klukas Exp $
 package org.graffiti.graph;
 
 import java.util.Collection;
@@ -50,28 +50,28 @@ import org.graffiti.event.ListenerManager;
  * </blockquote>
  * </p>
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @see Node
  * @see Edge
  * @see org.graffiti.attributes.Attributable
  */
 public interface Graph extends Attributable, DeepCopy {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the <code>AttributeTypesManager</code> of the <code>Graph</code>.
 	 * 
 	 * @return the <code>AttributeTypesManager</code> of the <code>Graph</code>.
 	 */
 	public AttributeTypesManager getAttTypesManager();
-
+	
 	/**
 	 * Indicates whether the <code>Graph</code> is directed. A <code>Graph</code> is directed if all the edges are directed.
 	 * 
 	 * @return <code>true</code> if the <code>Graph</code> is directed <code>false</code> otherwise.
 	 */
 	public boolean isDirected();
-
+	
 	/**
 	 * Indicates whether the <code>Graph</code> has been modified. A call to <code>setModified</code> can change this property to false e.g. after the
 	 * graph has been saved to disc. Changes to attributes and delete/add
@@ -80,7 +80,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 * @return True, if the graph has been modifed, False if not.
 	 */
 	public boolean isModified();
-
+	
 	/**
 	 * Should be set to False after saving changes and to True after making
 	 * changes to the Graph. The add/delete nodes and edges commands as well as
@@ -90,7 +90,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *           Indicates the new status of this field.
 	 */
 	public void setModified(boolean modified);
-
+	
 	/**
 	 * When passing a true value, all undirected edges in the graph will be set
 	 * to be directed. V.v. for a false value.
@@ -98,7 +98,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 * @param directed
 	 */
 	public void setDirected(boolean directed);
-
+	
 	/**
 	 * When passing a true value, all undirected edges in the graph will be set
 	 * to be directed. V.v. for a false value. A true second parameter indicates
@@ -109,7 +109,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 * @param adjustArrows
 	 */
 	public void setDirected(boolean directed, boolean adjustArrows);
-
+	
 	/**
 	 * Returns a <code>java.util.Collection</code> containing all the edges of
 	 * the current <code>Graph</code>.
@@ -118,7 +118,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *         the current <code>Graph</code>.
 	 */
 	public Collection<Edge> getEdges();
-
+	
 	/**
 	 * Returns a collection containing all the edges between n1 and n2. There can
 	 * be more than one <code>Edge</code> between two nodes. The edges returned
@@ -135,14 +135,14 @@ public interface Graph extends Attributable, DeepCopy {
 	 *               if one of the nodes is not contained in the graph.
 	 */
 	public Collection<Edge> getEdges(Node n1, Node n2);
-
+	
 	/**
 	 * Returns an iterator over the edges of the <code>Graph</code>.
 	 * 
 	 * @return an iterator over the edges of the <code>Graph</code>.
 	 */
 	public Iterator<Edge> getEdgesIterator();
-
+	
 	/**
 	 * Returns <code>true</code> if the <code>Graph</code> is empty. E.g. the <code>Graph</code> is equal to a <code>Graph</code> which has been
 	 * cleared.
@@ -150,63 +150,63 @@ public interface Graph extends Attributable, DeepCopy {
 	 * @return <code>true</code> if the <code>Graph</code> is empty, <code>false</code> otherwise.
 	 */
 	public boolean isEmpty();
-
+	
 	/**
 	 * Returns all nodes and all edges contained in this graph.
 	 * 
 	 * @return Collection
 	 */
 	public Collection<GraphElement> getGraphElements();
-
+	
 	/**
 	 * Returns a <code>java.util.List</code> containing all the nodes of the <code>Graph</code>.
 	 * 
 	 * @return a <code>java.util.List</code> containing all the nodes of the <code>Graph</code>.
 	 */
 	public List<Node> getNodes();
-
+	
 	/**
 	 * Returns an iterator over the nodes of the <code>Graph</code>. If the <code>Graph</code> is empty an empty iterator will be returned.
 	 * 
 	 * @return an interator containing the nodes of the <code>Graph</code>.
 	 */
 	public Iterator<Node> getNodesIterator();
-
+	
 	/**
 	 * Returns the number of directed edges of the <code>Graph</code>.
 	 * 
 	 * @return the number of directed edges of the <code>Graph</code>.
 	 */
 	public int getNumberOfDirectedEdges();
-
+	
 	/**
 	 * Returns the number of edges of the <code>Graph</code>.
 	 * 
 	 * @return the number of edges of the <code>Graph</code>.
 	 */
 	public int getNumberOfEdges();
-
+	
 	/**
 	 * Returns the number of nodes in the <code>Graph</code>.
 	 * 
 	 * @return the number of nodes in the <code>Graph</code>.
 	 */
 	public int getNumberOfNodes();
-
+	
 	/**
 	 * Returns the number of undirected edges in the <code>Graph</code>.
 	 * 
 	 * @return the number of undirected edges in the <code>Graph</code>.
 	 */
 	public int getNumberOfUndirectedEdges();
-
+	
 	/**
 	 * Indicates whether the <code>Graph</code> is undirected. A <code>Graph</code> is undirected if all the edges are undirected.
 	 * 
 	 * @return <code>true</code> if the <code>Graph</code> is undirected, <code>false</code> otherwise.
 	 */
 	public boolean isUndirected();
-
+	
 	/**
 	 * Adds the given attribute consumer to the list of attribute consumers.
 	 * 
@@ -215,7 +215,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 */
 	public void addAttributeConsumer(AttributeConsumer attConsumer)
 						throws UnificationException;
-
+	
 	/**
 	 * Adds a new <code>Edge</code> to the current <code>Graph</code>. Informs
 	 * the ListenerManager about the new <code>Edge</code>.
@@ -232,7 +232,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 */
 	public Edge addEdge(Node source, Node target, boolean directed)
 						throws GraphElementNotFoundException;
-
+	
 	/**
 	 * Adds a new <code>Edge</code> to the current <code>Graph</code>. Informs
 	 * the ListenerManager about the new <code>Edge</code>.
@@ -252,7 +252,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 */
 	public Edge addEdge(Node source, Node target, boolean directed,
 						CollectionAttribute col) throws GraphElementNotFoundException;
-
+	
 	/**
 	 * Adds a copy of the specified <code>Edge</code> to the <code>Graph</code> as a new <code>Edge</code> between the specified source and target
 	 * <code>Node</code>. Informs the ListenerManager about the newly added <code>Edge</code>. Also informs the ListenerManager about the copy of the
@@ -267,7 +267,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 * @return DOCUMENT ME!
 	 */
 	public Edge addEdgeCopy(Edge edge, Node source, Node target);
-
+	
 	/**
 	 * Adds a <Code>Graph</Code> g to the current <code>Graph</code>. <Code>Graph</Code> g will be copied and then all its nodes and edges will
 	 * be added to the current <code>Graph</code>. Like this g will not be
@@ -277,7 +277,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *           the <Code>Graph</Code> to be added.
 	 */
 	public Collection<GraphElement> addGraph(Graph g);
-
+	
 	/**
 	 * Adds a new <code>Node</code> to the <code>Graph</code>. Informs the
 	 * ListenerManager about the new <code>Node</code>.
@@ -285,7 +285,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 * @return the new <code>Node</code>.
 	 */
 	public Node addNode();
-
+	
 	/**
 	 * Adds a new node to the graph. Informs the ListenerManager about the new
 	 * node.
@@ -296,7 +296,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 * @return the new node.
 	 */
 	public Node addNode(CollectionAttribute col);
-
+	
 	/**
 	 * Adds a copy of the specified <code>Node</code> to the <code>Graph</code>.
 	 * Informs the ListenerManager about the newly added <code>Node</code> in the
@@ -308,13 +308,13 @@ public interface Graph extends Attributable, DeepCopy {
 	 * @return DOCUMENT ME!
 	 */
 	public Node addNodeCopy(Node node);
-
+	
 	/**
 	 * Deletes the current <code>Graph</code> by resetting all its attributes.
 	 * The <code>Graph</code> is then equal to a newly generated <code>Graph</code>.
 	 */
 	public void clear();
-
+	
 	/**
 	 * Returns <code>true</code>, if the <code>Graph</code> contains the
 	 * specified <code>Edge</code>, <code>false</code> otherwise.
@@ -325,7 +325,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *         specified <code>Edge</code>, <code>false</code> otherwise.
 	 */
 	public boolean containsEdge(Edge e);
-
+	
 	/**
 	 * Returns <code>true</code>, if the <code>Graph</code> contains the
 	 * specified <code>Node</code>, <code>false</code> otherwise.
@@ -335,7 +335,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 * @return <code>true</code>, if the <code>Graph</code> contains the <code>Node</code> n, <code>false</code> otherwise.
 	 */
 	public boolean containsNode(Node n);
-
+	
 	/**
 	 * Deletes <code>Edge</code> e from the current <code>Graph</code>. Informs
 	 * the ListenerManager about the deletion.
@@ -346,7 +346,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *               if the <code>Edge</code> to delete cannot be found in the <code>Graph</code>.
 	 */
 	public void deleteEdge(Edge e) throws GraphElementNotFoundException;
-
+	
 	/**
 	 * Deletes the <code>Node</code> n. All in- and out-going edges will be
 	 * deleted. Informs the ListenerManager about the deletion of the <code>Node</code> and the concerned edges.
@@ -357,7 +357,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *               if the <code>Node</code> to delete cannot be found in the <code>Graph</code>.
 	 */
 	public void deleteNode(Node n) throws GraphElementNotFoundException;
-
+	
 	/**
 	 * Returns <code>true</code>, if the given attribute consumer was in the list
 	 * of attribute consumers and could be removed.
@@ -366,9 +366,9 @@ public interface Graph extends Attributable, DeepCopy {
 	 *         of attribute consumers and could be removed.
 	 */
 	public boolean removeAttributeConsumer(AttributeConsumer attConsumer);
-
+	
 	public void deleteAll(Collection<GraphElement> graphelements);
-
+	
 	/**
 	 * The name can be retrieved with the method <code>getName</code>.
 	 * 
@@ -377,7 +377,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *           or for the developer.
 	 */
 	public void setName(String name);
-
+	
 	/**
 	 * @return A ID that can be used for identifying the graph - for the user or
 	 *         for the developer. The name can be set with the method <code>setName</code>. Calls <code>getName(false)</code> to return
@@ -385,20 +385,20 @@ public interface Graph extends Attributable, DeepCopy {
 	 *         file path.
 	 */
 	public String getName();
-
+	
 	/**
 	 * @return A ID that can be used for identifying the graph - for the user or
 	 *         for the developer. The name can be set with the method <code>setName</code>.
 	 */
 	public String getName(boolean fullName);
-
+	
 	/**
 	 * This method should number (<code>setId</code> all nodes globally unique.
 	 */
 	public void numberGraphElements();
-
+	
 	public void checkMaxGraphElementId(long id);
-
+	
 	public void setListenerManager(ListenerManager object);
 }
 

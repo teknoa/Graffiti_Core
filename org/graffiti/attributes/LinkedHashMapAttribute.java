@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: LinkedHashMapAttribute.java,v 1.7 2010/12/14 07:02:25 morla Exp $
+// $Id: LinkedHashMapAttribute.java,v 1.8 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -19,13 +19,13 @@ import org.graffiti.plugin.XMLHelper;
 /**
  * DOCUMENT ME!
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class LinkedHashMapAttribute
 					extends AbstractCollectionAttribute
 					implements SortedCollectionAttribute {
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Construct a new instance of a <code>LinkedHashMapAttribute</code>. The
 	 * internal LinkedHashMap is initialized empty.
@@ -37,9 +37,9 @@ public class LinkedHashMapAttribute
 		super(id);
 		this.attributes = new LinkedHashMap<String, Attribute>();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt> For each entry in the map, pre- and post-
 	 * AttributeAdded events are generated since method <code>add(Attribute
@@ -51,9 +51,9 @@ public class LinkedHashMapAttribute
 	public void setCollection(Map<String, Attribute> attrs) {
 		assert attrs != null;
 		attributes = new LinkedHashMap<String, Attribute>();
-
+		
 		Iterator<Attribute> it = attrs.values().iterator();
-
+		
 		if (getAttributable() == null) {
 			while (it.hasNext()) {
 				Attribute attr = (Attribute) it.next();
@@ -66,7 +66,7 @@ public class LinkedHashMapAttribute
 			}
 		}
 	}
-
+	
 	/**
 	 * Returns a cloned map (shallow copy of map: i.e. <code>this.map.equals(getCollection())</code><b>but
 	 * not</b><code>this.map == getCollection()</code>) between attributes'
@@ -78,11 +78,11 @@ public class LinkedHashMapAttribute
 	public Map<String, Attribute> getCollection() {
 		return (LinkedHashMap) ((LinkedHashMap) attributes).clone();
 	}
-
+	
 	public LinkedHashMap<String, Attribute> getCollectionNoClone() {
 		return (LinkedHashMap<String, Attribute>) attributes;
 	}
-
+	
 	/**
 	 * Already done in constructor for this attribute type.
 	 * 
@@ -90,7 +90,7 @@ public class LinkedHashMapAttribute
 	 */
 	public void setDefaultValue() {
 	}
-
+	
 	/**
 	 * Copies this <code>CollectionAttribute</code> and returns the copy. All
 	 * sub-attributes will be copied, too, i.e. a deep-copy is returned.
@@ -100,7 +100,7 @@ public class LinkedHashMapAttribute
 	public Object copy() {
 		LinkedHashMapAttribute copiedAttributes =
 							new LinkedHashMapAttribute(this.getId());
-
+		
 		// M.S.: w�re es hier nicht sinnvoller �ber attributes.values() zu
 		// iterieren? getId() ist wahrscheinlich schneller als get(Id)
 		// bzw. hat eine kleinerer Konstante...
@@ -111,10 +111,10 @@ public class LinkedHashMapAttribute
 			copiedAttribute.setParent(this);
 			copiedAttributes.attributes.put(attrId, copiedAttribute);
 		}
-
+		
 		return copiedAttributes;
 	}
-
+	
 	/**
 	 * Sets the value of the attribute by calling method <code>setCollection(Map attrs)</code>. The "value" is the Collection of
 	 * attributes. For each entry in the map, pre- and post- AttributeAdded
@@ -131,9 +131,9 @@ public class LinkedHashMapAttribute
 	protected void doSetValue(Object o)
 						throws IllegalArgumentException {
 		assert o != null;
-
+		
 		HashMap attrs;
-
+		
 		try {
 			attrs = (LinkedHashMap) o;
 		} catch (ClassCastException cce) {
@@ -144,10 +144,10 @@ public class LinkedHashMapAttribute
 									"((Linked)HashMap expected).");
 			}
 		}
-
+		
 		setCollection(attrs);
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.Displayable#toXMLString()
 	 */
@@ -163,10 +163,10 @@ public class LinkedHashMapAttribute
 		valString.append(XMLHelper.spc(4) + "</subAttributes>" +
 							XMLHelper.getDelimiter() + XMLHelper.spc(4) +
 							"<sorted>true</sorted>");
-
+		
 		return getStandardXML(valString.toString());
 	}
-
+	
 	public int size() {
 		return attributes.size();
 	}

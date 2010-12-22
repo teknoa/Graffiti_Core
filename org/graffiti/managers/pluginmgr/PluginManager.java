@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: PluginManager.java,v 1.8 2010/12/14 07:02:25 morla Exp $
+// $Id: PluginManager.java,v 1.9 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -20,7 +20,7 @@ import org.graffiti.util.ProgressViewer;
  */
 public interface PluginManager {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns <code>true</code>, if the plugin with the given name is in the
 	 * list of currently installed plugins.
@@ -28,7 +28,7 @@ public interface PluginManager {
 	 * @return DOCUMENT ME!
 	 */
 	public boolean isInstalled(String name);
-
+	
 	/**
 	 * Sets the <code>loadOnStartup</code> flag of the given object, to the
 	 * given value.
@@ -40,14 +40,14 @@ public interface PluginManager {
 	 *           at startup.
 	 */
 	public void setLoadOnStartup(String name, Boolean loadOnStartup);
-
+	
 	/**
 	 * Returns the current list of plugin entries.
 	 * 
 	 * @return a <code>Collection</code> containing all the plugin entries.
 	 */
 	public Collection<PluginEntry> getPluginEntries();
-
+	
 	/**
 	 * Returns the plugin instance of the given plugin name.
 	 * 
@@ -56,7 +56,7 @@ public interface PluginManager {
 	 * @return the instance of the plugin of the given name.
 	 */
 	public GenericPlugin getPluginInstance(String name);
-
+	
 	/**
 	 * Adds the given plugin manager listener to the list of listeners.
 	 * 
@@ -64,7 +64,7 @@ public interface PluginManager {
 	 *           the new listener to add to the list.
 	 */
 	public void addPluginManagerListener(PluginManagerListener listener);
-
+	
 	/**
 	 * Returns a new instance of the plugin &quot;main&quot; class with the
 	 * given plugin name.
@@ -78,7 +78,7 @@ public interface PluginManager {
 	 */
 	public GenericPlugin createInstance(URL pluginLocation)
 						throws PluginManagerException;
-
+	
 	/**
 	 * Loads the plugin from the given location. If several plugins should be
 	 * loaded simultaniously, use <code>loadPlugins</code> instead, since
@@ -96,7 +96,7 @@ public interface PluginManager {
 	public void loadPlugin(PluginDescription desc, URL pluginLocation,
 						Boolean loadOnStartup)
 						throws PluginManagerException;
-
+	
 	/**
 	 * Loads the plugins described by the given entries.
 	 * 
@@ -105,7 +105,7 @@ public interface PluginManager {
 	 */
 	public void loadPlugins(PluginEntry[] plugins)
 						throws PluginManagerException;
-
+	
 	/**
 	 * Loads the plugins which should be loaded on startup.
 	 * 
@@ -115,7 +115,7 @@ public interface PluginManager {
 	 */
 	public void loadStartupPlugins()
 						throws PluginManagerException;
-
+	
 	/**
 	 * Loads the plugins which should be loaded on startup. The progress made
 	 * is display in progressViewer.
@@ -129,7 +129,7 @@ public interface PluginManager {
 	 */
 	public void loadStartupPlugins(ProgressViewer progressViewer)
 						throws PluginManagerException;
-
+	
 	/**
 	 * Removes the given plugin manager listener from the list of listeners.
 	 * 
@@ -137,7 +137,7 @@ public interface PluginManager {
 	 *           the listener to remove from the list of listeners.
 	 */
 	public void removePluginManagerListener(PluginManagerListener listener);
-
+	
 	/**
 	 * Saves the plugin manager's prefs.
 	 * 
@@ -147,7 +147,7 @@ public interface PluginManager {
 	 */
 	public void savePrefs()
 						throws PluginManagerException;
-
+	
 	public Collection<RSSfeedDefinition> getPluginFeeds();
 }
 

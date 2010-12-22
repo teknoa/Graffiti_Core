@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: NodeGraphicAttribute.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: NodeGraphicAttribute.java,v 1.6 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -26,12 +26,12 @@ import org.graffiti.attributes.StringAttribute;
  * Defines all grahic attributes of a node
  * 
  * @author breu
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class NodeGraphicAttribute
 					extends GraphElementGraphicAttribute {
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor that sets the id to the given value, and initializes the
 	 * other attributes with default values.
@@ -46,7 +46,7 @@ public class NodeGraphicAttribute
 		add(new PortsAttribute(PORTS), false);
 		add(new NodeShapeAttribute(SHAPE, "org.graffiti.plugins.views.defaults.RectangleNodeShape"), false);
 	}
-
+	
 	@Override
 	public void add(Attribute a, boolean inform) throws AttributeExistsException, FieldAlreadySetException {
 		if (attributes.containsKey(a.getId())) {
@@ -54,7 +54,7 @@ public class NodeGraphicAttribute
 		} else
 			super.add(a, inform);
 	}
-
+	
 	@Override
 	public void add(Attribute a) throws AttributeExistsException, FieldAlreadySetException {
 		if (attributes.containsKey(a.getId())) {
@@ -62,7 +62,7 @@ public class NodeGraphicAttribute
 		} else
 			super.add(a);
 	}
-
+	
 	/**
 	 * Constructor for NodeGraphicAttribute.
 	 * 
@@ -83,7 +83,7 @@ public class NodeGraphicAttribute
 		add(new PortsAttribute(PORTS, p.getIngoing(), p.getOutgoing(), p.getCommon()), false);
 		add(new NodeShapeAttribute(SHAPE, "org.graffiti.plugins.views.defaults.RectangleNodeShape"), false);
 	}
-
+	
 	/**
 	 * Constructor for NodeGraphicAttribute.
 	 * 
@@ -103,12 +103,12 @@ public class NodeGraphicAttribute
 		add(new PortsAttribute(PORTS, p.getIngoing(), p.getOutgoing(), p.getCommon()), false);
 		add(new NodeShapeAttribute(SHAPE, "org.graffiti.plugins.views.defaults.RectangleNodeShape"), false);
 	}
-
+	
 	public NodeGraphicAttribute(Point2D position, Dimension size)
 						throws IllegalIdException {
 		this(position, size, new PortsAttribute(PORTS));
 	}
-
+	
 	/**
 	 * Constructor for NodeGraphicAttribute.
 	 * 
@@ -133,7 +133,7 @@ public class NodeGraphicAttribute
 		add(new NodeShapeAttribute(SHAPE, "org.graffiti.plugins.views.defaults.RectangleNodeShape"), false);
 		add(new PortsAttribute(PORTS, p.getIngoing(), p.getOutgoing(), p.getCommon()), false);
 	}
-
+	
 	/**
 	 * Constructor for NodeGraphicAttribute.
 	 * 
@@ -147,9 +147,9 @@ public class NodeGraphicAttribute
 		add(new PortsAttribute(PORTS), false);
 		add(new NodeShapeAttribute(SHAPE, "org.graffiti.plugins.views.defaults.RectangleNodeShape"), false);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>. The known graphic attributes are set,
 	 * additional values are simply added (that means that if there exists
@@ -172,7 +172,7 @@ public class NodeGraphicAttribute
 							attrs.keySet().contains(LINEMODE)) {
 			for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
 				String attrId = (String) it.next();
-
+				
 				if (attrId.equals(COORDINATE)) {
 					setCoordinate((CoordinateAttribute) attrs.get(COORDINATE));
 				} else
@@ -208,7 +208,7 @@ public class NodeGraphicAttribute
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * Sets the 'coordinate'-value.
 	 * 
@@ -219,7 +219,7 @@ public class NodeGraphicAttribute
 		remove(COORDINATE);
 		add(c, false);
 	}
-
+	
 	/**
 	 * Returns the 'coordinate'-value of the encapsulated node.
 	 * 
@@ -228,7 +228,7 @@ public class NodeGraphicAttribute
 	public CoordinateAttribute getCoordinate() {
 		return (CoordinateAttribute) attributes.get(COORDINATE);
 	}
-
+	
 	/**
 	 * Sets the 'dimension'-value.
 	 * 
@@ -239,7 +239,7 @@ public class NodeGraphicAttribute
 		remove(DIMENSION);
 		add(d);
 	}
-
+	
 	/**
 	 * Returns the 'dimension'-value of the encapsulated node.
 	 * 
@@ -248,7 +248,7 @@ public class NodeGraphicAttribute
 	public DimensionAttribute getDimension() {
 		return (DimensionAttribute) attributes.get(DIMENSION);
 	}
-
+	
 	/**
 	 * Sets the 'ports'-value.
 	 * 
@@ -259,7 +259,7 @@ public class NodeGraphicAttribute
 		remove(PORTS);
 		add(p);
 	}
-
+	
 	/**
 	 * Returns the 'ports'-value of the encapsulated node.
 	 * 
@@ -290,7 +290,7 @@ public class NodeGraphicAttribute
 	// }
 	// return copiedAttribute;
 	// }
-
+	
 }
 
 // ------------------------------------------------------------------------------

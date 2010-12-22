@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: HashMapAttribute.java,v 1.13 2010/12/14 07:02:25 morla Exp $
+// $Id: HashMapAttribute.java,v 1.14 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -26,7 +26,7 @@ import org.ErrorMsg;
  * 'Color'-CollectionAttribute. The subattributes 'red', 'green' and 'blue'
  * are not mapped in this Attribute!
  * 
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  * @see CollectionAttribute
  * @see CompositeAttribute
  */
@@ -34,7 +34,7 @@ public class HashMapAttribute
 					extends AbstractCollectionAttribute
 					implements CollectionAttribute, Comparable<Object> {
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Construct a new instance of a <code>HashMapAttribute</code>. The
 	 * internal HashMap is initialized empty.
@@ -46,14 +46,14 @@ public class HashMapAttribute
 		super(id);
 		this.attributes = new TreeMap<String, Attribute>();
 	}
-
+	
 	public HashMapAttribute() {
 		super("undefined id");
 		this.attributes = new TreeMap<String, Attribute>();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt> For each entry in the map, pre- and post-
 	 * AttributeAdded events are generated since method <code>add(Attribute
@@ -65,9 +65,9 @@ public class HashMapAttribute
 	public void setCollection(Map<String, Attribute> attrs) {
 		assert attrs != null;
 		attributes = new TreeMap<String, Attribute>();
-
+		
 		Iterator<Attribute> it = attrs.values().iterator();
-
+		
 		if (getAttributable() == null) {
 			while (it.hasNext()) {
 				Attribute attr = (Attribute) it.next();
@@ -84,7 +84,7 @@ public class HashMapAttribute
 			}
 		}
 	}
-
+	
 	/**
 	 * Returns a cloned map (shallow copy of map: i.e. <code>this.map.equals(getCollection())</code><b>but
 	 * not</b><code>this.map == getCollection()</code>) between attributes'
@@ -95,7 +95,7 @@ public class HashMapAttribute
 	public Map<String, Attribute> getCollection() {
 		return attributes;
 	}
-
+	
 	/**
 	 * Already done in constructor for this attribute type.
 	 * 
@@ -105,7 +105,7 @@ public class HashMapAttribute
 		if (attributes == null)
 			this.attributes = new TreeMap<String, Attribute>();
 	}
-
+	
 	/**
 	 * Copies this <code>CollectionAttribute</code> and returns the copy. All
 	 * sub-attributes will be copied, too, i.e. a deep-copy is returned.
@@ -140,7 +140,7 @@ public class HashMapAttribute
 			}
 		}
 	}
-
+	
 	/**
 	 * Sets the value of the attribute by calling method <code>setCollection(Map attrs)</code>. The "value" is the Collection of
 	 * attributes. For each entry in the map, pre- and post- AttributeAdded
@@ -157,9 +157,9 @@ public class HashMapAttribute
 	protected void doSetValue(Object o)
 						throws IllegalArgumentException {
 		assert o != null;
-
+		
 		Map<String, Attribute> attrs;
-
+		
 		try {
 			attrs = (Map<String, Attribute>) o;
 			setCollection(attrs);
@@ -168,14 +168,14 @@ public class HashMapAttribute
 								"(Collection's value: HashMap - expected): " + cce.getMessage());
 		}
 	}
-
+	
 	public int compareTo(Object o) {
 		if (o instanceof Attribute) {
 			return idd.compareTo(((Attribute) o).getId());
 		}
 		return 0;
 	}
-
+	
 	public int size() {
 		return attributes.size();
 	}

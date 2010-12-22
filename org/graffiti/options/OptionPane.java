@@ -11,18 +11,18 @@ import javax.swing.JComponent;
  * </p>
  * 
  * @author flierl
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public interface OptionPane {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the component, that should be displayed for this option pane.
 	 * 
 	 * @return DOCUMENT ME!
 	 */
 	JComponent getOptionDialogComponent();
-
+	
 	/**
 	 * Returns the internal name of this option pane. The option pane's label
 	 * is set to the value of the property <code>options.<i>name</i>.label</code>.
@@ -30,17 +30,17 @@ public interface OptionPane {
 	 * @return DOCUMENT ME!
 	 */
 	String getName();
-
+	
 	String getCategory();
-
+	
 	String getOptionName();
-
+	
 	/**
 	 * This method is called every time this option pane is displayed. The <code>AbstractOptionPane</code> class uses this to create the option
 	 * pane's GUI only when needed.
 	 */
 	void init(JComponent options);
-
+	
 	/**
 	 * Called when the options dialog's "ok" button is clicked. This should
 	 * save any properties being edited in this option pane.

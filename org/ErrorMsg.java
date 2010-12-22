@@ -24,7 +24,7 @@ public class ErrorMsg implements HelperClass {
 	private static LinkedList<String> errorMessages = new LinkedList<String>();
 	private static LinkedList<String> errorMessagesShort = new LinkedList<String>();
 	private static String statusMsg = null;
-
+	
 	public static DecimalFormat getDecimalFormat(String pattern) {
 		pattern = StringManipulationTools.stringReplace(pattern, ",", "");
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
@@ -32,7 +32,7 @@ public class ErrorMsg implements HelperClass {
 		df.applyPattern(pattern);
 		return df;
 	}
-
+	
 	/**
 	 * Adds a errorMessage to a global list. The error messages can be retrieved
 	 * with <code>getErrorMessages</code> and cleared with <code>clearErrorMessages</code>.
@@ -86,13 +86,13 @@ public class ErrorMsg implements HelperClass {
 			}
 		}
 	}
-
+	
 	public synchronized static void setStatusMessage(String statusMsg) {
 		synchronized (errorMessages) {
 			ErrorMsg.statusMsg = statusMsg;
 		}
 	}
-
+	
 	/**
 	 * Removes the current error messages. E.g. after showing them to the user.
 	 */
@@ -105,7 +105,7 @@ public class ErrorMsg implements HelperClass {
 			errorMessagesShort.clear();
 		}
 	}
-
+	
 	/**
 	 * Returns pending error messages that were not shown to the user immediatly.
 	 * 
@@ -116,7 +116,7 @@ public class ErrorMsg implements HelperClass {
 			int statusAvail = 0;
 			if (statusMsg != null && errorMessages.size() > 0)
 				statusAvail = 1;
-
+			
 			String[] result = new String[errorMessages.size() + statusAvail];
 			if (statusMsg != null && errorMessages.size() > 0)
 				result[0] = "Last Status: " + statusMsg;
@@ -127,7 +127,7 @@ public class ErrorMsg implements HelperClass {
 			return result;
 		}
 	}
-
+	
 	public synchronized static String[] getErrorMessagesShort() {
 		synchronized (errorMessagesShort) {
 			String[] result = new String[errorMessagesShort.size()];
@@ -148,7 +148,7 @@ public class ErrorMsg implements HelperClass {
 			return result;
 		}
 	}
-
+	
 	/**
 	 * @return
 	 */
@@ -161,24 +161,24 @@ public class ErrorMsg implements HelperClass {
 				res += "<" + errorTag + ">" + StringManipulationTools.UnicodeToHtml(errmsg[i]) + "</" + errorTag + ">";
 		return "<errormessages>" + res + "</errormessages>";
 	}
-
+	
 	public static int getErrorMsgCount() {
 		return errorMessages.size();
 	}
-
+	
 	public static String getLastStatusMessage() {
 		return statusMsg;
 	}
-
+	
 	private static ApplicationStatus apploadingCompleted = ApplicationStatus.INITIALIZATION;
-
+	
 	private static Collection<Runnable> finishedListeners = new ArrayList<Runnable>();
 	static Collection<Runnable> finishedAddonLoadingListeners = new ArrayList<Runnable>();
-
+	
 	public static ApplicationStatus getAppLoadingStatus() {
 		return apploadingCompleted;
 	}
-
+	
 	public static void setAppLoadingCompleted(ApplicationStatus status) {
 		apploadingCompleted = status;
 		if (apploadingCompleted == ApplicationStatus.PROGRAM_LOADING_FINISHED) {
@@ -212,7 +212,7 @@ public class ErrorMsg implements HelperClass {
 			});
 		}
 	}
-
+	
 	public static boolean areApploadingAndFinishActionsCompleted() {
 		if (getAppLoadingStatus() == ApplicationStatus.INITIALIZATION)
 			return false;
@@ -222,7 +222,7 @@ public class ErrorMsg implements HelperClass {
 		}
 		return result;
 	}
-
+	
 	public static void addOnAppLoadingFinishedAction(Runnable actionListener) {
 		if (getAppLoadingStatus() != ApplicationStatus.INITIALIZATION) {
 			SwingUtilities.invokeLater(actionListener);
@@ -232,7 +232,7 @@ public class ErrorMsg implements HelperClass {
 			}
 		}
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public static Object findChildComponent(Component c, Class searchClass) {
 		if (c == null)
@@ -255,7 +255,7 @@ public class ErrorMsg implements HelperClass {
 			}
 		return null;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public static void findChildComponents(Component c, Class searchClass, ArrayList<Object> result) {
 		if (c == null)
@@ -277,7 +277,7 @@ public class ErrorMsg implements HelperClass {
 				findChildComponents(jj, searchClass, result);
 			}
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public static Object findParentComponent(Component c, Class searchClass) {
 		if (c == null)
@@ -294,17 +294,17 @@ public class ErrorMsg implements HelperClass {
 		}
 		return findParentComponent(c.getParent(), searchClass);
 	}
-
+	
 	public static void addErrorMessage(Exception e) {
 		addErrorMessage(e.getLocalizedMessage());
 		e.printStackTrace();
 	}
-
+	
 	public static void addOnAddonLoadingFinishedAction(Runnable runnable) {
 		if (getAppLoadingStatus() == ApplicationStatus.ADDONS_LOADED)
 			runnable.run();
 		else
 			finishedAddonLoadingListeners.add(runnable);
 	}
-
+	
 }

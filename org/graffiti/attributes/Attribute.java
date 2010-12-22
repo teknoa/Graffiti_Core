@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Attribute.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: Attribute.java,v 1.5 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -16,41 +16,41 @@ import org.graffiti.plugin.Displayable;
  * Interfaces an object, which contains an <code>id</code> and a value. An <code>Attribute</code> may contain other <code>Attribute</code> instances
  * and thereby form a complete attribute hierarchy.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @see AttributeTypesManager
  */
 public interface Attribute
 					extends Displayable,
 					DeepCopy {
 	// ~ Static fields/initializers =============================================
-
+	
 	/** The path seperator for the attributes hierarchy. */
 	public static final String SEPARATOR = ".";
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the attributable the <code>Attribute</code> belongs to.
 	 * 
 	 * @return the <code>Attribute</code>'s attributable.
 	 */
 	public Attributable getAttributable();
-
+	
 	/**
 	 * The attribute's value is set so that its <code>getValue()</code> method
 	 * will not return <code>null</code>.
 	 */
 	public void setDefaultValue();
-
+	
 	/**
 	 * Returns the <code>Attribute</code>'s identifier.
 	 * 
 	 * @return the <code>Attribute</code>'s identifier.
 	 */
 	public String getId();
-
+	
 	public void setId(String id);
-
+	
 	/**
 	 * Sets the <code>Attribute</code>'s parent. <b>Implementation Note:</b>
 	 * This function should only work if the <code>Attribute</code>'s parent
@@ -63,7 +63,7 @@ public interface Attribute
 	 */
 	public void setParent(CollectionAttribute parent)
 						throws FieldAlreadySetException;
-
+	
 	/**
 	 * Returns the <code>Attribute</code>'s parent. If <code>this</code> is
 	 * already the root <code>Attribute</code>, <code>null</code> is returned.
@@ -71,14 +71,14 @@ public interface Attribute
 	 * @return the <code>Attribute</code>'s parent.
 	 */
 	public CollectionAttribute getParent();
-
+	
 	/**
 	 * Returns the <code>Attribute</code>'s path.
 	 * 
 	 * @return the <code>Attribute</code>'s path.
 	 */
 	public String getPath();
-
+	
 	/**
 	 * Sets the value of this <code>Attribute</code> to the given value. If the
 	 * value is set via <code>att.setValue(x)</code> and then retrieved via <code>y = att.getValue()</code> it is only guaranteed that x.equals(y)
@@ -93,7 +93,7 @@ public interface Attribute
 	 */
 	public void setValue(Object v)
 						throws IllegalArgumentException;
-
+	
 	/**
 	 * Returns the value of this <code>Attribute</code>. If the value is set
 	 * via <code>att.setValue(x)</code> and then retrieved via <code>y =
@@ -106,7 +106,7 @@ public interface Attribute
 	 * @return the value of this <code>Attribute</code>.
 	 */
 	public Object getValue();
-
+	
 	/**
 	 * Returns a string representation prepended by <code>n</code> spaces of
 	 * this attribute.

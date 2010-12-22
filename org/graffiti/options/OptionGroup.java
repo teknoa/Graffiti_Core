@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: OptionGroup.java,v 1.4 2010/12/14 07:02:27 morla Exp $
+// $Id: OptionGroup.java,v 1.5 2010/12/22 13:05:35 klukas Exp $
 
 package org.graffiti.options;
 
@@ -15,19 +15,19 @@ import java.util.Vector;
 /**
  * Represents an option pane group.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class OptionGroup {
 	// ~ Instance fields ========================================================
-
+	
 	/** The name of this option group. */
 	private String name;
-
+	
 	/** The list of members of this option group. */
 	private Vector<Object> members;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new option group.
 	 * 
@@ -38,9 +38,9 @@ public class OptionGroup {
 		this.name = name;
 		members = new Vector<Object>();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the member at the specified index.
 	 * 
@@ -52,7 +52,7 @@ public class OptionGroup {
 		return ((index >= 0) && (index < members.size()))
 							? members.elementAt(index) : null;
 	}
-
+	
 	/**
 	 * Returns the number of members.
 	 * 
@@ -61,7 +61,7 @@ public class OptionGroup {
 	public int getMemberCount() {
 		return members.size();
 	}
-
+	
 	/**
 	 * Returns the index of the specified member.
 	 * 
@@ -72,7 +72,7 @@ public class OptionGroup {
 	public int getMemberIndex(Object member) {
 		return members.indexOf(member);
 	}
-
+	
 	/**
 	 * Returns an enumeration of all members in this option group.
 	 * 
@@ -81,7 +81,7 @@ public class OptionGroup {
 	public Enumeration<Object> getMembers() {
 		return members.elements();
 	}
-
+	
 	/**
 	 * Returns the name of the option group.
 	 * 
@@ -90,7 +90,7 @@ public class OptionGroup {
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * Adds the given option group to this option group.
 	 * 
@@ -101,10 +101,10 @@ public class OptionGroup {
 		if (members.indexOf(group) != -1) {
 			return;
 		}
-
+		
 		members.addElement(group);
 	}
-
+	
 	/**
 	 * Adds the given option pane to this option group.
 	 * 
@@ -115,19 +115,19 @@ public class OptionGroup {
 		if (members.indexOf(pane) != -1) {
 			return;
 		}
-
+		
 		members.addElement(pane);
 	}
-
+	
 	/**
 	 * Calls the <code>save</code> methods of all members.
 	 */
 	public void save() {
 		Enumeration<Object> enum2 = members.elements();
-
+		
 		while (enum2.hasMoreElements()) {
 			Object elem = enum2.nextElement();
-
+			
 			try {
 				if (elem instanceof OptionPane) {
 					((OptionPane) elem).save(null);

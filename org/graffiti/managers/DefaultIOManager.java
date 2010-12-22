@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: DefaultIOManager.java,v 1.19 2010/12/14 07:02:26 morla Exp $
+// $Id: DefaultIOManager.java,v 1.20 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.managers;
 
@@ -38,19 +38,19 @@ import org.graffiti.plugin.io.resources.ResourceIOManager;
 /**
  * Handles the editor's IO serializers.
  * 
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  */
 public class DefaultIOManager implements IOManager {
-
+	
 	private class GravistoFileOpenFilter extends GenericFileFilter {
-
+		
 		/**
 		 * @param extension
 		 */
 		public GravistoFileOpenFilter(String extension) {
 			super(extension);
 		}
-
+		
 		/*
 		 * (non-Javadoc)
 		 * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
@@ -76,7 +76,7 @@ public class DefaultIOManager implements IOManager {
 			}
 			return false;
 		}
-
+		
 		/*
 		 * (non-Javadoc)
 		 * @see javax.swing.filechooser.FileFilter#getDescription()
@@ -87,25 +87,25 @@ public class DefaultIOManager implements IOManager {
 			return "Supported Graph Files";
 		}
 	}
-
+	
 	// ~ Static fields/initializers =============================================
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/** The set of input serializers. */
 	private final List<InputSerializer> inputSerializer;
-
+	
 	/** The set of output serializers. */
 	private final List<OutputSerializer> outputSerializer;
-
+	
 	/** The file chooser used to open and save graphs. */
 	private JFileChooser fc;
-
+	
 	/** The list of listeners. */
 	private final List<IOManagerListener> listeners;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new io manager.
 	 */
@@ -119,9 +119,9 @@ public class DefaultIOManager implements IOManager {
 			// ErrorMsg.addErrorMessage(ace);
 		}
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/*
 	 * @see
 	 * org.graffiti.managers.IOManager#addInputSerializer(org.graffiti.plugin
@@ -129,13 +129,13 @@ public class DefaultIOManager implements IOManager {
 	 */
 	public void addInputSerializer(InputSerializer is) {
 		// String[] inExtensions = is.getExtensions();
-
+		
 		// for (int j = 0; j < inExtensions.length; j++) {
 		inputSerializer.add(is);
 		// }
 		fireInputSerializerAdded(is);
 	}
-
+	
 	/*
 	 * @see
 	 * org.graffiti.managers.IOManager#addListener(org.graffiti.managers.IOManager
@@ -144,7 +144,7 @@ public class DefaultIOManager implements IOManager {
 	public void addListener(IOManagerListener ioManagerListener) {
 		listeners.add(ioManagerListener);
 	}
-
+	
 	/*
 	 * @see
 	 * org.graffiti.managers.IOManager#addOutputSerializer(org.graffiti.plugin
@@ -152,13 +152,13 @@ public class DefaultIOManager implements IOManager {
 	 */
 	public void addOutputSerializer(OutputSerializer os) {
 		String[] outExtensions = os.getExtensions();
-
+		
 		for (int j = 0; j < outExtensions.length; j++)
 			outputSerializer.add(os);
-
+		
 		fireOutputSerializerAdded(os);
 	}
-
+	
 	/*
 	 * @see
 	 * org.graffiti.managers.IOManager#createInputSerializer(java.lang.String)
@@ -196,7 +196,7 @@ public class DefaultIOManager implements IOManager {
 		}
 		return null;
 	}
-
+	
 	public Set<String> getGraphFileExtensions() {
 		Set<String> knownExt = new TreeSet<String>();
 		for (Iterator<InputSerializer> itr = inputSerializer.iterator(); itr.hasNext();) {
@@ -208,7 +208,7 @@ public class DefaultIOManager implements IOManager {
 		}
 		return knownExt;
 	}
-
+	
 	/*
 	 * @see org.graffiti.managers.IOManager#createOpenFileChooser()
 	 */
@@ -234,12 +234,12 @@ public class DefaultIOManager implements IOManager {
 				fc.addChoosableFileFilter(gff);
 			}
 		}
-
+		
 		fc.addChoosableFileFilter(new GravistoFileOpenFilter(null));
-
+		
 		return fc;
 	}
-
+	
 	/*
 	 * @see
 	 * org.graffiti.managers.IOManager#createOutputSerializer(java.lang.String)
@@ -254,7 +254,7 @@ public class DefaultIOManager implements IOManager {
 		}
 		return null;
 	}
-
+	
 	/*
 	 * @see org.graffiti.managers.IOManager#createSaveFileChooser()
 	 */
@@ -280,7 +280,7 @@ public class DefaultIOManager implements IOManager {
 										+ os.toString());
 				knownExt.add(ext[i]);
 				GravistoFileFilter gff = new GravistoFileFilter(ext[i], desc[i]);
-
+				
 				if (defaultFileFilter == null && gff.getExtension().equalsIgnoreCase(defaultExt)) {
 					defaultFileFilter = gff;
 				} else {
@@ -292,21 +292,21 @@ public class DefaultIOManager implements IOManager {
 			fc.addChoosableFileFilter(defaultFileFilter);
 		return fc;
 	}
-
+	
 	/*
 	 * @see org.graffiti.managers.IOManager#hasInputSerializer()
 	 */
 	public boolean hasInputSerializer() {
 		return !inputSerializer.isEmpty();
 	}
-
+	
 	/*
 	 * @see org.graffiti.managers.IOManager#hasOutputSerializer()
 	 */
 	public boolean hasOutputSerializer() {
 		return !outputSerializer.isEmpty();
 	}
-
+	
 	/*
 	 * @see
 	 * org.graffiti.managers.pluginmgr.PluginManagerListener#pluginAdded(org.
@@ -316,19 +316,19 @@ public class DefaultIOManager implements IOManager {
 	public void pluginAdded(GenericPlugin plugin, PluginDescription desc) {
 		// register add input serializers
 		InputSerializer[] is = plugin.getInputSerializers();
-
+		
 		for (int i = 0; i < is.length; i++) {
 			addInputSerializer(is[i]);
 		}
-
+		
 		// register all output serializers
 		OutputSerializer[] os = plugin.getOutputSerializers();
-
+		
 		for (int i = 0; i < os.length; i++) {
 			addOutputSerializer(os[i]);
 		}
 	}
-
+	
 	/*
 	 * @see
 	 * org.graffiti.managers.IOManager#removeListener(org.graffiti.managers.IOManager
@@ -337,7 +337,7 @@ public class DefaultIOManager implements IOManager {
 	public boolean removeListener(IOManagerListener l) {
 		return listeners.remove(l);
 	}
-
+	
 	/**
 	 * Returns a string representation of the io manager. Useful for debugging.
 	 * 
@@ -347,7 +347,7 @@ public class DefaultIOManager implements IOManager {
 	public String toString() {
 		return "inputSerializer: " + inputSerializer + " outputSerializer: " + outputSerializer;
 	}
-
+	
 	/**
 	 * Informs every registered io manager listener about the addition of the
 	 * given input serializer.
@@ -358,11 +358,11 @@ public class DefaultIOManager implements IOManager {
 	private void fireInputSerializerAdded(InputSerializer is) {
 		for (Iterator<IOManagerListener> i = listeners.iterator(); i.hasNext();) {
 			IOManager.IOManagerListener l = i.next();
-
+			
 			l.inputSerializerAdded(is);
 		}
 	}
-
+	
 	/**
 	 * Informs every output serializer about the addition of the given output
 	 * serializer.
@@ -373,7 +373,7 @@ public class DefaultIOManager implements IOManager {
 	private void fireOutputSerializerAdded(OutputSerializer os) {
 		for (Iterator<IOManagerListener> i = listeners.iterator(); i.hasNext();) {
 			IOManager.IOManagerListener l = i.next();
-
+			
 			l.outputSerializerAdded(os);
 		}
 	}

@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: StringSplitter.java,v 1.3 2010/12/14 07:02:26 morla Exp $
+// $Id: StringSplitter.java,v 1.4 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.util;
 
@@ -13,11 +13,11 @@ package org.graffiti.util;
  * Provides a method to split a String into several Strings according to a
  * certain String.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class StringSplitter {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Splits String <code>toSplit</code> using <code>delim</code> as
 	 * delimeter. Fills the returned String array with the results. If <code>delim</code> does not appear in <code>toSplit</code>, the whole
@@ -34,33 +34,33 @@ public class StringSplitter {
 		int count = 0;
 		String restString = toSplit;
 		int nextSplitPos = restString.indexOf(delim);
-
+		
 		while (nextSplitPos != -1) {
 			count++;
 			restString = restString.substring(nextSplitPos + delim.length());
 			nextSplitPos = restString.indexOf(delim);
 		}
-
+		
 		if (count == 0) {
 			return new String[] { toSplit };
 		} else {
 			String[] splitted = new String[count + 1];
 			count = 0;
-
+			
 			nextSplitPos = toSplit.indexOf(delim);
-
+			
 			while (nextSplitPos != -1) {
 				splitted[count++] = toSplit.substring(0, nextSplitPos);
 				toSplit = toSplit.substring(nextSplitPos + delim.length());
 				nextSplitPos = toSplit.indexOf(delim);
 			}
-
+			
 			splitted[count] = toSplit;
-
+			
 			return splitted;
 		}
 	}
-
+	
 	/**
 	 * Splits String <code>toSplit</code> using <code>delim</code> as
 	 * delimeter. Splits into a maximum of <code>limit</code> Strings. Fills
@@ -84,36 +84,36 @@ public class StringSplitter {
 				return new String[] { toSplit };
 			} else {
 				assert limit > 1;
-
+				
 				// count how many entries the array is going to have
 				int count = 0;
 				String restString = toSplit;
 				int nextSplitPos = restString.indexOf(delim);
-
+				
 				while ((nextSplitPos != -1) && (count < (limit - 1))) {
 					count++;
 					restString = restString.substring(nextSplitPos +
 										delim.length());
 					nextSplitPos = restString.indexOf(delim);
 				}
-
+				
 				String[] splitted = new String[count + 1];
 				count = 0;
-
+				
 				nextSplitPos = toSplit.indexOf(delim);
-
+				
 				while ((nextSplitPos != -1) && (count < (limit - 1))) {
 					splitted[count++] = toSplit.substring(0, nextSplitPos);
 					toSplit = toSplit.substring(nextSplitPos + delim.length());
 					nextSplitPos = toSplit.indexOf(delim);
 				}
-
+				
 				splitted[count] = toSplit;
-
+				
 				return splitted;
 			}
 	}
-
+	
 	/**
 	 * Splits String <code>toSplit</code> using <code>delim</code> as
 	 * delimeter. Splits into a maximum of 2 Strings. Fills the returned
@@ -130,7 +130,7 @@ public class StringSplitter {
 	 */
 	public static String[] splitInTwo(String toSplit, String delim) {
 		int splitPos = toSplit.indexOf(delim);
-
+		
 		if (splitPos == -1) {
 			return new String[] { toSplit };
 		} else {

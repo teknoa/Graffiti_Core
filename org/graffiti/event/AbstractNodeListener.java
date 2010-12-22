@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractNodeListener.java,v 1.3 2010/12/14 07:02:26 morla Exp $
+// $Id: AbstractNodeListener.java,v 1.4 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.event;
 
@@ -24,14 +24,14 @@ package org.graffiti.event;
  * the listener object is invoked and the <code>NodeEvent</code> is passed to it.
  * </p>
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @see ListenerManager
  * @see NodeEvent
  */
 public abstract class AbstractNodeListener
 					implements NodeListener {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Called just after an incoming edge has been added to the node. (For
 	 * undirected edges postUndirectedEdgeAdded is called instead.)
@@ -41,7 +41,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void postInEdgeAdded(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called after an incoming edge has been removed from the node. (For
 	 * undirected edges postUndirectedEdgeRemoved is called.)
@@ -51,7 +51,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void postInEdgeRemoved(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called after an outgoing edge has been added to the node. (For
 	 * undirected edges postUndirectedEdgeAdded is called instead.)
@@ -61,7 +61,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void postOutEdgeAdded(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called after an outgoing edge has been removed from the node. (For
 	 * undirected edges postUndirectedEdgeRemoved is called.)
@@ -71,7 +71,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void postOutEdgeRemoved(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called after an (undirected) edge has been added to the node. (For
 	 * directed edges pre- In/Out- EdgeAdded is called.)
@@ -81,7 +81,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void postUndirectedEdgeAdded(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called after an (undirected) edge has been removed from the node. (For
 	 * directed edges pre- In/Out- EdgeRemoved is called.)
@@ -91,7 +91,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void postUndirectedEdgeRemoved(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called just before an incoming edge is added to the node. (For
 	 * undirected edges preUndirectedEdgeAdded is called instead.)
@@ -101,7 +101,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void preInEdgeAdded(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called just before an incoming edge is removed from the node. (For
 	 * undirected edges preUndirectedEdgeRemoved is called.)
@@ -111,7 +111,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void preInEdgeRemoved(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called just before an outgoing edge is added to the node. (For
 	 * undirected edges preUndirectedEdgeAdded is called instead.)
@@ -121,7 +121,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void preOutEdgeAdded(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called just before an outgoing edge is removed from the node. (For
 	 * undirected edges preUndirectedEdgeRemoved is called.)
@@ -131,7 +131,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void preOutEdgeRemoved(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called just before an (undirected) edge is added to the node. (For
 	 * directed edges pre- In/Out- EdgeAdded is called.)
@@ -141,7 +141,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void preUndirectedEdgeAdded(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called just before an (undirected) edge is removed from the node. (For
 	 * directed edges pre- In/Out- EdgeRemoved is called.)
@@ -151,7 +151,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void preUndirectedEdgeRemoved(NodeEvent e) {
 	}
-
+	
 	/**
 	 * Called after a transaction has been finished.
 	 * 
@@ -160,7 +160,7 @@ public abstract class AbstractNodeListener
 	 */
 	public void transactionFinished(TransactionEvent e) {
 	}
-
+	
 	/**
 	 * Called after a transaction has been started.
 	 * 

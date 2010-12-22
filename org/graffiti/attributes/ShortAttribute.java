@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ShortAttribute.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: ShortAttribute.java,v 1.5 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -14,17 +14,17 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a short
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class ShortAttribute
 					extends AbstractAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this attribute */
 	private short value;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new instance of a <code>ShortAttribute</code>.
 	 * 
@@ -34,7 +34,7 @@ public class ShortAttribute
 	public ShortAttribute(String id) {
 		super(id);
 	}
-
+	
 	/**
 	 * Constructs a new instance of a <code>ShortAttribute</code> with the
 	 * given value.
@@ -48,7 +48,7 @@ public class ShortAttribute
 		super(id);
 		this.value = value;
 	}
-
+	
 	/**
 	 * Constructs a new instance of a <code>ShortAttribute</code> with the
 	 * given value.
@@ -62,16 +62,16 @@ public class ShortAttribute
 		super(id);
 		this.value = value.shortValue();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
 	 */
 	public void setDefaultValue() {
 		value = 0;
 	}
-
+	
 	/**
 	 * Set the value of this Object.
 	 * 
@@ -84,7 +84,7 @@ public class ShortAttribute
 		this.value = value;
 		callPostAttributeChanged(ae);
 	}
-
+	
 	/**
 	 * Returns the value of this object.
 	 * 
@@ -93,7 +93,7 @@ public class ShortAttribute
 	public short getShort() {
 		return value;
 	}
-
+	
 	/**
 	 * Returns the value of the attribute wrapped in an <code>Short</code> object.
 	 * 
@@ -102,7 +102,7 @@ public class ShortAttribute
 	public Object getValue() {
 		return new Short(value);
 	}
-
+	
 	/**
 	 * Returns a deep copy of this instance.
 	 * 
@@ -111,7 +111,7 @@ public class ShortAttribute
 	public Object copy() {
 		return new ShortAttribute(this.getId(), this.value);
 	}
-
+	
 	/**
 	 * Sets the value of the attribute. The <code>ListenerManager</code> is
 	 * informed by the method <code>setValue()</code>.
@@ -126,14 +126,14 @@ public class ShortAttribute
 	protected void doSetValue(Object o)
 						throws IllegalArgumentException {
 		assert o != null;
-
+		
 		try {
 			value = ((Short) o).shortValue();
 		} catch (ClassCastException cce) {
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.Displayable#toXMLString()
 	 */

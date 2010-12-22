@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ListenerRegistrationException.java,v 1.4 2010/12/14 07:02:26 morla Exp $
+// $Id: ListenerRegistrationException.java,v 1.5 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.event;
 
@@ -14,17 +14,17 @@ package org.graffiti.event;
  * registered. Will be thrown, if someone tries to add a strict listener while
  * the same listener is already registered as non strict or vice versa.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class ListenerRegistrationException
 					extends RuntimeException {
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a <code>ListenerRegistrationException</code> with the
 	 * specified detail message.

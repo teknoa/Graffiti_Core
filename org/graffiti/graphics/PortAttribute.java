@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: PortAttribute.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: PortAttribute.java,v 1.6 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -21,24 +21,24 @@ import org.graffiti.attributes.StringAttribute;
  * Contains information about the port of a node
  * 
  * @author breu
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class PortAttribute
 					extends HashMapAttribute
 					implements GraphicAttributeConstants {
 	// ~ Instance fields ========================================================
-
+	
 	/** Holds the coordinate of the port. */
 	private CoordinateAttribute coordinate;
-
+	
 	/** The or a port representing the given name and coorinate. */
 	private Port port = null;
-
+	
 	/** Holds the name of the port. */
 	private StringAttribute name;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for Port.
 	 * 
@@ -52,7 +52,7 @@ public class PortAttribute
 		add(this.name, false);
 		add(this.coordinate, false);
 	}
-
+	
 	/**
 	 * Constructor with an ID and a <code>Port</code> object.
 	 * 
@@ -63,7 +63,7 @@ public class PortAttribute
 		this(id, port.getName(), port.getX(), port.getY());
 		this.port = port;
 	}
-
+	
 	/**
 	 * Constructor for Port.
 	 * 
@@ -77,7 +77,7 @@ public class PortAttribute
 	public PortAttribute(String id, String n, CoordinateAttribute c) {
 		this(id, n, c.getX(), c.getY());
 	}
-
+	
 	/**
 	 * Constructor for Port.
 	 * 
@@ -91,7 +91,7 @@ public class PortAttribute
 	public PortAttribute(String id, String n, Point2D c) {
 		this(id, n, c.getX(), c.getY());
 	}
-
+	
 	/**
 	 * Constructor for Port.
 	 * 
@@ -107,7 +107,7 @@ public class PortAttribute
 	public PortAttribute(String id, StringAttribute n, double x, double y) {
 		this(id, n.getString(), x, y);
 	}
-
+	
 	/**
 	 * Constructor for Port.
 	 * 
@@ -121,7 +121,7 @@ public class PortAttribute
 	public PortAttribute(String id, StringAttribute n, CoordinateAttribute c) {
 		this(id, n.getString(), c.getX(), c.getY());
 	}
-
+	
 	/**
 	 * Constructor for Port.
 	 * 
@@ -135,7 +135,7 @@ public class PortAttribute
 	public PortAttribute(String id, StringAttribute n, Point2D c) {
 		this(id, n.getString(), c.getX(), c.getY());
 	}
-
+	
 	/**
 	 * Constructor for Port.
 	 * 
@@ -155,9 +155,9 @@ public class PortAttribute
 		add(this.name, false);
 		add(this.coordinate, false);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
 	 * 
@@ -172,7 +172,7 @@ public class PortAttribute
 							attrs.keySet().contains(COORDINATE)) {
 			for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
 				String attrId = (String) it.next();
-
+				
 				if (attrId.equals(NAME)) {
 					setName(((StringAttribute) attrs.get(NAME)).getString());
 				} else
@@ -186,7 +186,7 @@ public class PortAttribute
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * Sets the 'port'-value.
 	 * 
@@ -196,7 +196,7 @@ public class PortAttribute
 	public void setCoordinate(CoordinateAttribute c) {
 		coordinate.setCoordinate(c.getCoordinate());
 	}
-
+	
 	/**
 	 * Returns the 'port'-value of the encapsulated port.
 	 * 
@@ -205,7 +205,7 @@ public class PortAttribute
 	public CoordinateAttribute getCoordinate() {
 		return this.coordinate;
 	}
-
+	
 	/**
 	 * Sets the 'name'-value.
 	 * 
@@ -215,7 +215,7 @@ public class PortAttribute
 	public void setName(String n) {
 		this.name.setString(n);
 	}
-
+	
 	/**
 	 * Returns the 'name'-value of the encapsulated port.
 	 * 
@@ -225,7 +225,7 @@ public class PortAttribute
 	public String getName() {
 		return this.name.getString();
 	}
-
+	
 	/**
 	 * Returns the encapsulated port.
 	 * 
@@ -239,7 +239,7 @@ public class PortAttribute
 			return this.port;
 		}
 	}
-
+	
 	/**
 	 * Returns a deep copy of this object.
 	 * 
@@ -250,10 +250,10 @@ public class PortAttribute
 		PortAttribute copied = new PortAttribute(this.getId());
 		copied.setName(this.getName());
 		copied.setCoordinate((CoordinateAttribute) (this.getCoordinate().copy()));
-
+		
 		return copied;
 	}
-
+	
 	/**
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -262,27 +262,27 @@ public class PortAttribute
 		if (this == obj) {
 			return true;
 		}
-
+		
 		if (!(obj instanceof PortAttribute)) {
 			return false;
 		}
-
+		
 		PortAttribute pa = (PortAttribute) obj;
-
+		
 		if (!name.getString().equals(pa.getName())) {
 			return false;
 		}
-
+		
 		if (port != null) {
 			return port.equals(pa.getPort());
 		} else {
 			Port paport = pa.getPort();
-
+			
 			return (coordinate.getX() == paport.getX()) &&
 								(coordinate.getY() == paport.getY());
 		}
 	}
-
+	
 	// /**
 	// * Sets the value of this <code>Attribute</code> to the given value without
 	// * informing the <code>ListenerManager</code>.

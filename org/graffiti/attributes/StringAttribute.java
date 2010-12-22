@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: StringAttribute.java,v 1.7 2010/12/14 07:02:25 morla Exp $
+// $Id: StringAttribute.java,v 1.8 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -17,17 +17,17 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a String.
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class StringAttribute
 					extends AbstractAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this <code>StringAttribute</code>. */
 	protected String value;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new instance of a <code>StringAttribute</code>.
 	 * 
@@ -37,7 +37,7 @@ public class StringAttribute
 	protected StringAttribute(String id) {
 		super(id);
 	}
-
+	
 	/**
 	 * Constructs a new instance of a <code>StringAttribute</code> with the
 	 * given value.
@@ -51,11 +51,11 @@ public class StringAttribute
 		super(id);
 		this.value = value;
 	}
-
+	
 	public StringAttribute() {
 		super();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public static Attribute getTypedStringAttribute(String id) {
 		Attribute newInstance = null;
@@ -74,7 +74,7 @@ public class StringAttribute
 		assert newInstance != null;
 		return newInstance;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public static Attribute getTypedStringAttribute(String id, String value) {
 		Attribute newInstance = null;
@@ -95,16 +95,16 @@ public class StringAttribute
 		assert newInstance != null;
 		return newInstance;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
 	 */
 	public void setDefaultValue() {
 		value = "";
 	}
-
+	
 	/**
 	 * Sets the value of this object. The <code>ListenerManager</code> is
 	 * informed by the method <code>setValue()</code>.
@@ -114,13 +114,13 @@ public class StringAttribute
 	 */
 	public void setString(String value) {
 		// assert value != null;
-
+		
 		AttributeEvent ae = new AttributeEvent(this);
 		callPreAttributeChanged(ae);
 		this.value = value;
 		callPostAttributeChanged(ae);
 	}
-
+	
 	/**
 	 * Returns the value of this object.
 	 * 
@@ -129,7 +129,7 @@ public class StringAttribute
 	public String getString() {
 		return value;
 	}
-
+	
 	/**
 	 * Returns the value of this attribute, i.e. contained Sting object.
 	 * 
@@ -138,7 +138,7 @@ public class StringAttribute
 	public Object getValue() {
 		return value;
 	}
-
+	
 	/**
 	 * Returns a deep copy of this instance.
 	 * 
@@ -159,7 +159,7 @@ public class StringAttribute
 			}
 		}
 	}
-
+	
 	/**
 	 * @see org.graffiti.attributes.Attribute#toString(int)
 	 */
@@ -167,7 +167,7 @@ public class StringAttribute
 	public String toString(int n) {
 		return getSpaces(n) + getId() + " = \"" + value + "\"";
 	}
-
+	
 	/**
 	 * Sets the value of the <code>Attribute</code>. The <code>ListenerManager</code> is informed by the method <code>setValue()</code>.
 	 * 
@@ -181,14 +181,14 @@ public class StringAttribute
 	protected void doSetValue(Object o)
 						throws IllegalArgumentException {
 		assert o != null;
-
+		
 		try {
 			value = (String) o;
 		} catch (ClassCastException cce) {
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.Displayable#toXMLString()
 	 */
@@ -196,7 +196,7 @@ public class StringAttribute
 	public String toXMLString() {
 		return getStandardXML(value);
 	}
-
+	
 	/**
 	 * @author klukas
 	 */
@@ -205,7 +205,7 @@ public class StringAttribute
 		if (typedAttributesID2TypeForNodes.containsKey(id))
 			typedAttributesID2TypeForNodes.remove(id);
 		typedAttributesID2TypeForNodes.put(id, attributeType);
-
+		
 		if (typedAttributesID2TypeForEdges.containsKey(id))
 			typedAttributesID2TypeForEdges.remove(id);
 		typedAttributesID2TypeForEdges.put(id, attributeType);

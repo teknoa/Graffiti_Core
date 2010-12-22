@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: PluginHelper.java,v 1.8 2010/12/14 07:02:26 morla Exp $
+// $Id: PluginHelper.java,v 1.9 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.util;
 
@@ -39,7 +39,7 @@ import org.graffiti.managers.pluginmgr.PluginXMLParser;
 @SuppressWarnings("unchecked")
 public class PluginHelper implements HelperClass {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Reads and returns the plugin description of the plugin from the given
 	 * URL.
@@ -56,10 +56,10 @@ public class PluginHelper implements HelperClass {
 		if (pluginLocation == null) {
 			throw new PluginManagerException("exception.MalformedURL", "null");
 		}
-
+		
 		String fileName = pluginLocation.toString();
 		InputStream input;
-
+		
 		if (fileName.toLowerCase().endsWith(".xml")) {
 			try {
 				if (fileName.startsWith("jar:")) {
@@ -81,7 +81,7 @@ public class PluginHelper implements HelperClass {
 			} catch (IOException ioe) {
 				throw new PluginManagerException("exception.IO");
 			}
-
+			
 			// directly read from the jar or zip file
 		} else
 			if (fileName.toLowerCase().endsWith(".jar") ||
@@ -92,7 +92,7 @@ public class PluginHelper implements HelperClass {
 					StringBundle sBundle = StringBundle.getInstance();
 					ZipEntry entry = file.getEntry(sBundle.getString(
 										"plugin.xml.filename"));
-
+					
 					if (entry != null) {
 						// create an input stream from this entry.
 						input = file.getInputStream(entry);
@@ -110,9 +110,9 @@ public class PluginHelper implements HelperClass {
 				throw new PluginManagerException("exception.unknownFileType",
 									fileName);
 			}
-
+		
 		PluginDescription description = null;
-
+		
 		try {
 			PluginXMLParser parser = new PluginXMLParser();
 			description = parser.parse(input);
@@ -125,10 +125,10 @@ public class PluginHelper implements HelperClass {
 				ioe.printStackTrace();
 			}
 		}
-
+		
 		return description;
 	}
-
+	
 	/**
 	 * @return
 	 */

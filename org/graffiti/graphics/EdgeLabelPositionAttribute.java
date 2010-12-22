@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: EdgeLabelPositionAttribute.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: EdgeLabelPositionAttribute.java,v 1.6 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -20,36 +20,36 @@ import org.graffiti.attributes.IntegerAttribute;
  * DOCUMENT ME!
  * 
  * @author holleis
- * @version $Revision: 1.5 $ Specifies position of an edge label providing several parameters.
+ * @version $Revision: 1.6 $ Specifies position of an edge label providing several parameters.
  */
 public class EdgeLabelPositionAttribute
 					extends PositionAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * Specifies horizontal shift (from position given by <code>relAlign</code> and <code>alignSegment</code>) of center of label.
 	 */
 	private DoubleAttribute absHor;
-
+	
 	/**
 	 * Specifies vertical shift (from position given by <code>relAlign</code> and <code>alignSegment</code>) of center of label.
 	 */
 	private DoubleAttribute absVert;
-
+	
 	/**
 	 * Specifies alignment of the label relative to length of edge or edge
 	 * segment (whose number is given by <code>alignSegment</code>). Zero
 	 * means close to source, one means close to target.
 	 */
 	private DoubleAttribute relAlign;
-
+	
 	/**
 	 * Specifies the number of the line segment relative to which <code>relAlign</code> works. Zero means relative to whole edge.
 	 */
 	private IntegerAttribute alignSegment;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for NodeLabelPositionAttribute.
 	 * 
@@ -58,7 +58,7 @@ public class EdgeLabelPositionAttribute
 	public EdgeLabelPositionAttribute(String id) {
 		this(id, 0.5d, 0, 0d, 0d);
 	}
-
+	
 	/**
 	 * Constructor for NodeLabelPositionAttribute.
 	 * 
@@ -75,7 +75,7 @@ public class EdgeLabelPositionAttribute
 							new DoubleAttribute(ABSHOR, absHor),
 							new DoubleAttribute(ABSVERT, absVert));
 	}
-
+	
 	/**
 	 * Constructor for NodeLabelPositionAttribute.
 	 * 
@@ -98,9 +98,9 @@ public class EdgeLabelPositionAttribute
 		add(this.absHor, false);
 		add(this.absVert, false);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the absHor.
 	 * 
@@ -110,7 +110,7 @@ public class EdgeLabelPositionAttribute
 	public void setAbsHor(double absHor) {
 		this.absHor.setDouble(absHor);
 	}
-
+	
 	/**
 	 * Returns the absHor.
 	 * 
@@ -119,7 +119,7 @@ public class EdgeLabelPositionAttribute
 	public double getAbsHor() {
 		return absHor.getDouble();
 	}
-
+	
 	/**
 	 * Sets the absVert.
 	 * 
@@ -129,7 +129,7 @@ public class EdgeLabelPositionAttribute
 	public void setAbsVert(double absVert) {
 		this.absVert.setDouble(absVert);
 	}
-
+	
 	/**
 	 * Returns the absVert.
 	 * 
@@ -138,7 +138,7 @@ public class EdgeLabelPositionAttribute
 	public double getAbsVert() {
 		return absVert.getDouble();
 	}
-
+	
 	/**
 	 * Sets the alignSegment.
 	 * 
@@ -148,7 +148,7 @@ public class EdgeLabelPositionAttribute
 	public void setAlignSegment(int alignSegment) {
 		this.alignSegment.setInteger(alignSegment);
 	}
-
+	
 	/**
 	 * Returns the alignSegment.
 	 * 
@@ -157,7 +157,7 @@ public class EdgeLabelPositionAttribute
 	public int getAlignSegment() {
 		return alignSegment.getInteger();
 	}
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
 	 * 
@@ -174,7 +174,7 @@ public class EdgeLabelPositionAttribute
 							attrs.keySet().contains(ABSVERT)) {
 			for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
 				String attrId = (String) it.next();
-
+				
 				if (attrId.equals(RELALIGN)) {
 					setRelAlign(((DoubleAttribute) attrs.get(RELALIGN)).getDouble());
 				} else
@@ -194,7 +194,7 @@ public class EdgeLabelPositionAttribute
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * Sets the relAlign.
 	 * 
@@ -204,7 +204,7 @@ public class EdgeLabelPositionAttribute
 	public void setRelAlign(double relAlign) {
 		this.relAlign.setDouble(relAlign);
 	}
-
+	
 	/**
 	 * Returns the relAlign.
 	 * 
@@ -213,7 +213,7 @@ public class EdgeLabelPositionAttribute
 	public double getRelAlign() {
 		return relAlign.getDouble();
 	}
-
+	
 	/**
 	 * Returns a deep copy of this object.
 	 * 
@@ -226,10 +226,10 @@ public class EdgeLabelPositionAttribute
 		copied.setAlignSegment(this.getAlignSegment());
 		copied.setAbsHor(this.getAbsHor());
 		copied.setAbsVert(this.getAbsVert());
-
+		
 		return copied;
 	}
-
+	
 	// /**
 	// * Sets the value of this <code>Attribute</code> to the given value without
 	// * informing the <code>ListenerManager</code>.

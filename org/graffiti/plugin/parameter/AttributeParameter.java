@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AttributeParameter.java,v 1.5 2010/12/14 22:30:59 klukas Exp $
+// $Id: AttributeParameter.java,v 1.6 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -14,23 +14,23 @@ import org.graffiti.attributes.Attribute;
 /**
  * This class is used for <code>Parameters</code> that satisfy the <code>org.graffiti.attributes.Attribte</code> interface.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @see Attribute
  */
 public class AttributeParameter
 					extends AbstractSingleParameter {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of the <code>AttributeParameter</code>. */
 	private Attribute value = null;
-
+	
 	/**
 	 * The path to the attribute this <code>AttributeParameter</code> represents.
 	 */
 	private String path;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new attribute parameter.
 	 * 
@@ -42,9 +42,9 @@ public class AttributeParameter
 	public AttributeParameter(String name, String description) {
 		super(name, description);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the <code>Attribute</code> the <code>AttributeParameter</code> represents. <b>Implementation Note</b>: has to update the <code>path</code>.
 	 * 
@@ -54,7 +54,7 @@ public class AttributeParameter
 	public void setAttribute(Attribute value) {
 		// TODO
 	}
-
+	
 	/**
 	 * Returns the <code>Attribute</code> the <code>AttributeParameter</code> represents.
 	 * 
@@ -63,7 +63,7 @@ public class AttributeParameter
 	public Attribute getAttribute() {
 		return value;
 	}
-
+	
 	/**
 	 * Returns the path to the <code>Attribute</code> the <code>AttributeParameter</code> represents.
 	 * 
@@ -72,7 +72,7 @@ public class AttributeParameter
 	public String getPath() {
 		return path;
 	}
-
+	
 	/**
 	 * Sets the value of the <code>AttributeParameter</code>.
 	 * 
@@ -81,9 +81,9 @@ public class AttributeParameter
 	 */
 	@Override
 	public void setValue(Object value) {
-		// 
+		//
 	}
-
+	
 	/**
 	 * Returns the value of the <code>AttributeParameter</code>.
 	 * 
@@ -93,7 +93,7 @@ public class AttributeParameter
 	public Object getValue() {
 		return value;
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
 	 */

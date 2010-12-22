@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: CollectionAttribute.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: CollectionAttribute.java,v 1.5 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -38,12 +38,12 @@ import org.graffiti.core.DeepCopy;
  * </blockquote>
  * </p>
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public interface CollectionAttribute
 					extends DeepCopy, Attribute {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the attributable the <code>Attribute</code> belongs to.
 	 * <b>Implementation Note:</b> This function should only work if the <code>Attribute</code>'s attributable is null before. Normaly only
@@ -57,7 +57,7 @@ public interface CollectionAttribute
 	 */
 	public void setAttributable(Attributable att)
 						throws FieldAlreadySetException;
-
+	
 	/**
 	 * Returns the <code>Attribute</code> located at <code>path</code>.
 	 * 
@@ -70,7 +70,7 @@ public interface CollectionAttribute
 	 */
 	public Attribute getAttribute(String path)
 						throws AttributeNotFoundException, NoCollectionAttributeException;
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
 	 * 
@@ -78,14 +78,14 @@ public interface CollectionAttribute
 	 *           the map that contains all attributes.
 	 */
 	public void setCollection(Map<String, Attribute> attrs);
-
+	
 	/**
 	 * Returns the map of ids to attributes in the <code>CollectionAttribute</code>.
 	 * 
 	 * @return the map of ids to attributes in the <code>CollectionAttribute</code>.
 	 */
 	public Map<String, Attribute> getCollection();
-
+	
 	/**
 	 * Returns <code>true</code> if the <code>CollectionAttribute</code> is
 	 * empty.
@@ -93,7 +93,7 @@ public interface CollectionAttribute
 	 * @return <code>true</code> if this CollectionAttribute is empty.
 	 */
 	public boolean isEmpty();
-
+	
 	/**
 	 * Adds a given <code>Attribute</code> to the list. The id of given
 	 * attribute may not be already in the list.
@@ -106,7 +106,7 @@ public interface CollectionAttribute
 	 */
 	public void add(Attribute att)
 						throws AttributeExistsException, FieldAlreadySetException;
-
+	
 	/**
 	 * Adds a given attribute to the collection. Only informs the <code>ListenerManager</code> about the addition when <code>inform</code> is set to true.
 	 * 
@@ -124,7 +124,7 @@ public interface CollectionAttribute
 	 */
 	public void add(Attribute a, boolean inform)
 						throws AttributeExistsException, FieldAlreadySetException;
-
+	
 	/**
 	 * Removes the <code>Attribute</code> with the given <code>id</code> from
 	 * the list.
@@ -137,7 +137,7 @@ public interface CollectionAttribute
 	 */
 	public void remove(String id)
 						throws AttributeNotFoundException;
-
+	
 	/**
 	 * Removes the given <code>Attribute</code> from the list.
 	 * 
@@ -149,7 +149,7 @@ public interface CollectionAttribute
 	 */
 	public void remove(Attribute att)
 						throws AttributeNotFoundException;
-
+	
 	public int size();
 }
 

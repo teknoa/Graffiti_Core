@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ProgressViewer.java,v 1.4 2010/12/14 07:02:26 morla Exp $
+// $Id: ProgressViewer.java,v 1.5 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.util;
 
@@ -13,11 +13,11 @@ package org.graffiti.util;
  * A class that displays in some sense progress made while a long running task.
  * 
  * @author Michael Forster
- * @version $Revision: 1.4 $ $Date: 2010/12/14 07:02:26 $
+ * @version $Revision: 1.5 $ $Date: 2010/12/22 13:05:33 $
  */
 public interface ProgressViewer {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the progress viewer's maximum value to n. By default, the maximum
 	 * value is 100.
@@ -26,7 +26,7 @@ public interface ProgressViewer {
 	 *           the new maximum
 	 */
 	void setMaximum(int n);
-
+	
 	/**
 	 * Sets the value of the progress text. By default, this string is null. If
 	 * you have provided a custom progress string and want to revert to the
@@ -36,7 +36,7 @@ public interface ProgressViewer {
 	 *           the value of the progress string
 	 */
 	void setText(String text);
-
+	
 	/**
 	 * Sets the progress viewer's current value to n.
 	 * 
@@ -44,7 +44,7 @@ public interface ProgressViewer {
 	 *           the new value
 	 */
 	void setValue(int n);
-
+	
 	/**
 	 * Returns the progress viewer's current value. The value is always between
 	 * the zero and the maximum values, inclusive. By default, the value is
@@ -53,7 +53,7 @@ public interface ProgressViewer {
 	 * @return DOCUMENT ME!
 	 */
 	int getValue();
-
+	
 	int getMaximum();
 }
 

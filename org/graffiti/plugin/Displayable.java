@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Displayable.java,v 1.4 2010/12/14 07:02:27 morla Exp $
+// $Id: Displayable.java,v 1.5 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin;
 
@@ -18,28 +18,28 @@ import javax.swing.JComponent;
  */
 public interface Displayable {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets a short description of this object.
 	 * 
 	 * @param desc
 	 */
 	public void setDescription(String desc);
-
+	
 	/**
 	 * Returns a short description of this object.
 	 * 
 	 * @return String
 	 */
 	public String getDescription();
-
+	
 	/**
 	 * Returns the name of this object.
 	 * 
 	 * @return String
 	 */
 	public String getName();
-
+	
 	/**
 	 * Sets the encapsulated object.
 	 * 
@@ -50,14 +50,14 @@ public interface Displayable {
 	 */
 	public void setValue(Object val)
 						throws IllegalArgumentException;
-
+	
 	/**
 	 * Returns the encapsulated object.
 	 * 
 	 * @return Object
 	 */
 	public Object getValue();
-
+	
 	/**
 	 * Returns a well-formed XML string representing the Displayable. The
 	 * Displayable should be reconstructable via this representation.
@@ -70,7 +70,7 @@ public interface Displayable {
 	 * @return string holding an XML representation of this Displayable
 	 */
 	public String toXMLString();
-
+	
 	public JComponent getIcon();
 }
 

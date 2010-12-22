@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractIOSerializer.java,v 1.3 2010/12/14 07:02:26 morla Exp $
+// $Id: AbstractIOSerializer.java,v 1.4 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.io;
 
@@ -22,12 +22,12 @@ import org.graffiti.graph.Graph;
  * Provides additional methods to read and write from/to different kinds of
  * targets.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public abstract class AbstractIOSerializer
 					implements InputSerializer, OutputSerializer {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Reads in a graph from the given filename.
 	 * 
@@ -42,7 +42,7 @@ public abstract class AbstractIOSerializer
 						throws IOException {
 		read(new FileInputStream(filename), g);
 	}
-
+	
 	/**
 	 * Reads in the graph from the given url.
 	 * 
@@ -57,7 +57,7 @@ public abstract class AbstractIOSerializer
 						throws IOException {
 		read(url.openStream(), g);
 	}
-
+	
 	/**
 	 * Reads in a graph from the given input stream.
 	 * 
@@ -70,7 +70,7 @@ public abstract class AbstractIOSerializer
 	 */
 	public abstract void read(InputStream in, Graph g)
 						throws IOException;
-
+	
 	/**
 	 * Reads in a graph from the given input stream.
 	 * 
@@ -86,7 +86,7 @@ public abstract class AbstractIOSerializer
 		read(in, g);
 		return g;
 	}
-
+	
 	/**
 	 * Writes the contents of the given graph to a file.
 	 * 

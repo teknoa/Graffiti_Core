@@ -17,20 +17,20 @@ import org.junit.Test;
  * @author klukas
  */
 public class SettingsHelperDefaultIsTrue implements HelperClass {
-
+	
 	public boolean isEnabled(String name) {
 		return !new File(ReleaseInfo.getAppFolderWithFinalSep() + "feature_disabled_" + encode(name)).exists();
 	}
-
+	
 	protected static String encode(String name) {
 		return StringManipulationTools.removeHTMLtags(name).replaceAll(" ", "_").replaceAll("/", "_");
 	}
-
+	
 	@Test
 	public void testEncode() {
 		assertEquals("Setting Encode", "test_test_2", encode("test/test 2"));
 	}
-
+	
 	public void setEnabled(String name, boolean b) {
 		if (!b)
 			try {
@@ -42,7 +42,7 @@ public class SettingsHelperDefaultIsTrue implements HelperClass {
 			new File(ReleaseInfo.getAppFolderWithFinalSep() + "feature_disabled_" + encode(name)).delete();
 		}
 	}
-
+	
 	public JComponent getBooleanSettingsEditor(String description, final String option, final Runnable enable, final Runnable disable) {
 		final JCheckBox result = new JCheckBox(description, isEnabled(option));
 		result.setOpaque(false);
@@ -70,5 +70,5 @@ public class SettingsHelperDefaultIsTrue implements HelperClass {
 		t.start();
 		return result;
 	}
-
+	
 }

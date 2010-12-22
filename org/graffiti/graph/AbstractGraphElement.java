@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractGraphElement.java,v 1.6 2010/12/14 07:02:25 morla Exp $
+// $Id: AbstractGraphElement.java,v 1.7 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -26,30 +26,30 @@ public abstract class AbstractGraphElement
 					extends AbstractAttributable
 					implements GraphElement {
 	// ~ Static fields/initializers =============================================
-
+	
 	/** The logger for the current class. */
 	// static protected final Logger logger = Logger.getLogger(AbstractGraphElement.class.getName());
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/** The graph the current <code>AbstractGraphElement</code> belongs to. */
 	protected Graph graph;
-
+	
 	private long id;
-
+	
 	/**
 	 * Used for sorting the graphical output in Z-order. (e.g. nodes before edges)
 	 */
 	private int viewID;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new <code>AbstrctGraphElement</code>.
 	 */
 	public AbstractGraphElement() {
 	}
-
+	
 	/**
 	 * Constructs a new <code>AbstrctGraphElement</code>.
 	 * 
@@ -59,7 +59,7 @@ public abstract class AbstractGraphElement
 	public AbstractGraphElement(CollectionAttribute coll) {
 		super(coll);
 	}
-
+	
 	/**
 	 * Constructs a new <code>AbstrctGraphElement</code>. Sets the graph of the
 	 * current <code>AbstrctGraphElement</code>.
@@ -75,7 +75,7 @@ public abstract class AbstractGraphElement
 		this.graph = graph;
 		setID(IdGenereator.getNextID());
 	}
-
+	
 	/**
 	 * Constructs a new <code>AbstrctGraphElement</code>. Sets the graph of the
 	 * current <code>AbstrctGraphElement</code>.
@@ -87,9 +87,9 @@ public abstract class AbstractGraphElement
 		assert graph != null;
 		this.graph = graph;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the Graph the <code>AbstractGraphElement</code> belongs to.
 	 * 
@@ -98,7 +98,7 @@ public abstract class AbstractGraphElement
 	public Graph getGraph() {
 		return graph;
 	}
-
+	
 	/**
 	 * Returns the ListenerManager of the <code>GraphElement</code>.
 	 * 
@@ -111,15 +111,15 @@ public abstract class AbstractGraphElement
 		else
 			return getGraph().getListenerManager();
 	}
-
+	
 	public void setViewID(int viewID) {
 		this.viewID = viewID;
 	}
-
+	
 	public int getViewID() {
 		return viewID;
 	}
-
+	
 	public int compareTo(AbstractGraphElement o) {
 		if (getViewID() > ((GraphElement) o).getViewID())
 			return -1;
@@ -127,7 +127,7 @@ public abstract class AbstractGraphElement
 			return 1;
 		return 0;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.GraphElement#getID()
@@ -135,7 +135,7 @@ public abstract class AbstractGraphElement
 	public long getID() {
 		return id;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.GraphElement#setID(int)
@@ -144,7 +144,7 @@ public abstract class AbstractGraphElement
 		this.id = id;
 		getGraph().checkMaxGraphElementId(id);
 	}
-
+	
 }
 
 // ------------------------------------------------------------------------------

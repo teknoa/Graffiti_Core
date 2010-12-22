@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: PluginDependency.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: PluginDependency.java,v 1.5 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -14,43 +14,43 @@ import java.util.logging.Logger;
 /**
  * Models a dependency to another plugin.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class PluginDependency
 					implements Dependency {
 	// ~ Static fields/initializers =============================================
-
+	
 	/** The logger for the current class. */
 	private static final Logger logger = Logger.getLogger(PluginDependency.class.getName());
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/** The author of the plugin. */
 	private String author;
-
+	
 	/**
 	 * An URL or short description about the location of this plugin in the
 	 * internet.
 	 */
 	private String available;
-
+	
 	/** The name of the main class of the plugin dependency. */
 	private String main;
-
+	
 	// /**
 	// * Constructs a new plugin dependency.
 	// */
 	// public PluginDependency() {
 	// }
-
+	
 	/** The name of the plugin, this dependency depends on. */
 	private String name;
-
+	
 	/** The version of this plugin. */
 	private String version;
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the author.
 	 * 
@@ -61,7 +61,7 @@ public class PluginDependency
 		this.author = author;
 		logger.fine("author set to: " + author);
 	}
-
+	
 	/**
 	 * Returns the author.
 	 * 
@@ -70,7 +70,7 @@ public class PluginDependency
 	public String getAuthor() {
 		return author;
 	}
-
+	
 	/**
 	 * Sets the available.
 	 * 
@@ -81,7 +81,7 @@ public class PluginDependency
 		this.available = available;
 		logger.fine("available set to: " + available);
 	}
-
+	
 	/**
 	 * Returns the available.
 	 * 
@@ -90,7 +90,7 @@ public class PluginDependency
 	public String getAvailable() {
 		return available;
 	}
-
+	
 	/**
 	 * Sets the main.
 	 * 
@@ -101,7 +101,7 @@ public class PluginDependency
 		this.main = main;
 		logger.fine("main set to: " + main);
 	}
-
+	
 	/**
 	 * Returns the main.
 	 * 
@@ -110,7 +110,7 @@ public class PluginDependency
 	public String getMain() {
 		return main;
 	}
-
+	
 	/**
 	 * Sets the name.
 	 * 
@@ -121,7 +121,7 @@ public class PluginDependency
 		this.name = name;
 		logger.fine("name set to: " + name);
 	}
-
+	
 	/**
 	 * Returns the name.
 	 * 
@@ -130,7 +130,7 @@ public class PluginDependency
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * Sets the version.
 	 * 
@@ -141,7 +141,7 @@ public class PluginDependency
 		this.version = version;
 		logger.fine("version set to: " + version);
 	}
-
+	
 	/**
 	 * Returns the version.
 	 * 
@@ -150,7 +150,7 @@ public class PluginDependency
 	public String getVersion() {
 		return version;
 	}
-
+	
 	/**
 	 * Returns a human readable string of this object.
 	 * 

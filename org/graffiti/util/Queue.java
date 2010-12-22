@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Queue.java,v 1.4 2010/12/14 07:02:26 morla Exp $
+// $Id: Queue.java,v 1.5 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.util;
 
@@ -14,25 +14,25 @@ import java.util.LinkedList;
 /**
  * A simple queue.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class Queue {
 	// ~ Instance fields ========================================================
-
+	
 	/** The queue's data structure. */
 	private LinkedList<Object> list;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new queue.
 	 */
 	public Queue() {
 		list = new LinkedList<Object>();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns <code>true</code>, if the queue is empty.
 	 * 
@@ -41,7 +41,7 @@ public class Queue {
 	public boolean isEmpty() {
 		return list.isEmpty();
 	}
-
+	
 	/**
 	 * Adds the given object to the end of the queue.
 	 * 
@@ -51,14 +51,14 @@ public class Queue {
 	public void addLast(Object o) {
 		list.addLast(o);
 	}
-
+	
 	/**
 	 * @see java.util.Collection#clear()
 	 */
 	public void clear() {
 		list.clear();
 	}
-
+	
 	/**
 	 * Returns and removes the first element in the queue.
 	 * 

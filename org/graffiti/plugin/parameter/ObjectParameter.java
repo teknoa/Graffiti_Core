@@ -5,24 +5,24 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ObjectParameter.java,v 1.4 2010/12/14 07:02:27 morla Exp $
+// $Id: ObjectParameter.java,v 1.5 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
 /**
  * Parameter that contains an <code>Object</code> value.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class ObjectParameter
 					extends AbstractSingleParameter {
 	// ~ Instance fields ========================================================
-
+	
 	/** DOCUMENT ME! */
 	private Object object;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new integer parameter.
 	 * 
@@ -35,10 +35,10 @@ public class ObjectParameter
 	 */
 	public ObjectParameter(Object value, String name, String description) {
 		super(name, description);
-
+		
 		this.object = value;
 	}
-
+	
 	/**
 	 * Constructs a new integer parameter.
 	 * 
@@ -50,9 +50,9 @@ public class ObjectParameter
 	public ObjectParameter(String name, String description) {
 		super(name, description);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * @see org.graffiti.plugin.Displayable#setValue(java.lang.Object)
 	 */
@@ -61,7 +61,7 @@ public class ObjectParameter
 						throws IllegalArgumentException {
 		object = val;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.plugin.Displayable#getValue()

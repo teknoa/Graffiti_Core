@@ -12,7 +12,7 @@ public enum LabelFrameSetting {
 	CIRCLE_HALF_FILLED, CIRCLE_FILLED, CIRCLE,
 	PIN,
 	SIDE_LINES;
-
+	
 	@Override
 	public String toString() {
 		switch (this) {
@@ -44,7 +44,7 @@ public enum LabelFrameSetting {
 				return null;
 		}
 	}
-
+	
 	public String toGMLstring() {
 		switch (this) {
 			case NO_FRAME:
@@ -75,7 +75,7 @@ public enum LabelFrameSetting {
 				return null;
 		}
 	}
-
+	
 	public static LabelFrameSetting getSettingFromString(String s) {
 		if (s == null || s.length() == 0)
 			return NO_FRAME;

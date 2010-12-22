@@ -4,22 +4,22 @@ import javax.swing.JComponent;
 
 /**
  * @author klukas
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class JComponentParameter
 					extends AbstractSingleParameter {
 	private JComponent gui;
-
+	
 	public JComponentParameter(JComponent val, String name, String description) {
 		super(null, name, description);
 		this.gui = val;
 	}
-
+	
 	@Override
 	public Object getValue() {
 		return gui;
 	}
-
+	
 }
 
 // ------------------------------------------------------------------------------

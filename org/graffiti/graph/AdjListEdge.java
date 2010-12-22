@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AdjListEdge.java,v 1.7 2010/12/14 07:02:25 morla Exp $
+// $Id: AdjListEdge.java,v 1.8 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -16,7 +16,7 @@ import org.graffiti.attributes.CollectionAttribute;
 /**
  * Implementation of the <code>Edge</code> interface for a <code>Graph</code> with adjacency list representation.
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @see AdjListGraph
  * @see AdjListNode
  */
@@ -24,23 +24,23 @@ public class AdjListEdge
 					extends AbstractEdge
 					implements Edge, GraphElement {
 	// ~ Static fields/initializers =============================================
-
+	
 	/** The logger for the current class. */
 	private static final Logger logger = Logger.getLogger(AdjListEdge.class.getName());
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/** The source <code>Node</code> of this <code>Edge</code>. */
 	private Node source;
-
+	
 	/** The target <code>Node</code> of this <code>Edge</code>. */
 	private Node target;
-
+	
 	/** Indicates whether the <code>Edge</code> is directed or not. */
 	private boolean directed;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Creates a new GraphEdge instance going from <code>Node</code> source to <code>Node</code> target being directed or not.
 	 * 
@@ -63,7 +63,7 @@ public class AdjListEdge
 		this.target = target;
 		this.directed = directed;
 	}
-
+	
 	/**
 	 * Creates a new GraphEdge instance going from <code>Node</code> source to <code>Node</code> target being directed or not.
 	 * 
@@ -89,9 +89,9 @@ public class AdjListEdge
 		this.target = target;
 		this.directed = directed;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns <code>true</code>, if the <code>Edge</code> is directed, <code>false</code> otherwise.
 	 * 
@@ -100,7 +100,7 @@ public class AdjListEdge
 	public boolean isDirected() {
 		return directed;
 	}
-
+	
 	/**
 	 * Returns the source of the <code>Edge</code>.
 	 * 
@@ -109,7 +109,7 @@ public class AdjListEdge
 	public Node getSource() {
 		return source;
 	}
-
+	
 	/**
 	 * Returns the target of the <code>Edge</code>.
 	 * 
@@ -118,7 +118,7 @@ public class AdjListEdge
 	public Node getTarget() {
 		return target;
 	}
-
+	
 	/**
 	 * Sets the target of the current <code>Edge</code> to target. Target must
 	 * be contained in the same <code>Graph</code> as the <code>Edge</code>.
@@ -136,15 +136,15 @@ public class AdjListEdge
 	public void doSetTarget(Node target)
 						throws GraphElementNotFoundException, IllegalArgumentException {
 		assert target != null;
-
+		
 		if (target instanceof AdjListNode) {
 			if (this.getGraph() == target.getGraph()) {
 				// removing the edge from the old target node
 				((AdjListNode) this.getTarget()).removeInEdge(this);
-
+				
 				// setting the new target
 				this.target = target;
-
+				
 				// adding the edge to the new target node
 				((AdjListNode) target).addInEdge(this);
 			} else {
@@ -157,7 +157,7 @@ public class AdjListEdge
 													"requires");
 		}
 	}
-
+	
 	/**
 	 * Swaps source and target of the edge.
 	 */
@@ -169,7 +169,7 @@ public class AdjListEdge
 		logger.finest("setting the new target");
 		this.setTarget(oldSource);
 	}
-
+	
 	/**
 	 * Determines if an <code>Edge</code> is directed (<code>true</code>) or
 	 * not.
@@ -191,7 +191,7 @@ public class AdjListEdge
 			target.addInEdge(this);
 		}
 	}
-
+	
 	/**
 	 * Sets the source of the current <code>Edge</code> to <code>source</code>. <code>source</code> must be contained in the same <code>Graph</code> as
 	 * the current <code>Edge</code>.
@@ -208,15 +208,15 @@ public class AdjListEdge
 	protected void doSetSource(Node source)
 						throws GraphElementNotFoundException, IllegalArgumentException {
 		assert source != null;
-
+		
 		if (source instanceof AdjListNode) {
 			if (this.getGraph() == source.getGraph()) {
 				// removing the edge in the old source node
 				((AdjListNode) this.getSource()).removeOutEdge(this);
-
+				
 				// setting the new source
 				this.source = source;
-
+				
 				// adding the edge to the new source node
 				((AdjListNode) source).addOutEdge(this);
 			} else {
@@ -229,11 +229,11 @@ public class AdjListEdge
 													"requires");
 		}
 	}
-
+	
 	public void setGraphToNull() {
 		graph = null;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Edge#setGraph(org.graffiti.graph.Graph)
@@ -241,12 +241,12 @@ public class AdjListEdge
 	public void setGraph(Graph graph) {
 		this.graph = graph;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Edge ID=" + getID();
 	}
-
+	
 	public int compareTo(GraphElement arg0) {
 		return new Integer(getViewID()).compareTo(arg0.getViewID());
 	}

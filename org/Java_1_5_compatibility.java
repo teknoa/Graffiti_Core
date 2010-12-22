@@ -24,7 +24,7 @@ public class Java_1_5_compatibility {
 			//
 		}
 	}
-
+	
 	/**
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public class Java_1_5_compatibility {
 			return null;
 		}
 	}
-
+	
 	/**
 	 * @param defaultGraph
 	 * @return
@@ -47,7 +47,7 @@ public class Java_1_5_compatibility {
 			return null;
 		}
 	}
-
+	
 	public static String getJavaVersion() {
 		return "Java " + System.getProperty("java.version");
 		/*

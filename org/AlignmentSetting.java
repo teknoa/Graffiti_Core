@@ -15,7 +15,7 @@ public enum AlignmentSetting {
 	BORDER_BOTTOM_RIGHT, BORDER_LEFT_TOP, BORDER_LEFT_CENTER,
 	BORDER_LEFT_BOTTOM, BORDER_RIGHT_TOP, BORDER_RIGHT_CENTER,
 	BORDER_RIGHT_BOTTOM;
-
+	
 	@Override
 	public String toString() {
 		switch (this) {
@@ -75,9 +75,9 @@ public enum AlignmentSetting {
 				return "border, left-bottom";
 		}
 		return null;
-
+		
 	}
-
+	
 	public String toGMLstring() {
 		switch (this) {
 			case HIDDEN:

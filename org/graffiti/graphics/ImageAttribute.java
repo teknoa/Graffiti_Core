@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ImageAttribute.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: ImageAttribute.java,v 1.6 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -23,36 +23,36 @@ import org.graffiti.attributes.StringAttribute;
  * Contains the graphic attribute image.
  * 
  * @author breu
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class ImageAttribute
 					extends HashMapAttribute
 					implements GraphicAttributeConstants {
 	// ~ Instance fields ========================================================
-
+	
 	/** Contains the image. */
 	private AWTImageAttribute image;
-
+	
 	/**
 	 * Indicates whether the image has to maximize to the size of surrounding
 	 * rectangle
 	 */
 	private BooleanAttribute maximize;
-
+	
 	/**
 	 * Indicates whether the image has to be tiled if it is smaller than the
 	 * surrounding rectangle
 	 */
 	private BooleanAttribute tiled;
-
+	
 	/**
 	 * A reference to the image that is not specified by <code>java.awt.Image
 	 * </code>
 	 */
 	private StringAttribute reference;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for Image.
 	 * 
@@ -62,7 +62,7 @@ public class ImageAttribute
 	public ImageAttribute(String id) {
 		this(id, false, false, new AWTImageAttribute(IMAGE), "");
 	}
-
+	
 	/**
 	 * Constructor for Image.
 	 * 
@@ -81,7 +81,7 @@ public class ImageAttribute
 						String r) {
 		this(id, t, m, i.getImage(), r);
 	}
-
+	
 	/**
 	 * Constructor for Image.
 	 * 
@@ -100,7 +100,7 @@ public class ImageAttribute
 						AWTImageAttribute i, StringAttribute r) {
 		this(id, t.getBoolean(), m.getBoolean(), i.getImage(), r.getString());
 	}
-
+	
 	/**
 	 * Constructor for Image.
 	 * 
@@ -126,9 +126,9 @@ public class ImageAttribute
 		add(this.image, false);
 		add(this.reference, false);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
 	 * 
@@ -143,7 +143,7 @@ public class ImageAttribute
 							attrs.keySet().contains(IMAGE) && attrs.keySet().contains(REF)) {
 			for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
 				String attrId = (String) it.next();
-
+				
 				if (attrId.equals(TILED)) {
 					setTiled(((BooleanAttribute) attrs.get(TILED)).getBoolean());
 				} else
@@ -163,7 +163,7 @@ public class ImageAttribute
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * Sets the 'image'-value.
 	 * 
@@ -173,7 +173,7 @@ public class ImageAttribute
 	public void setImage(AWTImageAttribute i) {
 		this.image.setImage(i.getImage());
 	}
-
+	
 	/**
 	 * Returns the 'image'-value of the encapsulated image.
 	 * 
@@ -182,7 +182,7 @@ public class ImageAttribute
 	public AWTImageAttribute getImage() {
 		return this.image;
 	}
-
+	
 	/**
 	 * Sets the 'maximize'-value.
 	 * 
@@ -192,7 +192,7 @@ public class ImageAttribute
 	public void setMaximize(boolean m) {
 		this.maximize.setBoolean(m);
 	}
-
+	
 	/**
 	 * Returns the 'maximize'-value of the encapsulated image.
 	 * 
@@ -201,7 +201,7 @@ public class ImageAttribute
 	public boolean getMaximize() {
 		return this.maximize.getBoolean();
 	}
-
+	
 	/**
 	 * Sets the 'reference'-value.
 	 * 
@@ -211,7 +211,7 @@ public class ImageAttribute
 	public void setReference(String r) {
 		this.reference.setString(r);
 	}
-
+	
 	/**
 	 * Returns the 'reference'-value of the encapsulated image.
 	 * 
@@ -220,7 +220,7 @@ public class ImageAttribute
 	public String getReference() {
 		return this.reference.getString();
 	}
-
+	
 	/**
 	 * Sets the 'tiled'-value.
 	 * 
@@ -230,7 +230,7 @@ public class ImageAttribute
 	public void setTiled(boolean t) {
 		this.tiled.setBoolean(t);
 	}
-
+	
 	/**
 	 * Returns the 'tiled'-value of the encapsulated image.
 	 * 
@@ -239,7 +239,7 @@ public class ImageAttribute
 	public boolean getTiled() {
 		return this.tiled.getBoolean();
 	}
-
+	
 	/**
 	 * Returns a deep copy of this object.
 	 * 
@@ -252,10 +252,10 @@ public class ImageAttribute
 		copied.setMaximize(this.getMaximize());
 		copied.setReference(this.getReference());
 		copied.setImage((AWTImageAttribute) this.getImage().copy());
-
+		
 		return copied;
 	}
-
+	
 	/**
 	 * Sets the value of this <code>Attribute</code> to the given value without
 	 * informing the <code>ListenerManager</code>.
@@ -270,7 +270,7 @@ public class ImageAttribute
 	protected void doSetValue(Object v)
 						throws IllegalArgumentException {
 		ImageAttribute value;
-
+		
 		try {
 			value = (ImageAttribute) v;
 			this.tiled = new BooleanAttribute("tiled", value.getTiled());
@@ -290,7 +290,7 @@ public class ImageAttribute
 					maxAttr = new BooleanAttribute(maxAttr.getId(),
 										((IntegerAttribute) maxAttr).getInteger() == 0 ? false : true);
 				}
-
+				
 				this.tiled = (BooleanAttribute) tiledAttr;
 				this.maximize = (BooleanAttribute) maxAttr;
 				this.image = (AWTImageAttribute) map.get(IMAGE);

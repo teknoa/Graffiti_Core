@@ -5,19 +5,19 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: NodeShapeAttribute.java,v 1.3 2010/12/14 07:02:25 morla Exp $
+// $Id: NodeShapeAttribute.java,v 1.4 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
 /**
  * "Tagging" class only. To provide special edit component.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class NodeShapeAttribute
 					extends StringAttribute {
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Creates a new NodeShapeAttribute object.
 	 * 

@@ -7,13 +7,13 @@ import java.net.URL;
 import org.HomeFolder;
 
 public class HTTPhandler extends AbstractResourceIOHandler {
-
+	
 	public static final String PREFIX = "http";
-
+	
 	public String getPrefix() {
 		return PREFIX;
 	}
-
+	
 	@Override
 	public InputStream getInputStream(IOurl url) throws Exception {
 		if (url.isEqualPrefix(getPrefix()))
@@ -21,7 +21,7 @@ public class HTTPhandler extends AbstractResourceIOHandler {
 		else
 			return null;
 	}
-
+	
 	@Override
 	public IOurl copyDataAndReplaceURLPrefix(InputStream is, String targetFilename, ResourceIOConfigObject config)
 						throws Exception {
@@ -29,7 +29,7 @@ public class HTTPhandler extends AbstractResourceIOHandler {
 		HomeFolder.copyFile(is, new File(targetFilename));
 		return newurl;
 	}
-
+	
 	public static IOurl getURL(String httpurl) {
 		return new IOurl(httpurl);
 	}

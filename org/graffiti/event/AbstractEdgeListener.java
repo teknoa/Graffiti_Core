@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractEdgeListener.java,v 1.3 2010/12/14 07:02:26 morla Exp $
+// $Id: AbstractEdgeListener.java,v 1.4 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.event;
 
@@ -24,14 +24,14 @@ package org.graffiti.event;
  * graph structure changes is started or finished, the relevant method in the listener object is invoked and the <code>EdgeEvent</code> is passed to it.
  * </p>
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @see ListenerManager
  * @see EdgeEvent
  */
 public abstract class AbstractEdgeListener
 					implements EdgeListener {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Called after the edge was set directed or undirected.
 	 * 
@@ -40,7 +40,7 @@ public abstract class AbstractEdgeListener
 	 */
 	public void postDirectedChanged(EdgeEvent e) {
 	}
-
+	
 	/**
 	 * Called after the edge has been reversed.
 	 * 
@@ -49,7 +49,7 @@ public abstract class AbstractEdgeListener
 	 */
 	public void postEdgeReversed(EdgeEvent e) {
 	}
-
+	
 	/**
 	 * Called after the source node of an edge has changed.
 	 * 
@@ -58,7 +58,7 @@ public abstract class AbstractEdgeListener
 	 */
 	public void postSourceNodeChanged(EdgeEvent e) {
 	}
-
+	
 	/**
 	 * Called after the target node of an edge has changed.
 	 * 
@@ -67,7 +67,7 @@ public abstract class AbstractEdgeListener
 	 */
 	public void postTargetNodeChanged(EdgeEvent e) {
 	}
-
+	
 	/**
 	 * Called before the edge is set directed or undirected.
 	 * 
@@ -76,7 +76,7 @@ public abstract class AbstractEdgeListener
 	 */
 	public void preDirectedChanged(EdgeEvent e) {
 	}
-
+	
 	/**
 	 * Called before the edge is going to be reversed.
 	 * 
@@ -85,7 +85,7 @@ public abstract class AbstractEdgeListener
 	 */
 	public void preEdgeReversed(EdgeEvent e) {
 	}
-
+	
 	/**
 	 * Called before a change of the source node of an edge takes place.
 	 * 
@@ -94,7 +94,7 @@ public abstract class AbstractEdgeListener
 	 */
 	public void preSourceNodeChanged(EdgeEvent e) {
 	}
-
+	
 	/**
 	 * Called before a change of the target node of an edge takes place.
 	 * 
@@ -103,7 +103,7 @@ public abstract class AbstractEdgeListener
 	 */
 	public void preTargetNodeChanged(EdgeEvent e) {
 	}
-
+	
 	/**
 	 * Called after a transaction has been finished.
 	 * 
@@ -112,7 +112,7 @@ public abstract class AbstractEdgeListener
 	 */
 	public void transactionFinished(TransactionEvent e) {
 	}
-
+	
 	/**
 	 * Called after a transaction has been started.
 	 * 

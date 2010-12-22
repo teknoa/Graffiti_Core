@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractSingleParameter.java,v 1.5 2010/12/14 07:02:27 morla Exp $
+// $Id: AbstractSingleParameter.java,v 1.6 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -18,28 +18,28 @@ import org.graffiti.plugin.XMLHelper;
 /**
  * Implements functions that are common in all SingleParameters.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public abstract class AbstractSingleParameter
 					implements SingleParameter {
 	// ~ Instance fields ========================================================
-
+	
 	/** The image representing the parameter. */
 	private BufferedImage image = null;
-
+	
 	/** The value of this paramater. */
 	private Object value;
-
+	
 	/** The description of the parameter. */
 	private String description;
-
+	
 	/** The name of the parameter. */
 	private String name;
-
+	
 	private boolean left_aligned;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new abstract single parameter class.
 	 * 
@@ -55,7 +55,7 @@ public abstract class AbstractSingleParameter
 		this.description = description;
 		value = val;
 	}
-
+	
 	/**
 	 * Constructs a new abstract single parameter class.
 	 * 
@@ -68,9 +68,9 @@ public abstract class AbstractSingleParameter
 		this.name = name;
 		this.description = description;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the description.
 	 * 
@@ -79,7 +79,7 @@ public abstract class AbstractSingleParameter
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
 	/**
 	 * Returns the description of the parameter.
 	 * 
@@ -88,7 +88,7 @@ public abstract class AbstractSingleParameter
 	public String getDescription() {
 		return description;
 	}
-
+	
 	/**
 	 * Returns the image representing the parameter.
 	 * 
@@ -97,7 +97,7 @@ public abstract class AbstractSingleParameter
 	public BufferedImage getImage() {
 		return image;
 	}
-
+	
 	/**
 	 * Returns the name of the parameter.
 	 * 
@@ -106,7 +106,7 @@ public abstract class AbstractSingleParameter
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.Displayable#setValue(java.lang.Object)
 	 */
@@ -114,14 +114,14 @@ public abstract class AbstractSingleParameter
 						throws IllegalArgumentException {
 		value = val;
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.Displayable#getValue()
 	 */
 	public Object getValue() {
 		return value;
 	}
-
+	
 	/**
 	 * @see java.lang.Object#toString()
 	 */
@@ -133,19 +133,19 @@ public abstract class AbstractSingleParameter
 			return "Parameter (" + name + "), value: " + getValue().toString();
 		}
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
 	 */
 	public String toXMLString() {
 		String valStr = (value == null) ? "null" : value.toString();
-
+		
 		return "<parameter classname=\\\"" + getClass().getName() + "\\\">" +
 							XMLHelper.getDelimiter() + XMLHelper.spc(2) + "<value><![CDATA[" +
 							valStr + "]]>" + XMLHelper.getDelimiter() + XMLHelper.spc(2) +
 							"</value>" + XMLHelper.getDelimiter() + "</parameter>";
 	}
-
+	
 	/**
 	 * Embeds the given String into an XML String. It includes the classname of
 	 * the parameter and a "value" element that gets the given String <code>valueString</code> as content.
@@ -162,19 +162,19 @@ public abstract class AbstractSingleParameter
 							XMLHelper.spc(2) + "</value>" + XMLHelper.getDelimiter() +
 							"</parameter>";
 	}
-
+	
 	public JComponent getIcon() {
 		return null;
 	}
-
+	
 	public boolean isLeftAligned() {
 		return left_aligned;
 	}
-
+	
 	public void setLeftAligned(boolean left_aligned) {
 		this.left_aligned = left_aligned;
 	}
-
+	
 }
 
 // ------------------------------------------------------------------------------

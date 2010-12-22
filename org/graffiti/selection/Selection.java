@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Selection.java,v 1.10 2010/12/16 14:37:20 morla Exp $
+// $Id: Selection.java,v 1.11 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -45,42 +45,42 @@ import org.graffiti.graph.Node;
  * selectionChanged()</code>
  * </p>
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public class Selection {
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * The list of selected edges.
 	 * 
 	 * @see org.graffiti.graph.Edge
 	 */
 	private Set<Edge> edges;
-
+	
 	/**
 	 * The list of selected nodes.
 	 * 
 	 * @see org.graffiti.graph.Node
 	 */
 	private Set<Node> nodes;
-
+	
 	/**
 	 * Map of graph elements that changed state from unmarked to marked. This
 	 * map is cleared after a selectionChanged event has been fired.
 	 */
 	private Map<GraphElement, GraphElement> newMarked;
-
+	
 	/**
 	 * Map of graph elements that changed state from marked to unmarked. This
 	 * map is cleared after a selectionChanged event has been fired.
 	 */
 	private Map<GraphElement, GraphElement> newUnmarked;
-
+	
 	/** The name of this selection. */
 	private String name;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new <code>Selection</code> instance with the given name.
 	 */
@@ -91,7 +91,7 @@ public class Selection {
 		this.newMarked = new HashMap<GraphElement, GraphElement>();
 		this.newUnmarked = new HashMap<GraphElement, GraphElement>();
 	}
-
+	
 	/**
 	 * Constructs a new <code>Selection</code> instance with the given name.
 	 * 
@@ -106,9 +106,9 @@ public class Selection {
 		this.newMarked = new HashMap<GraphElement, GraphElement>();
 		this.newUnmarked = new HashMap<GraphElement, GraphElement>();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the list of selected edges.
 	 * 
@@ -117,7 +117,7 @@ public class Selection {
 	public Collection<Edge> getEdges() {
 		return this.edges;
 	}
-
+	
 	/**
 	 * Returns a list containing all edges and nodes in this selection.
 	 * 
@@ -127,10 +127,10 @@ public class Selection {
 		List<GraphElement> all = new LinkedList<GraphElement>();
 		all.addAll(this.edges);
 		all.addAll(this.nodes);
-
+		
 		return all;
 	}
-
+	
 	/**
 	 * Returns <code>true</code> if no nodes or edges are selected.
 	 * 
@@ -139,7 +139,7 @@ public class Selection {
 	public boolean isEmpty() {
 		return (this.nodes.isEmpty() && this.edges.isEmpty());
 	}
-
+	
 	/**
 	 * Sets the name.
 	 * 
@@ -157,7 +157,7 @@ public class Selection {
 								"Name of a selection may not be changed. Create new one.");
 		}
 	}
-
+	
 	/**
 	 * Returns the name of this selection.
 	 * 
@@ -166,7 +166,7 @@ public class Selection {
 	public String getName() {
 		return this.name;
 	}
-
+	
 	/**
 	 * Sets the list of graph elements that have been marked but the selection
 	 * listeners have not yet been notified.
@@ -177,7 +177,7 @@ public class Selection {
 	public void setNewMarked(Map<GraphElement, GraphElement> newMarked) {
 		this.newMarked = newMarked;
 	}
-
+	
 	/**
 	 * Returns the map holding graph elements that have been marked since the
 	 * last selectionChanged event.
@@ -188,7 +188,7 @@ public class Selection {
 	public Map<GraphElement, GraphElement> getNewMarked() {
 		return newMarked;
 	}
-
+	
 	/**
 	 * Sets the list of graph elements that have been unmarked but the
 	 * selection listeners have not yet been notified.
@@ -199,7 +199,7 @@ public class Selection {
 	public void setNewUnmarked(Map<GraphElement, GraphElement> newUnmarked) {
 		this.newUnmarked = newUnmarked;
 	}
-
+	
 	/**
 	 * Returns the map holding graph elements that have been unmarked since the
 	 * last selectionChanged event.
@@ -210,7 +210,7 @@ public class Selection {
 	public Map<GraphElement, GraphElement> getNewUnmarked() {
 		return newUnmarked;
 	}
-
+	
 	/**
 	 * Returns the list of selected nodes.
 	 * 
@@ -222,7 +222,7 @@ public class Selection {
 		else
 			return this.nodes;
 	}
-
+	
 	/**
 	 * Adds the given node or edge to the selection.
 	 * 
@@ -237,7 +237,7 @@ public class Selection {
 			this.add((Edge) ge);
 		}
 	}
-
+	
 	/**
 	 * Adds the given node to the list of selected nodes.
 	 * 
@@ -252,7 +252,7 @@ public class Selection {
 			this.newMarked.put(node, null);
 		}
 	}
-
+	
 	/**
 	 * Adds the given edge to the list of selected edges.
 	 * 
@@ -263,12 +263,12 @@ public class Selection {
 		if (!edges.contains(edge)) {
 			assert edge != null;
 			this.edges.add(edge);
-
+			
 			newUnmarked.remove(edge);
 			this.newMarked.put(edge, null);
 		}
 	}
-
+	
 	/**
 	 * Adds all (graph)elements of the given collection to this selection.
 	 * 
@@ -278,13 +278,13 @@ public class Selection {
 		for (Object ge : newElements)
 			add((GraphElement) ge);
 	}
-
+	
 	public void removeAll(Collection<?> elements) {
 		for (Object ge : elements) {
 			remove((GraphElement) ge);
 		}
 	}
-
+	
 	// /**
 	// * Adds all (graph)elements of the given collection to this selection.
 	// *
@@ -295,7 +295,7 @@ public class Selection {
 	// for(Node n : nodes)
 	// add(n);
 	// }
-
+	
 	/**
 	 * Adds all elements from the given selection to this selection.
 	 * 
@@ -306,7 +306,7 @@ public class Selection {
 			add((GraphElement) it.next());
 		}
 	}
-
+	
 	/**
 	 * Remove all elements from this selection.
 	 */
@@ -315,31 +315,31 @@ public class Selection {
 		for (Iterator<Node> it = nodes.iterator(); it.hasNext();) {
 			newUnmarked.put(it.next(), null);
 		}
-
+		
 		for (Iterator<Edge> it = edges.iterator(); it.hasNext();) {
 			newUnmarked.put(it.next(), null);
 		}
-
+		
 		nodes = new ListOrderedSet();
 		edges = new ListOrderedSet();
 		newMarked = new HashMap<GraphElement, GraphElement>();
 	}
-
+	
 	/**
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
 	public Object clone() {
 		Selection newSel = new Selection();
-
+		
 		for (Iterator<?> it = getElements().iterator(); it.hasNext();) {
 			GraphElement ge = (GraphElement) it.next();
 			newSel.add(ge);
 		}
-
+		
 		return newSel;
 	}
-
+	
 	/**
 	 * Removes the given node or edge from the selection.
 	 * 
@@ -352,11 +352,11 @@ public class Selection {
 		} else {
 			this.edges.remove(ge);
 		}
-
+		
 		newMarked.remove(ge);
 		this.newUnmarked.put(ge, null);
 	}
-
+	
 	/**
 	 * Gets a string describing the selection. Default: number of selected
 	 * nodes and edges in a sentence.
@@ -368,7 +368,7 @@ public class Selection {
 	public String toString() {
 		return nodes.size() + " nodes and " + edges.size() + " edges selected";
 	}
-
+	
 	/**
 	 * Clears the maps holding any changes since the last selectionChanged
 	 * event. Should be called whenever a selectionChanged event has been
@@ -378,7 +378,7 @@ public class Selection {
 		this.newMarked = new HashMap<GraphElement, GraphElement>();
 		this.newUnmarked = new HashMap<GraphElement, GraphElement>();
 	}
-
+	
 	public boolean contains(GraphElement ge) {
 		if (ge instanceof Node)
 			return this.nodes.contains(ge);
@@ -386,11 +386,11 @@ public class Selection {
 			return this.edges.contains(ge);
 		return false;
 	}
-
+	
 	public int getNumberOfNodes() {
 		return nodes.size();
 	}
-
+	
 	public Collection<Graph> getGraph() {
 		Collection<Graph> res = new ArrayList<Graph>();
 		if (nodes.size() > 0) {
@@ -403,7 +403,7 @@ public class Selection {
 		}
 		return null;
 	}
-
+	
 	public int getNumberOfEdges() {
 		return edges.size();
 	}

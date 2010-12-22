@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ShapeDescriptionAttribute.java,v 1.6 2010/12/14 07:02:26 morla Exp $
+// $Id: ShapeDescriptionAttribute.java,v 1.7 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -24,10 +24,10 @@ import org.graffiti.attributes.LinkedHashMapAttribute;
 public class ShapeDescriptionAttribute
 					extends LinkedHashMapAttribute {
 	// ~ Constructors ===========================================================
-
+	
 	// private CoordinateAttribute[] coords;
 	//
-
+	
 	/**
 	 * Constructor for ShapeDescriptionAttribute.
 	 * 
@@ -36,9 +36,9 @@ public class ShapeDescriptionAttribute
 	public ShapeDescriptionAttribute(String id) {
 		super(id);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	// /**
 	// * Returns a cloned list of attributes in this
 	// * <code>CollectionAttribute</code>.
@@ -50,7 +50,7 @@ public class ShapeDescriptionAttribute
 	// {
 	// return (LinkedHashMap) ((LinkedHashMap) attributes).clone();
 	// }
-
+	
 	/**
 	 * Replaces potentially existing coordinate attributes with the new given
 	 * ones.
@@ -61,18 +61,18 @@ public class ShapeDescriptionAttribute
 	@SuppressWarnings("unchecked")
 	public void setCoordinates(List points) {
 		attributes = new LinkedHashMap();
-
+		
 		CoordinateAttribute coord;
 		boolean inform = getAttributable() == null;
-
+		
 		int i = 0;
-
+		
 		for (Iterator it = points.iterator(); it.hasNext();) {
 			coord = new CoordinateAttribute("coord" + (i++), (Point2D) it.next());
 			add(coord, inform);
 		}
 	}
-
+	
 	//
 	// /**
 	// * @see org.graffiti.attributes.HashMapAttribute#getCollection()
@@ -130,7 +130,7 @@ public class ShapeDescriptionAttribute
 	// }
 	// }
 	//
-
+	
 	/**
 	 * Gets the x and y coordinates. The method returns a <code>List</code> containing <code>Point2D</code> objects.
 	 * 
@@ -139,15 +139,15 @@ public class ShapeDescriptionAttribute
 	public List<Point2D> getCoordinates() {
 		List<Point2D> points = new LinkedList<Point2D>();
 		CoordinateAttribute coord;
-
+		
 		for (Iterator<?> it = this.attributes.values().iterator(); it.hasNext();) {
 			coord = (CoordinateAttribute) it.next();
 			points.add(coord.getCoordinate());
 		}
-
+		
 		return points;
 	}
-
+	
 	/**
 	 * Copies this <code>CollectionAttribute</code> and returns the copy. All
 	 * sub-attributes will be copied, too, i.e. a deep-copy is returned.
@@ -157,7 +157,7 @@ public class ShapeDescriptionAttribute
 	@Override
 	public Object copy() {
 		ShapeDescriptionAttribute copy = new ShapeDescriptionAttribute(this.getId());
-
+		
 		// M.S.: wäre es hier nicht sinnvoller über attributes.values() zu
 		// iterieren? getId() ist wahrscheinlich schneller als get(Id)
 		// bzw. hat eine kleinerer Konstante...
@@ -170,7 +170,7 @@ public class ShapeDescriptionAttribute
 			copiedAttribute.setParent(this);
 			copy.attributes.put(copiedAttribute.getId(), copiedAttribute);
 		}
-
+		
 		return copy;
 	}
 }

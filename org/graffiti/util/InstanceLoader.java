@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: InstanceLoader.java,v 1.8 2010/12/14 07:02:26 morla Exp $
+// $Id: InstanceLoader.java,v 1.9 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.util;
 
@@ -19,22 +19,22 @@ import java.util.HashSet;
  * Represents an instance loader, which can be used to instanciate a class with
  * the given name.
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 @SuppressWarnings("unchecked")
 public class InstanceLoader {
 	// ~ Methods ================================================================
-
+	
 	private static ClassLoader storedLoader = InstanceLoader.class.getClassLoader();
-
+	
 	private static Policy allRight = new AllPermissionPolicy();
-
+	
 	public static synchronized void overrideLoader(ClassLoader loader) {
 		if (loader == null)
 			return;
-
+		
 		Policy.setPolicy(allRight); // :-D
-
+		
 		if (storedLoader != null && (storedLoader instanceof URLClassLoader) && (loader instanceof URLClassLoader)) {
 			// update stored loader with new URLs
 			URLClassLoader ucl = (URLClassLoader) storedLoader;
@@ -42,7 +42,7 @@ public class InstanceLoader {
 			HashSet<URL> knownURLs = new HashSet<URL>();
 			for (URL knownURL : ucl.getURLs())
 				knownURLs.add(knownURL);
-
+			
 			for (URL newURL : newUCL.getURLs()) {
 				if (!knownURLs.contains(newURL)) {
 					storedLoader = loader;
@@ -53,14 +53,14 @@ public class InstanceLoader {
 			storedLoader = loader;
 		}
 		Policy.setPolicy(allRight); // :-D
-
+		
 		Policy.setPolicy(allRight); // :-D
 	}
-
+	
 	public static synchronized ClassLoader getCurrentLoader() {
 		return storedLoader;
 	}
-
+	
 	/**
 	 * Returns a new instance of the specified class.
 	 * 
@@ -80,7 +80,7 @@ public class InstanceLoader {
 			throw new InstanceCreationException(iae);
 		}
 	}
-
+	
 	/**
 	 * Returns a new instance of the specified class.
 	 * 
@@ -94,7 +94,7 @@ public class InstanceLoader {
 						throws InstanceCreationException {
 		try {
 			Class c = storedLoader.loadClass(name);
-
+			
 			return c.newInstance();
 		} catch (NullPointerException npe) {
 			throw new InstanceCreationException(npe);
@@ -110,7 +110,7 @@ public class InstanceLoader {
 			throw new InstanceCreationException(e);
 		}
 	}
-
+	
 	/**
 	 * Returns a new instance of the specified class. Uses a constructor taking
 	 * one argument.
@@ -143,7 +143,7 @@ public class InstanceLoader {
 			throw new InstanceCreationException(iae);
 		}
 	}
-
+	
 	/**
 	 * Returns a new instance of the specified class. Uses a constructor taking
 	 * one argument.
@@ -180,7 +180,7 @@ public class InstanceLoader {
 			throw new InstanceCreationException(iae);
 		}
 	}
-
+	
 	/**
 	 * Returns a new instance of the specified class. Uses a constructor taking
 	 * one argument.

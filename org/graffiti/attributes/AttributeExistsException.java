@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AttributeExistsException.java,v 1.3 2010/12/14 07:02:25 morla Exp $
+// $Id: AttributeExistsException.java,v 1.4 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -13,14 +13,14 @@ package org.graffiti.attributes;
  * The <code>AttributeExistsException</code> will be thrown if a method tries
  * to add an attribute at a location where another attribute already exists.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class AttributeExistsException
 					extends RuntimeException {
 	// ~ Constructors ===========================================================
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs an <code>AttributeExistsException</code> with the specified
 	 * detail message.

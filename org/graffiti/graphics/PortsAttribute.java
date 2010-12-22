@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: PortsAttribute.java,v 1.7 2010/12/14 07:02:26 morla Exp $
+// $Id: PortsAttribute.java,v 1.8 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -24,24 +24,24 @@ import org.graffiti.util.MultipleIterator;
  * Contains ingoing, outgoing and common ports
  * 
  * @author breu
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class PortsAttribute
 					extends HashMapAttribute
 					implements GraphicAttributeConstants {
 	// ~ Instance fields ========================================================
-
+	
 	/** Holds all ports. */
 	private CollectionAttribute common;
-
+	
 	/** Holds all ingoing ports. */
 	private CollectionAttribute ingoing;
-
+	
 	/** Holds all outgoing ports. */
 	private CollectionAttribute outgoing;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for Ports.
 	 * 
@@ -57,7 +57,7 @@ public class PortsAttribute
 		add(this.outgoing, false);
 		add(this.common, false);
 	}
-
+	
 	/**
 	 * Constructor for Ports.
 	 * 
@@ -83,9 +83,9 @@ public class PortsAttribute
 		add(this.outgoing, false);
 		add(this.common, false);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
 	 * 
@@ -100,7 +100,7 @@ public class PortsAttribute
 							attrs.keySet().contains(COMMON)) {
 			for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
 				String attrId = (String) it.next();
-
+				
 				if (attrId.equals(IN)) {
 					setIngoing((CollectionAttribute) attrs.get(IN));
 				} else
@@ -117,7 +117,7 @@ public class PortsAttribute
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * Sets the 'common'-value.
 	 * 
@@ -126,10 +126,10 @@ public class PortsAttribute
 	 */
 	public void setCommon(CollectionAttribute c) {
 		this.common.setCollection(c.getCollection());
-
+		
 		// this.common = c;
 	}
-
+	
 	/**
 	 * Returns the 'common'-value of the encapsulated ports.
 	 * 
@@ -138,7 +138,7 @@ public class PortsAttribute
 	public CollectionAttribute getCommon() {
 		return this.common;
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -149,17 +149,17 @@ public class PortsAttribute
 	public void setCommonPorts(List ports) {
 		Map portsMap = new HashMap();
 		int i = 1;
-
+		
 		for (Iterator pit = ports.iterator(); pit.hasNext();) {
 			Port port = (Port) pit.next();
 			PortAttribute portAttr = new PortAttribute("port" + i,
 								port.getName(), port.getX(), port.getY());
 			portsMap.put("port" + i++, portAttr);
 		}
-
+		
 		this.common.setCollection(portsMap);
 	}
-
+	
 	/**
 	 * Sets the 'ingoing'-value.
 	 * 
@@ -168,10 +168,10 @@ public class PortsAttribute
 	 */
 	public void setIngoing(CollectionAttribute i) {
 		this.ingoing.setCollection(i.getCollection());
-
+		
 		// this.ingoing = i;
 	}
-
+	
 	/**
 	 * Returns the 'ingoing'-value of the encapsulated ports.
 	 * 
@@ -180,7 +180,7 @@ public class PortsAttribute
 	public CollectionAttribute getIngoing() {
 		return this.ingoing;
 	}
-
+	
 	/**
 	 * Sets the 'outgoing'-value.
 	 * 
@@ -189,10 +189,10 @@ public class PortsAttribute
 	 */
 	public void setOutgoing(CollectionAttribute o) {
 		this.ingoing.setCollection(o.getCollection());
-
+		
 		// this.outgoing = o;
 	}
-
+	
 	/**
 	 * Returns the 'outgoing'-value of the encapsulated ports.
 	 * 
@@ -201,7 +201,7 @@ public class PortsAttribute
 	public CollectionAttribute getOutgoing() {
 		return this.outgoing;
 	}
-
+	
 	/**
 	 * Look if there is a <code>PortAttribute</code> in this <code>CollectionAttribute</code> called <code>name</code>. Returns <code>null </code> if there is no
 	 * such attribute.
@@ -216,29 +216,29 @@ public class PortsAttribute
 		Map<?, ?> commonPortAttributesMap = this.common.getCollection();
 		Collection<?> commonPortAttributes = commonPortAttributesMap.values();
 		Map<?, ?> otherPortAttributesMap;
-
+		
 		if (out) {
 			otherPortAttributesMap = outgoing.getCollection();
 		} else {
 			otherPortAttributesMap = ingoing.getCollection();
 		}
-
+		
 		Collection<?> otherPortAttributes = otherPortAttributesMap.values();
-
+		
 		MultipleIterator it = new MultipleIterator(commonPortAttributes.iterator(),
 							otherPortAttributes.iterator());
-
+		
 		for (; it.hasNext();) {
 			PortAttribute port = (PortAttribute) it.next();
-
+			
 			if (port.getName().equals(name)) {
 				return port;
 			}
 		}
-
+		
 		return null;
 	}
-
+	
 	/**
 	 * Returns a deep copy of this object.
 	 * 
@@ -249,7 +249,7 @@ public class PortsAttribute
 		PortsAttribute copied = new PortsAttribute(this.getId(), getIngoing(), getOutgoing(), getCommon());
 		return copied;
 	}
-
+	
 	// /**
 	// * Sets the value of this <code>Attribute</code> to the given value without
 	// * informing the <code>ListenerManager</code>.

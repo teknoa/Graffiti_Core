@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: NodeLabelAttribute.java,v 1.3 2010/12/14 07:02:26 morla Exp $
+// $Id: NodeLabelAttribute.java,v 1.4 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -13,17 +13,17 @@ package org.graffiti.graphics;
  * DOCUMENT ME!
  * 
  * @author holleis
- * @version $Revision: 1.3 $ Extends LabelAttribute by a PositionAttribute specific for nodes.
+ * @version $Revision: 1.4 $ Extends LabelAttribute by a PositionAttribute specific for nodes.
  */
 public class NodeLabelAttribute
 					extends LabelAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	/** Position of a label within this node. */
 	// private NodeLabelPositionAttribute position;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for NodeLabelAttribute.
 	 * 
@@ -33,7 +33,7 @@ public class NodeLabelAttribute
 		super(id);
 		this.add(new NodeLabelPositionAttribute(POSITION), false);
 	}
-
+	
 	/**
 	 * Constructor for NodeLabelAttribute.
 	 * 
@@ -45,9 +45,9 @@ public class NodeLabelAttribute
 		super(id, l);
 		this.add(new NodeLabelPositionAttribute(POSITION), false);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	// /**
 	// * Sets the collection of attributes contained within this
 	// * <tt>CollectionAttribute</tt>
@@ -86,7 +86,7 @@ public class NodeLabelAttribute
 	// throw new IllegalArgumentException("Invalid value type.");
 	// }
 	// }
-
+	
 	/**
 	 * Sets the 'position'-value.
 	 * 
@@ -97,7 +97,7 @@ public class NodeLabelAttribute
 		remove(POSITION);
 		add(p, false);
 	}
-
+	
 	/**
 	 * Returns the NodeLabelPositionAttribute specifying the position of the
 	 * encapsulated label.
@@ -108,7 +108,7 @@ public class NodeLabelAttribute
 	public NodeLabelPositionAttribute getPosition() {
 		return (NodeLabelPositionAttribute) attributes.get(POSITION);
 	}
-
+	
 	// /**
 	// * Returns a deep copy of this object.
 	// *
@@ -126,7 +126,7 @@ public class NodeLabelAttribute
 	//
 	// return copied;
 	// }
-
+	
 	// /**
 	// * Sets the value of this <code>Attribute</code> to the given value without
 	// * informing the <code>ListenerManager</code>.

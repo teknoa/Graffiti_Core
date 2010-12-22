@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: PluginXMLParserErrorHandler.java,v 1.3 2010/12/14 07:02:25 morla Exp $
+// $Id: PluginXMLParserErrorHandler.java,v 1.4 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -16,12 +16,12 @@ import org.xml.sax.SAXParseException;
 /**
  * An error handler class for the plugin xml parser.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class PluginXMLParserErrorHandler
 					implements ErrorHandler {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Error Event Handler.
 	 * 
@@ -34,7 +34,7 @@ public class PluginXMLParserErrorHandler
 						throws SAXException {
 		throw e;
 	}
-
+	
 	/**
 	 * Fatal Error Event Handler.
 	 * 
@@ -47,7 +47,7 @@ public class PluginXMLParserErrorHandler
 						throws SAXException {
 		throw e;
 	}
-
+	
 	/**
 	 * Warning Event Handler.
 	 * 

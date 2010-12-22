@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: StringBundle.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: StringBundle.java,v 1.5 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.core;
 
@@ -19,21 +19,21 @@ package org.graffiti.core;
 public class StringBundle
 					extends GenericBundle {
 	// ~ Static fields/initializers =============================================
-
+	
 	/** The only instance which will be created and returned. */
 	private static StringBundle instance = null;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new <code>StringBundle</code>.
 	 */
 	protected StringBundle() {
 		super();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the only instance of this class.
 	 * 
@@ -43,10 +43,10 @@ public class StringBundle
 		if (instance == null) {
 			instance = new StringBundle();
 		}
-
+		
 		return instance;
 	}
-
+	
 	/**
 	 * Returns the location of this <code>Bundle</code>.
 	 * 

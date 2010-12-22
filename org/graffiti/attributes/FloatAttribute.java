@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: FloatAttribute.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: FloatAttribute.java,v 1.5 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -14,17 +14,17 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a float
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class FloatAttribute
 					extends AbstractAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this attribute */
 	private float value;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new instance of a <code>FloatAttribute</code>.
 	 * 
@@ -34,7 +34,7 @@ public class FloatAttribute
 	public FloatAttribute(String id) {
 		super(id);
 	}
-
+	
 	/**
 	 * Constructs a new instance of a <code>FloatAttribute</code> with the
 	 * given value.
@@ -48,7 +48,7 @@ public class FloatAttribute
 		super(id);
 		this.value = value;
 	}
-
+	
 	/**
 	 * Constructs a new instance of a <code>FloatAttribute</code> with the
 	 * given value.
@@ -62,16 +62,16 @@ public class FloatAttribute
 		super(id);
 		this.value = value.floatValue();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
 	 */
 	public void setDefaultValue() {
 		value = 0f;
 	}
-
+	
 	/**
 	 * Set the value of this Object.
 	 * 
@@ -84,7 +84,7 @@ public class FloatAttribute
 		this.value = value;
 		callPostAttributeChanged(ae);
 	}
-
+	
 	/**
 	 * Returns the value of this object.
 	 * 
@@ -93,7 +93,7 @@ public class FloatAttribute
 	public float getFloat() {
 		return value;
 	}
-
+	
 	/**
 	 * Returns the value of the attribute wrapped in an <code>Float</code> object.
 	 * 
@@ -102,7 +102,7 @@ public class FloatAttribute
 	public Object getValue() {
 		return new Float(value);
 	}
-
+	
 	/**
 	 * Returns a deep copy of this instance.
 	 * 
@@ -111,7 +111,7 @@ public class FloatAttribute
 	public Object copy() {
 		return new FloatAttribute(this.getId(), this.value);
 	}
-
+	
 	/**
 	 * Sets the value of the attribute. The <code>ListenerManager</code> is
 	 * informed by the method <code>setValue()</code>.
@@ -126,7 +126,7 @@ public class FloatAttribute
 	protected void doSetValue(Object o)
 						throws IllegalArgumentException {
 		assert o != null;
-
+		
 		try {
 			if (o instanceof Double)
 				value = ((Double) o).floatValue();
@@ -136,7 +136,7 @@ public class FloatAttribute
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.Displayable#toXMLString()
 	 */

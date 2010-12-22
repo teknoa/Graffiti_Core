@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AWTImageAttribute.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: AWTImageAttribute.java,v 1.6 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -21,17 +21,17 @@ import org.graffiti.attributes.CompositeAttribute;
  * Contains the awt image graphic attribute.
  * 
  * @author breu
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class AWTImageAttribute
 					extends CompositeAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	/** Contains the value of this <code>AWTImageAttribute</code>. */
 	private Image image;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for AWTImage.
 	 * 
@@ -44,7 +44,7 @@ public class AWTImageAttribute
 		super(id);
 		this.image = value;
 	}
-
+	
 	/**
 	 * Standard constructor. Creates an new image with size 0 of type int-argb.
 	 * 
@@ -55,9 +55,9 @@ public class AWTImageAttribute
 		super(id);
 		// image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * @see org.graffiti.attributes.CompositeAttribute#setAttribute(String, Attribute)
 	 */
@@ -65,7 +65,7 @@ public class AWTImageAttribute
 	public void setAttribute(String id, Attribute att)
 						throws AttributeNotFoundException, IllegalArgumentException {
 	}
-
+	
 	/**
 	 * @see org.graffiti.attributes.CompositeAttribute#getAttribute(String)
 	 */
@@ -74,7 +74,7 @@ public class AWTImageAttribute
 						throws AttributeNotFoundException {
 		throw new RuntimeException("still to implement!");
 	}
-
+	
 	/**
 	 * @see org.graffiti.attributes.CompositeAttribute#getAttributes()
 	 */
@@ -82,7 +82,7 @@ public class AWTImageAttribute
 	public CollectionAttribute getAttributes() {
 		throw new RuntimeException("still to implement!");
 	}
-
+	
 	/**
 	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
 	 */
@@ -91,7 +91,7 @@ public class AWTImageAttribute
 			image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 		}
 	}
-
+	
 	/**
 	 * Sets the 'image'-value.
 	 * 
@@ -101,7 +101,7 @@ public class AWTImageAttribute
 	public void setImage(Image i) {
 		this.image = i;
 	}
-
+	
 	/**
 	 * Returns the 'image'-value of the encapsulated awt-image.
 	 * 
@@ -110,7 +110,7 @@ public class AWTImageAttribute
 	public Image getImage() {
 		return this.image;
 	}
-
+	
 	/**
 	 * Returns the value of this attribute. This attribute just returns the
 	 * image.
@@ -120,7 +120,7 @@ public class AWTImageAttribute
 	public Object getValue() {
 		return getImage();
 	}
-
+	
 	/**
 	 * Copies the image to a new image with the same size.
 	 * 
@@ -132,7 +132,7 @@ public class AWTImageAttribute
 							image.getScaledInstance(image.getWidth(null),
 												image.getHeight(null), Image.SCALE_DEFAULT));
 	}
-
+	
 	/**
 	 * Sets the value of this object to the given value.
 	 * 

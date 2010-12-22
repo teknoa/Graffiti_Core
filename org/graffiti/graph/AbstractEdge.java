@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractEdge.java,v 1.5 2010/12/14 07:02:25 morla Exp $
+// $Id: AbstractEdge.java,v 1.6 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -18,18 +18,18 @@ import org.graffiti.event.ListenerManager;
 /**
  * Provides default implementations of methods on edges.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public abstract class AbstractEdge
 					extends AbstractGraphElement
 					implements Edge {
 	// ~ Static fields/initializers =============================================
-
+	
 	/** The logger for the current class. */
 	private static final Logger logger = Logger.getLogger(AbstractEdge.class.getName());
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new <code>AbstractEdge</code>. Also sets the graph.
 	 * 
@@ -40,7 +40,7 @@ public abstract class AbstractEdge
 		super(graph);
 		setViewID(0); // nodes default = -1, edges default = 0 => nodes are painted before edges
 	}
-
+	
 	/**
 	 * Constructs a new <code>AbstractEdge</code>. Sets the graph of the new <code>AbstractEdge</code>.
 	 * 
@@ -53,9 +53,9 @@ public abstract class AbstractEdge
 		super(graph, coll);
 		setViewID(0); // nodes default = -1, edges default = 0 => nodes are painted before edges
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Determines if an <code>Edge</code> is directed (<code>true</code>) or
 	 * not. Informs the ListenerManager that the direction has been modified.
@@ -71,7 +71,7 @@ public abstract class AbstractEdge
 		doSetDirected(directed);
 		listMan.postDirectedChanged(new EdgeEvent(this));
 	}
-
+	
 	/**
 	 * Sets the source of the current <code>Edge</code> to <code>source</code>. <code>source</code> must be contained in the same <code>Graph</code> as
 	 * the current <code>Edge</code>. Informs the ListenerManager about the
@@ -86,13 +86,13 @@ public abstract class AbstractEdge
 	public void setSource(Node source)
 						throws GraphElementNotFoundException {
 		assert source != null;
-
+		
 		ListenerManager listMan = this.getListenerManager();
 		listMan.preSourceNodeChanged(new EdgeEvent(this));
 		doSetSource(source);
 		listMan.postSourceNodeChanged(new EdgeEvent(this));
 	}
-
+	
 	/**
 	 * Sets the target of the current <code>Edge</code> to target. Target must
 	 * be contained in the same <code>Graph</code> as the <code>Edge</code>.
@@ -107,31 +107,31 @@ public abstract class AbstractEdge
 	public void setTarget(Node target)
 						throws GraphElementNotFoundException {
 		assert target != null;
-
+		
 		ListenerManager listMan = this.getListenerManager();
 		listMan.preTargetNodeChanged(new EdgeEvent(this));
 		doSetTarget(target);
 		listMan.postTargetNodeChanged(new EdgeEvent(this));
 	}
-
+	
 	/**
 	 * Swaps source and target of the edge. Informs the listtenerManager about
 	 * the change.
 	 */
 	public void reverse() {
 		logger.info("swapping source and target of the edge");
-
+		
 		ListenerManager listMan = getListenerManager();
 		listMan.preEdgeReversed(new EdgeEvent(this));
 		doReverse();
 		listMan.postEdgeReversed(new EdgeEvent(this));
 	}
-
+	
 	/**
 	 * Swaps source and target of the edge.
 	 */
 	protected abstract void doReverse();
-
+	
 	/**
 	 * Determines if an <code>Edge</code> is directed (<code>true</code>) or
 	 * not.
@@ -141,7 +141,7 @@ public abstract class AbstractEdge
 	 *           to be directed, <code>false</code> otherwise.
 	 */
 	protected abstract void doSetDirected(boolean directed);
-
+	
 	/**
 	 * Sets the source of the current <code>Edge</code> to <code>source</code>. <code>source</code> must be contained in the same <code>Graph</code> as
 	 * the current <code>Edge</code>.
@@ -154,7 +154,7 @@ public abstract class AbstractEdge
 	 */
 	protected abstract void doSetSource(Node source)
 						throws GraphElementNotFoundException;
-
+	
 	/**
 	 * Sets the target of the current <code>Edge</code> to target. Target must
 	 * be contained in the same <code>Graph</code> as the <code>Edge</code>.

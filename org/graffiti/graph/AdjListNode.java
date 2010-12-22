@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AdjListNode.java,v 1.9 2010/12/14 07:02:25 morla Exp $
+// $Id: AdjListNode.java,v 1.10 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -22,7 +22,7 @@ import org.graffiti.util.MultipleIterator;
 /**
  * Implements a graph node with adjacency list representation.
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * @see AdjListGraph
  * @see AdjListEdge
  */
@@ -30,29 +30,29 @@ public class AdjListNode
 					extends AbstractNode
 					implements Node, GraphElement {
 	// ~ Static fields/initializers =============================================
-
+	
 	/** The logger for the AdjListNode class. */
 	// private static final Logger logger = Logger.getLogger(AdjListNode.class.getName());
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * Contains all the directed ingoing edges of the current <code>Node</code>.
 	 */
 	private Set<Edge> directedInEdges;
-
+	
 	/**
 	 * Contains all the directed outgoing edges of the current <code>Node</code>.
 	 */
 	private Set<Edge> directedOutEdges;
-
+	
 	/**
 	 * Contains all the undirected edges connected to the current <code>Node</code>.
 	 */
 	private Set<Edge> undirectedEdges;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new <code>AdjListNode</code>.
 	 * 
@@ -66,7 +66,7 @@ public class AdjListNode
 		undirectedEdges = new LinkedHashSet<Edge>(); // new HashSet<Edge>();
 		directedOutEdges = new LinkedHashSet<Edge>(); // new HashSet<Edge>();
 	}
-
+	
 	/**
 	 * Constructs a new <code>AdjListNode</code>.
 	 * 
@@ -82,9 +82,9 @@ public class AdjListNode
 		undirectedEdges = new LinkedHashSet<Edge>(); // new HashSet<Edge>();
 		directedOutEdges = new LinkedHashSet<Edge>(); // new HashSet<Edge>();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns an iterator containing the directed ingoing edges of the <code>Node</code>.
 	 * 
@@ -94,7 +94,7 @@ public class AdjListNode
 	public Iterator<Edge> getDirectedInEdgesIterator() {
 		return new MultipleIterator(directedInEdges.iterator());
 	}
-
+	
 	/**
 	 * Returns an iterator containing the outgoing directed edges of the <code>Node</code>.
 	 * 
@@ -104,7 +104,7 @@ public class AdjListNode
 	public Iterator<Edge> getDirectedOutEdgesIterator() {
 		return new MultipleIterator(directedOutEdges.iterator());
 	}
-
+	
 	/**
 	 * Returns an iterator containing all the ingoing and outgoing directed and
 	 * undirected edges of the current <code>Node</code>. Ingoing and outgoing
@@ -119,7 +119,7 @@ public class AdjListNode
 		return (Iterator) new MultipleIterator(directedInEdges.iterator(),
 							undirectedEdges.iterator(), directedOutEdges.iterator());
 	}
-
+	
 	/**
 	 * Returns the in-degree of the current <code>Node</code>. The in-degree is
 	 * defined as the number of ingoing, directed edges plus the number of
@@ -131,7 +131,7 @@ public class AdjListNode
 	public int getInDegree() {
 		return directedInEdges.size() + undirectedEdges.size();
 	}
-
+	
 	/**
 	 * Returns the out-degree of the current <code>Node</code>. The out-degree
 	 * is defined as the number of outgoing, directed edges plus the number of
@@ -143,7 +143,7 @@ public class AdjListNode
 	public int getOutDegree() {
 		return directedOutEdges.size() + undirectedEdges.size();
 	}
-
+	
 	/**
 	 * Returns an iterator containing the undirected ingoing and outgoing edges
 	 * of the <code>Node</code>.
@@ -155,7 +155,7 @@ public class AdjListNode
 	public Iterator<Edge> getUndirectedEdgesIterator() {
 		return new MultipleIterator(undirectedEdges.iterator());
 	}
-
+	
 	@Override
 	public Collection<Edge> getEdges() {
 		Set<Edge> c = new LinkedHashSet<Edge>();
@@ -164,7 +164,7 @@ public class AdjListNode
 		c.addAll(undirectedEdges);
 		return c;
 	}
-
+	
 	/**
 	 * Sets the <code>graph</code> member variable to <code>null</code>. <b>Be
 	 * Careful:</b> This function should only be called when the node gets
@@ -173,7 +173,7 @@ public class AdjListNode
 	void setGraphToNull() {
 		this.graph = null;
 	}
-
+	
 	/**
 	 * Adds a new ingoing <code>Edge</code> to the corresponding <code>Edge</code> list. Informs the ListenerManageer about the change.
 	 * 
@@ -182,9 +182,9 @@ public class AdjListNode
 	 */
 	void addInEdge(AdjListEdge edge) {
 		assert edge != null;
-
+		
 		ListenerManager listMan = getListenerManager();
-
+		
 		if (edge.isDirected()) {
 			// logger.fine("adding an ingoing edge to this node");
 			// if (listMan!=null)
@@ -200,10 +200,10 @@ public class AdjListNode
 			if (listMan != null)
 				listMan.postUndirectedEdgeAdded(new NodeEvent(this, edge));
 		}
-
+		
 		// logger.fine("exiting doAddEdge()");
 	}
-
+	
 	/**
 	 * Adds a new outgoing <code>Edge</code> to the corresponding <code>Edge</code> list. Informs the ListenerManageer about the change.
 	 * 
@@ -212,9 +212,9 @@ public class AdjListNode
 	 */
 	void addOutEdge(AdjListEdge edge) {
 		assert edge != null;
-
+		
 		ListenerManager listMan = getListenerManager();
-
+		
 		if (edge.isDirected()) {
 			// logger.info("adding an outgoing edge to this node");
 			// if (listMan!=null)
@@ -230,10 +230,10 @@ public class AdjListNode
 			if (listMan != null)
 				listMan.postUndirectedEdgeAdded(new NodeEvent(this, edge));
 		}
-
+		
 		// logger.fine("exiting addEdge()");
 	}
-
+	
 	/**
 	 * Removes an ingoing <code>Edge</code> from the corresponding <code>Edge</code> list. Informs the ListenerManager about the change.
 	 * 
@@ -246,16 +246,16 @@ public class AdjListNode
 	void removeInEdge(Edge edge)
 						throws GraphElementNotFoundException {
 		assert edge != null;
-
+		
 		ListenerManager listMan = getListenerManager();
-
+		
 		if (edge.isDirected()) {
 			// logger.fine("removing an inEdge");
 			if (directedInEdges.contains(edge)) {
 				// if (listMan!=null)
 				// listMan.preInEdgeRemoved(new NodeEvent(this, edge));
 				directedInEdges.remove(edge);
-
+				
 				// if (listMan!=null)
 				// listMan.postInEdgeRemoved(new NodeEvent(this, edge));
 			} else {
@@ -268,7 +268,7 @@ public class AdjListNode
 			}
 		} else {
 			// logger.fine("removing an undirected edge");
-
+			
 			if (undirectedEdges.contains(edge)) {
 				if (listMan != null)
 					listMan.preUndirectedEdgeRemoved(new NodeEvent(this, edge));
@@ -284,10 +284,10 @@ public class AdjListNode
 														"the node");
 			}
 		}
-
+		
 		// logger.fine("exiting removeEdge()");
 	}
-
+	
 	/**
 	 * Removes an outgoing <code>Edge</code> from the corresponding <code>Edge</code> list. Informs the ListenerManager about the change.
 	 * 
@@ -300,12 +300,12 @@ public class AdjListNode
 	void removeOutEdge(Edge edge)
 						throws GraphElementNotFoundException {
 		assert edge != null;
-
+		
 		ListenerManager listMan = getListenerManager();
-
+		
 		if (edge.isDirected()) {
 			// logger.fine("removing a directed outEdge");
-
+			
 			if (directedOutEdges.contains(edge)) {
 				// if (listMan!=null)
 				// listMan.preOutEdgeRemoved(new NodeEvent(this, edge));
@@ -316,14 +316,14 @@ public class AdjListNode
 				// logger.severe("Throwing GraphElementNotFoundException, " +
 				// "because the edge was not found in the " +
 				// "(apropriate) list of the node");
-
+				
 				// throw new GraphElementNotFoundException(
 				// "The edge was not found in the (apropriate) list in " +
 				// "the node");
 			}
 		} else {
 			// logger.fine("removing an undirected outEdge");
-
+			
 			if (undirectedEdges.contains(edge)) {
 				if (listMan != null)
 					listMan.preUndirectedEdgeRemoved(new NodeEvent(this, edge));
@@ -334,16 +334,16 @@ public class AdjListNode
 				// logger.severe("Throwing GraphElementNotFoundException, " +
 				// "because the edge was not found in the " +
 				// "(apropriate) list of the node");
-
+				
 				// throw new GraphElementNotFoundException(
 				// "The edge was not found in the (apropriate) list in " +
 				// "the node");
 			}
 		}
-
+		
 		// logger.fine("exiting removeEdge()");
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Node#setGraph(org.graffiti.graph.AbstractGraph)
@@ -352,16 +352,16 @@ public class AdjListNode
 		assert graph != null;
 		this.graph = graph;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Node ID=" + getID();
 	}
-
+	
 	public int getDegree() {
 		return getEdges().size();
 	}
-
+	
 	public int compareTo(GraphElement arg0) {
 		return new Integer(getViewID()).compareTo(arg0.getViewID());
 	}

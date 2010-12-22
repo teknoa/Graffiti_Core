@@ -5,18 +5,18 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: DeepCopy.java,v 1.3 2010/12/14 07:02:25 morla Exp $
+// $Id: DeepCopy.java,v 1.4 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.core;
 
 /**
  * Guarantees a deep copy.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public interface DeepCopy {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns a deep copy of this object.
 	 * 

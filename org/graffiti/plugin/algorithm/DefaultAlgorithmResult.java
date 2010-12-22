@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: DefaultAlgorithmResult.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: DefaultAlgorithmResult.java,v 1.5 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.plugin.algorithm;
 
@@ -20,19 +20,19 @@ import java.util.Map;
 public class DefaultAlgorithmResult
 					implements AlgorithmResult {
 	// ~ Instance fields ========================================================
-
+	
 	/** DOCUMENT ME! */
 	protected Map<String, Object> resultMap = new HashMap<String, Object>();
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for DefaultAlgorithmResult.
 	 */
 	public DefaultAlgorithmResult() {
 		super();
 	}
-
+	
 	/**
 	 * Constructor for DefaultAlgorithmResult.
 	 * 
@@ -43,16 +43,16 @@ public class DefaultAlgorithmResult
 		super();
 		this.resultMap = resultMap;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * @see org.graffiti.plugin.algorithm.AlgorithmResult#getResult()
 	 */
 	public Map<String, Object> getResult() {
 		return this.resultMap;
 	}
-
+	
 	/*
 	 * @see org.graffiti.plugin.algorithm.AlgorithmResult#addToResult(java.lang.String, java.lang.Object)
 	 */

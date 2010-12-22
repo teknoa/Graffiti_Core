@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: RedundantMultipleIterator.java,v 1.4 2010/12/14 07:02:26 morla Exp $
+// $Id: RedundantMultipleIterator.java,v 1.5 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.util;
 
@@ -17,21 +17,21 @@ import java.util.NoSuchElementException;
  * implementing the <code>java.util.Iterator</code> interface. It is possible
  * to iterate over all the iterators one after the other.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class RedundantMultipleIterator
 					implements Iterator<Object> {
 	// ~ Instance fields ========================================================
-
+	
 	/** The iterators to iterate over. */
 	@SuppressWarnings("unchecked")
 	private Iterator[] iters;
-
+	
 	/** Points to the current iterator. */
 	private int current;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new <code>MultipleIterator</code> instance.
 	 * 
@@ -43,7 +43,7 @@ public class RedundantMultipleIterator
 		current = 0;
 		this.iters = iters;
 	}
-
+	
 	/**
 	 * Constructs a new <code>MultipleIterator</code> instance.
 	 * 
@@ -54,7 +54,7 @@ public class RedundantMultipleIterator
 		iters = new Iterator[1];
 		iters[0] = itr;
 	}
-
+	
 	/**
 	 * Constructs a new <code>MultipleIterator</code> instance.
 	 * 
@@ -68,7 +68,7 @@ public class RedundantMultipleIterator
 		iters[0] = itr1;
 		iters[1] = itr2;
 	}
-
+	
 	/**
 	 * Constructs a new <code>MultipleIterator</code> instance.
 	 * 
@@ -85,9 +85,9 @@ public class RedundantMultipleIterator
 		iters[1] = itr2;
 		iters[2] = itr3;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns <code>true</code> if the iteration has not yet passed each of
 	 * the iterators, <code>false</code> otherwise.
@@ -101,16 +101,16 @@ public class RedundantMultipleIterator
 		} else {
 			while (current < (iters.length - 1)) {
 				current++;
-
+				
 				if (iters[current].hasNext()) {
 					return true;
 				}
 			}
 		}
-
+		
 		return false;
 	}
-
+	
 	/**
 	 * Returns the next element of the iteration. If the end of one iterator
 	 * has been reached, the iteration will be continued on the next one.
@@ -125,16 +125,16 @@ public class RedundantMultipleIterator
 		} else {
 			while (current < (iters.length - 1)) {
 				current++;
-
+				
 				if (iters[current].hasNext()) {
 					return iters[current].next();
 				}
 			}
 		}
-
+		
 		throw new NoSuchElementException();
 	}
-
+	
 	/**
 	 * The method <code>remove()</code> of the interface <code>java.util.Iterator</code> will not be supported in this
 	 * implementation.

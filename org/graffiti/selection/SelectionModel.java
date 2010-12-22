@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: SelectionModel.java,v 1.8 2010/12/14 07:02:26 morla Exp $
+// $Id: SelectionModel.java,v 1.9 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.selection;
 
@@ -18,21 +18,21 @@ import java.util.Iterator;
  * Contains a list of selections and a reference to the current selection.
  * 
  * @author flierl
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class SelectionModel {
 	// ~ Static fields/initializers =============================================
-
+	
 	/** DOCUMENT ME! */
 	public static final String ACTIVE = "active";
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * The list of selections. Maps a <code>Selection.name</code> to a <code>Selection</code> instance.
 	 */
 	private Hashtable<String, Selection> selections;
-
+	
 	/**
 	 * The list of listeners, that want to be informed about changes in the
 	 * selection model.
@@ -40,12 +40,12 @@ public class SelectionModel {
 	 * @see SelectionListener
 	 */
 	private HashSet<SelectionListener> listeners;
-
+	
 	/** The current active selection. */
 	private String activeSelection;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new <code>SelectionModel</code>.
 	 */
@@ -53,9 +53,9 @@ public class SelectionModel {
 		selections = new Hashtable<String, Selection>();
 		listeners = new HashSet<SelectionListener>();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the active selection to the given value. Informs all listeners
 	 * about the change.
@@ -68,11 +68,11 @@ public class SelectionModel {
 			Selection oldSel = this.selections.get(this.activeSelection);
 			oldSel.clear();
 		}
-
+		
 		this.activeSelection = selectionName;
 		this.selectionChanged();
 	}
-
+	
 	/**
 	 * Sets the active selection to the given value. Informs all listeners
 	 * about the change.
@@ -86,21 +86,21 @@ public class SelectionModel {
 			oldSel.clear();
 			this.selectionChanged();
 		}
-
+		
 		this.activeSelection = sel.getName();
-
+		
 		if (selections.put(sel.getName(), sel) == null) {
 			SelectionEvent selectionEvent = new SelectionEvent(sel);
 			selectionEvent.setAdded(true);
-
+			
 			for (Iterator<SelectionListener> it = listeners.iterator(); it.hasNext();) {
 				((SelectionListener) it.next()).selectionListChanged(selectionEvent);
 			}
 		}
-
+		
 		this.selectionChanged();
 	}
-
+	
 	/**
 	 * Returns the active selection.
 	 * 
@@ -113,7 +113,7 @@ public class SelectionModel {
 			return selections.get(activeSelection);
 		}
 	}
-
+	
 	/**
 	 * Adds the given selection to the list of selections.
 	 * 
@@ -122,15 +122,15 @@ public class SelectionModel {
 	 */
 	public void add(Selection selection) {
 		selections.put(selection.getName(), selection);
-
+		
 		SelectionEvent selectionEvent = new SelectionEvent(selection);
 		selectionEvent.setAdded(true);
-
+		
 		for (Iterator<SelectionListener> it = listeners.iterator(); it.hasNext();) {
 			((SelectionListener) it.next()).selectionListChanged(selectionEvent);
 		}
 	}
-
+	
 	/**
 	 * Adds the given selection listener to the list of listeners.
 	 * 
@@ -142,7 +142,7 @@ public class SelectionModel {
 			listeners.add(listener);
 		}
 	}
-
+	
 	/**
 	 * Removes the given selection for the list of selections.
 	 * 
@@ -151,15 +151,15 @@ public class SelectionModel {
 	 */
 	public void remove(Selection selection) {
 		selections.remove(selection.getName());
-
+		
 		SelectionEvent selectionEvent = new SelectionEvent(selection);
 		selectionEvent.setAdded(false);
-
+		
 		for (Iterator<SelectionListener> it = listeners.iterator(); it.hasNext();) {
 			((SelectionListener) it.next()).selectionListChanged(selectionEvent);
 		}
 	}
-
+	
 	/**
 	 * Removes the given selection listener from the list of listeners.
 	 * 
@@ -169,7 +169,7 @@ public class SelectionModel {
 	public void removeSelectionListener(SelectionListener listener) {
 		listeners.remove(listener);
 	}
-
+	
 	/**
 	 * Informs the registered listeners that the active session has changed.
 	 */
@@ -183,7 +183,7 @@ public class SelectionModel {
 		for (SelectionListener sl : list) {
 			sl.selectionChanged(selectionEvent);
 		}
-
+		
 		activeSel.committedChanges();
 	}
 }

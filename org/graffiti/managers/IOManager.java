@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: IOManager.java,v 1.8 2010/12/14 07:02:26 morla Exp $
+// $Id: IOManager.java,v 1.9 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.managers;
 
@@ -22,12 +22,12 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public interface IOManager
 					extends PluginManagerListener {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Registers the given input serializer.
 	 * 
@@ -35,7 +35,7 @@ public interface IOManager
 	 *           the new serializer to add.
 	 */
 	void addInputSerializer(InputSerializer i);
-
+	
 	/**
 	 * Adds the given <code>IOManagerListener</code> to the list of io manager
 	 * listeners.
@@ -44,7 +44,7 @@ public interface IOManager
 	 *           the listener to add.
 	 */
 	void addListener(IOManagerListener ioManagerListener);
-
+	
 	/**
 	 * Registers the given output serializer.
 	 * 
@@ -52,7 +52,7 @@ public interface IOManager
 	 *           the new serializer to add.
 	 */
 	void addOutputSerializer(OutputSerializer o);
-
+	
 	/**
 	 * Creates an instance of an input serializer from the given extension.
 	 * 
@@ -61,7 +61,7 @@ public interface IOManager
 	 */
 	InputSerializer createInputSerializer(InputStream is, String ext)
 						throws IllegalAccessException, InstantiationException, FileNotFoundException;
-
+	
 	/**
 	 * Modifies the given file chooser by registering file extensions from the
 	 * input serializers.
@@ -69,7 +69,7 @@ public interface IOManager
 	 * @return DOCUMENT ME!
 	 */
 	JFileChooser createOpenFileChooser();
-
+	
 	/**
 	 * Creates an instance of an output serializer from the given extension.
 	 * 
@@ -77,7 +77,7 @@ public interface IOManager
 	 */
 	OutputSerializer createOutputSerializer(String ext)
 						throws IllegalAccessException, InstantiationException;
-
+	
 	/**
 	 * Creates and returns a file open chooser dialog with the registered file
 	 * extensions from the output serializers.
@@ -85,7 +85,7 @@ public interface IOManager
 	 * @return DOCUMENT ME!
 	 */
 	JFileChooser createSaveFileChooser();
-
+	
 	/**
 	 * Returns <code>true</code>, if the io manager has a registered input
 	 * manager.
@@ -94,7 +94,7 @@ public interface IOManager
 	 *         manager.
 	 */
 	boolean hasInputSerializer();
-
+	
 	/**
 	 * Returns <code>true</code>, if the io manager has a registered output
 	 * manager.
@@ -103,7 +103,7 @@ public interface IOManager
 	 *         manager.
 	 */
 	boolean hasOutputSerializer();
-
+	
 	/**
 	 * Returns <code>true</code>, if the given io manager listener was in the
 	 * list of listeners and could be removed.
@@ -113,15 +113,15 @@ public interface IOManager
 	 * @return DOCUMENT ME!
 	 */
 	boolean removeListener(IOManagerListener l);
-
+	
 	Set<String> getGraphFileExtensions();
-
+	
 	// ~ Inner Interfaces =======================================================
-
+	
 	/**
 	 * Interfaces an io manager listener.
 	 * 
-	 * @version $Revision: 1.8 $
+	 * @version $Revision: 1.9 $
 	 */
 	public interface IOManagerListener {
 		/**
@@ -131,7 +131,7 @@ public interface IOManager
 		 *           the input serializer, which was added to the manager.
 		 */
 		void inputSerializerAdded(InputSerializer is);
-
+		
 		/**
 		 * Called, if an output serializer ist added to the io manager.
 		 * 

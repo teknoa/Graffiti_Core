@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractCollectionAttribute.java,v 1.14 2010/12/14 07:02:25 morla Exp $
+// $Id: AbstractCollectionAttribute.java,v 1.15 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -19,27 +19,27 @@ import org.graffiti.plugin.XMLHelper;
  * Provides common functionality for <code>CollectionAttribute</code> instances. Calls the <code>ListenerManager</code> and delegates the
  * functionality to the implementing class.
  * 
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 public abstract class AbstractCollectionAttribute extends AbstractAttribute
 					implements CollectionAttribute {
 	// ~ Static fields/initializers =============================================
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * The internal map which maps the ids to the Attributes which are in this <code>CollectionAttribute</code>.
 	 */
 	protected Map<String, Attribute> attributes;
-
+	
 	/**
 	 * The <code>Attributable</code> of this <code>Attribute</code>. This
 	 * reference is <code>null</code> except for the root.
 	 */
 	private Attributable attributable;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for setting the id of an <code>AbstractCollectionAttribute</code>.
 	 * 
@@ -52,9 +52,9 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	public AbstractCollectionAttribute(String id) throws IllegalIdException {
 		super(id);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the <code>Attribute</code>'s <code>Attributable</code>.
 	 * <p>
@@ -73,7 +73,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 		assert this.getParent() == null : "Only the root attribute has a reference to the attributable "
 							+ " the hierarchy belongs to. Only call setAttributable on "
 							+ "attributes where parent == null.";
-
+		
 		// different from setParent, attributable is only null when
 		// not set before
 		if (this.attributable != null) {
@@ -82,7 +82,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			this.attributable = att;
 		}
 	}
-
+	
 	/**
 	 * Returns the <code>Attribute</code>'s <code>Attributable</code>.
 	 * 
@@ -91,16 +91,16 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	@Override
 	public Attributable getAttributable() {
 		Attribute parent = getParent();
-
+		
 		if (parent == null) {
 			return attributable;
 		} else {
 			return parent.getAttributable();
 		}
 	}
-
+	
 	private static int sepLen = Attribute.SEPARATOR.length();
-
+	
 	/**
 	 * Returns the attribute located at <code>path</code>.
 	 * 
@@ -143,7 +143,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			}
 		}
 	}
-
+	
 	/**
 	 * Returns <code>true</code> if the HashMapAttribute is empty. The same as <code>getCollection().isEmpty()</code> would yield, but this method
 	 * should be faster since the map is not copied.
@@ -153,7 +153,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	public boolean isEmpty() {
 		return attributes.isEmpty();
 	}
-
+	
 	/**
 	 * Returns the value of this attribute, i.e. map between contained
 	 * attributes' ids and these attributes. The behaviour of this method
@@ -166,7 +166,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	public Object getValue() {
 		return getCollection();
 	}
-
+	
 	/**
 	 * Adds a given attribute to the collection. Informs the <code>ListenerManager</code> about the addition.
 	 * 
@@ -185,11 +185,11 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			return;
 		if (a.getId() == null)
 			return;
-
+		
 		assert a != null;
-
+		
 		String attrId = a.getId();
-
+		
 		if (attributes.containsKey(attrId)) {
 			try {
 				attributes.get(attrId).setValue(a.getValue());
@@ -214,7 +214,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			callPostAttributeAdded(attrEvent);
 		}
 	}
-
+	
 	/**
 	 * Adds a given attribute to the collection. Only informs the <code>ListenerManager</code> about the addition when <code>inform</code> is set to true.
 	 * 
@@ -233,13 +233,13 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	public void add(Attribute a, boolean inform)
 						throws AttributeExistsException, FieldAlreadySetException {
 		assert a != null;
-
+		
 		if (inform)
 			add(a);
 		else {
 			// logger.warning("Adding Attribute with id " + id + " without " +
 			// "informing the ListenerManager.");
-
+			
 			if (a == null)
 				System.err.println("internal error: try to add null attribute...");
 			String attrId = a.getId();
@@ -256,7 +256,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			}
 		}
 	}
-
+	
 	/**
 	 * Removes the attribute with the given id from the collection. Notifies <code>ListenerManager</code> with an AttributeRemoved event when the
 	 * attribute hierarchy is attached to an <code>Attributable</code>.
@@ -276,7 +276,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 								"An id must not contain the SEPARATOR chararcter.");
 		} else {
 			Attribute attr = attributes.get(attrId);
-
+			
 			if (attr == null) {
 				throw new AttributeNotFoundException("Attribute with ID " + attrId
 									+ "does not exist in " + "this HashMapAttribute");
@@ -289,7 +289,7 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 			}
 		}
 	}
-
+	
 	/**
 	 * Removes the given attribute from the collection by calling <code>remove(String id)</code> with the attribute's id as parameter.
 	 * Notifies <code>ListenerManager</code> with an AttributeRemoved event
@@ -303,45 +303,45 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 	 */
 	public void remove(Attribute attr) throws AttributeNotFoundException {
 		assert attr != null;
-
+		
 		CollectionAttribute parent = attr.getParent();
-
+		
 		if (parent == null) {
 			AttributeEvent attrEvent = new AttributeEvent(attr);
 			callPreAttributeRemoved(attrEvent);
-
+			
 			// remove all subattributes
 			for (Iterator<?> itr = getCollection().keySet().iterator(); itr.hasNext();) {
 				String s = (String) itr.next();
 				attributes.remove(s);
 			}
-
+			
 			callPostAttributeRemoved(attrEvent);
 		} else {
 			// parent.remove cares about sending events to the ListenerManager
 			parent.remove(attr.getId());
 		}
 	}
-
+	
 	/**
 	 * @see org.graffiti.attributes.Attribute#toString(int)
 	 */
 	@Override
 	public String toString(int n) {
 		StringBuffer sb = new StringBuffer();
-
+		
 		sb.append(getSpaces(n) + idd + " " + getClass().getName() + " {\n");
-
+		
 		for (Iterator<Attribute> it = attributes.values().iterator(); it.hasNext();) {
 			Attribute attr = (Attribute) it.next();
 			sb.append(attr.toString(n + 1) + "\n");
 		}
-
+		
 		sb.append(getSpaces(n) + "}");
-
+		
 		return sb.toString();
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.Displayable#toXMLString()
 	 */
@@ -350,17 +350,17 @@ public abstract class AbstractCollectionAttribute extends AbstractAttribute
 		StringBuffer valString = new StringBuffer();
 		valString.append(XMLHelper.spc(4) + "<subAttributes>"
 							+ XMLHelper.getDelimiter());
-
+		
 		for (Iterator<Attribute> it = attributes.values().iterator(); it.hasNext();) {
 			Attribute attr = (Attribute) it.next();
 			valString.append(XMLHelper.spc(6) + "<subattr>" + attr.toXMLString()
 								+ "</subattr>" + XMLHelper.getDelimiter());
 		}
-
+		
 		valString.append(XMLHelper.spc(4) + "</subAttributes>"
 							+ XMLHelper.getDelimiter() + XMLHelper.spc(4)
 							+ "<sorted>false</sorted>");
-
+		
 		return getStandardXML(valString.toString());
 	}
 }

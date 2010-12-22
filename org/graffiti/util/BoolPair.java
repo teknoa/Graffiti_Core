@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: BoolPair.java,v 1.3 2010/12/14 07:02:26 morla Exp $
+// $Id: BoolPair.java,v 1.4 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.util;
 
@@ -13,19 +13,19 @@ package org.graffiti.util;
  * Encapsulates two boolean values.
  * 
  * @author Paul
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class BoolPair {
 	// ~ Instance fields ========================================================
-
+	
 	/** DOCUMENT ME! */
 	private boolean bool1;
-
+	
 	/** DOCUMENT ME! */
 	private boolean bool2;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Creates a new BoolPair object.
 	 * 
@@ -38,9 +38,9 @@ public class BoolPair {
 		this.bool1 = bool1;
 		this.bool2 = bool2;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -49,7 +49,7 @@ public class BoolPair {
 	public boolean getFst() {
 		return bool1;
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 

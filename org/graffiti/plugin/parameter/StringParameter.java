@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: StringParameter.java,v 1.6 2010/12/14 07:02:27 morla Exp $
+// $Id: StringParameter.java,v 1.7 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -17,18 +17,18 @@ import scenario.ProvidesScenarioSupportCommand;
 /**
  * Parameter that contains an <code>Integer</code> value.
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class StringParameter
 					extends AbstractSingleParameter
 					implements ProvidesScenarioSupportCommand {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this parameter. */
 	private String value = null;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new integer parameter.
 	 * 
@@ -43,9 +43,9 @@ public class StringParameter
 		super(name, description);
 		this.value = value;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the value of this parameter as an <code>String</code>.
 	 * 
@@ -54,7 +54,7 @@ public class StringParameter
 	public String getString() {
 		return value;
 	}
-
+	
 	/**
 	 * Sets the value of the <code>AttributeParameter</code>.
 	 * 
@@ -72,7 +72,7 @@ public class StringParameter
 			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
-
+	
 	/**
 	 * Returns the value of this parameter.
 	 * 
@@ -82,7 +82,7 @@ public class StringParameter
 	public Object getValue() {
 		return value;
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
 	 */
@@ -90,12 +90,12 @@ public class StringParameter
 	public String toXMLString() {
 		return getStandardXML(value.toString());
 	}
-
+	
 	public String getScenarioCommand() {
 		return "new StringParameter(\"" +
 							getString() + "\", \"" + getName() + "\", \"" + getDescription() + "\")";
 	}
-
+	
 	public Collection<String> getScenarioImports() {
 		ArrayList<String> res = new ArrayList<String>();
 		res.add("import org.graffiti.plugin.parameter.StringParameter;");

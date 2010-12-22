@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Dash.java,v 1.3 2010/12/14 07:02:26 morla Exp $
+// $Id: Dash.java,v 1.4 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -13,23 +13,23 @@ package org.graffiti.graphics;
  * Class that encapsulates the information needed to specify stroke properties.
  * 
  * @author schoeffl
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class Dash {
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * @see java.awt.BasicStroke
 	 */
 	private float[] dashArray;
-
+	
 	/**
 	 * @see java.awt.BasicStroke
 	 */
 	private float dashPhase;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new Dash. Initializes the dashArray with <code>null</code> and the dashPhase with 0.0.
 	 */
@@ -37,7 +37,7 @@ public class Dash {
 		this.dashArray = null;
 		this.dashPhase = 0f;
 	}
-
+	
 	/**
 	 * Constructs a new Dash. Sets the dashArray and the dashPhase to the given
 	 * values.
@@ -51,9 +51,9 @@ public class Dash {
 		this.dashArray = da;
 		this.dashPhase = dp;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the dashArray to the given array.
 	 * 
@@ -63,7 +63,7 @@ public class Dash {
 	public void setDashArray(float[] da) {
 		this.dashArray = da;
 	}
-
+	
 	/**
 	 * Returns the dashArray.
 	 * 
@@ -72,7 +72,7 @@ public class Dash {
 	public float[] getDashArray() {
 		return dashArray;
 	}
-
+	
 	/**
 	 * Sets the dashPhase to the given value.
 	 * 
@@ -82,7 +82,7 @@ public class Dash {
 	public void setDashPhase(float dp) {
 		this.dashPhase = dp;
 	}
-
+	
 	/**
 	 * Returns the dashPhase.
 	 * 

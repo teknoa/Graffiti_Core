@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractLimitableParameter.java,v 1.5 2010/12/14 07:02:27 morla Exp $
+// $Id: AbstractLimitableParameter.java,v 1.6 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -13,13 +13,13 @@ package org.graffiti.plugin.parameter;
  * This abstract class provides an implementation for the <code>isValid</code> method, using the <code>compareTo</code> method of the <code>Comparable</code>
  * interface.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public abstract class AbstractLimitableParameter
 					extends AbstractSingleParameter
 					implements LimitableParameter {
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new abstract limitable parameter.
 	 * 
@@ -31,9 +31,9 @@ public abstract class AbstractLimitableParameter
 	public AbstractLimitableParameter(String name, String description) {
 		super(name, description);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * @see org.graffiti.plugin.parameter.Parameter#toXMLString()
 	 */
@@ -41,21 +41,21 @@ public abstract class AbstractLimitableParameter
 	public String toXMLString() {
 		return getStandardXML(getValue().toString());
 	}
-
+	
 	/**
 	 * Returns the maximum of the intervall.
 	 * 
 	 * @return the maximum of the intervall.
 	 */
 	public abstract Comparable<?> getMax();
-
+	
 	/**
 	 * Returns the minimum of the intervall.
 	 * 
 	 * @return the minimum of the intervall.
 	 */
 	public abstract Comparable<?> getMin();
-
+	
 	/**
 	 * Returns <code>true</code> if the value is between the minimum and the
 	 * maximum, <code>false</code> otherwise.

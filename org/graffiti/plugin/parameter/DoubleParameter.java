@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: DoubleParameter.java,v 1.7 2010/12/14 07:02:27 morla Exp $
+// $Id: DoubleParameter.java,v 1.8 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -17,18 +17,18 @@ import scenario.ProvidesScenarioSupportCommand;
 /**
  * Represents a double parameter.
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class DoubleParameter
 					extends AbstractLimitableParameter
 					implements ProvidesScenarioSupportCommand {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this parameter. */
 	private Double value = null;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new double parameter.
 	 * 
@@ -40,7 +40,7 @@ public class DoubleParameter
 	public DoubleParameter(String name, String description) {
 		super(name, description);
 	}
-
+	
 	/**
 	 * Constructs a new double parameter.
 	 * 
@@ -55,9 +55,9 @@ public class DoubleParameter
 		super(name, description);
 		value = new Double(val);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -67,7 +67,7 @@ public class DoubleParameter
 	public void setDouble(Double val) {
 		this.value = val;
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -77,7 +77,7 @@ public class DoubleParameter
 	public void setDouble(double val) {
 		this.value = new Double(val);
 	}
-
+	
 	/**
 	 * Returns the value of this parameter as a <code>Double</code>.
 	 * 
@@ -86,7 +86,7 @@ public class DoubleParameter
 	public Double getDouble() {
 		return value;
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -96,7 +96,7 @@ public class DoubleParameter
 	public Comparable<?> getMax() {
 		return null; // TODO
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -106,7 +106,7 @@ public class DoubleParameter
 	public Comparable<?> getMin() {
 		return null; // TODO
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -116,7 +116,7 @@ public class DoubleParameter
 	public boolean isValid() {
 		return false; // TODO
 	}
-
+	
 	/**
 	 * Sets the value of the <code>AttributeParameter</code>.
 	 * 
@@ -128,7 +128,7 @@ public class DoubleParameter
 		// TODO
 		this.value = (Double) value;
 	}
-
+	
 	/**
 	 * Returns the value of this parameter.
 	 * 
@@ -138,12 +138,12 @@ public class DoubleParameter
 	public Object getValue() {
 		return value;
 	}
-
+	
 	public String getScenarioCommand() {
 		return "new DoubleParameter(" +
 							getDouble() + ", \"" + getName() + "\", \"" + getDescription() + "\")";
 	}
-
+	
 	public Collection<String> getScenarioImports() {
 		ArrayList<String> res = new ArrayList<String>();
 		res.add("import org.graffiti.plugin.parameter.DoubleParameter;");

@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AlgorithmResult.java,v 1.4 2010/12/14 07:02:25 morla Exp $
+// $Id: AlgorithmResult.java,v 1.5 2010/12/22 13:05:32 klukas Exp $
 
 /*
  * $Id
@@ -18,12 +18,12 @@ import java.util.Map;
  * An <code>AlgorithmResult</code> is a map of results that were computed by a <code>CalculatingAlgorithm</code>. It maps the name of a result to the
  * corresponding value.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @see CalculatingAlgorithm
  */
 public interface AlgorithmResult {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the <code>Map</code>. This function is intended to be used by
 	 * other components that want to display the results.
@@ -31,7 +31,7 @@ public interface AlgorithmResult {
 	 * @return DOCUMENT ME!
 	 */
 	public Map<?, ?> getResult();
-
+	
 	/**
 	 * Adds a key-value pair to the <code>Map</code>.
 	 * 

@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: EdgeParameter.java,v 1.4 2010/12/14 07:02:27 morla Exp $
+// $Id: EdgeParameter.java,v 1.5 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.plugin.parameter;
 
@@ -14,17 +14,17 @@ import org.graffiti.graph.Edge;
 /**
  * This class contains a single <code>Edge</code>.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class EdgeParameter
 					extends AbstractSingleParameter {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this parameter. */
 	private Edge value = null;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new edge parameter.
 	 * 
@@ -36,7 +36,7 @@ public class EdgeParameter
 	public EdgeParameter(String name, String description) {
 		super(name, description);
 	}
-
+	
 	/**
 	 * Constructs a new edge parameter.
 	 * 
@@ -51,9 +51,9 @@ public class EdgeParameter
 		super(name, description);
 		value = edge;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the <code>Edge</code> contained in this <code>EdgeParameter</code>.
 	 * 
@@ -62,7 +62,7 @@ public class EdgeParameter
 	public Edge getEdge() {
 		return value;
 	}
-
+	
 	/**
 	 * Sets the value of the <code>AttributeParameter</code>.
 	 * 
@@ -73,7 +73,7 @@ public class EdgeParameter
 	public void setValue(Object value) {
 		// TODO
 	}
-
+	
 	/**
 	 * Returns the value of this parameter.
 	 * 

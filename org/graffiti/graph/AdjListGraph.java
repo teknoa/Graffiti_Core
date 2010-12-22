@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AdjListGraph.java,v 1.11 2010/12/14 07:02:25 morla Exp $
+// $Id: AdjListGraph.java,v 1.12 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -26,7 +26,7 @@ import org.graffiti.event.ListenerManager;
  * representation of the graph. Requires <code>AdjListNode</code> and <code>AdjListEdge</code> as implementations for nodes and edges. Every
  * method modifying the graph will inform the <code>ListenerManager</code> about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * @see Graph
  * @see AbstractGraph
  * @see AdjListNode
@@ -36,37 +36,37 @@ import org.graffiti.event.ListenerManager;
  */
 public class AdjListGraph extends AbstractGraph implements Graph {
 	// ~ Static fields/initializers =============================================
-
+	
 	// /** The logger for the current class. */
 	// private static final Logger logger = Logger.getLogger(AdjListGraph.class
 	// .getName());
-
+	
 	private int id;
-
+	
 	private static int graphCount = 0;
-
+	
 	private static long maxGraphElementId = 0; // Long.MIN_VALUE;
-
+	
 	private String idName = null;
-
+	
 	@Override
 	public String toString() {
 		return "Graph ID=" + id + " / " + getName();
 	}
-
+	
 	// ~ Instance fields ========================================================
-
+	
 	/** The list containing the nodes of the graph. */
 	private ArrayList<Node> nodes = new ArrayList<Node>();
 	private ArrayList<Edge> edges = new ArrayList<Edge>();
-
+	
 	/**
 	 * set to True if graph has been modified.
 	 */
 	private boolean modified;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the default
 	 * <code>ListenerManager</code>.
@@ -80,7 +80,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		this.nodes = new ArrayList<Node>();
 		this.edges = new ArrayList<Edge>();
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#getNumberOfNodes()
@@ -89,7 +89,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public int getNumberOfNodes() {
 		return nodes.size();
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#getNodes()
@@ -98,7 +98,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public List<Node> getNodes() {
 		return nodes;
 	}
-
+	
 	/**
 	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the default
 	 * <code>ListenerManager</code>.
@@ -111,7 +111,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		this.nodes = new ArrayList<Node>();
 		this.edges = new ArrayList<Edge>();
 	}
-
+	
 	/**
 	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the specified one.
 	 * 
@@ -121,7 +121,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public AdjListGraph(ListenerManager listenerManager) {
 		super(listenerManager);
 	}
-
+	
 	/**
 	 * Constructs a new instance of an <code>AdjListGraph</code>. Sets the <code>ListenerManager</code> of the new instance to the specified one.
 	 * 
@@ -133,7 +133,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public AdjListGraph(ListenerManager listenerManager, CollectionAttribute coll) {
 		super(listenerManager, coll);
 	}
-
+	
 	/**
 	 * Constructs a new instance of an <code>AdjListGraph</code> from an
 	 * instance of any <code>Graph</code> implementation. Copies all nodes and
@@ -148,7 +148,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		super(listenerManager);
 		this.addGraph(g);
 	}
-
+	
 	/**
 	 * Constructs a new instance of an <code>AdjListGraph</code> from an
 	 * instance of any <code>Graph</code> implementation. Copies all nodes and
@@ -166,9 +166,9 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		super(listenerManager, coll);
 		this.addGraph(g);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * The given node is moved to the front of the node list.
 	 * 
@@ -179,7 +179,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 			nodes.add(0, node);
 		}
 	}
-
+	
 	/**
 	 * The given node is moved to the end of the node list.
 	 * 
@@ -190,7 +190,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 			nodes.add(node);
 		}
 	}
-
+	
 	/**
 	 * Returns an iterator over the nodes of the graph. Note that the remove
 	 * operation is not supported by this iterator.
@@ -200,7 +200,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public Iterator<Node> getNodesIterator() {
 		return nodes.iterator();
 	}
-
+	
 	/**
 	 * Creates and returns a copy of the graph. The attributes are copied as well
 	 * as all nodes and edges.
@@ -211,10 +211,10 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		AdjListGraph newGraph = new AdjListGraph((CollectionAttribute) this
 							.getAttributes().copy());
 		newGraph.addGraph(this);
-
+		
 		return newGraph;
 	}
-
+	
 	/**
 	 * Adds a new edge to the current graph. Informs the ListenerManager about
 	 * the new node.
@@ -230,16 +230,16 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	@Override
 	protected Edge doAddEdge(Node source, Node target, boolean directed) {
 		assert (source != null) && (target != null);
-
+		
 		AdjListEdge edge = (AdjListEdge) createEdge(source, target, directed);
 		((AdjListNode) source).addOutEdge(edge);
 		((AdjListNode) target).addInEdge(edge);
-
+		
 		edges.add(edge);
-
+		
 		return edge;
 	}
-
+	
 	/**
 	 * Adds a new edge to the current graph. Informs the ListenerManager about
 	 * the new node.
@@ -258,17 +258,17 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	protected Edge doAddEdge(Node source, Node target, boolean directed,
 						CollectionAttribute col) {
 		assert (source != null) && (target != null) && (col != null);
-
+		
 		AdjListEdge edge = (AdjListEdge) createEdge(source, target, directed, col);
 		((AdjListNode) source).addOutEdge(edge);
-
+		
 		((AdjListNode) target).addInEdge(edge);
-
+		
 		edges.add(edge);
-
+		
 		return edge;
 	}
-
+	
 	/**
 	 * Adds a new node to the graph. Informs the ListenerManager about the new
 	 * node.
@@ -282,7 +282,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		setModified(true);
 		nodes.add(node);
 	}
-
+	
 	/**
 	 * Deletes the current graph by resetting all its attributes. The graph is
 	 * then equal to a new generated graph i.e. the list of nodes and edges will
@@ -295,7 +295,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		this.nodes = new ArrayList<Node>();
 		this.edges = new ArrayList<Edge>();
 	}
-
+	
 	/**
 	 * Deletes the given edge from the current graph. Implicitly calls the
 	 * ListenerManager by calling <code>AdjListNode.removeEdge()</code> in the
@@ -311,17 +311,17 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 			((AdjListNode) (e.getSource())).removeInEdge(e);
 		if (((AdjListNode) (e.getTarget())).getAllInEdges().contains(e))
 			((AdjListNode) (e.getTarget())).removeInEdge(e);
-
+		
 		if (((AdjListNode) (e.getSource())).getAllOutEdges().contains(e))
 			((AdjListNode) (e.getSource())).removeOutEdge(e);
 		if (((AdjListNode) (e.getTarget())).getAllOutEdges().contains(e))
 			((AdjListNode) (e.getTarget())).removeOutEdge(e);
-
+		
 		((AdjListEdge) e).setGraphToNull();
 		edges.remove(e);
 		setModified(true);
 	}
-
+	
 	/**
 	 * Deletes the given node. First all in- and out-going edges will be deleted
 	 * using <code>deleteEdge()</code> and thereby informs the ListenerManager
@@ -335,18 +335,18 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	@Override
 	protected void doDeleteNode(Node n) throws GraphElementNotFoundException {
 		assert n != null;
-
+		
 		Collection<Edge> ce = n.getEdges();
 		for (Edge e : ce) {
 			deleteEdge(e);
 		}
-
+		
 		((AdjListNode) n).setGraphToNull();
 		nodes.remove(n);
-
+		
 		setModified(true);
 	}
-
+	
 	/**
 	 * Creates a new <code>AdjListNode</code> that is in the current graph.
 	 * 
@@ -357,7 +357,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		setModified(true);
 		return new AdjListNode(this);
 	}
-
+	
 	/**
 	 * Creates a new <code>AdjListNode</code> that is in the current graph. And
 	 * initializes it with the given <code>CollectionAttribute</code>.
@@ -369,11 +369,11 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	@Override
 	protected Node createNode(CollectionAttribute col) {
 		assert col != null;
-
+		
 		setModified(true);
 		return new AdjListNode(this, col);
 	}
-
+	
 	/**
 	 * Creates a new <code>AdjListEdge</code> that is in the current graph.
 	 * 
@@ -389,7 +389,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		setModified(true);
 		return new AdjListEdge(this, source, target, directed);
 	}
-
+	
 	/**
 	 * Creates a new <code>AdjListEdge</code> that is in the current graph. And
 	 * initializes it with the given <code>CollectionAttribute</code>.
@@ -407,11 +407,11 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	protected Edge createEdge(Node source, Node target, boolean directed,
 						CollectionAttribute col) {
 		assert col != null;
-
+		
 		setModified(true);
 		return new AdjListEdge(this, source, target, directed, col);
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#isModified()
@@ -419,7 +419,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public boolean isModified() {
 		return modified;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#setModified(boolean)
@@ -427,7 +427,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public void setModified(boolean modified) {
 		this.modified = modified;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#getEdges()
@@ -436,7 +436,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public Collection<Edge> getEdges() {
 		return edges;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#getNumberOfEdges()
@@ -445,7 +445,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public int getNumberOfEdges() {
 		return edges.size();
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#getEdges(org.graffiti.graph.Node,
@@ -459,7 +459,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 				result.add(edge);
 		return result;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#deleteAll(java.util.List)
@@ -474,7 +474,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 			}
 		}
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#setName(java.lang.String)
@@ -482,7 +482,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public void setName(String name) {
 		idName = name;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#getName()
@@ -490,7 +490,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public String getName() {
 		return getName(false);
 	}
-
+	
 	public String getName(boolean fullName) {
 		if (idName == null)
 			return "[not saved " + id + "]";
@@ -510,7 +510,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 			return res;
 		}
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#numberNodes()
@@ -522,7 +522,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		for (Node n : getNodes())
 			n.setID(++startNumber);
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.graffiti.graph.Graph#setMaxId(long)
@@ -531,7 +531,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 		if (id > maxGraphElementId)
 			maxGraphElementId = id;
 	}
-
+	
 	public void setListenerManager(ListenerManager l) {
 		listenerManager = l;
 	}

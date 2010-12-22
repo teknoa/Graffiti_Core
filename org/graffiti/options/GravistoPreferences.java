@@ -10,17 +10,17 @@ import java.util.HashMap;
  *         (c) 2004 IPK-Gatersleben
  */
 public class GravistoPreferences {
-
+	
 	@SuppressWarnings("unchecked")
 	HashMap<String, Comparable> optionsAndValues;
 	String preferencesNodeName;
-
+	
 	@SuppressWarnings("unchecked")
 	public GravistoPreferences(String preferencesNodeName) {
 		this.preferencesNodeName = preferencesNodeName;
 		optionsAndValues = new HashMap<String, Comparable>();
 	}
-
+	
 	public double getDouble(String optionName, double defaultValue) {
 		if (optionsAndValues.containsKey(optionName)) {
 			Object value = optionsAndValues.get(optionName);
@@ -28,11 +28,11 @@ public class GravistoPreferences {
 		} else
 			return defaultValue;
 	}
-
+	
 	public GravistoPreferences node(String subNodeName) {
 		return new GravistoPreferences(preferencesNodeName + "/" + subNodeName);
 	}
-
+	
 	public String get(String optionName, String defaultValue) {
 		if (optionsAndValues.containsKey(optionName)) {
 			Object value = optionsAndValues.get(optionName);
@@ -40,7 +40,7 @@ public class GravistoPreferences {
 		} else
 			return defaultValue;
 	}
-
+	
 	public float getFloat(String optionName, float defaultValue) {
 		if (optionsAndValues.containsKey(optionName)) {
 			Object value = optionsAndValues.get(optionName);
@@ -48,11 +48,11 @@ public class GravistoPreferences {
 		} else
 			return defaultValue;
 	}
-
+	
 	public void put(String optionName, String value) {
 		optionsAndValues.put(optionName, value);
 	}
-
+	
 	public int getInt(String optionName, int defaultValue) {
 		if (optionsAndValues.containsKey(optionName)) {
 			Object value = optionsAndValues.get(optionName);
@@ -60,15 +60,15 @@ public class GravistoPreferences {
 		} else
 			return defaultValue;
 	}
-
+	
 	public void clear() {
 		optionsAndValues.clear();
 	}
-
+	
 	public void putInt(String optionName, int value) {
 		optionsAndValues.put(optionName, new Integer(value));
 	}
-
+	
 	/**
 	 * @param class1
 	 * @return
@@ -80,12 +80,12 @@ public class GravistoPreferences {
 			return new GravistoPreferences("/" + classValue.getName());
 		}
 	}
-
+	
 	/**
 	 * @return
 	 */
 	public String[] keys() {
 		return (String[]) optionsAndValues.keySet().toArray(new String[] {});
 	}
-
+	
 }

@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: FieldAlreadySetException.java,v 1.3 2010/12/14 07:02:25 morla Exp $
+// $Id: FieldAlreadySetException.java,v 1.4 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -13,14 +13,14 @@ package org.graffiti.attributes;
  * The <code>FieldAlreadySetException</code> will be thrown if <code>setAttributable()</code> of <code>setParent()</code> is invoked on an
  * attribute where theses fields are not <tt>null</tt> anymore.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class FieldAlreadySetException
 					extends RuntimeException {
 	// ~ Constructors ===========================================================
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs an <code>FieldAlreadySetException</code> with the specified
 	 * detail message.

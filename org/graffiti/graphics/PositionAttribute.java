@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: PositionAttribute.java,v 1.4 2010/12/14 07:02:26 morla Exp $
+// $Id: PositionAttribute.java,v 1.5 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -17,13 +17,13 @@ import org.graffiti.attributes.HashMapAttribute;
 /**
  * Contains properties of the attribute position for a label
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public abstract class PositionAttribute
 					extends HashMapAttribute
 					implements GraphicAttributeConstants {
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for NodeLabelPositionAttribute.
 	 * 
@@ -32,9 +32,9 @@ public abstract class PositionAttribute
 	public PositionAttribute(String id) {
 		super(id);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
 	 * 

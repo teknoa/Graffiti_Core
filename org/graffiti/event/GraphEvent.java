@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: GraphEvent.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: GraphEvent.java,v 1.6 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.event;
 
@@ -21,47 +21,47 @@ import org.graffiti.graph.Node;
  * (<code>AbstractGraphListener</code> objects implement the <code>GraphListener</code> interface.) Each such listener object gets a <code>GraphEvent</code>
  * containing the graph event.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @see GraphListener
  * @see AbstractGraphListener
  */
 public class GraphEvent
 					extends AbstractEvent {
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * The edge that has been changed by the event. <code>Null</code> if no
 	 * edge is concerned.
 	 */
 	private Edge edge = null;
-
+	
 	/**
 	 * The graph that has been changed by the event. <code>Null</code> if no
 	 * graph is associated with the changed graph element (e.g. after an
 	 * element has been deleted) or if a different source has been specified.
 	 */
 	private Graph graph = null;
-
+	
 	/**
 	 * The node that has been changed by the event. <code>Null</code> if no
 	 * node is concerned.
 	 */
 	private Node node = null;
-
+	
 	/**
 	 * <code>secondNode</code> holds another node for events that are
 	 * originated from two nodes (like the <code>preEdgeAdded</code> event).
 	 * Is <code>null</code> if it is not needed.
 	 */
 	private Node secondNode = null;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a graph event object with the specified source component.
 	 * 
@@ -72,7 +72,7 @@ public class GraphEvent
 		super(graph);
 		this.graph = graph;
 	}
-
+	
 	/**
 	 * Constructs a graph event object with the specified source component.
 	 * 
@@ -83,7 +83,7 @@ public class GraphEvent
 		super(edge);
 		this.edge = edge;
 	}
-
+	
 	/**
 	 * Constructs a graph event object with the specified source component.
 	 * 
@@ -94,7 +94,7 @@ public class GraphEvent
 		super(node);
 		this.node = node;
 	}
-
+	
 	/**
 	 * Constructs a graph event object with the graph of the first node as
 	 * source and saves the two given nodes.
@@ -111,9 +111,9 @@ public class GraphEvent
 		this.node = node;
 		this.secondNode = secondNode;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the edge that originates this event, e.g.: the edge that has
 	 * been added. Might return <code>null</code> if no edge is concerned.
@@ -123,7 +123,7 @@ public class GraphEvent
 	public Edge getEdge() {
 		return edge;
 	}
-
+	
 	/**
 	 * Returns the graph that has been changed.
 	 * 
@@ -132,7 +132,7 @@ public class GraphEvent
 	public Graph getGraph() {
 		return graph;
 	}
-
+	
 	/**
 	 * Returns the node that is concerned with that event, e.g.: the node that
 	 * has been / is to be removed. Might return <code>null</code> if no node
@@ -143,7 +143,7 @@ public class GraphEvent
 	public Node getNode() {
 		return node;
 	}
-
+	
 	/**
 	 * Returns the node that is concerned with that event, e.g.: the node that
 	 * has been / is to be removed. Might return <code>null</code> if no node
@@ -154,7 +154,7 @@ public class GraphEvent
 	public Node getSecondNode() {
 		return secondNode;
 	}
-
+	
 	public Attributable getAttributeable() {
 		if (graph != null)
 			return graph;

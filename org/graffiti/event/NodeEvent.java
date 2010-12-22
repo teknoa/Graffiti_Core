@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: NodeEvent.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: NodeEvent.java,v 1.6 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.event;
 
@@ -20,23 +20,23 @@ import org.graffiti.graph.Node;
  * (<code>AbstractNodeListener</code> objects implement the <code>NodeListener</code> interface.) Each such listener object gets a <code>NodeEvent</code>
  * containing the node event.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @see NodeListener
  * @see AbstractNodeListener
  */
 public class NodeEvent
 					extends AbstractEvent {
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	/** The edge that might have been responsible for the NodeEvent. */
 	private Edge edge;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a graph event object with the specified source components.
 	 * 
@@ -49,9 +49,9 @@ public class NodeEvent
 		super(node);
 		this.edge = edge;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the edge that originated this event. E.g.: the edge that has
 	 * been added to the incoming egdes list of the node. Might return <tt>null</tt>.
@@ -61,7 +61,7 @@ public class NodeEvent
 	public Edge getEdge() {
 		return edge;
 	}
-
+	
 	/**
 	 * Returns the node that has been changed by this event.
 	 * 
@@ -70,7 +70,7 @@ public class NodeEvent
 	public Node getNode() {
 		return (Node) getSource();
 	}
-
+	
 	public Attributable getAttributeable() {
 		if (getNode() != null)
 			return getNode();

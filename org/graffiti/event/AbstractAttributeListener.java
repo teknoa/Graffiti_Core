@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AbstractAttributeListener.java,v 1.3 2010/12/14 07:02:26 morla Exp $
+// $Id: AbstractAttributeListener.java,v 1.4 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.event;
 
@@ -24,14 +24,14 @@ package org.graffiti.event;
  * invoked and the <code>AttributeEvent</code> is passed to it.
  * </p>
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @see ListenerManager
  * @see AttributeEvent
  */
 public abstract class AbstractAttributeListener
 					implements AttributeListener {
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Called after an attribute has been added.
 	 * 
@@ -40,7 +40,7 @@ public abstract class AbstractAttributeListener
 	 */
 	public void postAttributeAdded(AttributeEvent e) {
 	}
-
+	
 	/**
 	 * Called after an attribute has been changed.
 	 * 
@@ -49,7 +49,7 @@ public abstract class AbstractAttributeListener
 	 */
 	public void postAttributeChanged(AttributeEvent e) {
 	}
-
+	
 	/**
 	 * Called after an attribute has been removed.
 	 * 
@@ -58,7 +58,7 @@ public abstract class AbstractAttributeListener
 	 */
 	public void postAttributeRemoved(AttributeEvent e) {
 	}
-
+	
 	/**
 	 * Called just before an attribute is added.
 	 * 
@@ -67,7 +67,7 @@ public abstract class AbstractAttributeListener
 	 */
 	public void preAttributeAdded(AttributeEvent e) {
 	}
-
+	
 	/**
 	 * Called before a change of an attribute takes place.
 	 * 
@@ -76,7 +76,7 @@ public abstract class AbstractAttributeListener
 	 */
 	public void preAttributeChanged(AttributeEvent e) {
 	}
-
+	
 	/**
 	 * Called just before an attribute is removed.
 	 * 
@@ -85,7 +85,7 @@ public abstract class AbstractAttributeListener
 	 */
 	public void preAttributeRemoved(AttributeEvent e) {
 	}
-
+	
 	/**
 	 * Called after a transaction has been finished.
 	 * 
@@ -94,7 +94,7 @@ public abstract class AbstractAttributeListener
 	 */
 	public void transactionFinished(TransactionEvent e) {
 	}
-
+	
 	/**
 	 * Called after a transaction has been started.
 	 * 

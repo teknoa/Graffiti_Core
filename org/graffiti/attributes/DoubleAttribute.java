@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: DoubleAttribute.java,v 1.5 2010/12/14 07:02:25 morla Exp $
+// $Id: DoubleAttribute.java,v 1.6 2010/12/22 13:05:32 klukas Exp $
 
 package org.graffiti.attributes;
 
@@ -14,17 +14,17 @@ import org.graffiti.event.AttributeEvent;
 /**
  * Contains a double
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class DoubleAttribute
 					extends AbstractAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	/** The value of this attribute */
 	public double value;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs a new instance of a <code>DoubleAttribute</code>.
 	 * 
@@ -34,7 +34,7 @@ public class DoubleAttribute
 	public DoubleAttribute(String id) {
 		super(id);
 	}
-
+	
 	/**
 	 * Constructs a new instance of a <code>DoubleAttribute</code> with the
 	 * given value.
@@ -48,7 +48,7 @@ public class DoubleAttribute
 		super(id);
 		this.value = value;
 	}
-
+	
 	/**
 	 * Constructs a new instance of a <code>DoubleAttribute</code> with the
 	 * given value.
@@ -62,16 +62,16 @@ public class DoubleAttribute
 		super(id);
 		this.value = value.doubleValue();
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * @see org.graffiti.attributes.Attribute#setDefaultValue()
 	 */
 	public void setDefaultValue() {
 		value = 0.0;
 	}
-
+	
 	/**
 	 * Set the value of this Object.
 	 * 
@@ -84,7 +84,7 @@ public class DoubleAttribute
 		this.value = value;
 		callPostAttributeChanged(ae);
 	}
-
+	
 	/**
 	 * Returns the value of this attribute wrapped in an <code>Double</code> object.
 	 * 
@@ -93,7 +93,7 @@ public class DoubleAttribute
 	public double getDouble() {
 		return value;
 	}
-
+	
 	/**
 	 * Returns the value of the attribute.
 	 * 
@@ -102,7 +102,7 @@ public class DoubleAttribute
 	public Object getValue() {
 		return new Double(value);
 	}
-
+	
 	/**
 	 * Returns a deep copy of this instance.
 	 * 
@@ -111,7 +111,7 @@ public class DoubleAttribute
 	public Object copy() {
 		return new DoubleAttribute(this.getId(), this.value);
 	}
-
+	
 	/**
 	 * Sets the value of the attribute. The <code>ListenerManager</code> is
 	 * informed by the method <code>setValue()</code>.
@@ -126,14 +126,14 @@ public class DoubleAttribute
 	protected void doSetValue(Object o)
 						throws IllegalArgumentException {
 		assert o != null;
-
+		
 		try {
 			value = ((Double) o).doubleValue();
 		} catch (ClassCastException cce) {
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * @see org.graffiti.plugin.Displayable#toXMLString()
 	 */

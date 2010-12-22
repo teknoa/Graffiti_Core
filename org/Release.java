@@ -8,17 +8,17 @@ package org;
 
 public enum Release {
 	DEBUG, RELEASE_IPK, RELEASE_PUBLIC, RELEASE_CLUSTERVIS, KGML_EDITOR;
-
+	
 	private static MultipleFileLoader fileLoader = null;
-
+	
 	public static void setFileLoadHelper(MultipleFileLoader fileLoader) {
 		Release.fileLoader = fileLoader;
 	}
-
+	
 	public static MultipleFileLoader getFileLoaderHelper() {
 		return fileLoader;
 	}
-
+	
 	@Override
 	public String toString() {
 		switch (this) {

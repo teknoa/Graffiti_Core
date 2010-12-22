@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Edge.java,v 1.3 2010/12/14 07:02:25 morla Exp $
+// $Id: Edge.java,v 1.4 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graph;
 
@@ -14,7 +14,7 @@ package org.graffiti.graph;
  * source to target. Source, target and <code>Edge</code> must belong to the
  * same <code>Graph</code>. Otherwise the copy-methods of the interface <code>org.grafitti.graph.Graph</code> have to be used.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @see GraphElement
  * @see Node
  * @see Graph
@@ -22,15 +22,15 @@ package org.graffiti.graph;
 public interface Edge
 					extends GraphElement {
 	// ~ Static fields/initializers =============================================
-
+	
 	/** Indicates that an <code>Edge</code> is directed. */
 	public static final boolean DIRECTED = true;
-
+	
 	/** Indicates that an <code>Edge</code> is undirected. */
 	public static final boolean UNDIRECTED = false;
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Determines if an <code>Edge</code> is directed (<code>true</code>) or
 	 * not.
@@ -40,14 +40,14 @@ public interface Edge
 	 *           to be directed, <code>false</code> otherwise.
 	 */
 	public void setDirected(boolean directed);
-
+	
 	/**
 	 * Returns <code>true</code>, if the <code>Edge</code> is directed, <code>false</code> otherwise.
 	 * 
 	 * @return <code>true</code>, if the <code>Edge</code> is directed, <code>false</code> otherwise.
 	 */
 	public boolean isDirected();
-
+	
 	/**
 	 * Sets the source of the current <code>Edge</code> to source. <code>source</code> must be contained in the same <code>Graph</code> as
 	 * the current <code>Edge</code>. Informs the ListenerManager about the
@@ -63,14 +63,14 @@ public interface Edge
 	 */
 	public void setSource(Node source)
 						throws GraphElementNotFoundException, IllegalArgumentException;
-
+	
 	/**
 	 * Returns the source of the current <code>Edge</code>.
 	 * 
 	 * @return the source of the current <code>Edge</code>.
 	 */
 	public Node getSource();
-
+	
 	/**
 	 * Sets the target of the current <code>Edge</code> to target. <code>target</code> must be contained in the same <code>Graph</code> as
 	 * the <code>Edge</code>. Informs the ListenerManager about the change.
@@ -85,19 +85,19 @@ public interface Edge
 	 */
 	public void setTarget(Node target)
 						throws GraphElementNotFoundException, IllegalArgumentException;
-
+	
 	/**
 	 * Returns the target of the current <code>Edge</code>.
 	 * 
 	 * @return the target of the current <code>Edge</code>.
 	 */
 	public Node getTarget();
-
+	
 	/**
 	 * Changes source and target of the <code>Edge</code>, that means if the <code>Edge</code> is directed the direction will be changed.
 	 */
 	public void reverse();
-
+	
 	/**
 	 * @param graph
 	 */

@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Pair.java,v 1.3 2010/12/14 07:02:26 morla Exp $
+// $Id: Pair.java,v 1.4 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.util;
 
@@ -13,19 +13,19 @@ package org.graffiti.util;
  * Encapsulates two values.
  * 
  * @author Paul
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class Pair {
 	// ~ Instance fields ========================================================
-
+	
 	/** DOCUMENT ME! */
 	private Object val1;
-
+	
 	/** DOCUMENT ME! */
 	private Object val2;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Creates a new Pair object.
 	 * 
@@ -38,9 +38,9 @@ public class Pair {
 		this.val1 = val1;
 		this.val2 = val2;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -49,7 +49,7 @@ public class Pair {
 	public Object getFst() {
 		return val1;
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 

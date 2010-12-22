@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: DimensionAttribute.java,v 1.6 2010/12/14 07:02:26 morla Exp $
+// $Id: DimensionAttribute.java,v 1.7 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -22,21 +22,21 @@ import org.graffiti.attributes.HashMapAttribute;
  * surrounding rectangle
  * 
  * @author breu
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class DimensionAttribute
 					extends HashMapAttribute
 					implements GraphicAttributeConstants {
 	// ~ Instance fields ========================================================
-
+	
 	/** Contains height of minimal surrounding rectangle for a node */
 	private DoubleAttribute height;
-
+	
 	/** Contains width of minimal surrounding rectangle for a node */
 	private DoubleAttribute width;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for Dimension.
 	 * 
@@ -46,7 +46,7 @@ public class DimensionAttribute
 	public DimensionAttribute(String id) {
 		this(id, 0, 0);
 	}
-
+	
 	/**
 	 * Constructor for Dimension.
 	 * 
@@ -58,7 +58,7 @@ public class DimensionAttribute
 	public DimensionAttribute(String id, java.awt.Dimension d) {
 		this(id, d.getWidth(), d.getHeight());
 	}
-
+	
 	/**
 	 * Constructor for Dimension.
 	 * 
@@ -76,7 +76,7 @@ public class DimensionAttribute
 		add(this.height, false);
 		add(this.width, false);
 	}
-
+	
 	/**
 	 * Constructor for Dimension.
 	 * 
@@ -90,9 +90,9 @@ public class DimensionAttribute
 	public DimensionAttribute(String id, DoubleAttribute h, DoubleAttribute w) {
 		this(id, h.getDouble(), w.getDouble());
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>. The dimension values are set, additional
 	 * values are simply added (that means that if there exists already a
@@ -109,7 +109,7 @@ public class DimensionAttribute
 		// {
 		for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
 			String attrId = (String) it.next();
-
+			
 			if (attrId.equals(WIDTH)) {
 				setWidth(((DoubleAttribute) attrs.get(WIDTH)).getDouble());
 			} else
@@ -125,7 +125,7 @@ public class DimensionAttribute
 		// throw new IllegalArgumentException("Invalid value type.");
 		// }
 	}
-
+	
 	/**
 	 * Sets the <code>Dimension</code> of the attribute.
 	 * 
@@ -136,7 +136,7 @@ public class DimensionAttribute
 		this.height.setDouble(d.getHeight());
 		this.width.setDouble(d.getWidth());
 	}
-
+	
 	/**
 	 * Sets the <code>Dimension</code> of the attribute.
 	 * 
@@ -149,7 +149,7 @@ public class DimensionAttribute
 		this.height.setDouble(h);
 		this.width.setDouble(w);
 	}
-
+	
 	/**
 	 * Returns the <code>Dimension</code> of the attribute.
 	 * 
@@ -159,7 +159,7 @@ public class DimensionAttribute
 		return new Dimension((int) this.width.getDouble(),
 							(int) this.height.getDouble());
 	}
-
+	
 	/**
 	 * Sets the 'height'-value.
 	 * 
@@ -169,7 +169,7 @@ public class DimensionAttribute
 	public void setHeight(double h) {
 		this.height.setDouble(h);
 	}
-
+	
 	/**
 	 * Returns the 'height'-value of the encapsulated dimension.
 	 * 
@@ -178,7 +178,7 @@ public class DimensionAttribute
 	public double getHeight() {
 		return this.height.getDouble();
 	}
-
+	
 	/**
 	 * Sets the 'width'-value.
 	 * 
@@ -188,7 +188,7 @@ public class DimensionAttribute
 	public void setWidth(double w) {
 		this.width.setDouble(w);
 	}
-
+	
 	/**
 	 * Returns the 'width'-value of the encapsulated dimension.
 	 * 
@@ -197,7 +197,7 @@ public class DimensionAttribute
 	public double getWidth() {
 		return this.width.getDouble();
 	}
-
+	
 	/**
 	 * Returns a deep copy of this object.
 	 * 
@@ -208,7 +208,7 @@ public class DimensionAttribute
 		DimensionAttribute copied = new DimensionAttribute(getId(), getHeight(), getWidth());
 		return copied;
 	}
-
+	
 	// /**
 	// * Sets the value of this <code>Attribute</code> to the given value without
 	// * informing the <code>ListenerManager</code>.

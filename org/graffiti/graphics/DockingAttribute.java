@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: DockingAttribute.java,v 1.7 2010/12/14 07:02:26 morla Exp $
+// $Id: DockingAttribute.java,v 1.8 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -23,21 +23,21 @@ import org.graffiti.attributes.StringAttribute;
  * this correctly.
  * 
  * @author breu
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class DockingAttribute
 					extends HashMapAttribute
 					implements GraphicAttributeConstants {
 	// ~ Instance fields ========================================================
-
+	
 	/** Defines a port at source node */
 	private SourceDockingAttribute source;
-
+	
 	/** Defines a port at target node */
 	private TargetDockingAttribute target;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for Docking.
 	 * 
@@ -47,7 +47,7 @@ public class DockingAttribute
 	public DockingAttribute(String id) {
 		this(id, "", "");
 	}
-
+	
 	/**
 	 * Constructor for Docking.
 	 * 
@@ -65,9 +65,9 @@ public class DockingAttribute
 		add(this.source, false);
 		add(this.target, false);
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>. The docking values are set, additional
 	 * values are simply added (that means that if there exists already a
@@ -83,7 +83,7 @@ public class DockingAttribute
 		if (attrs.keySet().contains(SOURCE) || attrs.keySet().contains(TARGET)) {
 			for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
 				String attrId = it.next();
-
+				
 				if (attrId.equals(SOURCE)) {
 					setSource(((StringAttribute) attrs.get(SOURCE)).getString());
 				} else
@@ -97,7 +97,7 @@ public class DockingAttribute
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * Sets the 'source'-value.
 	 * 
@@ -107,7 +107,7 @@ public class DockingAttribute
 	public void setSource(String s) {
 		this.source.setString(s);
 	}
-
+	
 	/**
 	 * Returns the 'source'-value of the encapsulated docking.
 	 * 
@@ -116,7 +116,7 @@ public class DockingAttribute
 	public String getSource() {
 		return this.source.getString();
 	}
-
+	
 	/**
 	 * Sets the 'target'-value.
 	 * 
@@ -126,7 +126,7 @@ public class DockingAttribute
 	public void setTarget(String t) {
 		this.target.setString(t);
 	}
-
+	
 	/**
 	 * Returns the 'target'-value of the encapsulated docking.
 	 * 
@@ -135,7 +135,7 @@ public class DockingAttribute
 	public String getTarget() {
 		return this.target.getString();
 	}
-
+	
 	/**
 	 * Returns a deep copy of this object.
 	 * 
@@ -146,10 +146,10 @@ public class DockingAttribute
 		DockingAttribute copied = new DockingAttribute(this.getId());
 		copied.setSource(this.getSource());
 		copied.setTarget(this.getTarget());
-
+		
 		return copied;
 	}
-
+	
 	// /**
 	// * Sets the value of this <code>Attribute</code> to the given value without
 	// * informing the <code>ListenerManager</code>.

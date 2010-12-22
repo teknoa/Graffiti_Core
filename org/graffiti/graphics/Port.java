@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Port.java,v 1.5 2010/12/14 07:02:26 morla Exp $
+// $Id: Port.java,v 1.6 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -14,18 +14,18 @@ package org.graffiti.graphics;
  */
 public class Port {
 	// ~ Instance fields ========================================================
-
+	
 	/** DOCUMENT ME! */
 	private String name;
-
+	
 	/** DOCUMENT ME! */
 	private double x;
-
+	
 	/** DOCUMENT ME! */
 	private double y;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructor for Port.
 	 * 
@@ -41,9 +41,9 @@ public class Port {
 		this.x = x;
 		this.y = y;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the name.
 	 * 
@@ -53,7 +53,7 @@ public class Port {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * Returns the name.
 	 * 
@@ -62,7 +62,7 @@ public class Port {
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * Sets the x coordinate of this port.
 	 * 
@@ -71,7 +71,7 @@ public class Port {
 	public void setX(double x) {
 		this.x = x;
 	}
-
+	
 	/**
 	 * Returns the x ccordinate of this port.
 	 * 
@@ -80,7 +80,7 @@ public class Port {
 	public double getX() {
 		return x;
 	}
-
+	
 	/**
 	 * Sets the y ccordinate of this port.
 	 * 
@@ -89,7 +89,7 @@ public class Port {
 	public void setY(double y) {
 		this.y = y;
 	}
-
+	
 	/**
 	 * Returns the y ccordinate of this port.
 	 * 
@@ -98,7 +98,7 @@ public class Port {
 	public double getY() {
 		return y;
 	}
-
+	
 	/**
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -107,13 +107,13 @@ public class Port {
 		if (this == obj) {
 			return true;
 		}
-
+		
 		if (!(obj instanceof Port)) {
 			return false;
 		}
-
+		
 		Port po = (Port) obj;
-
+		
 		return (name.equals(po.name) && (x == po.x) && (y == po.y));
 	}
 }

@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: EdgeGraphicAttribute.java,v 1.7 2010/12/14 07:02:26 morla Exp $
+// $Id: EdgeGraphicAttribute.java,v 1.8 2010/12/22 13:05:33 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -26,12 +26,12 @@ import org.graffiti.attributes.StringAttribute;
  * Defines all graphic attributes of an edge
  * 
  * @author breu
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class EdgeGraphicAttribute
 					extends GraphElementGraphicAttribute {
 	// ~ Instance fields ========================================================
-
+	
 	// /** Object for docking specification of an edge at source and target nodes */
 	// private DockingAttribute docking;
 	//
@@ -52,9 +52,9 @@ public class EdgeGraphicAttribute
 	//
 	// /** Specifies the type of the line (e.g. polyline or spline types). */
 	// private StringAttribute lineType;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Constructs an EdgeGraphicAttribute and initializes all its members.
 	 * 
@@ -82,7 +82,7 @@ public class EdgeGraphicAttribute
 		add(StringAttribute.getTypedStringAttribute(LINETYPE, lt), false);
 		add(new EdgeShapeAttribute(SHAPE, "org.graffiti.plugins.views.defaults.StraightLineEdgeShape"), false);
 	}
-
+	
 	/**
 	 * Constructs an EdgeGraphicAttribute and initializes all its members.
 	 * 
@@ -93,7 +93,7 @@ public class EdgeGraphicAttribute
 		this("", "", 1d, new DockingAttribute(DOCKING),
 							new LinkedHashMapAttribute(BENDS), "");
 	}
-
+	
 	/**
 	 * Constructs an EdgeGraphicAttribute and initializes all its members.
 	 * 
@@ -112,7 +112,7 @@ public class EdgeGraphicAttribute
 						throws IllegalIdException {
 		this(ah, at, t, d, new LinkedHashMapAttribute(BENDS), "");
 	}
-
+	
 	/**
 	 * Constructs an EdgeGraphicAttribute and initializes all its members.
 	 * 
@@ -131,7 +131,7 @@ public class EdgeGraphicAttribute
 						throws IllegalIdException {
 		this(ah, at, t.getDouble(), d, new LinkedHashMapAttribute(BENDS), "");
 	}
-
+	
 	/**
 	 * Constructs an EdgeGraphicAttribute and initializes all its members.
 	 * 
@@ -151,9 +151,9 @@ public class EdgeGraphicAttribute
 		this(ah.getString(), at.getString(), t, d,
 							new LinkedHashMapAttribute(BENDS), "");
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Sets the 'arrowhead'-value.
 	 * 
@@ -164,7 +164,7 @@ public class EdgeGraphicAttribute
 		StringAttribute arrowhead = (StringAttribute) attributes.get(ARROWHEAD);
 		arrowhead.setString(ah);
 	}
-
+	
 	/**
 	 * Returns the 'arrowhead'-value of the encapsulated edge.
 	 * 
@@ -173,7 +173,7 @@ public class EdgeGraphicAttribute
 	public String getArrowhead() {
 		return ((StringAttribute) attributes.get(ARROWHEAD)).getString();
 	}
-
+	
 	/**
 	 * Sets the 'arrowtail'-value.
 	 * 
@@ -183,7 +183,7 @@ public class EdgeGraphicAttribute
 	public void setArrowtail(String at) {
 		((StringAttribute) attributes.get(ARROWTAIL)).setString(at);
 	}
-
+	
 	/**
 	 * Returns the 'arrowtail'-value of the encapsulated edge.
 	 * 
@@ -192,7 +192,7 @@ public class EdgeGraphicAttribute
 	public String getArrowtail() {
 		return ((StringAttribute) attributes.get(ARROWTAIL)).getString();
 	}
-
+	
 	/**
 	 * Sets the 'bends'-value.
 	 * 
@@ -203,7 +203,7 @@ public class EdgeGraphicAttribute
 		SortedCollectionAttribute bends = (SortedCollectionAttribute) attributes.get(BENDS);
 		bends.setCollection(b.getCollection());
 	}
-
+	
 	/**
 	 * Returns the collection of <code>CoordinateAttribute</code>s specifying
 	 * the bends for this edge.
@@ -214,7 +214,7 @@ public class EdgeGraphicAttribute
 	public SortedCollectionAttribute getBends() {
 		return (SortedCollectionAttribute) attributes.get(BENDS);
 	}
-
+	
 	/**
 	 * Sets the collection of attributes contained within this <tt>CollectionAttribute</tt>
 	 * 
@@ -238,7 +238,7 @@ public class EdgeGraphicAttribute
 							attrs.keySet().contains(SHAPE)) {
 			for (Iterator<String> it = attrs.keySet().iterator(); it.hasNext();) {
 				String attrId = it.next();
-
+				
 				if (attrId.equals(ARROWHEAD)) {
 					setArrowhead(((StringAttribute) attrs.get(ARROWHEAD)).getString());
 				} else
@@ -283,7 +283,7 @@ public class EdgeGraphicAttribute
 			throw new IllegalArgumentException("Invalid value type.");
 		}
 	}
-
+	
 	/**
 	 * Sets the 'docking'-value.
 	 * 
@@ -294,7 +294,7 @@ public class EdgeGraphicAttribute
 		remove(DOCKING);
 		add(d);
 	}
-
+	
 	/**
 	 * Returns the 'docking'-value of the encapsulated edge.
 	 * 
@@ -303,7 +303,7 @@ public class EdgeGraphicAttribute
 	public DockingAttribute getDocking() {
 		return (DockingAttribute) attributes.get(DOCKING);
 	}
-
+	
 	/**
 	 * DOCUMENT ME!
 	 * 
@@ -312,7 +312,7 @@ public class EdgeGraphicAttribute
 	public void setLineType(String l) {
 		((StringAttribute) attributes.get(LINETYPE)).setString(l);
 	}
-
+	
 	/**
 	 * Returns the line type.
 	 * 
@@ -321,7 +321,7 @@ public class EdgeGraphicAttribute
 	public String getLineType() {
 		return ((StringAttribute) attributes.get(LINETYPE)).getString();
 	}
-
+	
 	/**
 	 * Sets the 'thickness'-value.
 	 * 
@@ -331,7 +331,7 @@ public class EdgeGraphicAttribute
 	public void setThickness(double t) {
 		((ThicknessAttribute) attributes.get(THICKNESS)).setDouble(t);
 	}
-
+	
 	/**
 	 * Returns the 'thickness'-value of the encapsulated edge.
 	 * 
@@ -340,7 +340,7 @@ public class EdgeGraphicAttribute
 	public double getThickness() {
 		return ((ThicknessAttribute) attributes.get(THICKNESS)).getDouble();
 	}
-
+	
 	/**
 	 * Returns a deep copy of this object.
 	 * 
@@ -349,12 +349,12 @@ public class EdgeGraphicAttribute
 	@Override
 	public Object copy() {
 		EdgeGraphicAttribute copied = new EdgeGraphicAttribute();
-
+		
 		// copy ALL of the subattributes
 		for (Iterator<?> iter = attributes.values().iterator(); iter.hasNext();) {
 			Attribute attr = (Attribute) iter.next();
 			Attribute copAttr = (Attribute) attr.copy();
-
+			
 			try {
 				Attribute exAttr = copied.getAttribute(copAttr.getId());
 				exAttr.setValue(copAttr.getValue());
@@ -362,7 +362,7 @@ public class EdgeGraphicAttribute
 				copied.add(copAttr, false);
 			}
 		}
-
+		
 		// // first setting the subattributes defined in
 		// // GraphElementGrapichAttribute
 		// copied.setBackgroundImage((ImageAttribute) this.getBackgroundImage()
@@ -381,12 +381,12 @@ public class EdgeGraphicAttribute
 		// copied.setThickness(this.getThickness());
 		return copied;
 	}
-
+	
 	public Collection<Attribute> getBendAttributes() {
 		LinkedHashMapAttribute bends = (LinkedHashMapAttribute) attributes.get(BENDS);
 		return bends.getCollectionNoClone().values();
 	}
-
+	
 	public int getBendCount() {
 		return ((LinkedHashMapAttribute) attributes.get(BENDS)).getCollectionNoClone().size();
 	}

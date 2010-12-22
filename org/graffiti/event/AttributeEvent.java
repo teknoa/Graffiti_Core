@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AttributeEvent.java,v 1.6 2010/12/14 07:02:26 morla Exp $
+// $Id: AttributeEvent.java,v 1.7 2010/12/22 13:05:34 klukas Exp $
 
 package org.graffiti.event;
 
@@ -15,21 +15,21 @@ import org.graffiti.attributes.Attribute;
 /**
  * Contains an attribute event.
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class AttributeEvent
 					extends AbstractEvent {
 	// ~ Instance fields ========================================================
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	/** The path that has been assigned to the attribute by the event. */
 	private String path;
-
+	
 	// ~ Constructors ===========================================================
-
+	
 	/**
 	 * Contructor that is called when one attribute is concerned.
 	 * 
@@ -39,7 +39,7 @@ public class AttributeEvent
 	public AttributeEvent(Attribute attribute) {
 		super(attribute);
 	}
-
+	
 	/**
 	 * Contructor that is called when one composite attribute is concerned,
 	 * where it is comfortable to pass the path of attribute, too.
@@ -53,9 +53,9 @@ public class AttributeEvent
 		super(attribute);
 		this.path = path;
 	}
-
+	
 	// ~ Methods ================================================================
-
+	
 	/**
 	 * Returns the attribute that has been changed by this event.
 	 * 
@@ -64,7 +64,7 @@ public class AttributeEvent
 	public Attribute getAttribute() {
 		return (Attribute) getSource();
 	}
-
+	
 	/**
 	 * Returns the path to the attribute that has been changed by this event.
 	 * 
@@ -73,7 +73,7 @@ public class AttributeEvent
 	public String getPath() {
 		return path;
 	}
-
+	
 	public Attributable getAttributeable() {
 		return getAttribute().getAttributable();
 	}
