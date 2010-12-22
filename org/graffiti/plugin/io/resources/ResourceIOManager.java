@@ -51,8 +51,11 @@ public class ResourceIOManager {
 			return null;
 		}
 		for (ResourceIOHandler mh : getInstance().handlers)
-			if (url.isEqualPrefix(mh.getPrefix()))
-				return mh.getInputStream(url);
+			if (url.isEqualPrefix(mh.getPrefix())) {
+				InputStream is = mh.getInputStream(url);
+				if (is != null)
+					return is;
+			}
 		System.err.println("Could not create inputstream from URL " + url.toString() + "!");
 		return null;
 	}
