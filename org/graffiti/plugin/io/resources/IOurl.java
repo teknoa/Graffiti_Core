@@ -74,8 +74,8 @@ public class IOurl {
 		this.filename = filename;
 	}
 	
-	public void setDetail(String md5) {
-		this.detail = md5;
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 	
 	public void setPrefix(String prefix) {

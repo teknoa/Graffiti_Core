@@ -75,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.120 $
+ * @version $Revision: 1.121 $
  */
 public class AttributeHelper implements HelperClass {
 	
@@ -3487,19 +3487,23 @@ public class AttributeHelper implements HelperClass {
 		}
 	}
 	
+	@Deprecated
 	public static String getMD5fromFile(String filename) throws Exception {
 		File f = new File(filename);
 		return getMD5fromFile(f);
 	}
 	
+	@Deprecated
 	public static String getMD5fromFile(File f) throws Exception {
 		return getMD5fromInputStream(new FileInputStream(f), null);
 	}
 	
+	@Deprecated
 	public static String getMD5fromInputStream(InputStream is) throws Exception {
 		return getMD5fromInputStream(is, null);
 	}
 	
+	@Deprecated
 	public static String getMD5fromInputStream(InputStream is, ObjectRef optFileSize) throws Exception {
 		if (is == null)
 			return null;
