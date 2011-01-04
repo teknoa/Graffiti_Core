@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.LinkedHashSet;
 
+import org.ErrorMsg;
+
 public class ResourceIOManager {
 	
 	private static ResourceIOManager instance;
@@ -29,7 +31,11 @@ public class ResourceIOManager {
 	}
 	
 	public static void registerIOHandler(ResourceIOHandler handler) {
-		getInstance().handlers.add(handler);
+		ResourceIOHandler mh = getHandlerFromPrefix(handler.getPrefix());
+		if (mh != null)
+			ErrorMsg.addErrorMessage("IO Handler with Prefix " + handler.getPrefix() + " can't be registered more than once!");
+		else
+			getInstance().handlers.add(handler);
 	}
 	
 	public static void removeIOHandler(ResourceIOHandler handler) {
@@ -50,14 +56,19 @@ public class ResourceIOManager {
 			System.err.println("Could not create inputstream from NULL url!");
 			return null;
 		}
-		for (ResourceIOHandler mh : getInstance().handlers)
-			if (url.isEqualPrefix(mh.getPrefix())) {
-				InputStream is = mh.getInputStream(url);
-				if (is != null)
-					return is;
+		ResourceIOHandler mh = getHandlerFromPrefix(url.getPrefix());
+		if (mh == null) {
+			System.err.println("Could not get handler from URL " + url.toString() + "!");
+			return null;
+		} else {
+			InputStream is = mh.getInputStream(url);
+			if (is != null)
+				return is;
+			else {
+				System.err.println("Could not create inputstream from URL " + url.toString() + "!");
+				return null;
 			}
-		System.err.println("Could not create inputstream from URL " + url.toString() + "!");
-		return null;
+		}
 	}
 	
 	/**
@@ -79,10 +90,11 @@ public class ResourceIOManager {
 		if (is == null || srcFileName == null)
 			return null;
 		
-		for (ResourceIOHandler mh : getInstance().handlers)
-			if (mh.getPrefix().equals(targetHandlerPrefix))
-				return mh.copyDataAndReplaceURLPrefix(is, srcFileName, config);
-		return null;
+		ResourceIOHandler mh = getHandlerFromPrefix(targetHandlerPrefix);
+		if (mh == null)
+			return null;
+		else
+			return mh.copyDataAndReplaceURLPrefix(is, srcFileName, config);
 	}
 	
 	public static MyByteArrayInputStream getInputStreamMemoryCached(IOurl url) throws IOException, Exception {
@@ -122,5 +134,12 @@ public class ResourceIOManager {
 		
 		in.close();
 		out.close();
+	}
+	
+	public static ResourceIOHandler getHandlerFromPrefix(String prefix) {
+		for (ResourceIOHandler mh : getInstance().handlers)
+			if (mh.getPrefix().equals(prefix))
+				return mh;
+		return null;
 	}
 }

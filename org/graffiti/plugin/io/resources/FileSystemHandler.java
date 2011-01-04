@@ -42,4 +42,14 @@ public class FileSystemHandler extends AbstractResourceIOHandler {
 	public static IOurl getURL(File file) {
 		return new IOurl(PREFIX, file.getParent(), file.getName());
 	}
+	
+	@Override
+	public IOurl saveAs(IOurl source, String targetFilename) throws Exception {
+		if (source.getPrefix().equals(PREFIX)) {
+			ResourceIOConfigObject config = new FileSystemIOConfig(source.getDetail());
+			return copyDataAndReplaceURLPrefix(source.getInputStream(), targetFilename, config);
+		} else
+			throw new UnsupportedOperationException("Details are missing!");
+	}
+	
 }

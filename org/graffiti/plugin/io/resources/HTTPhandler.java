@@ -1,10 +1,7 @@
 package org.graffiti.plugin.io.resources;
 
-import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
-
-import org.HomeFolder;
 
 public class HTTPhandler extends AbstractResourceIOHandler {
 	
@@ -25,9 +22,7 @@ public class HTTPhandler extends AbstractResourceIOHandler {
 	@Override
 	public IOurl copyDataAndReplaceURLPrefix(InputStream is, String targetFilename, ResourceIOConfigObject config)
 						throws Exception {
-		IOurl newurl = new IOurl(getPrefix(), ((FileSystemIOConfig) config).getFileDir(), targetFilename);
-		HomeFolder.copyFile(is, new File(targetFilename));
-		return newurl;
+		throw new UnsupportedOperationException("HTTP save not supported");
 	}
 	
 	public static IOurl getURL(String httpurl) {
