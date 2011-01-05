@@ -32,9 +32,10 @@ public class ResourceIOManager {
 	
 	public static void registerIOHandler(ResourceIOHandler handler) {
 		ResourceIOHandler mh = getHandlerFromPrefix(handler.getPrefix());
-		if (mh != null)
+		if (mh != null) {
+			System.err.println("IO Handler with Prefix " + handler.getPrefix() + " can't be registered more than once!");
 			ErrorMsg.addErrorMessage("IO Handler with Prefix " + handler.getPrefix() + " can't be registered more than once!");
-		else
+		} else
 			getInstance().handlers.add(handler);
 	}
 	
