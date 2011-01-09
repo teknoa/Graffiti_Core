@@ -107,6 +107,12 @@ public class ResourceIOManager {
 		return new MyByteArrayInputStream(bos.toByteArray());
 	}
 	
+	public static MyByteArrayInputStream getInputStreamMemoryCached(InputStream is) throws IOException, Exception {
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ResourceIOManager.copyContent(is, bos);
+		return new MyByteArrayInputStream(bos.toByteArray());
+	}
+	
 	public static void copyContent(InputStream intemp, OutputStream out) throws IOException {
 		copyContent(intemp, out, -1);
 	}
