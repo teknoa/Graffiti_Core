@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: LabelAttribute.java,v 1.15 2010/12/22 13:05:33 klukas Exp $
+// $Id: LabelAttribute.java,v 1.16 2011/01/16 16:40:50 klukas Exp $
 
 package org.graffiti.graphics;
 
@@ -35,7 +35,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  * 
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public abstract class LabelAttribute extends HashMapAttribute implements
 					GraphicAttributeConstants {
@@ -193,7 +193,10 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 	}
 	
 	public String getAlignment() {
-		return ((StringAttribute) attributes.get(ANCHOR)).getString();
+		if (attributes.get(ANCHOR) != null)
+			return ((StringAttribute) attributes.get(ANCHOR)).getString();
+		else
+			return GraphicAttributeConstants.CENTERED;
 	}
 	
 	public String getAlignmentText() {
