@@ -6,9 +6,9 @@ import org.graffiti.plugin.io.resources.IOurl;
 
 public class MultiFileSelectionParameter extends StringParameter {
 	
-	private String[] extensions;
-	private String extensionDescription;
-	private boolean multipleFile;
+	private final String[] extensions;
+	private final String extensionDescription;
+	private final boolean multipleFile;
 	
 	public MultiFileSelectionParameter(ArrayList<IOurl> value, String name, String description, String[] extensions, String extensionDescription,
 						boolean multipleFiles) {
@@ -40,6 +40,8 @@ public class MultiFileSelectionParameter extends StringParameter {
 	
 	public static String convertToString(ArrayList<IOurl> urls) {
 		String s = "";
+		if (urls == null || urls.size() == 0)
+			return s;
 		for (IOurl u : urls)
 			s += u.toString() + ";";
 		if (s.length() > 0)
