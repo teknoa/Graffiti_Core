@@ -6,8 +6,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.LinkedHashSet;
 
-import org.ErrorMsg;
-
 public class ResourceIOManager {
 	
 	private static ResourceIOManager instance;
@@ -34,7 +32,6 @@ public class ResourceIOManager {
 		ResourceIOHandler mh = getHandlerFromPrefix(handler.getPrefix());
 		if (mh != null) {
 			System.err.println("IO Handler with Prefix " + handler.getPrefix() + " can't be registered more than once!");
-			ErrorMsg.addErrorMessage("IO Handler with Prefix " + handler.getPrefix() + " can't be registered more than once!");
 		} else
 			getInstance().handlers.add(handler);
 	}
