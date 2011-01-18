@@ -8,48 +8,13 @@
 
 package org.color;
 
-import static org.junit.Assert.assertEquals;
-
 import java.awt.Color;
 import java.util.ArrayList;
-
-import org.junit.Test;
 
 /**
  * @author klukas
  */
 public class ColorUtil {
-	
-	@Test
-	public void testColorConversion() {
-		Color c1 = new Color(120, 20, 90);
-		ColorXYZ cx1 = new ColorXYZ(c1);
-		assertEquals(cx1.x, 9.841, 0.001);
-		assertEquals(cx1.y, 5.232, 0.001);
-		assertEquals(cx1.z, 10.164, 0.001);
-		
-		c1 = new Color(240, 120, 0);
-		cx1 = new ColorXYZ(c1);
-		assertEquals(42.652, cx1.x, 0.001);
-		assertEquals(31.958, cx1.y, 0.001);
-		assertEquals(3.921, cx1.z, 0.001);
-		
-		Color_CIE_Lab cie = colorXYZ2CIELAB(cx1);
-		assertEquals(63.308, cie.getL(), 0.001);
-		assertEquals(40.951, cie.getA(), 0.001);
-		assertEquals(70.696, cie.getB(), 0.001);
-		
-		cx1 = cie.getColorXYZ();
-		assertEquals(42.652, cx1.x, 0.001);
-		assertEquals(31.958, cx1.y, 0.001);
-		assertEquals(3.921, cx1.z, 0.001);
-		
-		c1 = cx1.getColor();
-		assertEquals(240, c1.getRed(), 0.001);
-		assertEquals(120, c1.getGreen(), 0.001);
-		assertEquals(0, c1.getBlue(), 0.001);
-	}
-	
 	/**
 	 * @param palette
 	 * @param c
