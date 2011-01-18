@@ -75,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.121 $
+ * @version $Revision: 1.122 $
  */
 public class AttributeHelper implements HelperClass {
 	
@@ -3535,10 +3535,12 @@ public class AttributeHelper implements HelperClass {
 		return res;
 	}
 	
+	/**
+	 * If date is null, the current date is used!
+	 */
 	public static String getDateString(Date date) {
 		if (date == null) {
 			date = new Date();
-			System.err.println("Date object was null!");
 		}
 		return new SimpleDateFormat().format(date);
 	}
