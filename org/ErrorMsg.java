@@ -25,6 +25,12 @@ public class ErrorMsg implements HelperClass {
 	private static LinkedList<String> errorMessagesShort = new LinkedList<String>();
 	private static String statusMsg = null;
 	
+	private static boolean rethrowErrorMessages = true;
+	
+	public static void setRethrowErrorMessages(boolean rethrowErrorMessages) {
+		ErrorMsg.rethrowErrorMessages = rethrowErrorMessages;
+	}
+	
 	public static DecimalFormat getDecimalFormat(String pattern) {
 		pattern = StringManipulationTools.stringReplace(pattern, ",", "");
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
@@ -40,6 +46,8 @@ public class ErrorMsg implements HelperClass {
 	 * @param errorMsg
 	 */
 	public synchronized static void addErrorMessage(String errorMsg) {
+		if (rethrowErrorMessages)
+			throw new Error(errorMsg);
 		synchronized (errorMessages) {
 			StackTraceElement[] stack = Java_1_5_compatibility.getStackFrame();
 			String res;
@@ -296,6 +304,9 @@ public class ErrorMsg implements HelperClass {
 	}
 	
 	public static void addErrorMessage(Exception e) {
+		if (rethrowErrorMessages)
+			throw new Error(e);
+		
 		addErrorMessage(e.getLocalizedMessage());
 		e.printStackTrace();
 	}
