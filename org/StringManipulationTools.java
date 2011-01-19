@@ -20,7 +20,7 @@ public class StringManipulationTools implements HelperClass {
 	public static final String Unicode = "UTF-8";
 	
 	@SuppressWarnings("nls")
-	static final String[][] htmlNamedEntity2Unicode = {
+	public static final String[][] htmlNamedEntity2Unicode = {
 			{ "&nbsp;", "\u00A0" },
 			{ "&iexcl;", "\u00A1" },
 			{ "&cent;", "\u00A2" },
@@ -600,7 +600,7 @@ public class StringManipulationTools implements HelperClass {
 	 * converts all HTML named entities within a string to unicode
 	 * 
 	 * @param html
-	 * @return
+	 * @return unicode string
 	 */
 	public static String htmlNamedEntities2Unicode(String html) {
 		String unicode = html;
