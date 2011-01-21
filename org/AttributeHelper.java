@@ -75,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.122 $
+ * @version $Revision: 1.123 $
  */
 public class AttributeHelper implements HelperClass {
 	
@@ -881,6 +881,26 @@ public class AttributeHelper implements HelperClass {
 			return AlignmentSetting.CENTERED;
 		else
 			return AlignmentSetting.HIDDEN;
+	}
+	
+	public static boolean isLabelAlignmentKnownConstant(int index, Node node) {
+		try {
+			String idx = "" + index;
+			if (index < 0)
+				idx = "";
+			LabelAttribute labelAttr;
+			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS + idx)) {
+				labelAttr = (LabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS + idx);
+				String align = labelAttr.getAlignment();
+				for (AlignmentSetting a : AlignmentSetting.values()) {
+					if (a.toGMLstring().equalsIgnoreCase(align))
+						return true;
+				}
+			}
+		} catch (Exception ex) {
+			// empty
+		}
+		return false;
 	}
 	
 	/**
