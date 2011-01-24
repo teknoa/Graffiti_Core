@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: XMLHelper.java,v 1.22 2011/01/24 07:12:14 morla Exp $
+// $Id: XMLHelper.java,v 1.23 2011/01/24 12:53:03 morla Exp $
 
 package org.graffiti.plugin;
 
@@ -115,9 +115,6 @@ public class XMLHelper implements HelperClass {
 		serializer.output(getJDOMfromDOM(doc), resultStringWriter);
 		String result = resultStringWriter.toString();
 		result = StringManipulationTools.stringReplace(result, "'", "&apos;");
-		
-		result = StringManipulationTools.htmlNamedEntities2Unicode(result);
-		
 		return result;
 	}
 	

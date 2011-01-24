@@ -40,10 +40,6 @@ public class ResourceIOManager {
 		getInstance().handlers.remove(handler);
 	}
 	
-	// public static ArrayList<ResourceIOHandler> getHandlers() {
-	// return getInstance().handlers;
-	// }
-	
 	/**
 	 * Use {@link IOurl}.getInputStream instead.
 	 * 
