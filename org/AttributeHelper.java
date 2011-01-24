@@ -75,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.123 $
+ * @version $Revision: 1.124 $
  */
 public class AttributeHelper implements HelperClass {
 	
@@ -2520,6 +2520,22 @@ public class AttributeHelper implements HelperClass {
 		} catch (Exception ex) {
 		}
 		return null;
+	}
+	
+	public static void setLabelPosition(Node node, String pos) {
+		try {
+			LabelAttribute labelAttr;
+			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS)) {
+				labelAttr = (LabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
+			} else {
+				// no label - associate one
+				labelAttr = new NodeLabelAttribute(GraphicAttributeConstants.LABELGRAPHICS, "");
+				node.addAttribute(labelAttr, GraphicAttributeConstants.LABEL_ATTRIBUTE_PATH);
+			}
+			labelAttr.setAlignment(pos);
+		} catch (Exception ex) {
+			ErrorMsg.addErrorMessage(ex);
+		}
 	}
 	
 	/**
