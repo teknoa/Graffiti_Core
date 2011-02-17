@@ -118,15 +118,16 @@ public class ReleaseInfo implements HelperClass {
 								 * break;
 								 */
 			case GravistoJavaHelp:
-				if (currentRelease != Release.RELEASE_CLUSTERVIS
-									&& currentRelease != Release.KGML_EDITOR) {
-					if ((new File(getAppFolderWithFinalSep()
-										+ "setting_help_enabled")).exists())
-						return true;
-					else
-						return false;
-				}
 				return false;
+				// if (currentRelease != Release.RELEASE_CLUSTERVIS
+				// && currentRelease != Release.KGML_EDITOR) {
+				// if ((new File(getAppFolderWithFinalSep()
+				// + "setting_help_enabled")).exists())
+				// return true;
+				// else
+				// return false;
+				// }
+				// return false;
 			case TAB_LAYOUT:
 				return true; /*
 								 * if (currentRelease==Release.RELEASE_CLUSTERVIS ||

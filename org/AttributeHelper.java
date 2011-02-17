@@ -34,9 +34,9 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -75,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.124 $
+ * @version $Revision: 1.125 $
  */
 public class AttributeHelper implements HelperClass {
 	
@@ -435,7 +435,7 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("Node:fill", "Shape: Fill-Color");
 		idToNiceId.put("fill", "Fill-Color");
 		
-		idToNiceId.put("useCustomRange", chartSelN + ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Custom Min/Max");
+		idToNiceId.put("useCustomRange", chartSelN + ":<html>&nbsp;Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Custom Min/Max");
 		idToNiceId.put("useCustomRangeSteps", chartSelN
 							+ ":<html>&nbsp;Range Axis: <br>&nbsp;&nbsp;&nbsp;<small><!--A-->Custom Step Size");
 		idToNiceId.put("rangeStepSize", chartSelN
@@ -443,8 +443,8 @@ public class AttributeHelper implements HelperClass {
 		
 		idToNiceId.put("max_charts_in_column", chartSelN + ": Number of Charts in a Row");
 		
-		idToNiceId.put("minRange", chartSelN + ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Minimum");
-		idToNiceId.put("maxRange", chartSelN + ":<html>Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Maximum");
+		idToNiceId.put("minRange", chartSelN + ":<html>&nbsp;Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Minimum");
+		idToNiceId.put("maxRange", chartSelN + ":<html>&nbsp;Range Axis: <br>&nbsp;&nbsp;&nbsp;<small>Maximum");
 		idToNiceId.put("connectPriorItems", chartAllLine + ": No gaps for missing data");
 		idToNiceId.put("Node:outline", "Shape: Frame-Color");
 		idToNiceId.put("Edge:outline", "Color");
@@ -742,8 +742,6 @@ public class AttributeHelper implements HelperClass {
 		if (label == null)
 			return;
 		try {
-			if (label.contains("\""))
-				label = label.replace("\"", "");
 			EdgeLabelAttribute labelAttr;
 			
 			if (hasAttribute(edge, GraphicAttributeConstants.LABELGRAPHICS)) {
@@ -784,8 +782,6 @@ public class AttributeHelper implements HelperClass {
 			return;
 		}
 		try {
-			if (label.contains("\""))
-				label = label.replace("\"", "");
 			LabelAttribute labelAttr;
 			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS)) {
 				labelAttr = (LabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS);
@@ -806,14 +802,18 @@ public class AttributeHelper implements HelperClass {
 		}
 	}
 	
-	public static void setLabel(int idx, Node node, String label, String fontName, String alignment) {
+	/**
+	 * @param idx
+	 *           Use -1 to get main label, use 0..99 to get annotation labels
+	 */
+	public static void setLabel(int idx, GraphElement ge, String label, String fontName, String alignment) {
 		String index = "" + idx;
 		if (idx < 0)
 			index = "";
 		if (label == null) {
-			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS + index)) {
-				NodeLabelAttribute labelAttr;
-				labelAttr = (NodeLabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS + index);
+			if (hasAttribute(ge, GraphicAttributeConstants.LABELGRAPHICS + index)) {
+				LabelAttribute labelAttr;
+				labelAttr = (LabelAttribute) ge.getAttribute(GraphicAttributeConstants.LABELGRAPHICS + index);
 				labelAttr.getParent().remove(labelAttr);
 			}
 			return;
@@ -822,12 +822,15 @@ public class AttributeHelper implements HelperClass {
 			if (label.contains("\""))
 				label = label.replace("\"", "");
 			LabelAttribute labelAttr;
-			if (hasAttribute(node, GraphicAttributeConstants.LABELGRAPHICS + index)) {
-				labelAttr = (LabelAttribute) node.getAttribute(GraphicAttributeConstants.LABELGRAPHICS + index);
+			if (hasAttribute(ge, GraphicAttributeConstants.LABELGRAPHICS + index)) {
+				labelAttr = (LabelAttribute) ge.getAttribute(GraphicAttributeConstants.LABELGRAPHICS + index);
 			} else {
 				// no label - associate one
-				labelAttr = new NodeLabelAttribute(GraphicAttributeConstants.LABELGRAPHICS + index, label);
-				node.addAttribute(labelAttr, GraphicAttributeConstants.LABEL_ATTRIBUTE_PATH);
+				if (ge instanceof Node)
+					labelAttr = new NodeLabelAttribute(GraphicAttributeConstants.LABELGRAPHICS + index, label);
+				else
+					labelAttr = new EdgeLabelAttribute(GraphicAttributeConstants.LABELGRAPHICS + index, label);
+				ge.addAttribute(labelAttr, GraphicAttributeConstants.LABEL_ATTRIBUTE_PATH);
 			}
 			
 			if (fontName != null)
@@ -841,6 +844,10 @@ public class AttributeHelper implements HelperClass {
 		}
 	}
 	
+	/**
+	 * @param index
+	 *           Use -1 to get main label, use 0..99 to get annotation labels
+	 */
 	public static void setLabelAlignment(int index, Node node, AlignmentSetting align) {
 		try {
 			String idx = "" + index;
@@ -860,6 +867,10 @@ public class AttributeHelper implements HelperClass {
 		}
 	}
 	
+	/**
+	 * @param index
+	 *           Use -1 to get main label, use 0..99 to get annotation labels
+	 */
 	public static AlignmentSetting getLabelAlignment(int index, Node node) {
 		try {
 			String idx = "" + index;
@@ -883,6 +894,10 @@ public class AttributeHelper implements HelperClass {
 			return AlignmentSetting.HIDDEN;
 	}
 	
+	/**
+	 * @param index
+	 *           Use -1 to get main label, use 0..99 to get annotation labels
+	 */
 	public static boolean isLabelAlignmentKnownConstant(int index, Node node) {
 		try {
 			String idx = "" + index;
@@ -968,6 +983,10 @@ public class AttributeHelper implements HelperClass {
 		return getLabels(graphElement, true);
 	}
 	
+	/**
+	 * @param index
+	 *           Use -1 to get main label, use 0..99 to get annotation labels
+	 */
 	public static String getLabel(int index, Attributable node, String defaultReturn) {
 		try {
 			LabelAttribute labelAttr;
@@ -2771,19 +2790,19 @@ public class AttributeHelper implements HelperClass {
 		}
 	}
 	
-	public static void setLabelColor(int index, Node n, Color color) {
+	public static void setLabelColor(int index, GraphElement ge, Color color) {
 		String idx = "" + index;
 		if (index < 0)
 			idx = "";
 		try {
-			HashMapAttribute l = (HashMapAttribute) n.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
-								+ NodeLabelAttribute.LABELGRAPHICS + idx);
+			HashMapAttribute l = (HashMapAttribute) ge.getAttribute(GraphicAttributeConstants.LABEL_ATTRIBUTE_PATH + "."
+								+ GraphicAttributeConstants.LABELGRAPHICS + idx);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
 			o.setString(ColorUtil.getHexFromColor(color));
 		} catch (AttributeNotFoundException e) {
-			setLabel(n, getLabel(n, ""));
-			HashMapAttribute l = (HashMapAttribute) n.getAttribute(NodeLabelAttribute.LABEL_ATTRIBUTE_PATH + "."
-								+ NodeLabelAttribute.LABELGRAPHICS + idx);
+			setLabel(index, ge, getLabel(index, ge, ""), null, null);
+			HashMapAttribute l = (HashMapAttribute) ge.getAttribute(GraphicAttributeConstants.LABEL_ATTRIBUTE_PATH + "."
+								+ GraphicAttributeConstants.LABELGRAPHICS + idx);
 			StringAttribute o = (StringAttribute) l.getAttribute("color");
 			o.setString(ColorUtil.getHexFromColor(color));
 		}
