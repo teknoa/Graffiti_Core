@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ListenerManager.java,v 1.16 2010/12/22 13:05:34 klukas Exp $
+// $Id: ListenerManager.java,v 1.17 2011/03/24 12:21:27 morla Exp $
 
 package org.graffiti.event;
 
@@ -32,7 +32,7 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  * 
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 public class ListenerManager {
 	// ~ Instance fields ========================================================
@@ -41,19 +41,19 @@ public class ListenerManager {
 	 * Holds the list of registered NodeListeners that receive events even if a
 	 * transaction is active.
 	 */
-	private Set<AttributeListener> alltimeAttributeListenerList;
-	private Set<EdgeListener> alltimeEdgeListenerList;
-	private Set<GraphListener> alltimeGraphListenerList;
-	private Set<NodeListener> alltimeNodeListenerList;
+	private final Set<AttributeListener> alltimeAttributeListenerList;
+	private final Set<EdgeListener> alltimeEdgeListenerList;
+	private final Set<GraphListener> alltimeGraphListenerList;
+	private final Set<NodeListener> alltimeNodeListenerList;
 	
 	/**
 	 * Holds the list of registered AttributeListeners that do not receive any
 	 * events whenever a transaction is active.
 	 */
-	private Set<AttributeListener> delayedAttributeListenerList;
-	private Set<EdgeListener> delayedEdgeListenerList;
-	private Set<GraphListener> delayedGraphListenerList;
-	private Set<NodeListener> delayedNodeListenerList;
+	private final Set<AttributeListener> delayedAttributeListenerList;
+	private final Set<EdgeListener> delayedEdgeListenerList;
+	private final Set<GraphListener> delayedGraphListenerList;
+	private final Set<NodeListener> delayedNodeListenerList;
 	
 	/** Logs the objects that get changed during a transaction. */
 	private TransactionHashMap changedObjects;
@@ -322,7 +322,8 @@ public class ListenerManager {
 			throw new IllegalArgumentException("The argument " + "may not be null");
 		
 		if (transactionsActive == 0) {
-			for (AttributeListener al : delayedAttributeListenerList) {
+			Set<AttributeListener> copy1 = new HashSet<AttributeListener>(delayedAttributeListenerList);
+			for (AttributeListener al : copy1) {
 				al.postAttributeChanged(event);
 			}
 		} else {
@@ -374,13 +375,13 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = delayedEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postDirectedChanged(event);
+				(it.next()).postDirectedChanged(event);
 			}
 			
 			it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postDirectedChanged(event);
+				(it.next()).postDirectedChanged(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -389,7 +390,7 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postDirectedChanged(event);
+				(it.next()).postDirectedChanged(event);
 			}
 		}
 	}
@@ -411,13 +412,13 @@ public class ListenerManager {
 			Iterator<GraphListener> it = delayedGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postEdgeAdded(event);
+				(it.next()).postEdgeAdded(event);
 			}
 			
 			it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postEdgeAdded(event);
+				(it.next()).postEdgeAdded(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -435,7 +436,7 @@ public class ListenerManager {
 			Iterator<GraphListener> it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postEdgeAdded(event);
+				(it.next()).postEdgeAdded(event);
 			}
 		}
 	}
@@ -457,13 +458,13 @@ public class ListenerManager {
 			Iterator<GraphListener> it = delayedGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postEdgeRemoved(event);
+				(it.next()).postEdgeRemoved(event);
 			}
 			
 			it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postEdgeRemoved(event);
+				(it.next()).postEdgeRemoved(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -482,7 +483,7 @@ public class ListenerManager {
 			Iterator<GraphListener> it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postEdgeRemoved(event);
+				(it.next()).postEdgeRemoved(event);
 			}
 		}
 	}
@@ -503,13 +504,13 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = delayedEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postEdgeReversed(event);
+				(it.next()).postEdgeReversed(event);
 			}
 			
 			it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postEdgeReversed(event);
+				(it.next()).postEdgeReversed(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -518,7 +519,7 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postEdgeReversed(event);
+				(it.next()).postEdgeReversed(event);
 			}
 		}
 	}
@@ -540,13 +541,13 @@ public class ListenerManager {
 			Iterator<GraphListener> it = delayedGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postGraphCleared(event);
+				(it.next()).postGraphCleared(event);
 			}
 			
 			it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postGraphCleared(event);
+				(it.next()).postGraphCleared(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -564,7 +565,7 @@ public class ListenerManager {
 			Iterator<GraphListener> it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postGraphCleared(event);
+				(it.next()).postGraphCleared(event);
 			}
 		}
 	}
@@ -666,13 +667,13 @@ public class ListenerManager {
 			Iterator<GraphListener> it = delayedGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postNodeAdded(event);
+				(it.next()).postNodeAdded(event);
 			}
 			
 			it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postNodeAdded(event);
+				(it.next()).postNodeAdded(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -690,7 +691,7 @@ public class ListenerManager {
 			Iterator<GraphListener> it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postNodeAdded(event);
+				(it.next()).postNodeAdded(event);
 			}
 		}
 	}
@@ -712,13 +713,13 @@ public class ListenerManager {
 			Iterator<GraphListener> it = delayedGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postNodeRemoved(event);
+				(it.next()).postNodeRemoved(event);
 			}
 			
 			it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postNodeRemoved(event);
+				(it.next()).postNodeRemoved(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -736,7 +737,7 @@ public class ListenerManager {
 			Iterator<GraphListener> it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).postNodeRemoved(event);
+				(it.next()).postNodeRemoved(event);
 			}
 		}
 	}
@@ -838,13 +839,13 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = delayedEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postSourceNodeChanged(event);
+				(it.next()).postSourceNodeChanged(event);
 			}
 			
 			it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postSourceNodeChanged(event);
+				(it.next()).postSourceNodeChanged(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -853,7 +854,7 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postSourceNodeChanged(event);
+				(it.next()).postSourceNodeChanged(event);
 			}
 		}
 	}
@@ -875,13 +876,13 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = delayedEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postTargetNodeChanged(event);
+				(it.next()).postTargetNodeChanged(event);
 			}
 			
 			it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postTargetNodeChanged(event);
+				(it.next()).postTargetNodeChanged(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -890,7 +891,7 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postTargetNodeChanged(event);
+				(it.next()).postTargetNodeChanged(event);
 			}
 		}
 	}
@@ -913,13 +914,13 @@ public class ListenerManager {
 			Iterator<NodeListener> it = delayedNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).postUndirectedEdgeAdded(event);
+				(it.next()).postUndirectedEdgeAdded(event);
 			}
 			
 			it = alltimeNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).postUndirectedEdgeAdded(event);
+				(it.next()).postUndirectedEdgeAdded(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -931,7 +932,7 @@ public class ListenerManager {
 			Iterator<NodeListener> it = alltimeNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).postUndirectedEdgeAdded(event);
+				(it.next()).postUndirectedEdgeAdded(event);
 			}
 		}
 	}
@@ -954,13 +955,13 @@ public class ListenerManager {
 			Iterator<NodeListener> it = delayedNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).postUndirectedEdgeRemoved(event);
+				(it.next()).postUndirectedEdgeRemoved(event);
 			}
 			
 			it = alltimeNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).postUndirectedEdgeRemoved(event);
+				(it.next()).postUndirectedEdgeRemoved(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -972,7 +973,7 @@ public class ListenerManager {
 			Iterator<NodeListener> it = alltimeNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).postUndirectedEdgeRemoved(event);
+				(it.next()).postUndirectedEdgeRemoved(event);
 			}
 		}
 	}
@@ -1009,7 +1010,7 @@ public class ListenerManager {
 			Iterator<AttributeListener> it = alltimeAttributeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((AttributeListener) it.next()).preAttributeAdded(event);
+				(it.next()).preAttributeAdded(event);
 			}
 		}
 	}
@@ -1031,13 +1032,13 @@ public class ListenerManager {
 			Iterator<AttributeListener> it = delayedAttributeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((AttributeListener) it.next()).preAttributeChanged(event);
+				(it.next()).preAttributeChanged(event);
 			}
 			
 			it = alltimeAttributeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((AttributeListener) it.next()).preAttributeChanged(event);
+				(it.next()).preAttributeChanged(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1046,7 +1047,7 @@ public class ListenerManager {
 			Iterator<AttributeListener> it = alltimeAttributeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((AttributeListener) it.next()).preAttributeChanged(event);
+				(it.next()).preAttributeChanged(event);
 			}
 		}
 	}
@@ -1067,13 +1068,13 @@ public class ListenerManager {
 			Iterator<AttributeListener> it = delayedAttributeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((AttributeListener) it.next()).preAttributeRemoved(event);
+				(it.next()).preAttributeRemoved(event);
 			}
 			
 			it = alltimeAttributeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((AttributeListener) it.next()).preAttributeRemoved(event);
+				(it.next()).preAttributeRemoved(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1082,7 +1083,7 @@ public class ListenerManager {
 			Iterator<AttributeListener> it = alltimeAttributeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((AttributeListener) it.next()).preAttributeRemoved(event);
+				(it.next()).preAttributeRemoved(event);
 			}
 		}
 	}
@@ -1104,13 +1105,13 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = delayedEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).preDirectedChanged(event);
+				(it.next()).preDirectedChanged(event);
 			}
 			
 			it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).preDirectedChanged(event);
+				(it.next()).preDirectedChanged(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1119,7 +1120,7 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).preDirectedChanged(event);
+				(it.next()).preDirectedChanged(event);
 			}
 		}
 	}
@@ -1141,13 +1142,13 @@ public class ListenerManager {
 			Iterator<GraphListener> it = delayedGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preEdgeAdded(event);
+				(it.next()).preEdgeAdded(event);
 			}
 			
 			it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preEdgeAdded(event);
+				(it.next()).preEdgeAdded(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1165,7 +1166,7 @@ public class ListenerManager {
 			Iterator<GraphListener> it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preEdgeAdded(event);
+				(it.next()).preEdgeAdded(event);
 			}
 		}
 	}
@@ -1187,13 +1188,13 @@ public class ListenerManager {
 			Iterator<GraphListener> it = delayedGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preEdgeRemoved(event);
+				(it.next()).preEdgeRemoved(event);
 			}
 			
 			it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preEdgeRemoved(event);
+				(it.next()).preEdgeRemoved(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1211,7 +1212,7 @@ public class ListenerManager {
 			Iterator<GraphListener> it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preEdgeRemoved(event);
+				(it.next()).preEdgeRemoved(event);
 			}
 		}
 	}
@@ -1233,13 +1234,13 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = delayedEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).preEdgeReversed(event);
+				(it.next()).preEdgeReversed(event);
 			}
 			
 			it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).preEdgeReversed(event);
+				(it.next()).preEdgeReversed(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1248,7 +1249,7 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).postEdgeReversed(event);
+				(it.next()).postEdgeReversed(event);
 			}
 		}
 	}
@@ -1270,13 +1271,13 @@ public class ListenerManager {
 			Iterator<GraphListener> it = delayedGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preGraphCleared(event);
+				(it.next()).preGraphCleared(event);
 			}
 			
 			it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preGraphCleared(event);
+				(it.next()).preGraphCleared(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1294,7 +1295,7 @@ public class ListenerManager {
 			Iterator<GraphListener> it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preGraphCleared(event);
+				(it.next()).preGraphCleared(event);
 			}
 		}
 	}
@@ -1396,13 +1397,13 @@ public class ListenerManager {
 			Iterator<GraphListener> it = delayedGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preNodeAdded(event);
+				(it.next()).preNodeAdded(event);
 			}
 			
 			it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preNodeAdded(event);
+				(it.next()).preNodeAdded(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1420,7 +1421,7 @@ public class ListenerManager {
 			Iterator<GraphListener> it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preNodeAdded(event);
+				(it.next()).preNodeAdded(event);
 			}
 		}
 	}
@@ -1442,13 +1443,13 @@ public class ListenerManager {
 			Iterator<GraphListener> it = delayedGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preNodeRemoved(event);
+				(it.next()).preNodeRemoved(event);
 			}
 			
 			it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preNodeRemoved(event);
+				(it.next()).preNodeRemoved(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1466,7 +1467,7 @@ public class ListenerManager {
 			Iterator<GraphListener> it = alltimeGraphListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((GraphListener) it.next()).preNodeRemoved(event);
+				(it.next()).preNodeRemoved(event);
 			}
 		}
 	}
@@ -1568,13 +1569,13 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = delayedEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).preSourceNodeChanged(event);
+				(it.next()).preSourceNodeChanged(event);
 			}
 			
 			it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).preSourceNodeChanged(event);
+				(it.next()).preSourceNodeChanged(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1583,7 +1584,7 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).preSourceNodeChanged(event);
+				(it.next()).preSourceNodeChanged(event);
 			}
 		}
 	}
@@ -1605,13 +1606,13 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = delayedEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).preTargetNodeChanged(event);
+				(it.next()).preTargetNodeChanged(event);
 			}
 			
 			it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).preTargetNodeChanged(event);
+				(it.next()).preTargetNodeChanged(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1620,7 +1621,7 @@ public class ListenerManager {
 			Iterator<EdgeListener> it = alltimeEdgeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((EdgeListener) it.next()).preTargetNodeChanged(event);
+				(it.next()).preTargetNodeChanged(event);
 			}
 		}
 	}
@@ -1643,13 +1644,13 @@ public class ListenerManager {
 			Iterator<NodeListener> it = delayedNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).preUndirectedEdgeAdded(event);
+				(it.next()).preUndirectedEdgeAdded(event);
 			}
 			
 			it = alltimeNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).preUndirectedEdgeAdded(event);
+				(it.next()).preUndirectedEdgeAdded(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1661,7 +1662,7 @@ public class ListenerManager {
 			Iterator<NodeListener> it = alltimeNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).preUndirectedEdgeAdded(event);
+				(it.next()).preUndirectedEdgeAdded(event);
 			}
 		}
 	}
@@ -1684,13 +1685,13 @@ public class ListenerManager {
 			Iterator<NodeListener> it = delayedNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).preUndirectedEdgeRemoved(event);
+				(it.next()).preUndirectedEdgeRemoved(event);
 			}
 			
 			it = alltimeNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).preUndirectedEdgeRemoved(event);
+				(it.next()).preUndirectedEdgeRemoved(event);
 			}
 		} else {
 			// log objects that are (probably) affected
@@ -1702,7 +1703,7 @@ public class ListenerManager {
 			Iterator<NodeListener> it = alltimeNodeListenerList.iterator();
 			
 			while (it.hasNext()) {
-				((NodeListener) it.next()).preUndirectedEdgeRemoved(event);
+				(it.next()).preUndirectedEdgeRemoved(event);
 			}
 		}
 	}
