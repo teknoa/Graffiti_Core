@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: LabelAttribute.java,v 1.17 2011/02/17 08:02:24 morla Exp $
+// $Id: LabelAttribute.java,v 1.18 2011/04/01 13:30:24 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -34,7 +34,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  * 
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public abstract class LabelAttribute extends HashMapAttribute implements
 					GraphicAttributeConstants {
@@ -89,8 +89,7 @@ public abstract class LabelAttribute extends HashMapAttribute implements
 	// ===========================================================
 	public LabelAttribute() {
 		this(LABELGRAPHICS);
-		ErrorMsg
-							.addErrorMessage("INTERNAL ERROR, Label Attribute Created, with no ID!");
+		ErrorMsg.addErrorMessage("INTERNAL ERROR, Label Attribute Created, with no ID!");
 	}
 	
 	/**
