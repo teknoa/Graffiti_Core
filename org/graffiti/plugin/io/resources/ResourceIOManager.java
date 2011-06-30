@@ -96,12 +96,8 @@ public class ResourceIOManager {
 		InputStream is = url != null ? url.getInputStream() : null;
 		if (is == null)
 			return null;
-		if (is instanceof MyByteArrayInputStream) {
-			return (MyByteArrayInputStream) is;
-		} else {
-			ResourceIOManager.copyContent(is, bos);
-			return new MyByteArrayInputStream(bos.toByteArray());
-		}
+		ResourceIOManager.copyContent(is, bos);
+		return new MyByteArrayInputStream(bos.toByteArray());
 	}
 	
 	public static MyByteArrayInputStream getInputStreamMemoryCached(InputStream is) throws IOException, Exception {

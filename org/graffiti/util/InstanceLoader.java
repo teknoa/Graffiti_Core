@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: InstanceLoader.java,v 1.10 2011/03/29 08:22:42 morla Exp $
+// $Id: InstanceLoader.java,v 1.11 2011/06/30 06:53:46 morla Exp $
 
 package org.graffiti.util;
 
@@ -19,7 +19,7 @@ import java.util.HashSet;
  * Represents an instance loader, which can be used to instanciate a class with
  * the given name.
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 @SuppressWarnings("unchecked")
 public class InstanceLoader {

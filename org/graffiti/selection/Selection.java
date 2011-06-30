@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Selection.java,v 1.11 2010/12/22 13:05:34 klukas Exp $
+// $Id: Selection.java,v 1.12 2011/06/30 06:53:46 morla Exp $
 
 package org.graffiti.selection;
 
@@ -45,7 +45,7 @@ import org.graffiti.graph.Node;
  * selectionChanged()</code>
  * </p>
  * 
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class Selection {
 	// ~ Instance fields ========================================================
@@ -100,11 +100,18 @@ public class Selection {
 	 */
 	@SuppressWarnings("unchecked")
 	public Selection(String name) {
+		this();
 		this.name = name;
-		this.nodes = new ListOrderedSet();
-		this.edges = new ListOrderedSet();
-		this.newMarked = new HashMap<GraphElement, GraphElement>();
-		this.newUnmarked = new HashMap<GraphElement, GraphElement>();
+	}
+	
+	public Selection(String name, Collection<?> newElements) {
+		this(name);
+		addAll(newElements);
+	}
+	
+	public Selection(Collection<?> newElements) {
+		this();
+		addAll(newElements);
 	}
 	
 	// ~ Methods ================================================================

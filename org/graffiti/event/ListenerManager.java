@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: ListenerManager.java,v 1.17 2011/03/24 12:21:27 morla Exp $
+// $Id: ListenerManager.java,v 1.18 2011/06/30 06:53:45 morla Exp $
 
 package org.graffiti.event;
 
@@ -32,7 +32,7 @@ import org.graffiti.util.MultipleIterator;
  * contains all objects that (might) have been changed. This set is passed to
  * both, strict and non strict listeners.
  * 
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public class ListenerManager {
 	// ~ Instance fields ========================================================

@@ -75,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.125 $
+ * @version $Revision: 1.126 $
  */
 public class AttributeHelper implements HelperClass {
 	
@@ -266,51 +266,25 @@ public class AttributeHelper implements HelperClass {
 	}
 	
 	private static String getSubStringUntilNumber(String path) {
-		if (path != null && path.indexOf("0") > 0)
-			return path.substring(0, path.indexOf("0"));
-		if (path != null && path.indexOf("1") > 0)
-			return path.substring(0, path.indexOf("1"));
-		if (path != null && path.indexOf("2") > 0)
-			return path.substring(0, path.indexOf("2"));
-		if (path != null && path.indexOf("3") > 0)
-			return path.substring(0, path.indexOf("3"));
-		if (path != null && path.indexOf("4") > 0)
-			return path.substring(0, path.indexOf("4"));
-		if (path != null && path.indexOf("5") > 0)
-			return path.substring(0, path.indexOf("5"));
-		if (path != null && path.indexOf("6") > 0)
-			return path.substring(0, path.indexOf("6"));
-		if (path != null && path.indexOf("7") > 0)
-			return path.substring(0, path.indexOf("7"));
-		if (path != null && path.indexOf("8") > 0)
-			return path.substring(0, path.indexOf("8"));
-		if (path != null && path.indexOf("9") > 0)
-			return path.substring(0, path.indexOf("9"));
+		if (path == null)
+			return path;
+		
+		for (int i = 99; i > 0; i--)
+			if (path.indexOf(i + "") > 0)
+				return path.substring(0, path.indexOf(i + ""));
 		return path;
 	}
 	
 	private static String getSubStringFromNumber(String path, String div) {
+		if (path == null)
+			return "";
 		int lastNumberPos = -1;
-		if (path != null && path.lastIndexOf("0") > 0)
-			lastNumberPos = (lastNumberPos < path.lastIndexOf("0") ? path.lastIndexOf("0") : lastNumberPos);
-		if (path != null && path.lastIndexOf("1") > 0)
-			lastNumberPos = (lastNumberPos < path.lastIndexOf("1") ? path.lastIndexOf("1") : lastNumberPos);
-		if (path != null && path.lastIndexOf("2") > 0)
-			lastNumberPos = (lastNumberPos < path.lastIndexOf("2") ? path.lastIndexOf("2") : lastNumberPos);
-		if (path != null && path.lastIndexOf("3") > 0)
-			lastNumberPos = (lastNumberPos < path.lastIndexOf("3") ? path.lastIndexOf("3") : lastNumberPos);
-		if (path != null && path.lastIndexOf("4") > 0)
-			lastNumberPos = (lastNumberPos < path.lastIndexOf("4") ? path.lastIndexOf("4") : lastNumberPos);
-		if (path != null && path.lastIndexOf("5") > 0)
-			lastNumberPos = (lastNumberPos < path.lastIndexOf("5") ? path.lastIndexOf("5") : lastNumberPos);
-		if (path != null && path.lastIndexOf("6") > 0)
-			lastNumberPos = (lastNumberPos < path.lastIndexOf("6") ? path.lastIndexOf("6") : lastNumberPos);
-		if (path != null && path.lastIndexOf("7") > 0)
-			lastNumberPos = (lastNumberPos < path.lastIndexOf("7") ? path.lastIndexOf("7") : lastNumberPos);
-		if (path != null && path.lastIndexOf("8") > 0)
-			lastNumberPos = (lastNumberPos < path.lastIndexOf("8") ? path.lastIndexOf("8") : lastNumberPos);
-		if (path != null && path.lastIndexOf("9") > 0)
-			lastNumberPos = (lastNumberPos < path.lastIndexOf("9") ? path.lastIndexOf("9") : lastNumberPos);
+		
+		for (int i = 99; i > 0; i--)
+			if (path.lastIndexOf(i + "") > 0) {
+				lastNumberPos = (lastNumberPos < path.lastIndexOf(i + "") ? path.lastIndexOf(i + "") : lastNumberPos);
+				break;
+			}
 		
 		if (lastNumberPos < 0)
 			return "";
@@ -366,6 +340,8 @@ public class AttributeHelper implements HelperClass {
 		setDeleteableAttribute(".labelgraphics.", "labelgraphics");
 		setDeleteableAttribute(".image.", "image");
 		setDeleteableAttribute(".pathway_ref_url", "pathway_ref_url");
+		for (int i = 0; i < 100; i++)
+			setDeleteableAttribute(".pathway_ref_url" + i, "pathway_ref_url" + i);
 		setDeleteableAttribute(".url", "url");
 		for (int i = 1; i < 100; i++)
 			setDeleteableAttribute(".labelgraphics" + i + ".", "labelgraphics" + i);
@@ -503,6 +479,7 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("node_plotOrientationHor", chartAll + ": Horizontal/Vertical");
 		idToNiceId.put("node_outlineBorderWidth", chartAll + ":<html>&nbsp;Bar-Outline/<br>&nbsp;Line Thickness");
 		idToNiceId.put("node_halfErrorBar", chartAllBars + ": Hide bottom of Error-Bar");
+		idToNiceId.put("node_removeEmptyConditions", chartAll + ": Remove Space for Empty Conditions");
 		idToNiceId.put("scatter_showRangeAxis", "Scatter-Plot: Show Y-axis");
 		idToNiceId.put("scatter_showLegend", "Scatter-Plot: Show Legend");
 		idToNiceId.put("scatter_showTickMarks", "Scatter-Plot: Show X-axis");
@@ -965,14 +942,10 @@ public class AttributeHelper implements HelperClass {
 		
 		if (includeMainLabel) {
 			String nodeName = getLabel(graphElement, null);
-			if (nodeName != null && nodeName.length() > 0)
-				;
 			result.add(nodeName);
 		}
-		for (int idx = 1; idx <= graphElement.getAttributes().size(); idx++) {
+		for (int idx = 1; idx <= 99/* graphElement.getAttributes().size() */; idx++) {
 			String lbl = getLabel(idx, graphElement, null);
-			if (lbl != null && lbl.length() > 0)
-				;
 			result.add(lbl);
 		}
 		
@@ -988,6 +961,8 @@ public class AttributeHelper implements HelperClass {
 	 *           Use -1 to get main label, use 0..99 to get annotation labels
 	 */
 	public static String getLabel(int index, Attributable node, String defaultReturn) {
+		if (index > 99)
+			return null;
 		try {
 			LabelAttribute labelAttr;
 			
@@ -2567,6 +2542,8 @@ public class AttributeHelper implements HelperClass {
 	 * @return NodeLabelAttribute, if present, otherwise null.
 	 */
 	public static NodeLabelAttribute getLabel(int index, Node node) {
+		if (index > 99)
+			return null;
 		try {
 			String idx = "" + index;
 			if (index < 0)
@@ -2589,6 +2566,8 @@ public class AttributeHelper implements HelperClass {
 	 * @return EdgeLabelAttribute, if present, otherwise null.
 	 */
 	public static EdgeLabelAttribute getLabel(int index, Edge edge) {
+		if (index > 99)
+			return null;
 		try {
 			String idx = "" + index;
 			if (index < 0)

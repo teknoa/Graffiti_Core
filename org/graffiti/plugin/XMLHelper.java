@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: XMLHelper.java,v 1.23 2011/01/24 12:53:03 morla Exp $
+// $Id: XMLHelper.java,v 1.24 2011/06/30 06:53:45 morla Exp $
 
 package org.graffiti.plugin;
 

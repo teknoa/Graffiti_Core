@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: GraphicAttributeConstants.java,v 1.10 2010/12/22 13:05:33 klukas Exp $
+// $Id: GraphicAttributeConstants.java,v 1.11 2011/06/30 06:53:45 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -118,9 +118,15 @@ public interface GraphicAttributeConstants {
 	
 	/** Constant used to specify the position of a label according to a node. */
 	public static final String INSIDEBOTTOM = "b";
+	public static final String INSIDEBOTTOMLEFT = "ibl";
+	public static final String INSIDEBOTTOMRIGHT = "ibr";
 	
 	/** Constant used to specify the position of a label according to a node. */
 	public static final String INSIDETOP = "t";
+	public static final String INSIDETOPLEFT = "itl";
+	public static final String INSIDETOPRIGHT = "itr";
+	public static final String INSIDELEFT = "il";
+	public static final String INSIDERIGHT = "ir";
 	
 	/** Constant used to specify the position of a label according to a node. */
 	public static final String CENTERED = "c";

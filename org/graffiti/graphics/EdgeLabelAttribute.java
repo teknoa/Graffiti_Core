@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: EdgeLabelAttribute.java,v 1.8 2010/12/22 13:05:33 klukas Exp $
+// $Id: EdgeLabelAttribute.java,v 1.9 2011/06/30 06:53:45 morla Exp $
 package org.graffiti.graphics;
 
 import org.graffiti.attributes.HashMapAttribute;
@@ -14,7 +14,7 @@ import org.graffiti.attributes.HashMapAttribute;
  * DOCUMENT ME!
  * 
  * @author holleis
- * @version $Revision: 1.8 $ Extends LabelAttribute by a PositionAttribute specific for edges.
+ * @version $Revision: 1.9 $ Extends LabelAttribute by a PositionAttribute specific for edges.
  */
 public class EdgeLabelAttribute extends LabelAttribute {
 	/** Position of a label within this node. */
@@ -166,16 +166,17 @@ public class EdgeLabelAttribute extends LabelAttribute {
 	 *         encapsulated label.
 	 */
 	public EdgeLabelPositionAttribute getPosition() {
-		if (!(attributes.get(POSITION) instanceof EdgeLabelPositionAttribute)) {
-			HashMapAttribute hma = (HashMapAttribute) attributes.get(POSITION);
+		if (this.attributes.get(POSITION) == null) {
 			EdgeLabelPositionAttribute elpa = new EdgeLabelPositionAttribute(POSITION);
-			if (hma != null) {
+			this.attributes.put(POSITION, elpa);
+		} else
+			if (!this.attributes.get(POSITION).getClass().equals(EdgeLabelPositionAttribute.class)) {
+				HashMapAttribute hma = (HashMapAttribute) this.attributes.get(POSITION);
+				EdgeLabelPositionAttribute elpa = new EdgeLabelPositionAttribute(POSITION);
 				elpa.setCollection(hma.getCollection());
-				attributes.remove(attributes.get(POSITION));
+				this.attributes.put(POSITION, elpa);
 			}
-			attributes.put(POSITION, elpa);
-		}
-		return (EdgeLabelPositionAttribute) attributes.get(POSITION);
+		return (EdgeLabelPositionAttribute) this.attributes.get(POSITION);
 	}
 }
 

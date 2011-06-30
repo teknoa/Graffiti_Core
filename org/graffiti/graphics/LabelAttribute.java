@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: LabelAttribute.java,v 1.18 2011/04/01 13:30:24 morla Exp $
+// $Id: LabelAttribute.java,v 1.19 2011/06/30 06:53:45 morla Exp $
 
 package org.graffiti.graphics;
 
@@ -34,7 +34,7 @@ import org.graffiti.graph.Node;
 /**
  * Contains the graphic attribute label
  * 
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  */
 public abstract class LabelAttribute extends HashMapAttribute implements
 					GraphicAttributeConstants {
