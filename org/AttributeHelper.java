@@ -75,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.126 $
+ * @version $Revision: 1.127 $
  */
 public class AttributeHelper implements HelperClass {
 	
@@ -537,8 +537,8 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put(".graphics.offY", "Shape: Multi-Offset (Y)");
 		
 		idToNiceId.put(".graphics.bends.bend", "Edge-Bend ");
-		idToNiceId.put(".graphics.bends.bend.x", "Edge-Bend 0: x");
-		idToNiceId.put(".graphics.bends.bend.y", "Edge-Bend 0: y");
+		idToNiceId.put(".graphics.bends.bend.x", "Edge-Bend: x");
+		idToNiceId.put(".graphics.bends.bend.y", "Edge-Bend: y");
 		
 		idToNiceId.put("localAlign", "Label:" + disabled + "Local Alignment");
 		
