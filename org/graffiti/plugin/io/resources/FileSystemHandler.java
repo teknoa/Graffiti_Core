@@ -47,7 +47,10 @@ public class FileSystemHandler extends AbstractResourceIOHandler {
 	public IOurl saveAs(IOurl source, String targetFilename) throws Exception {
 		if (source.getPrefix().equals(PREFIX)) {
 			ResourceIOConfigObject config = new FileSystemIOConfig(source.getDetail());
-			return copyDataAndReplaceURLPrefix(source.getInputStream(), targetFilename, config);
+			InputStream is = source.getInputStream();
+			IOurl r = copyDataAndReplaceURLPrefix(is, targetFilename, config);
+			is.close();
+			return r;
 		} else
 			throw new UnsupportedOperationException("Details are missing!");
 	}

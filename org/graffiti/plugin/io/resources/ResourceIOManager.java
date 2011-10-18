@@ -97,6 +97,7 @@ public class ResourceIOManager {
 		if (is == null)
 			return null;
 		ResourceIOManager.copyContent(is, bos);
+		is.close();
 		return new MyByteArrayInputStream(bos.toByteArray());
 	}
 	

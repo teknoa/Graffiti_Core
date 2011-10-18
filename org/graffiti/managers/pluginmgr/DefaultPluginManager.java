@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: DefaultPluginManager.java,v 1.30 2010/12/22 13:05:33 klukas Exp $
+// $Id: DefaultPluginManager.java,v 1.31 2011/10/18 13:46:21 morla Exp $
 
 package org.graffiti.managers.pluginmgr;
 
@@ -38,7 +38,7 @@ import org.graffiti.util.StringSplitter;
 /**
  * Manages the list of plugins.
  * 
- * @version $Revision: 1.30 $
+ * @version $Revision: 1.31 $
  */
 public class DefaultPluginManager
 					implements PluginManager {
@@ -58,7 +58,7 @@ public class DefaultPluginManager
 	 * Maps from a plugin name (<code>String</code>) to a plugin entry
 	 * (<code>Entry</code>).
 	 */
-	private Hashtable<String, PluginEntry> pluginEntries;
+	private final Hashtable<String, PluginEntry> pluginEntries;
 	
 	/**
 	 * Holds the plugin entries of the last search. This avoids researching
@@ -67,10 +67,10 @@ public class DefaultPluginManager
 	// private List<PluginEntry> entries;
 	
 	/** The list of plugin manager listeners. */
-	private List<PluginManagerListener> pluginManagerListeners;
+	private final List<PluginManagerListener> pluginManagerListeners;
 	
 	/** The preferences of the plugin manager. */
-	private GravistoPreferences prefs;
+	private final GravistoPreferences prefs;
 	
 	// ~ Constructors ===========================================================
 	
@@ -520,7 +520,7 @@ public class DefaultPluginManager
 			String msg = "";
 			
 			for (Iterator<String> itr = messages.iterator(); itr.hasNext();) {
-				msg += ((String) itr.next() + "\n");
+				msg += (itr.next() + "\n");
 			}
 			
 			throw new PluginManagerException("exception.loadStartup\n",
@@ -565,7 +565,7 @@ public class DefaultPluginManager
 			List<URL> plugins = new LinkedList<URL>();
 			
 			for (Iterator<PluginEntry> i = pluginEntries.values().iterator(); i.hasNext();) {
-				PluginEntry e = (PluginEntry) i.next();
+				PluginEntry e = i.next();
 				
 				if (e.getLoadOnStartup().equals(Boolean.TRUE)) {
 					plugins.add(e.getPluginLocation());
@@ -694,7 +694,7 @@ public class DefaultPluginManager
 		if (isInstalled(name)) {
 			loaded = true;
 			if (!ReleaseInfo.isRunningAsApplet()) {
-				System.err.println("Applet? " + ReleaseInfo.isRunningAsApplet());
+				// System.err.println("Applet? " + ReleaseInfo.isRunningAsApplet());
 				throw new PluginAlreadyLoadedException("Plugin name " + name + " already defined/plugin already loaded!");
 			}
 		}
