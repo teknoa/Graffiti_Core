@@ -75,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.128 $
+ * @version $Revision: 1.129 $
  */
 public class AttributeHelper implements HelperClass {
 	
@@ -402,8 +402,8 @@ public class AttributeHelper implements HelperClass {
 		idToNiceId.put("height", "<html><!--A-->Size");
 		idToNiceId.put("x", "Position");
 		idToNiceId.put("y", "Position");
-		idToNiceId.put("z_", "Z");
-		idToNiceId.put("depth", "Depth");
+		idToNiceId.put("z_", "Position");
+		idToNiceId.put("depth_", "Depth");
 		idToNiceId.put("mol", "Molecule Structure:3D MOL View");
 		idToNiceId.put("rounding", "Shape: Rounded Corners");
 		idToNiceId.put("Edge:shape", "Shape");
@@ -3040,12 +3040,12 @@ public class AttributeHelper implements HelperClass {
 	}
 	
 	public static double getDepth(Node node, double defaultReturn, boolean setDefault) {
-		double z = (Double) getAttributeValue(node, "graphics", "depth", defaultReturn, new Double(0), setDefault);
+		double z = (Double) getAttributeValue(node, "graphics", "depth_", defaultReturn, new Double(0), setDefault);
 		return z;
 	}
 	
 	public static void setDepth(Node node, double depth) {
-		setAttribute(node, "graphics", "depth", depth);
+		setAttribute(node, "graphics", "depth_", depth);
 	}
 	
 	public static boolean isHiddenGraphElement(GraphElement ge) {
@@ -3578,7 +3578,7 @@ public class AttributeHelper implements HelperClass {
 		}
 		return new SimpleDateFormat().format(date);
 	}
-
+	
 	public static HashSet<String> getFuzzyLabels(String label) {
 		if (label == null)
 			return new HashSet<String>();
