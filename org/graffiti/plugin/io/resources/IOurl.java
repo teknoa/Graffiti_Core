@@ -21,7 +21,8 @@ public class IOurl {
 		if (url.lastIndexOf("/") > 0) {
 			detail = url.substring(0, url.lastIndexOf(SEPERATOR));
 			url = url.substring(url.lastIndexOf(SEPERATOR) + SEPERATOR.length());
-		}
+		} else
+			detail = "";
 		filename = url;
 	}
 	
@@ -58,7 +59,7 @@ public class IOurl {
 		String s = "";
 		if (getPrefix() != null)
 			s += getPrefix() + "://";
-		if (getDetail() != null)
+		if (getDetail() != null && getDetail().length() > 0)
 			s += getDetail() + SEPERATOR;
 		return s + getFileName();
 	}
