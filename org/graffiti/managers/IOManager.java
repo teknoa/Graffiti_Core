@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: IOManager.java,v 1.9 2010/12/22 13:05:33 klukas Exp $
+// $Id: IOManager.java,v 1.9.4.1 2013/03/27 13:45:03 tczauderna Exp $
 
 package org.graffiti.managers;
 
@@ -22,10 +22,10 @@ import org.graffiti.plugin.io.OutputSerializer;
 /**
  * Handles the editor's IO serializers.
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.9.4.1 $
  */
 public interface IOManager
-					extends PluginManagerListener {
+		extends PluginManagerListener {
 	// ~ Methods ================================================================
 	
 	/**
@@ -60,7 +60,7 @@ public interface IOManager
 	 * @throws FileNotFoundException
 	 */
 	InputSerializer createInputSerializer(InputStream is, String ext)
-						throws IllegalAccessException, InstantiationException, FileNotFoundException;
+			throws IllegalAccessException, InstantiationException, FileNotFoundException;
 	
 	/**
 	 * Modifies the given file chooser by registering file extensions from the
@@ -75,8 +75,17 @@ public interface IOManager
 	 * 
 	 * @return DOCUMENT ME!
 	 */
+	
 	OutputSerializer createOutputSerializer(String ext)
-						throws IllegalAccessException, InstantiationException;
+			throws IllegalAccessException, InstantiationException;
+	
+	/**
+	 * Creates an instance of an output serializer from the given extension and
+	 * file type description.
+	 * @return the output serializer
+	 */
+	OutputSerializer createOutputSerializer(String ext, String fileTypeDescription)
+			throws IllegalAccessException, InstantiationException;
 	
 	/**
 	 * Creates and returns a file open chooser dialog with the registered file
@@ -121,7 +130,7 @@ public interface IOManager
 	/**
 	 * Interfaces an io manager listener.
 	 * 
-	 * @version $Revision: 1.9 $
+	 * @version $Revision: 1.9.4.1 $
 	 */
 	public interface IOManagerListener {
 		/**

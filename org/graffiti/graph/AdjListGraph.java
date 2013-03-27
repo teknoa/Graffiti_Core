@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: AdjListGraph.java,v 1.12 2010/12/22 13:05:33 klukas Exp $
+// $Id: AdjListGraph.java,v 1.12.4.1 2013/03/27 13:45:03 tczauderna Exp $
 
 package org.graffiti.graph;
 
@@ -26,7 +26,7 @@ import org.graffiti.event.ListenerManager;
  * representation of the graph. Requires <code>AdjListNode</code> and <code>AdjListEdge</code> as implementations for nodes and edges. Every
  * method modifying the graph will inform the <code>ListenerManager</code> about the modification according to the description in <code>Graph</code>.
  * 
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.12.4.1 $
  * @see Graph
  * @see AbstractGraph
  * @see AdjListNode
@@ -48,6 +48,9 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	private static long maxGraphElementId = 0; // Long.MIN_VALUE;
 	
 	private String idName = null;
+	
+	// a file type description for the graph
+	private String fileTypeDescription = null;
 	
 	@Override
 	public String toString() {
@@ -162,7 +165,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 *           the <code>CollectionAttribute</code> of the currently created <code>AdjListGraph</code> instance.
 	 */
 	public AdjListGraph(Graph g, ListenerManager listenerManager,
-						CollectionAttribute coll) {
+			CollectionAttribute coll) {
 		super(listenerManager, coll);
 		this.addGraph(g);
 	}
@@ -209,7 +212,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 */
 	public Object copy() {
 		AdjListGraph newGraph = new AdjListGraph((CollectionAttribute) this
-							.getAttributes().copy());
+				.getAttributes().copy());
 		newGraph.addGraph(this);
 		
 		return newGraph;
@@ -256,7 +259,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 */
 	@Override
 	protected Edge doAddEdge(Node source, Node target, boolean directed,
-						CollectionAttribute col) {
+			CollectionAttribute col) {
 		assert (source != null) && (target != null) && (col != null);
 		
 		AdjListEdge edge = (AdjListEdge) createEdge(source, target, directed, col);
@@ -405,7 +408,7 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	 * @return the new edge.
 	 */
 	protected Edge createEdge(Node source, Node target, boolean directed,
-						CollectionAttribute col) {
+			CollectionAttribute col) {
 		assert col != null;
 		
 		setModified(true);
@@ -500,11 +503,11 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 			String res;
 			if (idName.lastIndexOf(File.separator) > 0)
 				res = idName.substring(idName.lastIndexOf(File.separator)
-									+ File.separator.length());
+						+ File.separator.length());
 			else
 				if (idName.lastIndexOf("/") > 0)
 					res = idName.substring(idName.lastIndexOf("/")
-										+ "/".length());
+							+ "/".length());
 				else
 					res = idName;
 			return res;
@@ -535,6 +538,32 @@ public class AdjListGraph extends AbstractGraph implements Graph {
 	public void setListenerManager(ListenerManager l) {
 		listenerManager = l;
 	}
+	
+	/**
+	 * Sets a file type description which can be used to choose
+	 * an appropriate output serializer independent of the file
+	 * extension.
+	 * @param fileTypeDescription
+	 */
+	@Override
+	public void setFileTypeDescription(String fileTypeDescription) {
+		
+		this.fileTypeDescription = fileTypeDescription;
+		
+	}
+	
+	/**
+	 * Returns a file type description which can be used to choose an
+	 * appropriate output serializer independent of the file extension.
+	 * @return a file type description
+	 */
+	@Override
+	public String getFileTypeDescription() {
+		
+		return this.fileTypeDescription;
+		
+	}
+	
 }
 
 // ------------------------------------------------------------------------------

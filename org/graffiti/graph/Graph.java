@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: Graph.java,v 1.7 2010/12/22 13:05:33 klukas Exp $
+// $Id: Graph.java,v 1.7.4.1 2013/03/27 13:45:03 tczauderna Exp $
 package org.graffiti.graph;
 
 import java.util.Collection;
@@ -50,7 +50,7 @@ import org.graffiti.event.ListenerManager;
  * </blockquote>
  * </p>
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.7.4.1 $
  * @see Node
  * @see Edge
  * @see org.graffiti.attributes.Attributable
@@ -214,7 +214,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *           the attribute consumer to add.
 	 */
 	public void addAttributeConsumer(AttributeConsumer attConsumer)
-						throws UnificationException;
+			throws UnificationException;
 	
 	/**
 	 * Adds a new <code>Edge</code> to the current <code>Graph</code>. Informs
@@ -231,7 +231,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *               if any of the nodes cannot be found in the <code>Graph</code>.
 	 */
 	public Edge addEdge(Node source, Node target, boolean directed)
-						throws GraphElementNotFoundException;
+			throws GraphElementNotFoundException;
 	
 	/**
 	 * Adds a new <code>Edge</code> to the current <code>Graph</code>. Informs
@@ -251,7 +251,7 @@ public interface Graph extends Attributable, DeepCopy {
 	 *               if any of the nodes cannot be found in the <code>Graph</code>.
 	 */
 	public Edge addEdge(Node source, Node target, boolean directed,
-						CollectionAttribute col) throws GraphElementNotFoundException;
+			CollectionAttribute col) throws GraphElementNotFoundException;
 	
 	/**
 	 * Adds a copy of the specified <code>Edge</code> to the <code>Graph</code> as a new <code>Edge</code> between the specified source and target
@@ -400,6 +400,22 @@ public interface Graph extends Attributable, DeepCopy {
 	public void checkMaxGraphElementId(long id);
 	
 	public void setListenerManager(ListenerManager object);
+	
+	/**
+	 * Sets a file type description which can be used to choose
+	 * an appropriate output serializer independent of the file
+	 * extension.
+	 * @param fileTypeDescription
+	 */
+	public void setFileTypeDescription(String fileTypeDescription);
+
+	/**
+	 * Returns a file type description which can be used to choose an
+	 * appropriate output serializer independent of the file extension.
+	 * @return a file type description
+	 */
+	public String getFileTypeDescription();
+	
 }
 
 // ------------------------------------------------------------------------------
