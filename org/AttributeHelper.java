@@ -75,7 +75,7 @@ import org.graffiti.graphics.NodeLabelAttribute;
  * attributes.
  * 
  * @author Christian Klukas
- * @version $Revision: 1.129 $
+ * @version $Revision: 1.130 $
  */
 public class AttributeHelper implements HelperClass {
 	
@@ -796,8 +796,13 @@ public class AttributeHelper implements HelperClass {
 			return;
 		}
 		try {
-			if (label.contains("\""))
-				label = label.replace("\"", "");
+			/*
+			 * the label is not "repaired"
+			 * that is done during the file-writing process.
+			 * The GMLReader was adapted to take care for those quotation marks
+			 */
+//			if (label.contains("\""))
+//				label = label.replace("\"", "");
 			LabelAttribute labelAttr;
 			if (hasAttribute(ge, GraphicAttributeConstants.LABELGRAPHICS + index)) {
 				labelAttr = (LabelAttribute) ge.getAttribute(GraphicAttributeConstants.LABELGRAPHICS + index);
