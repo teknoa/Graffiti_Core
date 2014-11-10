@@ -5,7 +5,7 @@
 // Copyright (c) 2001-2004 Gravisto Team, University of Passau
 //
 // ==============================================================================
-// $Id: DefaultIOManager.java,v 1.20 2010/12/22 13:05:33 klukas Exp $
+// $Id: DefaultIOManager.java,v 1.21 2014/11/10 00:04:55 klapperipk Exp $
 
 package org.graffiti.managers;
 
@@ -38,7 +38,7 @@ import org.graffiti.plugin.io.resources.ResourceIOManager;
 /**
  * Handles the editor's IO serializers.
  * 
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  */
 public class DefaultIOManager implements IOManager {
 	
@@ -151,10 +151,10 @@ public class DefaultIOManager implements IOManager {
 	 * .io.OutputSerializer)
 	 */
 	public void addOutputSerializer(OutputSerializer os) {
-		String[] outExtensions = os.getExtensions();
-		
-		for (int j = 0; j < outExtensions.length; j++)
-			outputSerializer.add(os);
+		// String[] outExtensions = os.getExtensions();
+		//
+		// for (int j = 0; j < outExtensions.length; j++)
+		outputSerializer.add(os);
 		
 		fireOutputSerializerAdded(os);
 	}
@@ -214,7 +214,7 @@ public class DefaultIOManager implements IOManager {
 	 */
 	public JFileChooser createOpenFileChooser() {
 		fc.resetChoosableFileFilters();
-		Set<String> knownExt = new TreeSet<String>();
+		// Set<String> knownExt = new TreeSet<String>();
 		for (Iterator<InputSerializer> itr = inputSerializer.iterator(); itr.hasNext();) {
 			InputSerializer is = itr.next();
 			String[] ext = is.getExtensions();
@@ -227,7 +227,7 @@ public class DefaultIOManager implements IOManager {
 				// if (knownExt.contains(ext[i]))
 				// ErrorMsg.addErrorMessage("Internal Error: Duplicate Input File Type Extension - "
 				// + ext[i] + " Class: " + is.toString());
-				knownExt.add(ext[i]);
+				// knownExt.add(ext[i]);
 				// System.out.println("Output: " + ext[i] + " Class: " +
 				// is.toString());
 				GravistoFileFilter gff = new GravistoFileFilter(ext[i], desc[i]);
@@ -245,12 +245,34 @@ public class DefaultIOManager implements IOManager {
 	 * org.graffiti.managers.IOManager#createOutputSerializer(java.lang.String)
 	 */
 	public OutputSerializer createOutputSerializer(String extSearch) {
+		
+		return createOutputSerializer(extSearch, null);
+		
+	}
+	
+	/*
+	 * @see
+	 * org.graffiti.managers.IOManager#createOutputSerializer(java.lang.String, java.lang.String)
+	 */
+	public OutputSerializer createOutputSerializer(String extSearch, String fileTypeDescription) {
 		for (Iterator<OutputSerializer> itr = outputSerializer.iterator(); itr.hasNext();) {
 			OutputSerializer os = itr.next();
 			String[] ext = os.getExtensions();
-			for (int i = 0; i < ext.length; i++)
-				if (ext[i].equalsIgnoreCase(extSearch))
-					return os;
+			String[] fileTypeDescriptions = os.getFileTypeDescriptions();
+			if (fileTypeDescriptions != null && fileTypeDescriptions.length > 0 && fileTypeDescription != null) {
+				boolean descriptionMatches = false;
+				for (int i = 0; i < fileTypeDescriptions.length; i++)
+					if (fileTypeDescriptions[i].equalsIgnoreCase(fileTypeDescription)) {
+						descriptionMatches = true;
+						break;
+					}
+				for (int i = 0; i < ext.length; i++)
+					if (ext[i].equalsIgnoreCase(extSearch) && descriptionMatches)
+						return os;
+			} else
+				for (int i = 0; i < ext.length; i++)
+					if (ext[i].equalsIgnoreCase(extSearch))
+						return os;
 		}
 		return null;
 	}
@@ -265,7 +287,7 @@ public class DefaultIOManager implements IOManager {
 		GravistoFileFilter defaultFileFilter = null;
 		fc.resetChoosableFileFilters();
 		fc.setAcceptAllFileFilterUsed(false);
-		Set<String> knownExt = new TreeSet<String>();
+		// Set<String> knownExt = new TreeSet<String>();
 		for (Iterator<OutputSerializer> itr = outputSerializer.iterator(); itr.hasNext();) {
 			OutputSerializer os = itr.next();
 			String[] ext = os.getExtensions();
@@ -275,10 +297,10 @@ public class DefaultIOManager implements IOManager {
 				continue;
 			}
 			for (int i = 0; i < ext.length; i++) {
-				if (knownExt.contains(ext[i]))
-					ErrorMsg.addErrorMessage("Error: Duplicate Output File Type Extension - " + ext[i] + " Class: "
-										+ os.toString());
-				knownExt.add(ext[i]);
+				// if (knownExt.contains(ext[i]))
+				// ErrorMsg.addErrorMessage("Error: Duplicate Output File Type Extension - " + ext[i] + " Class: "
+				// + os.toString());
+				// knownExt.add(ext[i]);
 				GravistoFileFilter gff = new GravistoFileFilter(ext[i], desc[i]);
 				
 				if (defaultFileFilter == null && gff.getExtension().equalsIgnoreCase(defaultExt)) {
